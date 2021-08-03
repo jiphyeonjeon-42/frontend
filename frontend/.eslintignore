@@ -1,0 +1,3 @@
+// 여기에 작성하는 파일들은 eslint에서 제외된다.
+src/serviceWorker.js
+src/*.test.js
