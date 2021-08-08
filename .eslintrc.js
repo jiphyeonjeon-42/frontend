@@ -21,6 +21,14 @@ module.exports = {
     ],
     "no-console": 0,
   },
+  settings: {
+    "import/resolver": {
+      node: {
+        paths: ["src"],
+      },
+    },
+  },
+  parser: "babel-eslint",
 };
 
 //   "extends": ["plugin:prettier/recommended"]는 세 가지를 한다고 설명한다.

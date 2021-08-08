@@ -1,0 +1,39 @@
+.book-info {
+	margin-top: 25px;
+	margin-bottom: 25px;
+	margin-left: 10px;
+	margin-right: 10px;
+	flex-basis: 20%;
+	flex-shrink: 1;
+}
+
+.book-info__image {
+	height: 220px;
+	flex-shrink: 1;
+}
+
+.book-info__link {
+	display: flex;
+	flex-basis: 20%;
+	justify-content: space-evenly;
+	flex-grow: 1;
+}
+
+.book-info .book-info__title{
+	margin: 10px;
+}
+
+.book-info .book-info__authors {
+	/* display: flex; */
+	margin: 5px;
+}
+
+.book-info .book-info__author {
+	/* display: flex; */
+	margin: 5px;
+}
+
+.book-info__publish {
+	margin: 5px;
+}
+

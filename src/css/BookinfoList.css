@@ -1,0 +1,9 @@
+.bookinfoList {
+	margin-left: 8%;
+	margin-right: 8%;
+	margin-top: 80px;
+	background-color: antiquewhite;
+	display: flex;
+	flex-wrap: wrap;
+	flex-grow: 1;
+}

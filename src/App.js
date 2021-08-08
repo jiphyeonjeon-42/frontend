@@ -1,25 +1,25 @@
 import React from "react";
-import logo from "./logo.svg";
+import { HashRouter, Route } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import SearchHome from "./component/SearchHome";
+import SearchDetail from "./component/SearchDetail";
 import "./App.css";
+import Header from "./component/Header";
+import Banner from "./component/Banner";
+// import Books from "./component/Books";
+import SearchBar from "./component/SearchBar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          집현전 화이팅!
-        </a>
-      </header>
-    </div>
+    <RecoilRoot>
+      <HashRouter>
+        <Route path="/" component={Header} />
+        <Route path="/" component={Banner} />
+        <Route path="/" component={SearchBar} />
+        <Route path="/" exact component={SearchHome} />
+        <Route path="/info/:id" component={SearchDetail} />
+      </HashRouter>
+    </RecoilRoot>
   );
 }
 
