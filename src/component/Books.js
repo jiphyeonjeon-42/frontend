@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { atom, useRecoilState } from "recoil";
 import axios from "axios";
 import Bookinfo from "./BookInfo";
 import "../css/Books.css";
 
-const REST_API_KEY = "";
+const REST_API_KEY = "a73179e66ae3cdbd45b31c84ac3c8df4";
 let searchForm = document.getElementById("search-form");
+
+export const pageEndState = atom({ key: "pageEndState", default: true });
 
 const useLoading = initLoading => {
   const [isLoading, setLoading] = useState(initLoading);
@@ -26,8 +29,8 @@ const useWord = initWord => {
   return { word, setWord };
 };
 
-const useIsEnd = initIsEnd => {
-  const [isEnd, setIsEnd] = useState(initIsEnd);
+const useIsEnd = () => {
+  const [isEnd, setIsEnd] = useRecoilState(pageEndState);
   return { isEnd, setIsEnd };
 };
 
@@ -64,7 +67,7 @@ const Books = () => {
     event.preventDefault();
     searchForm = document.getElementById("search-form");
     setPage(1);
-    setIsEnd(false);
+    // setIsEnd(false);
     setWord(searchForm.querySelector("input").value);
     console.log(word);
   };
@@ -128,7 +131,11 @@ const Books = () => {
               author={items.authors}
               publisher={items.publisher}
               image={items.thumbnail}
-              publishedAt={parseInt(items.datetime, 10)}
+              publishedAt={`${parseInt(
+                items.datetime.slice(0, 4),
+                10,
+              )}년 ${parseInt(items.datetime.slice(5, 7), 10)}월`}
+              category={items.status}
               // key={items.id}
               // id={parseInt(items.isbn)}
               // title={items.title}

@@ -19,7 +19,7 @@ const BookDetail = ({ location }) => {
           ))}
         </div>
         <h4>
-          {location.state.publisher} | {location.state.publisheredAt}
+          {location.state.publisher} | {location.state.publishedAt}
         </h4>
       </div>
     </div>
