@@ -4,7 +4,7 @@ import axios from "axios";
 import Bookinfo from "./BookInfo";
 import "../css/Books.css";
 
-const REST_API_KEY = "a73179e66ae3cdbd45b31c84ac3c8df4";
+const REST_API_KEY = ""; // kakao api
 let searchForm = document.getElementById("search-form");
 
 export const pageEndState = atom({ key: "pageEndState", default: true });
