@@ -26,7 +26,13 @@ const SearchBar = () => {
         value={input}
         onChange={onChange}
       />
-      <input className="search-button" type="submit" value="검색" />
+      <button className="search-button" type="submit">
+        <img
+          className="search-icon"
+          src="https://image.flaticon.com/icons/png/512/54/54481.png"
+          alt="search"
+        />
+      </button>
     </form>
   );
 };

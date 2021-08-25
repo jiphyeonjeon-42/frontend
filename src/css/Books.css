@@ -1,9 +1,17 @@
-.books{
-	margin-left: 8%;
-	margin-right: 8%;
-	margin-top: 80px;
-	background-color: antiquewhite;
-	display: flex;
-	flex-wrap: wrap;
-	flex-grow: 1;
+.loader {
+  text-align: center;
+}
+
+.books {
+  margin-left: 7%;
+  margin-right: 7%;
+  /* margin-top: 80px; */
+  /* padding-top: 25px; */
+  padding-left: 3%;
+  padding-right: 3%;
+  background-color: rgb(244, 244, 244);
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
 }

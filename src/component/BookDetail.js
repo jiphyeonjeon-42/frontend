@@ -15,11 +15,18 @@ const BookDetail = ({ location }) => {
         {/* <h4 className="bookinfo__author">{location.state.authors} </h4> */}
         <div>
           {location.state.author.map(who => (
-            <h4 className="bookinfo__author">{who} </h4>
+            <h4 className="bookinfo__author">저자 : {who} </h4>
           ))}
+          <h4>출판사 : {location.state.publisher}</h4>
+          <h4>
+            출판년도 :{location.state.publishedAt.slice(0, 4)}년
+            {location.state.publishedAt.slice(5, 7)}월
+          </h4>
+          <h4>표준부호(ISBN) : {location.state.isbn}</h4>
+          <h4 className="donators">기부자 : tkim 등 등 </h4>
         </div>
         <h4>
-          {location.state.publisher} | {location.state.publisheredAt}
+          {location.state.publisher} | {location.state.publishedAt}
         </h4>
       </div>
     </div>
