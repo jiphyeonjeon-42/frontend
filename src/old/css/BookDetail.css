@@ -1,0 +1,21 @@
+.book-detail {
+	background-color: beige;
+	margin-top: 100px;
+	margin-left: 13%;
+	margin-right: 13%;
+	display: flex;
+}
+
+.book-detail__photo {
+	height: 300px;
+	margin-top: 25px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 25px;
+}
+
+.book-detail__info {
+	margin-top: 25px;
+	margin-left: 20px;
+	margin-right: 40px;
+}

@@ -10,7 +10,11 @@ const SearchLoader = () => {
     <section>
       {isEnd ? (
         <div className="search-end">
-          <h1>검색 결과가 없습니다.</h1>
+          <h1>
+            원하는 도서를 찾을 수 없나요?
+            <br />
+            희망 도서를 신청해보세요!
+          </h1>
         </div>
       ) : (
         <div className="search-loader" />

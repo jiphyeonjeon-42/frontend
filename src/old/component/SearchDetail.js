@@ -6,7 +6,6 @@ import { useSetRecoilState } from "recoil";
 import { useParams } from "react-router-dom";
 import BookDetail from "./BookDetail";
 import { pageEndState } from "./Books";
-import BookStatus from "./BookStatus";
 
 const SearchDetail = ({ location }) => {
   const setPageEndState = useSetRecoilState(pageEndState);
@@ -19,7 +18,6 @@ const SearchDetail = ({ location }) => {
         {/* <Header />
         <Banner /> */}
         <BookDetail location={location} />
-        <BookStatus />
       </div>
     );
   }

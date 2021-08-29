@@ -1,0 +1,21 @@
+.infomation-bg {
+  background-image: url("../img/infomation_bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  /* width: 100vw - (100vw - 100%); */
+  position: relative;
+  z-index: 1;
+  /* height: 30vh; */
+  /* object-fit: contain; */
+}
+
+.infomation-title {
+  /* padding: 8.5vh 18.8vw 6.375vh 18.8vw; */
+  padding: 333px 18.8vw 60px 18.8vw;
+}
+
+.infomation-subtitle {
+  /* padding: 8.5vh 18.8vw 6.375vh 18.8vw; */
+  margin: 118px 0 148px 18.8vw;
+}
