@@ -1,31 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { atom, useRecoilState } from "recoil";
+import { atom, useRecoilState, useSetRecoilState } from "recoil";
+// import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Bookinfo from "./BookInfo";
 import "../css/Books.css";
+// eslint-disable-next-line import/no-cycle
+import { pageRangeState } from "./Pagination";
 
-const REST_API_KEY = ""; // kakao api
+const REST_API_KEY = "a73179e66ae3cdbd45b31c84ac3c8df4";
 let searchForm = document.getElementById("search-form");
 
 export const pageEndState = atom({ key: "pageEndState", default: true });
+export const searchWord = atom({ key: "searchWord", default: "" });
+export const bookListState = atom({ key: "bookListState", default: [] });
+export const currentPage = atom({ key: "currentPage", default: 1 });
 
 const useLoading = initLoading => {
   const [isLoading, setLoading] = useState(initLoading);
   return { isLoading, setLoading };
 };
 
-const useBookList = initBookList => {
-  const [bookList, setBookList] = useState(initBookList);
+const useBookList = () => {
+  const [bookList, setBookList] = useState(bookListState);
   return { bookList, setBookList };
 };
 
-const usePage = initPage => {
-  const [page, setPage] = useState(initPage);
+const usePage = () => {
+  const [page, setPage] = useRecoilState(currentPage);
   return { page, setPage };
 };
 
-const useWord = initWord => {
-  const [word, setWord] = useState(initWord);
+const useWord = () => {
+  const [word, setWord] = useRecoilState(searchWord);
   return { word, setWord };
 };
 
@@ -35,38 +41,43 @@ const useIsEnd = () => {
 };
 
 const Books = () => {
+  const setPageRange = useSetRecoilState(pageRangeState);
+  // eslint-disable-next-line prefer-const
+  //   let history = useHistory();
   const { isLoading, setLoading } = useLoading(true);
   const { bookList, setBookList } = useBookList([]);
   const { page, setPage } = usePage(1);
-  const { word, setWord } = useWord("파이썬");
+  const { word, setWord } = useWord("");
   const { isEnd, setIsEnd } = useIsEnd(false);
 
-  const infiniteScroll = async () => {
-    const { documentElement, body } = document;
+  //   const infiniteScroll = async () => {
+  //     const { documentElement, body } = document;
 
-    const scrollHeight = Math.max(
-      documentElement.scrollHeight,
-      body.scrollHeight,
-    );
+  //     const scrollHeight = Math.max(
+  //       documentElement.scrollHeight,
+  //       body.scrollHeight,
+  //     );
 
-    const scrollTop = Math.max(documentElement.scrollTop, body.scrollTop);
+  //     const scrollTop = Math.max(documentElement.scrollTop, body.scrollTop);
 
-    const clientHeight = Math.min(
-      documentElement.clientHeight,
-      body.clientHeight,
-    );
+  //     const clientHeight = Math.min(
+  //       documentElement.clientHeight,
+  //       body.clientHeight,
+  //     );
 
-    if (scrollTop + clientHeight >= scrollHeight) {
-      if (isEnd === false) {
-        setPage(page + 1);
-      }
-    }
-  };
+  //     if (scrollTop + clientHeight >= scrollHeight) {
+  //       if (isEnd === false) {
+  //         setPage(page + 1);
+  //       }
+  //     }
+  //   };
 
   const handleSearchSumbit = event => {
+    // history.push("/");
     event.preventDefault();
     searchForm = document.getElementById("search-form");
     setPage(1);
+    setPageRange(0);
     // setIsEnd(false);
     setWord(searchForm.querySelector("input").value);
     console.log(word);
@@ -91,11 +102,12 @@ const Books = () => {
       //   },
     });
     setIsEnd(meta.is_end);
-    if (page === 1) {
-      setBookList(documents);
-    } else {
-      setBookList(bookList.concat(documents));
-    }
+    // if (page === 1) {
+    //   setBookList(documents);
+    // } else {
+    //   setBookList(bookList.concat(documents));
+    // }
+    setBookList(documents);
     console.log(bookList, isEnd);
     setLoading(false);
     console.log(isLoading);
@@ -103,10 +115,10 @@ const Books = () => {
 
   useEffect(getBookList, [word, page]);
 
-  useEffect(() => {
-    window.addEventListener("scroll", infiniteScroll, true);
-    return () => window.removeEventListener("scroll", infiniteScroll, true);
-  });
+  //   useEffect(() => {
+  //     window.addEventListener("scroll", infiniteScroll, true);
+  //     return () => window.removeEventListener("scroll", infiniteScroll, true);
+  //   });
 
   useEffect(() => {
     searchForm = document.getElementById("search-form");

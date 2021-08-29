@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
+// import { useHistory } from "react-router-dom";
 import "../css/SearchBar.css";
 
 const useInput = initInput => {
@@ -15,7 +16,13 @@ const useInput = initInput => {
 };
 
 const SearchBar = () => {
+  // eslint-disable-next-line prefer-const
+  //   let history = useHistory();
   const { input, onChange } = useInput("");
+
+  //   function handleClick() {
+  //     history.push(`/search/${input}`);
+  //   }
   return (
     <form id="search-form">
       <input

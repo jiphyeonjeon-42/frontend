@@ -1,26 +1,77 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import LOGO from "../img/logo_.png";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import LOGO from "../img/jiphyeonjeon_logo.svg";
+import INFOMATION from "../img/information_icon.svg";
+import LOGIN from "../img/login_icon.svg";
+import ADMIN from "../img/admin_icon.svg";
 import "../css/Header.css";
 
 const Header = () => {
+  const [toggleLNB, setToggleLNB] = useState(false);
+  const clickAdmin = () => {
+    const target = document.querySelector(".gnb__admin__text");
+    target.style.opacity = toggleLNB === true ? 1 : 0.7;
+    setToggleLNB(!toggleLNB);
+  };
   return (
-    <div className="header">
-      <nav className="navbar">
-        <div className="navbar__logo">
-          <i className="fas fa-store-alt" />
-          <img src={LOGO} className="logo" alt="logo" />
-        </div>
-        <ul className="navbar__menu">
+    <header className="header">
+      <div className="header__logo">
+        <Link className="logo__link" to={{ pathname: `/` }}>
+          <img src={LOGO} className="logo_img" alt="logo" />
+        </Link>
+      </div>
+      <nav className="header__gnb">
+        <ul className="gnb__menu">
           <li>
-            <a href="">로그인</a>
+            <Link className="gnb__info" to={{ pathname: `/infomation` }}>
+              <img
+                src={INFOMATION}
+                className="gnb__info__icon"
+                alt="infomation"
+              />
+              <span className="gnb__info__text">이용안내</span>
+            </Link>
+          </li>
+          <li className="gnb__admin">
+            <button
+              className="gnb__admin__button"
+              type="button"
+              onClick={clickAdmin}
+            >
+              <img src={ADMIN} className="gnb__admin__icon" alt="admin" />
+              <span className="gnb__admin__text">대출/반납</span>
+            </button>
+            {toggleLNB ? (
+              <div className="gnb__admin__lnb">
+                <div className="lnb__line__circle">
+                  <div className="lnb__line" />
+                  <div className="lnb__circle">
+                    <div className="lnb__circle__loan" />
+                    <div className="lnb__circle__return" />
+                  </div>
+                </div>
+                <ul className="lnb__menu">
+                  <Link to={{ pathname: `/loan` }}>
+                    <li className="lnb__loan">대출</li>
+                  </Link>
+                  <Link to={{ pathname: `/return` }}>
+                    <li className="lnb__return">조회 및 반납</li>
+                  </Link>
+                </ul>
+              </div>
+            ) : (
+              <div className="gnb__admin__lnb" />
+            )}
+          </li>
+          <li>
+            <Link className="gnb__login" to={{ pathname: `/login` }}>
+              <img src={LOGIN} className="gnb__login__icon" alt="login" />
+              <span className="gnb__login__text">로그인</span>
+            </Link>
           </li>
         </ul>
-        <a href="" className="navbar__toggleBtn">
-          <i className="fas fa-bars" />
-        </a>
       </nav>
-    </div>
+    </header>
   );
 };
 
