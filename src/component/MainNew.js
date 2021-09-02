@@ -5,6 +5,8 @@ import ARRLEFT from "../img/arrow_left.svg";
 import ARRRIGHT from "../img/arrow_right.svg";
 import "../css/MainNew.css";
 
+const REST_API_KEY = "a73179e66ae3cdbd45b31c84ac3c8df4";
+
 const MainNew = () => {
   const [docs, setDocs] = useState([]);
   const [page, setPage] = useState(0);
@@ -51,7 +53,7 @@ const MainNew = () => {
           alignItems="center"
         />
       </div>
-      <div className="main-new__booklist carousel__container">
+      <div className="main-new__booklist">
         <div
           className="main-new__books"
           style={{ transform: `translate(${transNum}px)` }}

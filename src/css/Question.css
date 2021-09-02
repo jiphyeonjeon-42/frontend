@@ -1,7 +1,8 @@
 .qna {
   display: flex;
   flex-direction: column;
-  padding: 0 18.8vw 0 39.6vw;
+  padding: 0 0 0 400px;
+  width: 800px
 }
 
 .qna__question {
@@ -32,7 +33,6 @@
 }
 
 .qna__answer {
-  /* width: 674px; */
   border-left: 1px solid #a4a4a4;
   margin: 44px 0 0 72px;
   padding: 0 25px 0 25px;
@@ -45,6 +45,7 @@
   letter-spacing: normal;
   text-align: left;
   color: #a4a4a4;
+  white-space: normal;
 }
 
 .qna__line {

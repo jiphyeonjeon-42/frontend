@@ -1,11 +1,11 @@
-.infomation-bg {
-  background-image: url("../img/infomation_bg.png");
+.search-bg {
+  background-image: url("../img/search_bg.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   min-width: 1320px;
   width: 100%;
-  height: 500px;
+  height: 704px;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -13,18 +13,21 @@
   /* object-fit: contain; */
 }
 
-.infomation-section {
+.search-section {
   width: 1200px;
 }
 
-.infomation-title {
+.search-title {
   position: relative;
-  padding: 132px 0 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 150px 0 120px 0;
   width: 1200px;
   z-index: 2;
 }
 
-.infomation-subtitle {
+.search-subtitle {
   width: 400px;
-  padding: 118px 800px 148px 0;
+  padding: 100px 0 148px 0;
 }

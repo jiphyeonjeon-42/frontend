@@ -9,6 +9,8 @@ import ARRLEFT from "../img/arrow_left_circle.svg";
 import ARRRIGHT from "../img/arrow_right_circle.svg";
 import "../css/MainPopular.css";
 
+const REST_API_KEY = "a73179e66ae3cdbd45b31c84ac3c8df4";
+
 const MainPopluar = () => {
   const [page, setPage] = useState(0);
   const [docs, setDocs] = useRecoilState(popularList);

@@ -1,17 +1,19 @@
 .main-new {
   width: 100%;
   height: 935px;
-  position: relative;
+  /* position: relative; */
 }
 
 .main-new__title-wrapper {
   width: 1200px;
-  margin: 240px auto;
-  position: relative;
+  /* margin: 240px auto; */
+  margin-top: 938px;
+  /* position: relative; */
 }
+
 .main-new__booklist {
   margin-top: 100px;
-  position: relative;
+  position: absolute;
   width: 100%;
   overflow: hidden;
 }
@@ -30,7 +32,7 @@
 }
 
 .main-new__books_pagination {
-  position: relative;
+  /* position: relative; */
   width: 1920px;
   display: block;
 }
