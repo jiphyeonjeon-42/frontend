@@ -1,0 +1,65 @@
+.main-popular {
+  width: 1200px;
+  margin: 0px auto;
+  height: 1100px;
+}
+
+.main-popular__content {
+  height: 580px;
+  margin-top: 80px;
+}
+
+.main-popular__cover {
+  width: 342px;
+  height: 580px;
+  float: left;
+}
+.main-popular__cover-img {
+  height: 500px;
+}
+.main-popular__cover-more {
+  width: 262.1px;
+  height: 48px;
+  border-radius: 24px;
+  background-color: #e63737;
+  margin: 32px auto 0;
+  padding: auto;
+  text-align: center;
+  line-height: 48px;
+}
+.main-popular__cover-detail {
+  width: 810px;
+  height: 580px;
+  float: right;
+}
+
+.main-popular__description {
+  border-bottom: 1px solid rgba(45, 45, 45, 0.4);
+  height: 159px;
+}
+
+.main-popular__title {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.main-popular__detail {
+  margin-left: 28px;
+}
+
+.main-popular__container {
+  width: 714px;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.main-popular__booklist {
+  margin-top: 54px;
+  display: flex;
+  justify-content: space-between;
+}
+.main-popular__arrow {
+  top: 50%;
+  background-color: transparent;
+  border: none;
+}

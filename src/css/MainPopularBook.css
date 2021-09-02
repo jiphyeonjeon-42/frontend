@@ -1,0 +1,19 @@
+.main-popular__booklist__book-button {
+  padding: 0;
+  border: 0;
+  margin-left: 32px;
+  background-color: transparent;
+  text-align: left;
+  width: 206px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.main-popular__booklist__book-cover {
+  width: 206px;
+}
+
+.main-popular__booklist__title {
+  margin-top: 12px;
+  margin-bottom: 4px;
+}

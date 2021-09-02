@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="36">
+    <g data-name="scroll_icon" transform="translate(-944.243 -950.365)" style="opacity:.8">
+        <g data-name="사각형 3" transform="translate(944.243 950.365)" style="stroke:#d5d5d5;stroke-width:2px;fill:none">
+            <rect width="24" height="36" rx="12" style="stroke:none"/>
+            <rect x="1" y="1" width="22" height="34" rx="11" style="fill:none"/>
+        </g>
+        <circle data-name="타원 2" cx="3" cy="3" r="3" transform="translate(953.243 957.365)" style="fill:#d5d5d5"/>
+    </g>
+</svg>
