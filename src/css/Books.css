@@ -1,0 +1,15 @@
+.loader {
+  text-align: center;
+}
+
+.books {
+  /* margin-top: 80px; */
+  /* padding-top: 25px; */
+  padding-left: 3%;
+  padding-right: 3%;
+  background-color: rgb(244, 244, 244);
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}

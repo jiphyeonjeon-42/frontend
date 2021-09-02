@@ -1,0 +1,14 @@
+.App {
+  display: flex;
+}
+
+.App-body {
+  flex: none;
+  width:1200px
+}
+
+.App-space {
+  flex-basis: 60px;
+  flex-grow: 1;
+  flex-shrink: 0;
+}

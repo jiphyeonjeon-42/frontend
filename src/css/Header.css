@@ -1,23 +1,22 @@
 .header {
   display: flex;
-  position: 0;
-  position: absolute;
+  width: 1200px;
+  margin: 0 0 0 0;
+  padding: 80px 0 0 0;
+  position: relative;
   z-index: 2;
   left: 0;
   right: 0;
-  padding: 80px 18.8vw 60px 18.8vw;
 }
 
 .header__logo {
   flex: none;
-  margin: 0 15vw 0 0;
+  margin: 0 660px 0 0;
 }
 
 .logo_img {
   width: 124px;
   height: 42px;
-  /* width: 6.5vmax; */
-  /* height: 8.4vh; */
   object-fit: contain;
 }
 
@@ -29,12 +28,11 @@
   list-style: none;
   display: flex;
   padding: 0 0 0 0;
-  margin: 0;
-  margin-top: 9px;
+  margin: 9px 0 0 0;
 }
 
 .gnb__info {
-  margin: 0 3.1vw 0 0;
+  margin: 0 60px 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,18 +41,12 @@
 .gnb__info__icon {
   width: 25px;
   height: 25px;
-  /* width: 1.3vmax; */
   margin: 1px 8px 1px 0;
-  /* margin: 0 0.4vmax 0 0; */
   object-fit: contain;
 }
 
 .gnb__info__text {
-  /* width: 66px;
-  height: 27px; */
-  /* width: 3.4vw; */
   margin: 0 0 0 0;
-  /* font-size: 1vmax; */
   font-size: 18px;
   font-family: NotoSansCJKkr;
   font-weight: normal;
@@ -68,7 +60,7 @@
 }
 
 .gnb__admin__button {
-  margin: 0 3.1vw 0 0;
+  margin: 0 60px 0 0;
   padding: 0 0 0 0;
   border: 0;
   background: none;
@@ -80,19 +72,13 @@
 .gnb__admin__icon {
   width: 18px;
   height: 25px;
-  /* width: 1vmax;
-  height: 1.3vmax; */
   margin: 1px 8px 1px 0;
-  /* margin: 0 0.4vmax 0 0; */
   object-fit: contain;
 }
 
 .gnb__admin__text {
-  /* width: 73px;
-  height: 27px; */
   margin: 0 0 0 0;
   font-family: NotoSansCJKkr;
-  /* font-size: 1vmax; */
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
@@ -109,8 +95,6 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  position: relative;
-  /* height: 22vh; */
   height: 87px;
 }
 
@@ -119,13 +103,11 @@
 }
 
 .lnb__line {
+  position: relative;
   height: 74.5px;
   width: 0;
-  /* border-left: solid 1px #fff; */
   border-right: solid 1px #fff;
-  /* margin-right: 0.4vmax; */
   margin: 0 13.5px 0 9px;
-  position: relative;
   top: -1.5px;
 }
 
@@ -144,7 +126,7 @@
   height: 0px;
   border: 3.5px solid #fff;
   border-radius: 100%;
-  top: 27px;
+  top: 26px;
 }
 
 .lnb__circle__return {
@@ -153,11 +135,10 @@
   height: 0px;
   border: 3.5px solid #fff;
   border-radius: 100%;
-  top: 64px;
+  top: 62.5px;
 }
 
 .lnb__menu {
-  position: relative;
   list-style: none;
   padding-inline-start: 0;
 }
@@ -167,7 +148,6 @@
   word-break: keep-all;
   white-space: nowrap;
   font-family: NotoSansCJKkr;
-  /* font-size: 0.8vmax; */
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
@@ -183,7 +163,6 @@
   word-break: keep-all;
   white-space: nowrap;
   font-family: NotoSansCJKkr;
-  /* font-size: 0.8vmax; */
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
@@ -204,18 +183,12 @@
 .gnb__login__icon {
   width: 23px;
   height: 25px;
-  /* width: 1.2vmax;
-  height: 1.2vmax; */
   margin: 1px 8px 1px 0;
-  margin: 0 0.4vmax 0 0;
   object-fit: contain;
 }
 
 .gnb__login__text {
-  /* width: 66px;
-  height: 27px; */
   margin: 0 0 0 0;
-  font-size: 1vmax;
   font-size: 18px;
   font-family: NotoSansCJKkr;
   font-weight: normal;

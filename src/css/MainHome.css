@@ -1,10 +1,15 @@
 .main-bg {
   background-image: url("../img/main_bg.png");
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  min-width: 1320px;
+  width: 100%;
   height: 938px;
-  position: relative;
+  position: absolute;
   z-index: 1;
+  top: 0;
+  left: 0;
 }
 
 .main-home {
@@ -41,8 +46,9 @@
   border-radius: 30px;
 }
 .main-home__scroll {
-  position: absolute;
-  bottom: 60px;
+  /* position: absolute; */
+  margin-top: 237px;
+  margin-bottom: 60px;
   text-align: center;
 }
 

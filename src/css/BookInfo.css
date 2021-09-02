@@ -1,0 +1,73 @@
+a:link {
+  color: black;
+  text-decoration: none;
+}
+a:visited {
+  color: rgb(101, 101, 101);
+  text-decoration: none;
+}
+a:hover {
+  /* color: black; */
+  text-decoration: underline;
+}
+/* a:active {
+	color: green;
+	text-decoration: none;
+  } */
+
+.book-info {
+  flex-basis: 20%;
+  /* flex-shrink: 1; */
+}
+
+.book-info__image {
+  height: 220px;
+  flex-shrink: 1;
+}
+
+.book-info__link {
+  display: flex;
+  flex-basis: 20%;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.book-info .book-info__title {
+  font-size: 15px;
+  margin: 5px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.book-info .book-info__author {
+  /* display: flex; */
+  margin: 5px;
+}
+
+.book-info__cate {
+  /* display: flex; */
+  margin-top: 10px;
+}
+
+.book-info__category {
+  /* display: flex; */
+  font-size: 12px;
+  margin: 5px;
+  border-radius: 15px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border: 1px solid grey;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.book-info__publish {
+  margin: 5px;
+  /* font-size: small; */
+}
