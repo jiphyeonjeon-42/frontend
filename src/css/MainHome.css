@@ -1,4 +1,4 @@
-.main-bg {
+/* .main-bg {
   background-image: url("../img/main_bg.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -10,19 +10,27 @@
   z-index: 1;
   top: 0;
   left: 0;
+} */
+
+.main-home-wraper {
+  padding: 0 270px 0 270px;
+  position: relative;
+  z-index: 2;
 }
 
 .main-home {
-  padding-top: 280px;
+  height: 735px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 900px;
 }
 
 .main-home__line {
   width: 40px;
   height: 6px;
   background-color: #d5d5d5;
+  margin-top: 74px;
   margin-bottom: 57px;
   padding: 0;
   border: 0;
@@ -46,8 +54,7 @@
   border-radius: 30px;
 }
 .main-home__scroll {
-  /* position: absolute; */
-  margin-top: 237px;
+  margin-top: auto;
   margin-bottom: 60px;
   text-align: center;
 }

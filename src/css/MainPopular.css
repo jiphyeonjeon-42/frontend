@@ -1,7 +1,14 @@
+.main-popular-wraper {
+  margin-top: 240px;
+  padding: 0 120px 0 120px;
+  margin-bottom: 300px;
+}
+
 .main-popular {
   width: 1200px;
+  height: 803px;
   margin: 0px auto;
-  height: 1100px;
+  /* height: 1100px; */
 }
 
 .main-popular__content {

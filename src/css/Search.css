@@ -1,4 +1,4 @@
-.search-bg {
+/* .search-bg {
   background-image: url("../img/search_bg.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -10,11 +10,15 @@
   z-index: 1;
   top: 0;
   left: 0;
-  /* object-fit: contain; */
-}
+} */
 
+.search-section-wraper {
+  padding: 0 270px 0 270px;
+}
 .search-section {
-  width: 1200px;
+  max-width: 1200px;
+  min-width: 900px;
+  margin: auto;
 }
 
 .search-title {
@@ -22,12 +26,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 150px 0 120px 0;
-  width: 1200px;
+  padding: 150px 270px 120px 270px;
+  min-width: 900px;
   z-index: 2;
 }
 
 .search-subtitle {
   width: 400px;
-  padding: 100px 0 148px 0;
+  padding: 100px 0 64px 0;
 }

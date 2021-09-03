@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { atom, useRecoilState } from "recoil";
 import axios from "axios";
 import PropTypes from "prop-types";
-import Bookinfo from "./BookInfo";
+import BookInfo from "./BookInfo";
 import { currentPage } from "./Pagination";
 import "../css/Books.css";
-
-const REST_API_KEY = "a73179e66ae3cdbd45b31c84ac3c8df4";
 
 export const pageEndState = atom({ key: "pageEndState", default: true });
 // export const searchWord = atom({ key: "searchWord", default: "" });
@@ -79,7 +77,7 @@ const Books = ({ userWord, userPage }) => {
       ) : (
         <div className="books">
           {bookList.map(items => (
-            <Bookinfo
+            <BookInfo
               className="bookinfo"
               key={parseInt(items.isbn, 10)}
               id={parseInt(items.isbn, 10)}

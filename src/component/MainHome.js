@@ -1,39 +1,11 @@
-import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import React from "react";
+import SearchBar from "./SearchBar";
 import ScrollIcon from "../img/scroll-icon.svg";
-import { searchWord } from "./Search";
-import SearchBar, { useSearchInput } from "./SearchBar";
-import { currentPage, pageRangeState } from "./Pagination";
 import "../css/MainHome.css";
 
 const Main = () => {
-  // eslint-disable-next-line prefer-const
-  let history = useHistory();
-  const setSearchWord = useSetRecoilState(searchWord);
-  const setPageRange = useSetRecoilState(pageRangeState);
-  const setPage = useSetRecoilState(currentPage);
-  const setInputValue = useSetRecoilState(useSearchInput);
-
-  setInputValue("");
-
-  const handleSearchSumbit = event => {
-    event.preventDefault();
-    const searchForm = document.getElementById("search-form");
-    const searchInputValue = searchForm.querySelector("#search-input").value;
-    setSearchWord(searchInputValue);
-    setPageRange(0);
-    setPage(1);
-    history.push(`/search/${searchInputValue}`);
-  };
-
-  useEffect(() => {
-    const searchForm = document.getElementById("search-form");
-    searchForm.addEventListener("submit", handleSearchSumbit);
-    return () => searchForm.removeEventListener("submit", handleSearchSumbit);
-  }, []);
   return (
-    <section className="main-bg">
+    <section className="main-home-wraper">
       <div className="main-home">
         <div className="main-home__line" />
         <span className="main-home__greet font-48 color-ff">

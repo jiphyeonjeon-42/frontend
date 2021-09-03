@@ -1,8 +1,8 @@
 .qna {
   display: flex;
   flex-direction: column;
-  padding: 0 0 0 400px;
-  width: 800px
+  padding: 0 0 0 0;
+
 }
 
 .qna__question {

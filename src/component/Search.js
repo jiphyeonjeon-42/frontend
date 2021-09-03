@@ -7,6 +7,7 @@ import SubTitle from "./SubTitle";
 import SearchBar, { useSearchInput } from "./SearchBar";
 import Books from "./Books";
 import Pagination, { currentPage, pageRangeState } from "./Pagination";
+import BackGround from "./BackGround";
 import "../css/Search.css";
 
 export const searchWord = atom({ key: "searchWord", default: "" });
@@ -42,20 +43,22 @@ const Search = ({ match }) => {
 
   return (
     <main>
-      <div className="search-bg" />
+      <BackGround page="search" />
       <section className="search-title">
         <Title titleKorean="검색" titleEng="SEARCH" />
         <SearchBar />
       </section>
-      <section className="search-section">
-        <div className="search-subtitle">
-          <SubTitle
-            subTitle={`'${subTitle}' 도서 검색 결과`}
-            alignItems="start"
-          />
+      <section className="search-section-wraper">
+        <div className="search-section">
+          <div className="search-subtitle">
+            <SubTitle
+              subTitle={`'${subTitle}' 도서 검색 결과`}
+              alignItems="start"
+            />
+          </div>
+          <Books userWord={subTitle} />
+          <Pagination />
         </div>
-        <Books userWord={subTitle} />
-        <Pagination />
       </section>
     </main>
   );

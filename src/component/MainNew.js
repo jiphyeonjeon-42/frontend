@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SubTitle from "./SubTitle";
-import ARRLEFT from "../img/arrow_left.svg";
-import ARRRIGHT from "../img/arrow_right.svg";
+import ArrLeft from "../img/arrow_left.svg";
+import ArrRight from "../img/arrow_right.svg";
 import "../css/MainNew.css";
-
-const REST_API_KEY = "a73179e66ae3cdbd45b31c84ac3c8df4";
 
 const MainNew = () => {
   const [docs, setDocs] = useState([]);
@@ -81,10 +79,10 @@ const MainNew = () => {
         </div>} */}
         <div className="main-new__arrowbox">
           <button className="main-new__arrow" onClick={onPrev} type="button">
-            <img src={ARRLEFT} alt="" />
+            <img src={ArrLeft} alt="" />
           </button>
           <button className="main-new__arrow" onClick={onNext} type="button">
-            <img src={ARRRIGHT} alt="" />
+            <img src={ArrRight} alt="" />
           </button>
         </div>
       </div>
