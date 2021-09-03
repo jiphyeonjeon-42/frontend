@@ -3,13 +3,11 @@
 }
 
 .books {
-  /* margin-top: 80px; */
-  /* padding-top: 25px; */
-  padding-left: 3%;
-  padding-right: 3%;
   background-color: rgb(244, 244, 244);
-  border-radius: 20px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  flex-grow: 1;
+  white-space: normal;
+  flex-flow: row wrap;
 }

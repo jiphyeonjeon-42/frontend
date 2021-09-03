@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "../css/BookInfo.css";
 
-const Bookinfo = ({
+const BookInfo = ({
   id,
   title,
   author,
@@ -34,7 +34,6 @@ const Bookinfo = ({
           alt={title}
           title={title}
         />
-
         <div className="book-info__info">
           <h5 className="book-info__title">{title}</h5>
           {/* <h6 className="book-info__author">{author}</h6> */}
@@ -53,7 +52,7 @@ const Bookinfo = ({
   );
 };
 
-Bookinfo.propTypes = {
+BookInfo.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   // eslint-disable-next-line react/require-default-props
@@ -65,4 +64,4 @@ Bookinfo.propTypes = {
   category: PropTypes.string.isRequired,
 };
 
-export default Bookinfo;
+export default BookInfo;

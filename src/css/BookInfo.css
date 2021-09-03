@@ -10,40 +10,26 @@ a:hover {
   /* color: black; */
   text-decoration: underline;
 }
-/* a:active {
-	color: green;
-	text-decoration: none;
-  } */
 
 .book-info {
-  flex-basis: 20%;
-  /* flex-shrink: 1; */
+  display: flex;
+  max-width: 600px;
+  min-width: 600px;
 }
 
 .book-info__image {
-  height: 220px;
-  flex-shrink: 1;
+  width: 127px;
+  height: 183px;
 }
 
-.book-info__link {
-  display: flex;
-  flex-basis: 20%;
-  justify-content: space-evenly;
-  flex-grow: 1;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.book-info .book-info__title {
+.book-info__title {
   font-size: 15px;
   margin: 5px;
   margin-top: 15px;
   margin-bottom: 10px;
 }
 
-.book-info .book-info__author {
+.book-info__author {
   /* display: flex; */
   margin: 5px;
 }
