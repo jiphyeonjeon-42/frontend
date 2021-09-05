@@ -4,6 +4,7 @@ import SubTitle from "./SubTitle";
 import ArrLeft from "../img/arrow_left.svg";
 import ArrRight from "../img/arrow_right.svg";
 import "../css/MainNew.css";
+import { REST_API_KEY } from "../api";
 
 const MainNew = () => {
   const [docs, setDocs] = useState([]);

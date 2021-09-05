@@ -1,0 +1,35 @@
+.availavble {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.availavble__icon {
+  margin-right: 12px;
+  width: 16px;
+  height: 12px;
+}
+
+.sort {
+  display: flex;
+  margin-top: 28px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-by {
+  display: flex;
+}
+
+.sort-by__button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  margin-right: 24px;
+}

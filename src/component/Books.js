@@ -3,26 +3,19 @@ import { atom, useRecoilState } from "recoil";
 import axios from "axios";
 import PropTypes from "prop-types";
 import BookInfo from "./BookInfo";
-import { currentPage } from "./Pagination";
 import "../css/Books.css";
+import { REST_API_KEY } from "../api";
 
 export const pageEndState = atom({ key: "pageEndState", default: true });
-// export const searchWord = atom({ key: "searchWord", default: "" });
-export const bookListState = atom({ key: "bookListState", default: [] });
 
 const useLoading = initLoading => {
   const [isLoading, setLoading] = useState(initLoading);
   return { isLoading, setLoading };
 };
 
-const useBookList = () => {
-  const [bookList, setBookList] = useState(bookListState);
+const useBookList = initBookList => {
+  const [bookList, setBookList] = useState(initBookList);
   return { bookList, setBookList };
-};
-
-const usePage = () => {
-  const [page, setPage] = useRecoilState(currentPage);
-  return { page, setPage };
 };
 
 const useIsEnd = () => {
@@ -33,7 +26,6 @@ const useIsEnd = () => {
 const Books = ({ userWord, userPage }) => {
   const { isLoading, setLoading } = useLoading(true);
   const { bookList, setBookList } = useBookList([]);
-  const { page } = usePage(userPage);
   const { isEnd, setIsEnd } = useIsEnd(false);
 
   const getBookList = async () => {
@@ -43,7 +35,7 @@ const Books = ({ userWord, userPage }) => {
       params: {
         query: userWord,
         // eslint-disable-next-line object-shorthand
-        page: page,
+        page: userPage,
         size: 20,
       },
       headers: {
@@ -63,10 +55,9 @@ const Books = ({ userWord, userPage }) => {
     setBookList(documents);
     console.log(isEnd);
     setLoading(false);
-    // console.log(bookList, isLoading);
   };
 
-  useEffect(getBookList, [userWord, page]);
+  useEffect(getBookList, [userWord, userPage]);
 
   return (
     <section>
@@ -88,7 +79,7 @@ const Books = ({ userWord, userPage }) => {
               publishedAt={`${parseInt(
                 items.datetime.slice(0, 4),
                 10,
-              )}년 ${parseInt(items.datetime.slice(5, 7), 10)}월`}
+              )}.${parseInt(items.datetime.slice(5, 7), 10)}`}
               category={items.status}
               // key={items.id}
               // id={parseInt(items.isbn)}

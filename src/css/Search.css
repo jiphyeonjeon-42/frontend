@@ -12,10 +12,12 @@
   left: 0;
 } */
 
-.search-section-wraper {
-  padding: 0 270px 0 270px;
+.wish-book-wraper {
+  height: 887px;
 }
+
 .search-section {
+  padding: 0 270px 0 270px;
   max-width: 1200px;
   min-width: 900px;
   margin: auto;
@@ -33,5 +35,5 @@
 
 .search-subtitle {
   width: 400px;
-  padding: 100px 0 64px 0;
+  padding: 100px 0 0 0;
 }

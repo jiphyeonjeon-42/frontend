@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import LinkToDetail from "../img/link_to_detail.svg";
 import "../css/BookInfo.css";
 
 const BookInfo = ({
@@ -13,20 +14,7 @@ const BookInfo = ({
   category,
 }) => {
   return (
-    <Link
-      className="book-info__link"
-      to={{
-        pathname: `/info/${id}`,
-        state: {
-          title,
-          author,
-          publisher,
-          image,
-          publishedAt,
-          category,
-        },
-      }}
-    >
+    <div className="book-info-wraper">
       <div className="book-info">
         <img
           className="book-info__image"
@@ -34,21 +22,57 @@ const BookInfo = ({
           alt={title}
           title={title}
         />
+        <div className="book-info__available color-ff font-14">대여가능</div>
         <div className="book-info__info">
-          <h5 className="book-info__title">{title}</h5>
-          {/* <h6 className="book-info__author">{author}</h6> */}
-          <h6 className="book-info__author">
-            {author[0]}
-            {author.length > 1 ? ` 외 ${author.length - 1}명 ` : " "}|{" "}
-            {publisher}
-          </h6>
-          <h6 className="book-info__publish">{publishedAt}</h6>
-          <div className="book-info__cate">
-            <span className="book-info__category">#{category}</span>
+          <div className="book-info__title font-18-bold--letterspacing color-54">
+            {title}
+          </div>
+          <div className="book-info__others font-16 color-54">
+            {/* {author} */}
+            <span>
+              {author[0]}
+              {author.length > 1 ? ` 외 ${author.length - 1}명 ` : ``}
+            </span>
+            <span className="book-info__separator">|</span>
+            <span>{publisher}</span>
+            <span className="book-info__separator">|</span>
+            <span>{category}</span>
+          </div>
+          <div className="book-info__published-at font-16 color-54">
+            <span>발행연도</span>
+            <span className="book-info__separator-half" />
+            <span>{publishedAt}</span>
+          </div>
+          <div className="book-info__isbn font-16 color-54">
+            <span>표준부호</span>
+            <span className="book-info__separator-half" />
+            <span>{id}</span>
+          </div>
+          <div className="book-info__link">
+            <Link
+              to={{
+                pathname: `/info/${id}`,
+                state: {
+                  title,
+                  author,
+                  publisher,
+                  image,
+                  publishedAt,
+                  category,
+                },
+              }}
+            >
+              <img
+                className="book-info__link-icon"
+                src={LinkToDetail}
+                alt={title}
+              />
+            </Link>
           </div>
         </div>
       </div>
-    </Link>
+      <div className="book-info__line" />
+    </div>
   );
 };
 
