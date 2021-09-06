@@ -8,6 +8,8 @@ import "../css/MainNew.css";
 const MainNew = () => {
   const [docs, setDocs] = useState([]);
   const [page, setPage] = useState(0);
+  console.log(window.innerWidth);
+  // const nextBook = Math.ceil(window.innerWidth / 236) + 1;
   const getData = async () => {
     const {
       data: { documents },
@@ -51,7 +53,18 @@ const MainNew = () => {
           alignItems="center"
         />
       </div>
+
       <div className="main-new__booklist">
+        <button className="main-new__arrow" onClick={onPrev} type="button">
+          <img src={ArrLeft} alt="" />
+        </button>
+        <button
+          className="main-new__arrow right"
+          onClick={onNext}
+          type="button"
+        >
+          <img src={ArrRight} alt="" />
+        </button>
         <div
           className="main-new__books"
           style={{ transform: `translate(${transNum}px)` }}
@@ -66,7 +79,6 @@ const MainNew = () => {
             /* 상세페이지로 연결되어야 하는 부분 끝 */
           ))}
         </div>
-
         {/* 
         
         {        <div className="main-new_books_pagination">
@@ -77,14 +89,6 @@ const MainNew = () => {
             <li className="main-new_books_pag_circle" />
           </ul>
         </div>} */}
-        <div className="main-new__arrowbox">
-          <button className="main-new__arrow" onClick={onPrev} type="button">
-            <img src={ArrLeft} alt="" />
-          </button>
-          <button className="main-new__arrow" onClick={onNext} type="button">
-            <img src={ArrRight} alt="" />
-          </button>
-        </div>
       </div>
     </section>
   );
