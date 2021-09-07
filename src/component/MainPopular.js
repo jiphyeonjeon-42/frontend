@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
+import { Link } from "react-router-dom";
 import popularList from "../atom/popularList";
 import popularMain from "../atom/popularMain";
 import SubTitle from "./SubTitle";
@@ -16,12 +17,13 @@ const MainPopluar = () => {
       data: { items },
     } = await axios.get(`http://localhost:3001/books/info/`, {
       params: {
-        sort: "new",
+        sort: "popular",
         limit: 9,
       },
     });
     setDocs(items);
     setMain(items[0]);
+    console.log(items);
   };
   useEffect(getData, []);
 
@@ -59,9 +61,15 @@ const MainPopluar = () => {
               alt={main.title}
               className="main-popular__cover-img"
             />
-            <div className="main-popular__cover-more font-20 color-ff">
-              도서 자세히 보기
-            </div>
+            <Link
+              to={{
+                pathname: `/info/${main.id}`,
+              }}
+            >
+              <div className="main-popular__cover-more font-20 color-ff">
+                도서 자세히 보기
+              </div>
+            </Link>
           </div>
           <div className="main-popular__cover-detail">
             <div className="main-popular__description color-54">

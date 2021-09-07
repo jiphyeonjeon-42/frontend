@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import SubTitle from "./SubTitle";
 import ArrLeft from "../img/arrow_left.svg";
 import ArrRight from "../img/arrow_right.svg";
@@ -12,18 +13,14 @@ const MainNew = () => {
   // const nextBook = Math.ceil(window.innerWidth / 236) + 1;
   const getData = async () => {
     const {
-      data: { documents },
-    } = await axios.get(`https://dapi.kakao.com/v3/search/book`, {
+      data: { items },
+    } = await axios.get(`http://localhost:3001/books/info/`, {
       params: {
-        query: "새로운",
-        sort: "recency",
-        size: 20,
-      },
-      headers: {
-        Authorization: `KakaoAK ${REST_API_KEY}`,
+        sort: "new",
+        limit: 20,
       },
     });
-    setDocs([...documents.slice(-1), ...documents, ...documents.slice(0, 7)]);
+    setDocs([...items.slice(-1), ...items, ...items.slice(0, 7)]);
   };
   useEffect(getData, []);
   const onNext = () => {
@@ -71,11 +68,13 @@ const MainNew = () => {
         >
           {docs.map(item => (
             /* 상세 페이지로 연결되어야 하는 부분 */
-            <img
-              className="main-new__book"
-              src={item.thumbnail}
-              alt="popular"
-            />
+            <Link
+              to={{
+                pathname: `/info/${item.id}`,
+              }}
+            >
+              <img className="main-new__book" src={item.image} alt="popular" />
+            </Link>
             /* 상세페이지로 연결되어야 하는 부분 끝 */
           ))}
         </div>
