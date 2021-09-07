@@ -15,7 +15,9 @@ const BookDetail = ({ location, match }) => {
     console.log(location.pathname);
   }, [location]);
   const getData = async () => {
-    const response = await axios.get(`http://localhost:3001/books/info/${id}`);
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/books/info/${id}`,
+    );
     setData(response.data);
     console.log(response.data);
   };

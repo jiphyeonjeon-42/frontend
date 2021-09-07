@@ -33,7 +33,7 @@ const Books = ({ userWord, userPage }) => {
   const getBookList = async () => {
     const {
       data: { items, meta, categories },
-    } = await axios.get(`http://localhost:3001/books/search`, {
+    } = await axios.get(`${process.env.REACT_APP_API}/books/search`, {
       //   params: {
       //     query: userWord,
       //     // eslint-disable-next-line object-shorthand
