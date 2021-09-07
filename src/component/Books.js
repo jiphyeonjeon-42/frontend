@@ -5,7 +5,6 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import BookInfo from "./BookInfo";
 import "../css/Books.css";
-// import { REST_API_KEY } from "../api";
 
 export const pageEndState = atom({ key: "pageEndState", default: true });
 export const entireCategory = atom({ key: "entireCategory", default: [] });
@@ -89,7 +88,7 @@ const Books = ({ userWord, userPage }) => {
               //   )}.${parseInt(items.datetime.slice(5, 7), 10)}`}
               //   category={items.status}
               key={items.id}
-              id={parseInt(items.isbn, 10)}
+              id={items.id}
               title={items.title}
               author={items.author}
               publisher={items.publisher}

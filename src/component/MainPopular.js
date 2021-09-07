@@ -1,14 +1,12 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
+import { Link } from "react-router-dom";
 import popularList from "../atom/popularList";
 import popularMain from "../atom/popularMain";
 import SubTitle from "./SubTitle";
 import MainPopularBook from "./MainPopularBook";
-import ArrLeft from "../img/arrow_left_circle.svg";
-import ArrRight from "../img/arrow_right_circle.svg";
 import "../css/MainPopular.css";
-import { REST_API_KEY } from "../api";
 
 const MainPopluar = () => {
   const [page, setPage] = useState(0);
@@ -16,19 +14,16 @@ const MainPopluar = () => {
   const [main, setMain] = useRecoilState(popularMain);
   const getData = async () => {
     const {
-      data: { documents },
-    } = await axios.get(`https://dapi.kakao.com/v3/search/book`, {
+      data: { items },
+    } = await axios.get(`http://localhost:3001/books/info/`, {
       params: {
-        query: "인기",
-        sort: "recency",
-        size: 9,
-      },
-      headers: {
-        Authorization: `KakaoAK ${REST_API_KEY}`,
+        sort: "popular",
+        limit: 9,
       },
     });
-    setDocs(documents);
-    setMain(documents[0]);
+    setDocs(items);
+    setMain(items[0]);
+    console.log(items);
   };
   useEffect(getData, []);
 
@@ -49,7 +44,7 @@ const MainPopluar = () => {
     index -= 1;
     setPage(index);
   };
-  const transNum = -2142 + (206 + 32) * (docs.length - 3 * page);
+  const transNum = -2142 - 16 + (206 + 32) * (docs.length - 3 * page);
 
   return (
     <section className="main-popular-wraper">
@@ -62,13 +57,19 @@ const MainPopluar = () => {
         <div className="main-popular__content">
           <div className="main-popular__cover">
             <img
-              src={main.thumbnail}
+              src={main.image}
               alt={main.title}
               className="main-popular__cover-img"
             />
-            <div className="main-popular__cover-more font-20 color-ff">
-              도서 자세히 보기
-            </div>
+            <Link
+              to={{
+                pathname: `/info/${main.id}`,
+              }}
+            >
+              <div className="main-popular__cover-more font-20 color-ff">
+                도서 자세히 보기
+              </div>
+            </Link>
           </div>
           <div className="main-popular__cover-detail">
             <div className="main-popular__description color-54">
@@ -80,7 +81,7 @@ const MainPopluar = () => {
               <span className="font-16">출판사</span>
               <span className="font-16-light"> | {main.publisher}</span>
               <span className="main-popular__detail font-16">발행연도</span>
-              <span className="font-16-light"> | {main.datetime}</span>
+              <span className="font-16-light"> | {main.publishedAt}</span>
               <span className="main-popular__detail font-16">표준부호</span>
               <span className="font-16-light"> | {main.isbn}</span>
             </div>
@@ -90,7 +91,7 @@ const MainPopluar = () => {
                 onClick={onPrev}
                 type="button"
               >
-                <img src={ArrLeft} alt="" />
+                {" "}
               </button>
               <div className="main-popular__container">
                 <div
@@ -103,11 +104,11 @@ const MainPopluar = () => {
                 </div>
               </div>
               <button
-                className="main-popular__arrow"
+                className="main-popular__arrow right"
                 onClick={onNext}
                 type="button"
               >
-                <img src={ArrRight} alt="" />
+                {" "}
               </button>
             </div>
           </div>

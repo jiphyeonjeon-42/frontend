@@ -10,13 +10,27 @@
   margin: auto;
 }
 
+.main-new__arrow {
+  width: 80px;
+  height: 340px;
+  margin: 10px;
+  float: left;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: none;
+  z-index: 100;
+  position: inherit;
+}
+
+.main-new__arrow.right {
+  float: right;
+}
+
 .main-new__booklist {
-  margin-top: 100px;
   position: relative;
   z-index: 1;
   width: 100%;
-  min-width: 1440px;
   overflow: hidden;
+  margin-top: 100px;
 }
 
 .main-new__book {
@@ -59,19 +73,4 @@
 
 .main-new__books_pag_circle.selected {
   background-color: #2d2d2d;
-}
-
-.main-new__arrowbox {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.main-new__arrow {
-  width: 80px;
-  height: 340px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border: none;
 }

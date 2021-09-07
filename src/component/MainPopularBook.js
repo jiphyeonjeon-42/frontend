@@ -20,14 +20,14 @@ const MainPopularBook = ({ book }) => {
     >
       <img
         className="main-popular__booklist__book-cover"
-        src={book.thumbnail}
+        src={book.image}
         alt={book.title}
       />
       <p className="font-16-bold color-2d main-popular__booklist__title">
         {book.title}
       </p>
       <p className="font-16 color-54 ">
-        {book.authors[0]} | {book.publisher}
+        {book.author} | {book.publisher}
       </p>
     </button>
   );
@@ -38,10 +38,8 @@ export default MainPopularBook;
 MainPopularBook.propTypes = {
   book: PropTypes.shape({
     title: PropTypes.string,
-    thumbnail: PropTypes.string,
-    authors: PropTypes.oneOfType({
-      0: PropTypes.string,
-    }),
+    image: PropTypes.string,
+    author: PropTypes.string,
     publisher: PropTypes.string,
   }).isRequired,
 };

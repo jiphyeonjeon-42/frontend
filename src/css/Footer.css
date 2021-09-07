@@ -1,9 +1,13 @@
 .footer {
   text-align: center;
-  background-color: rgb(245, 245, 245);
+  background-color: #2d2d2d;
+  width: 100%;
+  min-width: 1320px;
+  height: 380px;
+  margin-top: 300px;
 }
 
 .footer__text {
-	margin: 0px;
-	padding: 20px;
+  margin: 0px;
+  padding: 20px;
 }

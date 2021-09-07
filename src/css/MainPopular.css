@@ -22,6 +22,7 @@
   float: left;
 }
 .main-popular__cover-img {
+  width: 342px;
   height: 500px;
 }
 .main-popular__cover-more {
@@ -37,6 +38,7 @@
 .main-popular__cover-detail {
   width: 810px;
   height: 580px;
+  margin-left: 48px;
   float: right;
 }
 
@@ -66,7 +68,23 @@
   justify-content: space-between;
 }
 .main-popular__arrow {
+  width: 32px;
+  background-image: url(../img/arrow_left_circle.svg);
+  background-repeat: no-repeat;
+  background-position-y: center;
   top: 50%;
   background-color: transparent;
   border: none;
+}
+
+.main-popular__arrow.right {
+  background-image: url(../img/arrow_right_circle.svg);
+}
+
+.main-popular__arrow:hover {
+  background-image: url(../img/arrow_left_circle_hover.svg);
+}
+
+.main-popular__arrow.right:hover {
+  background-image: url(../img/arrow_right_circle_hover.svg);
 }
