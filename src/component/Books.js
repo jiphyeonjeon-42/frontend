@@ -6,6 +6,7 @@ import BookInfo from "./BookInfo";
 import { currentPage } from "./Pagination";
 import "../css/Books.css";
 
+const REST_API_KEY = "670dea7916052ba57c8202334cfafd53";
 export const pageEndState = atom({ key: "pageEndState", default: true });
 // export const searchWord = atom({ key: "searchWord", default: "" });
 export const bookListState = atom({ key: "bookListState", default: [] });
@@ -32,7 +33,7 @@ const useIsEnd = () => {
 
 const Books = ({ userWord, userPage }) => {
   const { isLoading, setLoading } = useLoading(true);
-  const { bookList, setBookList } = useBookList([]);
+  const { bookList, setBookList } = useBookList(bookListState);
   const { page } = usePage(userPage);
   const { isEnd, setIsEnd } = useIsEnd(false);
 

@@ -1,0 +1,27 @@
+.bookStatus {
+  margin-bottom: 12px;
+  display: flex;
+}
+.bookStatus-id {
+  width: 60px;
+  min-width: 60px;
+}
+.bookStatus-callSign {
+  margin-right: 60px;
+  width: 60px;
+}
+.bookStatus-status {
+  margin-right: 60px;
+  width: 60px;
+}
+.bookStatus-dueDate {
+  width: 240px;
+}
+.reservation-btn {
+  background: none;
+  border: none;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.bookStatus-arr {
+  margin-left: 12px;
+}

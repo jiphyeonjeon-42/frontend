@@ -1,5 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="14.828" height="26.828">
-    <g data-name="오른쪽으로 넘기기">
-        <path data-name="패스 24" d="M12 24 0 12 12 0" transform="translate(1.414 1.414)" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:2px"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="340" viewBox="0 0 80 340">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: rgba(0,0,0,0.4);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="오른쪽넘기기_활성화_" data-name="오른쪽넘기기(활성화)" transform="translate(80 340) rotate(180)">
+    <rect id="사각형_7" data-name="사각형 7" class="cls-1" width="80" height="340" transform="translate(80 340) rotate(180)"/>
+    <g id="화살표" transform="translate(32 158)">
+      <g id="오른쪽으로_넘기기" data-name="오른쪽으로 넘기기" transform="translate(12 24) rotate(180)">
+        <path id="패스_24" data-name="패스 24" class="cls-2" d="M12,24,0,12,12,0" transform="translate(12 24) rotate(180)"/>
+      </g>
     </g>
+  </g>
 </svg>

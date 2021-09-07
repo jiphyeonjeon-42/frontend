@@ -24,3 +24,8 @@
   background-image: url("../img/search_bg.png");
   height: 704px;
 }
+
+.bookdetail-bg {
+  background-image: url("../img/bookdetail_bg.png");
+  height: 500px;
+}
