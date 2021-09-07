@@ -5,28 +5,30 @@ import { atom, useRecoilState, useSetRecoilState } from "recoil";
 import Title from "./Title";
 import SubTitle from "./SubTitle";
 import SearchBar, { useSearchInput } from "./SearchBar";
+// eslint-disable-next-line import/no-cycle
 import Books from "./Books";
-import Pagination, { currentPage, pageRangeState } from "./Pagination";
+import Pagination, { pageRangeState } from "./Pagination";
 import BackGround from "./BackGround";
 import "../css/Search.css";
+import CategoryFilter from "./CategoryFilter";
 
 export const searchWord = atom({ key: "searchWord", default: "" });
+export const currentPage = atom({ key: "currentPage", default: 1 });
 
-const Search = ({ match }) => {
+const Search = ({ match, location }) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
   const [subTitle, setSubTitle] = useRecoilState(searchWord);
+  const [page, setPage] = useRecoilState(currentPage);
   const setPageRange = useSetRecoilState(pageRangeState);
-  const setPage = useSetRecoilState(currentPage);
   const setInputValue = useSetRecoilState(useSearchInput);
 
   const handleSearchSumbit = event => {
     event.preventDefault();
     setPageRange(0);
-    setPage(1);
     const searchForm = document.getElementById("search-form");
     const searchInputValue = searchForm.querySelector("#search-input").value;
-    history.push(`/search/${searchInputValue}`);
+    history.push(`/search/${searchInputValue}?${1}`);
   };
 
   useEffect(() => {
@@ -36,10 +38,15 @@ const Search = ({ match }) => {
   }, []);
 
   useEffect(() => {
-    console.log(match.params.word);
+    console.log(match);
+    const queryArr = location.search.split("?");
+    const query = queryArr[queryArr.length - 1];
+    // console.log(queryArr);
+    // console.log(query);
     setSubTitle(match.params.word);
     setInputValue(match.params.word);
-  }, [match.params]);
+    setPage(query);
+  }, [match.params, location.search]);
 
   return (
     <main>
@@ -48,18 +55,18 @@ const Search = ({ match }) => {
         <Title titleKorean="검색" titleEng="SEARCH" />
         <SearchBar />
       </section>
-      <section className="search-section-wraper">
-        <div className="search-section">
-          <div className="search-subtitle">
-            <SubTitle
-              subTitle={`'${subTitle}' 도서 검색 결과`}
-              alignItems="start"
-            />
-          </div>
-          <Books userWord={subTitle} />
-          <Pagination />
+      <section className="search-section">
+        <div className="search-subtitle">
+          <SubTitle
+            subTitle={`'${subTitle}' 도서 검색 결과`}
+            alignItems="start"
+          />
         </div>
+        <CategoryFilter />
+        <Books userWord={subTitle} userPage={page} />
+        <Pagination current={page} />
       </section>
+      <section className="wish-book-wraper" />
     </main>
   );
 };

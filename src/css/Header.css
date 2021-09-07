@@ -6,11 +6,8 @@ a:active {
   text-decoration: none;
 }
 
-.header-wrapper {
-  padding: 80px 270px 0 270px;
-}
-
 .header {
+  padding: 80px 270px 0 270px;
   display: flex;
   height: 123px;
   max-width: 1200px;

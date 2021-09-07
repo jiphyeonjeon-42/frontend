@@ -1,3 +1,39 @@
 .pagination {
-	text-align: center;
+  margin-top: 8px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.page-button {
+  margin: 0 16px 0 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.page-button-icon {
+  width: 8px;
+  height: 16px;
+}
+
+.page-button-icon-reverse {
+  width: 8px;
+  height: 16px;
+  transform-origin: 50% 50%;
+  transform: rotate(180deg);
+}
+
+.pre-page-button {
+  margin: 6px 16px 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.next-page-button {
+  margin: 6px 0 0 16px;
+  padding: 0;
+  border: 0;
+  background: none;
 }
