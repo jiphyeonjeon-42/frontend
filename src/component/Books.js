@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { atom, useRecoilState } from "recoil";
+import { atom, useSetRecoilState } from "recoil";
+// import { atom, useRecoilState } from "recoil";
 import axios from "axios";
 import PropTypes from "prop-types";
 import BookInfo from "./BookInfo";
 import "../css/Books.css";
-import { REST_API_KEY } from "../api";
+// import { REST_API_KEY } from "../api";
 
 export const pageEndState = atom({ key: "pageEndState", default: true });
+export const entireCategory = atom({ key: "entireCategory", default: [] });
 
 const useLoading = initLoading => {
   const [isLoading, setLoading] = useState(initLoading);
@@ -18,42 +20,47 @@ const useBookList = initBookList => {
   return { bookList, setBookList };
 };
 
-const useIsEnd = () => {
-  const [isEnd, setIsEnd] = useRecoilState(pageEndState);
-  return { isEnd, setIsEnd };
-};
+// const useIsEnd = () => {
+//   const [isEnd, setIsEnd] = useRecoilState(pageEndState);
+//   return { isEnd, setIsEnd };
+// };
 
 const Books = ({ userWord, userPage }) => {
   const { isLoading, setLoading } = useLoading(true);
   const { bookList, setBookList } = useBookList([]);
-  const { isEnd, setIsEnd } = useIsEnd(false);
+  const setEntireCate = useSetRecoilState(entireCategory);
+  //   const { isEnd, setIsEnd } = useIsEnd(false);
 
   const getBookList = async () => {
     const {
-      data: { meta, documents },
-    } = await axios.get(`https://dapi.kakao.com/v3/search/book`, {
+      data: { items, meta, categories },
+    } = await axios.get(`http://localhost:3001/books/search`, {
+      //   params: {
+      //     query: userWord,
+      //     // eslint-disable-next-line object-shorthand
+      //     page: userPage,
+      //     size: 20,
+      //   },
+      //   headers: {
+      //     Authorization: `KakaoAK ${REST_API_KEY}`,
+      //   },
       params: {
         query: userWord,
-        // eslint-disable-next-line object-shorthand
         page: userPage,
-        size: 20,
+        limit: 20,
       },
-      headers: {
-        Authorization: `KakaoAK ${REST_API_KEY}`,
-      },
-      //   params: {
-      //     word: searchString,
-      //     page: pageNum,
-      //   },
     });
-    setIsEnd(meta.is_end);
+    // setIsEnd(meta.is_end);
     // if (page === 1) {
     //   setBookList(documents);
     // } else {
     //   setBookList(bookList.concat(documents));
     // }
-    setBookList(documents);
-    console.log(isEnd);
+    setBookList(items);
+    console.log("items", items);
+    console.log("meta", meta);
+    console.log("categories", categories);
+    setEntireCate(categories);
     setLoading(false);
   };
 
@@ -70,24 +77,25 @@ const Books = ({ userWord, userPage }) => {
           {bookList.map(items => (
             <BookInfo
               className="bookinfo"
-              key={parseInt(items.isbn, 10)}
+              //   key={parseInt(items.isbn, 10)}
+              //   id={parseInt(items.isbn, 10)}
+              //   title={items.title}
+              //   author={items.authors}
+              //   publisher={items.publisher}
+              //   image={items.thumbnail}
+              //   publishedAt={`${parseInt(
+              //     items.datetime.slice(0, 4),
+              //     10,
+              //   )}.${parseInt(items.datetime.slice(5, 7), 10)}`}
+              //   category={items.status}
+              key={items.id}
               id={parseInt(items.isbn, 10)}
               title={items.title}
-              author={items.authors}
+              author={items.author}
               publisher={items.publisher}
-              image={items.thumbnail}
-              publishedAt={`${parseInt(
-                items.datetime.slice(0, 4),
-                10,
-              )}.${parseInt(items.datetime.slice(5, 7), 10)}`}
-              category={items.status}
-              // key={items.id}
-              // id={parseInt(items.isbn)}
-              // title={items.title}
-              // author={items.author}
-              // publisher={items.publisher}
-              // image={items.image}
-              // publishedAt={items.publishedAt}
+              image={items.image}
+              publishedAt={items.publishedAt}
+              category={items.category}
             />
           ))}
         </div>

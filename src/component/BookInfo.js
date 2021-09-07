@@ -28,10 +28,10 @@ const BookInfo = ({
             {title}
           </div>
           <div className="book-info__others font-16 color-54">
-            {/* {author} */}
             <span>
-              {author[0]}
-              {author.length > 1 ? ` 외 ${author.length - 1}명 ` : ``}
+              {author}
+              {/* {author[0]}
+              {author.length > 1 ? ` 외 ${author.length - 1}명 ` : ``} */}
             </span>
             <span className="book-info__separator">|</span>
             <span>{publisher}</span>

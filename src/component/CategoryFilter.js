@@ -9,11 +9,12 @@ import {
 import ArrLeft from "../img/arrow_left_black.svg";
 import ArrRight from "../img/arrow_right_black.svg";
 import Sort from "./Sort";
+import { entireCategory } from "./Books";
 import "../css/CategoryFilter.css";
 
 const userCategory = atom({ key: "userCategory", default: 0 });
 const startCategory = atom({ key: "startCategory", default: 0 });
-const HiddenCategory = atom({ key: "HiddenCategory", default: true });
+const hiddenCategory = atom({ key: "hiddenCategory", default: true });
 
 const PreCategory = () => {
   const [startCate, setStartCate] = useRecoilState(startCategory);
@@ -41,7 +42,7 @@ const PreCategory = () => {
 
 const NextCategory = () => {
   const [startCate, setStartCate] = useRecoilState(startCategory);
-  const hiddenCate = useRecoilValue(HiddenCategory);
+  const hiddenCate = useRecoilValue(hiddenCategory);
 
   const slideRight = () => {
     if (hiddenCate) {
@@ -98,9 +99,10 @@ const Category = ({ categoryIndex, categoryName, categoryNum }) => {
 
 const CategoryFilter = () => {
   const setCate = useSetRecoilState(userCategory);
-  const setHiddenCate = useSetRecoilState(HiddenCategory);
+  const setHiddenCate = useSetRecoilState(hiddenCategory);
   const [startCate, setStartCate] = useRecoilState(startCategory);
-  const [entireCategory, setEntireCategory] = useState([]);
+  const [entireCate, setEntireCate] = useState([]);
+  const entire = useRecoilValue(entireCategory);
 
   const toggleCategoryButton = () => {
     const categoryFileterWidth = document.querySelector(
@@ -109,14 +111,14 @@ const CategoryFilter = () => {
     const categoryArrowWidth =
       document.querySelector(".pre-category").offsetWidth +
       document.querySelector(".next-category").offsetWidth;
-    const categoryButtonWidth = entireCategory.slice(startCate);
+    const categoryButtonWidth = entireCate.slice(startCate);
     const categoryListWidth = categoryFileterWidth - categoryArrowWidth;
     const categoryButtonWidthSum =
       categoryButtonWidth.reduce((a, b) => a + b, 0) +
       36 * (categoryButtonWidth.length - 1);
     if (
       startCate > 0 &&
-      entireCategory.slice(startCate - 1).reduce((a, b) => a + b, 0) +
+      entireCate.slice(startCate - 1).reduce((a, b) => a + b, 0) +
         36 * categoryButtonWidth.length <
         categoryListWidth
     )
@@ -131,12 +133,12 @@ const CategoryFilter = () => {
     const categoryButtonWidth = Array.from(categoryButton).map(
       items => items.offsetWidth,
     );
-    setEntireCategory(categoryButtonWidth);
-  }, []);
+    setEntireCate(categoryButtonWidth);
+  }, [entire]);
 
   useEffect(() => {
     toggleCategoryButton();
-  }, [startCate, entireCategory]);
+  }, [startCate, entireCate]);
 
   useEffect(() => {
     window.addEventListener("resize", toggleCategoryButton);
@@ -150,14 +152,13 @@ const CategoryFilter = () => {
       <div className="category-filter__list">
         <PreCategory />
         <div className="categories">
-          <Category categoryIndex={0} categoryName="전체" categoryNum={20} />
-          <Category categoryIndex={1} categoryName="데이터1" categoryNum={10} />
-          <Category categoryIndex={2} categoryName="데이터2" categoryNum={10} />
-          <Category categoryIndex={3} categoryName="데이터3" categoryNum={10} />
-          <Category categoryIndex={4} categoryName="데이터4" categoryNum={10} />
-          <Category categoryIndex={5} categoryName="데이터5" categoryNum={10} />
-          <Category categoryIndex={6} categoryName="데이터6" categoryNum={10} />
-          <Category categoryIndex={7} categoryName="데이터7" categoryNum={10} />
+          {entire.map((items, index) => (
+            <Category
+              categoryIndex={index}
+              categoryName={items.name}
+              categoryNum={items.count}
+            />
+          ))}
           {/* <Category categoryName="데이터7" categoryNum={10} onClick="false" /> */}
         </div>
         <NextCategory />
