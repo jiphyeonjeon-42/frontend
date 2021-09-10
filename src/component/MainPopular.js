@@ -64,6 +64,9 @@ const MainPopluar = () => {
             <Link
               to={{
                 pathname: `/info/${main.id}`,
+                state: {
+                  bread: "인기 도서",
+                },
               }}
             >
               <div className="main-popular__cover-more font-20 color-ff">

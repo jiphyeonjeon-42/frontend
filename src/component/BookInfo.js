@@ -6,12 +6,14 @@ import "../css/BookInfo.css";
 
 const BookInfo = ({
   id,
+  isbn,
   title,
   author,
   publisher,
   image,
   publishedAt,
   category,
+  bread,
 }) => {
   return (
     <div className="book-info-wraper">
@@ -46,7 +48,7 @@ const BookInfo = ({
           <div className="book-info__isbn font-16 color-54">
             <span>표준부호</span>
             <span className="book-info__separator-half" />
-            <span>{id}</span>
+            <span>{isbn}</span>
           </div>
           <div className="book-info__link">
             <Link
@@ -59,6 +61,7 @@ const BookInfo = ({
                   image,
                   publishedAt,
                   category,
+                  bread,
                 },
               }}
             >
@@ -78,6 +81,7 @@ const BookInfo = ({
 
 BookInfo.propTypes = {
   id: PropTypes.number.isRequired,
+  isbn: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   // eslint-disable-next-line react/require-default-props
   author: PropTypes.arrayOf(PropTypes.string.isRequired),
@@ -86,6 +90,7 @@ BookInfo.propTypes = {
   image: PropTypes.string.isRequired,
   publishedAt: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
+  bread: PropTypes.string.isRequired,
 };
 
 export default BookInfo;
