@@ -15,7 +15,7 @@ const MainPopluar = () => {
   const getData = async () => {
     const {
       data: { items },
-    } = await axios.get(`http://localhost:3001/books/info/`, {
+    } = await axios.get(`${process.env.REACT_APP_API}/books/info/`, {
       params: {
         sort: "popular",
         limit: 9,

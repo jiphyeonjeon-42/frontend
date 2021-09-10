@@ -32,6 +32,15 @@ const Books = ({ userWord, userPage, userSort }) => {
     const {
       data: { items, meta, categories },
     } = await axios.get(`${process.env.REACT_APP_API}/books/search`, {
+      //   params: {
+      //     query: userWord,
+      //     // eslint-disable-next-line object-shorthand
+      //     page: userPage,
+      //     size: 20,
+      //   },
+      //   headers: {
+      //     Authorization: `KakaoAK ${REST_API_KEY}`,
+      //   },
       params: {
         query: userWord,
         page: userPage,

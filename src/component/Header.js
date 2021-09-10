@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import Logo from "../img/jiphyeonjeon_logo.svg";
 import Information from "../img/information_icon.svg";
 import Login from "../img/login_icon.svg";
 import Admin from "../img/admin_icon.svg";
 import "../css/Header.css";
+import userState from "../atom/userState";
 
 const Header = () => {
   const [toggleLNB, setToggleLNB] = useState(false);
+  const user = useRecoilValue(userState);
   const clickAdmin = () => {
     const target = document.querySelector(".gnb__admin__text");
     target.style.opacity = toggleLNB === true ? 1 : 0.7;
@@ -64,10 +67,21 @@ const Header = () => {
             )}
           </li>
           <li>
-            <Link className="gnb__login" to={{ pathname: `/login` }}>
-              <img src={Login} className="gnb__login__icon" alt="login" />
-              <span className="gnb__login__text">로그인</span>
-            </Link>
+            {user.id ? (
+              <Link className="gnb__login" to={{ pathname: `/logout` }}>
+                <img src={Login} className="gnb__login__icon" alt="login" />
+                <span className="gnb__login__text">로그아웃</span>{" "}
+              </Link>
+            ) : (
+              <a
+                className="gnb__login"
+                href="https://api.intra.42.fr/oauth/authorize?client_id=c5e22b602708659fd8d3fbf6350271f01bbc47e58d342bc00859d7880b7bbe6e&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fauth%2Ftoken&response_type=code"
+              >
+                <img src={Login} className="gnb__login__icon" alt="login" />
+
+                <span className="gnb__login__text">로그인</span>
+              </a>
+            )}
           </li>
         </ul>
       </nav>
