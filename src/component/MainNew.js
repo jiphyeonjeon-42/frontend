@@ -71,6 +71,9 @@ const MainNew = () => {
             <Link
               to={{
                 pathname: `/info/${item.id}`,
+                state: {
+                  bread: "신간 도서",
+                },
               }}
             >
               <img className="main-new__book" src={item.image} alt="popular" />

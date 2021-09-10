@@ -1,17 +1,30 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
-import { atom, useRecoilState, useSetRecoilState } from "recoil";
+import { useHistory } from "react-router-dom";
+import {
+  atom,
+  useRecoilState,
+  useSetRecoilState,
+  useRecoilValue,
+} from "recoil";
+// eslint-disable-next-line import/no-cycle
+import { userCategory } from "./CategoryFilter";
 import CheckIcon from "../img/check_icon.svg";
+import RedCheckIcon from "../img/check_icon_red.svg";
 import "../css/Sort.css";
 
-const sortState = atom({ key: "sortState", default: 0 });
+export const sortBy = atom({ key: "sortBy", default: "" });
 const availableState = atom({ key: "availableState", default: false });
 
-const SortBy = ({ sortIndex, text }) => {
-  const [userSort, setSort] = useRecoilState(sortState);
+const SortBy = ({ sort, text }) => {
+  // eslint-disable-next-line prefer-const
+  let history = useHistory();
+  const [userSort, setSort] = useRecoilState(sortBy);
+  const cateIndex = useRecoilValue(userCategory);
 
   const changeSortBy = () => {
-    setSort(sortIndex);
+    setSort(sort);
+    history.push(`?page=${1}&category=${cateIndex}&sort=${sort}`);
   };
 
   return (
@@ -19,7 +32,7 @@ const SortBy = ({ sortIndex, text }) => {
       type="button"
       onClick={changeSortBy}
       className={`sort-by__button ${
-        userSort === sortIndex ? "font-16-bold color-54" : "font-16 color-a4"
+        userSort === sort ? "font-16-bold color-54" : "font-16 color-a4"
       }`}
     >
       {text}
@@ -36,7 +49,11 @@ const Availavble = () => {
 
   return (
     <button type="button" onClick={toggleAvailable} className="availavble">
-      <img className="availavble__icon" src={CheckIcon} alt="check" />
+      <img
+        className="availavble__icon"
+        src={`${isAvailable ? RedCheckIcon : CheckIcon}`}
+        alt="check"
+      />
       <div
         className={`availavble__text font-16-bold ${
           isAvailable ? "color-red" : "color-a4"
@@ -49,7 +66,7 @@ const Availavble = () => {
 };
 
 const Sort = () => {
-  const setSort = useSetRecoilState(sortState);
+  const setSort = useSetRecoilState(sortBy);
   const setAvailable = useSetRecoilState(availableState);
 
   useEffect(() => {
@@ -60,10 +77,10 @@ const Sort = () => {
   return (
     <div className="sort">
       <div className="sort-by">
-        <SortBy sortIndex={0} text="이름순" />
-        <SortBy sortIndex={1} text="입고순" />
-        <SortBy sortIndex={2} text="발행연도순" />
-        <SortBy sortIndex={3} text="인기순" />
+        <SortBy sort="accurate" text="정확도순" />
+        <SortBy sort="title" text="이름순" />
+        <SortBy sort="new" text="발행연도순" />
+        <SortBy sort="popular" text="인기순" />
       </div>
       <Availavble />
     </div>

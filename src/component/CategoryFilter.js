@@ -1,18 +1,17 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import {
-  atom,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { useHistory } from "react-router-dom";
 import ArrLeft from "../img/arrow_left_black.svg";
 import ArrRight from "../img/arrow_right_black.svg";
-import Sort from "./Sort";
+// eslint-disable-next-line import/no-cycle
 import { entireCategory } from "./Books";
+// eslint-disable-next-line import/no-cycle
+import { sortBy } from "./Sort";
 import "../css/CategoryFilter.css";
 
-const userCategory = atom({ key: "userCategory", default: 0 });
+export const userCategory = atom({ key: "userCategory", default: 0 });
+export const userCategoryName = atom({ key: "userCategoryName", default: "" });
 const startCategory = atom({ key: "startCategory", default: 0 });
 const hiddenCategory = atom({ key: "hiddenCategory", default: true });
 
@@ -70,21 +69,29 @@ const NextCategory = () => {
 };
 
 const Category = ({ categoryIndex, categoryName, categoryNum }) => {
-  //   const isEnd = true;
-  const [userCate, setCate] = useRecoilState(userCategory);
+  // eslint-disable-next-line prefer-const
+  let history = useHistory();
   const startCate = useRecoilValue(startCategory);
+  const userCate = useRecoilValue(userCategory);
+  const sort = useRecoilValue(sortBy);
+
   const changeFilter = () => {
-    setCate(categoryIndex);
+    console.log("before", startCate);
+    history.push(`?page=${1}&category=${categoryIndex}&sort=${sort}`);
+    console.log("after", startCate);
   };
+
   return startCate <= categoryIndex ? (
     <button
-      className={`category-button button-onclick-${userCate === categoryIndex}`}
+      className={`category-button button-onclick-${
+        parseInt(userCate, 10) === categoryIndex
+      }`}
       type="button"
       onClick={changeFilter}
     >
       <div
         className={`${
-          userCate === categoryIndex
+          parseInt(userCate, 10) === categoryIndex
             ? "font-16-bold color-54"
             : "font-16 color-a4"
         } category-button-text`}
@@ -98,11 +105,14 @@ const Category = ({ categoryIndex, categoryName, categoryNum }) => {
 };
 
 const CategoryFilter = () => {
-  const setCate = useSetRecoilState(userCategory);
-  const setHiddenCate = useSetRecoilState(hiddenCategory);
-  const [startCate, setStartCate] = useRecoilState(startCategory);
-  const [entireCate, setEntireCate] = useState([]);
-  const entire = useRecoilValue(entireCategory);
+  //   const setCate = useSetRecoilState(userCategory);
+  //   const setHiddenCate = useSetRecoilState(hiddenCategory);
+  const [hiddenCate, setHiddenCate] = useRecoilState(hiddenCategory);
+  const startCate = useRecoilValue(startCategory);
+  //   const [startCate, setStartCate] = useRecoilState(startCategory);
+  const entireCate = useRecoilValue(entireCategory);
+  //   const userCate = useRecoilValue(userCategory);
+  const [entireCateWidth, setEntireCateWidth] = useState([]);
 
   const toggleCategoryButton = () => {
     const categoryFileterWidth = document.querySelector(
@@ -111,34 +121,35 @@ const CategoryFilter = () => {
     const categoryArrowWidth =
       document.querySelector(".pre-category").offsetWidth +
       document.querySelector(".next-category").offsetWidth;
-    const categoryButtonWidth = entireCate.slice(startCate);
+    const categoryButtonWidth = entireCateWidth.slice(
+      startCate > 0 ? startCate - 1 : startCate,
+    );
     const categoryListWidth = categoryFileterWidth - categoryArrowWidth;
     const categoryButtonWidthSum =
       categoryButtonWidth.reduce((a, b) => a + b, 0) +
       36 * (categoryButtonWidth.length - 1);
-    if (
-      startCate > 0 &&
-      entireCate.slice(startCate - 1).reduce((a, b) => a + b, 0) +
-        36 * categoryButtonWidth.length <
-        categoryListWidth
-    )
-      setStartCate(startCate - 1);
+    // if (
+    //   startCate > 0 &&
+    //   entireCateWidth.slice(startCate - 1).reduce((a, b) => a + b, 0) +
+    //     36 * categoryButtonWidth.length <
+    //     categoryListWidth
+    // )
+    //   setStartCate(startCate - 1);
     if (categoryListWidth >= categoryButtonWidthSum) setHiddenCate(false);
     else setHiddenCate(true);
   };
 
   useEffect(() => {
-    setCate(0);
     const categoryButton = document.getElementsByClassName("category-button");
     const categoryButtonWidth = Array.from(categoryButton).map(
       items => items.offsetWidth,
     );
-    setEntireCate(categoryButtonWidth);
-  }, [entire]);
+    setEntireCateWidth(categoryButtonWidth);
+  }, [startCate, entireCate, hiddenCate]);
 
   useEffect(() => {
     toggleCategoryButton();
-  }, [startCate, entireCate]);
+  }, [startCate, entireCateWidth, hiddenCate]);
 
   useEffect(() => {
     window.addEventListener("resize", toggleCategoryButton);
@@ -152,19 +163,17 @@ const CategoryFilter = () => {
       <div className="category-filter__list">
         <PreCategory />
         <div className="categories">
-          {entire.map((items, index) => (
+          {entireCate.map((items, index) => (
             <Category
               categoryIndex={index}
               categoryName={items.name}
               categoryNum={items.count}
             />
           ))}
-          {/* <Category categoryName="데이터7" categoryNum={10} onClick="false" /> */}
         </div>
         <NextCategory />
       </div>
       <div className="category-filter__line" />
-      <Sort />
     </div>
   );
 };

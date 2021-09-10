@@ -1,5 +1,5 @@
 .bookdetail-main {
-  width: 1200px;
+  min-width: 1440px;
   margin: 0px auto;
 }
 .bookdetail-title {
@@ -23,6 +23,7 @@
 .bookdetail-body {
   width: 1200px;
   position: relative;
+  margin: 0px auto;
 }
 .bookDetail__photo img {
   width: 348px;
