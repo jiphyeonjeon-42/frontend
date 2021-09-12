@@ -1,34 +1,34 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  atom,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import Title from "./Title";
 import SubTitle from "./SubTitle";
 import SearchBar, { useSearchInput } from "./SearchBar";
-// eslint-disable-next-line import/no-cycle
-import Books, { entireCategory } from "./Books";
-import Pagination, { pageRangeState, currentPage } from "./Pagination";
+import Books from "./Books";
+import Pagination from "./Pagination";
+import { pageRangeState, currentPage } from "../atom/page";
 import BackGround from "./BackGround";
-import "../css/Search.css";
-import CategoryFilter, {
+import CategoryFilter from "./CategoryFilter";
+import {
+  entireCategory,
   userCategory,
   userCategoryName,
-} from "./CategoryFilter";
-import Sort, { sortBy } from "./Sort";
+} from "../atom/categories";
+import Sort from "./Sort";
+import { sortBy } from "../atom/sortBy";
+import { searchWord } from "../atom/searchWord";
+import WishBook from "./WishBook";
+import "../css/Search.css";
 
-export const searchWord = atom({ key: "searchWord", default: "" });
+// export const searchWord = atom({ key: "searchWord", default: "" });
 
 const Search = ({ match, location }) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
   const [subTitle, setSubTitle] = useRecoilState(searchWord);
-  const [page, setPage] = useRecoilState(currentPage);
-  const [sort, setSort] = useRecoilState(sortBy);
+  const setPage = useSetRecoilState(currentPage);
+  const setSort = useSetRecoilState(sortBy);
   const setCate = useSetRecoilState(userCategory);
   const setPageRange = useSetRecoilState(pageRangeState);
   const setInputValue = useSetRecoilState(useSearchInput);
@@ -84,10 +84,12 @@ const Search = ({ match, location }) => {
         </div>
         <CategoryFilter />
         <Sort />
-        <Books userWord={subTitle} userPage={page} userSort={sort} />
+        <Books />
         <Pagination />
       </section>
-      <section className="wish-book-wraper" />
+      <section className="wish-book-wraper">
+        <WishBook />
+      </section>
     </main>
   );
 };

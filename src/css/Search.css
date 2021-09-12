@@ -13,7 +13,12 @@
 } */
 
 .wish-book-wraper {
+  min-width: 900px;
+  padding: 0 270px 0 270px;
   height: 887px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-section {

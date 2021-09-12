@@ -2,16 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { useHistory } from "react-router-dom";
+import { entireCategory, userCategory } from "../atom/categories";
+import { sortBy } from "../atom/sortBy";
 import ArrLeft from "../img/arrow_left_black.svg";
 import ArrRight from "../img/arrow_right_black.svg";
-// eslint-disable-next-line import/no-cycle
-import { entireCategory } from "./Books";
-// eslint-disable-next-line import/no-cycle
-import { sortBy } from "./Sort";
 import "../css/CategoryFilter.css";
 
-export const userCategory = atom({ key: "userCategory", default: 0 });
-export const userCategoryName = atom({ key: "userCategoryName", default: "" });
+// export const userCategory = atom({ key: "userCategory", default: 0 });
+// export const userCategoryName = atom({ key: "userCategoryName", default: "" });
 const startCategory = atom({ key: "startCategory", default: 0 });
 const hiddenCategory = atom({ key: "hiddenCategory", default: true });
 

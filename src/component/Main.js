@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-// import { currentPage } from "./Search";
-import { useSearchInput } from "./SearchBar";
-import { pageRangeState } from "./Pagination";
 import BackGround from "./BackGround";
 import MainHome from "./MainHome";
 import MainNew from "./MainNew";
 import MainPopular from "./MainPopular";
-import { userCategoryName } from "./CategoryFilter";
+import { useSearchInput } from "./SearchBar";
+import { pageRangeState } from "../atom/page";
+import { userCategoryName } from "../atom/categories";
 import "../css/Main.css";
 
 const Main = () => {

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { atom, useSetRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import axios from "axios";
-import PropTypes from "prop-types";
 import BookInfo from "./BookInfo";
-// eslint-disable-next-line import/no-cycle
-import { userCategoryName } from "./CategoryFilter";
+import { entireCategory, userCategoryName } from "../atom/categories";
+import { sortBy } from "../atom/sortBy";
+import { searchWord } from "../atom/searchWord";
+import { lastPageNum, currentPage } from "../atom/page";
 import "../css/Books.css";
 
-export const entireCategory = atom({ key: "entireCategory", default: [] });
-export const lastPageNum = atom({ key: "lastPageNum", default: 0 });
+// export const entireCategory = atom({ key: "entireCategory", default: [] });
+// export const lastPageNum = atom({ key: "lastPageNum", default: 0 });
 
 const useLoading = initLoading => {
   const [isLoading, setLoading] = useState(initLoading);
@@ -20,27 +21,20 @@ const useBookList = initBookList => {
   return { bookList, setBookList };
 };
 
-const Books = ({ userWord, userPage, userSort }) => {
+const Books = () => {
   const { isLoading, setLoading } = useLoading(true);
   const { bookList, setBookList } = useBookList([]);
   const setEntireCate = useSetRecoilState(entireCategory);
   const userCateName = useRecoilValue(userCategoryName);
-  //   const [currentword] = useRecoilValue(searchWord);
   const setLastPage = useSetRecoilState(lastPageNum);
+  const userSort = useRecoilValue(sortBy);
+  const userWord = useRecoilValue(searchWord);
+  const userPage = useRecoilValue(currentPage);
 
   const getBookList = async () => {
     const {
       data: { items, meta, categories },
     } = await axios.get(`${process.env.REACT_APP_API}/books/search`, {
-      //   params: {
-      //     query: userWord,
-      //     // eslint-disable-next-line object-shorthand
-      //     page: userPage,
-      //     size: 20,
-      //   },
-      //   headers: {
-      //     Authorization: `KakaoAK ${REST_API_KEY}`,
-      //   },
       params: {
         query: userWord,
         page: userPage,
@@ -86,12 +80,6 @@ const Books = ({ userWord, userPage, userSort }) => {
       )}
     </section>
   );
-};
-
-Books.propTypes = {
-  userWord: PropTypes.string.isRequired,
-  userSort: PropTypes.string.isRequired,
-  userPage: PropTypes.number.isRequired,
 };
 
 export default Books;
