@@ -8,7 +8,10 @@
   width: 1200px;
   height: 803px;
   margin: 0px auto;
-  /* height: 1100px; */
+}
+
+.margin-16 {
+  margin: 16px;
 }
 
 .main-popular__content {

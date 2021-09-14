@@ -6,12 +6,25 @@ import ArrLeft from "../img/arrow_left.svg";
 import ArrRight from "../img/arrow_right.svg";
 import "../css/MainNew.css";
 
+function useWidth() {
+  const [widthSize, setWidthSize] = useState(undefined);
+  useEffect(() => {
+    function handleSize() {
+      setWidthSize(window.innerWidth);
+    }
+    window.addEventListener("resize", handleSize);
+    handleSize();
+    return () => window.removeEventListener("resize", handleSize);
+  });
+  return widthSize;
+}
+
 const MainNew = () => {
   const [docs, setDocs] = useState([]);
   const [page, setPage] = useState(0);
-  console.log(window.innerWidth);
-  // const nextBook = Math.ceil(window.innerWidth / 236) + 1;
-  const getData = async () => {
+  const display = Math.ceil((useWidth() - 266) / 236);
+
+  useEffect(async () => {
     const {
       data: { items },
     } = await axios.get(`${process.env.REACT_APP_API}/books/info/`, {
@@ -20,27 +33,29 @@ const MainNew = () => {
         limit: 20,
       },
     });
-    setDocs([...items.slice(-1), ...items, ...items.slice(0, 7)]);
-  };
-  useEffect(getData, []);
+    setDocs([...items]);
+  }, []);
+  const shelf = [...docs, ...docs.slice(0, display + 1)];
   const onNext = () => {
     let index = page;
-    if (index === docs.length - 9) {
+    if (index === shelf.length - display - 2) {
       index = -1;
     }
     index += 1;
     setPage(index);
   };
-
   const onPrev = () => {
     let index = page;
     if (index === 0) {
-      index = docs.length - 8;
+      index = shelf.length - display - 1;
     }
     index -= 1;
     setPage(index);
   };
-  const transNum = -6608 - 92 + (216 + 20) * (docs.length - page);
+  const onChapter = e => {
+    setPage((e.target.innerText - 1) * 5);
+  };
+  const transNum = -124 - 236 * shelf.length + 236 * (shelf.length - page);
   return (
     <section className="main-new">
       <div className="main-new__title-wrapper">
@@ -66,31 +81,63 @@ const MainNew = () => {
           className="main-new__books"
           style={{ transform: `translate(${transNum}px)` }}
         >
-          {docs.map(item => (
-            /* 상세 페이지로 연결되어야 하는 부분 */
-            <Link
-              to={{
-                pathname: `/info/${item.id}`,
-                state: {
-                  bread: "신간 도서",
-                },
-              }}
-            >
-              <img className="main-new__book" src={item.image} alt="popular" />
-            </Link>
-            /* 상세페이지로 연결되어야 하는 부분 끝 */
+          {shelf.map(item => (
+            <div className="main-new__book">
+              <Link
+                to={{
+                  pathname: `/info/${item.id}`,
+                  state: {
+                    bread: "신간 도서",
+                  },
+                }}
+              >
+                <img
+                  className="main-new__book-img"
+                  src={item.image}
+                  alt="new"
+                />
+              </Link>
+            </div>
           ))}
         </div>
-        {/* 
-        
-        {        <div className="main-new_books_pagination">
-          <ul className="main-new_books_pag_circlebox">
-            <li className="main-new_books_pag_circle" />
-            <li className="main-new_books_pag_circle selected" />
-            <li className="main-new_books_pag_circle" />
-            <li className="main-new_books_pag_circle" />
-          </ul>
-        </div>} */}
+      </div>
+      <div className="main-new__books_pagination">
+        <button
+          type="button"
+          className={`${
+            Math.floor(page / 5) === 0 && "selected"
+          } main-new__books_pag_circle`}
+          onClick={onChapter}
+        >
+          1
+        </button>
+        <button
+          type="button"
+          className={`${
+            Math.floor(page / 5) === 1 && "selected"
+          } main-new__books_pag_circle`}
+          onClick={onChapter}
+        >
+          2
+        </button>
+        <button
+          type="button"
+          className={`${
+            Math.floor(page / 5) === 2 && "selected"
+          } main-new__books_pag_circle`}
+          onClick={onChapter}
+        >
+          3
+        </button>
+        <button
+          type="button"
+          className={`${
+            Math.floor(page / 5) === 3 && "selected"
+          } main-new__books_pag_circle`}
+          onClick={onChapter}
+        >
+          4
+        </button>
       </div>
     </section>
   );
