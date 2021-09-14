@@ -51,19 +51,38 @@ const Header = () => {
                   <div className="lnb__circle">
                     <div className="lnb__circle__loan" />
                     <div className="lnb__circle__return" />
+                    <div className="lnb__circle__reservation" />
                   </div>
                 </div>
                 <ul className="lnb__menu">
-                  <Link to={{ pathname: `/loan` }}>
-                    <li className="lnb__loan">대출</li>
-                  </Link>
-                  <Link to={{ pathname: `/return` }}>
-                    <li className="lnb__return">조회 및 반납</li>
-                  </Link>
+                  <li className="lnb__loan">
+                    <Link
+                      className="lnb__text font-18 color-ff"
+                      to={{ pathname: `/loan` }}
+                    >
+                      대출
+                    </Link>
+                  </li>
+                  <li className="lnb__return">
+                    <Link
+                      className="lnb__text font-18 color-ff"
+                      to={{ pathname: `/return` }}
+                    >
+                      조회 및 반납
+                    </Link>
+                  </li>
+                  <li className="lnb__text lnb__reservation">
+                    <Link
+                      className="font-18 color-ff"
+                      to={{ pathname: `/reservation` }}
+                    >
+                      예약 대출
+                    </Link>
+                  </li>
                 </ul>
               </div>
             ) : (
-              <div className="gnb__admin__lnb" />
+              ``
             )}
           </li>
           <li>

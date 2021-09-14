@@ -4,8 +4,9 @@
 }
 .bookdetail-title {
   position: relative;
-  padding: 132px 270px 60px 270px;
+  padding: 89px 270px 60px 270px;
   min-width: 900px;
+  height: 107px;
   z-index: 2;
 }
 .bookcontent {

@@ -1,56 +1,36 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import {
-  atom,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import Title from "./Title";
 import SubTitle from "./SubTitle";
-import SearchBar, { useSearchInput } from "./SearchBar";
-// eslint-disable-next-line import/no-cycle
-import Books, { entireCategory } from "./Books";
-import Pagination, { pageRangeState, currentPage } from "./Pagination";
+import SearchBar from "./SearchBar";
+import Books from "./Books";
+import Pagination from "./Pagination";
+import { currentPage } from "../atom/page";
 import BackGround from "./BackGround";
-import "../css/Search.css";
-import CategoryFilter, {
+import CategoryFilter from "./CategoryFilter";
+import {
+  entireCategory,
   userCategory,
   userCategoryName,
-} from "./CategoryFilter";
-import Sort, { sortBy } from "./Sort";
+} from "../atom/categories";
+import { sortBy } from "../atom/sortBy";
+import { searchWord } from "../atom/searchWord";
+import { useSearchInput } from "../atom/useSearchInput";
+import Sort from "./Sort";
+import WishBook from "./WishBook";
+import "../css/Search.css";
 
-export const searchWord = atom({ key: "searchWord", default: "" });
+// export const searchWord = atom({ key: "searchWord", default: "" });
 
 const Search = ({ match, location }) => {
-  // eslint-disable-next-line prefer-const
-  let history = useHistory();
   const [subTitle, setSubTitle] = useRecoilState(searchWord);
-  const [page, setPage] = useRecoilState(currentPage);
-  const [sort, setSort] = useRecoilState(sortBy);
+  const setPage = useSetRecoilState(currentPage);
+  const setSort = useSetRecoilState(sortBy);
   const setCate = useSetRecoilState(userCategory);
-  const setPageRange = useSetRecoilState(pageRangeState);
   const setInputValue = useSetRecoilState(useSearchInput);
   const setCategoryName = useSetRecoilState(userCategoryName);
   const entireCate = useRecoilValue(entireCategory);
-
-  const handleSearchSumbit = event => {
-    event.preventDefault();
-    setPageRange(0);
-    setCategoryName("");
-    const searchForm = document.getElementById("search-form");
-    const searchInputValue = searchForm.querySelector("#search-input").value;
-    history.push(
-      `/search/${searchInputValue}?page=${1}&category=${0}&sort=accurate`,
-    );
-  };
-
-  useEffect(() => {
-    const searchForm = document.getElementById("search-form");
-    searchForm.addEventListener("submit", handleSearchSumbit);
-    return () => searchForm.removeEventListener("submit", handleSearchSumbit);
-  }, []);
 
   useEffect(() => {
     console.log(match);
@@ -84,10 +64,12 @@ const Search = ({ match, location }) => {
         </div>
         <CategoryFilter />
         <Sort />
-        <Books userWord={subTitle} userPage={page} userSort={sort} />
+        <Books />
         <Pagination />
       </section>
-      <section className="wish-book-wraper" />
+      <section className="wish-book-wraper">
+        <WishBook />
+      </section>
     </main>
   );
 };

@@ -46,6 +46,11 @@ a:hover {
 }
 
 .book-info__title {
+  width: 400px;
+  max-width: 800px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .book-info__others {

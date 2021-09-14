@@ -1,18 +1,18 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useHistory } from "react-router-dom";
 import ArrRight from "../img/arrow_right_black.svg";
-import { lastPageNum } from "./Books";
-import { sortBy } from "./Sort";
-import { userCategory } from "./CategoryFilter";
+import { lastPageNum, currentPage, pageRangeState } from "../atom/page";
+import { sortBy } from "../atom/sortBy";
+import { userCategory } from "../atom/categories";
 import "../css/Pagination.css";
 
-export const currentPage = atom({ key: "currentPage", default: 1 });
-export const pageRangeState = atom({
-  key: "pageRangeState",
-  default: 0,
-});
+// export const currentPage = atom({ key: "currentPage", default: 1 });
+// export const pageRangeState = atom({
+//   key: "pageRangeState",
+//   default: 0,
+// });
 
 const PageButton = ({ pageNum }) => {
   // eslint-disable-next-line prefer-const

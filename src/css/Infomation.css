@@ -13,16 +13,17 @@
 } */
 
 .infomation-wraper {
-	position: relative;
-	padding: 0 270px 60px 0;
-	min-width: 900px;
-	z-index: 2;
-  }
+  position: relative;
+  padding: 0 270px 60px 0;
+  min-width: 900px;
+  z-index: 2;
+}
 
 .infomation-title {
   position: relative;
-  padding: 132px 270px 60px 270px;
+  padding: 89px 270px 60px 270px;
   min-width: 900px;
+  height: 107px;
   z-index: 2;
 }
 
@@ -39,6 +40,6 @@
 }
 
 .infomation-qna {
-	width: 800px;
-	margin-left: auto;
+  width: 800px;
+  margin-left: auto;
 }

@@ -7,13 +7,13 @@ import {
   useSetRecoilState,
   useRecoilValue,
 } from "recoil";
-// eslint-disable-next-line import/no-cycle
-import { userCategory } from "./CategoryFilter";
+import { userCategory } from "../atom/categories";
+import { sortBy } from "../atom/sortBy";
 import CheckIcon from "../img/check_icon.svg";
 import RedCheckIcon from "../img/check_icon_red.svg";
 import "../css/Sort.css";
 
-export const sortBy = atom({ key: "sortBy", default: "" });
+// export const sortBy = atom({ key: "sortBy", default: "" });
 const availableState = atom({ key: "availableState", default: false });
 
 const SortBy = ({ sort, text }) => {

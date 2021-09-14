@@ -9,7 +9,7 @@ a:active {
 .header {
   padding: 80px 270px 0 270px;
   display: flex;
-  height: 123px;
+  height: 164px;
   max-width: 1200px;
   min-width: 900px;
   margin: auto;
@@ -58,7 +58,6 @@ a:active {
 .gnb__info__text {
   margin: 0 0 0 0;
   font-size: 18px;
-  font-family: NotoSansCJKkr;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -88,7 +87,6 @@ a:active {
 
 .gnb__admin__text {
   margin: 0 0 0 0;
-  font-family: NotoSansCJKkr;
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
@@ -105,7 +103,7 @@ a:active {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  height: 87px;
+  /* height: 130px; */
 }
 
 .lnb__line__circle {
@@ -114,7 +112,7 @@ a:active {
 
 .lnb__line {
   position: relative;
-  height: 74.5px;
+  height: 117.5px;
   width: 0;
   border-right: solid 1px #fff;
   margin: 0 13.5px 0 9px;
@@ -126,26 +124,42 @@ a:active {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 0 0 0 6px;
-  top: -76px;
+  margin: 0 0 0 0;
+  top: -122.5px;
+  left: 6.5px;
 }
 
 .lnb__circle__loan {
   position: relative;
-  width: 0px;
-  height: 0px;
-  border: 3.5px solid #fff;
+  width: 7px;
+  height: 7px;
+  border: 0;
+  padding: 0;
+  background-color: #fff;
   border-radius: 100%;
-  top: 26px;
+  top: 28px;
 }
 
 .lnb__circle__return {
   position: relative;
-  width: 0px;
-  height: 0px;
-  border: 3.5px solid #fff;
+  width: 7px;
+  height: 7px;
+  border: 0;
+  padding: 0;
+  background-color: #fff;
   border-radius: 100%;
-  top: 62.5px;
+  top: 64px;
+}
+
+.lnb__circle__reservation {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border: 0;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 100%;
+  top: 100px;
 }
 
 .lnb__menu {
@@ -153,34 +167,26 @@ a:active {
   padding-inline-start: 0;
 }
 
-.lnb__loan {
-  margin-top: 16px;
+.lnb__text {
   word-break: keep-all;
   white-space: nowrap;
-  font-family: NotoSansCJKkr;
-  font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.5;
   letter-spacing: normal;
   text-align: left;
-  color: #fff;
+}
+
+.lnb__loan {
+  margin-top: 14px;
 }
 
 .lnb__return {
   margin-top: 16px;
-  word-break: keep-all;
-  white-space: nowrap;
-  font-family: NotoSansCJKkr;
-  font-size: 18px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.5;
-  letter-spacing: normal;
-  text-align: left;
-  color: #fff;
+}
+
+.lnb__reservation {
+  margin-top: 17px;
 }
 
 .gnb__login {
@@ -200,7 +206,6 @@ a:active {
 .gnb__login__text {
   margin: 0 0 0 0;
   font-size: 18px;
-  font-family: NotoSansCJKkr;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
