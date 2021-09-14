@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import Title from "./Title";
 import SubTitle from "./SubTitle";
-import SearchBar, { useSearchInput } from "./SearchBar";
+import SearchBar from "./SearchBar";
 import Books from "./Books";
 import Pagination from "./Pagination";
-import { pageRangeState, currentPage } from "../atom/page";
+import { currentPage } from "../atom/page";
 import BackGround from "./BackGround";
 import CategoryFilter from "./CategoryFilter";
 import {
@@ -15,42 +14,23 @@ import {
   userCategory,
   userCategoryName,
 } from "../atom/categories";
-import Sort from "./Sort";
 import { sortBy } from "../atom/sortBy";
 import { searchWord } from "../atom/searchWord";
+import { useSearchInput } from "../atom/useSearchInput";
+import Sort from "./Sort";
 import WishBook from "./WishBook";
 import "../css/Search.css";
 
 // export const searchWord = atom({ key: "searchWord", default: "" });
 
 const Search = ({ match, location }) => {
-  // eslint-disable-next-line prefer-const
-  let history = useHistory();
   const [subTitle, setSubTitle] = useRecoilState(searchWord);
   const setPage = useSetRecoilState(currentPage);
   const setSort = useSetRecoilState(sortBy);
   const setCate = useSetRecoilState(userCategory);
-  const setPageRange = useSetRecoilState(pageRangeState);
   const setInputValue = useSetRecoilState(useSearchInput);
   const setCategoryName = useSetRecoilState(userCategoryName);
   const entireCate = useRecoilValue(entireCategory);
-
-  const handleSearchSumbit = event => {
-    event.preventDefault();
-    setPageRange(0);
-    setCategoryName("");
-    const searchForm = document.getElementById("search-form");
-    const searchInputValue = searchForm.querySelector("#search-input").value;
-    history.push(
-      `/search/${searchInputValue}?page=${1}&category=${0}&sort=accurate`,
-    );
-  };
-
-  useEffect(() => {
-    const searchForm = document.getElementById("search-form");
-    searchForm.addEventListener("submit", handleSearchSumbit);
-    return () => searchForm.removeEventListener("submit", handleSearchSumbit);
-  }, []);
 
   useEffect(() => {
     console.log(match);

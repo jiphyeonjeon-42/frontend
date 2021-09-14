@@ -1,8 +1,17 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
+import {
+  atom,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 import { useHistory } from "react-router-dom";
-import { entireCategory, userCategory } from "../atom/categories";
+import {
+  entireCategory,
+  userCategory,
+  startCategory,
+} from "../atom/categories";
 import { sortBy } from "../atom/sortBy";
 import ArrLeft from "../img/arrow_left_black.svg";
 import ArrRight from "../img/arrow_right_black.svg";
@@ -10,7 +19,7 @@ import "../css/CategoryFilter.css";
 
 // export const userCategory = atom({ key: "userCategory", default: 0 });
 // export const userCategoryName = atom({ key: "userCategoryName", default: "" });
-const startCategory = atom({ key: "startCategory", default: 0 });
+// const startCategory = atom({ key: "startCategory", default: 0 });
 const hiddenCategory = atom({ key: "hiddenCategory", default: true });
 
 const PreCategory = () => {
@@ -74,9 +83,7 @@ const Category = ({ categoryIndex, categoryName, categoryNum }) => {
   const sort = useRecoilValue(sortBy);
 
   const changeFilter = () => {
-    console.log("before", startCate);
     history.push(`?page=${1}&category=${categoryIndex}&sort=${sort}`);
-    console.log("after", startCate);
   };
 
   return startCate <= categoryIndex ? (
@@ -103,13 +110,9 @@ const Category = ({ categoryIndex, categoryName, categoryNum }) => {
 };
 
 const CategoryFilter = () => {
-  //   const setCate = useSetRecoilState(userCategory);
-  //   const setHiddenCate = useSetRecoilState(hiddenCategory);
-  const [hiddenCate, setHiddenCate] = useRecoilState(hiddenCategory);
+  const setHiddenCate = useSetRecoilState(hiddenCategory);
   const startCate = useRecoilValue(startCategory);
-  //   const [startCate, setStartCate] = useRecoilState(startCategory);
   const entireCate = useRecoilValue(entireCategory);
-  //   const userCate = useRecoilValue(userCategory);
   const [entireCateWidth, setEntireCateWidth] = useState([]);
 
   const toggleCategoryButton = () => {
@@ -119,42 +122,36 @@ const CategoryFilter = () => {
     const categoryArrowWidth =
       document.querySelector(".pre-category").offsetWidth +
       document.querySelector(".next-category").offsetWidth;
-    const categoryButtonWidth = entireCateWidth.slice(
-      startCate > 0 ? startCate - 1 : startCate,
-    );
     const categoryListWidth = categoryFileterWidth - categoryArrowWidth;
     const categoryButtonWidthSum =
-      categoryButtonWidth.reduce((a, b) => a + b, 0) +
-      36 * (categoryButtonWidth.length - 1);
-    // if (
-    //   startCate > 0 &&
-    //   entireCateWidth.slice(startCate - 1).reduce((a, b) => a + b, 0) +
-    //     36 * categoryButtonWidth.length <
-    //     categoryListWidth
-    // )
-    //   setStartCate(startCate - 1);
+      entireCateWidth.reduce((a, b) => a + b, 0) +
+      36 * (entireCateWidth.length - 1);
     if (categoryListWidth >= categoryButtonWidthSum) setHiddenCate(false);
     else setHiddenCate(true);
   };
 
-  useEffect(() => {
+  const calcEntireWidth = () => {
     const categoryButton = document.getElementsByClassName("category-button");
     const categoryButtonWidth = Array.from(categoryButton).map(
       items => items.offsetWidth,
     );
     setEntireCateWidth(categoryButtonWidth);
-  }, [startCate, entireCate, hiddenCate]);
+  };
+
+  useEffect(() => {
+    calcEntireWidth();
+  }, [startCate, entireCate]);
 
   useEffect(() => {
     toggleCategoryButton();
-  }, [startCate, entireCateWidth, hiddenCate]);
+  }, [entireCateWidth]);
 
   useEffect(() => {
-    window.addEventListener("resize", toggleCategoryButton);
+    window.addEventListener("resize", calcEntireWidth);
     return () => {
-      window.removeEventListener("resize", toggleCategoryButton);
+      window.removeEventListener("resize", calcEntireWidth);
     };
-  }, [toggleCategoryButton]);
+  }, [calcEntireWidth]);
 
   return (
     <div className="category-filter">
