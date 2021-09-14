@@ -23,7 +23,6 @@ const MainPopluar = () => {
     });
     setDocs(items);
     setMain(items[0]);
-    console.log(items);
   };
   useEffect(getData, []);
 
@@ -76,8 +75,10 @@ const MainPopluar = () => {
           </div>
           <div className="main-popular__cover-detail">
             <div className="main-popular__description color-54">
-              <span className="font-16-light color-2d">#{main.title}</span>
-              <span className="font-16-light color-2d">#{main.author}</span>
+              <span className="font-16-light color-2d ">#{main.category}</span>
+              <span className="font-16-light color-2d margin-16">
+                #{main.author}
+              </span>
               <p className="main-popular__title font-32-bold color-2d">
                 {main.title}
               </p>
