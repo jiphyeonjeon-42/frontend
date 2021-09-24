@@ -11,9 +11,7 @@ const BookDetail = ({ location, match }) => {
   const [data, setData] = useState({ books: [] });
   const { id } = match.params;
   console.log(id);
-  useEffect(() => {
-    console.log(location.pathname);
-  }, [location]);
+
   const getData = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/books/info/${id}`,
@@ -21,7 +19,10 @@ const BookDetail = ({ location, match }) => {
     setData(response.data);
     console.log(response.data);
   };
-  useEffect(getData, []);
+  useEffect(() => {
+    getData();
+    window.scrollTo(0, 0);
+  }, []);
   // console.log(data);
   // console.log(response.data);
   // console.log(data.books[0]);
@@ -59,7 +60,7 @@ const BookDetail = ({ location, match }) => {
                 <span className="detailKey__txt">기부자</span>
               </div>
               <div className="detailValue color-54">
-                <span className="detailValue__txt ">{data.author}</span>
+                <span className="detailValue__txt">{data.author}</span>
                 <span className="detailValue__txt">{data.publisher}</span>
                 <span className="detailValue__txt">{data.publishedAt}</span>
                 <span className="detailValue__txt">{data.category}</span>

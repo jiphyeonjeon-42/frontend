@@ -14,7 +14,7 @@ import "../css/Pagination.css";
 //   default: 0,
 // });
 
-const PageButton = ({ pageNum }) => {
+const PageButton = ({ pageNum, myRef }) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
   const current = useRecoilValue(currentPage);
@@ -23,6 +23,7 @@ const PageButton = ({ pageNum }) => {
 
   const changePage = () => {
     history.push(`?page=${pageNum}&category=${cate}&sort=${sort}`);
+    myRef.current.scrollIntoView();
   };
 
   return (
@@ -79,7 +80,7 @@ const NextPageButton = () => {
   );
 };
 
-const Pagination = () => {
+const Pagination = ({ myRef }) => {
   const pageRange = useRecoilValue(pageRangeState);
   const lastPage = useRecoilValue(lastPageNum);
   const pageRangeArr = [];
@@ -93,7 +94,7 @@ const Pagination = () => {
     <div className="pagination">
       <PrePageButton />
       {pageRangeArr.map(n => (
-        <PageButton pageNum={n} />
+        <PageButton pageNum={n} myRef={myRef} />
       ))}
       <NextPageButton />
     </div>

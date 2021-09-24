@@ -9,6 +9,7 @@ import Main from "./component/Main";
 import Search from "./component/Search";
 import Auth from "./component/Auth";
 import Logout from "./component/Logout";
+import ReturnBook from "./component/ReturnBook";
 // import BookInfo from "./component/BookInfo";
 import "./css/reset.css";
 import "./App.css";
@@ -24,6 +25,7 @@ function App() {
         <Route path="/info/:id" component={BookDetail} />
         <Route path="/auth" component={Auth} />
         <Route path="/logout" component={Logout} />
+        <Route path="/return" component={ReturnBook} />
         <Route path="/" component={Footer} />
       </BrowserRouter>
     </RecoilRoot>

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import Title from "./Title";
 import SubTitle from "./SubTitle";
@@ -25,6 +26,7 @@ import "../css/Search.css";
 
 const Search = ({ match, location }) => {
   const [subTitle, setSubTitle] = useRecoilState(searchWord);
+  const myRef = useRef(null);
   const setPage = useSetRecoilState(currentPage);
   const setSort = useSetRecoilState(sortBy);
   const setCate = useSetRecoilState(userCategory);
@@ -56,7 +58,7 @@ const Search = ({ match, location }) => {
         <SearchBar />
       </section>
       <section className="search-section">
-        <div className="search-subtitle">
+        <div className="search-subtitle" ref={myRef}>
           <SubTitle
             subTitle={`'${subTitle}' 도서 검색 결과`}
             alignItems="start"
@@ -65,7 +67,7 @@ const Search = ({ match, location }) => {
         <CategoryFilter />
         <Sort />
         <Books />
-        <Pagination />
+        <Pagination myRef={myRef} />
       </section>
       <section className="wish-book-wraper">
         <WishBook />
