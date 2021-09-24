@@ -58,7 +58,7 @@ const Header = () => {
                   <li className="lnb__loan">
                     <Link
                       className="lnb__text font-18 color-ff"
-                      to={{ pathname: `/loan` }}
+                      to={{ pathname: `/rent` }}
                     >
                       대출
                     </Link>

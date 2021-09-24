@@ -1,0 +1,33 @@
+.modal__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.modal__container {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 676px;
+  width: 1200px;
+  padding: 16px;
+  background: #ffffff;
+  /* text-align: center; */
+  z-index: 3;
+}
+
+.modal__close-button {
+  background: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 20px;
+  height: 20px;
+  margin: 40px 40px 0 auto;
+  display: flex;
+}

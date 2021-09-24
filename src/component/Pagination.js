@@ -14,7 +14,7 @@ import "../css/Pagination.css";
 //   default: 0,
 // });
 
-const PageButton = ({ pageNum }) => {
+const PageButton = ({ pageNum, myRef }) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
   const current = useRecoilValue(currentPage);
@@ -23,6 +23,8 @@ const PageButton = ({ pageNum }) => {
 
   const changePage = () => {
     history.push(`?page=${pageNum}&category=${cate}&sort=${sort}`);
+    // 페이지 전환시 돔이 참조하고 있는 곳으로 현재 스크롤 이동
+    myRef.current.scrollIntoView();
   };
 
   return (
@@ -79,7 +81,7 @@ const NextPageButton = () => {
   );
 };
 
-const Pagination = () => {
+const Pagination = ({ myRef }) => {
   const pageRange = useRecoilValue(pageRangeState);
   const lastPage = useRecoilValue(lastPageNum);
   const pageRangeArr = [];
@@ -93,7 +95,7 @@ const Pagination = () => {
     <div className="pagination">
       <PrePageButton />
       {pageRangeArr.map(n => (
-        <PageButton pageNum={n} />
+        <PageButton pageNum={n} myRef={myRef} />
       ))}
       <NextPageButton />
     </div>

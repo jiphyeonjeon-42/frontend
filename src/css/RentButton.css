@@ -1,0 +1,26 @@
+.rent-button {
+  min-width: 1440px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 300px;
+}
+
+.rent-button__text {
+  margin-bottom: 24px;
+}
+
+.rent-button__button {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  width: 212px;
+  height: 48px;
+  background: none;
+  border-radius: 24px;
+  background-color: #a4a4a4;
+  /* background-color: #e63737; */
+}
