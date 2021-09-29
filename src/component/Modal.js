@@ -3,6 +3,8 @@ import React from "react";
 import { atom, useRecoilState } from "recoil";
 import CloseButton from "../img/x_button.svg";
 import "../css/Modal.css";
+import ModalBook from "./ModalBook";
+import ModalUser from "./ModalUser";
 
 export const isModalOpen = atom({ key: "isModalOpen", default: 0 });
 
@@ -23,7 +25,7 @@ const Modal = () => {
         >
           <img src={CloseButton} alt="close" />
         </button>
-        <div>{userModal === 1 ? "카뎃 정보" : "도서 정보"}</div>
+        {userModal === 1 ? <ModalUser /> : <ModalBook />}
       </div>
     </div>
   );

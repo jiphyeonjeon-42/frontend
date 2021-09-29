@@ -34,7 +34,7 @@ const Books = () => {
   const getBookList = async () => {
     const {
       data: { items, meta, categories },
-    } = await axios.get(`${process.env.REACT_APP_API}/books/search`, {
+    } = await axios.get(`${process.env.REACT_APP_API}/books/info/search`, {
       params: {
         query: userWord,
         page: userPage,

@@ -37,6 +37,7 @@ const Rent = () => {
           Icon={Login}
           titleKO="카뎃 정보"
           titleEN="Cadet info"
+          placeHolder="예약 대출자의 성명 혹은 도서명을 입력해주세요."
         />
         <InquireBoxRent modalNum={1} />
       </div>

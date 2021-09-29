@@ -94,7 +94,7 @@ const Header = () => {
             ) : (
               <a
                 className="gnb__login"
-                href="https://api.intra.42.fr/oauth/authorize?client_id=c5e22b602708659fd8d3fbf6350271f01bbc47e58d342bc00859d7880b7bbe6e&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fauth%2Ftoken&response_type=code"
+                href={`${process.env.REACT_APP_API}/auth/oauth`}
               >
                 <img src={Login} className="gnb__login__icon" alt="login" />
 
