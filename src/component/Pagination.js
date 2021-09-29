@@ -23,6 +23,7 @@ const PageButton = ({ pageNum, myRef }) => {
 
   const changePage = () => {
     history.push(`?page=${pageNum}&category=${cate}&sort=${sort}`);
+    // 페이지 전환시 돔이 참조하고 있는 곳으로 현재 스크롤 이동
     myRef.current.scrollIntoView();
   };
 

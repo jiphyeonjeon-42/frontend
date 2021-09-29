@@ -1,0 +1,10 @@
+.modal-book__search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.modal-book__text {
+  margin-right: 60px;
+}

@@ -48,6 +48,7 @@ const SearchBar = () => {
         id="search-input"
         required
         type="text"
+        autoComplete="off"
         value={input}
         onChange={onChange}
       />

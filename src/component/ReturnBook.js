@@ -7,7 +7,7 @@ import SubTitle from "./SubTitle";
 const ReturnBook = () => {
   return (
     <main className="returnbook-main">
-      <BackGround page="information" />
+      <BackGround page="admin" />
       <section>
         <div className="returnbook-title">
           <Title titleKorean="조회 및 반납" titleEng="INQUIRE & RETURN BOOK" />

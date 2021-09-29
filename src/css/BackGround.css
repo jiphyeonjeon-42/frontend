@@ -29,3 +29,8 @@
   background-image: url("../img/bookdetail_bg.png");
   height: 500px;
 }
+
+.admin-bg {
+  background-image: url("../img/admin_bg.png");
+  height: 500px;
+}

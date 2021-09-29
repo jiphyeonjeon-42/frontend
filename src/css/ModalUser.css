@@ -1,0 +1,10 @@
+.modal-user__search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.modal-user__text {
+  margin-right: 60px;
+}

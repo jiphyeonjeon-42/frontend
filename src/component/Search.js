@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useRef } from "react";
-
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import Title from "./Title";
 import SubTitle from "./SubTitle";

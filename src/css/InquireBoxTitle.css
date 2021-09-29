@@ -1,0 +1,23 @@
+.inquire-box-title {
+  background-color: #545454;
+  height: 120px;
+  max-width: 1200px;
+  min-width: 900px;
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  /* margin: 0 270px 0 270px; */
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.inquire-box-title__icon {
+  /* width: 39px; */
+  height: 40px;
+  margin: 0 20px 0 60px;
+}
+
+.inquire-box-title__en {
+  margin-left: 16px;
+}
