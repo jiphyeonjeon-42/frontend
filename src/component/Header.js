@@ -35,56 +35,58 @@ const Header = () => {
               <span className="gnb__info__text">이용안내</span>
             </Link>
           </li>
-          <li className="gnb__admin">
-            <button
-              className="gnb__admin__button"
-              type="button"
-              onClick={clickAdmin}
-            >
-              <img src={Admin} className="gnb__admin__icon" alt="admin" />
-              <span className="gnb__admin__text">대출/반납</span>
-            </button>
-            {toggleLNB ? (
-              <div className="gnb__admin__lnb">
-                <div className="lnb__line__circle">
-                  <div className="lnb__line" />
-                  <div className="lnb__circle">
-                    <div className="lnb__circle__loan" />
-                    <div className="lnb__circle__return" />
-                    <div className="lnb__circle__reservation" />
+          {user.isLogin && (
+            <li className="gnb__admin">
+              <button
+                className="gnb__admin__button"
+                type="button"
+                onClick={clickAdmin}
+              >
+                <img src={Admin} className="gnb__admin__icon" alt="admin" />
+                <span className="gnb__admin__text">대출/반납</span>
+              </button>
+              {toggleLNB ? (
+                <div className="gnb__admin__lnb">
+                  <div className="lnb__line__circle">
+                    <div className="lnb__line" />
+                    <div className="lnb__circle">
+                      <div className="lnb__circle__loan" />
+                      <div className="lnb__circle__return" />
+                      <div className="lnb__circle__reservation" />
+                    </div>
                   </div>
+                  <ul className="lnb__menu">
+                    <li className="lnb__loan">
+                      <Link
+                        className="lnb__text font-18 color-ff"
+                        to={{ pathname: `/rent` }}
+                      >
+                        대출
+                      </Link>
+                    </li>
+                    <li className="lnb__return">
+                      <Link
+                        className="lnb__text font-18 color-ff"
+                        to={{ pathname: `/return` }}
+                      >
+                        조회 및 반납
+                      </Link>
+                    </li>
+                    <li className="lnb__text lnb__reservation">
+                      <Link
+                        className="font-18 color-ff"
+                        to={{ pathname: `/reservation` }}
+                      >
+                        예약 대출
+                      </Link>
+                    </li>
+                  </ul>
                 </div>
-                <ul className="lnb__menu">
-                  <li className="lnb__loan">
-                    <Link
-                      className="lnb__text font-18 color-ff"
-                      to={{ pathname: `/rent` }}
-                    >
-                      대출
-                    </Link>
-                  </li>
-                  <li className="lnb__return">
-                    <Link
-                      className="lnb__text font-18 color-ff"
-                      to={{ pathname: `/return` }}
-                    >
-                      조회 및 반납
-                    </Link>
-                  </li>
-                  <li className="lnb__text lnb__reservation">
-                    <Link
-                      className="font-18 color-ff"
-                      to={{ pathname: `/reservation` }}
-                    >
-                      예약 대출
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              ``
-            )}
-          </li>
+              ) : (
+                ``
+              )}
+            </li>
+          )}
           <li>
             {user.id ? (
               <Link className="gnb__login" to={{ pathname: `/logout` }}>
