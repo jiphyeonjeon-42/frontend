@@ -7,6 +7,7 @@ import userState from "../atom/userState";
 const Logout = () => {
   const setUser = useSetRecoilState(userState);
   setUser({
+    isLogin: false,
     id: 0,
     userId: "",
     isAdmin: false,
