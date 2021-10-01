@@ -5,12 +5,14 @@ import CheckIcon from "../img/check_icon.svg";
 import RedCheckIcon from "../img/check_icon_red.svg";
 import "../css/Sort.css";
 
-const SortBy = ({ cateIndex, userSort, sortName, text }) => {
+const SortBy = ({ userWord, cateIndex, userSort, sortName, text }) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
 
   const changeSortBy = () => {
-    history.push(`?page=${1}&category=${cateIndex}&sort=${sortName}`);
+    history.push(
+      `?string=${userWord}&page=${1}&category=${cateIndex}&sort=${sortName}`,
+    );
   };
 
   return (
@@ -49,29 +51,33 @@ const Availavble = ({ isAvailable, setAvailable }) => {
   );
 };
 
-const Sort = ({ isAvailable, setAvailable, userSort, cateIndex }) => {
+const Sort = ({ userWord, isAvailable, setAvailable, userSort, cateIndex }) => {
   return (
     <div className="sort">
       <div className="sort-by">
         <SortBy
+          userWord={userWord}
           cateIndex={cateIndex}
           userSort={userSort}
           sortName="accurate"
           text="정확도순"
         />
         <SortBy
+          serWord={userWord}
           cateIndex={cateIndex}
           userSort={userSort}
           sortName="title"
           text="이름순"
         />
         <SortBy
+          serWord={userWord}
           cateIndex={cateIndex}
           userSort={userSort}
           sortName="new"
           text="발행연도순"
         />
         <SortBy
+          serWord={userWord}
           cateIndex={cateIndex}
           userSort={userSort}
           sortName="popular"

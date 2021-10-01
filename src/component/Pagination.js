@@ -4,12 +4,21 @@ import { useHistory } from "react-router-dom";
 import ArrRight from "../img/arrow_right_black.svg";
 import "../css/Pagination.css";
 
-const PageButton = ({ userPage, userSort, userCateIndex, pageNum, myRef }) => {
+const PageButton = ({
+  userWord,
+  userPage,
+  userSort,
+  userCateIndex,
+  pageNum,
+  myRef,
+}) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
 
   const changePage = () => {
-    history.push(`?page=${pageNum}&category=${userCateIndex}&sort=${userSort}`);
+    history.push(
+      `?string=${userWord}&page=${pageNum}&category=${userCateIndex}&sort=${userSort}`,
+    );
     // 페이지 전환시 돔이 참조하고 있는 곳으로 현재 스크롤 이동
     myRef.current.scrollIntoView();
   };
@@ -66,6 +75,7 @@ const NextPageButton = ({ pageRange, setPageRange, lastPage }) => {
 };
 
 const Pagination = ({
+  userWord,
   pageRange,
   setPageRange,
   lastPage,
@@ -91,6 +101,7 @@ const Pagination = ({
       {pageRangeArr.map(n => (
         <PageButton
           pageNum={n}
+          userWord={userWord}
           userPage={userPage}
           userSort={userSort}
           userCateIndex={userCateIndex}

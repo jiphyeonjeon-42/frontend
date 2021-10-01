@@ -84,6 +84,7 @@ const Search = ({ match, location }) => {
           />
         </div>
         <CategoryFilter
+          userWord={userWord}
           userSort={userSort}
           userCate={cateIndex}
           entireCate={entireCate}
@@ -91,6 +92,7 @@ const Search = ({ match, location }) => {
           setStartCate={setStartCate}
         />
         <Sort
+          userWord={userWord}
           userSort={userSort}
           cateIndex={cateIndex}
           isAvailable={isAvailable}
@@ -104,6 +106,7 @@ const Search = ({ match, location }) => {
           <Books bookList={bookList} />
         )}
         <Pagination
+          userWord={userWord}
           lastPage={lastPage}
           userPage={userPage}
           userSort={userSort}

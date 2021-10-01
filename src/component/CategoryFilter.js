@@ -54,6 +54,7 @@ const NextCategory = ({ hiddenCate, startCate, setStartCate }) => {
 };
 
 const Category = ({
+  userWord,
   userSort,
   userCate,
   categoryIndex,
@@ -64,7 +65,9 @@ const Category = ({
   let history = useHistory();
 
   const changeFilter = () => {
-    history.push(`?page=${1}&category=${categoryIndex}&sort=${userSort}`);
+    history.push(
+      `?string=${userWord}&page=${1}&category=${categoryIndex}&sort=${userSort}`,
+    );
   };
 
   return (
@@ -89,6 +92,7 @@ const Category = ({
 };
 
 const CategoryFilter = ({
+  userWord,
   startCate,
   setStartCate,
   userSort,
@@ -140,6 +144,7 @@ const CategoryFilter = ({
           {entireCate.map((items, index) =>
             startCate <= index ? (
               <Category
+                userWord={userWord}
                 userSort={userSort}
                 userCate={userCate}
                 categoryIndex={index}
