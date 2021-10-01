@@ -1,28 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { useHistory } from "react-router-dom";
 import ArrRight from "../img/arrow_right_black.svg";
-import { lastPageNum, currentPage, pageRangeState } from "../atom/page";
-import { sortBy } from "../atom/sortBy";
-import { userCategory } from "../atom/categories";
 import "../css/Pagination.css";
 
-// export const currentPage = atom({ key: "currentPage", default: 1 });
-// export const pageRangeState = atom({
-//   key: "pageRangeState",
-//   default: 0,
-// });
-
-const PageButton = ({ pageNum, myRef }) => {
+const PageButton = ({ userPage, userSort, userCateIndex, pageNum, myRef }) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
-  const current = useRecoilValue(currentPage);
-  const sort = useRecoilValue(sortBy);
-  const cate = useRecoilValue(userCategory);
 
   const changePage = () => {
-    history.push(`?page=${pageNum}&category=${cate}&sort=${sort}`);
+    history.push(`?page=${pageNum}&category=${userCateIndex}&sort=${userSort}`);
     // 페이지 전환시 돔이 참조하고 있는 곳으로 현재 스크롤 이동
     myRef.current.scrollIntoView();
   };
@@ -32,7 +19,7 @@ const PageButton = ({ pageNum, myRef }) => {
       type="button"
       onClick={changePage}
       className={`page-button font-20 ${
-        parseInt(current, 10) === pageNum ? "color-54" : "color-a4"
+        parseInt(userPage, 10) === pageNum ? "color-54" : "color-a4"
       }`}
     >
       {pageNum}
@@ -40,8 +27,7 @@ const PageButton = ({ pageNum, myRef }) => {
   );
 };
 
-const PrePageButton = () => {
-  const [pageRange, setPageRange] = useRecoilState(pageRangeState);
+const PrePageButton = ({ pageRange, setPageRange }) => {
   const changePage = () => {
     if (pageRange > 0) {
       setPageRange(pageRange - 1);
@@ -62,17 +48,15 @@ const PrePageButton = () => {
   );
 };
 
-const NextPageButton = () => {
-  const [pageRange, setPageRange] = useRecoilState(pageRangeState);
-  const lastPage = useRecoilValue(lastPageNum);
+const NextPageButton = ({ pageRange, setPageRange, lastPage }) => {
   const changePage = () => {
-    if (pageRange < parseInt(lastPage / 5, 10)) {
+    if ((pageRange + 1) * 5 < parseInt(lastPage, 10)) {
       setPageRange(pageRange + 1);
     }
   };
   return (
     <button className="next-page-button" type="button" onClick={changePage}>
-      {pageRange < parseInt(lastPage / 5, 10) ? (
+      {(pageRange + 1) * 5 < parseInt(lastPage, 10) ? (
         <img className="page-button-icon" src={ArrRight} alt="nextPage" />
       ) : (
         <span className="page-button-icon" />
@@ -81,9 +65,15 @@ const NextPageButton = () => {
   );
 };
 
-const Pagination = ({ myRef }) => {
-  const pageRange = useRecoilValue(pageRangeState);
-  const lastPage = useRecoilValue(lastPageNum);
+const Pagination = ({
+  pageRange,
+  setPageRange,
+  lastPage,
+  userPage,
+  userSort,
+  userCateIndex,
+  myRef,
+}) => {
   const pageRangeArr = [];
 
   // eslint-disable-next-line no-plusplus
@@ -93,11 +83,25 @@ const Pagination = ({ myRef }) => {
 
   return (
     <div className="pagination">
-      <PrePageButton />
+      <PrePageButton
+        pageRange={pageRange}
+        setPageRange={setPageRange}
+        lastPage={lastPage}
+      />
       {pageRangeArr.map(n => (
-        <PageButton pageNum={n} myRef={myRef} />
+        <PageButton
+          pageNum={n}
+          userPage={userPage}
+          userSort={userSort}
+          userCateIndex={userCateIndex}
+          myRef={myRef}
+        />
       ))}
-      <NextPageButton />
+      <NextPageButton
+        pageRange={pageRange}
+        setPageRange={setPageRange}
+        lastPage={lastPage}
+      />
     </div>
   );
 };

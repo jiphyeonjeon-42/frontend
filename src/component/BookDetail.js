@@ -10,18 +10,22 @@ import BookStatus from "./BookStatus";
 const BookDetail = ({ location, match }) => {
   const [data, setData] = useState({ books: [] });
   const { id } = match.params;
+
   console.log(id);
+
   useEffect(() => {
     console.log(location.pathname);
   }, [location]);
-  const getData = async () => {
+
+  const fetchData = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/books/info/${id}`,
     );
     setData(response.data);
     console.log(response.data);
   };
-  useEffect(getData, []);
+
+  useEffect(fetchData, []);
   // console.log(data);
   // console.log(response.data);
   // console.log(data.books[0]);

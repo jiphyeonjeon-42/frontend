@@ -1,21 +1,17 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { pageRangeState } from "../atom/page";
-import { startCategory, userCategoryName } from "../atom/categories";
+import { searchWord } from "../atom/searchWord";
 import { useSearchInput } from "../atom/useSearchInput";
 import "../css/SearchBar.css";
 import SearchIcon from "../img/search_icon.svg";
 
-// export const useSearchInput = atom({ key: "useSearchInput", default: "" });
-
-const SearchBar = () => {
+const SearchBar = ({ setStartCate, setPageRange, setAvailable }) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
   const [input, setInput] = useRecoilState(useSearchInput);
-  const setPageRange = useSetRecoilState(pageRangeState);
-  const setCategoryName = useSetRecoilState(userCategoryName);
-  const setStartCategory = useSetRecoilState(startCategory);
+  const setUserWord = useSetRecoilState(searchWord);
 
   const onChange = event => {
     const {
@@ -26,11 +22,13 @@ const SearchBar = () => {
 
   const handleSearchSumbit = event => {
     event.preventDefault();
-    setPageRange(0);
-    setCategoryName("");
-    setStartCategory(0);
+    // setCategoryName("");
+    if (setPageRange) setPageRange(0);
+    if (setStartCate) setStartCate(0);
+    if (setAvailable) setAvailable(false);
     const searchForm = document.getElementById("search-form");
     const searchInputValue = searchForm.querySelector("#search-input").value;
+    setUserWord(searchInputValue);
     history.push(
       `/search/${searchInputValue}?page=${1}&category=${0}&sort=accurate`,
     );
@@ -40,7 +38,7 @@ const SearchBar = () => {
     const searchForm = document.getElementById("search-form");
     searchForm.addEventListener("submit", handleSearchSumbit);
     return () => searchForm.removeEventListener("submit", handleSearchSumbit);
-  }, [handleSearchSumbit]);
+  }, [handleSearchSumbit, setStartCate, setPageRange, setAvailable]);
 
   return (
     <form id="search-form">
