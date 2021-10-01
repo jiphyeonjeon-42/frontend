@@ -1,30 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import {
-  atom,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
 import { useHistory } from "react-router-dom";
-import {
-  entireCategory,
-  userCategory,
-  startCategory,
-} from "../atom/categories";
-import { sortBy } from "../atom/sortBy";
 import ArrLeft from "../img/arrow_left_black.svg";
 import ArrRight from "../img/arrow_right_black.svg";
 import "../css/CategoryFilter.css";
 
-// export const userCategory = atom({ key: "userCategory", default: 0 });
-// export const userCategoryName = atom({ key: "userCategoryName", default: "" });
-// const startCategory = atom({ key: "startCategory", default: 0 });
-const hiddenCategory = atom({ key: "hiddenCategory", default: true });
-
-const PreCategory = () => {
-  const [startCate, setStartCate] = useRecoilState(startCategory);
-
+const PreCategory = ({ startCate, setStartCate }) => {
   const slideLeft = () => {
     if (startCate > 0) {
       setStartCate(startCate - 1);
@@ -46,10 +27,7 @@ const PreCategory = () => {
   );
 };
 
-const NextCategory = () => {
-  const [startCate, setStartCate] = useRecoilState(startCategory);
-  const hiddenCate = useRecoilValue(hiddenCategory);
-
+const NextCategory = ({ hiddenCate, startCate, setStartCate }) => {
   const slideRight = () => {
     if (hiddenCate) {
       setStartCate(startCate + 1);
@@ -75,18 +53,21 @@ const NextCategory = () => {
   );
 };
 
-const Category = ({ categoryIndex, categoryName, categoryNum }) => {
+const Category = ({
+  userSort,
+  userCate,
+  categoryIndex,
+  categoryName,
+  categoryNum,
+}) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
-  const startCate = useRecoilValue(startCategory);
-  const userCate = useRecoilValue(userCategory);
-  const sort = useRecoilValue(sortBy);
 
   const changeFilter = () => {
-    history.push(`?page=${1}&category=${categoryIndex}&sort=${sort}`);
+    history.push(`?page=${1}&category=${categoryIndex}&sort=${userSort}`);
   };
 
-  return startCate <= categoryIndex ? (
+  return (
     <button
       className={`category-button button-onclick-${
         parseInt(userCate, 10) === categoryIndex
@@ -104,15 +85,17 @@ const Category = ({ categoryIndex, categoryName, categoryNum }) => {
         {categoryName} ({categoryNum})
       </div>
     </button>
-  ) : (
-    ``
   );
 };
 
-const CategoryFilter = () => {
-  const setHiddenCate = useSetRecoilState(hiddenCategory);
-  const startCate = useRecoilValue(startCategory);
-  const entireCate = useRecoilValue(entireCategory);
+const CategoryFilter = ({
+  startCate,
+  setStartCate,
+  userSort,
+  userCate,
+  entireCate,
+}) => {
+  const [hiddenCate, setHiddenCate] = useState(false);
   const [entireCateWidth, setEntireCateWidth] = useState([]);
 
   const toggleCategoryButton = () => {
@@ -138,13 +121,9 @@ const CategoryFilter = () => {
     setEntireCateWidth(categoryButtonWidth);
   };
 
-  useEffect(() => {
-    calcEntireWidth();
-  }, [startCate, entireCate]);
+  useEffect(calcEntireWidth, [startCate, entireCate]);
 
-  useEffect(() => {
-    toggleCategoryButton();
-  }, [entireCateWidth]);
+  useEffect(toggleCategoryButton, [entireCateWidth]);
 
   useEffect(() => {
     window.addEventListener("resize", calcEntireWidth);
@@ -156,17 +135,25 @@ const CategoryFilter = () => {
   return (
     <div className="category-filter">
       <div className="category-filter__list">
-        <PreCategory />
+        <PreCategory startCate={startCate} setStartCate={setStartCate} />
         <div className="categories">
-          {entireCate.map((items, index) => (
-            <Category
-              categoryIndex={index}
-              categoryName={items.name}
-              categoryNum={items.count}
-            />
-          ))}
+          {entireCate.map((items, index) =>
+            startCate <= index ? (
+              <Category
+                userSort={userSort}
+                userCate={userCate}
+                categoryIndex={index}
+                categoryName={items.name}
+                categoryNum={items.count}
+              />
+            ) : null,
+          )}
         </div>
-        <NextCategory />
+        <NextCategory
+          startCate={startCate}
+          setStartCate={setStartCate}
+          hiddenCate={hiddenCate}
+        />
       </div>
       <div className="category-filter__line" />
     </div>

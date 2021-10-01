@@ -1,30 +1,16 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import {
-  atom,
-  useRecoilState,
-  useSetRecoilState,
-  useRecoilValue,
-} from "recoil";
-import { userCategory } from "../atom/categories";
-import { sortBy } from "../atom/sortBy";
 import CheckIcon from "../img/check_icon.svg";
 import RedCheckIcon from "../img/check_icon_red.svg";
 import "../css/Sort.css";
 
-// export const sortBy = atom({ key: "sortBy", default: "" });
-const availableState = atom({ key: "availableState", default: false });
-
-const SortBy = ({ sort, text }) => {
+const SortBy = ({ cateIndex, userSort, sortName, text }) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
-  const [userSort, setSort] = useRecoilState(sortBy);
-  const cateIndex = useRecoilValue(userCategory);
 
   const changeSortBy = () => {
-    setSort(sort);
-    history.push(`?page=${1}&category=${cateIndex}&sort=${sort}`);
+    history.push(`?page=${1}&category=${cateIndex}&sort=${sortName}`);
   };
 
   return (
@@ -32,7 +18,7 @@ const SortBy = ({ sort, text }) => {
       type="button"
       onClick={changeSortBy}
       className={`sort-by__button ${
-        userSort === sort ? "font-16-bold color-54" : "font-16 color-a4"
+        userSort === sortName ? "font-16-bold color-54" : "font-16 color-a4"
       }`}
     >
       {text}
@@ -40,9 +26,7 @@ const SortBy = ({ sort, text }) => {
   );
 };
 
-const Availavble = () => {
-  const [isAvailable, setAvailable] = useRecoilState(availableState);
-
+const Availavble = ({ isAvailable, setAvailable }) => {
   const toggleAvailable = () => {
     setAvailable(!isAvailable);
   };
@@ -65,24 +49,36 @@ const Availavble = () => {
   );
 };
 
-const Sort = () => {
-  const setSort = useSetRecoilState(sortBy);
-  const setAvailable = useSetRecoilState(availableState);
-
-  useEffect(() => {
-    setSort(0);
-    setAvailable(false);
-  }, []);
-
+const Sort = ({ isAvailable, setAvailable, userSort, cateIndex }) => {
   return (
     <div className="sort">
       <div className="sort-by">
-        <SortBy sort="accurate" text="정확도순" />
-        <SortBy sort="title" text="이름순" />
-        <SortBy sort="new" text="발행연도순" />
-        <SortBy sort="popular" text="인기순" />
+        <SortBy
+          cateIndex={cateIndex}
+          userSort={userSort}
+          sortName="accurate"
+          text="정확도순"
+        />
+        <SortBy
+          cateIndex={cateIndex}
+          userSort={userSort}
+          sortName="title"
+          text="이름순"
+        />
+        <SortBy
+          cateIndex={cateIndex}
+          userSort={userSort}
+          sortName="new"
+          text="발행연도순"
+        />
+        <SortBy
+          cateIndex={cateIndex}
+          userSort={userSort}
+          sortName="popular"
+          text="인기순"
+        />
       </div>
-      <Availavble />
+      <Availavble isAvailable={isAvailable} setAvailable={setAvailable} />
     </div>
   );
 };

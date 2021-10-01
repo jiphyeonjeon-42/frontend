@@ -20,7 +20,7 @@
 .reservation-btn {
   background: none;
   border: none;
-  font-family: "Noto Sans KR", sans-serif;
+  /* font-family: "Noto Sans KR", sans-serif; */
 }
 .bookStatus-arr {
   margin-left: 12px;

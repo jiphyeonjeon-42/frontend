@@ -12,7 +12,7 @@ const MainPopluar = () => {
   const [page, setPage] = useState(0);
   const [docs, setDocs] = useRecoilState(popularList);
   const [main, setMain] = useRecoilState(popularMain);
-  const getData = async () => {
+  const fetchData = async () => {
     const {
       data: { items },
     } = await axios.get(`${process.env.REACT_APP_API}/books/info/`, {
@@ -24,7 +24,7 @@ const MainPopluar = () => {
     setDocs(items);
     setMain(items[0]);
   };
-  useEffect(getData, []);
+  useEffect(fetchData, []);
 
   const onNext = () => {
     let index = page;

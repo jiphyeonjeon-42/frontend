@@ -21,7 +21,7 @@
 
 .question__text {
   margin: 0 0 0 0;
-  font-family: NotoSansCJKKR;
+  /* font-family: NotoSansCJKKR; */
   font-size: 28px;
   font-weight: bold;
   font-stretch: normal;
@@ -36,7 +36,7 @@
   border-left: 1px solid #a4a4a4;
   margin: 44px 0 0 72px;
   padding: 0 25px 0 25px;
-  font-family: NotoSansCJKKR;
+  /* font-family: NotoSansCJKKR; */
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;

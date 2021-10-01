@@ -1,52 +1,68 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useState, useEffect, useRef } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import axios from "axios";
 import Title from "./Title";
 import SubTitle from "./SubTitle";
 import SearchBar from "./SearchBar";
 import Books from "./Books";
 import Pagination from "./Pagination";
-import { currentPage } from "../atom/page";
 import BackGround from "./BackGround";
 import CategoryFilter from "./CategoryFilter";
-import {
-  entireCategory,
-  userCategory,
-  userCategoryName,
-} from "../atom/categories";
-import { sortBy } from "../atom/sortBy";
-import { searchWord } from "../atom/searchWord";
-import { useSearchInput } from "../atom/useSearchInput";
 import Sort from "./Sort";
 import WishBook from "./WishBook";
+import { searchWord } from "../atom/searchWord";
+import { useSearchInput } from "../atom/useSearchInput";
 import "../css/Search.css";
 
-// export const searchWord = atom({ key: "searchWord", default: "" });
-
 const Search = ({ match, location }) => {
-  const [subTitle, setSubTitle] = useRecoilState(searchWord);
   const myRef = useRef(null);
-  const setPage = useSetRecoilState(currentPage);
-  const setSort = useSetRecoilState(sortBy);
-  const setCate = useSetRecoilState(userCategory);
   const setInputValue = useSetRecoilState(useSearchInput);
-  const setCategoryName = useSetRecoilState(userCategoryName);
-  const entireCate = useRecoilValue(entireCategory);
+  const [userWord, setUserWord] = useRecoilState(searchWord);
+  const [isLoading, setLoading] = useState(true);
+  const [bookList, setBookList] = useState([]);
+  const [startCate, setStartCate] = useState(0);
+  const [pageRange, setPageRange] = useState(0);
+  const [isAvailable, setAvailable] = useState(false);
+  const [userPage, setPage] = useState(1);
+  const [userSort, setSort] = useState("");
+  const [cateIndex, setCateIndex] = useState(0);
+  const [userCateName, setCategoryName] = useState("");
+  const [entireCate, setEntireCate] = useState([]);
+  const [lastPage, setLastPage] = useState(0);
+
+  const fetchBookList = async () => {
+    const {
+      data: { items, meta, categories },
+    } = await axios.get(`${process.env.REACT_APP_API}/books/info/search`, {
+      params: {
+        query: userWord,
+        page: userPage,
+        sort: userSort,
+        category: userCateName,
+        limit: 20,
+      },
+    });
+    setBookList(items);
+    setEntireCate(categories);
+    setLoading(false);
+    setLastPage(meta.totalPages);
+  };
+
+  useEffect(fetchBookList, [userWord, userPage, userSort, userCateName]);
 
   useEffect(() => {
-    console.log(match);
     const queryArr = location.search.split("?");
     const query = queryArr[queryArr.length - 1];
     const [queryPage, queryCate, querySort] = query.split("&");
-    setSubTitle(match.params.word);
+    setUserWord(match.params.word);
     setInputValue(match.params.word);
     setPage(queryPage.split("=")[1]);
     setSort(querySort.split("=")[1]);
-    setCate(queryCate.split("=")[1]);
+    setCateIndex(queryCate.split("=")[1]);
     if (parseInt(queryCate.split("=")[1], 10) === 0) setCategoryName("");
-    else if (entireCate[queryCate.split("=")[1]] === undefined)
-      console.log(entireCate);
-    else setCategoryName(entireCate[queryCate.split("=")[1]].name);
+    else if (entireCate[queryCate.split("=")[1]] !== undefined)
+      setCategoryName(entireCate[queryCate.split("=")[1]].name);
   }, [match.params, location.search, entireCate]);
 
   return (
@@ -54,19 +70,48 @@ const Search = ({ match, location }) => {
       <BackGround page="search" />
       <section className="search-title">
         <Title titleKorean="검색" titleEng="SEARCH" />
-        <SearchBar />
+        <SearchBar
+          setStartCate={setStartCate}
+          setPageRange={setPageRange}
+          setAvailable={setAvailable}
+        />
       </section>
       <section className="search-section">
         <div className="search-subtitle" ref={myRef}>
           <SubTitle
-            subTitle={`'${subTitle}' 도서 검색 결과`}
+            subTitle={`'${userWord}' 도서 검색 결과`}
             alignItems="start"
           />
         </div>
-        <CategoryFilter />
-        <Sort />
-        <Books />
-        <Pagination myRef={myRef} />
+        <CategoryFilter
+          userSort={userSort}
+          userCate={cateIndex}
+          entireCate={entireCate}
+          startCate={startCate}
+          setStartCate={setStartCate}
+        />
+        <Sort
+          userSort={userSort}
+          cateIndex={cateIndex}
+          isAvailable={isAvailable}
+          setAvailable={setAvailable}
+        />
+        {isLoading ? (
+          <div className="loader">
+            <span className="loader__text">Loading...</span>
+          </div>
+        ) : (
+          <Books bookList={bookList} />
+        )}
+        <Pagination
+          lastPage={lastPage}
+          userPage={userPage}
+          userSort={userSort}
+          userCateIndex={cateIndex}
+          pageRange={pageRange}
+          setPageRange={setPageRange}
+          myRef={myRef}
+        />
       </section>
       <section className="wish-book-wraper">
         <WishBook />
