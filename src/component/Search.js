@@ -54,9 +54,9 @@ const Search = ({ match, location }) => {
   useEffect(() => {
     const queryArr = location.search.split("?");
     const query = queryArr[queryArr.length - 1];
-    const [queryPage, queryCate, querySort] = query.split("&");
-    setUserWord(match.params.word);
-    setInputValue(match.params.word);
+    const [queryString, queryPage, queryCate, querySort] = query.split("&");
+    setUserWord(decodeURIComponent(queryString.split("string=")[1]));
+    setInputValue(decodeURIComponent(queryString.split("string=")[1]));
     setPage(queryPage.split("=")[1]);
     setSort(querySort.split("=")[1]);
     setCateIndex(queryCate.split("=")[1]);

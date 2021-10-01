@@ -30,7 +30,9 @@ const SearchBar = ({ setStartCate, setPageRange, setAvailable }) => {
     const searchInputValue = searchForm.querySelector("#search-input").value;
     setUserWord(searchInputValue);
     history.push(
-      `/search/${searchInputValue}?page=${1}&category=${0}&sort=accurate`,
+      `/search?string=${encodeURIComponent(
+        searchInputValue,
+      )}&page=${1}&category=${0}&sort=accurate`,
     );
   };
 
