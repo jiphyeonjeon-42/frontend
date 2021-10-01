@@ -3,6 +3,9 @@ import BackGround from "./BackGround";
 import Title from "./Title";
 import "../css/ReservedLoan.css";
 import SubTitle from "./SubTitle";
+import InquireBoxTitle from "./InquireBoxTitle";
+import InquireBoxRent from "./InquireBoxRent";
+import Login from "../img/login_icon.svg";
 
 const ReservedLoan = () => {
   return (
@@ -21,7 +24,15 @@ const ReservedLoan = () => {
         </div>
       </section>
       <section className="reservedLoan-body">
-        <div>hihihi</div>
+        <div className="inquire-box-wrapper">
+          <InquireBoxTitle
+            Icon={Login}
+            titleKO="예약 정보"
+            titleEN="Reservation info"
+            placeHolder="예약 대출자의 성명 혹은 도서명을 입력해주세요."
+          />
+          <InquireBoxRent modalNum={1} />
+        </div>
       </section>
     </main>
   );
