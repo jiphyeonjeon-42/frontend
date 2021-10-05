@@ -9,7 +9,7 @@ import ModalUser from "./rent/ModalUser";
 export const isModalOpen = atom({ key: "isModalOpen", default: 0 });
 
 // eslint-disable-next-line react/prop-types
-const Modal = ({ setSelectUser }) => {
+const Modal = ({ setSelectUser, setSelectBooks, selectBooks }) => {
   const [userModal, setUserModal] = useRecoilState(isModalOpen);
 
   const closeModal = () => {
@@ -32,7 +32,11 @@ const Modal = ({ setSelectUser }) => {
             setUserModal={setUserModal}
           />
         ) : (
-          <ModalBook />
+          <ModalBook
+            setSelectBooks={setSelectBooks}
+            selectBooks={selectBooks}
+            setUserModal={setUserModal}
+          />
         )}
       </div>
     </div>

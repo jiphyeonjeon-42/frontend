@@ -1,0 +1,65 @@
+.inquire-box-book {
+  width: 1200px;
+  background-color: #e8e8e8;
+  /* height: 160px; */
+  /* border-radius: 61px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  position: relative;
+  z-index: 0;
+}
+
+.none {
+  top: -60px;
+}
+
+.two {
+  border-bottom-left-radius: 61px;
+  border-bottom-right-radius: 61px;
+  top: -60px;
+}
+
+.four {
+  border-radius: 61px;
+  height: 101px;
+  top: -20px;
+}
+
+.inquire-box-book__add-button {
+  height: 40px;
+  border: 0;
+  margin: 0;
+  background: none;
+  font-size: 28px;
+  text-decoration: none;
+  /* margin: 90px 0 30px 0; */
+  cursor: pointer;
+}
+
+.add-two {
+  margin: 90px 0 30px 0;
+}
+
+.add-four {
+  margin: 30px 0 30px 0;
+}
+
+.inquire-box-book__undo-button {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  margin: 0;
+  background: none;
+  font-size: 28px;
+  text-decoration: none;
+  /* margin: 90px 0 30px 0; */
+  cursor: pointer;
+}
+
+.inquire-box-book__id-undo {
+  display: flex;
+  margin: 90px 0 30px 0;
+  align-items: center;
+}

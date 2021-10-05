@@ -6,11 +6,13 @@ import { isModalOpen } from "../Modal";
 import DeleteButton from "../../img/x_button.svg";
 import "../../css/InquireBoxUser.css";
 
-const InquireBoxRent = ({ modalNum, selectUser, setSelectUser }) => {
+const USER_MODAL = 1;
+
+const InquireBoxUser = ({ selectUser, setSelectUser }) => {
   const setUserModal = useSetRecoilState(isModalOpen);
 
   const openModal = () => {
-    setUserModal(modalNum);
+    setUserModal(USER_MODAL);
   };
 
   const deleteUser = () => {
@@ -47,8 +49,8 @@ const InquireBoxRent = ({ modalNum, selectUser, setSelectUser }) => {
   );
 };
 
-export default InquireBoxRent;
+export default InquireBoxUser;
 
-InquireBoxRent.propTypes = {
+InquireBoxUser.propTypes = {
   setSelectUser: PropTypes.func.isRequired,
 };
