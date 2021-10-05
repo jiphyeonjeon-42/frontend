@@ -1,0 +1,21 @@
+.modal-user__search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 28px 0 49px 0;
+}
+
+.modal-user__text {
+  margin-right: 60px;
+}
+
+.modal-user {
+  display: flex;
+  flex-direction: column;
+  height: 616px;
+}
+
+.modal-user__pagination {
+  margin-top: auto;
+  /* height: 150px; */
+}

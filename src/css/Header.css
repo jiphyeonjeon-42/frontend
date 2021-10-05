@@ -76,6 +76,7 @@ a:active {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .gnb__admin__icon {
@@ -129,7 +130,7 @@ a:active {
   left: 6.5px;
 }
 
-.lnb__circle__loan {
+.lnb__circle__rent {
   position: relative;
   width: 7px;
   height: 7px;
@@ -177,7 +178,7 @@ a:active {
   text-align: left;
 }
 
-.lnb__loan {
+.lnb__rent {
   margin-top: 14px;
 }
 

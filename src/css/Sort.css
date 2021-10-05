@@ -7,6 +7,7 @@
   margin-left: auto;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .availavble__icon {
@@ -32,4 +33,5 @@
   border: 0;
   background: none;
   margin-right: 24px;
+  cursor: pointer;
 }
