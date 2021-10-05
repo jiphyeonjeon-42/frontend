@@ -1,16 +1,15 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import BookDetail from "./component/BookDetail";
-import Footer from "./component/Footer";
-import Header from "./component/Header";
-import Infomation from "./component/Information";
-import Main from "./component/Main";
-import Search from "./component/Search";
-import Auth from "./component/Auth";
-import Logout from "./component/Logout";
-import Rent from "./component/Rent";
-// import BookInfo from "./component/BookInfo";
+import BookDetail from "./component/book/BookDetail";
+import Footer from "./component/utils/Footer";
+import Header from "./component/utils/Header";
+import Infomation from "./component/information/Information";
+import Main from "./component/main/Main";
+import Search from "./component/search/Search";
+import Auth from "./component/login/Auth";
+import Logout from "./component/login/Logout";
+import Rent from "./component/rent/Rent";
 import "./css/reset.css";
 import "./App.css";
 

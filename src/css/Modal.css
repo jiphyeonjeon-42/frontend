@@ -15,7 +15,6 @@
   transform: translate(-50%, -50%);
   height: 676px;
   width: 1200px;
-  padding: 16px;
   background: #ffffff;
   /* text-align: center; */
   z-index: 3;
@@ -30,6 +29,7 @@
   height: 20px;
   margin: 40px 40px 0 auto;
   display: flex;
+  cursor: pointer;
 }
 
 /* .modal__search-bar {
