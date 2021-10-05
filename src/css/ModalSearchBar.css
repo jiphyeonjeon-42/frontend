@@ -11,13 +11,13 @@
 }
 
 .short {
-	width: 689px;
-	margin-left: auto;
-	margin-right: 28px;
+  width: 689px;
+  margin-left: auto;
+  margin-right: 28px;
 }
 
 .long {
-	width: 783px;
+  width: 783px;
 }
 
 input:focus {

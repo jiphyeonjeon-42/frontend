@@ -5,11 +5,18 @@
   justify-content: center;
 }
 
+.modal-pagination {
+  padding: 0 0 60px 0;
+  display: flex;
+  justify-content: center;
+}
+
 .page-button {
   margin: 0 16px 0 16px;
   padding: 0;
   border: 0;
   background: none;
+  cursor: pointer;
 }
 
 .page-button-icon {
@@ -29,6 +36,7 @@
   padding: 0;
   border: 0;
   background: none;
+  cursor: pointer;
 }
 
 .next-page-button {
@@ -36,4 +44,5 @@
   padding: 0;
   border: 0;
   background: none;
+  cursor: pointer;
 }
