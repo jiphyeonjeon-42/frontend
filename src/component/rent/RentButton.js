@@ -23,6 +23,8 @@ const RentButton = ({ selectUser, selectBooks }) => {
           selectUser && selectBooks.length > 0 ? "red" : "black"
         }-button font-20 color-ff`}
         type="button"
+        // eslint-disable-next-line react/prop-types
+        disabled={selectUser && selectBooks.length > 0 ? "" : "disabled"}
       >
         도서 대출하기
       </button>

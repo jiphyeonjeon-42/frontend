@@ -1,8 +1,6 @@
 .inquire-box-book {
   width: 1200px;
   background-color: #e8e8e8;
-  /* height: 160px; */
-  /* border-radius: 61px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,19 +9,26 @@
   z-index: 0;
 }
 
+.inquire-box-book-active {
+  width: 1080px;
+  margin-left: auto;
+}
+
 .none {
   top: -60px;
+  padding: 90px 0 0 0;
 }
 
 .two {
   border-bottom-left-radius: 61px;
   border-bottom-right-radius: 61px;
+  padding: 90px 0 30px 0;
   top: -60px;
 }
 
 .four {
   border-radius: 61px;
-  height: 101px;
+  padding: 30px 0 30px 0;
   top: -20px;
 }
 
@@ -34,32 +39,42 @@
   background: none;
   font-size: 28px;
   text-decoration: none;
-  /* margin: 90px 0 30px 0; */
   cursor: pointer;
-}
-
-.add-two {
-  margin: 90px 0 30px 0;
-}
-
-.add-four {
-  margin: 30px 0 30px 0;
 }
 
 .inquire-box-book__undo-button {
   width: 20px;
   height: 20px;
   border: 0;
-  margin: 0;
+  margin: 0 75px 0 auto;
   background: none;
   font-size: 28px;
   text-decoration: none;
-  /* margin: 90px 0 30px 0; */
   cursor: pointer;
 }
 
 .inquire-box-book__id-undo {
   display: flex;
-  margin: 90px 0 30px 0;
+  padding: 30px 0 41px 0;
   align-items: center;
+  border-bottom: 1px solid #a4a4a4;
+}
+
+.inquire-box-book__info {
+  display: flex;
+  padding: 40px 0 70px 0;
+}
+
+.inquire-box-book__info {
+  display: flex;
+}
+
+.book__info__factor {
+  /* display: flex; */
+  /* align-items: center; */
+  margin-right: 40px;
+}
+
+.book__info__factor-half {
+  margin-right: 20px;
 }

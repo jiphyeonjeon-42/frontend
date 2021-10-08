@@ -7,7 +7,8 @@ import "../../css/BookList.css";
 
 const BookList = ({
   book,
-  isValid,
+  // isLenderable book.isLenderable 로 변경 예정
+  isLenderable,
   setSelectBooks,
   selectBooks,
   setUserModal,
@@ -33,12 +34,23 @@ const BookList = ({
   };
 
   return (
-    <button className="modal-book-list" type="button" onClick={seletOneOfBook}>
+    <button
+      className="modal-book-list"
+      type="button"
+      onClick={seletOneOfBook}
+      disabled={
+        isAlreadySelected(book, selectBooks) || isLenderable === 0
+          ? "disabled"
+          : ""
+      }
+    >
       <div className="modal-book-list__book">
         <div className="modal-book-list__name">
-          <div className="font-18-bold color-54">{`Book${book.id}`}</div>
+          <div className="font-18-bold color-54">
+            {book.info.title ? book.info.title : `Book${book.id}`}
+          </div>
           <div className="modal-book-list__valid font-16 color-red">
-            {isValid
+            {isLenderable
               ? isAlreadySelected(book, selectBooks)
                 ? "이미 선택됨"
                 : "대출 가능"
@@ -46,11 +58,17 @@ const BookList = ({
           </div>
         </div>
         <div className="modal-book-list__info">
-          <div className="font-16 color-54">저자</div>
+          <div className="font-16 color-54">
+            {book.info.author ? book.info.author : "저자"}
+          </div>
           <div className="modal-book-list__separator">|</div>
-          <div className="font-16 color-54">출판</div>
+          <div className="font-16 color-54">
+            {book.info.publisher ? book.info.publisher : "출판사"}
+          </div>
           <div className="modal-book-list__separator">|</div>
-          <div className="font-16 color-54">카테고리</div>
+          <div className="font-16 color-54">
+            {book.info.category ? book.info.category : "카테고리"}
+          </div>
           <div className="modal-book-list__callsign font-16 color-54">
             {`도서코드 : ${book.callSign}`}
           </div>

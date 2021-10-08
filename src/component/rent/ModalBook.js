@@ -65,7 +65,7 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
           setSelectBooks={setSelectBooks}
           selectBooks={selectBooks}
           setUserModal={setUserModal}
-          isValid={(index * 2 + 1) % 2}
+          isLenderable={(index * 2 + 1) % 2}
           name={`Name${book.id}`}
         />
       ))}
