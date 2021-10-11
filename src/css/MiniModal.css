@@ -33,10 +33,33 @@
 }
 
 .mini-modal__wrapper {
-  padding: 64px 40px 40px 40px;
+  padding: 80px 40px 40px 64px;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+}
+
+.mini-modal__text {
+  height: 290px;
+  position: relative;
+}
+
+.mini-modal__text:before {
+  content: " ";
+  background-color: #a4a4a4;
+  position: absolute;
+  left: 0;
+  right: 650px;
+  height: 4px;
+}
+
+.mini-modal__text__title {
+  padding-top: 40px;
+  line-height: 56px;
+}
+
+.mini-modal__text__message {
+  margin-top: 40px;
 }
 
 .mini-modal__cancel-button {

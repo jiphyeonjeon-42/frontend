@@ -37,7 +37,7 @@ const BookStatus = ({ id, callSign, dueDate, status }) => {
         <span>예악 하기</span>
         <img className="bookStatus-arr" src={Arr} alt="Arr" />
       </button>
-      {miniModal && <MiniModal handleModal={handleModal} type="confirm" />}
+      {miniModal && <MiniModal handleModal={handleModal} typeProps="confirm" />}
     </div>
   );
 };
