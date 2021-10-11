@@ -111,13 +111,15 @@ const MiniModal = ({ handleModal, typeProps }) => {
   return (
     <div className="modal__background">
       <div className="mini-modal__container">
-        <button
-          className="mini-modal__close-button"
-          type="button"
-          onClick={handleModal}
-        >
-          <img src={CloseButton} alt="close" />
-        </button>
+        {type !== "loading" && (
+          <button
+            className="mini-modal__close-button"
+            type="button"
+            onClick={handleModal}
+          >
+            <img src={CloseButton} alt="close" />
+          </button>
+        )}
         <div className="mini-modal__wrapper">
           <div className="mini-modal__text">
             <p className="mini-modal__text__title font-32-bold color-2d">
@@ -131,13 +133,15 @@ const MiniModal = ({ handleModal, typeProps }) => {
             </p>
           </div>
           <div>
-            <button
-              className="mini-modal__confirm-button font-20 color-ff"
-              type="button"
-              onClick={onConfirm}
-            >
-              확인하기
-            </button>
+            {type !== "loading" && (
+              <button
+                className="mini-modal__confirm-button font-20 color-ff"
+                type="button"
+                onClick={onConfirm}
+              >
+                확인하기
+              </button>
+            )}
             {type === "confirm" && (
               <button
                 className="mini-modal__cancel-button font-20 color-ff"
