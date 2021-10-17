@@ -75,7 +75,7 @@ const InquireBoxBook = ({ shape, book, selectBooks, setSelectBooks }) => {
             </div>
             <div className="book__info__factor">
               <span className="book__info__factor-half font-18-bold">
-                기타정보
+                발행연도
               </span>
               <span className="font-16">{tempBook.callSign}</span>
             </div>
