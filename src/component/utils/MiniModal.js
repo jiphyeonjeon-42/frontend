@@ -1,23 +1,55 @@
 import React, { useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
+import axios from "axios";
 import PropTypes from "prop-types";
 import globalModal from "../../atom/globalModal";
 import "../../css/MiniModal.css";
 import CloseButton from "../../img/x_button.svg";
 
-const MiniModal = ({ handleModal, typeProps }) => {
+const MiniModal = ({ handleModal, typeProps, bookId }) => {
   const [type, setType] = useState(typeProps);
-  const setGlobalModal = useSetRecoilState(globalModal);
-  const fetchOrder = () => {
-    const result = {
-      status: "200",
-      statusText: "axios로 수정해야 하는데 api가 완성된걸까",
-    };
-    setGlobalModal({
-      view: true,
-      error: `api ${result.status} ${result.statusText}`,
-    });
-    return "n명";
+  const [fetchNumber, setFetchNumber] = useState(-1);
+  const [fetchString, setFetchString] = useState("");
+  const [globalError, setGlobalError] = useRecoilState(globalModal);
+  const fetchReservOrder = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_API}/books/${bookId}/reservations/count/`)
+      .then(response => {
+        setFetchNumber(response.data.count);
+      })
+      .catch(error => {
+        setGlobalError({
+          view: true,
+          error: `books/:id/reservations/count/ ${error.response.status} ${error.response.data.error} ${error.response.data.message}`,
+        });
+        setType("error");
+      });
+  };
+
+  const postReserv = async () => {
+    await axios
+      .post(`${process.env.REACT_APP_API}/reservations/`, {
+        bookId,
+      })
+      .then(response => {
+        const rank = response.data.count;
+        if (rank === 1) {
+          console.log(response);
+          setType("successWithDate");
+          setFetchNumber(rank);
+          setFetchString("21.01.01");
+        } else {
+          setType("successDefault");
+          setFetchNumber(rank);
+        }
+      })
+      .catch(error => {
+        setGlobalError({
+          view: true,
+          error: `/reservations/ ${error.response.status} ${error.response.data.error} ${error.response.data.message}`,
+        });
+        setType("error");
+      });
   };
 
   let text;
@@ -30,37 +62,34 @@ const MiniModal = ({ handleModal, typeProps }) => {
         emphasis: "",
         title_after: "",
         title_next: "",
-        message: `오류 확인 및 수정을 위해 slack 으로 문의 부탁드립니다!. 오류코드 : ${global.error}`,
+        message: `오류 확인 및 수정을 위해 slack 으로 문의 부탁드립니다!. 오류코드 : ${globalError.error}`,
       };
-      onConfirm = handleModal;
-      onCancel = handleModal;
+      onConfirm = () => {
+        handleModal();
+        setGlobalError({ view: false, error: "" });
+      };
       break;
     case "confirm":
+      if (fetchNumber === -1) fetchReservOrder();
       text = {
         title: "현재 예약대기자는 ",
-        emphasis: fetchOrder(),
+        emphasis: `${fetchNumber}명`,
         title_after: "입니다.",
         title_next: "예약하시겠습니까?",
         message:
           "주의: 예약도서는 2권 이상 대출할 수 없거나, 연체회원일 경우 대출이 제한됩니다.",
       };
       onConfirm = () => {
+        setFetchNumber(-1);
         setType("loading");
-        setTimeout(() => {
-          const rand = Math.floor(Math.random() * 2);
-          if (!rand) {
-            setType("successDefault");
-          } else if (rand === 1) {
-            setType("failDefault");
-          }
-        }, 5000);
+        postReserv();
       };
       onCancel = handleModal;
       break;
     case "successDefault":
       text = {
         title: "예약 ",
-        emphasis: "nn순위",
+        emphasis: `${fetchNumber}순위`,
         title_after: "로 등록되셨습니다.",
         title_next: "",
         message: "대출이 가능해지면 Slack 알림을 보내드리겠습니다.",
@@ -70,10 +99,10 @@ const MiniModal = ({ handleModal, typeProps }) => {
     case "successWithDate":
       text = {
         title: "예약 ",
-        emphasis: "nn순위",
+        emphasis: `${fetchNumber}순위`,
         title_after: "로 등록되셨습니다.",
         title_next: "",
-        message: "대출 가능 일자는 21.00.00.입니다. 감사합니다.",
+        message: `대출 가능 일자는 ${fetchString}입니다. 감사합니다.`,
       };
       onConfirm = handleModal;
       break;
@@ -97,6 +126,9 @@ const MiniModal = ({ handleModal, typeProps }) => {
       };
       break;
     default:
+      if (globalError.error) {
+        setType("error");
+      }
       text = {
         title: "예기치 못한 오류가 발생했습니다",
         emphasis: "",
@@ -158,9 +190,14 @@ const MiniModal = ({ handleModal, typeProps }) => {
   );
 };
 
+MiniModal.defaultProps = {
+  bookId: "1",
+};
+
 MiniModal.propTypes = {
   handleModal: PropTypes.func.isRequired,
   typeProps: PropTypes.string.isRequired,
+  bookId: PropTypes.number,
 };
 
 export default MiniModal;

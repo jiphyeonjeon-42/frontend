@@ -11,7 +11,7 @@ import MiniModal from "../utils/MiniModal";
 const BookStatus = ({ id, callSign, dueDate, status }) => {
   const [miniModal, setMiniModal] = useState(false);
   const user = useRecoilValue(userState);
-  const handleModal = () => {
+  const openModal = () => {
     if (!status) {
       return;
     }
@@ -19,7 +19,11 @@ const BookStatus = ({ id, callSign, dueDate, status }) => {
       window.location = `${process.env.REACT_APP_API}/auth/oauth`;
       return;
     }
-    setMiniModal(!miniModal);
+    setMiniModal(true);
+  };
+
+  const closeModal = () => {
+    setMiniModal(false);
   };
 
   return (
@@ -32,12 +36,14 @@ const BookStatus = ({ id, callSign, dueDate, status }) => {
         className={`reservation-btn font-16 ${
           status ? "color-red" : "color-a4"
         }`}
-        onClick={handleModal}
+        onClick={openModal}
       >
         <span>예악 하기</span>
         <img className="bookStatus-arr" src={Arr} alt="Arr" />
       </button>
-      {miniModal && <MiniModal handleModal={handleModal} typeProps="confirm" />}
+      {miniModal && (
+        <MiniModal handleModal={closeModal} typeProps="confirm" bookId={id} />
+      )}
     </div>
   );
 };

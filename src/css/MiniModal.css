@@ -60,6 +60,9 @@
 
 .mini-modal__text__message {
   margin-top: 40px;
+  width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .mini-modal__cancel-button {

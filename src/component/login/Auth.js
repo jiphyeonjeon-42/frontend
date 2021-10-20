@@ -28,13 +28,13 @@ const Auth = () => {
       .catch(response => {
         setGlobalModal({
           view: true,
-          error: `me ${response.status} ${response.data.message}`,
+          error: `me ${response.name} ${response.message}`,
         });
       });
   }, []);
   return (
     <div>
-      <Redirect to="/" />{" "}
+      <Redirect to="/" />
     </div>
   );
 };
