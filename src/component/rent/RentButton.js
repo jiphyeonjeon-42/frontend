@@ -6,19 +6,15 @@ import "../../css/RentButton.css";
 const RentButton = ({ selectUser, selectBooks }) => {
   const createLending = () => {
     axios.post(`${process.env.REACT_APP_API}/lendings`, {
-      data: {
-        userId: selectUser.id,
-        bookId: selectBooks[0].id,
-        condition: "문제없음",
-      },
+      userId: selectUser.id,
+      bookId: selectBooks[0].id,
+      condition: "문제없음",
     });
     if (selectBooks.length > 1) {
       axios.post(`${process.env.REACT_APP_API}/lendings`, {
-        data: {
-          userId: selectUser.id,
-          bookId: selectBooks[1].id,
-          condition: "문제없음",
-        },
+        userId: selectUser.id,
+        bookId: selectBooks[1].id,
+        condition: "문제없음",
       });
     }
   };
