@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import Modal, { isModalOpen } from "../Modal";
 import BackGround from "../utils/BackGround";
@@ -10,15 +10,12 @@ import Login from "../../img/login_icon.svg";
 import Book from "../../img/admin_icon.svg";
 import "../../css/Rent.css";
 import InquireBoxUser from "./InquireBoxUser";
-import InquireBoxRent from "./InquireBoxRent";
+import InquireBoxBook from "./InquireBoxBook";
 
 const Rent = () => {
   const userModal = useRecoilValue(isModalOpen);
   const [selectUser, setSelectUser] = useState(null);
-
-  useEffect(() => {
-    console.log(selectUser);
-  }, [selectUser]);
+  const [selectBooks, setSelectBooks] = useState([]);
 
   return (
     <main>
@@ -39,18 +36,38 @@ const Rent = () => {
           titleKO="카뎃 정보"
           titleEN="Cadet info"
         />
-        <InquireBoxUser
-          modalNum={1}
-          selectUser={selectUser}
-          setSelectUser={setSelectUser}
-        />
+        <InquireBoxUser selectUser={selectUser} setSelectUser={setSelectUser} />
       </div>
       <div className="inquire-box-wrapper">
         <InquireBoxTitle Icon={Book} titleKO="도서 정보" titleEN="Book info" />
-        <InquireBoxRent modalNum={2} />
+        {selectBooks.length > 0
+          ? selectBooks.map((book, index) => (
+              <InquireBoxBook
+                book={book}
+                shape={selectBooks.length === 2 && index === 0 ? "none" : "two"}
+                selectBooks={selectBooks}
+                setSelectBooks={setSelectBooks}
+              />
+            ))
+          : null}
+        {selectBooks.length < 2 ? (
+          <InquireBoxBook
+            book={null}
+            shape={selectBooks.length === 0 ? "two" : "four"}
+            selectBooks={selectBooks}
+            setSelectBooks={setSelectBooks}
+          />
+        ) : null}
       </div>
-      <RentButton />
-      {userModal !== 0 ? <Modal setSelectUser={setSelectUser} /> : null};
+      <RentButton selectUser={selectUser} selectBooks={selectBooks} />
+      {userModal !== 0 ? (
+        <Modal
+          setSelectUser={setSelectUser}
+          setSelectBooks={setSelectBooks}
+          selectBooks={selectBooks}
+        />
+      ) : null}
+      ;
     </main>
   );
 };

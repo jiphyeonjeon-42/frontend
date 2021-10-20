@@ -1,0 +1,67 @@
+.modal-book-list {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 1024px;
+  padding: 20px 0 20px 0;
+  margin: 0 auto 0 auto;
+  align-items: center;
+  border-bottom: 1px solid #a4a4a4;
+  cursor: pointer;
+  background: none;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.modal-book-list:hover {
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  -o-transform: scale(1.01);
+  transform: scale(1.01);
+}
+
+.modal-book-list__book {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-book-list__info {
+  display: flex;
+  align-items: center;
+}
+
+.modal-book-list__name {
+  width: 161px;
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.modal-book-list__arrow {
+  width: 8px;
+  height: 16px;
+  /* margin-top: 4px; */
+  margin: 4px 0 0 auto;
+}
+
+.modal-book-list__valid {
+  margin-left: 28px;
+}
+
+.modal-book-list__callsign {
+  margin-left: 28px;
+}
+
+.modal-book-list__separator {
+  margin: 0 12px 0 12px;
+}

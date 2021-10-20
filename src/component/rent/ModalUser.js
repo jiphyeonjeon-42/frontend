@@ -38,7 +38,6 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
     });
     setUserList(items);
     setLastUserSearchPage(meta.totalPages);
-    console.log(meta);
   };
 
   useEffect(fetchUserData, [userSearchWord, userSearchPage]);

@@ -1,4 +1,4 @@
-.inquire-box-user {
+.inquire-box-book {
   width: 1200px;
   background-color: #e8e8e8;
   display: flex;
@@ -7,18 +7,32 @@
   margin: auto;
   position: relative;
   z-index: 0;
-  top: -60px;
-  border-bottom-left-radius: 61px;
-  border-bottom-right-radius: 61px;
-  padding: 90px 0 30px 0;
 }
 
-.inquire-box-user-active {
+.inquire-box-book-active {
   width: 1080px;
   margin-left: auto;
 }
 
-.inquire-box-user__add-button {
+.none {
+  top: -60px;
+  padding: 90px 0 0 0;
+}
+
+.two {
+  border-bottom-left-radius: 61px;
+  border-bottom-right-radius: 61px;
+  padding: 90px 0 30px 0;
+  top: -60px;
+}
+
+.four {
+  border-radius: 61px;
+  padding: 30px 0 30px 0;
+  top: -20px;
+}
+
+.inquire-box-book__add-button {
   height: 40px;
   border: 0;
   margin: 0;
@@ -28,7 +42,7 @@
   cursor: pointer;
 }
 
-.inquire-box-user__undo-button {
+.inquire-box-book__undo-button {
   width: 20px;
   height: 20px;
   border: 0;
@@ -39,42 +53,28 @@
   cursor: pointer;
 }
 
-.inquire-box-user__id-undo {
+.inquire-box-book__id-undo {
   display: flex;
+  padding: 30px 0 41px 0;
   align-items: center;
-  padding: 30px 0 40px 0;
   border-bottom: 1px solid #a4a4a4;
 }
 
-.inquire-box-user__lendings {
-  display: flex;
-  padding: 40px 0 40px 0;
-  border-bottom: 1px solid #a4a4a4;
-}
-
-.inquire-box-user__reservations {
+.inquire-box-book__info {
   display: flex;
   padding: 40px 0 70px 0;
 }
 
-.user__book-cnt {
-  width: 176px;
+.inquire-box-book__info {
+  display: flex;
 }
 
-.user__book-info {
-  flex-grow: 1;
+.book__info__factor {
+  /* display: flex; */
+  /* align-items: center; */
+  margin-right: 40px;
 }
 
-.user__book-info__title {
-  margin-bottom: 20px;
-}
-
-.user__book-info__line {
-  height: 1px;
-  background-color: #a4a4a4;
-  margin: 20px 0 20px 0;
-}
-
-.user__reservations-info {
-  margin-left: 28px;
+.book__info__factor-half {
+  margin-right: 20px;
 }
