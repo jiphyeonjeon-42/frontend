@@ -6,7 +6,7 @@ import globalModal from "../../atom/globalModal";
 import "../../css/MiniModal.css";
 import CloseButton from "../../img/x_button.svg";
 
-const MiniModal = ({ handleModal, typeProps, bookId }) => {
+const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
   const [type, setType] = useState(typeProps);
   const [fetchNumber, setFetchNumber] = useState(-1);
   const [fetchString, setFetchString] = useState("");
@@ -20,7 +20,7 @@ const MiniModal = ({ handleModal, typeProps, bookId }) => {
       .catch(error => {
         setGlobalError({
           view: true,
-          error: `books/:id/reservations/count/ ${error.response.status} ${error.response.data.error} ${error.response.data.message}`,
+          error: `books/:id/reservations/count/ ${error.name} ${error.message}`,
         });
         setType("error");
       });
@@ -125,6 +125,16 @@ const MiniModal = ({ handleModal, typeProps, bookId }) => {
         message: "잠시만 기다려주세요.",
       };
       break;
+    case "return":
+      text = {
+        title: "반납이 완료되었습니다.",
+        emphasis: "",
+        title_after: "",
+        title_next: "",
+        message,
+      };
+      onConfirm = handleModal;
+      break;
     default:
       if (globalError.error) {
         setType("error");
@@ -167,7 +177,7 @@ const MiniModal = ({ handleModal, typeProps, bookId }) => {
           <div>
             {type !== "loading" && (
               <button
-                className="modal__confirm-button font-20 color-ff"
+                className="modal__button confirm mini font-20 color-ff"
                 type="button"
                 onClick={onConfirm}
               >
@@ -176,7 +186,7 @@ const MiniModal = ({ handleModal, typeProps, bookId }) => {
             )}
             {type === "confirm" && (
               <button
-                className="modal__cancel-button font-20 color-ff"
+                className="modal__button mini font-20 color-ff"
                 type="button"
                 onClick={onCancel}
               >
@@ -192,12 +202,14 @@ const MiniModal = ({ handleModal, typeProps, bookId }) => {
 
 MiniModal.defaultProps = {
   bookId: "1",
+  message: "",
 };
 
 MiniModal.propTypes = {
   handleModal: PropTypes.func.isRequired,
   typeProps: PropTypes.string.isRequired,
   bookId: PropTypes.number,
+  message: PropTypes.string,
 };
 
 export default MiniModal;

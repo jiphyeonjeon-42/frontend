@@ -4,7 +4,8 @@
   width: 800px;
   height: 460px;
 }
-x .modal__close-button.mini {
+
+.modal__close-button.mini {
   display: block;
   float: right;
   top: 0;
@@ -43,23 +44,23 @@ x .modal__close-button.mini {
   word-wrap: break-word;
 }
 
-.modal__cancel-button {
-  margin: 0;
+.modal__button {
+  margin-right: 24px;
   border: 0;
-  padding: 9px 36px 9px 36px;
-  background: none;
+  padding: 0.5rem 2rem;
+  text-align: center;
   border-radius: 24px;
   background-color: #a4a4a4;
-  float: right;
-  bottom: 0;
 }
 
-.modal__confirm-button {
-  margin: 0 0 0 24px;
-  border: 0;
-  padding: 9px 36px 9px 36px;
-  border-radius: 24px;
-  background-color: #e63737;
+.modal__button.mini {
   float: right;
-  bottom: 0;
+}
+
+.modal__button.confirm {
+  background-color: #e63737;
+}
+
+.modal__button.confirm.mini {
+  margin: 0;
 }

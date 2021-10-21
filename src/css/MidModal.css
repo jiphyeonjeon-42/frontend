@@ -6,21 +6,54 @@
 }
 
 .modal__wrapper.mid {
-  padding: 7% 13% 7% 13%;
+  padding: 88px;
 }
 
 .mid-modal__cover {
-  background-color: aquamarine;
   float: left;
-  width: 30%;
-  height: 100%;
+  width: 342px;
+  height: 500px;
+  margin-right: 48px;
+}
+
+.mid-modal__cover-img {
+  width: 342px;
+  height: 500px;
 }
 
 .mid-modal__detail {
-  background-color: brown;
-  margin-left: 48px;
+  display: inline-block;
+  width: 634px;
 }
 
 .mid-modal__book {
   height: 133px;
+  margin-bottom: 28px;
+}
+
+.mid-modal__user {
+  float: left;
+  width: 50%;
+  height: 133px;
+}
+
+.mid-modal__lend {
+  height: 133px;
+}
+
+.mid-modal__remark {
+  margin-top: 28px;
+  height: 178px;
+}
+
+.mid-modal__remark__input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.margin-8 {
+  margin: 8px 0 8px 0;
 }
