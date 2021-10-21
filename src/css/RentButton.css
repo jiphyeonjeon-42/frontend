@@ -21,6 +21,14 @@
   height: 48px;
   background: none;
   border-radius: 24px;
-  background-color: #a4a4a4;
   /* background-color: #e63737; */
+}
+
+.black-button {
+  background-color: #a4a4a4;
+}
+
+.red-button {
+  background-color: #e63737;
+  cursor: pointer;
 }

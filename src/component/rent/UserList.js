@@ -7,6 +7,7 @@ import "../../css/UserList.css";
 
 const UserList = ({
   user,
+  // lendCnt & isPenalty -> user.lendCnt & user.isPenalty 로 변경
   lendCnt,
   isPenalty,
   setSelectUser,
@@ -22,7 +23,12 @@ const UserList = ({
   };
 
   return (
-    <button className="user-list" type="button" onClick={seletUser}>
+    <button
+      className="user-list"
+      type="button"
+      onClick={seletUser}
+      disabled={isPenalty || lendCnt >= 2 ? "disabled" : ""}
+    >
       <div className="user-list__name">
         <div className="font-18-bold color-54">{`Name${user.id}`}</div>
       </div>
