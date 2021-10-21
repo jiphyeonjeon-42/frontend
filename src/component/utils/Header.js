@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import Logo from "../../img/jiphyeonjeon_logo.svg";
 import Information from "../../img/information_icon.svg";
 import Login from "../../img/login_icon.svg";
@@ -10,12 +10,18 @@ import userState from "../../atom/userState";
 
 const Header = () => {
   const [toggleLNB, setToggleLNB] = useState(false);
-  const user = useRecoilValue(userState);
+  const [user, setUser] = useRecoilState(userState);
   const clickAdmin = () => {
     const target = document.querySelector(".gnb__admin__text");
     target.style.opacity = toggleLNB === true ? 1 : 0.7;
     setToggleLNB(!toggleLNB);
   };
+  useEffect(() => {
+    const localUser = JSON.parse(window.localStorage.getItem("user"));
+    if (localUser && !user.isLogin && localUser.isLogin) {
+      setUser(localUser);
+    }
+  }, []);
   return (
     <header className="header">
       <div className="header__logo">
