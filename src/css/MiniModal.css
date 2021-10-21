@@ -1,38 +1,16 @@
-.modal__background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 3;
-}
+@import url(./Modal.css);
 
-.mini-modal__container {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 460px;
+.modal__container.mini {
   width: 800px;
-  background: #ffffff;
-  z-index: 3;
+  height: 460px;
 }
-
-.mini-modal__close-button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  width: 20px;
-  height: 20px;
-  margin: 40px 40px 0 auto;
+x .modal__close-button.mini {
+  display: block;
   float: right;
   top: 0;
   right: 0;
-  cursor: pointer;
 }
-
-.mini-modal__wrapper {
+.modal__wrapper {
   padding: 80px 40px 40px 64px;
   height: 100%;
   width: 100%;
@@ -65,7 +43,7 @@
   word-wrap: break-word;
 }
 
-.mini-modal__cancel-button {
+.modal__cancel-button {
   margin: 0;
   border: 0;
   padding: 9px 36px 9px 36px;
@@ -76,7 +54,7 @@
   bottom: 0;
 }
 
-.mini-modal__confirm-button {
+.modal__confirm-button {
   margin: 0 0 0 24px;
   border: 0;
   padding: 9px 36px 9px 36px;

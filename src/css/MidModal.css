@@ -1,0 +1,26 @@
+@import url(./MiniModal.css);
+
+.modal__background .mid-modal {
+  width: 1200px;
+  height: 680px;
+}
+
+.modal__wrapper.mid {
+  padding: 7% 13% 7% 13%;
+}
+
+.mid-modal__cover {
+  background-color: aquamarine;
+  float: left;
+  width: 30%;
+  height: 100%;
+}
+
+.mid-modal__detail {
+  background-color: brown;
+  margin-left: 48px;
+}
+
+.mid-modal__book {
+  height: 133px;
+}

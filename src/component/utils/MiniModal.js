@@ -142,17 +142,17 @@ const MiniModal = ({ handleModal, typeProps, bookId }) => {
 
   return (
     <div className="modal__background">
-      <div className="mini-modal__container">
+      <div className="mini modal__container">
         {type !== "loading" && (
           <button
-            className="mini-modal__close-button"
+            className="modal__close-button mini"
             type="button"
             onClick={handleModal}
           >
             <img src={CloseButton} alt="close" />
           </button>
         )}
-        <div className="mini-modal__wrapper">
+        <div className="modal__wrapper">
           <div className="mini-modal__text">
             <p className="mini-modal__text__title font-32-bold color-2d">
               {text.title}
@@ -167,7 +167,7 @@ const MiniModal = ({ handleModal, typeProps, bookId }) => {
           <div>
             {type !== "loading" && (
               <button
-                className="mini-modal__confirm-button font-20 color-ff"
+                className="modal__confirm-button font-20 color-ff"
                 type="button"
                 onClick={onConfirm}
               >
@@ -176,7 +176,7 @@ const MiniModal = ({ handleModal, typeProps, bookId }) => {
             )}
             {type === "confirm" && (
               <button
-                className="mini-modal__cancel-button font-20 color-ff"
+                className="modal__cancel-button font-20 color-ff"
                 type="button"
                 onClick={onCancel}
               >
