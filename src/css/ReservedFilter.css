@@ -1,0 +1,26 @@
+.proceeding {
+  background: none;
+  padding: 0;
+  border: 0;
+}
+
+.finish {
+  background: none;
+  padding: 0;
+  border: 0;
+  margin-left: 24px;
+}
+
+.filter__icon {
+  margin-right: 12px;
+}
+
+.reserved-filter {
+  width: 1134px;
+  padding-right: 68px;
+}
+
+.reserved-filter-wrapper {
+  width: 300px;
+  margin-left: auto;
+}

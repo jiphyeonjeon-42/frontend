@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import BackGround from "../utils/BackGround";
 import Title from "../utils/Title";
 import "../../css/ReturnBook.css";
+import InquireBoxTitle from "../utils/InquireBoxTitle";
 import SubTitle from "../utils/SubTitle";
 import MidModal from "../utils/MidModal";
+import Login from "../../img/login_icon.svg";
 
 const ReturnBook = () => {
   const [modal, setModal] = useState(false);
@@ -30,7 +32,14 @@ const ReturnBook = () => {
         </div>
       </section>
       <section className="returnbook-body">
-        <div>hihihi</div>
+        <div className="inquire-box-wrapper">
+          <InquireBoxTitle
+            Icon={Login}
+            titleKO="현재 대출정보"
+            titleEN="Rent info"
+            placeHolder="대출자의 성명 또는 대출중인 도서명을 입력해주세요."
+          />
+        </div>
       </section>
       <button type="button" onClick={openModal}>
         반납
