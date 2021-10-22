@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import axios from "axios";
 import BackGround from "../utils/BackGround";
 import Title from "../utils/Title";
 import "../../css/ReturnBook.css";
+import ModalPagination from "../rent/ModalPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import SubTitle from "../utils/SubTitle";
 import MidModal from "../utils/MidModal";
+import ReturnBookTable from "./ReturnBookTable";
+import ReturnBookFilter from "./ReturnBookFilter";
 import Login from "../../img/login_icon.svg";
+import { useModalSearchInput } from "../ModalSearchBar";
 
 const ReturnBook = () => {
   const [modal, setModal] = useState(false);
+  const [userSearchWord, setUserSearchWord] =
+    useRecoilState(useModalSearchInput);
+  const [returnBookPage, setReturnBookPage] = useState(1);
+  const [returnBookPageRange, setReturnBookPageRange] = useState(0);
+  const [lastreturnBookPage, setLastreturnBookPage] = useState(1);
+  const [returnBookList, setReturnBookList] = useState([]);
+  const [lendingSort, setLendingSort] = useState(false);
+  const [lendingId, setLendingId] = useState(0);
 
   const openModal = () => {
     setModal(true);
@@ -16,6 +30,47 @@ const ReturnBook = () => {
   const closeModal = () => {
     setModal(false);
   };
+
+  const handlereturnBookSumbit = event => {
+    event.preventDefault();
+    const searchForm = document.querySelector(".modal-search-form");
+    const searchInputValue = searchForm.querySelector(
+      ".modal-search__input",
+    ).value;
+    setUserSearchWord(searchInputValue);
+    setReturnBookPage(1);
+    setReturnBookPageRange(0);
+  };
+
+  const fetchreturnBookData = async () => {
+    const {
+      data: { items, meta },
+    } = await axios.get(`${process.env.REACT_APP_API}/lendings/search`, {
+      params: {
+        query: userSearchWord,
+        page: returnBookPage,
+        limit: 5,
+        sort: lendingSort ? "older" : "new",
+      },
+    });
+    setReturnBookList(items);
+    setLastreturnBookPage(meta.totalPages);
+    console.log(returnBookList);
+  };
+
+  useEffect(() => {
+    setUserSearchWord("");
+  }, []);
+
+  useEffect(fetchreturnBookData, [userSearchWord, returnBookPage, lendingSort]);
+
+  useEffect(() => {
+    const searchForm = document.querySelector(".modal-search-form");
+    searchForm.addEventListener("submit", handlereturnBookSumbit);
+    return () =>
+      searchForm.removeEventListener("submit", handlereturnBookSumbit);
+  }, [handlereturnBookSumbit]);
+
   return (
     <main className="returnbook-main">
       <BackGround page="admin" />
@@ -40,11 +95,33 @@ const ReturnBook = () => {
             placeHolder="대출자의 성명 또는 대출중인 도서명을 입력해주세요."
           />
         </div>
+        <div className="inquire-box-returnBook-table">
+          <div className="returnBook-filter">
+            <ReturnBookFilter
+              lendingSort={lendingSort}
+              setLendingSort={setLendingSort}
+            />
+          </div>
+          {returnBookList.map(factor => (
+            <ReturnBookTable
+              factor={factor}
+              openModal={openModal}
+              setLendingId={setLendingId}
+            />
+          ))}
+          <div className="returnBook-table__pagination">
+            <ModalPagination
+              userPage={returnBookPage}
+              setUserPage={setReturnBookPage}
+              pageRange={returnBookPageRange}
+              setPageRange={setReturnBookPageRange}
+              lastPage={lastreturnBookPage}
+            />
+          </div>
+        </div>
       </section>
-      <button type="button" onClick={openModal}>
-        반납
-      </button>
-      {modal && <MidModal lendingId={2} handleModal={closeModal} />}
+      <button type="button">반납</button>
+      {modal && <MidModal lendingId={lendingId} handleModal={closeModal} />}
     </main>
   );
 };

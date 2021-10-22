@@ -10,16 +10,26 @@ import InquireBoxTitle from "../utils/InquireBoxTitle";
 import { useModalSearchInput } from "../ModalSearchBar";
 import Login from "../../img/login_icon.svg";
 import ReservedFilter from "./ReservedFilter";
-import Arr from "../../img/arrow_right_black.svg";
+import ReservedTableList from "./ReservedTableList";
+import MidModal from "../utils/MidModal";
+// import PropTypes from "prop-types";
 
 const ReservedLoan = () => {
+  const [modal, setModal] = useState(false);
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useModalSearchInput);
   const [resevedLoanPage, setResevedLoanPage] = useState(1);
   const [resevedLoanPageRange, setResevedLoanPageRange] = useState(0);
   const [lastresevedLoanPage, setLastresevedLoanPage] = useState(1);
   const [reservedLoanList, setReservedLoanList] = useState([]);
-
+  const [isProceeding, setProceeding] = useState(true);
+  const [isFinish, setFinish] = useState(false);
+  const openModal = () => {
+    setModal(true);
+  };
+  const closeModal = () => {
+    setModal(false);
+  };
   const handleReservedLoanSumbit = event => {
     event.preventDefault();
     const searchForm = document.querySelector(".modal-search-form");
@@ -31,6 +41,13 @@ const ReservedLoan = () => {
     setResevedLoanPageRange(0);
   };
 
+  const filterState = () => {
+    if (isProceeding && isFinish) return "proceeding, finish";
+    if (isProceeding) return "proceeding";
+    if (isFinish) return "finish";
+    return "";
+  };
+
   const fetchReservedLoanData = async () => {
     const {
       data: { items, meta },
@@ -39,6 +56,7 @@ const ReservedLoan = () => {
         query: userSearchWord,
         page: resevedLoanPage,
         limit: 5,
+        filter: filterState(),
       },
     });
     setReservedLoanList(items);
@@ -46,7 +64,16 @@ const ReservedLoan = () => {
     console.log(reservedLoanList);
   };
 
-  useEffect(fetchReservedLoanData, [userSearchWord, resevedLoanPage]);
+  useEffect(() => {
+    setUserSearchWord("");
+  }, []);
+
+  useEffect(fetchReservedLoanData, [
+    userSearchWord,
+    resevedLoanPage,
+    isProceeding,
+    isFinish,
+  ]);
 
   useEffect(() => {
     const searchForm = document.querySelector(".modal-search-form");
@@ -81,38 +108,16 @@ const ReservedLoan = () => {
         </div>
         <div className="inquire-box-reservedLoan-table">
           <div className="reservedLoan-filter">
-            <ReservedFilter />
+            <ReservedFilter
+              isProceeding={isProceeding}
+              setProceeding={setProceeding}
+              isFinish={isFinish}
+              setFinish={setFinish}
+            />
           </div>
-
           {reservedLoanList.map(factor => (
-            <div className="reservedLoan-table-list">
-              <div className="reservedLoan-table-list__name font-18-bold color-54">
-                {factor.user && factor.user.login}
-              </div>
-              <button className="reservedLoan-table-list__button" type="button">
-                <div className="reservedLoan-table-list__title">
-                  <span className="font-18-bold color-54">
-                    {factor.book.info.title}
-                  </span>
-                  <img
-                    className="reservedLoan-table-list__arr"
-                    src={Arr}
-                    alt="arrow"
-                  />
-                </div>
-                <div className="reservedLoan-table-list__info">
-                  <span className="re-callSign font-16 color-54">
-                    도서등록번호 : {factor.book.callSign}
-                  </span>
-                  <span className="re-dueDate font-16 color-54">
-                    {factor.book.lendings[0] &&
-                      `반납 예정일 : ${factor.book.lendings[0].dueDate}`}
-                  </span>
-                </div>
-              </button>
-            </div>
+            <ReservedTableList factor={factor} openModal={openModal} />
           ))}
-
           <div className="reservedLoan-table__pagination">
             <ModalPagination
               userPage={resevedLoanPage}
@@ -124,6 +129,7 @@ const ReservedLoan = () => {
           </div>
         </div>
       </section>
+      {modal && <MidModal lendingId={2} handleModal={closeModal} />}
     </main>
   );
 };

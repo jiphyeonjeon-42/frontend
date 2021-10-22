@@ -1,4 +1,4 @@
-.reservedLoan-table-list {
+.returnbook-table-list {
   display: flex;
   width: 1080px;
   margin-left: auto;
@@ -6,7 +6,7 @@
   /* margin-top: 20px; */
 }
 
-.reservedLoan-table-list__button {
+.returnbook-table-list__button {
   width: 919px;
   background: none;
   margin: 0;
@@ -18,26 +18,30 @@
   cursor: pointer;
 }
 
-.reservedLoan-table-list__title {
+.returnbook-table-list__title {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   /* flex-shrink: auto; */
 }
 
-.reservedLoan-table-list__arr {
+.returnbook-table-list__arr {
   width: 8px;
   height: 16px;
   margin-right: 68px;
   margin-left: auto;
 }
 
-.reservedLoan-table-list__name {
+.returnbook-table-list__name {
   width: 161px;
 }
 
-.reservedLoan-table-list__info {
+.returnbook-table-list__info {
 }
 .re-callSign {
+  margin-right: 28px;
+}
+
+.re-dueDate {
   margin-right: 28px;
 }

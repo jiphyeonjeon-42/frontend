@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import React from "react";
 import "../../css/ReservedFilter.css";
 import CheckIcon from "../../img/check_icon.svg";
 import RedCheckIcon from "../../img/check_icon_red.svg";
 
-const ReservedFilter = () => {
-  const [isProceeding, setProceeding] = useState(false);
-  const [isFinish, setFinish] = useState(false);
+const ReservedFilter = ({
+  isProceeding,
+  setProceeding,
+  isFinish,
+  setFinish,
+}) => {
+  // const [isProceeding, setProceeding] = useState(false);
+  // const [isFinish, setFinish] = useState(false);
   const toggleProceeding = () => {
     setProceeding(!isProceeding);
   };
@@ -15,7 +21,11 @@ const ReservedFilter = () => {
   return (
     <div className="reserved-filter">
       <div className="reserved-filter-wrapper">
-        <button type="button" onClick={toggleProceeding} className="proceeding">
+        <button
+          type="button"
+          onClick={toggleProceeding}
+          className="proceeding filter-button"
+        >
           <img
             className="filter__icon"
             src={`${isProceeding ? RedCheckIcon : CheckIcon}`}
@@ -29,7 +39,11 @@ const ReservedFilter = () => {
             진행중 예약 보기
           </span>
         </button>
-        <button type="button" onClick={toggleFinish} className="finish">
+        <button
+          type="button"
+          onClick={toggleFinish}
+          className="finish filter-button"
+        >
           <img
             className="filter__icon"
             src={`${isFinish ? RedCheckIcon : CheckIcon}`}
