@@ -107,7 +107,7 @@ const MidModal = ({ lendingId, handleModal }) => {
                 <p className="font-16 color-red">비고</p>
                 <textarea
                   className="mid-modal__remark__input margin-8"
-                  placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
+                  placeholder={`대출당시 : ${data.condition}`}
                   value={remark}
                   onChange={handleRemark}
                 />
