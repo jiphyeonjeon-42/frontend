@@ -11,7 +11,7 @@ import { useModalSearchInput } from "../ModalSearchBar";
 import Login from "../../img/login_icon.svg";
 import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
-import MidModal from "../utils/MidModal";
+import ReservedModal from "./ReservedModal";
 // import PropTypes from "prop-types";
 
 const ReservedLoan = () => {
@@ -24,6 +24,8 @@ const ReservedLoan = () => {
   const [reservedLoanList, setReservedLoanList] = useState([]);
   const [isProceeding, setProceeding] = useState(true);
   const [isFinish, setFinish] = useState(false);
+  const [reservedInfo, setReservedInfo] = useState(null);
+
   const openModal = () => {
     setModal(true);
   };
@@ -116,7 +118,11 @@ const ReservedLoan = () => {
             />
           </div>
           {reservedLoanList.map(factor => (
-            <ReservedTableList factor={factor} openModal={openModal} />
+            <ReservedTableList
+              factor={factor}
+              openModal={openModal}
+              setInfo={setReservedInfo}
+            />
           ))}
           <div className="reservedLoan-table__pagination">
             <ModalPagination
@@ -129,7 +135,9 @@ const ReservedLoan = () => {
           </div>
         </div>
       </section>
-      {modal && <MidModal lendingId={2} handleModal={closeModal} />}
+      {modal && (
+        <ReservedModal reservedInfo={reservedInfo} handleModal={closeModal} />
+      )}
     </main>
   );
 };

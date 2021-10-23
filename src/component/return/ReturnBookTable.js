@@ -36,13 +36,15 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
           </span>
           <span
             className={`re-penaltyDays font-16 ${
-              factor.user.penaltyDays === "-" ? "color-54" : "color-red"
+              factor && factor.user && factor.user.penaltyDays
+                ? "color-54"
+                : "color-red"
             }`}
           >
             {`대출연체일 : ${
-              factor.user && factor.user.penaltyDays === "-"
-                ? "0"
-                : factor.user.penaltyDays
+              factor && factor.user && factor.user.penaltyDays
+                ? factor.user.penaltyDays
+                : "0"
             }`}
           </span>
         </div>

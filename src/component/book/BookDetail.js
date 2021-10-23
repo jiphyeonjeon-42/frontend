@@ -44,7 +44,8 @@ const BookDetail = ({ location, match }) => {
       <section className="bookdetail-body">
         <div className="breadcrumb">
           <span className="font-16 color-a4">
-            {location.state.bread} &gt; 도서상세페이지 및 예약
+            {location.state ? `${location.state.bread} ` : "집현전 "} &gt;
+            도서상세페이지 및 예약
           </span>
         </div>
         <div className="bookcontent">

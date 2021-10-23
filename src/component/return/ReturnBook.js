@@ -120,7 +120,6 @@ const ReturnBook = () => {
           </div>
         </div>
       </section>
-      <button type="button">반납</button>
       {modal && <MidModal lendingId={lendingId} handleModal={closeModal} />}
     </main>
   );
