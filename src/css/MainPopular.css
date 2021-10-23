@@ -38,6 +38,7 @@
   text-align: center;
   line-height: 48px;
 }
+
 .main-popular__cover-detail {
   width: 810px;
   height: 580px;
@@ -70,6 +71,12 @@
   display: flex;
   justify-content: space-between;
 }
+
+.main-popular__books {
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: 0.3s;
+}
+
 .main-popular__arrow {
   width: 32px;
   background-image: url(../img/arrow_left_circle.svg);
