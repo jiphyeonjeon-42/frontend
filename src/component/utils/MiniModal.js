@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import PropTypes from "prop-types";
@@ -11,6 +11,11 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
   const [fetchNumber, setFetchNumber] = useState(-1);
   const [fetchString, setFetchString] = useState("");
   const [globalError, setGlobalError] = useRecoilState(globalModal);
+  useEffect(() => {
+    return () => {
+      window.location.reload();
+    };
+  }, []);
   const fetchReservOrder = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/books/${bookId}/reservations/count/`)
