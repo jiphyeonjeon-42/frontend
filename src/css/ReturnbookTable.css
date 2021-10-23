@@ -1,0 +1,47 @@
+.returnbook-table-list {
+  display: flex;
+  width: 1080px;
+  margin-left: auto;
+  padding-top: 40px;
+  /* margin-top: 20px; */
+}
+
+.returnbook-table-list__button {
+  width: 919px;
+  background: none;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  border-bottom: 1px solid #a4a4a4;
+  padding-bottom: 40px;
+  cursor: pointer;
+}
+
+.returnbook-table-list__title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  /* flex-shrink: auto; */
+}
+
+.returnbook-table-list__arr {
+  width: 8px;
+  height: 16px;
+  margin-right: 68px;
+  margin-left: auto;
+}
+
+.returnbook-table-list__name {
+  width: 161px;
+}
+
+.returnbook-table-list__info {
+}
+.re-callSign {
+  margin-right: 28px;
+}
+
+.re-dueDate {
+  margin-right: 28px;
+}

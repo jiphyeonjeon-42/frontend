@@ -12,6 +12,8 @@ import Logout from "./component/login/Logout";
 import Rent from "./component/rent/Rent";
 import "./css/reset.css";
 import "./App.css";
+import ReservedLoan from "./component/reservedloan/ReservedLoan";
+import ReturnBook from "./component/return/ReturnBook";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/info/:id" component={BookDetail} />
         <Route path="/auth" component={Auth} />
         <Route path="/logout" component={Logout} />
+        <Route path="/return" component={ReturnBook} />
+        <Route path="/reservation" component={ReservedLoan} />
         <Route path="/" component={Footer} />
       </BrowserRouter>
     </RecoilRoot>

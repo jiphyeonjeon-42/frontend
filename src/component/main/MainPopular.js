@@ -22,6 +22,7 @@ const MainPopluar = () => {
       },
     });
     setDocs(items);
+    console.log(items[0]);
     setMain(items[0]);
   };
   useEffect(fetchData, []);

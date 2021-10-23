@@ -1,0 +1,37 @@
+.reservedLoan-main {
+  min-width: 1440px;
+  margin: 0px auto;
+}
+.reservedLoan-title {
+  position: relative;
+  padding: 89px 270px 60px 270px;
+  min-width: 900px;
+  height: 107px;
+  z-index: 2;
+}
+.reservedLoan-subtitle {
+  min-width: 900px;
+  padding: 118px 270px 120px 270px;
+  margin: auto;
+}
+
+.inquire-box-reservedLoan-table {
+  width: 1200px;
+  background-color: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; *
+  /* justify-content: space-between; */
+  margin: auto;
+  position: relative;
+  z-index: 0;
+  top: -120px;
+  border-bottom-left-radius: 61px;
+  border-bottom-right-radius: 61px;
+  padding: 90px 0 51px 0;
+}
+
+.reservedLoan-table__pagination {
+  margin-top: 36px;
+  /* height: 150px; */
+}
