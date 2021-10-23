@@ -46,7 +46,7 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
       .catch(error => {
         setGlobalError({
           view: true,
-          error: `/reservations/ ${error.response.status} ${error.response.data.error} ${error.response.data.message}`,
+          error: `/reservations/ ${error.name} ${error.message}`,
         });
         setType("error");
       });
@@ -128,6 +128,16 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
     case "return":
       text = {
         title: "반납이 완료되었습니다.",
+        emphasis: "",
+        title_after: "",
+        title_next: "",
+        message,
+      };
+      onConfirm = handleModal;
+      break;
+    case "lend":
+      text = {
+        title: "대출이 완료되었습니다.",
         emphasis: "",
         title_after: "",
         title_next: "",
