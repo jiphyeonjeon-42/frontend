@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { useSetRecoilState } from "recoil";
 import { Link } from "react-router-dom";
+import globalModal from "../../atom/globalModal";
 import SubTitle from "../utils/SubTitle";
 import ArrLeft from "../../img/arrow_left.svg";
 import ArrRight from "../../img/arrow_right.svg";
@@ -15,27 +17,38 @@ function useWidth() {
     window.addEventListener("resize", handleSize);
     handleSize();
     return () => window.removeEventListener("resize", handleSize);
-  });
+  }, []);
   return widthSize;
 }
 
 const MainNew = () => {
   const [docs, setDocs] = useState([]);
   const [page, setPage] = useState(0);
+  const setGlobalError = useSetRecoilState(globalModal);
+  const intervalId = useRef(0);
   const display = Math.ceil((useWidth() - 266) / 236);
+  const shelf = [...docs, ...docs.slice(0, display + 1)];
 
   useEffect(async () => {
-    const {
-      data: { items },
-    } = await axios.get(`${process.env.REACT_APP_API}/books/info/`, {
-      params: {
-        sort: "new",
-        limit: 20,
-      },
-    });
-    setDocs([...items]);
+    await axios
+      .get(`${process.env.REACT_APP_API}/books/info/`, {
+        params: {
+          sort: "new",
+          limit: 20,
+        },
+      })
+      .then(response => {
+        const { items } = response.data;
+        setDocs([...items]);
+      })
+      .catch(error => {
+        setGlobalError({
+          view: true,
+          error: `books/info/search=new ${error.name} ${error.message}`,
+        });
+      });
   }, []);
-  const shelf = [...docs, ...docs.slice(0, display + 1)];
+
   const onNext = () => {
     let index = page;
     if (index === shelf.length - display - 2) {
@@ -55,6 +68,18 @@ const MainNew = () => {
   const onChapter = e => {
     setPage((e.target.innerText - 1) * 5);
   };
+  const pauseInterval = () => {
+    clearInterval(intervalId.current);
+  };
+  const startInterval = () => {
+    intervalId.current = setInterval(onNext, 2000);
+  };
+
+  useEffect(() => {
+    intervalId.current = setInterval(onNext, 2000);
+    return () => clearInterval(intervalId.current);
+  }, [page]);
+
   const transNum = -124 - 236 * shelf.length + 236 * (shelf.length - page);
   return (
     <section className="main-new">
@@ -66,7 +91,11 @@ const MainNew = () => {
         />
       </div>
 
-      <div className="main-new__booklist">
+      <div
+        className="main-new__booklist"
+        onMouseEnter={pauseInterval}
+        onMouseLeave={startInterval}
+      >
         <button className="main-new__arrow" onClick={onPrev} type="button">
           <img src={ArrLeft} alt="" />
         </button>
