@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import PropTypes from "prop-types";
 import "../../css/MidModal.css";
 import axios from "axios";
-import { useSetRecoilState } from "recoil";
 import CloseButton from "../../img/x_button.svg";
 import MiniModal from "./MiniModal";
 import globalModal from "../../atom/globalModal";
+import userState from "../../atom/userState";
 
 const MidModal = ({ lendingId, handleModal }) => {
   const defaultData = {
@@ -14,6 +15,7 @@ const MidModal = ({ lendingId, handleModal }) => {
     user: { id: 0, login: "", penaltyDays: 0 },
     book: { id: 0, callSign: "", info: { id: 0, title: "", image: "x.jpg" } },
   };
+  const user = useRecoilValue(userState);
   const [data, setData] = useState(defaultData);
   const [mini, setMini] = useState("");
   const [remark, setRemark] = useState("");
@@ -35,7 +37,8 @@ const MidModal = ({ lendingId, handleModal }) => {
     const condition = remark;
     setRemark("");
     await axios
-      .post(`${process.env.REACT_APP_API}/returns`, {
+      .post(`${process.env.REACT_APP_API}/returnings`, {
+        userId: user.id,
         lendingId,
         condition,
       })
@@ -46,7 +49,7 @@ const MidModal = ({ lendingId, handleModal }) => {
         setMini("error");
         setGlobalError({
           view: true,
-          error: `returns/ POST ${error.name} ${error.message}`,
+          error: `returnings/ POST ${error.name} ${error.message}`,
         });
       });
   };
@@ -91,7 +94,7 @@ const MidModal = ({ lendingId, handleModal }) => {
                 <p className="font-28-bold color-54  margin-8">
                   {data.user.login}
                 </p>
-                <p className="font-16 color-54">{`연체일수 : ${data.user.penaltyDays}`}</p>
+                <p className="font-16 color-54">{`연체일수 : ${data.user.penaltyDays}일`}</p>
               </div>
               <div className="mid-modal__lend">
                 <p className="font-16 color-red">대출정보</p>
@@ -104,7 +107,7 @@ const MidModal = ({ lendingId, handleModal }) => {
                 <p className="font-16 color-red">비고</p>
                 <textarea
                   className="mid-modal__remark__input margin-8"
-                  placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
+                  placeholder={`대출당시 : ${data.condition}`}
                   value={remark}
                   onChange={handleRemark}
                 />
