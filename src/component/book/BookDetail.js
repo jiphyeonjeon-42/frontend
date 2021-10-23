@@ -63,7 +63,7 @@ const BookDetail = ({ location, match }) => {
                 <span className="detailKey__txt">기부자</span>
               </div>
               <div className="detailValue color-54">
-                <span className="detailValue__txt ">{data.author}</span>
+                <span className="detailValue__txt">{data.author}</span>
                 <span className="detailValue__txt">{data.publisher}</span>
                 <span className="detailValue__txt">{data.publishedAt}</span>
                 <span className="detailValue__txt">{data.category}</span>

@@ -78,13 +78,16 @@ summary,
 time,
 mark,
 audio,
-video {
+video,
+textarea {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  appearance: none;
+  background-color: transparent;
 }
 /* HTML5 display-role reset for older browsers */
 article,

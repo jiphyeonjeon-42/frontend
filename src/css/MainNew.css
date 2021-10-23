@@ -35,6 +35,11 @@
   margin-top: 100px;
 }
 
+.main-new__books {
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: 0.3s;
+}
+
 .main-new__book {
   text-align: none;
   width: 216px;
@@ -43,15 +48,33 @@
   margin-left: 20px;
   vertical-align: top;
 }
+
+.main-new__book:hover {
+  margin-top: 10px;
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: 0.3s;
+}
+
 .main-new__book-img {
   width: 216px;
   height: 320px;
 }
+
 .main-new__book:first-child {
   margin-left: 0;
 }
+
 .main-new__book:nth-child(even) {
   margin-top: 20px;
+}
+
+.main-new__book:nth-child(even):hover {
+  margin-top: 10px;
 }
 
 .main-new__books_pagination {

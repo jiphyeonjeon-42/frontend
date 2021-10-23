@@ -1,0 +1,31 @@
+.proceeding {
+  background: none;
+  padding: 0;
+  border: 0;
+}
+
+.finish {
+  background: none;
+  padding: 0;
+  border: 0;
+  margin-left: 24px;
+}
+
+.filter__icon {
+  margin-right: 12px;
+}
+
+.return-filter {
+  width: 1134px;
+  padding-right: 68px;
+}
+
+.return-filter-wrapper {
+  margin-left: 120px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  cursor: pointer;
+}
