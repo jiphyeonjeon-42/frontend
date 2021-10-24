@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   padding: 0 0 0 0;
-
 }
 
 .qna__question {
@@ -11,6 +10,8 @@
   padding: 0 0 0 0;
   border: 0;
   background: none;
+  white-space: normal;
+  text-align: left;
 }
 
 .question__icon {
@@ -19,33 +20,15 @@
   margin: 0 52px 0 0;
 }
 
-.question__text {
-  margin: 0 0 0 0;
-  /* font-family: NotoSansCJKKR; */
-  font-size: 28px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #545454;
-}
-
 .qna__answer {
   border-left: 1px solid #a4a4a4;
   margin: 44px 0 0 72px;
   padding: 0 25px 0 25px;
-  /* font-family: NotoSansCJKKR; */
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #a4a4a4;
   white-space: normal;
+}
+
+.display-none {
+  display: none;
 }
 
 .qna__line {

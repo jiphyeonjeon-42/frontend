@@ -32,11 +32,11 @@ const Header = () => {
       <nav className="header__gnb">
         <ul className="gnb__menu">
           <li>
-            <Link className="gnb__info" to={{ pathname: `/infomation` }}>
+            <Link className="gnb__info" to={{ pathname: `/information` }}>
               <img
                 src={Information}
                 className="gnb__info__icon"
-                alt="infomation"
+                alt="information"
               />
               <span className="gnb__info__text">이용안내</span>
             </Link>
