@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+/* eslint-disable react/forbid-prop-types */
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../../css/MidModal.css";
 import axios from "axios";
+import { useSetRecoilState } from "recoil";
 import CloseButton from "../../img/x_button.svg";
-import MiniModal from "./MiniModal";
+import MiniModal from "../utils/MiniModal";
 import globalModal from "../../atom/globalModal";
-import userState from "../../atom/userState";
 
-const MidModal = ({ lendingId, handleModal }) => {
-  const defaultData = {
-    createdAt: "",
-    dueDate: "",
-    user: { id: 0, login: "", penaltyDays: 0 },
-    book: { id: 0, callSign: "", info: { id: 0, title: "", image: "x.jpg" } },
-  };
-  const user = useRecoilValue(userState);
-  const [data, setData] = useState(defaultData);
+const ReservedModal = ({ reservedInfo, handleModal }) => {
+  // const defaultData = {
+  //   createdAt: "",
+  //   dueDate: "",
+  //   user: { id: 0, login: "", penaltyDays: 0 },
+  //   book: { id: 0, callSign: "", info: { id: 0, title: "", image: "x.jpg" } },
+  // };
+  // const [data, setData] = useState(defaultData);
   const [mini, setMini] = useState("");
   const [remark, setRemark] = useState("");
   const setGlobalError = useSetRecoilState(globalModal);
@@ -25,31 +24,31 @@ const MidModal = ({ lendingId, handleModal }) => {
     e.preventDefault();
     setRemark(e.target.value);
   };
-  useEffect(async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/lendings/${lendingId}`)
-      .then(response => {
-        setData(response.data);
-      });
-  }, []);
-  const postReturn = async () => {
+  // useEffect(async () => {
+  //   await axios
+  //     .get(`${process.env.REACT_APP_API}/lendings/${lendingId}`)
+  //     .then(response => {
+  //       setData(response.data);
+  //     });
+  // }, []);
+  const postData = async () => {
     if (!remark) return;
     const condition = remark;
     setRemark("");
     await axios
-      .post(`${process.env.REACT_APP_API}/returnings`, {
-        userId: user.id,
-        lendingId,
+      .post(`${process.env.REACT_APP_API}/lendings`, {
+        userId: reservedInfo.user.id,
+        bookId: reservedInfo.book.id,
         condition,
       })
       .then(() => {
-        setMini("return");
+        setMini("lend");
       })
       .catch(error => {
         setMini("error");
         setGlobalError({
           view: true,
-          error: `returnings/ POST ${error.name} ${error.message}`,
+          error: `lendings/ POST ${error.name} ${error.message}`,
         });
       });
   };
@@ -58,7 +57,7 @@ const MidModal = ({ lendingId, handleModal }) => {
       {mini ? (
         <MiniModal
           typeProps={mini}
-          message={data.book.info.title}
+          message={reservedInfo.book.info.title}
           handleModal={() => {
             setMini("");
             handleModal();
@@ -76,7 +75,7 @@ const MidModal = ({ lendingId, handleModal }) => {
           <div className="modal__wrapper mid">
             <div className="mid-modal__cover">
               <img
-                src={data.book.info.image}
+                src={reservedInfo.book.info.image}
                 alt="cover"
                 className="mid-modal__cover-img"
               />
@@ -85,29 +84,29 @@ const MidModal = ({ lendingId, handleModal }) => {
               <div className="mid-modal__book">
                 <p className="font-16 color-red">도서정보</p>
                 <p className="font-28-bold color-54  margin-8">
-                  {data.book.info.title}
+                  {reservedInfo.book.info.title}
                 </p>
-                <p className="font-16 color-54">{`도서코드 : ${data.book.callSign}`}</p>
+                <p className="font-16 color-54">{`도서코드 : ${reservedInfo.book.callSign}`}</p>
               </div>
               <div className="mid-modal__user">
                 <p className="font-16 color-red">유저정보</p>
                 <p className="font-28-bold color-54  margin-8">
-                  {data.user.login}
+                  {reservedInfo.user.login}
                 </p>
-                <p className="font-16 color-54">{`연체일수 : ${data.user.penaltyDays}일`}</p>
+                <p className="font-16 color-54">{`연체일수 : ${reservedInfo.user.penaltyDays}`}</p>
               </div>
               <div className="mid-modal__lend">
-                <p className="font-16 color-red">대출정보</p>
+                <p className="font-16 color-red">예약 만료일</p>
                 <p className="font-28-bold color-54  margin-8">
-                  {data.createdAt}
+                  {reservedInfo.endAt ? reservedInfo.endAt : "NULL"}
                 </p>
-                <p className="font-16 color-54">{`반납예정일 : ${data.dueDate}`}</p>
+                {/* <p className="font-16 color-54">{`예약한 날짜 : ${reservedInfo.endAt}`}</p> */}
               </div>
               <div className="mid-modal__remark">
                 <p className="font-16 color-red">비고</p>
                 <textarea
                   className="mid-modal__remark__input margin-8"
-                  placeholder={`대출당시 : ${data.condition}`}
+                  placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
                   value={remark}
                   onChange={handleRemark}
                 />
@@ -116,9 +115,9 @@ const MidModal = ({ lendingId, handleModal }) => {
                     remark && `confirm`
                   }`}
                   type="button"
-                  onClick={postReturn}
+                  onClick={postData}
                 >
-                  반납 완료하기
+                  예약대출 완료하기
                 </button>
                 <button
                   className="modal__button mid font-20 color-ff"
@@ -136,9 +135,9 @@ const MidModal = ({ lendingId, handleModal }) => {
   );
 };
 
-MidModal.propTypes = {
+ReservedModal.propTypes = {
   handleModal: PropTypes.func.isRequired,
-  lendingId: PropTypes.number.isRequired,
+  reservedInfo: PropTypes.object.isRequired,
 };
 
-export default MidModal;
+export default ReservedModal;
