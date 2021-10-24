@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import BookDetail from "./component/book/BookDetail";
 import Footer from "./component/utils/Footer";
+import NotFound from "./component/utils/NotFound";
 import Header from "./component/utils/Header";
 import Information from "./component/information/Information";
 import Main from "./component/main/Main";
@@ -20,15 +21,18 @@ function App() {
     <RecoilRoot>
       <BrowserRouter>
         <Route path="/" component={Header} />
-        <Route path="/" exact component={Main} />
-        <Route path="/information" exact component={Information} />
-        <Route path="/rent" exact component={Rent} />
-        <Route path="/search" component={Search} />
-        <Route path="/info/:id" component={BookDetail} />
-        <Route path="/auth" component={Auth} />
-        <Route path="/logout" component={Logout} />
-        <Route path="/return" component={ReturnBook} />
-        <Route path="/reservation" component={ReservedLoan} />
+        <Switch>
+          <Route path="/" exact component={Main} />
+          <Route path="/information" exact component={Information} />
+          <Route path="/rent" exact component={Rent} />
+          <Route path="/search" exact component={Search} />
+          <Route path="/info/:id" exact component={BookDetail} />
+          <Route path="/auth" exact component={Auth} />
+          <Route path="/logout" exact component={Logout} />
+          <Route path="/return" exact component={ReturnBook} />
+          <Route path="/reservation" exact component={ReservedLoan} />
+          <Route component={NotFound} />
+        </Switch>
         <Route path="/" component={Footer} />
       </BrowserRouter>
     </RecoilRoot>

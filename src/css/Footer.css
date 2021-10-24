@@ -4,6 +4,8 @@
   justify-content: center;
   background-color: #2d2d2d;
   min-width: 1440px;
+  position: relative;
+  z-index: 2;
 }
 
 .footer-wrapper {

@@ -10,6 +10,11 @@
   left: 0;
 }
 
+.not-found-bg {
+  background-color: #2d2d2d;
+  height: 100vh;
+}
+
 .information-bg {
   background-image: url("../img/information_bg.png");
   height: 500px;
