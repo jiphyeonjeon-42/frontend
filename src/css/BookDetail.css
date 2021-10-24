@@ -1,6 +1,7 @@
 .bookdetail-main {
   min-width: 1440px;
   margin: 0px auto;
+  margin-bottom: 300px;
 }
 .bookdetail-title {
   position: relative;

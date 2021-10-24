@@ -98,7 +98,9 @@ const ReservedModal = ({ reservedInfo, handleModal }) => {
               <div className="mid-modal__lend">
                 <p className="font-16 color-red">예약 만료일</p>
                 <p className="font-28-bold color-54  margin-8">
-                  {reservedInfo.endAt ? reservedInfo.endAt : "NULL"}
+                  {reservedInfo.endAt
+                    ? reservedInfo.endAt.slice(0, 10)
+                    : "NULL"}
                 </p>
                 {/* <p className="font-16 color-54">{`예약한 날짜 : ${reservedInfo.endAt}`}</p> */}
               </div>
