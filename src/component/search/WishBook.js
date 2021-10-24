@@ -13,7 +13,7 @@ const WishBook = () => {
         등록 희망도서를 신청해보세요!
       </div>
       <a
-        href={process.env.REAT_APP_WISH}
+        href={process.env.REACT_APP_WISH}
         className="wish-book__button font-20 color-ff"
       >
         희망도서 등록하러 가기
