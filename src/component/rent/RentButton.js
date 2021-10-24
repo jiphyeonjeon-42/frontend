@@ -3,7 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import "../../css/RentButton.css";
 
-const RentButton = ({ selectUser, selectBooks }) => {
+const RentButton = ({ selectUser, selectBooks, setMiniModal }) => {
   const createLending = () => {
     axios.post(`${process.env.REACT_APP_API}/lendings`, {
       userId: selectUser.id,
@@ -17,6 +17,7 @@ const RentButton = ({ selectUser, selectBooks }) => {
         condition: "문제없음",
       });
     }
+    setMiniModal(true);
   };
   return (
     <div className="rent-button">
@@ -46,6 +47,7 @@ RentButton.propTypes = {
   selectUser: PropTypes.object.isRequired,
   // eslint-disable-next-line react/require-default-props
   selectBooks: PropTypes.arrayOf(PropTypes.object.isRequired),
+  setMiniModal: PropTypes.func.isRequired,
 };
 
 export default RentButton;
