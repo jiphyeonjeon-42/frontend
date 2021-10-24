@@ -1,5 +1,5 @@
-/* .infomation-bg {
-  background-image: url("../img/infomation_bg.png");
+/* .information-bg {
+  background-image: url("../img/information_bg.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -12,14 +12,14 @@
   left: 0;
 } */
 
-.infomation-wraper {
+.information-wraper {
   position: relative;
   padding: 0 270px 60px 0;
   min-width: 900px;
   z-index: 2;
 }
 
-.infomation-title {
+.information-title {
   position: relative;
   padding: 89px 270px 60px 270px;
   min-width: 900px;
@@ -27,19 +27,19 @@
   z-index: 2;
 }
 
-.infomation-section {
+.information-section {
   min-width: 900px;
   max-width: 1200px;
   padding: 0 270px 0 270px;
   margin: auto;
 }
 
-.infomation-subtitle {
+.information-subtitle {
   width: 400px;
   padding: 118px 0 148px 0;
 }
 
-.infomation-qna {
+.information-qna {
   width: 800px;
   margin-left: auto;
   margin-bottom: 256px;

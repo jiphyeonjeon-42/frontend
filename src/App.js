@@ -4,7 +4,7 @@ import { RecoilRoot } from "recoil";
 import BookDetail from "./component/book/BookDetail";
 import Footer from "./component/utils/Footer";
 import Header from "./component/utils/Header";
-import Infomation from "./component/information/Information";
+import Information from "./component/information/Information";
 import Main from "./component/main/Main";
 import Search from "./component/search/Search";
 import Auth from "./component/login/Auth";
@@ -21,7 +21,7 @@ function App() {
       <BrowserRouter>
         <Route path="/" component={Header} />
         <Route path="/" exact component={Main} />
-        <Route path="/infomation" exact component={Infomation} />
+        <Route path="/information" exact component={Information} />
         <Route path="/rent" exact component={Rent} />
         <Route path="/search" component={Search} />
         <Route path="/info/:id" component={BookDetail} />
