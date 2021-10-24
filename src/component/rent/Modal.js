@@ -1,10 +1,10 @@
 /* eslint-disable eqeqeq */
 import React from "react";
 import { atom, useRecoilState } from "recoil";
-import CloseButton from "../img/x_button.svg";
-import "../css/Modal.css";
-import ModalBook from "./rent/ModalBook";
-import ModalUser from "./rent/ModalUser";
+import CloseButton from "../../img/x_button.svg";
+import "../../css/Modal.css";
+import ModalBook from "./ModalBook";
+import ModalUser from "./ModalUser";
 
 export const isModalOpen = atom({ key: "isModalOpen", default: 0 });
 

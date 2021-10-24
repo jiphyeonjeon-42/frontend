@@ -2,7 +2,7 @@
 import React from "react";
 // import SearchBar from "./SearchBar";
 import "../../css/InquireBoxTitle.css";
-import ModalSearchBar from "../ModalSearchBar";
+import ModalSearchBar from "./ModalSearchBar";
 
 const InquireBoxTitle = ({ Icon, titleKO, titleEN, placeHolder }) => {
   return (
