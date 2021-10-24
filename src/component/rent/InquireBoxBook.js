@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSetRecoilState } from "recoil";
-import { isModalOpen } from "../Modal";
+import { isModalOpen } from "./Modal";
 import DeleteButton from "../../img/x_button.svg";
 import "../../css/InquireBoxBook.css";
 

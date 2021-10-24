@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
-import Modal, { isModalOpen } from "../Modal";
+import Modal, { isModalOpen } from "./Modal";
 import BackGround from "../utils/BackGround";
 import Title from "../utils/Title";
 import SubTitle from "../utils/SubTitle";

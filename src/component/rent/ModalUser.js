@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import ModalSearchBar, { useModalSearchInput } from "../ModalSearchBar";
+import ModalSearchBar, { useModalSearchInput } from "../utils/ModalSearchBar";
 import ModalPagination from "./ModalPagination";
 import UserList from "./UserList";
 import "../../css/ModalUser.css";

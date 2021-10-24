@@ -7,7 +7,7 @@ import "../../css/ReservedLoan.css";
 import SubTitle from "../utils/SubTitle";
 import ModalPagination from "../rent/ModalPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import { useModalSearchInput } from "../ModalSearchBar";
+import { useModalSearchInput } from "../utils/ModalSearchBar";
 import Login from "../../img/login_icon.svg";
 import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
