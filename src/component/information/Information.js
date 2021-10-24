@@ -6,6 +6,7 @@ import Question from "./Question";
 import "../../css/Infomation.css";
 
 const Infomation = () => {
+  window.scrollTo(0, 0);
   return (
     <main>
       <BackGround page="information" />
