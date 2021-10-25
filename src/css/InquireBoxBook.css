@@ -12,28 +12,31 @@
 .inquire-box-book-active {
   width: 1080px;
   margin-left: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .none {
   top: -60px;
-  padding: 90px 0 0 0;
+  padding: 60px 0 0 0;
 }
 
 .two {
   border-bottom-left-radius: 61px;
   border-bottom-right-radius: 61px;
-  padding: 90px 0 30px 0;
+  padding: 60px 0 0 0;
   top: -60px;
 }
 
 .four {
   border-radius: 61px;
-  padding: 30px 0 30px 0;
+  padding: 0;
   top: -20px;
 }
 
 .inquire-box-book__add-button {
-  height: 40px;
+  height: 100px;
+  width: 100%;
   border: 0;
   margin: 0;
   background: none;
