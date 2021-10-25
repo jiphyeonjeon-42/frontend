@@ -48,7 +48,6 @@ const Search = ({ match, location }) => {
     setEntireCate(categories);
     setLoading(false);
     setLastPage(meta.totalPages > 0 ? meta.totalPages : 1);
-    console.log("totalPages", meta.totalPages);
   };
 
   useEffect(fetchBookList, [userWord, userPage, userSort, userCateName]);
@@ -128,10 +127,8 @@ const Search = ({ match, location }) => {
 
   useEffect(() => {
     const query = returnQuery(location.search, "?");
-    console.log(query);
     const [queryString, queryPage, queryCateIndex, querySort] =
       queryOption(query);
-    console.log(queryString, queryPage, queryCateIndex, querySort);
     setUserWord(decodeURIComponent(queryString));
     setInputValue(decodeURIComponent(queryString));
     setPage(queryPage);
