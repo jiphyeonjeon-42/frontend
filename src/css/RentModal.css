@@ -48,8 +48,8 @@
 
 .rent-modal__detail {
   /* display: inline-block; */
-  /* width: 634px; */
-  flex-grow: 1;
+  width: 700px;
+  /* flex-grow: 1; */
 }
 
 /* .mid-modal__book {
