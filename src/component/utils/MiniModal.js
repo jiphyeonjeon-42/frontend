@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import PropTypes from "prop-types";
@@ -11,6 +11,11 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
   const [fetchNumber, setFetchNumber] = useState(-1);
   const [fetchString, setFetchString] = useState("");
   const [globalError, setGlobalError] = useRecoilState(globalModal);
+  useEffect(() => {
+    return () => {
+      window.location.reload();
+    };
+  }, []);
   const fetchReservOrder = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/books/${bookId}/reservations/count/`)
@@ -46,7 +51,7 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
       .catch(error => {
         setGlobalError({
           view: true,
-          error: `/reservations/ ${error.response.status} ${error.response.data.error} ${error.response.data.message}`,
+          error: `/reservations/ ${error.name} ${error.message}`,
         });
         setType("error");
       });
@@ -128,6 +133,16 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
     case "return":
       text = {
         title: "반납이 완료되었습니다.",
+        emphasis: "",
+        title_after: "",
+        title_next: "",
+        message,
+      };
+      onConfirm = handleModal;
+      break;
+    case "lend":
+      text = {
+        title: "대출이 완료되었습니다.",
         emphasis: "",
         title_after: "",
         title_next: "",

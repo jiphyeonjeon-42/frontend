@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -29,7 +30,7 @@ const Search = ({ match, location }) => {
   const [cateIndex, setCateIndex] = useState(0);
   const [userCateName, setCategoryName] = useState("");
   const [entireCate, setEntireCate] = useState([]);
-  const [lastPage, setLastPage] = useState(0);
+  const [lastPage, setLastPage] = useState(1);
 
   const fetchBookList = async () => {
     const {
@@ -46,24 +47,97 @@ const Search = ({ match, location }) => {
     setBookList(items);
     setEntireCate(categories);
     setLoading(false);
-    setLastPage(meta.totalPages);
+    setLastPage(meta.totalPages > 0 ? meta.totalPages : 1);
   };
 
   useEffect(fetchBookList, [userWord, userPage, userSort, userCateName]);
 
+  const returnQuery = (url, key) => {
+    let query;
+    const splitQuery = url.split(key);
+
+    if (splitQuery.length === 2) query = splitQuery[1];
+    else if (splitQuery.length < 2) query = "";
+    else query = splitQuery.slice(1).join(key);
+
+    return query;
+  };
+
+  const queryOption = query => {
+    const isValid = (str, include) => {
+      if (
+        str.includes(include) &&
+        str.split(include).length === 2 &&
+        str.split(include)[0] === ""
+      )
+        return true;
+      return false;
+    };
+
+    const isInteger = (str, base) => {
+      // eslint-disable-next-line no-restricted-globals
+      if (isNaN(str)) return false;
+      if (parseFloat(str, 10) % 1 !== 0) return false;
+      if (parseInt(str, 10) < base) return false;
+      return true;
+    };
+
+    const isSort = str => {
+      if (
+        str === "accurate" ||
+        str === "title" ||
+        str === "new" ||
+        str === "popular"
+      )
+        return true;
+      return false;
+    };
+
+    const queryArr = query.split("&");
+    let queryString = "";
+    let queryPage = "1";
+    let queryCateIndex = "0";
+    let querySort = "accurate";
+
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < queryArr.length; i++) {
+      if (isValid(queryArr[i], "string="))
+        queryString = queryArr[i].split("string=")[1];
+      else if (
+        isValid(queryArr[i], "page=") &&
+        isInteger(queryArr[i].split("page=")[1], 1)
+      )
+        queryPage = Math.min(queryArr[i].split("page=")[1], lastPage);
+      else if (
+        isValid(queryArr[i], "category=") &&
+        isInteger(queryArr[i].split("category=")[1], 0)
+      )
+        queryCateIndex =
+          queryArr[i].split("category=")[1] >= entireCate.length
+            ? 0
+            : queryArr[i].split("category=")[1];
+      else if (
+        isValid(queryArr[i], "sort=") &&
+        isSort(queryArr[i].split("sort=")[1])
+      )
+        querySort = queryArr[i].split("sort=")[1];
+    }
+    return [queryString, queryPage, queryCateIndex, querySort];
+  };
+
   useEffect(() => {
-    const queryArr = location.search.split("?");
-    const query = queryArr[queryArr.length - 1];
-    const [queryString, queryPage, queryCate, querySort] = query.split("&");
-    setUserWord(decodeURIComponent(queryString.split("string=")[1]));
-    setInputValue(decodeURIComponent(queryString.split("string=")[1]));
-    setPage(queryPage.split("=")[1]);
-    setSort(querySort.split("=")[1]);
-    setCateIndex(queryCate.split("=")[1]);
-    if (parseInt(queryCate.split("=")[1], 10) === 0) setCategoryName("");
-    else if (entireCate[queryCate.split("=")[1]] !== undefined)
-      setCategoryName(entireCate[queryCate.split("=")[1]].name);
-  }, [match.params, location.search, entireCate]);
+    const query = returnQuery(location.search, "?");
+    const [queryString, queryPage, queryCateIndex, querySort] =
+      queryOption(query);
+    setUserWord(decodeURIComponent(queryString));
+    setInputValue(decodeURIComponent(queryString));
+    setPage(queryPage);
+    setSort(querySort);
+    setCateIndex(queryCateIndex);
+    if (parseInt(queryCateIndex, 10) === 0) setCategoryName("");
+    else if (entireCate[parseInt(queryCateIndex, 10)] !== undefined)
+      setCategoryName(entireCate[parseInt(queryCateIndex, 10)].name);
+  }, [match.params, location.search, entireCate, lastPage]);
 
   return (
     <main>

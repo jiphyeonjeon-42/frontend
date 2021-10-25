@@ -3,7 +3,12 @@ import React from "react";
 import "../../css/ReservedTableList.css";
 import Arr from "../../img/arrow_right_black.svg";
 
-const ReservedTableList = ({ factor, openModal }) => {
+const ReservedTableList = ({ factor, openModal, setInfo }) => {
+  const openSetModal = () => {
+    setInfo(factor);
+    openModal();
+  };
+
   return (
     <div className="reservedLoan-table-list">
       <div className="reservedLoan-table-list__name font-18-bold color-54">
@@ -12,7 +17,7 @@ const ReservedTableList = ({ factor, openModal }) => {
       <button
         className="reservedLoan-table-list__button"
         type="button"
-        onClick={openModal}
+        onClick={openSetModal}
       >
         <div className="reservedLoan-table-list__title">
           <span className="font-18-bold color-54">

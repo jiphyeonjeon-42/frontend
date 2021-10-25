@@ -1,13 +1,58 @@
 .footer {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #2d2d2d;
-  width: 100%;
   min-width: 1440px;
-  height: 380px;
-  /* margin-top: 300px; */
+  position: relative;
+  z-index: 2;
+}
+
+.footer-wrapper {
+  width: 960px;
+  padding: 64px 0 80px 0;
+  display: flex;
 }
 
 .footer__text {
-  margin: 0px;
-  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.footer__copyright {
+  margin-top: 40px;
+}
+
+.footer__name {
+  margin-right: 200px;
+  text-align: center;
+}
+
+.footer__address {
+  display: flex;
+}
+
+.footer__address__title {
+  width: 70px;
+}
+
+.footer__info {
+  margin-left: 164px;
+}
+
+.footer__icon {
+  display: flex;
+  align-items: center;
+}
+
+.icon-youtube {
+  margin-right: 30px;
+  margin-top: 5px;
+}
+
+.icon-github {
+  margin-top: 5px;
+}
+
+.footer__icon-space {
+  width: 35px;
 }
