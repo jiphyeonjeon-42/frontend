@@ -24,7 +24,21 @@ const BookInfo = ({
 
   return (
     <div className="book-info-wraper">
-      <div className="book-info">
+      <Link
+        className="book-info"
+        to={{
+          pathname: `/info/${id}`,
+          state: {
+            title,
+            author,
+            publisher,
+            image,
+            publishedAt,
+            category,
+            bread,
+          },
+        }}
+      >
         <img
           className="book-info__image"
           src={image}
@@ -53,30 +67,13 @@ const BookInfo = ({
             <span className="book-info__separator-half" />
             <span>{isbn}</span>
           </div>
-          <div className="book-info__link">
-            <Link
-              to={{
-                pathname: `/info/${id}`,
-                state: {
-                  title,
-                  author,
-                  publisher,
-                  image,
-                  publishedAt,
-                  category,
-                  bread,
-                },
-              }}
-            >
-              <img
-                className="book-info__link-icon"
-                src={LinkToDetail}
-                alt={title}
-              />
-            </Link>
-          </div>
+          <img
+            className="book-info__link-icon"
+            src={LinkToDetail}
+            alt={title}
+          />
         </div>
-      </div>
+      </Link>
       <div className="book-info__line" />
     </div>
   );

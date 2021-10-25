@@ -53,7 +53,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer__info color-ff">
-          <Link className="color-ff" to={{ pathname: `/infomation` }}>
+          <Link className="color-ff" to={{ pathname: `/information` }}>
             이용안내
           </Link>
         </div>
