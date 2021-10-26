@@ -62,15 +62,15 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
           placeHolder="대출자의 성명을 입력해주세요."
         />
       </div>
-      {userList.map((user, index) => (
+      {userList.map(user => (
         <UserList
           key={user.id}
           user={user}
           setSelectUser={setSelectUser}
           setUserModal={setUserModal}
           name={`Name${user.id}`}
-          lendCnt={index % 3}
-          isPenalty={index % 2 ? !user.isPenalty : user.isPenalty}
+          lendCnt={user.id % 3}
+          isPenalty={user.id % 2 ? !user.isPenalty : user.isPenalty}
         />
       ))}
       <div className="modal-user__pagination">

@@ -5,6 +5,7 @@ import BackGround from "../utils/BackGround";
 import Title from "../utils/Title";
 import SubTitle from "../utils/SubTitle";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
+import RentModal from "./RentModal";
 import RentButton from "./RentButton";
 import Login from "../../img/login_icon.svg";
 import Book from "../../img/admin_icon.svg";
@@ -16,6 +17,11 @@ const Rent = () => {
   const userModal = useRecoilValue(isModalOpen);
   const [selectUser, setSelectUser] = useState(null);
   const [selectBooks, setSelectBooks] = useState([]);
+  const [midModal, setMidModal] = useState(false);
+
+  const closeModal = () => {
+    setMidModal(false);
+  };
 
   return (
     <main>
@@ -59,7 +65,11 @@ const Rent = () => {
           />
         ) : null}
       </div>
-      <RentButton selectUser={selectUser} selectBooks={selectBooks} />
+      <RentButton
+        selectUser={selectUser}
+        selectBooks={selectBooks}
+        setModal={setMidModal}
+      />
       {userModal !== 0 ? (
         <Modal
           setSelectUser={setSelectUser}
@@ -67,7 +77,13 @@ const Rent = () => {
           selectBooks={selectBooks}
         />
       ) : null}
-      ;
+      {midModal && (
+        <RentModal
+          selectUser={selectUser}
+          selectBooks={selectBooks}
+          handleModal={closeModal}
+        />
+      )}
     </main>
   );
 };
