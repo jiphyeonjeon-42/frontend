@@ -33,27 +33,27 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
     setRemark2(e.target.value);
   };
 
-  //   const postData = async () => {
-  //     if (!remark) return;
-  //     const condition = remark;
-  //     setRemark1("");
-  //     await axios
-  //       .post(`${process.env.REACT_APP_API}/lendings`, {
-  //         userId: selectUser.id,
-  //         bookId: selectBooks[0].id,
-  //         condition,
-  //       })
-  //       .then(() => {
-  //         setMini("lend");
-  //       })
-  //       .catch(error => {
-  //         setMini("error");
-  //         setGlobalError({
-  //           view: true,
-  //           error: `lendings/ POST ${error.name} ${error.message}`,
-  //         });
-  //       });
-  //   };
+  const postData = async () => {
+    const condition = [remark1, remark2];
+    setRemark1("");
+    setRemark2("");
+    await axios
+      .post(`${process.env.REACT_APP_API}/lendings`, {
+        userId: selectUser.id,
+        bookId: selectBooks.id,
+        condition,
+      })
+      .then(() => {
+        setMini("lend");
+      })
+      .catch(error => {
+        setMini("error");
+        setGlobalError({
+          view: true,
+          error: `lendings/ POST ${error.name} ${error.message}`,
+        });
+      });
+  };
 
   return (
     <div className="modal__background">
@@ -114,7 +114,7 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
                 </div>
               </div>
               {selectBooks.length === 2 && (
-                <div className="rent-modal__book-info">
+                <div className="rent-modal__book-info second-book">
                   <div className="rent-modal__cover">
                     <img
                       src={selectBooks[1].info.image}
@@ -133,7 +133,7 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
                     <div className="rent-modal__remark">
                       <p className="font-16 color-red">비고</p>
                       <textarea
-                        className="mid-modal__remark__input margin-8"
+                        className="mid-modal__remark__input"
                         placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
                         value={remark2}
                         onChange={handleRemark2}
@@ -146,12 +146,20 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
             <div className="rent-modal__button">
               <button
                 className={`modal__button mid font-20 color-ff ${
-                  remark1 && remark2 && `confirm`
+                  ((selectBooks.length === 2 && remark1 && remark2) ||
+                    (selectBooks.length === 1 && remark1)) &&
+                  `confirm`
                 }`}
                 type="button"
-                // onClick={postData}
+                disabled={
+                  (selectBooks.length === 2 && remark1 && remark2) ||
+                  (selectBooks.length === 1 && remark1)
+                    ? ""
+                    : "disabled"
+                }
+                onClick={postData}
               >
-                예약대출 완료하기
+                대출 완료하기
               </button>
               <button
                 className="modal__button mid font-20 color-ff"
