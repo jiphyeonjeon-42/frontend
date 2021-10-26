@@ -34,13 +34,17 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
   };
 
   const postData = async () => {
-    const condition = [remark1, remark2];
+    const condition = selectBooks.length === 1 ? [remark1] : [remark1, remark2];
+    const bookId =
+      selectBooks.length === 1
+        ? [selectBooks[0].id]
+        : [selectBooks[0].id, selectBooks[1].id];
     setRemark1("");
     setRemark2("");
     await axios
       .post(`${process.env.REACT_APP_API}/lendings`, {
         userId: selectUser.id,
-        bookId: selectBooks.id,
+        bookId,
         condition,
       })
       .then(() => {

@@ -11,7 +11,7 @@ import MidModal from "../utils/MidModal";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
 import Login from "../../img/login_icon.svg";
-import { useModalSearchInput } from "../utils/ModalSearchBar";
+import { useModalSearchInput } from "../../atom/useSearchInput";
 
 const ReturnBook = () => {
   const [modal, setModal] = useState(false);

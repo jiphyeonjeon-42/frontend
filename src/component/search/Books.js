@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import BookInfo from "./BookInfo";
 import "../../css/Books.css";
 
@@ -23,6 +23,10 @@ const Books = ({ bookList }) => {
       ))}
     </section>
   );
+};
+
+Books.propTypes = {
+  bookList: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 export default Books;

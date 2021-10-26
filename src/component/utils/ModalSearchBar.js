@@ -1,14 +1,10 @@
 import React from "react";
-import { atom, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
+import PropTypes from "prop-types";
+import { useModalSearchInput } from "../../atom/useSearchInput";
 import SearchIcon from "../../img/search_icon_black.svg";
 import "../../css/ModalSearchBar.css";
 
-export const useModalSearchInput = atom({
-  key: "useModalSearchInput",
-  default: "",
-});
-
-// eslint-disable-next-line react/prop-types
 const ModalSearchBar = ({ placeHolder, width }) => {
   const [input, setInput] = useRecoilState(useModalSearchInput);
 
@@ -35,6 +31,11 @@ const ModalSearchBar = ({ placeHolder, width }) => {
       </button>
     </form>
   );
+};
+
+ModalSearchBar.propTypes = {
+  placeHolder: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
 };
 
 export default ModalSearchBar;

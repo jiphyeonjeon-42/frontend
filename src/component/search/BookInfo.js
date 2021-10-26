@@ -83,9 +83,7 @@ BookInfo.propTypes = {
   id: PropTypes.number.isRequired,
   isbn: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/require-default-props
-  author: PropTypes.arrayOf(PropTypes.string.isRequired),
-  //   author: PropTypes.string.isRequired,
+  author: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   publisher: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   publishedAt: PropTypes.string.isRequired,

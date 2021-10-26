@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from "react";
-// import SearchBar from "./SearchBar";
+import PropTypes from "prop-types";
 import "../../css/InquireBoxTitle.css";
 import ModalSearchBar from "./ModalSearchBar";
 
@@ -17,6 +16,13 @@ const InquireBoxTitle = ({ Icon, titleKO, titleEN, placeHolder }) => {
       ) : null}
     </div>
   );
+};
+
+InquireBoxTitle.propTypes = {
+  Icon: PropTypes.string.isRequired,
+  titleKO: PropTypes.string.isRequired,
+  titleEN: PropTypes.string.isRequired,
+  placeHolder: PropTypes.string.isRequired,
 };
 
 export default InquireBoxTitle;
