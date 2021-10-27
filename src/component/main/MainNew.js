@@ -23,11 +23,12 @@ function useWidth() {
 
 const MainNew = () => {
   const [docs, setDocs] = useState([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [transition, setTransition] = useState(true);
   const setGlobalError = useSetRecoilState(globalModal);
   const intervalId = useRef(0);
   const display = Math.ceil((useWidth() - 266) / 236);
-  const shelf = [...docs, ...docs.slice(0, display + 1)];
+  const shelf = [...docs.slice(-1), ...docs, ...docs.slice(0, display + 1)];
 
   useEffect(async () => {
     await axios
@@ -50,20 +51,27 @@ const MainNew = () => {
   }, []);
 
   const onNext = () => {
-    let index = page;
+    const index = page;
     if (index === shelf.length - display - 2) {
-      index = -1;
-    }
-    index += 1;
-    setPage(index);
+      setTransition(false);
+      setPage(0);
+      setTimeout(() => {
+        setTransition(true);
+        setPage(1);
+      }, 3);
+    } else setPage(index + 1);
   };
   const onPrev = () => {
     let index = page;
     if (index === 0) {
-      index = shelf.length - display - 1;
-    }
-    index -= 1;
-    setPage(index);
+      index = shelf.length - display - 2;
+      setTransition(false);
+      setPage(index);
+      setTimeout(() => {
+        setTransition(true);
+        setPage(index - 1);
+      }, 3);
+    } else setPage(index - 1);
   };
   const onChapter = e => {
     setPage((e.target.innerText - 1) * 5);
@@ -72,14 +80,15 @@ const MainNew = () => {
     clearInterval(intervalId.current);
   };
   const startInterval = () => {
+    clearInterval(intervalId.current);
     intervalId.current = setInterval(onNext, 2000);
   };
 
   useEffect(() => {
+    clearInterval(intervalId.current);
     intervalId.current = setInterval(onNext, 2000);
     return () => clearInterval(intervalId.current);
   }, [page]);
-
   const transNum = -124 - 236 * shelf.length + 236 * (shelf.length - page);
   return (
     <section className="main-new">
@@ -91,11 +100,7 @@ const MainNew = () => {
         />
       </div>
 
-      <div
-        className="main-new__booklist"
-        onMouseEnter={pauseInterval}
-        onMouseLeave={startInterval}
-      >
+      <div className="main-new__booklist">
         <button className="main-new__arrow" onClick={onPrev} type="button">
           <img src={ArrLeft} alt="" />
         </button>
@@ -107,8 +112,10 @@ const MainNew = () => {
           <img src={ArrRight} alt="" />
         </button>
         <div
-          className="main-new__books"
+          className={`${transition && "main-new__books"}`}
           style={{ transform: `translate(${transNum}px)` }}
+          onMouseEnter={pauseInterval}
+          onMouseLeave={startInterval}
         >
           {shelf.map(item => (
             <div className="main-new__book">
@@ -134,7 +141,8 @@ const MainNew = () => {
         <button
           type="button"
           className={`${
-            Math.floor(page / 5) === 0 && "selected"
+            (Math.floor(page / 5) === 0 || Math.floor(page / 5) === 4) &&
+            "selected"
           } main-new__books_pag_circle`}
           onClick={onChapter}
         >
