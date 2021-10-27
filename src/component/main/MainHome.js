@@ -8,7 +8,7 @@ const Main = () => {
     <section className="main-home-wraper">
       <div className="main-home">
         <div className="main-home__line" />
-        <span className="main-home__greet font-48 color-ff">
+        <span className="main-home__greet font-48-bold color-ff">
           어서오세요, 집현전입니다.
         </span>
         <span className="main-home__guide font-16 color-d5">
