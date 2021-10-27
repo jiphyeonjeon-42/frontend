@@ -1,7 +1,7 @@
 import React from "react";
 import { atom, useRecoilState } from "recoil";
-import SearchIcon from "../img/search_icon_black.svg";
-import "../css/ModalSearchBar.css";
+import SearchIcon from "../../img/search_icon_black.svg";
+import "../../css/ModalSearchBar.css";
 
 export const useModalSearchInput = atom({
   key: "useModalSearchInput",
