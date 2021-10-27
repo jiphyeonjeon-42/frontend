@@ -11,13 +11,6 @@ import MiniModal from "../utils/MiniModal";
 import globalModal from "../../atom/globalModal";
 
 const RentModal = ({ selectUser, selectBooks, handleModal }) => {
-  // const defaultData = {
-  //   createdAt: "",
-  //   dueDate: "",
-  //   user: { id: 0, login: "", penaltyDays: 0 },
-  //   book: { id: 0, callSign: "", info: { id: 0, title: "", image: "x.jpg" } },
-  // };
-  // const [data, setData] = useState(defaultData);
   const [mini, setMini] = useState("");
   const [remark1, setRemark1] = useState("");
   const [remark2, setRemark2] = useState("");
@@ -34,15 +27,31 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
   };
 
   const postData = async () => {
-    const condition = [remark1, remark2];
+    const data =
+      selectBooks.length === 1
+        ? [
+            {
+              userId: selectUser.id,
+              bookId: selectBooks[0].id,
+              condition: remark1,
+            },
+          ]
+        : [
+            {
+              userId: selectUser.id,
+              bookId: selectBooks[0].id,
+              condition: remark1,
+            },
+            {
+              userId: selectUser.id,
+              bookId: selectBooks[1].id,
+              condition: remark2,
+            },
+          ];
     setRemark1("");
     setRemark2("");
     await axios
-      .post(`${process.env.REACT_APP_API}/lendings`, {
-        userId: selectUser.id,
-        bookId: selectBooks.id,
-        condition,
-      })
+      .post(`${process.env.REACT_APP_API}/lendings`, data)
       .then(() => {
         setMini("lend");
       })
