@@ -1,35 +1,28 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Title from "../utils/Title";
 import "../../css/BookDetail.css";
 import BackGround from "../utils/BackGround";
 import BookStatus from "./BookStatus";
 // eslint-disable-next-line react/prop-types
+
 const BookDetail = ({ location, match }) => {
   const [data, setData] = useState({ books: [] });
   const { id } = match.params;
-
-  console.log(id);
-
-  useEffect(() => {
-    console.log(location.pathname);
-  }, [location]);
+  const myRef = useRef(null);
 
   const fetchData = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/books/info/${id}`,
     );
     setData(response.data);
-    console.log(response.data);
+    myRef.current.scrollIntoView();
   };
 
   useEffect(fetchData, []);
-  // console.log(data);
-  // console.log(response.data);
-  // console.log(data.books[0]);
-  // console.log(bookdata);
+
   return (
     <main className="bookdetail-main">
       <BackGround page="bookdetail" />
@@ -42,7 +35,7 @@ const BookDetail = ({ location, match }) => {
         </div>
       </section>
       <section className="bookdetail-body">
-        <div className="breadcrumb">
+        <div className="breadcrumb" ref={myRef}>
           <span className="font-16 color-a4">
             {location.state ? `${location.state.bread} ` : "집현전 "} &gt;
             도서상세페이지 및 예약
