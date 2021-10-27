@@ -54,16 +54,14 @@ const MainNew = () => {
     if (index === shelf.length - display - 2) {
       index = -1;
     }
-    index += 1;
-    setPage(index);
+    setPage(index + 1);
   };
   const onPrev = () => {
     let index = page;
     if (index === 0) {
       index = shelf.length - display - 1;
     }
-    index -= 1;
-    setPage(index);
+    setPage(index - 1);
   };
   const onChapter = e => {
     setPage((e.target.innerText - 1) * 5);
@@ -72,10 +70,12 @@ const MainNew = () => {
     clearInterval(intervalId.current);
   };
   const startInterval = () => {
+    clearInterval(intervalId.current);
     intervalId.current = setInterval(onNext, 2000);
   };
 
   useEffect(() => {
+    clearInterval(intervalId.current);
     intervalId.current = setInterval(onNext, 2000);
     return () => clearInterval(intervalId.current);
   }, [page]);
