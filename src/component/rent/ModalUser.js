@@ -38,7 +38,9 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
       })
       .then(res => {
         setUserList(res.data.items);
-        setLastUserSearchPage(res.data.meta.totalPages);
+        setLastUserSearchPage(
+          res.data.meta.totalPages > 0 ? res.data.meta.totalPages : 1,
+        );
       })
       .catch(error => {
         console.log(error);
@@ -46,6 +48,10 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
   };
 
   useEffect(fetchUserData, [userSearchWord, userSearchPage]);
+
+  useEffect(() => {
+    setUserSearchPage(1);
+  }, [userSearchWord]);
 
   useEffect(() => {
     const searchForm = document.querySelector(".modal-search-form");

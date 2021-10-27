@@ -38,7 +38,9 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
       })
       .then(res => {
         setBookList(res.data.items);
-        setLastBookSearchPage(res.data.meta.totalPages);
+        setLastBookSearchPage(
+          res.data.meta.totalPages > 0 ? res.data.meta.totalPages : 1,
+        );
       })
       .catch(error => {
         console.log(error);
@@ -46,6 +48,10 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
   };
 
   useEffect(fetchBookData, [bookSearchWord, bookSearchPage]);
+
+  useEffect(() => {
+    setBookSearchPage(1);
+  }, [bookSearchPage]);
 
   useEffect(() => {
     const searchForm = document.querySelector(".modal-search-form");
