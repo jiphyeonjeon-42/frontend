@@ -28,17 +28,21 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
   };
 
   const fetchUserData = async () => {
-    const {
-      data: { items, meta },
-    } = await axios.get(`${process.env.REACT_APP_API}/users/search`, {
-      params: {
-        query: userSearchWord,
-        page: userSearchPage,
-        limit: 5,
-      },
-    });
-    setUserList(items);
-    setLastUserSearchPage(meta.totalPages);
+    await axios
+      .get(`${process.env.REACT_APP_API}/users/search`, {
+        params: {
+          query: userSearchWord,
+          page: userSearchPage,
+          limit: 5,
+        },
+      })
+      .then(res => {
+        setUserList(res.data.items);
+        setLastUserSearchPage(res.data.meta.totalPages);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   useEffect(fetchUserData, [userSearchWord, userSearchPage]);

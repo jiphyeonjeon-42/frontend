@@ -28,17 +28,21 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
   };
 
   const fetchBookData = async () => {
-    const {
-      data: { items, meta },
-    } = await axios.get(`${process.env.REACT_APP_API}/books/search`, {
-      params: {
-        query: bookSearchWord,
-        page: bookSearchPage,
-        limit: 5,
-      },
-    });
-    setBookList(items);
-    setLastBookSearchPage(meta.totalPages);
+    await axios
+      .get(`${process.env.REACT_APP_API}/books/search`, {
+        params: {
+          query: bookSearchWord,
+          page: bookSearchPage,
+          limit: 5,
+        },
+      })
+      .then(res => {
+        setBookList(res.data.items);
+        setLastBookSearchPage(res.data.meta.totalPages);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   useEffect(fetchBookData, [bookSearchWord, bookSearchPage]);

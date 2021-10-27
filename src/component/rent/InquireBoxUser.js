@@ -82,22 +82,25 @@ const InquireBoxUser = ({ selectUser, setSelectUser }) => {
           </div>
           <div className="inquire-box-user__lendings">
             <div className="user__book-cnt font-18-bold color-54">
-              {`대출중인 도서 (${lendings.length})`}
+              {`대출중인 도서 (${selectUser.id % 3})`}
             </div>
             <div className="user__book-info">
-              {lendings.map((item, index) => (
-                <div>
-                  {index >= 1 ? (
-                    <div className="user__book-info__line" />
-                  ) : null}
-                  <div className="user__book-info__title font-18-bold color-54">
-                    {`${index + 1}. ${item.book.info.title}`}
-                  </div>
-                  <div className="font-16 color-54">
-                    {`반납 예정일 : ${item.dueDate}`}
-                  </div>
-                </div>
-              ))}
+              {lendings.map(
+                (item, index) =>
+                  index < selectUser.id % 3 && (
+                    <div>
+                      {index >= 1 ? (
+                        <div className="user__book-info__line" />
+                      ) : null}
+                      <div className="user__book-info__title font-18-bold color-54">
+                        {`${index + 1}. ${item.book.info.title}`}
+                      </div>
+                      <div className="font-16 color-54">
+                        {`반납 예정일 : ${item.dueDate}`}
+                      </div>
+                    </div>
+                  ),
+              )}
             </div>
           </div>
           <div className="inquire-box-user__reservations">
