@@ -38,7 +38,7 @@ const BookStatus = ({ id, callSign, dueDate, status }) => {
         }`}
         onClick={openModal}
       >
-        <span>예악 하기</span>
+        <span>예약 하기</span>
         <img className="bookStatus-arr" src={Arr} alt="Arr" />
       </button>
       {miniModal && (
