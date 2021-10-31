@@ -24,11 +24,13 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
   const closeModal = () => {
     setMiniModal(false);
   };
+
+  const doubleDigit = number => {
+    return number < 10 ? `0${number}` : `${number}`;
+  };
   return (
     <div className="bookStatus color-54">
-      <div className="bookStatus-id font-16">{`${index < 9 && "0"}${
-        index + 1
-      }`}</div>
+      <div className="bookStatus-id font-16">{doubleDigit(index + 1)}</div>
       <div className="bookStatus-callSign font-16">{callSign}</div>
       <div className="bookStatus-status font-16">{status}</div>
       <div className="bookStatus-dueDate font-16">{dueDate}</div>

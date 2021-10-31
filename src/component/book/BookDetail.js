@@ -72,6 +72,7 @@ const BookDetail = ({ location, match }) => {
                 <div>
                   {data.books.map((item, index) => (
                     <BookStatus
+                      key={item.id}
                       id={item.id}
                       callSign={item.callSign}
                       status={item.status}
