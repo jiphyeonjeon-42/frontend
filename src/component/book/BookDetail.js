@@ -70,12 +70,14 @@ const BookDetail = ({ location, match }) => {
               </span>
               <div className="bookStateList">
                 <div>
-                  {data.books.map(item => (
+                  {data.books.map((item, index) => (
                     <BookStatus
+                      key={item.id}
                       id={item.id}
                       callSign={item.callSign}
                       status={item.status}
                       dueDate={item.dueDate}
+                      index={index}
                     />
                   ))}
                 </div>
