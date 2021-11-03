@@ -21,10 +21,16 @@
   z-index: 100;
   position: inherit;
   padding: 0;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: 0.3s;
 }
 
 .main-new__arrow.right {
   float: right;
+}
+
+.main-new__arrow:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .main-new__booklist {
@@ -47,6 +53,7 @@
   display: inline-block;
   margin-left: 20px;
   vertical-align: top;
+  background-color: #a4a4a4;
 }
 
 .main-new__book:hover {
@@ -83,6 +90,7 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
 .main-new__books_pag_circle {
   width: 12px;
   height: 12px;

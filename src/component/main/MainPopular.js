@@ -1,30 +1,39 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { Link } from "react-router-dom";
 import popularList from "../../atom/popularList";
 import popularMain from "../../atom/popularMain";
 import SubTitle from "../utils/SubTitle";
 import MainPopularBook from "./MainPopularBook";
+import globalModal from "../../atom/globalModal";
 import "../../css/MainPopular.css";
 
 const MainPopluar = () => {
   const [page, setPage] = useState(0);
   const [docs, setDocs] = useRecoilState(popularList);
   const [main, setMain] = useRecoilState(popularMain);
-  const fetchData = async () => {
-    const {
-      data: { items },
-    } = await axios.get(`${process.env.REACT_APP_API}/books/info/`, {
-      params: {
-        sort: "popular",
-        limit: 9,
-      },
-    });
-    setDocs(items);
-    setMain(items[0]);
-  };
-  useEffect(fetchData, []);
+  const setGlobalError = useSetRecoilState(globalModal);
+  useEffect(async () => {
+    await axios
+      .get(`${process.env.REACT_APP_API}/books/info/`, {
+        params: {
+          sort: "popular",
+          limit: 9,
+        },
+      })
+      .then(response => {
+        const { items } = response.data;
+        setDocs(items);
+        setMain(items[0]);
+      })
+      .catch(error => {
+        setGlobalError({
+          view: true,
+          error: `books/info/search=popular ${error.name} ${error.message}`,
+        });
+      });
+  }, []);
 
   const onNext = () => {
     let index = page;
