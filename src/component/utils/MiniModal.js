@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import PropTypes from "prop-types";
@@ -11,11 +11,6 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
   const [fetchNumber, setFetchNumber] = useState(-1);
   const [fetchString, setFetchString] = useState("");
   const [globalError, setGlobalError] = useRecoilState(globalModal);
-  useEffect(() => {
-    return () => {
-      window.location.reload();
-    };
-  }, []);
   const fetchReservOrder = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/books/${bookId}/reservations/count/`)
@@ -39,7 +34,6 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
       .then(response => {
         const rank = response.data.count;
         if (rank === 1) {
-          console.log(response);
           setType("successWithDate");
           setFetchNumber(rank);
           setFetchString("21.01.01");
@@ -55,6 +49,11 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
         });
         setType("error");
       });
+  };
+
+  const confirmWithReload = () => {
+    window.location.reload();
+    handleModal();
   };
 
   let text;
@@ -99,7 +98,7 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
         title_next: "",
         message: "대출이 가능해지면 Slack 알림을 보내드리겠습니다.",
       };
-      onConfirm = handleModal;
+      onConfirm = confirmWithReload;
       break;
     case "successWithDate":
       text = {
@@ -109,7 +108,7 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
         title_next: "",
         message: `대출 가능 일자는 ${fetchString}입니다. 감사합니다.`,
       };
-      onConfirm = handleModal;
+      onConfirm = confirmWithReload;
       break;
     case "failDefault":
       text = {
@@ -138,7 +137,7 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
         title_next: "",
         message,
       };
-      onConfirm = handleModal;
+      onConfirm = confirmWithReload;
       break;
     case "lend":
       text = {
@@ -148,7 +147,7 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
         title_next: "",
         message,
       };
-      onConfirm = handleModal;
+      onConfirm = confirmWithReload;
       break;
     default:
       if (globalError.error) {
@@ -164,10 +163,21 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
       onConfirm = handleModal;
       break;
   }
+  const stopEventBubbling = e => {
+    e.stopPropagation();
+  };
 
   return (
-    <div className="modal__background">
-      <div className="mini modal__container">
+    <button
+      className="modal__background mini"
+      type="button"
+      onClick={handleModal}
+    >
+      <button
+        className="modal__container mini"
+        type="button"
+        onClick={stopEventBubbling}
+      >
         {type !== "loading" && (
           <button
             className="modal__close-button mini"
@@ -210,8 +220,8 @@ const MiniModal = ({ handleModal, typeProps, bookId, message }) => {
             )}
           </div>
         </div>
-      </div>
-    </div>
+      </button>
+    </button>
   );
 };
 

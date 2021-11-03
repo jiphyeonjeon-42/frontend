@@ -1,8 +1,13 @@
 @import url(./Modal.css);
 
+.modal__background.mini {
+  width: 100%;
+}
+
 .modal__container.mini {
   width: 800px;
   height: 460px;
+  text-align: left;
 }
 
 .modal__close-button.mini {
