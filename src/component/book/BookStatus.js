@@ -11,7 +11,7 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
   const [miniModal, setMiniModal] = useState(false);
   const user = useRecoilValue(userState);
   const openModal = () => {
-    if (!status) {
+    if (dueDate === "-") {
       return;
     }
     if (!user.isLogin) {
@@ -42,7 +42,7 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
         onClick={openModal}
         disabled={dueDate === "-"}
       >
-        <span>예약 하기</span>
+        <span>{dueDate === "-" ? "예약 불가" : "예약 하기"}</span>
         <img
           className="bookStatus-arr"
           src={dueDate === "-" ? ArrDef : ArrRes}
