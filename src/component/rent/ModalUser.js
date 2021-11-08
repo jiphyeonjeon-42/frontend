@@ -50,6 +50,7 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
   useEffect(fetchUserData, [userSearchWord, userSearchPage]);
 
   useEffect(() => {
+    setUserSearchPageRange(0);
     setUserSearchPage(1);
   }, [userSearchWord]);
 

@@ -33,7 +33,7 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
         params: {
           query: bookSearchWord,
           page: bookSearchPage,
-          limit: 5,
+          limit: 3,
         },
       })
       .then(res => {
@@ -50,8 +50,9 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
   useEffect(fetchBookData, [bookSearchWord, bookSearchPage]);
 
   useEffect(() => {
+    setBookSearchPageRange(0);
     setBookSearchPage(1);
-  }, [bookSearchPage]);
+  }, [bookSearchWord]);
 
   useEffect(() => {
     const searchForm = document.querySelector(".modal-search-form");
@@ -63,6 +64,7 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
   useEffect(() => {
     setBookSearchWord("");
   }, []);
+
   return (
     <section className="modal-book">
       <div className="modal-book__search-bar">
