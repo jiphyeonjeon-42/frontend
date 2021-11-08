@@ -1,16 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useSetRecoilState } from "recoil";
-import popularMain from "../../atom/popularMain";
 import "../../css/MainPopularBook.css";
 
-const MainPopularBook = ({ book }) => {
-  const setMain = useSetRecoilState(popularMain);
-  const onMain = e => {
-    console.log(e);
+const MainPopularBook = ({ book, setMain }) => {
+  function onMain() {
     setMain(book);
-  };
-
+  }
   return (
     <button
       className="main-popular__booklist__book-button"
@@ -42,4 +37,5 @@ MainPopularBook.propTypes = {
     author: PropTypes.string,
     publisher: PropTypes.string,
   }).isRequired,
+  setMain: PropTypes.func.isRequired,
 };
