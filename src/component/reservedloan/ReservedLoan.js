@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import BackGround from "../utils/BackGround";
@@ -15,7 +15,6 @@ import ReservedModal from "./ReservedModal";
 // import PropTypes from "prop-types";
 
 const ReservedLoan = () => {
-  const myRef = useRef();
   const [modal, setModal] = useState(false);
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useModalSearchInput);
@@ -62,7 +61,6 @@ const ReservedLoan = () => {
         filter: filterState(),
       },
     });
-    myRef.current.scrollIntoView();
     setReservedLoanList(items);
     setLastresevedLoanPage(meta.totalPages);
     console.log(reservedLoanList);
@@ -90,7 +88,7 @@ const ReservedLoan = () => {
     <main className="reservedLoan-main">
       <BackGround page="admin" />
       <section>
-        <div className="reservedLoan-title" ref={myRef}>
+        <div className="reservedLoan-title">
           <Title titleKorean="예약 대출" titleEng="BOOK RESERVATION" />
         </div>
         <div className="reservedLoan-subtitle">

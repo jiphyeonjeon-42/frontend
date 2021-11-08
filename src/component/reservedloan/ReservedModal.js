@@ -36,11 +36,13 @@ const ReservedModal = ({ reservedInfo, handleModal }) => {
     const condition = remark;
     setRemark("");
     await axios
-      .post(`${process.env.REACT_APP_API}/lendings`, {
-        userId: reservedInfo.user.id,
-        bookId: reservedInfo.book.id,
-        condition,
-      })
+      .post(`${process.env.REACT_APP_API}/lendings`, [
+        {
+          userId: reservedInfo.user.id,
+          bookId: reservedInfo.book.id,
+          condition,
+        },
+      ])
       .then(() => {
         setMini("lend");
       })

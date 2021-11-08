@@ -10,8 +10,6 @@ const ReservedFilter = ({
   isFinish,
   setFinish,
 }) => {
-  // const [isProceeding, setProceeding] = useState(false);
-  // const [isFinish, setFinish] = useState(false);
   const toggleProceeding = () => {
     setProceeding(!isProceeding);
   };
