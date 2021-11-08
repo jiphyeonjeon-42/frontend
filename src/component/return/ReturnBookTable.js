@@ -6,7 +6,7 @@ import "../../css/ReturnbookTable.css";
 
 const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
   const openSetModal = () => {
-    setLendingId(factor.book.id);
+    setLendingId(factor.id);
     openModal();
   };
 
@@ -22,7 +22,7 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
       >
         <div className="returnbook-table-list__title">
           <span className="font-18-bold color-54">
-            {factor.book && factor.book.id}
+            {factor.book && factor.book.info.title}
             {/* {factor.book && factor.book.info && factor.book.info.title} */}
           </span>
           <img className="returnbook-table-list__arr" src={Arr} alt="arrow" />
@@ -37,8 +37,8 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
           <span
             className={`re-penaltyDays font-16 ${
               factor && factor.user && factor.user.penaltyDays
-                ? "color-54"
-                : "color-red"
+                ? "color-red"
+                : "color-54"
             }`}
           >
             {`대출연체일 : ${
