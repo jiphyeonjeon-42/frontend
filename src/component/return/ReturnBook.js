@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import BackGround from "../utils/BackGround";
@@ -14,7 +14,6 @@ import Login from "../../img/login_icon.svg";
 import { useModalSearchInput } from "../utils/ModalSearchBar";
 
 const ReturnBook = () => {
-  const myRef = useRef();
   const [modal, setModal] = useState(false);
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useModalSearchInput);
@@ -54,8 +53,6 @@ const ReturnBook = () => {
         sort: lendingSort ? "older" : "new",
       },
     });
-    myRef.current.scrollIntoView();
-
     setReturnBookList(items);
     setLastreturnBookPage(meta.totalPages);
     console.log(returnBookList);
@@ -78,12 +75,12 @@ const ReturnBook = () => {
     <main className="returnbook-main">
       <BackGround page="admin" />
       <section>
-        <div className="returnbook-title" ref={myRef}>
+        <div className="returnbook-title">
           <Title titleKorean="조회 및 반납" titleEng="INQUIRE & RETURN BOOK" />
         </div>
         <div className="returnbook-subtitle">
           <SubTitle
-            subTitle="대출에 필요한 정보를 입력해주세요."
+            subTitle="반납에 필요한 정보를 입력해주세요."
             description="카뎃정보, 도서정보, 비고사항을 입력해주세요"
             alignItems="center"
           />
