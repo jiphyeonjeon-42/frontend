@@ -1,13 +1,5 @@
 @import url(./MidModal.css);
 
-/* .modal__background .mid-modal {
-  width: 1200px;
-  height: 680px;
-}
-
-.modal__wrapper.mid {
-  padding: 88px;
-} */
 
 .rent-modal__container {
   position: fixed;
@@ -17,7 +9,6 @@
   height: 676px;
   width: 1200px;
   background: #ffffff;
-  /* text-align: center; */
   z-index: 3;
 }
 
@@ -25,6 +16,12 @@
   height: 300px;
   margin-bottom: 35px;
   overflow: auto;
+}
+
+.rent-modal__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .rent-modal__book-info {
@@ -36,7 +33,6 @@
 }
 
 .rent-modal__cover {
-  /* float: left; */
   width: 205px;
   height: 300px;
   margin-left: 10px;
@@ -50,20 +46,10 @@
 }
 
 .rent-modal__detail {
-  /* display: inline-block; */
   width: 720px;
-  /* flex-grow: 1; */
 }
 
-/* .mid-modal__book {
-  height: 133px;
-  margin-bottom: 28px;
-} */
-
 .rent-modal__user {
-  /* float: left; */
-  /* width: 50%; */
-  /* height: 133px; */
   padding-bottom: 20px;
   border-bottom: 1px solid #a4a4a4;
   margin-bottom: 35px;
@@ -73,25 +59,8 @@
   margin-right: 35px;
 }
 
-/* .mid-modal__lend {
-  height: 133px;
-}
-
-.mid-modal__remark {
-  margin-top: 28px;
-  height: 178px;
-}
-
-.mid-modal__remark__input {
-  width: 100%;
-  box-sizing: border-box;
-  height: 100px;
-  display: block;
-  margin-bottom: 15px;
-} */
-
 .rent-modal__remark {
-	height: 139px;
+  height: 139px;
 }
 
 .rent-modal__button {

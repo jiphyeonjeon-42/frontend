@@ -106,7 +106,7 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
                 <div className="rent-modal__detail">
                   <div className="mid-modal__book">
                     <p className="font-16 color-red">도서정보</p>
-                    <p className="font-28-bold color-54  margin-8">
+                    <p className="rent-modal__title font-28-bold color-54  margin-8">
                       {selectBooks[0].info.title}
                     </p>
                     <p className="font-16 color-54">{`도서코드 : ${selectBooks[0].callSign}`}</p>
