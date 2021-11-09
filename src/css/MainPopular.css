@@ -23,6 +23,7 @@
   width: 342px;
   height: 580px;
   float: left;
+  margin-top: -160px;
 }
 .main-popular__cover-img {
   width: 342px;
@@ -40,14 +41,9 @@
   line-height: 48px;
 }
 
-.main-popular__cover-detail {
-  width: 810px;
-  height: 580px;
-  margin-left: 48px;
-  float: right;
-}
 
 .main-popular__description {
+  margin-left: 390px;
   border-bottom: 1px solid rgba(45, 45, 45, 0.4);
   height: 159px;
 }
@@ -69,6 +65,7 @@
 }
 .main-popular__booklist {
   margin-top: 56px;
+  margin-left : 390px;
   display: flex;
   justify-content: space-between;
 }
@@ -98,4 +95,25 @@
 
 .main-popular__arrow.right:hover {
   background-image: url(../img/arrow_right_circle_hover.svg);
+}
+
+
+@media screen and (max-width: 1200px) {
+  /* .main-popular {
+    width: 100%;   
+    white-space:normal;
+
+  }
+  .main-popular__cover {
+    float: none;
+    margin-top: 0px;
+  }
+  .main-popular__description {
+    margin-left: 0px;
+    
+  }
+  .main-popular__booklist {
+    margin-left: 0px;
+    white-space:normal;
+  } */
 }
