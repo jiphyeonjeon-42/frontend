@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import ModalSearchBar, { useModalSearchInput } from "../utils/ModalSearchBar";
+import ModalSearchBar from "../utils/ModalSearchBar";
+import { useModalSearchInput } from "../../atom/useSearchInput";
 import ModalPagination from "./ModalPagination";
 import BookList from "./BookList";
 import "../../css/ModalBook.css";
@@ -27,20 +28,31 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
   };
 
   const fetchBookData = async () => {
-    const {
-      data: { items, meta },
-    } = await axios.get(`${process.env.REACT_APP_API}/books/search`, {
-      params: {
-        query: bookSearchWord,
-        page: bookSearchPage,
-        limit: 5,
-      },
-    });
-    setBookList(items);
-    setLastBookSearchPage(meta.totalPages);
+    await axios
+      .get(`${process.env.REACT_APP_API}/books/search`, {
+        params: {
+          query: bookSearchWord,
+          page: bookSearchPage,
+          limit: 3,
+        },
+      })
+      .then(res => {
+        setBookList(res.data.items);
+        setLastBookSearchPage(
+          res.data.meta.totalPages > 0 ? res.data.meta.totalPages : 1,
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   useEffect(fetchBookData, [bookSearchWord, bookSearchPage]);
+
+  useEffect(() => {
+    setBookSearchPageRange(0);
+    setBookSearchPage(1);
+  }, [bookSearchWord]);
 
   useEffect(() => {
     const searchForm = document.querySelector(".modal-search-form");
@@ -52,6 +64,7 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
   useEffect(() => {
     setBookSearchWord("");
   }, []);
+
   return (
     <section className="modal-book">
       <div className="modal-book__search-bar">

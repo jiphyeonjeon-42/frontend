@@ -1,4 +1,3 @@
-/* eslint-disable eqeqeq */
 import React from "react";
 import { atom, useRecoilState } from "recoil";
 import CloseButton from "../../img/x_button.svg";

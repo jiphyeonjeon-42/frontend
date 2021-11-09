@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import ModalSearchBar, { useModalSearchInput } from "../utils/ModalSearchBar";
+import ModalSearchBar from "../utils/ModalSearchBar";
+import { useModalSearchInput } from "../../atom/useSearchInput";
 import ModalPagination from "./ModalPagination";
 import UserList from "./UserList";
 import "../../css/ModalUser.css";
@@ -27,20 +28,31 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
   };
 
   const fetchUserData = async () => {
-    const {
-      data: { items, meta },
-    } = await axios.get(`${process.env.REACT_APP_API}/users/search`, {
-      params: {
-        query: userSearchWord,
-        page: userSearchPage,
-        limit: 5,
-      },
-    });
-    setUserList(items);
-    setLastUserSearchPage(meta.totalPages);
+    await axios
+      .get(`${process.env.REACT_APP_API}/users/search`, {
+        params: {
+          query: userSearchWord,
+          page: userSearchPage,
+          limit: 5,
+        },
+      })
+      .then(res => {
+        setUserList(res.data.items);
+        setLastUserSearchPage(
+          res.data.meta.totalPages > 0 ? res.data.meta.totalPages : 1,
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   useEffect(fetchUserData, [userSearchWord, userSearchPage]);
+
+  useEffect(() => {
+    setUserSearchPageRange(0);
+    setUserSearchPage(1);
+  }, [userSearchWord]);
 
   useEffect(() => {
     const searchForm = document.querySelector(".modal-search-form");

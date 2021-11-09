@@ -33,21 +33,27 @@ const Search = ({ match, location }) => {
   const [lastPage, setLastPage] = useState(1);
 
   const fetchBookList = async () => {
-    const {
-      data: { items, meta, categories },
-    } = await axios.get(`${process.env.REACT_APP_API}/books/info/search`, {
-      params: {
-        query: userWord,
-        page: userPage,
-        sort: userSort,
-        category: userCateName,
-        limit: 20,
-      },
-    });
-    setBookList(items);
-    setEntireCate(categories);
-    setLoading(false);
-    setLastPage(meta.totalPages > 0 ? meta.totalPages : 1);
+    await axios
+      .get(`${process.env.REACT_APP_API}/books/info/search`, {
+        params: {
+          query: userWord,
+          page: userPage,
+          sort: userSort,
+          category: userCateName,
+          limit: 20,
+        },
+      })
+      .then(res => {
+        setBookList(res.data.items);
+        setEntireCate(res.data.categories);
+        setLoading(false);
+        setLastPage(
+          res.data.meta.totalPages > 0 ? res.data.meta.totalPages : 1,
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   useEffect(fetchBookList, [userWord, userPage, userSort, userCateName]);
