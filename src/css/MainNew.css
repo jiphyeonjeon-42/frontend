@@ -5,9 +5,7 @@
   position: relative;
 }
 
-.main-new__title-wrapper {
-  min-width: 900px;
-  padding: 0 270px 0 270px;
+.main-new__wrapper {
   margin: auto;
 }
 
@@ -15,18 +13,20 @@
   width: 80px;
   height: 340px;
   margin: 0;
-  float: left;
+  position: absolute;
+  top: 245px;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   border: none;
   z-index: 100;
-  position: inherit;
   padding: 0;
   transition: all 0.3s ease-in-out;
   -webkit-transition: 0.3s;
 }
 
 .main-new__arrow.right {
-  float: right;
+  left: unset;
+  right: 0;
 }
 
 .main-new__arrow:hover {

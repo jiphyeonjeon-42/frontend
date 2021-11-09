@@ -48,7 +48,7 @@ const MainNew = () => {
 
   return (
     <section className="main-new">
-      <div className="main-new__title-wrapper">
+      <div className="main-new__wrapper">
         <SubTitle
           subTitle="집현전에 새로 들어온 신작을 확인해보세요"
           description="책을 클릭하면 더 자세한 정보를 확인할 수 있습니다."

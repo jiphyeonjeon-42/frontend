@@ -1,24 +1,11 @@
-/* .main-bg {
-  background-image: url("../img/main_bg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  min-width: 1320px;
-  width: 100%;
-  height: 938px;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-} */
 
-.main-home-wraper {
+.main-home {
   padding: 0 270px 0 270px;
   position: relative;
   z-index: 2;
 }
 
-.main-home {
+.main-home__wrapper {
   height: 694px;
   display: flex;
   flex-direction: column;

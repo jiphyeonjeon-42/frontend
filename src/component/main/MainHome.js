@@ -5,8 +5,8 @@ import "../../css/MainHome.css";
 
 const Main = () => {
   return (
-    <section className="main-home-wraper">
-      <div className="main-home">
+    <section className="main-home">
+      <div className="main-home__wrapper">
         <div className="main-home__line" />
         <span className="main-home__greet font-48-bold color-ff">
           어서오세요, 집현전입니다.
