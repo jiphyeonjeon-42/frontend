@@ -27,7 +27,7 @@ const BookDetail = ({ location, match }) => {
     <main className="bookdetail-main">
       <BackGround page="bookdetail" />
       <section>
-        <div className="bookdetail-title">
+        <div className="bookdetail-title" ref={myRef}>
           <Title
             titleKorean="도서 상세페이지 및 예약"
             titleEng="DETAIL & RESERVATION"
@@ -35,7 +35,7 @@ const BookDetail = ({ location, match }) => {
         </div>
       </section>
       <section className="bookdetail-body">
-        <div className="breadcrumb" ref={myRef}>
+        <div className="breadcrumb">
           <span className="font-16 color-a4">
             {location.state ? `${location.state.bread} ` : "집현전 "} &gt;
             도서상세페이지 및 예약
