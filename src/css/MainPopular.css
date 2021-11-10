@@ -1,10 +1,10 @@
-.main-popular-wraper {
+.main-popular {
   margin-top: 240px;
   padding: 0 120px 0 120px;
   margin-bottom: 300px;
 }
 
-.main-popular {
+.main-popular__wrapper {
   width: 1200px;
   height: 803px;
   margin: 0px auto;

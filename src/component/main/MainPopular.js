@@ -44,8 +44,8 @@ const MainPopluar = () => {
   }, []);
 
   return (
-    <section className="main-popular-wraper">
-      <div className="main-popular">
+    <section className="main-popular">
+      <div className="main-popular__wrapper">
         <SubTitle
           subTitle="이번 달 인기 도서를 소개합니다"
           description="집현전 사람들이 이번 달 가장 많이 본 책들은 무엇일까요?"
