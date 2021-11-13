@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/forbid-prop-types */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../../css/RentModal.css";
@@ -96,38 +94,15 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
                 } / 2 )`}</span>
               </div>
               <div className="rent-modal__books">
-                <div className="rent-modal__book-info">
-                  <div className="rent-modal__cover">
-                    <img
-                      src={selectBooks[0].info.image}
-                      alt="cover"
-                      className="rent-modal__cover-img"
-                    />
-                  </div>
-                  <div className="rent-modal__detail">
-                    <div className="mid-modal__book">
-                      <p className="font-16 color-red">도서정보</p>
-                      <p className="font-28-bold color-54  margin-8">
-                        {selectBooks[0].info.title}
-                      </p>
-                      <p className="font-16 color-54">{`도서코드 : ${selectBooks[0].callSign}`}</p>
-                    </div>
-                    <div className="rent-modal__remark">
-                      <p className="font-16 color-red">비고</p>
-                      <textarea
-                        className="mid-modal__remark__input margin-8"
-                        placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
-                        value={remark1}
-                        onChange={handleRemark1}
-                      />
-                    </div>
-                  </div>
-                </div>
-                {selectBooks.length === 2 && (
-                  <div className="rent-modal__book-info second-book">
+                {selectBooks.map((selectBook, index) => (
+                  <div
+                    className={`rent-modal__book-info ${
+                      index === 0 ? "" : "second-book"
+                    }`}
+                  >
                     <div className="rent-modal__cover">
                       <img
-                        src={selectBooks[1].info.image}
+                        src={selectBook.info.image}
                         alt="cover"
                         className="rent-modal__cover-img"
                       />
@@ -135,23 +110,23 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
                     <div className="rent-modal__detail">
                       <div className="mid-modal__book">
                         <p className="font-16 color-red">도서정보</p>
-                        <p className="font-28-bold color-54  margin-8">
-                          {selectBooks[1].info.title}
+                        <p className="rent-modal__title font-28-bold color-54 margin-8">
+                          {selectBook.info.title}
                         </p>
-                        <p className="font-16 color-54">{`도서코드 : ${selectBooks[1].callSign}`}</p>
+                        <p className="font-16 color-54">{`도서코드 : ${selectBook.callSign}`}</p>
                       </div>
                       <div className="rent-modal__remark">
                         <p className="font-16 color-red">비고</p>
                         <textarea
-                          className="mid-modal__remark__input"
+                          className="mid-modal__remark__input margin-8"
                           placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
-                          value={remark2}
-                          onChange={handleRemark2}
+                          value={index === 0 ? remark1 : remark2}
+                          onChange={index === 0 ? handleRemark1 : handleRemark2}
                         />
                       </div>
                     </div>
                   </div>
-                )}
+                ))}
               </div>
               <div className="rent-modal__button">
                 <button

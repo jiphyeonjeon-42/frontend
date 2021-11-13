@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 import ArrRight from "../../img/arrow_right_black.svg";
@@ -6,9 +5,7 @@ import "../../css/Pagination.css";
 
 const PageButton = ({ pageNum, userPage, setUserPage }) => {
   const changePage = () => {
-    if (setUserPage) {
-      setUserPage(pageNum);
-    }
+    setUserPage(pageNum);
   };
 
   return (
@@ -16,7 +13,7 @@ const PageButton = ({ pageNum, userPage, setUserPage }) => {
       type="button"
       onClick={changePage}
       className={`page-button font-20 ${
-        parseInt(userPage, 10) === pageNum ? "color-54" : "color-a4"
+        userPage === pageNum ? "color-54" : "color-a4"
       }`}
     >
       {pageNum}
@@ -62,7 +59,7 @@ const NextPageButton = ({ pageRange, setPageRange, lastPage }) => {
   );
 };
 
-const Pagination = ({
+const AdminPagination = ({
   userPage,
   setUserPage,
   pageRange,
@@ -77,7 +74,7 @@ const Pagination = ({
   }
 
   return (
-    <div className="modal-pagination">
+    <div className="admin-pagination">
       <PrePageButton pageRange={pageRange} setPageRange={setPageRange} />
       {pageRangeArr.map(n => (
         <PageButton pageNum={n} userPage={userPage} setUserPage={setUserPage} />
@@ -91,8 +88,29 @@ const Pagination = ({
   );
 };
 
-export default Pagination;
+export default AdminPagination;
 
 PageButton.propTypes = {
+  pageNum: PropTypes.number.isRequired,
+  userPage: PropTypes.number.isRequired,
   setUserPage: PropTypes.func.isRequired,
+};
+
+PrePageButton.propTypes = {
+  pageRange: PropTypes.number.isRequired,
+  setPageRange: PropTypes.func.isRequired,
+};
+
+NextPageButton.propTypes = {
+  pageRange: PropTypes.number.isRequired,
+  setPageRange: PropTypes.func.isRequired,
+  lastPage: PropTypes.number.isRequired,
+};
+
+AdminPagination.propTypes = {
+  userPage: PropTypes.number.isRequired,
+  setUserPage: PropTypes.func.isRequired,
+  pageRange: PropTypes.number.isRequired,
+  setPageRange: PropTypes.func.isRequired,
+  lastPage: PropTypes.number.isRequired,
 };

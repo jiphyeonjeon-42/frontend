@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import ModalSearchBar from "../utils/ModalSearchBar";
-import { useModalSearchInput } from "../../atom/useSearchInput";
-import ModalPagination from "./ModalPagination";
+import AdminSearchBar from "../utils/AdminSearchBar";
+import { useAdminSearchInput } from "../../atom/useSearchInput";
+import AdminPagination from "../utils/AdminPagination";
 import UserList from "./UserList";
 import "../../css/ModalUser.css";
 
 // eslint-disable-next-line react/prop-types
 const ModalUser = ({ setSelectUser, setUserModal }) => {
   const [userSearchWord, setUserSearchWord] =
-    useRecoilState(useModalSearchInput);
+    useRecoilState(useAdminSearchInput);
   const [userSearchPage, setUserSearchPage] = useState(1);
   const [userSearchPageRange, setUserSearchPageRange] = useState(0);
   const [lastUserSearchPage, setLastUserSearchPage] = useState(1);
@@ -69,7 +69,7 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
     <section className="modal-user">
       <div className="modal-user__search-bar">
         <div className="modal-user__text font-28-bold color-54">카뎃 정보</div>
-        <ModalSearchBar
+        <AdminSearchBar
           width="long"
           placeHolder="대출자의 성명을 입력해주세요."
         />
@@ -86,7 +86,7 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
         />
       ))}
       <div className="modal-user__pagination">
-        <ModalPagination
+        <AdminPagination
           userPage={userSearchPage}
           setUserPage={setUserSearchPage}
           pageRange={userSearchPageRange}

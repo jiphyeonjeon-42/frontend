@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import ModalSearchBar from "../utils/ModalSearchBar";
-import { useModalSearchInput } from "../../atom/useSearchInput";
-import ModalPagination from "./ModalPagination";
+import AdminSearchBar from "../utils/AdminSearchBar";
+import { useAdminSearchInput } from "../../atom/useSearchInput";
+import AdminPagination from "../utils/AdminPagination";
 import BookList from "./BookList";
 import "../../css/ModalBook.css";
 
 // eslint-disable-next-line react/prop-types
 const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
   const [bookSearchWord, setBookSearchWord] =
-    useRecoilState(useModalSearchInput);
+    useRecoilState(useAdminSearchInput);
   const [bookSearchPage, setBookSearchPage] = useState(1);
   const [bookSearchPageRange, setBookSearchPageRange] = useState(0);
   const [lastBookSearchPage, setLastBookSearchPage] = useState(1);
@@ -69,7 +69,7 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
     <section className="modal-book">
       <div className="modal-book__search-bar">
         <div className="modal-book__text font-28-bold color-54">도서 정보</div>
-        <ModalSearchBar placeHolder="도서의 이름을 입력해주세요." />
+        <AdminSearchBar placeHolder="도서의 이름을 입력해주세요." />
       </div>
       {bookList.map((book, index) => (
         <BookList
@@ -83,7 +83,7 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
         />
       ))}
       <div className="modal-user__pagination">
-        <ModalPagination
+        <AdminPagination
           userPage={bookSearchPage}
           setUserPage={setBookSearchPage}
           pageRange={bookSearchPageRange}
