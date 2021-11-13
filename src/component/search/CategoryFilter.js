@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 import ArrLeft from "../../img/arrow_left_black.svg";
 import ArrRight from "../../img/arrow_right_black.svg";
 import "../../css/CategoryFilter.css";
@@ -146,6 +146,7 @@ const CategoryFilter = ({
           {entireCate.map((items, index) =>
             startCate <= index ? (
               <Category
+                key={items.name}
                 userWord={userWord}
                 userSort={userSort}
                 userCate={userCate}
@@ -165,6 +166,36 @@ const CategoryFilter = ({
       <div className="category-filter__line" />
     </div>
   );
+};
+
+PreCategory.propTypes = {
+  startCate: PropTypes.number.isRequired,
+  setStartCate: PropTypes.func.isRequired,
+};
+
+NextCategory.propTypes = {
+  hiddenCate: PropTypes.bool.isRequired,
+  startCate: PropTypes.number.isRequired,
+  setStartCate: PropTypes.func.isRequired,
+};
+
+Category.propTypes = {
+  userWord: PropTypes.string.isRequired,
+  userSort: PropTypes.string.isRequired,
+  userCate: PropTypes.number.isRequired,
+  categoryIndex: PropTypes.number.isRequired,
+  categoryName: PropTypes.string.isRequired,
+  categoryNum: PropTypes.number.isRequired,
+};
+
+CategoryFilter.propTypes = {
+  userWord: PropTypes.string.isRequired,
+  startCate: PropTypes.number.isRequired,
+  setStartCate: PropTypes.func.isRequired,
+  userSort: PropTypes.string.isRequired,
+  userCate: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  entireCate: PropTypes.array.isRequired,
 };
 
 export default CategoryFilter;

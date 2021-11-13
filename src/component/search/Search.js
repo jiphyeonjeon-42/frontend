@@ -1,8 +1,7 @@
-/* eslint-disable prefer-destructuring */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import axios from "axios";
+import PropTypes from "prop-types";
 import Title from "../utils/Title";
 import SubTitle from "../utils/SubTitle";
 import SearchBar from "./SearchBar";
@@ -11,6 +10,7 @@ import Pagination from "./Pagination";
 import BackGround from "../utils/BackGround";
 import CategoryFilter from "./CategoryFilter";
 import Sort from "./Sort";
+import Available from "./Available";
 import WishBook from "./WishBook";
 import { searchWord } from "../../atom/searchWord";
 import { useSearchInput } from "../../atom/useSearchInput";
@@ -62,6 +62,7 @@ const Search = ({ match, location }) => {
     let query;
     const splitQuery = url.split(key);
 
+    // eslint-disable-next-line prefer-destructuring
     if (splitQuery.length === 2) query = splitQuery[1];
     else if (splitQuery.length < 2) query = "";
     else query = splitQuery.slice(1).join(key);
@@ -101,19 +102,23 @@ const Search = ({ match, location }) => {
 
     const queryArr = query.split("&");
     let queryString = "";
-    let queryPage = "1";
-    let queryCateIndex = "0";
+    let queryPage = 1;
+    let queryCateIndex = 0;
     let querySort = "accurate";
 
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < queryArr.length; i++) {
       if (isValid(queryArr[i], "string="))
+        // eslint-disable-next-line prefer-destructuring
         queryString = queryArr[i].split("string=")[1];
       else if (
         isValid(queryArr[i], "page=") &&
         isInteger(queryArr[i].split("page=")[1], 1)
       )
-        queryPage = Math.min(queryArr[i].split("page=")[1], lastPage);
+        queryPage = Math.min(
+          parseInt(queryArr[i].split("page=")[1], 10),
+          lastPage,
+        );
       else if (
         isValid(queryArr[i], "category=") &&
         isInteger(queryArr[i].split("category=")[1], 0)
@@ -121,11 +126,12 @@ const Search = ({ match, location }) => {
         queryCateIndex =
           queryArr[i].split("category=")[1] >= entireCate.length
             ? 0
-            : queryArr[i].split("category=")[1];
+            : parseInt(queryArr[i].split("category=")[1], 10);
       else if (
         isValid(queryArr[i], "sort=") &&
         isSort(queryArr[i].split("sort=")[1])
       )
+        // eslint-disable-next-line prefer-destructuring
         querySort = queryArr[i].split("sort=")[1];
     }
     return [queryString, queryPage, queryCateIndex, querySort];
@@ -161,30 +167,32 @@ const Search = ({ match, location }) => {
           <SubTitle
             subTitle={`'${userWord}' 도서 검색 결과`}
             alignItems="start"
+            description=""
           />
         </div>
         <CategoryFilter
           userWord={userWord}
           userSort={userSort}
-          userCate={cateIndex}
+          userCate={parseInt(cateIndex, 10)}
           entireCate={entireCate}
           startCate={startCate}
           setStartCate={setStartCate}
         />
-        <Sort
-          userWord={userWord}
-          userSort={userSort}
-          cateIndex={cateIndex}
-          isAvailable={isAvailable}
-          setAvailable={setAvailable}
-        />
+        <div className="search-sort-available">
+          <Sort
+            userWord={userWord}
+            userSort={userSort}
+            cateIndex={parseInt(cateIndex, 10)}
+          />
+          <Available isAvailable={isAvailable} setAvailable={setAvailable} />
+        </div>
         <Books bookList={bookList} isLoading={isLoading} />
         <Pagination
           userWord={userWord}
           lastPage={lastPage}
-          userPage={userPage}
+          userPage={parseInt(userPage, 10)}
           userSort={userSort}
-          userCateIndex={cateIndex}
+          userCateIndex={parseInt(cateIndex, 10)}
           pageRange={pageRange}
           setPageRange={setPageRange}
           myRef={myRef}
@@ -195,6 +203,13 @@ const Search = ({ match, location }) => {
       </section>
     </main>
   );
+};
+
+Search.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  match: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  location: PropTypes.object.isRequired,
 };
 
 export default Search;

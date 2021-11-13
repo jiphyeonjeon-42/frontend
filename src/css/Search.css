@@ -29,3 +29,10 @@
   width: 400px;
   padding: 100px 0 0 0;
 }
+
+.search-sort-available {
+  display: flex;
+  margin-bottom: 80px;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import PropTypes from "prop-types";
 import { searchWord } from "../../atom/searchWord";
 import { useSearchInput } from "../../atom/useSearchInput";
 import "../../css/SearchBar.css";
@@ -57,6 +57,15 @@ const SearchBar = ({ setStartCate, setPageRange, setAvailable }) => {
       </button>
     </form>
   );
+};
+
+SearchBar.propTypes = {
+  // eslint-disable-next-line react/require-default-props
+  setStartCate: PropTypes.func,
+  // eslint-disable-next-line react/require-default-props
+  setPageRange: PropTypes.func,
+  // eslint-disable-next-line react/require-default-props
+  setAvailable: PropTypes.func,
 };
 
 export default SearchBar;

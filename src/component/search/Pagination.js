@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 import ArrRight from "../../img/arrow_right_black.svg";
 import "../../css/Pagination.css";
 
@@ -100,6 +100,7 @@ const Pagination = ({
       />
       {pageRangeArr.map(n => (
         <PageButton
+          key={n}
           pageNum={n}
           userWord={userWord}
           userPage={userPage}
@@ -115,6 +116,44 @@ const Pagination = ({
       />
     </div>
   );
+};
+
+PageButton.propTypes = {
+  myRef: PropTypes.oneOfType([
+    PropTypes.func,
+    // eslint-disable-next-line react/forbid-prop-types
+    PropTypes.shape({ current: PropTypes.any }),
+  ]).isRequired,
+  userWord: PropTypes.string.isRequired,
+  pageNum: PropTypes.number.isRequired,
+  userPage: PropTypes.number.isRequired,
+  userSort: PropTypes.string.isRequired,
+  userCateIndex: PropTypes.number.isRequired,
+};
+PrePageButton.propTypes = {
+  pageRange: PropTypes.number.isRequired,
+  setPageRange: PropTypes.func.isRequired,
+};
+
+NextPageButton.propTypes = {
+  pageRange: PropTypes.number.isRequired,
+  setPageRange: PropTypes.func.isRequired,
+  lastPage: PropTypes.number.isRequired,
+};
+
+Pagination.propTypes = {
+  myRef: PropTypes.oneOfType([
+    PropTypes.func,
+    // eslint-disable-next-line react/forbid-prop-types
+    PropTypes.shape({ current: PropTypes.any }),
+  ]).isRequired,
+  userWord: PropTypes.string.isRequired,
+  pageRange: PropTypes.number.isRequired,
+  setPageRange: PropTypes.func.isRequired,
+  lastPage: PropTypes.number.isRequired,
+  userPage: PropTypes.number.isRequired,
+  userSort: PropTypes.string.isRequired,
+  userCateIndex: PropTypes.number.isRequired,
 };
 
 export default Pagination;
