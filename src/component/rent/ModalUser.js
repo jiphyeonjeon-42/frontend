@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import AdminSearchBar from "../utils/AdminSearchBar";
-import { useModalSearchInput } from "../../atom/useSearchInput";
+import { useAdminSearchInput } from "../../atom/useSearchInput";
 import AdminPagination from "../utils/AdminPagination";
 import UserList from "./UserList";
 import "../../css/ModalUser.css";
@@ -10,7 +10,7 @@ import "../../css/ModalUser.css";
 // eslint-disable-next-line react/prop-types
 const ModalUser = ({ setSelectUser, setUserModal }) => {
   const [userSearchWord, setUserSearchWord] =
-    useRecoilState(useModalSearchInput);
+    useRecoilState(useAdminSearchInput);
   const [userSearchPage, setUserSearchPage] = useState(1);
   const [userSearchPageRange, setUserSearchPageRange] = useState(0);
   const [lastUserSearchPage, setLastUserSearchPage] = useState(1);

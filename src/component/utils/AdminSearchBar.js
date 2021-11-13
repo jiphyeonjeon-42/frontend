@@ -1,12 +1,12 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import PropTypes from "prop-types";
-import { useModalSearchInput } from "../../atom/useSearchInput";
+import { useAdminSearchInput } from "../../atom/useSearchInput";
 import SearchIcon from "../../img/search_icon_black.svg";
 import "../../css/AdminSearchBar.css";
 
 const AdminSearchBar = ({ placeHolder, width }) => {
-  const [input, setInput] = useRecoilState(useModalSearchInput);
+  const [input, setInput] = useRecoilState(useAdminSearchInput);
 
   const onChange = event => {
     const {

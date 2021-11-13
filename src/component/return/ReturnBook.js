@@ -11,12 +11,12 @@ import MidModal from "../utils/MidModal";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
 import Login from "../../img/login_icon.svg";
-import { useModalSearchInput } from "../../atom/useSearchInput";
+import { useAdminSearchInput } from "../../atom/useSearchInput";
 
 const ReturnBook = () => {
   const [modal, setModal] = useState(false);
   const [userSearchWord, setUserSearchWord] =
-    useRecoilState(useModalSearchInput);
+    useRecoilState(useAdminSearchInput);
   const [returnBookPage, setReturnBookPage] = useState(1);
   const [returnBookPageRange, setReturnBookPageRange] = useState(0);
   const [lastreturnBookPage, setLastreturnBookPage] = useState(1);

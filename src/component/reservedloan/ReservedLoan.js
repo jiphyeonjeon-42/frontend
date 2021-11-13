@@ -7,7 +7,7 @@ import "../../css/ReservedLoan.css";
 import SubTitle from "../utils/SubTitle";
 import AdminPagination from "../utils/AdminPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import { useModalSearchInput } from "../../atom/useSearchInput";
+import { useAdminSearchInput } from "../../atom/useSearchInput";
 import Login from "../../img/login_icon.svg";
 import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
@@ -17,7 +17,7 @@ import ReservedModal from "./ReservedModal";
 const ReservedLoan = () => {
   const [modal, setModal] = useState(false);
   const [userSearchWord, setUserSearchWord] =
-    useRecoilState(useModalSearchInput);
+    useRecoilState(useAdminSearchInput);
   const [resevedLoanPage, setResevedLoanPage] = useState(1);
   const [resevedLoanPageRange, setResevedLoanPageRange] = useState(0);
   const [lastresevedLoanPage, setLastresevedLoanPage] = useState(1);
