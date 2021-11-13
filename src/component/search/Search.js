@@ -11,6 +11,7 @@ import Pagination from "./Pagination";
 import BackGround from "../utils/BackGround";
 import CategoryFilter from "./CategoryFilter";
 import Sort from "./Sort";
+import Available from "./Available";
 import WishBook from "./WishBook";
 import { searchWord } from "../../atom/searchWord";
 import { useSearchInput } from "../../atom/useSearchInput";
@@ -171,13 +172,10 @@ const Search = ({ match, location }) => {
           startCate={startCate}
           setStartCate={setStartCate}
         />
-        <Sort
-          userWord={userWord}
-          userSort={userSort}
-          cateIndex={cateIndex}
-          isAvailable={isAvailable}
-          setAvailable={setAvailable}
-        />
+        <div className="search-sort-available">
+          <Sort userWord={userWord} userSort={userSort} cateIndex={cateIndex} />
+          <Available isAvailable={isAvailable} setAvailable={setAvailable} />
+        </div>
         <Books bookList={bookList} isLoading={isLoading} />
         <Pagination
           userWord={userWord}

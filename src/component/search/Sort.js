@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { useHistory } from "react-router-dom";
-import CheckIcon from "../../img/check_icon.svg";
-import RedCheckIcon from "../../img/check_icon_red.svg";
 import "../../css/Sort.css";
 
 const SortBy = ({ userWord, cateIndex, userSort, sortName, text }) => {
@@ -28,63 +26,37 @@ const SortBy = ({ userWord, cateIndex, userSort, sortName, text }) => {
   );
 };
 
-const Availavble = ({ isAvailable, setAvailable }) => {
-  const toggleAvailable = () => {
-    setAvailable(!isAvailable);
-  };
-
+const Sort = ({ userWord, userSort, cateIndex }) => {
   return (
-    <button type="button" onClick={toggleAvailable} className="availavble">
-      <img
-        className="availavble__icon"
-        src={`${isAvailable ? RedCheckIcon : CheckIcon}`}
-        alt="check"
+    <div className="sort-by">
+      <SortBy
+        userWord={userWord}
+        cateIndex={cateIndex}
+        userSort={userSort}
+        sortName="accurate"
+        text="정확도순"
       />
-      <div
-        className={`availavble__text font-16-bold ${
-          isAvailable ? "color-red" : "color-a4"
-        }`}
-      >
-        대여 가능한 도서만 보기
-      </div>
-    </button>
-  );
-};
-
-const Sort = ({ userWord, isAvailable, setAvailable, userSort, cateIndex }) => {
-  return (
-    <div className="sort">
-      <div className="sort-by">
-        <SortBy
-          userWord={userWord}
-          cateIndex={cateIndex}
-          userSort={userSort}
-          sortName="accurate"
-          text="정확도순"
-        />
-        <SortBy
-          userWord={userWord}
-          cateIndex={cateIndex}
-          userSort={userSort}
-          sortName="title"
-          text="이름순"
-        />
-        <SortBy
-          userWord={userWord}
-          cateIndex={cateIndex}
-          userSort={userSort}
-          sortName="new"
-          text="발행연도순"
-        />
-        <SortBy
-          userWord={userWord}
-          cateIndex={cateIndex}
-          userSort={userSort}
-          sortName="popular"
-          text="인기순"
-        />
-      </div>
-      <Availavble isAvailable={isAvailable} setAvailable={setAvailable} />
+      <SortBy
+        userWord={userWord}
+        cateIndex={cateIndex}
+        userSort={userSort}
+        sortName="title"
+        text="이름순"
+      />
+      <SortBy
+        userWord={userWord}
+        cateIndex={cateIndex}
+        userSort={userSort}
+        sortName="new"
+        text="발행연도순"
+      />
+      <SortBy
+        userWord={userWord}
+        cateIndex={cateIndex}
+        userSort={userSort}
+        sortName="popular"
+        text="인기순"
+      />
     </div>
   );
 };
