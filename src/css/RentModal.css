@@ -1,5 +1,10 @@
 @import url(./MidModal.css);
 
+.rent-modal__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .rent-modal__container {
   position: fixed;
@@ -26,17 +31,20 @@
 
 .rent-modal__book-info {
   display: flex;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .second-book {
-  margin-top: 20px;
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid #d4d4d4;
 }
 
 .rent-modal__cover {
   width: 205px;
   height: 300px;
-  margin-left: 10px;
-  margin-right: 48px;
+  margin-right: 38px;
   flex-shrink: 0;
 }
 
