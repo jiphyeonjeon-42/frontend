@@ -26,7 +26,7 @@ const Search = ({ match, location }) => {
   const [pageRange, setPageRange] = useState(0);
   const [isAvailable, setAvailable] = useState(false);
   const [userPage, setPage] = useState(1);
-  const [userSort, setSort] = useState("");
+  const [userSort, setSort] = useState("accurate");
   const [cateIndex, setCateIndex] = useState(0);
   const [userCateName, setCategoryName] = useState("");
   const [entireCate, setEntireCate] = useState([]);
@@ -178,13 +178,7 @@ const Search = ({ match, location }) => {
           isAvailable={isAvailable}
           setAvailable={setAvailable}
         />
-        {isLoading ? (
-          <div className="loader">
-            <span className="loader__text">Loading...</span>
-          </div>
-        ) : (
-          <Books bookList={bookList} />
-        )}
+        <Books bookList={bookList} isLoading={isLoading} />
         <Pagination
           userWord={userWord}
           lastPage={lastPage}
