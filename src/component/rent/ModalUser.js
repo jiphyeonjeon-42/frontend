@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import ModalSearchBar from "../utils/ModalSearchBar";
+import AdminSearchBar from "../utils/AdminSearchBar";
 import { useModalSearchInput } from "../../atom/useSearchInput";
 import AdminPagination from "../utils/AdminPagination";
 import UserList from "./UserList";
@@ -69,7 +69,7 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
     <section className="modal-user">
       <div className="modal-user__search-bar">
         <div className="modal-user__text font-28-bold color-54">카뎃 정보</div>
-        <ModalSearchBar
+        <AdminSearchBar
           width="long"
           placeHolder="대출자의 성명을 입력해주세요."
         />

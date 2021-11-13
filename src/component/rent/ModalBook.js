@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import ModalSearchBar from "../utils/ModalSearchBar";
+import AdminSearchBar from "../utils/AdminSearchBar";
 import { useModalSearchInput } from "../../atom/useSearchInput";
 import AdminPagination from "../utils/AdminPagination";
 import BookList from "./BookList";
@@ -69,7 +69,7 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
     <section className="modal-book">
       <div className="modal-book__search-bar">
         <div className="modal-book__text font-28-bold color-54">도서 정보</div>
-        <ModalSearchBar placeHolder="도서의 이름을 입력해주세요." />
+        <AdminSearchBar placeHolder="도서의 이름을 입력해주세요." />
       </div>
       {bookList.map((book, index) => (
         <BookList

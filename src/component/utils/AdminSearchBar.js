@@ -3,9 +3,9 @@ import { useRecoilState } from "recoil";
 import PropTypes from "prop-types";
 import { useModalSearchInput } from "../../atom/useSearchInput";
 import SearchIcon from "../../img/search_icon_black.svg";
-import "../../css/ModalSearchBar.css";
+import "../../css/AdminSearchBar.css";
 
-const ModalSearchBar = ({ placeHolder, width }) => {
+const AdminSearchBar = ({ placeHolder, width }) => {
   const [input, setInput] = useRecoilState(useModalSearchInput);
 
   const onChange = event => {
@@ -33,9 +33,9 @@ const ModalSearchBar = ({ placeHolder, width }) => {
   );
 };
 
-ModalSearchBar.propTypes = {
+AdminSearchBar.propTypes = {
   placeHolder: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
 };
 
-export default ModalSearchBar;
+export default AdminSearchBar;

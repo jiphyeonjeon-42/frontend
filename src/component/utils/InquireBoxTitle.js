@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "../../css/InquireBoxTitle.css";
-import ModalSearchBar from "./ModalSearchBar";
+import AdminSearchBar from "./AdminSearchBar";
 
 const InquireBoxTitle = ({ Icon, titleKO, titleEN, placeHolder }) => {
   return (
@@ -12,7 +12,7 @@ const InquireBoxTitle = ({ Icon, titleKO, titleEN, placeHolder }) => {
         <span className="inquire-box-title__en font-16">{titleEN}</span>
       </span>
       {placeHolder ? (
-        <ModalSearchBar placeHolder={placeHolder} width="short" />
+        <AdminSearchBar placeHolder={placeHolder} width="short" />
       ) : null}
     </div>
   );
