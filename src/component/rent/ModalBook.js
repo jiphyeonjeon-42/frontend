@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import ModalSearchBar from "../utils/ModalSearchBar";
 import { useModalSearchInput } from "../../atom/useSearchInput";
-import ModalPagination from "./ModalPagination";
+import AdminPagination from "../utils/AdminPagination";
 import BookList from "./BookList";
 import "../../css/ModalBook.css";
 
@@ -83,7 +83,7 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
         />
       ))}
       <div className="modal-user__pagination">
-        <ModalPagination
+        <AdminPagination
           userPage={bookSearchPage}
           setUserPage={setBookSearchPage}
           pageRange={bookSearchPageRange}

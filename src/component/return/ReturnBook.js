@@ -4,7 +4,7 @@ import axios from "axios";
 import BackGround from "../utils/BackGround";
 import Title from "../utils/Title";
 import "../../css/ReturnBook.css";
-import ModalPagination from "../rent/ModalPagination";
+import AdminPagination from "../utils/AdminPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import SubTitle from "../utils/SubTitle";
 import MidModal from "../utils/MidModal";
@@ -110,7 +110,7 @@ const ReturnBook = () => {
             />
           ))}
           <div className="returnBook-table__pagination">
-            <ModalPagination
+            <AdminPagination
               userPage={returnBookPage}
               setUserPage={setReturnBookPage}
               pageRange={returnBookPageRange}

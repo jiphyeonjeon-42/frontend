@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import ModalSearchBar from "../utils/ModalSearchBar";
 import { useModalSearchInput } from "../../atom/useSearchInput";
-import ModalPagination from "./ModalPagination";
+import AdminPagination from "../utils/AdminPagination";
 import UserList from "./UserList";
 import "../../css/ModalUser.css";
 
@@ -86,7 +86,7 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
         />
       ))}
       <div className="modal-user__pagination">
-        <ModalPagination
+        <AdminPagination
           userPage={userSearchPage}
           setUserPage={setUserSearchPage}
           pageRange={userSearchPageRange}
