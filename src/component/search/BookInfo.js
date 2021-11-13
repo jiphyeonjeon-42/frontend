@@ -81,9 +81,9 @@ const BookInfo = ({
 
 BookInfo.propTypes = {
   id: PropTypes.number.isRequired,
-  isbn: PropTypes.number.isRequired,
+  isbn: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  author: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  author: PropTypes.string.isRequired,
   publisher: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   publishedAt: PropTypes.string.isRequired,

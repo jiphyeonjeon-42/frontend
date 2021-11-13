@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 import "../../css/Sort.css";
 
 const SortBy = ({ userWord, cateIndex, userSort, sortName, text }) => {
@@ -59,6 +59,20 @@ const Sort = ({ userWord, userSort, cateIndex }) => {
       />
     </div>
   );
+};
+
+SortBy.propTypes = {
+  userWord: PropTypes.string.isRequired,
+  userSort: PropTypes.string.isRequired,
+  cateIndex: PropTypes.number.isRequired,
+  sortName: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};
+
+Sort.propTypes = {
+  userWord: PropTypes.string.isRequired,
+  userSort: PropTypes.string.isRequired,
+  cateIndex: PropTypes.number.isRequired,
 };
 
 export default Sort;

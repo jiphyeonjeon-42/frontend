@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 // import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 import CheckIcon from "../../img/check_icon.svg";
 import RedCheckIcon from "../../img/check_icon_red.svg";
 import "../../css/Available.css";
@@ -26,6 +26,11 @@ const Available = ({ isAvailable, setAvailable }) => {
       </div>
     </button>
   );
+};
+
+Available.propTypes = {
+  isAvailable: PropTypes.bool.isRequired,
+  setAvailable: PropTypes.func.isRequired,
 };
 
 export default Available;
