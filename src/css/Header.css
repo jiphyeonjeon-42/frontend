@@ -69,10 +69,8 @@ a:active {
 }
 
 .gnb__admin__button {
+  all: unset;
   margin: 0 60px 0 0;
-  padding: 0 0 0 0;
-  border: 0;
-  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
