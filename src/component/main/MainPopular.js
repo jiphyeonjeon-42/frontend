@@ -22,6 +22,7 @@ const MainPopluar = () => {
   const [docs, setDocs] = useState([]);
   const [main, setMain] = useState(mainDefault);
   const setGlobalError = useSetRecoilState(globalModal);
+
   useEffect(async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/books/info/`, {
@@ -36,9 +37,12 @@ const MainPopluar = () => {
         setMain(items[0]);
       })
       .catch(error => {
+        const message = error.response.data.message
+          ? error.response.data.message
+          : error.message;
         setGlobalError({
           view: true,
-          error: `books/info/search=popular ${error.name} ${error.message}`,
+          error: `예상치 못한 오류가 발생했습니다.\nbooks/info/search=popular Error ${message}`,
         });
       });
   }, []);

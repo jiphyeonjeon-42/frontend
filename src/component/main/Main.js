@@ -8,14 +8,15 @@ import { useSearchInput } from "../../atom/useSearchInput";
 import globalModal from "../../atom/globalModal";
 import MiniModal from "../utils/MiniModal";
 import "../../css/Main.css";
+import ModalContentsOnlyTitle from "../utils/ModalContentsTitleWithMessage";
 
 const Main = () => {
   const setInputValue = useSetRecoilState(useSearchInput);
   const [miniModal, setMiniModal] = useRecoilState(globalModal);
-  const handleModal = () => {
+  const closeModal = () => {
     setMiniModal({
-      view: !miniModal.view,
-      error: miniModal.error,
+      view: false,
+      error: "",
     });
   };
   useEffect(() => {
@@ -23,7 +24,14 @@ const Main = () => {
   }, []);
   return (
     <main className="main-wrapper">
-      {miniModal.view && <MiniModal handleModal={handleModal} type="error" />}
+      {miniModal.view && (
+        <MiniModal closeModal={closeModal}>
+          <ModalContentsOnlyTitle
+            closeModal={closeModal}
+            title={miniModal.error}
+          />
+        </MiniModal>
+      )}
       <BackGround page="main" />
       <MainHome />
       <MainNew />

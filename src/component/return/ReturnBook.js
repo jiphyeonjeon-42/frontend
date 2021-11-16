@@ -7,11 +7,11 @@ import "../../css/ReturnBook.css";
 import AdminPagination from "../utils/AdminPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import SubTitle from "../utils/SubTitle";
-import MidModal from "../utils/MidModal";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
 import Login from "../../img/login_icon.svg";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
+import ReturnModal from "./ReturnModal";
 
 const ReturnBook = () => {
   const [modal, setModal] = useState(false);
@@ -55,7 +55,6 @@ const ReturnBook = () => {
     });
     setReturnBookList(items);
     setLastreturnBookPage(meta.totalPages);
-    console.log(returnBookList);
   };
 
   useEffect(() => {
@@ -120,7 +119,7 @@ const ReturnBook = () => {
           </div>
         </div>
       </section>
-      {modal && <MidModal lendingId={lendingId} handleModal={closeModal} />}
+      {modal && <ReturnModal lendingId={lendingId} closeModal={closeModal} />}
     </main>
   );
 };

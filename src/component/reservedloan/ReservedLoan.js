@@ -63,7 +63,6 @@ const ReservedLoan = () => {
     });
     setReservedLoanList(items);
     setLastresevedLoanPage(meta.totalPages);
-    console.log(reservedLoanList);
   };
 
   useEffect(() => {
@@ -136,7 +135,7 @@ const ReservedLoan = () => {
         </div>
       </section>
       {modal && (
-        <ReservedModal reservedInfo={reservedInfo} handleModal={closeModal} />
+        <ReservedModal reservedInfo={reservedInfo} closeModal={closeModal} />
       )}
     </main>
   );

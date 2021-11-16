@@ -25,10 +25,13 @@ const Auth = () => {
         window.localStorage.setItem("user", JSON.stringify(newUser));
         window.history.go(-2);
       })
-      .catch(response => {
+      .catch(error => {
+        const message = error.response.data.message
+          ? error.response.data.message
+          : error.message;
         setGlobalModal({
           view: true,
-          error: `me ${response.name} ${response.message}`,
+          error: `예상치 못한 오류가 발생했습니다.\nme Error ${message}`,
         });
       });
   }, []);

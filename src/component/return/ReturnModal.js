@@ -1,35 +1,30 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import MiniModal from "../utils/MiniModal";
 import MidModal from "../utils/MidModal";
 import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import RentModalContents from "./RentModalContents";
+import ReturnModalContents from "./ReturnModalContents";
 
-const RentModal = ({ selectUser, selectBooks, handleModal }) => {
+const ReturnModal = ({ lendingId, closeModal }) => {
   const [miniModalContents, setMiniModalContents] = useState("");
-  const [lendResult, setLendResult] = useState(false);
+  const [returnResult, setReturnResult] = useState(false);
 
   const closeMiniModal = () => {
     setMiniModalContents("");
-    handleModal();
+    closeModal();
     window.location.reload();
   };
-  const bookTitle =
-    selectBooks.length === 1
-      ? selectBooks[0].info.title
-      : `${selectBooks[0].info.title}\n${selectBooks[1].info.title}`;
 
   return (
     <>
       {miniModalContents ? (
         <MiniModal closeModal={closeMiniModal}>
-          {lendResult ? (
+          {returnResult ? (
             <ModalContentsTitleWithMessage
               closeModal={closeMiniModal}
-              title="대출이 완료되었습니다."
-              message={bookTitle}
+              title="반납이 완료되었습니다."
+              message={miniModalContents}
             />
           ) : (
             <ModalContentsOnlyTitle
@@ -39,13 +34,12 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
           )}
         </MiniModal>
       ) : (
-        <MidModal closeModal={handleModal}>
-          <RentModalContents
-            selectUser={selectUser}
-            selectBooks={selectBooks}
-            closeModal={handleModal}
+        <MidModal closeModal={closeModal}>
+          <ReturnModalContents
+            lendingId={lendingId}
+            closeModal={closeModal}
             setMiniModalContents={setMiniModalContents}
-            setLendResult={setLendResult}
+            setReturnResult={setReturnResult}
           />
         </MidModal>
       )}
@@ -53,10 +47,9 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
   );
 };
 
-RentModal.propTypes = {
-  handleModal: PropTypes.func.isRequired,
-  //   selectUser: PropTypes.object.isRequired,
-  //   selectBooks: PropTypes.object.isRequired,
-};
+export default ReturnModal;
 
-export default RentModal;
+ReturnModal.propTypes = {
+  lendingId: PropTypes.number.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};
