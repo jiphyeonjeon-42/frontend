@@ -22,7 +22,7 @@ const MainPopularBookList = ({ docs, setMain }) => {
     index -= 1;
     setPage(index);
   };
-  const transNum = -2142 - 16 + (206 + 32) * (docs.length - 3 * page);
+  const transNum = -32 - 3 * 238 * page;
 
   return (
     <div className="main-popular__booklist">
