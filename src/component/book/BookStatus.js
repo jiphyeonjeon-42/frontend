@@ -6,9 +6,11 @@ import "../../css/BookStatus.css";
 import ArrRes from "../../img/arrow_right_res.svg";
 import ArrDef from "../../img/arrow_right_res_default.svg";
 import MiniModal from "../utils/MiniModal";
+import Reservation from "../reservation/Reservation";
 
 const BookStatus = ({ id, callSign, dueDate, status, index }) => {
-  const [miniModal, setMiniModal] = useState(false);
+  const [miniModalView, setMiniModalView] = useState(false);
+  const [miniModalClosable, setMiniModalClosable] = useState(true);
   const user = useRecoilValue(userState);
   const openModal = () => {
     if (dueDate === "-") {
@@ -18,11 +20,11 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
       window.location = `${process.env.REACT_APP_API}/auth/oauth`;
       return;
     }
-    setMiniModal(true);
+    setMiniModalView(true);
   };
 
   const closeModal = () => {
-    setMiniModal(false);
+    if (miniModalClosable) setMiniModalView(false);
   };
 
   const doubleDigit = number => {
@@ -49,8 +51,14 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
           alt="Arr"
         />
       </button>
-      {miniModal && (
-        <MiniModal handleModal={closeModal} typeProps="confirm" bookId={id} />
+      {miniModalView && (
+        <MiniModal closeModal={closeModal}>
+          <Reservation
+            bookId={id}
+            closeModal={closeModal}
+            setClosable={setMiniModalClosable}
+          />
+        </MiniModal>
       )}
     </div>
   );

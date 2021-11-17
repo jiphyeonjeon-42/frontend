@@ -36,9 +36,12 @@ const MainNew = () => {
         setDocs([...items]);
       })
       .catch(error => {
+        const message = error.response.data.message
+          ? error.response.data.message
+          : error.message;
         setGlobalError({
           view: true,
-          error: `books/info/search=new ${error.name} ${error.message}`,
+          error: `예상치 못한 오류가 발생했습니다.\nbooks/info/search=new Error ${message}`,
         });
       });
   }, []);

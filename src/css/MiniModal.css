@@ -1,5 +1,6 @@
 @import url(./Modal.css);
 
+
 .modal__background.mini {
   width: 100%;
 }
@@ -7,7 +8,10 @@
 .modal__container.mini {
   width: 800px;
   height: 460px;
+  border: 0;
+  padding: 0;
   text-align: left;
+  white-space: pre-wrap;
 }
 
 .modal__close-button.mini {
@@ -45,7 +49,7 @@
 .mini-modal__text__message {
   margin-top: 40px;
   width: 100%;
-  white-space: normal;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 
