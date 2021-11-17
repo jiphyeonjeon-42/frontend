@@ -47,7 +47,7 @@ const ReservedLoan = () => {
     if (isProceeding && isFinish) return "proceeding,finish";
     if (isProceeding) return "proceeding";
     if (isFinish) return "finish";
-    return "";
+    return "proceeding";
   };
 
   const fetchReservedLoanData = async () => {
