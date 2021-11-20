@@ -1,22 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "../../css/MainPopularBook.css";
+import IMGERR from "../../img/image_onerror.svg";
 
 const MainPopularBook = ({ book, setMain }) => {
   function onMain() {
     setMain(book);
   }
+  function subtituteImg(e) {
+    e.target.src = IMGERR;
+  }
   return (
     <button
       className="main-popular__booklist__book-button"
       type="button"
-      value="wow"
       onClick={onMain}
     >
       <img
         className="main-popular__booklist__book-cover"
         src={book.image}
         alt={book.title}
+        onError={subtituteImg}
       />
       <p className="font-16-bold color-2d main-popular__booklist__title">
         {book.title}

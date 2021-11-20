@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import IMGERR from "../../img/image_onerror.svg";
 
 const MainNewBook = ({ book }) => {
+  function subtituteImg(e) {
+    e.target.src = IMGERR;
+  }
   return (
     <div className="main-new__book">
       <Link
@@ -13,7 +17,12 @@ const MainNewBook = ({ book }) => {
           },
         }}
       >
-        <img className="main-new__book-img" src={book.image} alt="new" />
+        <img
+          className="main-new__book-img"
+          src={book.image}
+          alt="new"
+          onError={subtituteImg}
+        />
       </Link>
     </div>
   );
