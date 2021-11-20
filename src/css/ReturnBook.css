@@ -1,17 +1,17 @@
 .returnbook-main {
-  min-width: 1440px;
+  min-width: 1200px;
   margin: 0px auto;
 }
 .returnbook-title {
   position: relative;
-  padding: 89px 270px 60px 270px;
+  padding: 89px 150px 60px 150px;
   min-width: 900px;
   height: 107px;
   z-index: 2;
 }
 .returnbook-subtitle {
   min-width: 900px;
-  padding: 118px 270px 120px 270px;
+  padding: 118px 150px 120px 150px;
   margin: auto;
 }
 

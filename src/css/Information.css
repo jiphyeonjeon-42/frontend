@@ -14,14 +14,14 @@
 
 .information-wraper {
   position: relative;
-  padding: 0 270px 60px 0;
+  padding: 0 150px 60px 0;
   min-width: 900px;
   z-index: 2;
 }
 
 .information-title {
   position: relative;
-  padding: 89px 270px 60px 270px;
+  padding: 89px 150px 60px 150px;
   min-width: 900px;
   height: 107px;
   z-index: 2;
@@ -30,7 +30,7 @@
 .information-section {
   min-width: 900px;
   max-width: 1200px;
-  padding: 0 270px 0 270px;
+  padding: 0 150px 0 150px;
   margin: auto;
 }
 
