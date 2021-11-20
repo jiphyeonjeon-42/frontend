@@ -2,13 +2,27 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
-const UserConfirm = ({ bookId, closeModal, onConfirm }) => {
+const UserConfirm = ({
+  bookId,
+  closeModal,
+  onConfirm,
+  setReservationStep,
+  setErrorMessage,
+}) => {
   const [expectedRank, setExpectedRank] = useState(-1);
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API}/books/${bookId}/reservations/count/`)
       .then(response => {
         setExpectedRank(response.data.count);
+      })
+      .catch(error => {
+        setReservationStep("failure");
+        setErrorMessage(
+          error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        );
       });
   }, []);
   const onCancel = () => {
@@ -54,4 +68,6 @@ UserConfirm.propTypes = {
   bookId: PropTypes.number.isRequired,
   closeModal: PropTypes.func.isRequired,
   onConfirm: PropTypes.func.isRequired,
+  setReservationStep: PropTypes.func.isRequired,
+  setErrorMessage: PropTypes.func.isRequired,
 };
