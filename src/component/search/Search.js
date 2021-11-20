@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import axios from "axios";
@@ -184,7 +185,7 @@ const Search = ({ match, location }) => {
             userSort={userSort}
             cateIndex={parseInt(cateIndex, 10)}
           />
-          <Available isAvailable={isAvailable} setAvailable={setAvailable} />
+          {/* <Available isAvailable={isAvailable} setAvailable={setAvailable} /> */}
         </div>
         <Books bookList={bookList} isLoading={isLoading} />
         <Pagination
