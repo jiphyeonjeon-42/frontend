@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -17,6 +18,7 @@ const BookInfo = ({
   bread,
 }) => {
   const parseDate = publishedDate => {
+    if (!publishedDate) return { year: null, month: null, day: null };
     const [year, month, day] = publishedDate.split("-");
     return { year, month, day };
   };
@@ -66,7 +68,7 @@ const BookInfo = ({
           <div className="book-info__published-at font-16 color-54">
             <span>발행연도</span>
             <span className="book-info__separator-half" />
-            <span>{`${year}.${month}`}</span>
+            <span>{year && month ? `${year}.${month}` : "-"}</span>
           </div>
           <div className="book-info__isbn font-16 color-54">
             <span>표준부호</span>
@@ -92,7 +94,8 @@ BookInfo.propTypes = {
   author: PropTypes.string.isRequired,
   publisher: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  publishedAt: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  publishedAt: PropTypes.object,
   category: PropTypes.string.isRequired,
   bread: PropTypes.string.isRequired,
 };
