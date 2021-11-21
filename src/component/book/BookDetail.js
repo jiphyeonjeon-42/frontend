@@ -6,6 +6,7 @@ import Title from "../utils/Title";
 import "../../css/BookDetail.css";
 import BackGround from "../utils/BackGround";
 import BookStatus from "./BookStatus";
+import IMGERR from "../../img/image_onerror.svg";
 // eslint-disable-next-line react/prop-types
 
 const BookDetail = ({ location, match }) => {
@@ -22,6 +23,10 @@ const BookDetail = ({ location, match }) => {
   };
 
   useEffect(fetchData, []);
+
+  function subtituteImg(e) {
+    e.target.src = IMGERR;
+  }
 
   return (
     <main className="bookdetail-main">
@@ -43,7 +48,7 @@ const BookDetail = ({ location, match }) => {
         </div>
         <div className="bookcontent">
           <div className="bookDetail__photo">
-            <img src={data.image} alt={data.title} />
+            <img src={data.image} alt={data.title} onError={subtituteImg} />
           </div>
           <div className="bookDetail__info">
             <span className="bookinfo__title color-red">도서정보</span>

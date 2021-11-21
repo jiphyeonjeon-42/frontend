@@ -1,17 +1,17 @@
 .reservedLoan-main {
-  min-width: 1440px;
+  min-width: 1200px;
   margin: 0px auto;
 }
 .reservedLoan-title {
   position: relative;
-  padding: 89px 270px 60px 270px;
+  padding: 89px 0 60px ;
   min-width: 900px;
   height: 107px;
   z-index: 2;
 }
 .reservedLoan-subtitle {
   min-width: 900px;
-  padding: 118px 270px 120px 270px;
+  padding: 118px 0 120px ;
   margin: auto;
 }
 

@@ -20,7 +20,7 @@ const QnA = ({ isOpen, question, answer, link }) => {
         <span className="question__text font-28-bold color-54">{question}</span>
       </button>
       {onOff ? (
-        <span className="qna__answer font-16 color-a4">
+        <span className="qna__answer font-16 color-54">
           <a href="/" className={`${!link && "display-none"}`}>
             클릭
           </a>

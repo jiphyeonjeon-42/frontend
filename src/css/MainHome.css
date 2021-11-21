@@ -1,6 +1,6 @@
 
 .main-home {
-  padding: 0 270px 0 270px;
+  padding: 0 150px 0 150px;
   position: relative;
   z-index: 2;
 }
@@ -52,4 +52,10 @@
 
 .main-home__scroll_icon {
   margin-top: 16px;
+}
+
+@media screen and (max-width:1200px){
+  .main-home__scroll {
+    display: none;
+  }
 }

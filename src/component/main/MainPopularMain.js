@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import IMGERR from "../../img/image_onerror.svg";
 
 const MainPopularMain = ({ main }) => {
+  function subtituteImg(e) {
+    e.target.src = IMGERR;
+  }
   return (
     <>
       <div className="main-popular__description color-54">
@@ -40,6 +44,7 @@ const MainPopularMain = ({ main }) => {
             src={main.image}
             alt={main.title}
             className="main-popular__cover-img"
+            onError={subtituteImg}
           />
           <div className="main-popular__cover-more font-20 color-ff">
             도서 자세히 보기

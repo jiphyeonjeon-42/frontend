@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import LinkToDetail from "../../img/link_to_detail.svg";
 import "../../css/BookInfo.css";
+import IMGERR from "../../img/image_onerror.svg";
 
 const BookInfo = ({
   id,
@@ -21,6 +22,10 @@ const BookInfo = ({
   };
 
   const { year, month } = parseDate(publishedAt);
+
+  function subtituteImg(e) {
+    e.target.src = IMGERR;
+  }
 
   return (
     <div className="book-info-wraper">
@@ -44,6 +49,7 @@ const BookInfo = ({
           src={image}
           alt={title}
           title={title}
+          onError={subtituteImg}
         />
         {/* <div className="book-info__available color-ff font-14">대여가능</div> */}
         <div className="book-info__info">

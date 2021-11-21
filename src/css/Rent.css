@@ -1,6 +1,6 @@
 .rent-title {
   position: relative;
-  padding: 89px 270px 60px 270px;
+  padding: 89px 150px 60px 150px;
   min-width: 900px;
   height: 107px;
   z-index: 2;
@@ -8,13 +8,13 @@
 
 .rent-subtitle {
   min-width: 900px;
-  padding: 118px 270px 120px 270px;
+  padding: 118px 150px 120px 150px;
   margin: auto;
 }
 
 .inquire-box-wrapper {
-  min-width: 1440px;
-  /* padding: 0 270px 0 270px; */
+  min-width: 1200px;
+  /* padding: 0 150px 0 150px; */
   margin: auto;
   align-items: center;
   margin-bottom: 60px;

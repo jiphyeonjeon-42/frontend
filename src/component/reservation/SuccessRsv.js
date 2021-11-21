@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const successMessage = lendabledate => {
   if (lendabledate)
-    return `대출 가능 일자는 ${lendabledate}.입니다. 감사합니다.`;
+    return `대출 가능 예상일자는 ${lendabledate}.입니다. \n대출이 가능해지면 Slack 알림을 보내드리겠습니다.`;
   return "대출이 가능해지면 Slack 알림을 보내드리겠습니다.";
 };
 

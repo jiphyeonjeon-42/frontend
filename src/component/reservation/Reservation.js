@@ -19,7 +19,7 @@ const Reservation = ({ bookId, closeModal, setClosable }) => {
         setPropsNumber(response.data.count);
         setReservationStep("success");
         if (response.data.count === 1) {
-          const date = response.data.lendarableDate;
+          const date = response.data.lenderableDate;
           setPropsString(date.slice(2, 10).replaceAll("-", "."));
         }
       })
@@ -37,7 +37,7 @@ const Reservation = ({ bookId, closeModal, setClosable }) => {
 
   const tryReservation = async () => {
     setClosable(false);
-    setReservationStep(1);
+    setReservationStep("");
     postReservation();
     setClosable(true);
   };
@@ -50,6 +50,8 @@ const Reservation = ({ bookId, closeModal, setClosable }) => {
             bookId={bookId}
             closeModal={closeModal}
             onConfirm={tryReservation}
+            setReservationStep={setReservationStep}
+            setErrorMessage={setPropsString}
           />
         );
       case "success":
