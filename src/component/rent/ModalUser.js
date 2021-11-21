@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import AdminSearchBar from "../utils/AdminSearchBar";
@@ -7,7 +8,6 @@ import AdminPagination from "../utils/AdminPagination";
 import UserList from "./UserList";
 import "../../css/ModalUser.css";
 
-// eslint-disable-next-line react/prop-types
 const ModalUser = ({ setSelectUser, setUserModal }) => {
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
@@ -80,9 +80,6 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
           user={user}
           setSelectUser={setSelectUser}
           setUserModal={setUserModal}
-          name={`Name${user.id}`}
-          lendCnt={user.id % 3}
-          isPenalty={user.id % 2 ? !user.isPenalty : user.isPenalty}
         />
       ))}
       <div className="modal-user__pagination">
@@ -99,3 +96,8 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
 };
 
 export default ModalUser;
+
+ModalUser.propTypes = {
+  setSelectUser: PropTypes.func.isRequired,
+  setUserModal: PropTypes.func.isRequired,
+};

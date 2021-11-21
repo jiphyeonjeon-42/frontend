@@ -10,17 +10,29 @@ const RentButton = ({ selectUser, selectBooks, setModal }) => {
     <div className="rent-button">
       <div className="rent-button__text font-16 color-a4">
         {selectUser && selectBooks.length > 0
-          ? `Name${selectUser.id}님에게 ${selectBooks[0].info.title}${
+          ? `${selectUser.login}님에게 ${selectBooks[0].info.title}${
               selectBooks[1] ? `, ${selectBooks[1].info.title}` : ``
             }를 대출합니다.`
           : "정보를 입력해주세요."}
       </div>
       <button
         className={`rent-button__button ${
-          selectUser && selectBooks.length > 0 ? "red" : "black"
+          selectUser &&
+          !selectUser.isPenalty &&
+          selectBooks.length > 0 &&
+          2 - selectUser.lendingCnt >= selectBooks.length
+            ? "red"
+            : "black"
         }-button font-20 color-ff`}
         type="button"
-        disabled={selectUser && selectBooks.length > 0 ? "" : "disabled"}
+        disabled={
+          selectUser &&
+          !selectUser.isPenalty &&
+          selectBooks.length > 0 &&
+          2 - selectUser.lendingCnt >= selectBooks.length
+            ? ""
+            : "disabled"
+        }
         onClick={openRentModal}
       >
         도서 대출하기
