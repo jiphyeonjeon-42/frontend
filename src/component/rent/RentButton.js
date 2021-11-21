@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 import "../../css/RentButton.css";
@@ -42,8 +43,8 @@ const RentButton = ({ selectUser, selectBooks, setModal }) => {
 };
 
 RentButton.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  selectUser: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  selectUser: PropTypes.object,
   selectBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   setModal: PropTypes.func.isRequired,
 };

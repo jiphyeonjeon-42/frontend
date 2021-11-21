@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/forbid-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 import { useSetRecoilState } from "recoil";
@@ -48,8 +50,17 @@ const InquireBoxUser = ({ selectUser, setSelectUser }) => {
       {selectUser ? (
         <div className="inquire-box-user-active">
           <div className="inquire-box-user__id-undo">
-            <div className="inquire-box-user__id font-28-bold color-54">
-              {selectUser.login}
+            <div>
+              <span className="inquire-box-user__id font-28-bold color-54">
+                {selectUser.login}
+              </span>
+              <span className="font-16 color-red">
+                {selectUser.isPenalty
+                  ? "연체(연체종료일: )"
+                  : selectUser.lendingCnt >= 2
+                  ? "대출제한(2권 이상 대출)"
+                  : null}
+              </span>
             </div>
             <button
               className="inquire-box-user__undo-button color-a4"
@@ -65,7 +76,7 @@ const InquireBoxUser = ({ selectUser, setSelectUser }) => {
             </div>
             <div className="user__book-info">
               {selectUser.lendings.map((item, index) => (
-                <div>
+                <div key={item.id}>
                   {index >= 1 ? (
                     <div className="user__book-info__line" />
                   ) : null}
@@ -85,7 +96,7 @@ const InquireBoxUser = ({ selectUser, setSelectUser }) => {
             </div>
             <div className="user__book-info">
               {selectUser.reservations.map((item, index) => (
-                <div>
+                <div key={item.id}>
                   {index >= 1 ? (
                     <div className="user__book-info__line" />
                   ) : null}
@@ -130,6 +141,6 @@ export default InquireBoxUser;
 
 InquireBoxUser.propTypes = {
   setSelectUser: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  selectUser: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  selectUser: PropTypes.object,
 };

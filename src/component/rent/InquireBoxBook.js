@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 import { useSetRecoilState } from "recoil";
@@ -80,6 +81,6 @@ InquireBoxBook.propTypes = {
   setSelectBooks: PropTypes.func.isRequired,
   selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
   shape: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  book: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  book: PropTypes.object,
 };

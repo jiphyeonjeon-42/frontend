@@ -69,7 +69,10 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
     <section className="modal-book">
       <div className="modal-book__search-bar">
         <div className="modal-book__text font-28-bold color-54">도서 정보</div>
-        <AdminSearchBar placeHolder="도서의 이름을 입력해주세요." />
+        <AdminSearchBar
+          width="long"
+          placeHolder="도서의 이름을 입력해주세요."
+        />
       </div>
       {bookList.map(book => (
         <BookList
@@ -98,6 +101,5 @@ export default ModalBook;
 ModalBook.propTypes = {
   setSelectBooks: PropTypes.func.isRequired,
   setUserModal: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  selectBooks: PropTypes.object.isRequired,
+  selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

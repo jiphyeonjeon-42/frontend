@@ -76,6 +76,7 @@ const RentModalContents = ({
       <div className="rent-modal__books">
         {selectBooks.map((selectBook, index) => (
           <div
+            key={selectBook.id}
             className={`rent-modal__book-info ${
               index === 0 ? "" : "second-book"
             }`}
