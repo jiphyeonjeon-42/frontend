@@ -36,7 +36,7 @@ const MainNew = () => {
         setDocs([...items]);
       })
       .catch(error => {
-        const message = error.response.data.message
+        const message = error.response
           ? error.response.data.message
           : error.message;
         setGlobalError({
