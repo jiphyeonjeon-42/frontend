@@ -77,7 +77,12 @@ const AdminPagination = ({
     <div className="admin-pagination">
       <PrePageButton pageRange={pageRange} setPageRange={setPageRange} />
       {pageRangeArr.map(n => (
-        <PageButton pageNum={n} userPage={userPage} setUserPage={setUserPage} />
+        <PageButton
+          key={n}
+          pageNum={n}
+          userPage={userPage}
+          setUserPage={setUserPage}
+        />
       ))}
       <NextPageButton
         pageRange={pageRange}

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import MiniModal from "../utils/MiniModal";
@@ -55,8 +54,9 @@ const RentModal = ({ selectUser, selectBooks, handleModal }) => {
 
 RentModal.propTypes = {
   handleModal: PropTypes.func.isRequired,
-  //   selectUser: PropTypes.object.isRequired,
-  //   selectBooks: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  selectUser: PropTypes.object.isRequired,
+  selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default RentModal;
