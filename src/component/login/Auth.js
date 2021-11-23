@@ -15,15 +15,15 @@ const Auth = () => {
       .then(response => {
         const { data } = response;
         const nowDate = new Date();
-        const expireDeta = new Date();
-        expireDeta.setDate(nowDate.getDate() + 14);
+        const expireDate = new Date();
+        expireDate.setDate(nowDate.getDate() + 14);
         const newUser = {
           isLogin: true,
           id: data.id,
           userId: data.intra,
           isAdmin: data.librarian,
           imgUrl: data.imageUrl,
-          expire: expireDeta.toISOString(),
+          expire: expireDate.toISOString(),
         };
         setUser(newUser);
         window.localStorage.setItem("user", JSON.stringify(newUser));
