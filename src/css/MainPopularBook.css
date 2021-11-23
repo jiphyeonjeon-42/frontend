@@ -17,4 +17,6 @@
 .main-popular__booklist__title {
   margin-top: 16px;
   margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
