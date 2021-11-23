@@ -12,12 +12,18 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
   const [miniModalView, setMiniModalView] = useState(false);
   const [miniModalClosable, setMiniModalClosable] = useState(true);
   const user = useRecoilValue(userState);
+
+  const getHost = () => {
+    return `${window.location.protocol}//${window.location.host}`;
+  };
   const openModal = () => {
     if (dueDate === "-") {
       return;
     }
     if (!user.isLogin) {
-      window.location = `${process.env.REACT_APP_API}/auth/oauth`;
+      window.location = `${
+        process.env.REACT_APP_API
+      }/auth/oauth?clientURL=${getHost()}`;
       return;
     }
     setMiniModalView(true);
