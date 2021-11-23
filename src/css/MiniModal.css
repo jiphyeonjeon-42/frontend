@@ -44,6 +44,7 @@
 .mini-modal__text__title {
   padding-top: 40px;
   line-height: 56px;
+  white-space: pre-wrap;
 }
 
 .mini-modal__text__message {

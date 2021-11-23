@@ -70,6 +70,8 @@
 
 .user__book-info__title {
   margin-bottom: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user__book-info__line {
