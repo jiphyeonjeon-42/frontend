@@ -22,8 +22,10 @@ function Routes() {
 
   useEffect(() => {
     const localUser = JSON.parse(window.localStorage.getItem("user"));
-    if (localUser && !user.isLogin && localUser.isLogin) {
-      setUser(localUser);
+    const nowDate = new Date();
+    if (localUser && localUser.isLogin) {
+      const expireDate = new Date(localUser.expire);
+      if (nowDate < expireDate) setUser(localUser);
     }
   }, []);
 

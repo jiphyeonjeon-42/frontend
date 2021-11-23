@@ -17,6 +17,11 @@ const Header = () => {
     setToggleLNB(!toggleLNB);
   };
 
+  const nowDate = new Date();
+  const expireDate = new Date(user.expire);
+  if (nowDate > expireDate)
+    window.location = `${process.env.REACT_APP_API}/auth/oauth`;
+
   return (
     <header className="header">
       <div className="header__logo">
