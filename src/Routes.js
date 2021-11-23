@@ -22,7 +22,7 @@ function Routes() {
 
   useEffect(() => {
     const localUser = JSON.parse(window.localStorage.getItem("user"));
-    if (localUser && !user.isLogin && localUser.isLogin) {
+    if (localUser && !user.isAdmin && localUser.isAdmin) {
       setUser(localUser);
     }
   }, []);
@@ -37,9 +37,9 @@ function Routes() {
         <Route path="/info/:id" exact component={BookDetail} />
         <Route path="/auth" exact component={Auth} />
         <Route path="/logout" exact component={Logout} />
-        {user.isLogin && <Route path="/rent" exact component={Rent} />}
-        {user.isLogin && <Route path="/return" exact component={ReturnBook} />}
-        {user.isLogin && (
+        {user.isAdmin && <Route path="/rent" exact component={Rent} />}
+        {user.isAdmin && <Route path="/return" exact component={ReturnBook} />}
+        {user.isAdmin && (
           <Route path="/reservation" exact component={ReservedLoan} />
         )}
         <Route component={NotFound} />

@@ -36,7 +36,7 @@ const Header = () => {
               <span className="gnb__info__text">이용안내</span>
             </Link>
           </li>
-          {user.isLogin && (
+          {user.isAdmin && (
             <li className="gnb__admin">
               <button
                 className="gnb__admin__button"
