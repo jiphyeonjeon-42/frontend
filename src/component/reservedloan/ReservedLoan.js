@@ -118,6 +118,7 @@ const ReservedLoan = () => {
           </div>
           {reservedLoanList.map(factor => (
             <ReservedTableList
+              key={factor.id}
               factor={factor}
               openModal={openModal}
               setInfo={setReservedInfo}
