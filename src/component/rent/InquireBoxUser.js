@@ -105,17 +105,16 @@ const InquireBoxUser = ({ selectUser, setSelectUser }) => {
                   </div>
                   <div className="font-16 color-54">
                     <span>{`예약순위 : ${
-                      item.count ? item.count : ""
-                    }순위`}</span>
-                    {item.lenderableDate ? (
+                      item.count ? `${item.count}순위` : "-"
+                    }`}</span>
+                    {/* {item.lenderableDate ? (
                       <span className="user__reservations-info">
-                        대출 가능일 :{" "}
-                        {item.lenderableDate ? item.lenderableDate : ""}
+                        대출 가능일 : {item.lenderableDate}
                       </span>
-                    ) : null}
+                    ) : null} */}
                     {item.endAt ? (
                       <span className="user__reservations-info">
-                        예약 혜택 종료일 : {item.endAt ? item.endAt : ""}
+                        예약 혜택 종료일 : {item.endAt}
                       </span>
                     ) : null}
                   </div>
