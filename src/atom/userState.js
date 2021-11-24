@@ -8,6 +8,7 @@ const userState = atom({
     userId: "",
     isAdmin: false,
     imgUrl: "",
+    expire: "",
   },
 });
 

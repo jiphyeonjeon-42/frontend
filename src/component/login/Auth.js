@@ -16,12 +16,16 @@ const Auth = () => {
       .get(`${process.env.REACT_APP_API}/auth/me`)
       .then(response => {
         const { data } = response;
+        const nowDate = new Date();
+        const expireDate = new Date();
+        expireDate.setDate(nowDate.getDate() + 14);
         const newUser = {
           isLogin: true,
           id: data.id,
           userId: data.intra,
           isAdmin: data.librarian,
           imgUrl: data.imageUrl,
+          expire: expireDate.toISOString(),
         };
         setUser(newUser);
         window.localStorage.setItem("user", JSON.stringify(newUser));
@@ -29,7 +33,7 @@ const Auth = () => {
         history.push("/");
       })
       .catch(error => {
-        const message = error.response.data.message
+        const message = error.response
           ? error.response.data.message
           : error.message;
         setGlobalModal({

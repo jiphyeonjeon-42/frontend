@@ -21,6 +21,17 @@ const Header = () => {
     setToggleLNB(!toggleLNB);
   };
 
+  const getHost = () => {
+    return `${window.location.protocol}//${window.location.host}`;
+  };
+
+  const nowDate = new Date();
+  const expireDate = new Date(user.expire);
+  if (nowDate > expireDate)
+    window.location = `${
+      process.env.REACT_APP_API
+    }/auth/oauth?clientURL=${getHost()}`;
+
   return (
     <header className="header">
       <div className="header__logo">
