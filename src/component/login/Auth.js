@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import userState from "../../atom/userState";
 import globalModal from "../../atom/globalModal";
@@ -8,6 +8,8 @@ import globalModal from "../../atom/globalModal";
 const Auth = () => {
   const setUser = useSetRecoilState(userState);
   const setGlobalModal = useSetRecoilState(globalModal);
+  // eslint-disable-next-line prefer-const
+  let history = useHistory();
 
   useEffect(async () => {
     await axios
@@ -23,7 +25,8 @@ const Auth = () => {
         };
         setUser(newUser);
         window.localStorage.setItem("user", JSON.stringify(newUser));
-        window.history.go(-2);
+        // window.history.go(-2);
+        history.push("/");
       })
       .catch(error => {
         const message = error.response.data.message
