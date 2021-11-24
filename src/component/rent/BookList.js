@@ -1,18 +1,10 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
 import React from "react";
 import PropTypes from "prop-types";
 import Arrow from "../../img/arrow_right_black.svg";
 import "../../css/BookList.css";
 
-const BookList = ({
-  book,
-  // isLenderable book.isLenderable 로 변경 예정
-  isLenderable,
-  setSelectBooks,
-  selectBooks,
-  setUserModal,
-}) => {
+const BookList = ({ book, setSelectBooks, selectBooks, setUserModal }) => {
   const seletOneOfBook = () => {
     if (setSelectBooks) {
       selectBooks.push(book);
@@ -39,7 +31,7 @@ const BookList = ({
       type="button"
       onClick={seletOneOfBook}
       disabled={
-        isAlreadySelected(book, selectBooks) || isLenderable === 0
+        isAlreadySelected(book, selectBooks) || book.isLenderable === false
           ? "disabled"
           : ""
       }
@@ -50,7 +42,7 @@ const BookList = ({
             {book.info.title ? book.info.title : `Book${book.id}`}
           </div>
           <div className="modal-book-list__valid font-16 color-red">
-            {isLenderable
+            {book.isLenderable
               ? isAlreadySelected(book, selectBooks)
                 ? "이미 선택됨"
                 : "대출 가능"
@@ -84,4 +76,7 @@ export default BookList;
 BookList.propTypes = {
   setSelectBooks: PropTypes.func.isRequired,
   setUserModal: PropTypes.func.isRequired,
+  selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  book: PropTypes.object.isRequired,
 };

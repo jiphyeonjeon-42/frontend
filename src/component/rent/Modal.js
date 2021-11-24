@@ -1,5 +1,6 @@
 import React from "react";
 import { atom, useRecoilState } from "recoil";
+import PropTypes from "prop-types";
 import CloseButton from "../../img/x_button.svg";
 import "../../css/Modal.css";
 import ModalBook from "./ModalBook";
@@ -7,7 +8,6 @@ import ModalUser from "./ModalUser";
 
 export const isModalOpen = atom({ key: "isModalOpen", default: 0 });
 
-// eslint-disable-next-line react/prop-types
 const Modal = ({ setSelectUser, setSelectBooks, selectBooks }) => {
   const [userModal, setUserModal] = useRecoilState(isModalOpen);
 
@@ -40,6 +40,12 @@ const Modal = ({ setSelectUser, setSelectBooks, selectBooks }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  setSelectBooks: PropTypes.func.isRequired,
+  setSelectUser: PropTypes.func.isRequired,
+  selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Modal;

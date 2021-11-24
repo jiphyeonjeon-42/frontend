@@ -22,7 +22,8 @@ InquireBoxTitle.propTypes = {
   Icon: PropTypes.string.isRequired,
   titleKO: PropTypes.string.isRequired,
   titleEN: PropTypes.string.isRequired,
-  placeHolder: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  placeHolder: PropTypes.string,
 };
 
 export default InquireBoxTitle;

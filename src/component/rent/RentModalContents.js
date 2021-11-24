@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../../css/RentModal.css";
@@ -70,15 +69,14 @@ const RentModalContents = ({
       <div className="rent-modal__user">
         <p className="font-16 color-red">유저정보</p>
         <span className="rent-modal__user__id font-28-bold color-54 margin-8">
-          Name{selectUser.id}
+          {selectUser.login}
         </span>
-        <span className="font-16 color-54">{`현재 대출권수 ( ${
-          selectUser.id % 3
-        } / 2 )`}</span>
+        <span className="font-16 color-54">{`현재 대출권수 ( ${selectUser.lendingCnt} / 2 )`}</span>
       </div>
       <div className="rent-modal__books">
         {selectBooks.map((selectBook, index) => (
           <div
+            key={selectBook.id}
             className={`rent-modal__book-info ${
               index === 0 ? "" : "second-book"
             }`}
@@ -145,6 +143,9 @@ export default RentModalContents;
 
 RentModalContents.propTypes = {
   closeModal: PropTypes.func.isRequired,
-  //   selectUser: PropTypes.object.isRequired,
-  //   selectBooks: PropTypes.object.isRequired,
+  setMiniModalContents: PropTypes.func.isRequired,
+  setLendResult: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  selectUser: PropTypes.object.isRequired,
+  selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

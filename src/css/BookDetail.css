@@ -43,6 +43,8 @@
   font-weight: bold;
   margin-top: 8px;
   margin-bottom: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .bookDetail__info {
   width: 800px;
@@ -73,6 +75,8 @@
 .bookinfo__title {
   font-size: 16px;
   font-weight: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .bookState {
   margin-top: 20px;

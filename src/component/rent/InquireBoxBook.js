@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
+/* eslint-disable react/forbid-prop-types */
+import React from "react";
 import PropTypes from "prop-types";
 import { useSetRecoilState } from "recoil";
 import { isModalOpen } from "./Modal";
@@ -15,13 +15,8 @@ const InquireBoxBook = ({ shape, book, selectBooks, setSelectBooks }) => {
     setUserModal(BOOK_MODAL);
   };
 
-  useEffect(() => {
-    console.log("selectBooks", selectBooks);
-  }, [selectBooks]);
-
   const deleteBook = () => {
     if (setSelectBooks && book) {
-      console.log(selectBooks.indexOf(book));
       setSelectBooks(selectBooks.splice(1 - selectBooks.indexOf(book), 1));
     }
   };
@@ -84,4 +79,8 @@ export default InquireBoxBook;
 
 InquireBoxBook.propTypes = {
   setSelectBooks: PropTypes.func.isRequired,
+  selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  shape: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  book: PropTypes.object,
 };

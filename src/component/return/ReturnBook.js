@@ -103,6 +103,7 @@ const ReturnBook = () => {
           </div>
           {returnBookList.map(factor => (
             <ReturnBookTable
+              key={factor.id}
               factor={factor}
               openModal={openModal}
               setLendingId={setLendingId}

@@ -8,6 +8,10 @@ import Admin from "../../img/admin_icon.svg";
 import "../../css/Header.css";
 import userState from "../../atom/userState";
 
+const getHost = () => {
+  return `${window.location.protocol}//${window.location.host}`;
+};
+
 const Header = () => {
   const user = useRecoilValue(userState);
   const [toggleLNB, setToggleLNB] = useState(false);
@@ -47,7 +51,7 @@ const Header = () => {
               <span className="gnb__info__text">이용안내</span>
             </Link>
           </li>
-          {user.isLogin && (
+          {user.isAdmin && (
             <li className="gnb__admin">
               <button
                 className="gnb__admin__button"
@@ -108,7 +112,9 @@ const Header = () => {
             ) : (
               <a
                 className="gnb__login"
-                href={`${process.env.REACT_APP_API}/auth/oauth`}
+                href={`${
+                  process.env.REACT_APP_API
+                }/auth/oauth?clientURL=${getHost()}`}
               >
                 <img src={Login} className="gnb__login__icon" alt="login" />
 

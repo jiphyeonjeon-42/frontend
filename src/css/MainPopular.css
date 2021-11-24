@@ -50,6 +50,8 @@
 .main-popular__title {
   margin-top: 12px;
   margin-bottom: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .main-popular__detail {
