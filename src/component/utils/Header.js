@@ -8,10 +8,6 @@ import Admin from "../../img/admin_icon.svg";
 import "../../css/Header.css";
 import userState from "../../atom/userState";
 
-const getHost = () => {
-  return `${window.location.protocol}//${window.location.host}`;
-};
-
 const Header = () => {
   const user = useRecoilValue(userState);
   const [toggleLNB, setToggleLNB] = useState(false);

@@ -27,7 +27,6 @@ function Routes() {
     if (localUser && localUser.isLogin) {
       const expireDate = new Date(localUser.expire);
       if (nowDate < expireDate) setUser(localUser);
-
     }
   }, []);
 
