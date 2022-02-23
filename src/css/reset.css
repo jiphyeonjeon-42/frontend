@@ -1,4 +1,7 @@
-html,
+html {
+  font-size: 62.5%;
+}
+
 body,
 div,
 span,
@@ -178,71 +181,71 @@ body {
 }
 
 .font-48-bold {
-  font-size: 48px;
+  font-size: 4.8rem;
   font-weight: bold;
 }
 
 .font-40-bold {
-  font-size: 40px;
+  font-size: 4rem;
   font-weight: bold;
 }
 
 .font-32-bold {
-  font-size: 32px;
+  font-size: 3.2rem;
   font-weight: bold;
 }
 .font-28-bold {
-  font-size: 28px;
+  font-size: 2.8rem;
   font-weight: bold;
 }
 
 .font-20-bold {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: bold;
 }
 
 .font-20 {
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: normal;
 }
 
 .font-18-bold--letterspacing {
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: bold;
   letter-spacing: -0.36px;
 }
 
 .font-18 {
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: normal;
 }
 
 .font-18-bold {
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: bold;
 }
 
 .font-16-bold {
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: bold;
 }
 
 .font-16 {
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: normal;
 }
 
 .font-16-light {
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: lighter;
 }
 
 .font-14 {
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: normal;
 }
 
 .font-12 {
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: normal;
 }
