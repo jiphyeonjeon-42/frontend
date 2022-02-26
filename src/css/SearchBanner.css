@@ -1,0 +1,29 @@
+.search-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 29rem 12rem 10rem 12rem;
+  min-width: 52.8rem;
+}
+
+.search-banner__title__ko {
+  line-height: 1.48;
+}
+
+.search-banner__title__en {
+  margin-top: 1.2rem;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 1199px) {
+  .search-banner__title__ko {
+    font-size: 4rem !important;
+  }
+
+  .search-banner__title__en {
+    margin-top: 0.8rem;
+  }
+  .search-banner {
+    padding: 23rem 12rem 8rem 12rem;
+  }
+}
