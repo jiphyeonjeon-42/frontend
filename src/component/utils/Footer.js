@@ -52,7 +52,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="footer__info color-ff">
+        <div className="footer__information color-ff">
           <Link className="color-ff" to={{ pathname: `/information` }}>
             이용안내
           </Link>

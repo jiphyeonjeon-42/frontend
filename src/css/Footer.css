@@ -1,58 +1,79 @@
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: #2d2d2d;
-  min-width: 1200px;
-  position: relative;
+  min-width: 78.4rem;
   z-index: 2;
+  padding: 6.4rem 9rem 8rem 9rem;
+  position: relative;
+  margin: auto;
 }
 
 .footer-wrapper {
-  width: 960px;
-  padding: 64px 0 80px 0;
+  max-width: 130rem;
+  min-width: 102rem;
   display: flex;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.footer_info__icon {
+  margin: 0 1rem 0 0;
+  object-fit: contain;
+  width: 2rem;
+  height: 2rem;
 }
 
 .footer__text {
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .footer__copyright {
-  margin-top: 40px;
-}
-
-.footer__name {
-  margin-right: 200px;
-  text-align: center;
+  margin-top: 4rem;
 }
 
 .footer__address {
   display: flex;
+  padding-left: 2.4rem;
 }
 
 .footer__address__title {
-  width: 70px;
-}
-
-.footer__info {
-  margin-left: 164px;
+  width: 6rem;
 }
 
 .footer__icon {
   display: flex;
   align-items: center;
+  margin-top: 0.5rem;
 }
 
 .icon-youtube {
-  margin-right: 30px;
-  margin-top: 5px;
+  margin-right: 3rem;
 }
 
-.icon-github {
-  margin-top: 5px;
-}
+@media screen and (max-width: 1199px) {
+  .footer {
+    padding: 6.4rem 6rem 8rem 6rem;
+    min-width: 64.8rem;
+    font-size: 1.4rem !important;
+  }
 
-.footer__icon-space {
-  width: 35px;
+  .footer-wrapper {
+    min-width: 64.8rem;
+  }
+
+  .footer__address__title {
+    width: 4.5rem;
+  }
+
+  .footer__address {
+    display: flex;
+    padding-left: 1.2rem;
+  }
+
+  .footer__icon {
+    margin-top: 0.2rem;
+  }
+
+  .footer__copyright {
+    margin-top: 3.5rem;
+  }
 }
