@@ -1,9 +1,7 @@
 .footer {
   background-color: #2d2d2d;
   min-width: 78.4rem;
-  z-index: 2;
   padding: 6.4rem 9rem 8rem 9rem;
-  position: relative;
   margin: auto;
 }
 
@@ -15,6 +13,12 @@
   margin: auto;
 }
 
+.footer__name-contents {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
 .footer_info__icon {
   margin: 0 1rem 0 0;
   object-fit: contain;
@@ -22,36 +26,63 @@
   height: 2rem;
 }
 
-.footer__text {
+.footer__name {
   margin-bottom: 1rem;
 }
 
-.footer__copyright {
-  margin-top: 4rem;
-}
-
-.footer__address {
-  display: flex;
-  padding-left: 2.4rem;
-}
-
-.footer__address__title {
-  width: 6rem;
-}
-
-.footer__icon {
+.footer__contents {
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
 }
 
-.icon-youtube {
+.footer__contact-copyright {
+  padding-left: 2.4rem;
+}
+
+.footer__contact__slack {
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+}
+
+/* .footer__copyright {
+  margin-top: 4rem;
+} */
+
+.footer__title {
   margin-right: 3rem;
+}
+
+.footer__description {
+  margin-bottom: 1rem;
+}
+
+.footer__icon {
+  display: flex;
+  align-items: center;
+  margin-right: 3.5rem;
+}
+
+.icon-youtube {
+  display: flex;
+  align-items: center;
+  width: 2.1rem;
+}
+
+.icon-github {
+  width: 2rem;
+  height: 2rem;
+}
+
+.icon-information {
+  display: none;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 @media screen and (max-width: 1199px) {
   .footer {
-    padding: 6.4rem 6rem 8rem 6rem;
+    padding: 5.6rem 6rem 7rem 6rem;
     min-width: 64.8rem;
     font-size: 1.4rem !important;
   }
@@ -60,20 +91,95 @@
     min-width: 64.8rem;
   }
 
-  .footer__address__title {
-    width: 4.5rem;
+  .footer__title {
+    margin-right: 2rem;
   }
 
-  .footer__address {
-    display: flex;
+  .footer__contact-copyright {
     padding-left: 1.2rem;
   }
 
   .footer__icon {
-    margin-top: 0.2rem;
+    margin-right: 2.5rem;
   }
 
-  .footer__copyright {
-    margin-top: 3.5rem;
+  .footer__contact__slack {
+    margin-bottom: 3.5rem;
+  }
+
+  .icon-youtube {
+    width: 2rem;
+  }
+
+  .icon-github {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .icon-information {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .footer {
+    padding: 4rem 4rem 5rem 4rem;
+    min-width: 28rem;
+    font-size: 1.2rem !important;
+  }
+
+  .footer-wrapper {
+    min-width: 27.5rem;
+    max-width: 27.5rem;
+    flex-direction: column;
+  }
+
+  .footer__information {
+    display: none;
+  }
+
+  .footer__name-contents {
+    flex-direction: row;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer__contact-copyright {
+    padding-left: 0rem;
+  }
+
+  .footer__icon {
+    margin-top: 0;
+    margin-right: 2rem;
+  }
+
+  .footer__name {
+    margin-bottom: 0;
+  }
+
+  .icon-youtube {
+    width: 1.8rem;
+  }
+
+  .icon-github {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  .icon-information {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .icon-information {
+    display: flex;
+  }
+
+  .footer__contact__slack {
+    margin-top: 0.7rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .footer__contents {
+    margin-left: 4rem;
+    margin-top: 0;
   }
 }
