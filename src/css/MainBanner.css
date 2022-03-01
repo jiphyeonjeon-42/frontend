@@ -30,18 +30,26 @@
   color: #fff;
 }
 
-.main-banner .main-banner__guide {
+.main-banner .main-banner__guide1 {
   margin-top: 1.6rem;
+  margin-bottom: 6rem;
   color: #d5d5d5;
 }
 
-.main-banner__search {
+.main-banner .main-banner__guide2 {
+  margin-top: 1.4rem;
+  margin-bottom: 4rem;
+  color: #d5d5d5;
+  display: none;
+}
+
+/* .main-banner__search {
   margin-top: 6rem;
   width: 80rem;
   height: 6rem;
   border: 0.2rem white solid;
   border-radius: 3rem;
-}
+} */
 
 .main-banner__scroll {
   padding: 0 0 6rem 0;
@@ -72,5 +80,41 @@
     width: 3.5rem;
     height: 0.5rem;
     margin-bottom: 3.5rem;
+  }
+
+  .main-banner .main-banner__guide1 {
+    margin-top: 1.4rem;
+    margin-bottom: 5.2rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main-banner {
+    padding: 0 4rem 0 4rem;
+    min-width: 28rem;
+  }
+
+  .main-banner__wrapper {
+    padding: 12rem 0 8rem 0;
+  }
+
+  .main-banner__greet {
+    font-size: 4rem !important;
+    white-space: pre-wrap;
+    text-align: center;
+    word-wrap: break-word;
+    word-break: keep-all;
+  }
+
+  .main-banner__scroll {
+    padding: 0 0 3.5rem 0;
+  }
+
+  .main-banner .main-banner__guide1 {
+    display: none;
+  }
+
+  .main-banner .main-banner__guide2 {
+    display: block;
   }
 }

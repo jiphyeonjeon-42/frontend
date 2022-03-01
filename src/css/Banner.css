@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center;
   width: 100%;
-  min-width: 76.8rem;
+  min-width: 36rem;
 }
 
 .main-img {
@@ -28,7 +28,7 @@
 
 .banner-wrapper {
   padding: 27rem 0rem 6rem 0rem;
-  min-width: 76.8rem;
+  min-width: 36rem;
 }
 
 .banner__title {
@@ -62,5 +62,20 @@
 
   .banner__title__en {
     margin-top: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .banner-wrapper {
+    padding: 13rem 0rem 3rem 0rem;
+  }
+
+  .banner__title__ko {
+    font-size: 3.2rem !important;
+  }
+
+  .banner__title__en {
+    margin-top: 0.6rem;
+    font-size: 1.4rem !important;
   }
 }
