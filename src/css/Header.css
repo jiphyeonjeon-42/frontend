@@ -26,6 +26,12 @@ a:active {
   transform: translate(-50%);
 }
 
+@media screen and (max-width: 767px) {
+  .header {
+    display: none;
+  }
+}
+
 .header-wrapper {
   padding: 7rem 15rem 0 15rem;
   display: flex;

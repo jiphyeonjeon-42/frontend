@@ -5,6 +5,7 @@ import BookDetail from "./component/book/BookDetail";
 import Footer from "./component/utils/Footer";
 import NotFound from "./component/utils/NotFound";
 import Header from "./component/utils/Header";
+import MobileHeader from "./component/utils/MobileHeader";
 import Information from "./component/information/Information";
 import Main from "./component/main/Main";
 import Search from "./component/search/Search";
@@ -33,6 +34,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Route path="/" component={Header} />
+      <Route path="/" component={MobileHeader} />
       <Switch>
         <Route path="/" exact component={Main} />
         <Route path="/information" exact component={Information} />
