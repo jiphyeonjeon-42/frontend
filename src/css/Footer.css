@@ -17,13 +17,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
-}
-
-.footer_info__icon {
-  margin: 0 1rem 0 0;
-  object-fit: contain;
-  width: 2rem;
-  height: 2rem;
+  width: fit-content;
 }
 
 .footer__name {
@@ -45,10 +39,6 @@
   margin-bottom: 4rem;
 }
 
-/* .footer__copyright {
-  margin-top: 4rem;
-} */
-
 .footer__title {
   margin-right: 3rem;
 }
@@ -60,12 +50,13 @@
 .footer__icon {
   display: flex;
   align-items: center;
-  margin-right: 3.5rem;
+}
+
+.footer__icon-margin {
+  margin-left: 3.5rem;
 }
 
 .icon-youtube {
-  display: flex;
-  align-items: center;
   width: 2.1rem;
 }
 
@@ -99,8 +90,8 @@
     padding-left: 1.2rem;
   }
 
-  .footer__icon {
-    margin-right: 2.5rem;
+  .footer__icon-margin {
+    margin-left: 2.5rem;
   }
 
   .footer__contact__slack {
@@ -147,8 +138,8 @@
     padding-left: 0rem;
   }
 
-  .footer__icon {
-    margin-top: 0;
+  .footer__icon-margin {
+    margin-left: 2rem;
     margin-right: 2rem;
   }
 

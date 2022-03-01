@@ -18,12 +18,12 @@ const Footer = () => {
               className="footer__icon"
               href="https://www.youtube.com/c/%EC%9D%B4%EB%85%B8%EB%B2%A0%EC%9D%B4%EC%85%98%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/featured"
             >
-              <img className="icon-youtube" src={Youtube} alt="youtube" />
+              <img className="footer__icon" src={Youtube} alt="youtube" />
             </a>
             <a
               target="_blank"
               rel="noreferrer"
-              className="footer__icon"
+              className="footer__icon footer__icon-margin"
               href="https://github.com/jiphyeonjeon-42"
             >
               <img className="icon-github" src={Github} alt="github" />
