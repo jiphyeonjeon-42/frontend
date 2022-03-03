@@ -209,7 +209,7 @@ a:active {
 @media screen and (max-width: 1199px) {
   .header-wrapper {
     padding: 5rem 8rem 0 8rem;
-    min-width: 60.8rem;
+    min-width: 58.8rem;
   }
 
   .gnb__button {
