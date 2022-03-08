@@ -10,7 +10,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 900px;
 }
 
 .main-home__line {

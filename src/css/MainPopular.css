@@ -1,110 +1,94 @@
-.main-popular {
-  margin-top: 240px;
+.main__popular {
+  margin: 240px auto;
   padding: 0;
   margin-bottom: 300px;
+  box-sizing: border-box;
+  width: 100vw;
+  overflow: hidden;
 }
 
-.main-popular__wrapper {
-  width: 1140px;
-  height: 803px;
+
+.main__popular__wrapper {
+  width: 970px;
+  height: 750px;
   margin: 0px auto;
 }
 
-.margin-16 {
-  margin: 16px;
-}
-
-.main-popular__content {
-  height: 580px;
+.main__popular__contents {
   margin-top: 80px;
+  margin-left: -110px;
+  display: inline-flex;
+  align-items: center;
 }
 
-.main-popular__cover {
-  width: 342px;
-  height: 580px;
+.main__popular__content {
+  background-color: #f2f2f2;
+  padding: 20px 0 5px ;
+  margin: auto 10px;
+  border-radius: 30px;
+  box-sizing: border-box;
+}
+
+.main__popular__content.margin-220{
+  margin-left:190px;
+}
+.main__popular__side {
+  height: 370px;
+  padding: 0;
+  border: 0px;
+}
+
+.main__popular__basic-book {
+  display: block;
+  margin :0 20px 15px;
+  width: 140px;
+  height: 100px;
+  border: solid 10px #ffffff;
+  border-radius: 20px;
+  background-color: #ffffff;
+  text-align: left;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.main__popular__basic-book.center{
+  width: 700px;
+  font:inherit;
+}
+
+.main__popular__basic-book.selected {
+  height: 210px;
+}
+
+.main__popular__basic-img {
+  width: 150px;
   float: left;
-  margin-top: -160px;
 }
-.main-popular__cover-img {
-  width: 342px;
-  height: 500px;
-}
-.main-popular__cover-more {
-  width: 262.1px;
-  height: 48px;
-  border-radius: 24px;
-  background-color: #e63737;
-  margin: 32px auto 0;
-  padding: auto;
-  text-align: center;
-  line-height: 48px;
-}
-
-
-.main-popular__description {
-  margin-left: 370px;
-  border-bottom: 1px solid rgba(45, 45, 45, 0.4);
-  height: 159px;
-}
-
-.main-popular__title {
-  margin-top: 12px;
-  margin-bottom: 16px;
+.main__popular__summary {
+  display: block;
   overflow: hidden;
-  text-overflow: ellipsis;
+  font:inherit;
 }
 
-.main-popular__detail {
-  margin-left: 28px;
+.main__popular__rank {
+  float:left;
+  margin: 10px 20px;
 }
 
-.main-popular__container {
-  width: 682px;
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
+.main__popular__detail {
+  display: block;
+  margin: 0px 0 10px 170px;
+  line-height: 200%;
 }
-.main-popular__booklist {
-  margin-top: 56px;
-  margin-left : 370px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.main-popular__books {
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: 0.3s;
-}
-
-.main-popular__arrow {
-  width: 32px;
-  background-image: url(../img/arrow_left_circle.svg);
-  background-repeat: no-repeat;
-  background-position-y: center;
-  top: 50%;
-  background-color: transparent;
-  border: none;
-}
-
-.main-popular__arrow.right {
-  background-image: url(../img/arrow_right_circle.svg);
-}
-
-.main-popular__arrow:hover {
-  background-image: url(../img/arrow_left_circle_hover.svg);
-}
-
-.main-popular__arrow.right:hover {
-  background-image: url(../img/arrow_right_circle_hover.svg);
+.main__popular__detail.hidden {
+  display: none;
 }
 
 
-@media screen and (max-width:1200px) {
-  /* .main-popular {
-    width: 100%;   
-    white-space:normal;
+@media screen and (max-width:1200px) and (min-width:768px) {
 
-  }
+
+  /*
   .main-popular__cover {
     float: none;
     margin-top: 0px;
