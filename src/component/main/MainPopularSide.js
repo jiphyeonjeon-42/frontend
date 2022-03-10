@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import IMGERR from "../../img/image_onerror.svg";
 
-const MainPopularSide = ({ books, onClick }) => {
+const MainPopularSide = ({ books, onClick, side }) => {
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
   return (
     <button
-      className="main__popular__content main__popular__side"
+      className={`main__popular__${
+        side === "left" ? "left" : "right"
+      } main__popular__content main__popular__side`}
       type="button"
       onClick={onClick}
     >
@@ -31,4 +33,5 @@ export default MainPopularSide;
 MainPopularSide.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func.isRequired,
+  side: PropTypes.string.isRequired,
 };

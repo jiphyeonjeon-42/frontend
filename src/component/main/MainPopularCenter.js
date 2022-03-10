@@ -12,10 +12,13 @@ const MainPopularCenter = ({ books, centerTop }) => {
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
+
+  const position = () => {
+    return Math.round(centerTop / 3) * 74;
+  };
+
   return (
-    <div
-      className={`${centerTop === 0 && "margin-220"} main__popular__content`}
-    >
+    <div className="main__popular__content main__popular__center">
       {books.map((book, index) => (
         <button
           className={`${
@@ -53,6 +56,10 @@ const MainPopularCenter = ({ books, centerTop }) => {
           </div>
         </button>
       ))}
+      <div
+        className="main__popular__pagination"
+        style={{ left: `${position()}px` }}
+      />
     </div>
   );
 };

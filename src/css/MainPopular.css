@@ -9,38 +9,46 @@
 
 
 .main__popular__wrapper {
-  width: 970px;
+  width: 760px;
   height: 750px;
   margin: 0px auto;
 }
 
 .main__popular__contents {
-  margin-top: 80px;
-  margin-left: -110px;
-  display: inline-flex;
-  align-items: center;
+  margin: 80px auto;
+  width: 760px;
 }
 
 .main__popular__content {
   background-color: #f2f2f2;
   padding: 20px 0 5px ;
-  margin: auto 10px;
+  margin: 0 10px;
   border-radius: 30px;
   box-sizing: border-box;
 }
 
-.main__popular__content.margin-220{
-  margin-left:190px;
-}
 .main__popular__side {
   height: 370px;
   padding: 0;
   border: 0px;
+  top: -420px;
 }
 
+.main__popular__left {
+  float: left;
+  position: relative;
+  left:-200px;
+}
+
+.main__popular__right{
+  float: right;
+  position: relative;
+  right:-200px;
+}
 .main__popular__basic-book {
   display: block;
-  margin :0 20px 15px;
+  margin :0 20px 15px ;
+  padding: 0px;
   width: 140px;
   height: 100px;
   border: solid 10px #ffffff;
@@ -53,7 +61,7 @@
 
 .main__popular__basic-book.center{
   width: 700px;
-  font:inherit;
+  font: inherit;
 }
 
 .main__popular__basic-book.selected {
@@ -84,21 +92,30 @@
   display: none;
 }
 
+.main__popular__pagination {
+  width:7.6rem;
+  height: 0.4rem;
+  position: relative;
+  background-color: #2d2d2d;
+  z-index: 1;
+  top:4rem;
+}
 
-@media screen and (max-width:1200px) and (min-width:768px) {
+.main__popular__center::after {
+  content: " ";
+  display: block;
+  position: relative;
+  background-color: #d5d5d5;
+  z-index: 0;
+  left:0;
+  right:0;
+  top:3.7rem;
+  height: 0.2rem;
+}
 
 
-  /*
-  .main-popular__cover {
-    float: none;
-    margin-top: 0px;
+@media screen and (max-width:767px) {
+  .main__popular__contents {
+    margin-left: 0;
   }
-  .main-popular__description {
-    margin-left: 0px;
-    
-  }
-  .main-popular__booklist {
-    margin-left: 0px;
-    white-space:normal;
-  } */
 }

@@ -54,9 +54,9 @@ const MainPopular = () => {
           alignItems="start"
         />
         <div className="main__popular__contents">
-          <MainPopularSide books={left} onClick={onLeft} />{" "}
           <MainPopularCenter books={center} centerTop={centerTop} />
-          <MainPopularSide books={right} onClick={onRight} />
+          <MainPopularSide books={left} onClick={onLeft} side="left" />
+          <MainPopularSide books={right} onClick={onRight} side="right" />
         </div>
       </div>
     </section>
