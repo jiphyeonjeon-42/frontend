@@ -30,7 +30,7 @@ const MainPopular = () => {
           : error.message;
         setGlobalError({
           view: true,
-          error: `예상치 못한 오류가 발생했습니다.\nbooks/info/search=new Error ${message}`,
+          error: `예상치 못한 오류가 발생했습니다.\nbooks/info/search=popular Error ${message}`,
         });
       });
   }, []);
