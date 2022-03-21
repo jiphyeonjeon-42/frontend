@@ -25,6 +25,11 @@
   margin: 0 10px;
   border-radius: 30px;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+.main__popular__books {
+  margin: 0 10px;
 }
 
 .main__popular__side {
@@ -45,6 +50,25 @@
   position: relative;
   right:-200px;
 }
+
+.main__popular__center {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.main__popular__contents::after {
+  content: " ";
+  display: block;
+  position: relative;
+  background-color: #d5d5d5;
+  z-index: 0;
+  left:0;
+  right:0;
+  top:3.7rem;
+  height: 0.2rem;
+}
+
 .main__popular__basic-book {
   display: block;
   margin :0 20px 15px ;
@@ -72,6 +96,7 @@
   width: 150px;
   float: left;
 }
+
 .main__popular__summary {
   display: block;
   overflow: hidden;
@@ -100,19 +125,6 @@
   z-index: 1;
   top:4rem;
 }
-
-.main__popular__center::after {
-  content: " ";
-  display: block;
-  position: relative;
-  background-color: #d5d5d5;
-  z-index: 0;
-  left:0;
-  right:0;
-  top:3.7rem;
-  height: 0.2rem;
-}
-
 
 @media screen and (max-width:767px) {
   .main__popular__contents {

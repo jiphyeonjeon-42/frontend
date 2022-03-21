@@ -35,7 +35,10 @@ const MainPopular = () => {
       });
   }, []);
   const left = docs.slice(centerTop - 3, centerTop);
-  const center = docs.slice(centerTop, centerTop + 3);
+  const center = () => {
+    if (centerTop) return docs.slice(centerTop - 3, centerTop + 6);
+    return [...docs.slice(0, 3), ...docs.slice(0, 6)];
+  };
   const right = docs.slice(centerTop + 3, centerTop + 6);
   const onLeft = () => {
     if (centerTop === 0) return;
@@ -45,6 +48,11 @@ const MainPopular = () => {
     if (centerTop === 27) return;
     setCenterTop(centerTop + 3);
   };
+
+  const position = () => {
+    return Math.round(centerTop / 3) * 74;
+  };
+
   return (
     <section className="main__popular">
       <div className="main__popular__wrapper">
@@ -54,9 +62,18 @@ const MainPopular = () => {
           alignItems="start"
         />
         <div className="main__popular__contents">
-          <MainPopularCenter books={center} centerTop={centerTop} />
+          <MainPopularCenter
+            docs={center()}
+            centerTop={centerTop}
+            onLeft={onLeft}
+            onRight={onRight}
+          />
           <MainPopularSide books={left} onClick={onLeft} side="left" />
           <MainPopularSide books={right} onClick={onRight} side="right" />
+          <div
+            className="main__popular__pagination"
+            style={{ left: `${position()}px` }}
+          />
         </div>
       </div>
     </section>
