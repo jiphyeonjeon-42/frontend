@@ -12,6 +12,11 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
   const [miniModalView, setMiniModalView] = useState(false);
   const [miniModalClosable, setMiniModalClosable] = useState(true);
   const user = useRecoilValue(userState);
+  const [mobileToggle, setMobileToggle] = useState(false);
+
+  const handleToggle = () => {
+    setMobileToggle(!mobileToggle);
+  };
 
   const getHost = () => {
     return `${window.location.protocol}//${window.location.host}`;
@@ -51,12 +56,18 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
         disabled={dueDate === "-"}
       >
         <span>{dueDate === "-" ? "예약 불가" : "예약 하기"}</span>
+      </button>
+      <div
+        className="bookStatus-toggle"
+        onClick={handleToggle}
+        aria-hidden="true"
+      >
         <img
-          className="bookStatus-arr"
+          className={mobileToggle ? "bookStatus-arr-clicked" : "bookStatus-arr"}
           src={dueDate === "-" ? ArrDef : ArrRes}
           alt="Arr"
         />
-      </button>
+      </div>
       {miniModalView && (
         <MiniModal closeModal={closeModal}>
           <Reservation
@@ -66,6 +77,22 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
           />
         </MiniModal>
       )}
+      <div
+        className={
+          mobileToggle
+            ? "bookStatus-mobile-container"
+            : "bookStatus-mobile-container-hidden"
+        }
+      >
+        <p className="bookStatus-mobile-item">
+          <span>청구기호</span>
+          <span>{callSign}</span>
+        </p>
+        <p className="bookStatus-mobile-item">
+          <span>반납 예정일</span>
+          <span>{dueDate}</span>
+        </p>
+      </div>
     </div>
   );
 };

@@ -24,6 +24,90 @@
 .reservation-btn.cursor-pointer {
   cursor: pointer;
 }
+
 .bookStatus-arr {
   margin-left: 12px;
+  margin-top: 3px;
+}
+
+.bookStatus-arr-clicked {
+  margin-left: 12px;
+  margin-top: 3px;
+}
+
+.bookStatus-mobile-container {
+  display: none;
+}
+
+.bookStatus-mobile-container-hidden {
+  display: none;
+}
+
+@media screen and (max-width:767px) {
+
+  html {
+    font-size: 50% !important;
+  }
+
+  .bookStatus-callSign{
+    display: none;
+  }
+
+  .bookStatus-dueDate{
+    display: none;
+  }
+
+  .bookStatus {
+    flex-wrap: wrap;
+    padding: 2rem 0;
+    border-bottom: 1px dotted black;
+  }
+
+  .bookStatus div {
+    padding-right: 20rem;
+    font-size: 5rem;
+  }
+
+  .bookStatus-toggle {
+    width: 3rem;
+  }
+
+  .bookStatus-arr {
+    width: 100%;
+    cursor: pointer;
+    margin-left: 35rem;
+    transform: rotate(90deg);
+  }
+
+  .bookStatus-arr-clicked {
+    width: 100%;
+    cursor: pointer;
+    margin-left: 35rem;
+    transform: rotate(270deg);
+  }
+
+  .bookStatus-mobile-container {
+    display: block;
+    height: 200px;
+    width: 100%;
+  }
+
+  .bookStatus-mobile-container-hidden {
+    display: none;
+  }
+
+  .bookStatus-mobile-item {
+    margin-top: 30px;
+  }
+
+  .bookStatus-mobile-item span:first-child{
+    font-weight: bolder;
+    margin-left: 20%;
+  }
+
+  .bookStatus-mobile-item span:nth-child(2){
+    position: absolute;
+    left: 50%;
+  }
+
 }
