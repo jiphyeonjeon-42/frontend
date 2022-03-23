@@ -1,15 +1,15 @@
-.bookdetail-main {
+.book-detail-main {
   min-width: 120rem;
   margin: 0 auto 30rem;
 }
-.bookdetail-title {
+.book-detail-title {
   position: relative;
   padding: 8.9rem 0 6rem ;
   min-width: 90rem;
   height: 10.7rem;
   z-index: 2;
 }
-.bookcontent {
+.book-content {
   display: flex;
   width: 120rem;
   min-width: 120rem;
@@ -21,21 +21,21 @@
   margin-top: 12rem;
 }
 
-.bookdetail-body {
+.book-detail-body {
   width: 120rem;
   position: relative;
   margin: 0 auto;
 }
-.bookDetail__photo img {
+.book-detail__photo img {
   width: 34.8rem;
   height: 51.1rem;
   margin: 0 4.8rem 0 0;
 }
-.bookphoto {
+.book-photo {
   width: 100%;
   height: auto;
 }
-.bookdetail__info__title {
+.book-detail__title {
   width: auto;
   height: 4.1rem;
   font-size: 2.8rem;
@@ -45,10 +45,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.bookDetail__info {
+.book-detail {
   width: 80rem;
 }
-.detailInfo {
+.book-detail__info {
   border-style: solid;
   border-color: #a4a4a4 !important;
   border-top: solid 0.1rem;
@@ -56,7 +56,7 @@
   height: 24rem;
   display: flex;
 }
-.detailKey__txt {
+.book-detail__info-key {
   display: block;
   font-size: 1.8rem;
   font-weight: bold;
@@ -64,23 +64,24 @@
   margin-top: 1.5rem;
   /* padding-top: 12px; */
 }
-.detailValue__txt {
+
+.book-detail__info-value {
   display: block;
   font-size: 1.8rem;
   margin-top: 1.5rem;
   margin-left: 10rem;
   font-weight: normal;
 }
-.bookinfo__title {
+.book-info__title {
   font-size: 1.6rem;
   font-weight: normal;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.bookState {
+.book-state {
   margin-top: 2rem;
 }
-.bookStateList {
+.book-state__list {
   margin-top: 2rem;
 }
 
@@ -95,46 +96,50 @@
     padding-right: 4rem;
   }
 
-  .bookcontent {
+  .book-content {
     display: block;
   }
 
-  .bookDetail__photo {
+  .book-detail__photo {
     margin: 3rem auto;
     width: 85%;
     height: 120rem;
   }
 
-  .bookDetail__photo img {
+  .book-detail__photo img {
     width: 100%;
     height: 100%;
   }
 
-  .bookDetail__info {
+  .book-detail {
     width: 90%;
     padding: 5rem;
   }
 
-  .bookDetail__info span {
+  .book-detail__info span {
     font-size: 5rem;
   }
 
-  .bookdetail__info__title {
+  .book-detail__title {
     font-size: 5rem;
     height: auto;
   }
 
-  .detailInfo {
+  .book-detail__info {
     height: auto;
     padding: 0 0 2rem 0;
   }
 
-  .detailInfo span {
+  .detail-info span {
     padding: 2rem 0;
   }
 
-  .bookStateList > div {
+  .book-state__list > div {
     width: 100%;
+  }
+
+  .book-state > span {
+    font-size: 5rem;
   }
 
 }
