@@ -9,7 +9,6 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
 
   const changeSelected = e => {
     setSelected(parseInt(e.currentTarget.value, 10));
-    console.log(centerTop);
   };
 
   function subtituteImg(e) {
@@ -17,18 +16,14 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
   }
 
   function touchStart(e) {
-    e.preventDefault();
     setPosX(e.touches[0].pageX);
   }
 
   function touchMove(e) {
-    e.preventDefault();
     const move = posX - e.touches[0].pageX;
     if (centerTop || move > 0) setMoveX(move);
   }
-
-  function touchEnd(e) {
-    e.preventDefault();
+  function touchEnd() {
     if (moveX > 300) onRight();
     else if (moveX < -300) onLeft();
     setMoveX(0);
@@ -36,7 +31,7 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
 
   const totalBooks = [docs.slice(0, 3), docs.slice(3, 6), docs.slice(6, 9)];
   const scroll = () => {
-    return `${-770 - moveX}px`;
+    return `${(-770 - moveX) * 0.1}rem`;
   };
   return (
     <div className="main__popular__content">

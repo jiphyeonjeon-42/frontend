@@ -15,6 +15,7 @@ const MainNewBookPagination = ({ page, setPage }) => {
     <div className="main-new__books_pagination">
       {chapter.map(i => (
         <button
+          key={i}
           type="button"
           className={`${
             isSelected(i) && "selected"

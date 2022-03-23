@@ -1,7 +1,7 @@
 .main__popular {
-  margin: 240px auto;
+  margin: 24rem auto;
   padding: 0;
-  margin-bottom: 300px;
+  margin-bottom: 30rem;
   box-sizing: border-box;
   width: 100vw;
   overflow: hidden;
@@ -9,46 +9,46 @@
 
 
 .main__popular__wrapper {
-  width: 760px;
-  height: 750px;
-  margin: 0px auto;
+  width: 76rem;
+  height: 75rem;
+  margin: 0 auto;
 }
 
 .main__popular__contents {
-  margin: 80px auto;
-  width: 760px;
+  margin: 8rem auto;
+  width: 76rem;
 }
 
 .main__popular__content {
   background-color: #f2f2f2;
-  padding: 20px 0 5px ;
-  margin: 0 10px;
-  border-radius: 30px;
+  padding: 2rem 0 0.5rem ;
+  margin: 0 1rem;
+  border-radius: 3rem;
   box-sizing: border-box;
   overflow: hidden;
 }
 
 .main__popular__books {
-  margin: 0 10px;
+  margin: 0 1rem;
 }
 
 .main__popular__side {
-  height: 370px;
+  height: 37rem;
   padding: 0;
-  border: 0px;
-  top: -420px;
+  border: 0;
+  top: -42rem;
 }
 
 .main__popular__left {
   float: left;
   position: relative;
-  left:-200px;
+  left:-20rem;
 }
 
 .main__popular__right{
   float: right;
   position: relative;
-  right:-200px;
+  right:-20rem;
 }
 
 .main__popular__center {
@@ -71,12 +71,12 @@
 
 .main__popular__basic-book {
   display: block;
-  margin :0 20px 15px ;
-  padding: 0px;
-  width: 140px;
-  height: 100px;
-  border: solid 10px #ffffff;
-  border-radius: 20px;
+  margin :0 2rem 1.5rem ;
+  padding: 0;
+  width: 14rem;
+  height: 10rem;
+  border: solid 1rem #ffffff;
+  border-radius: 2rem;
   background-color: #ffffff;
   text-align: left;
   overflow: hidden;
@@ -84,16 +84,16 @@
 }
 
 .main__popular__basic-book.center{
-  width: 700px;
+  width: 70rem;
   font: inherit;
 }
 
 .main__popular__basic-book.selected {
-  height: 210px;
+  height: 21rem;
 }
 
 .main__popular__basic-img {
-  width: 150px;
+  width: 15rem;
   float: left;
 }
 
@@ -105,12 +105,12 @@
 
 .main__popular__rank {
   float:left;
-  margin: 10px 20px;
+  margin: 1rem 2rem;
 }
 
 .main__popular__detail {
   display: block;
-  margin: 0px 0 10px 170px;
+  margin: 0 0 1rem 17rem;
   line-height: 200%;
 }
 .main__popular__detail.hidden {
