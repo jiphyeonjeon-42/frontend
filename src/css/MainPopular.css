@@ -1,120 +1,133 @@
-.main-popular {
-  margin-top: 240px;
+.main__popular {
+  margin: 24rem auto;
   padding: 0;
-  margin-bottom: 300px;
+  margin-bottom: 30rem;
+  box-sizing: border-box;
+  width: 100vw;
+  overflow: hidden;
 }
 
-.main-popular__wrapper {
-  width: 1140px;
-  height: 803px;
-  margin: 0px auto;
+
+.main__popular__wrapper {
+  width: 76rem;
+  height: 75rem;
+  margin: 0 auto;
 }
 
-.margin-16 {
-  margin: 16px;
+.main__popular__contents {
+  margin: 8rem auto;
+  width: 76rem;
 }
 
-.main-popular__content {
-  height: 580px;
-  margin-top: 80px;
+.main__popular__content {
+  background-color: #f2f2f2;
+  padding: 2rem 0 0.5rem ;
+  margin: 0 1rem;
+  border-radius: 3rem;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.main-popular__cover {
-  width: 342px;
-  height: 580px;
+.main__popular__books {
+  margin: 0 1rem;
+}
+
+.main__popular__side {
+  height: 37rem;
+  padding: 0;
+  border: 0;
+  top: -42rem;
+}
+
+.main__popular__left {
   float: left;
-  margin-top: -160px;
-}
-.main-popular__cover-img {
-  width: 342px;
-  height: 500px;
-}
-.main-popular__cover-more {
-  width: 262.1px;
-  height: 48px;
-  border-radius: 24px;
-  background-color: #e63737;
-  margin: 32px auto 0;
-  padding: auto;
-  text-align: center;
-  line-height: 48px;
-}
-
-
-.main-popular__description {
-  margin-left: 370px;
-  border-bottom: 1px solid rgba(45, 45, 45, 0.4);
-  height: 159px;
-}
-
-.main-popular__title {
-  margin-top: 12px;
-  margin-bottom: 16px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.main-popular__detail {
-  margin-left: 28px;
-}
-
-.main-popular__container {
-  width: 682px;
   position: relative;
-  overflow: hidden;
-  display: inline-block;
+  left:-20rem;
 }
-.main-popular__booklist {
-  margin-top: 56px;
-  margin-left : 370px;
+
+.main__popular__right{
+  float: right;
+  position: relative;
+  right:-20rem;
+}
+
+.main__popular__center {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  overflow: hidden;
 }
 
-.main-popular__books {
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: 0.3s;
+.main__popular__contents::after {
+  content: " ";
+  display: block;
+  position: relative;
+  background-color: #d5d5d5;
+  z-index: 0;
+  left:0;
+  right:0;
+  top:3.7rem;
+  height: 0.2rem;
 }
 
-.main-popular__arrow {
-  width: 32px;
-  background-image: url(../img/arrow_left_circle.svg);
-  background-repeat: no-repeat;
-  background-position-y: center;
-  top: 50%;
-  background-color: transparent;
-  border: none;
+.main__popular__basic-book {
+  display: block;
+  margin :0 2rem 1.5rem ;
+  padding: 0;
+  width: 14rem;
+  height: 10rem;
+  border: solid 1rem #ffffff;
+  border-radius: 2rem;
+  background-color: #ffffff;
+  text-align: left;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.main-popular__arrow.right {
-  background-image: url(../img/arrow_right_circle.svg);
+.main__popular__basic-book.center{
+  width: 70rem;
+  font: inherit;
 }
 
-.main-popular__arrow:hover {
-  background-image: url(../img/arrow_left_circle_hover.svg);
+.main__popular__basic-book.selected {
+  height: 21rem;
 }
 
-.main-popular__arrow.right:hover {
-  background-image: url(../img/arrow_right_circle_hover.svg);
+.main__popular__basic-img {
+  width: 15rem;
+  float: left;
 }
 
+.main__popular__summary {
+  display: block;
+  overflow: hidden;
+  font:inherit;
+}
 
-@media screen and (max-width:1200px) {
-  /* .main-popular {
-    width: 100%;   
-    white-space:normal;
+.main__popular__rank {
+  float:left;
+  margin: 1rem 2rem;
+}
 
+.main__popular__detail {
+  display: block;
+  margin: 0 0 1rem 17rem;
+  line-height: 200%;
+}
+.main__popular__detail.hidden {
+  display: none;
+}
+
+.main__popular__pagination {
+  width:7.6rem;
+  height: 0.4rem;
+  position: relative;
+  background-color: #2d2d2d;
+  z-index: 1;
+  top:4rem;
+}
+
+@media screen and (max-width:767px) {
+  .main__popular__contents {
+    margin-left: 0;
   }
-  .main-popular__cover {
-    float: none;
-    margin-top: 0px;
-  }
-  .main-popular__description {
-    margin-left: 0px;
-    
-  }
-  .main-popular__booklist {
-    margin-left: 0px;
-    white-space:normal;
-  } */
 }

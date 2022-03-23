@@ -1,7 +1,7 @@
 .main-new {
   width: 100%;
-  height: 695px;
-  margin-top: 240px;
+  height: 69.5rem;
+  margin-top: 24rem;
   position: relative;
 }
 
@@ -10,11 +10,11 @@
 }
 
 .main-new__arrow {
-  width: 80px;
-  height: 340px;
+  width: 8rem;
+  height: 34rem;
   margin: 0;
   position: absolute;
-  top: 245px;
+  top: 24.5rem;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   border: none;
@@ -38,7 +38,7 @@
   z-index: 1;
   width: 100%;
   overflow: hidden;
-  margin-top: 100px;
+  margin-top: 10rem;
 }
 
 .main-new__books {
@@ -48,15 +48,15 @@
 
 .main-new__book {
   text-align: none;
-  width: 216px;
-  height: 320px;
+  width: 21.6rem;
+  height: 32rem;
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 2rem;
   vertical-align: top;
 }
 
 .main-new__book:hover {
-  margin-top: 10px;
+  margin-top: 1rem;
   -webkit-transform: scale(1.05);
   -moz-transform: scale(1.05);
   -ms-transform: scale(1.05);
@@ -67,8 +67,8 @@
 }
 
 .main-new__book-img {
-  width: 216px;
-  height: 320px;
+  width: 21.6rem;
+  height: 32rem;
 }
 
 .main-new__book:first-child {
@@ -76,11 +76,11 @@
 }
 
 .main-new__book:nth-child(even) {
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 .main-new__book:nth-child(even):hover {
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 
 .main-new__books_pagination {
@@ -91,12 +91,12 @@
 }
 
 .main-new__books_pag_circle {
-  width: 12px;
-  height: 12px;
+  width: 1.2rem;
+  height: 1.2rem;
   border-radius: 50%;
   background-color: #a4a4a4;
   display: inline-block;
-  margin-left: 12px;
+  margin-left: 1.2rem;
   border: none;
   padding: 0;
   cursor: pointer;

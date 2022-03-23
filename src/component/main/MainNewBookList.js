@@ -60,7 +60,7 @@ const MainNewBookList = ({ books, display }) => {
       <div className="main-new__booklist">
         <div
           className={`${transition && "main-new__books"}`}
-          style={{ transform: `translate(${-92 - 236 * page}px)` }}
+          style={{ transform: `translate(${-92 - 236 * page * 0.1}rem)` }}
           onMouseEnter={pauseInterval}
           onMouseLeave={startInterval}
         >
