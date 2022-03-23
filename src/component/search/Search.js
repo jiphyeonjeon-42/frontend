@@ -8,7 +8,7 @@ import SubTitle from "../utils/SubTitle";
 import SearchBar from "./SearchBar";
 import Books from "./Books";
 import Pagination from "./Pagination";
-import BackGround from "../utils/BackGround";
+import SearchBanner from "./SearchBanner";
 import CategoryFilter from "./CategoryFilter";
 import Sort from "./Sort";
 import Available from "./Available";
@@ -154,15 +154,11 @@ const Search = ({ match, location }) => {
 
   return (
     <main>
-      <BackGround page="search" />
-      <section className="search-title">
-        <Title titleKorean="검색" titleEng="SEARCH" />
-        <SearchBar
-          setStartCate={setStartCate}
-          setPageRange={setPageRange}
-          setAvailable={setAvailable}
-        />
-      </section>
+      <SearchBanner
+        setStartCate={setStartCate}
+        setPageRange={setPageRange}
+        setAvailable={setAvailable}
+      />
       <section className="search-section">
         <div className="search-subtitle" ref={myRef}>
           <SubTitle

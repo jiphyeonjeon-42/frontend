@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import BackGround from "../utils/BackGround";
-import Title from "../utils/Title";
+import Banner from "../utils/Banner";
 import "../../css/ReservedLoan.css";
 import SubTitle from "../utils/SubTitle";
 import AdminPagination from "../utils/AdminPagination";
@@ -84,12 +83,9 @@ const ReservedLoan = () => {
   }, [handleReservedLoanSumbit]);
 
   return (
-    <main className="reservedLoan-main">
-      <BackGround page="admin" />
-      <section>
-        <div className="reservedLoan-title">
-          <Title titleKorean="예약 대출" titleEng="BOOK RESERVATION" />
-        </div>
+    <main>
+      <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />
+      <section className="reservedLoan-main">
         <div className="reservedLoan-subtitle">
           <SubTitle
             subTitle="예약대출에 필요한 정보를 입력해주세요."

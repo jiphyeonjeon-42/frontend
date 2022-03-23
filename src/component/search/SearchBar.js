@@ -43,19 +43,21 @@ const SearchBar = ({ setStartCate, setPageRange, setAvailable }) => {
   }, [handleSearchSumbit, setStartCate, setPageRange, setAvailable]);
 
   return (
-    <form id="search-form">
-      <input
-        id="search-input"
-        required
-        type="text"
-        autoComplete="off"
-        value={input}
-        onChange={onChange}
-      />
-      <button className="search-button" type="submit">
-        <img className="search-icon" src={SearchIcon} alt="search" />
-      </button>
-    </form>
+    <div className="search-bar">
+      <form id="search-form">
+        <input
+          id="search-input"
+          required
+          type="text"
+          autoComplete="off"
+          value={input}
+          onChange={onChange}
+        />
+        <button className="search-button" type="submit">
+          <img className="search-icon" src={SearchIcon} alt="search" />
+        </button>
+      </form>
+    </div>
   );
 };
 

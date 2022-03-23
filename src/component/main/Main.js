@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import BackGround from "../utils/BackGround";
-import MainHome from "./MainHome";
+import MainBanner from "./MainBanner";
 import MainNew from "./MainNew";
 import MainPopular from "./MainPopular";
 import { useSearchInput } from "../../atom/useSearchInput";
@@ -32,8 +31,7 @@ const Main = () => {
           />
         </MiniModal>
       )}
-      <BackGround page="main" />
-      <MainHome />
+      <MainBanner />
       <MainNew />
       <MainPopular />
     </main>

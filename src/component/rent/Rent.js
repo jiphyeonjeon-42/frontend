@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import Modal, { isModalOpen } from "./Modal";
-import BackGround from "../utils/BackGround";
-import Title from "../utils/Title";
+import Banner from "../utils/Banner";
 import SubTitle from "../utils/SubTitle";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import RentModal from "./RentModal";
@@ -25,10 +24,7 @@ const Rent = () => {
 
   return (
     <main>
-      <BackGround page="admin" />
-      <section className="rent-title">
-        <Title titleKorean="대출" titleEng="RENT BOOK" />
-      </section>
+      <Banner img="admin" titleKo="대출" titleEn="RENT BOOK" />
       <div className="rent-subtitle">
         <SubTitle
           subTitle="대출에 필요한 정보를 입력해주세요"

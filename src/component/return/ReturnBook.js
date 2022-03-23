@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import BackGround from "../utils/BackGround";
-import Title from "../utils/Title";
+import Banner from "../utils/Banner";
 import "../../css/ReturnBook.css";
 import AdminPagination from "../utils/AdminPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
@@ -71,12 +70,13 @@ const ReturnBook = () => {
   }, [handlereturnBookSumbit]);
 
   return (
-    <main className="returnbook-main">
-      <BackGround page="admin" />
-      <section>
-        <div className="returnbook-title">
-          <Title titleKorean="조회 및 반납" titleEng="INQUIRE & RETURN BOOK" />
-        </div>
+    <main>
+      <Banner
+        img="admin"
+        titleKo="조회 및 반납"
+        titleEn="INQUIRE & RETURN BOOK"
+      />
+      <section className="returnbook-main">
         <div className="returnbook-subtitle">
           <SubTitle
             subTitle="반납에 필요한 정보를 입력해주세요."

@@ -1,3 +1,13 @@
+@media screen and (max-width: 1199px) {
+  .gnb__text {
+    font-size: 1.6rem !important;
+  }
+
+  .lnb__text {
+    font-size: 1.4rem !important;
+  }
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -7,16 +17,28 @@ a:active {
 }
 
 .header {
-  padding: 80px 150px 0 150px;
-  display: flex;
-  height: 164px;
-  max-width: 1200px;
-  min-width: 900px;
+  width: 100%;
   margin: auto;
-  position: relative;
+  position: absolute;
   z-index: 2;
-  left: 0;
-  right: 0;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    display: none;
+  }
+}
+
+.header-wrapper {
+  padding: 7rem 15rem 0 15rem;
+  display: flex;
+  max-width: 120rem;
+  min-width: 88rem;
+  margin: auto;
+  flex-grow: 1;
 }
 
 .header__logo {
@@ -25,8 +47,8 @@ a:active {
 }
 
 .logo_img {
-  width: 124px;
-  height: 42px;
+  width: 12.4rem;
+  height: 4.2rem;
   object-fit: contain;
 }
 
@@ -38,26 +60,11 @@ a:active {
   list-style: none;
   display: flex;
   padding: 0 0 0 0;
-  margin: 9px 0 0 0;
+  margin: 1rem 0 0 0;
 }
 
-.gnb__info {
-  margin: 0 60px 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.gnb__info__icon {
-  width: 25px;
-  height: 25px;
-  margin: 1px 8px 1px 0;
-  object-fit: contain;
-}
-
-.gnb__info__text {
+.gnb__text {
   margin: 0 0 0 0;
-  font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -68,54 +75,69 @@ a:active {
   word-break: keep-all;
 }
 
-.gnb__admin__button {
+.gnb__icon {
+  margin: 0 1rem 0 0;
+  object-fit: contain;
+}
+
+.gnb__book__icon {
+  width: 1.65rem;
+  height: 2.2rem;
+}
+
+.gnb__info__icon {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.gnb__button {
+  margin: 0 0 0 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gnb__user__button {
   all: unset;
-  margin: 0 60px 0 0;
+  margin: 0 0 0 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 
-.gnb__admin__icon {
-  width: 18px;
-  height: 25px;
-  margin: 1px 8px 1px 0;
-  object-fit: contain;
+.gnb__user__icon {
+  width: 2.2rem;
+  height: 2.2rem;
 }
 
-.gnb__admin__text {
-  margin: 0 0 0 0;
-  font-size: 18px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.5;
-  letter-spacing: normal;
-  text-align: left;
-  color: #fff;
-  word-break: keep-all;
-  white-space: nowrap;
+.gnb__dropdown__icon {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin: 0.5rem 0 0 0.8rem;
 }
 
-.gnb__admin__lnb {
+.gnb__user__lnb {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  /* height: 130px; */
+  position: relative;
+  flex-direction: row-reverse;
+  right: 0.3rem;
 }
 
 .lnb__line__circle {
   position: relative;
+  margin: 0 0 0 0.9rem;
 }
 
 .lnb__line {
   position: relative;
-  height: 117.5px;
+  height: 11.5rem;
   width: 0;
-  border-right: solid 1px #fff;
-  margin: 0 13.5px 0 9px;
-  top: -1.5px;
+  border-right: solid 0.1rem #fff;
+  top: -1rem;
+  left: 0.3rem;
 }
 
 .lnb__circle {
@@ -123,47 +145,37 @@ a:active {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 0 0 0 0;
-  top: -122.5px;
-  left: 6.5px;
+  top: -12.4rem;
+}
+
+.lnb__circle__shape {
+  position: relative;
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 0;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 100%;
 }
 
 .lnb__circle__rent {
-  position: relative;
-  width: 7px;
-  height: 7px;
-  border: 0;
-  padding: 0;
-  background-color: #fff;
-  border-radius: 100%;
-  top: 28px;
+  top: 3.3rem;
 }
 
 .lnb__circle__return {
-  position: relative;
-  width: 7px;
-  height: 7px;
-  border: 0;
-  padding: 0;
-  background-color: #fff;
-  border-radius: 100%;
-  top: 64px;
+  top: 6.6rem;
 }
 
 .lnb__circle__reservation {
-  position: relative;
-  width: 7px;
-  height: 7px;
-  border: 0;
-  padding: 0;
-  background-color: #fff;
-  border-radius: 100%;
-  top: 100px;
+  top: 9.9rem;
 }
 
 .lnb__menu {
   list-style: none;
   padding-inline-start: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .lnb__text {
@@ -173,44 +185,103 @@ a:active {
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
-  text-align: left;
+  text-align: right;
+  opacity: 0.8;
+}
+
+.lnb__text:hover {
+  opacity: 1;
+  font-weight: bold;
 }
 
 .lnb__rent {
-  margin-top: 14px;
+  margin-top: 1.4rem;
 }
 
 .lnb__return {
-  margin-top: 16px;
+  margin-top: 1.6rem;
 }
 
 .lnb__reservation {
-  margin-top: 17px;
+  margin-top: 1.6rem;
 }
 
-.gnb__login {
-  margin: 0 0 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@media screen and (max-width: 1199px) {
+  .header-wrapper {
+    padding: 5rem 8rem 0 8rem;
+    min-width: 58.8rem;
+  }
 
-.gnb__login__icon {
-  width: 23px;
-  height: 25px;
-  margin: 1px 8px 1px 0;
-  object-fit: contain;
-}
+  .gnb__button {
+    margin: 0 0 0 4rem;
+  }
 
-.gnb__login__text {
-  margin: 0 0 0 0;
-  font-size: 18px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.5;
-  letter-spacing: normal;
-  text-align: left;
-  color: #fff;
-  word-break: keep-all;
+  .gnb__user__button {
+    margin: 0 0 0 4rem;
+  }
+
+  .logo_img {
+    width: 11.16rem;
+    height: 3.78rem;
+  }
+
+  .gnb__book__icon {
+    width: 1.5rem;
+    height: 2rem;
+  }
+
+  .gnb__info__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .gnb__user__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .gnb__dropdown__icon {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin: 0.6rem 0 0 0.8rem;
+  }
+
+  .lnb__line {
+    height: 10.2rem;
+    top: -1rem;
+    left: 0.3rem;
+  }
+
+  .lnb__circle {
+    top: -12.4rem;
+  }
+
+  .lnb__circle__shape {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+
+  .lnb__circle__rent {
+    top: 4.3rem;
+  }
+
+  .lnb__circle__return {
+    top: 7.1rem;
+  }
+
+  .lnb__circle__reservation {
+    top: 9.8rem;
+  }
+
+  .lnb__rent {
+    margin-top: 1.4rem;
+  }
+
+  .lnb__return {
+    margin-top: 1.4rem;
+  }
+
+  .lnb__reservation {
+    margin-top: 1.4rem;
+  }
 }

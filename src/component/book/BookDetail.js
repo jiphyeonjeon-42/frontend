@@ -1,10 +1,9 @@
-/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState, useRef } from "react";
+// import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Title from "../utils/Title";
 import "../../css/BookDetail.css";
-import BackGround from "../utils/BackGround";
+import Banner from "../utils/Banner";
 import BookStatus from "./BookStatus";
 import IMGERR from "../../img/image_onerror.svg";
 // eslint-disable-next-line react/prop-types
@@ -12,14 +11,14 @@ import IMGERR from "../../img/image_onerror.svg";
 const BookDetail = ({ location, match }) => {
   const [data, setData] = useState({ books: [] });
   const { id } = match.params;
-  const myRef = useRef(null);
+  // const myRef = useRef(null);
 
   const fetchData = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/books/info/${id}`,
     );
     setData(response.data);
-    myRef.current.scrollIntoView();
+    // myRef.current.scrollIntoView();
   };
 
   useEffect(fetchData, []);
@@ -29,8 +28,8 @@ const BookDetail = ({ location, match }) => {
   }
 
   return (
-    <main className="bookdetail-main">
-      <BackGround page="bookdetail" />
+    <main>
+      {/* <BackGround page="bookdetail" />
       <section>
         <div className="bookdetail-title" ref={myRef}>
           <Title
@@ -38,7 +37,12 @@ const BookDetail = ({ location, match }) => {
             titleEng="DETAIL & RESERVATION"
           />
         </div>
-      </section>
+      </section> */}
+      <Banner
+        img="bookdetail"
+        titleKo="도서 상세페이지 및 예약"
+        titleEn="DETAIL & RESERVATION"
+      />
       <section className="bookdetail-body">
         <div className="breadcrumb">
           <span className="font-16 color-a4">
