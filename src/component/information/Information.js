@@ -1,6 +1,5 @@
 import React from "react";
-import BackGround from "../utils/BackGround";
-import Title from "../utils/Title";
+import Banner from "../utils/Banner";
 import SubTitle from "../utils/SubTitle";
 import Question from "./Question";
 import "../../css/Information.css";
@@ -9,10 +8,7 @@ const Information = () => {
   window.scrollTo(0, 0);
   return (
     <main>
-      <BackGround page="information" />
-      <section className="information-title">
-        <Title titleKorean="이용안내" titleEng="INFORMATION" />
-      </section>
+      <Banner img="information" titleKo="이용안내" titleEn="INFORMATION" />
       <section className="information-section">
         <div className="information-subtitle">
           <SubTitle subTitle="무엇이 궁금하신가요?" alignItems="start" />
