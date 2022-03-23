@@ -1,21 +1,21 @@
 .bookStatus {
-  margin-bottom: 12px;
+  margin-bottom: 1.2rem;
   display: flex;
 }
 .bookStatus-id {
-  width: 60px;
-  min-width: 60px;
+  width: 6rem;
+  min-width: 6rem;
 }
 .bookStatus-callSign {
-  margin-right: 60px;
-  width: 60px;
+  margin-right: 6rem;
+  width: 6rem;
 }
 .bookStatus-status {
-  margin-right: 60px;
-  width: 60px;
+  margin-right: 6rem;
+  width: 6rem;
 }
 .bookStatus-dueDate {
-  width: 240px;
+  width: 24rem;
 }
 .reservation-btn {
   background: none;
@@ -26,13 +26,13 @@
 }
 
 .bookStatus-arr {
-  margin-left: 12px;
-  margin-top: 3px;
+  margin-left: 1.2rem;
+  margin-top: 0.3rem;
 }
 
 .bookStatus-arr-clicked {
-  margin-left: 12px;
-  margin-top: 3px;
+  margin-left: 1.2rem;
+  margin-top: 0.3rem;
 }
 
 .bookStatus-mobile-container {
@@ -60,7 +60,7 @@
   .bookStatus {
     flex-wrap: wrap;
     padding: 2rem 0;
-    border-bottom: 1px dotted black;
+    border-bottom: 0.1rem dotted black;
   }
 
   .bookStatus div {
@@ -88,7 +88,7 @@
 
   .bookStatus-mobile-container {
     display: block;
-    height: 200px;
+    height: 20rem;
     width: 100%;
   }
 
@@ -97,7 +97,7 @@
   }
 
   .bookStatus-mobile-item {
-    margin-top: 30px;
+    margin-top: 3rem;
   }
 
   .bookStatus-mobile-item span:first-child{

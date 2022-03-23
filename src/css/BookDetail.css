@@ -1,35 +1,35 @@
 .bookdetail-main {
-  min-width: 1200px;
-  margin: 0 auto 300px;
+  min-width: 120rem;
+  margin: 0 auto 30rem;
 }
 .bookdetail-title {
   position: relative;
-  padding: 89px 0 60px ;
-  min-width: 900px;
-  height: 107px;
+  padding: 8.9rem 0 6rem ;
+  min-width: 90rem;
+  height: 10.7rem;
   z-index: 2;
 }
 .bookcontent {
   display: flex;
-  width: 1200px;
-  min-width: 1200px;
-  margin: 60px 10px;
+  width: 120rem;
+  min-width: 120rem;
+  margin: 6rem 1rem;
 }
 .breadcrumb {
   display: flex;
   justify-content: flex-end;
-  margin-top: 120px;
+  margin-top: 12rem;
 }
 
 .bookdetail-body {
-  width: 1200px;
+  width: 120rem;
   position: relative;
   margin: 0 auto;
 }
 .bookDetail__photo img {
-  width: 348px;
-  height: 511px;
-  margin: 0 48px 0 0;
+  width: 34.8rem;
+  height: 51.1rem;
+  margin: 0 4.8rem 0 0;
 }
 .bookphoto {
   width: 100%;
@@ -37,51 +37,51 @@
 }
 .bookdetail__info__title {
   width: auto;
-  height: 41px;
-  font-size: 28px;
+  height: 4.1rem;
+  font-size: 2.8rem;
   font-weight: bold;
-  margin-top: 8px;
-  margin-bottom: 24px;
+  margin-top: 0.8rem;
+  margin-bottom: 2.4rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .bookDetail__info {
-  width: 800px;
+  width: 80rem;
 }
 .detailInfo {
   border-style: solid;
   border-color: #a4a4a4 !important;
-  border-top: solid 1px;
-  border-bottom: solid 1px;
-  height: 240px;
+  border-top: solid 0.1rem;
+  border-bottom: solid 0.1rem;
+  height: 24rem;
   display: flex;
 }
 .detailKey__txt {
   display: block;
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: bold;
-  letter-spacing: -0.36px;
-  margin-top: 15px;
+  letter-spacing: -0.036rem;
+  margin-top: 1.5rem;
   /* padding-top: 12px; */
 }
 .detailValue__txt {
   display: block;
-  font-size: 18px;
-  margin-top: 15px;
-  margin-left: 100px;
+  font-size: 1.8rem;
+  margin-top: 1.5rem;
+  margin-left: 10rem;
   font-weight: normal;
 }
 .bookinfo__title {
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: normal;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .bookState {
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 .bookStateList {
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 @media screen and (min-width:768px) and (max-width: 1200px) {
@@ -100,9 +100,9 @@
   }
 
   .bookDetail__photo {
-    margin: 30px auto;
+    margin: 3rem auto;
     width: 85%;
-    height: 1200px;
+    height: 120rem;
   }
 
   .bookDetail__photo img {
@@ -126,11 +126,11 @@
 
   .detailInfo {
     height: auto;
-    padding: 0 0 20px 0;
+    padding: 0 0 2rem 0;
   }
 
   .detailInfo span {
-    padding: 20px 0;
+    padding: 2rem 0;
   }
 
   .bookStateList > div {
