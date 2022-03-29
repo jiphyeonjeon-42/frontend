@@ -7,9 +7,15 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
   const [posX, setPosX] = useState(0);
   const [moveX, setMoveX] = useState(0);
 
-  const changeSelected = e => {
+  function linkToDetail(e) {
+    if (posX) return;
+    window.location = `/info/${e.currentTarget.id}`;
+  }
+
+  function changeSelected(e) {
+    if (posX) return;
     setSelected(parseInt(e.currentTarget.value, 10));
-  };
+  }
 
   function subtituteImg(e) {
     e.target.src = IMGERR;
@@ -18,29 +24,52 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
   function touchStart(e) {
     setPosX(e.touches[0].pageX);
   }
-
   function touchMove(e) {
     const move = posX - e.touches[0].pageX;
     if (centerTop || move > 0) setMoveX(move);
   }
+
   function touchEnd() {
-    if (moveX > 300) onRight();
-    else if (moveX < -300) onLeft();
+    if (moveX > 30) onRight();
+    else if (moveX < -30) onLeft();
     setMoveX(0);
   }
 
+  function mouseMove(e) {
+    if (!posX) return;
+    const move = posX - e.clientX;
+    if (centerTop || move > 0) setMoveX(move);
+  }
+
+  function mouseStart(e) {
+    setPosX(e.clientX);
+  }
+
+  function mouseEnd(e) {
+    if (!posX) return;
+    const move = posX - e.clientX;
+    if (centerTop || move < 0) setMoveX(move);
+    if (move > 30) onRight();
+    else if (move < -30) onLeft();
+    setMoveX(0);
+    setPosX(0);
+  }
+
   const totalBooks = [docs.slice(0, 3), docs.slice(3, 6), docs.slice(6, 9)];
-  const scroll = () => {
-    return `${(-770 - moveX) * 0.1}rem`;
-  };
+
   return (
     <div className="main__popular__content">
       <div
+        role="presentation"
         className="main__popular__center"
+        onMouseDown={mouseStart}
+        onMouseMove={mouseMove}
+        onMouseUp={mouseEnd}
+        onMouseLeave={mouseEnd}
         onTouchStart={touchStart}
         onTouchMove={touchMove}
         onTouchEnd={touchEnd}
-        style={{ marginLeft: scroll() }}
+        style={{ transform: `translate(${(-750 - moveX) * 0.1}rem)` }}
       >
         {totalBooks.map(books => (
           <div className="main__popular__books">
@@ -51,10 +80,12 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
                 } main__popular__basic-book center`}
                 value={index}
                 type="button"
-                onClick={changeSelected}
+                onClick={selected === index ? linkToDetail : changeSelected}
                 key={book.id}
+                id={book.id}
               >
                 <img
+                  draggable="false"
                   src={book.image}
                   alt={book.title}
                   className={`${

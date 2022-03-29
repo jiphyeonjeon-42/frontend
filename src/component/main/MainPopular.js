@@ -50,7 +50,7 @@ const MainPopular = () => {
   };
 
   const position = () => {
-    return Math.round(centerTop / 3) * 74;
+    return Math.round(centerTop / 3) * 10;
   };
 
   return (
@@ -72,7 +72,7 @@ const MainPopular = () => {
           <MainPopularSide books={right} onClick={onRight} side="right" />
           <div
             className="main__popular__pagination"
-            style={{ left: `${position()}px` }}
+            style={{ left: `${position()}%` }}
           />
         </div>
       </div>
