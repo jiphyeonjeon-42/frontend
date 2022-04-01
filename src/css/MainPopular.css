@@ -1,31 +1,31 @@
 .main__popular {
-  margin: 24rem auto;
+  margin-top: 24rem;
   padding: 0;
-  margin-bottom: 30rem;
+  margin-bottom: 20rem;
   box-sizing: border-box;
-  width: 100vw;
+  height: 80rem;
   overflow: hidden;
 }
 
 
 .main__popular__wrapper {
-  width: 76rem;
+  width: 70rem;
   height: 75rem;
   margin: 0 auto;
 }
 
 .main__popular__contents {
-  margin: 8rem auto;
-  width: 76rem;
+  margin: 5rem auto 0;
 }
 
 .main__popular__content {
   background-color: #f2f2f2;
-  padding: 2rem 0 0.5rem ;
-  margin: 0 1rem;
+  padding: 0;
+  margin:0;
   border-radius: 3rem;
   box-sizing: border-box;
   overflow: hidden;
+  border: #f2f2f2 solid 2rem;
 }
 
 .main__popular__books {
@@ -54,7 +54,6 @@
 .main__popular__center {
   display: flex;
   flex-direction: row;
-  overflow: hidden;
 }
 
 .main__popular__contents::after {
@@ -84,12 +83,16 @@
 }
 
 .main__popular__basic-book.center{
-  width: 70rem;
+  width: 66rem;
   font: inherit;
 }
 
 .main__popular__basic-book.selected {
   height: 21rem;
+}
+
+.main__popular__basic-book:last-child {
+  margin-bottom: 0;
 }
 
 .main__popular__basic-img {
@@ -127,7 +130,20 @@
 }
 
 @media screen and (max-width:767px) {
-  .main__popular__contents {
-    margin-left: 0;
+  .main__popular__wrapper {
+    width:90%;
+  }
+
+   .main__popular__side{
+    display: none;
+  }
+
+  .main__popular__content.center {
+    width:95%;
+    margin:auto;
+  }
+
+  .main__popular__pagination {
+    width:10%
   }
 }

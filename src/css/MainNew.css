@@ -14,11 +14,11 @@
   height: 34rem;
   margin: 0;
   position: absolute;
-  top: 24.5rem;
+  top: 27.5rem;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   border: none;
-  z-index: 100;
+  z-index: 1;
   padding: 0;
   transition: all 0.3s ease-in-out;
   -webkit-transition: 0.3s;
@@ -35,7 +35,7 @@
 
 .main-new__booklist {
   position: relative;
-  z-index: 1;
+  z-index: 0;
   width: 100%;
   overflow: hidden;
   margin-top: 10rem;
