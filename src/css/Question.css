@@ -43,44 +43,44 @@
 
 @media screen and (max-width: 1199px) {
   .question__text {
-    font-size: 2.4rem !important;
+    font-size: 1.8rem !important;
   }
 
   .question__icon {
-	width: 16px;
-	height: 16px;
-	margin: 0 35px 0 0;
+    width: 16px;
+    height: 16px;
+    margin: 0 35px 0 0;
   }
 
   .qna__answer {
-	font-size: 1.6rem !important;
-	margin: 33px 0 0 52px;
+    font-size: 1.5rem !important;
+    margin: 33px 0 0 52px;
   }
 
   .qna__line {
-	margin: 3.5rem 0 3.5rem 0;
+    margin: 3.5rem 0 3.5rem 0;
   }
 }
 
 @media screen and (max-width: 767px) {
   .question__text {
-    font-size: 1.8rem !important;
+    font-size: 1.6rem !important;
   }
 
   .qna__answer {
-	border-left: 0;
+    border-left: 0;
     font-size: 1.4rem !important;
-	margin: 20px 0 0 40px;
-	padding: 0 1rem 0 0;
+    margin: 20px 0 0 40px;
+    padding: 0 1rem 0 0;
   }
 
   .question__icon {
-	width: 14px;
-	height: 14px;
-	margin: 0 25px 0 0;
+    width: 14px;
+    height: 14px;
+    margin: 0 25px 0 0;
   }
 
   .qna__line {
-	margin: 2.7rem 0 2.7rem 0;
+    margin: 2.7rem 0 2.7rem 0;
   }
 }
