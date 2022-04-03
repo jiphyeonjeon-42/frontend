@@ -1,16 +1,15 @@
 .wish-book-wraper {
-  min-width: 900px;
-  padding: 0 150px 0 150px;
-  height: 887px;
+  min-width: 36rem;
+  padding: 0 15rem 0 15rem;
+  height: 88.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .search-section {
-  padding: 0 150px 0 150px;
-  max-width: 1200px;
-  min-width: 900px;
+  padding: 0 15rem 0 15rem;
+  max-width: 120rem;
   margin: auto;
 }
 
@@ -26,7 +25,7 @@
 }
 
 .search-subtitle {
-  width: 400px;
+  width: 100%;
   padding: 100px 0 0 0;
 }
 
@@ -35,3 +34,30 @@
   margin-bottom: 80px;
   align-items: center;
 }
+
+@media screen and (min-width:768px) and (max-width: 1200px) {
+
+  .search-section {
+    padding: 0 7.5rem 0 7.5rem;
+  }
+
+}
+
+@media screen and (max-width:767px) {
+
+  .search-section {
+    min-width: 32rem;
+    padding: 0 1.5rem 0 1.5rem;
+  }
+
+  .subtitle__title {
+    font-size: 3.2rem;
+  }
+
+  .wish-book-wraper {
+    padding: 0;
+    height: 65rem;
+  }
+
+}
+
