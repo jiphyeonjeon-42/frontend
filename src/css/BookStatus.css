@@ -3,19 +3,20 @@
   display: flex;
 }
 .book-status__id {
-  width: 6rem;
-  min-width: 6rem;
+  width: auto;
+  margin-right: 6rem;
 }
 .book-status__callSign {
   margin-right: 6rem;
-  width: 6rem;
+  width: auto;
 }
 .book-status__status {
   margin-right: 6rem;
-  width: 6rem;
+  width: auto;
 }
 .book-status__dueDate {
-  width: 24rem;
+  width: auto;
+  margin-right: 6rem;
 }
 .reservation-btn {
   background: none;
@@ -43,6 +44,23 @@
   display: none;
 }
 
+@media screen and (min-width:768px) and (max-width: 1200px) {
+
+  .book-status__id {
+    margin-right: 3rem;
+  }
+  .book-status__callSign {
+    margin-right: 3rem;
+  }
+  .book-status__status {
+    margin-right: 3rem;
+  }
+  .book-status__dueDate {
+    margin-right: 3rem;
+  }
+
+}
+
 @media screen and (max-width:767px) {
 
   .book-status__callSign{
@@ -60,31 +78,31 @@
   }
 
   .book-status div {
-    padding-right: 20rem;
-    font-size: 5rem;
+    margin: auto 0;
+    padding-right: 2rem;
+    font-size: 2rem;
   }
 
   .book-status__toggle {
-    width: 3rem;
+    margin-left: auto !important;
+    width: 2rem;
   }
 
   .book-status__toggle-img {
     width: 100%;
     cursor: pointer;
-    margin-left: 35rem;
     transform: rotate(90deg);
   }
 
   .book-status__toggle-img-clicked {
     width: 100%;
     cursor: pointer;
-    margin-left: 35rem;
     transform: rotate(270deg);
   }
 
   .book-status__mobile-info {
     display: block;
-    height: 20rem;
+    height: auto;
     width: 100%;
   }
 
@@ -93,12 +111,12 @@
   }
 
   .book-status__mobile-info-item {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
   }
 
   .book-status__mobile-info-item span:first-child{
     font-weight: bolder;
-    margin-left: 20%;
+    margin-left: 10%;
   }
 
   .book-status__mobile-info-item span:nth-child(2){
@@ -106,8 +124,22 @@
     left: 50%;
   }
 
+  .book-status > .reservation-btn {
+    margin: 0.4rem 0 0 2rem;
+  }
+
   .book-status > .reservation-btn > span {
-    font-size: 5rem;
+    font-size: 2rem;
+  }
+
+  .book-status__toggle-img {
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .book-status__toggle-img-clicked {
+    margin-left: 0;
+    margin-top: 0;
   }
 
 }
