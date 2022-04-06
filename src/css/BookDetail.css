@@ -1,5 +1,4 @@
 .book-detail-main {
-  /*min-width: 120rem;*/
   margin: 0 auto 30rem;
 }
 .book-detail-title {
@@ -12,7 +11,6 @@
 .book-content {
   display: flex;
   width: 100%;
-  /*min-width: 120rem;*/
   margin: 6rem 0;
 }
 
@@ -149,7 +147,7 @@
   .book-detail__photo {
     margin: 0 auto 3rem auto !important;
     width: 95%;
-    height: 120rem;
+    height: 70rem;
   }
 
   .book-detail__photo img {
