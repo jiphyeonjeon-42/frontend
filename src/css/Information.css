@@ -1,46 +1,139 @@
-/* .information-bg {
-  background-image: url("../img/information_bg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  min-width: 1320px;
-  width: 100%;
-  height: 500px;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-} */
-
-.information-wraper {
-  position: relative;
-  padding: 0 150px 60px 0;
-  min-width: 900px;
-  z-index: 2;
-}
-
-.information-title {
-  position: relative;
-  padding: 89px 150px 60px 150px;
-  min-width: 900px;
-  height: 107px;
-  z-index: 2;
+.information-wrapper {
+  padding: 0 15rem 0 15rem;
 }
 
 .information-section {
-  min-width: 900px;
-  max-width: 1200px;
-  padding: 0 150px 0 150px;
-  margin: auto;
+  min-width: 90rem;
+  max-width: 95rem;
+  margin: 0 auto 0 auto;
 }
 
 .information-subtitle {
-  width: 400px;
-  padding: 118px 0 148px 0;
+  padding: 11rem 0 14rem 0;
+  margin-left: 4rem;
 }
 
 .information-qna {
-  width: 800px;
+  min-width: 80rem;
+  max-width: 80rem;
   margin-left: auto;
-  margin-bottom: 256px;
+  margin-bottom: 21rem;
+}
+
+.information-subtitle__line {
+  width: 4rem;
+  height: 0.4rem;
+  background-color: #a4a4a4;
+  margin-bottom: 4.2rem;
+}
+
+.information-subtitle__titlebox {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.information-subtitle__titlebox__title {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.48;
+  letter-spacing: normal;
+  text-align: left;
+  color: #2d2d2d;
+  word-break: keep-all;
+  white-space: normal;
+}
+
+.information-subtitle__titlebox__toggle {
+  font-size: 1.4rem;
+  color: #545454;
+  background: none;
+  border: none;
+}
+
+.toggle_img {
+  width: 1.8rem;
+  transition: 0.8s;
+}
+
+.rotate-right {
+  transform: rotate(0deg);
+}
+
+.rotate-left {
+  transform: rotate(90deg);
+}
+
+@media screen and (max-width: 1199px) {
+  .information-wrapper {
+    padding: 0 8rem 0 8rem;
+  }
+
+  .information-section {
+    min-width: 60.8rem;
+    max-width: 92rem;
+  }
+
+  .information-qna {
+    min-width: 52.8rem;
+    max-width: 80rem;
+    padding-left: 7rem;
+    margin-bottom: 17.5rem;
+  }
+
+  .information-subtitle {
+    padding: 8.3rem 0 10.5rem 0;
+    margin-left: 3rem;
+  }
+
+  .information-subtitle__titlebox__title {
+    font-size: 2.6rem;
+  }
+
+  .information-subtitle__line {
+    width: 3.2rem;
+    height: 0.3rem;
+    margin-bottom: 3.2rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .information-wrapper {
+    padding: 0 3rem 0 3rem;
+  }
+
+  .information-section {
+    min-width: 30rem;
+    max-width: 60.8rem;
+  }
+
+  .information-qna {
+    min-width: 27rem;
+    max-width: 52.8rem;
+    padding-left: 3rem;
+    margin-bottom: 13rem;
+  }
+
+  .information-subtitle {
+    padding: 6rem 0 6.5rem 0;
+    margin-left: 1.5rem;
+  }
+
+  .information-subtitle__titlebox__title {
+    font-size: 2rem;
+  }
+
+  .information-subtitle__line {
+    width: 2.4rem;
+    height: 0.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .information-subtitle__titlebox__toggle {
+    font-size: 1.2rem;
+  }
+
+  .toggle_img {
+    width: 1.5rem;
+  }
 }
