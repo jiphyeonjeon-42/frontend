@@ -5,12 +5,12 @@ import Banner from "../utils/Banner";
 import "../../css/ReturnBook.css";
 import AdminPagination from "../utils/AdminPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import SubTitle from "../utils/SubTitle";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
-import Login from "../../img/login_icon.svg";
+import Login from "../../img/login_icon_white.svg";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import ReturnModal from "./ReturnModal";
+import AdminTabs from "../utils/AdminTabs";
 
 const ReturnBook = () => {
   const [modal, setModal] = useState(false);
@@ -76,15 +76,7 @@ const ReturnBook = () => {
         titleKo="조회 및 반납"
         titleEn="INQUIRE & RETURN BOOK"
       />
-      <section className="returnbook-main">
-        <div className="returnbook-subtitle">
-          <SubTitle
-            subTitle="반납에 필요한 정보를 입력해주세요."
-            description="카뎃정보, 도서정보, 비고사항을 입력해주세요"
-            alignItems="center"
-          />
-        </div>
-      </section>
+      <AdminTabs />
       <section className="returnbook-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle

@@ -3,14 +3,14 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import Banner from "../utils/Banner";
 import "../../css/ReservedLoan.css";
-import SubTitle from "../utils/SubTitle";
 import AdminPagination from "../utils/AdminPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
-import Login from "../../img/login_icon.svg";
+import Login from "../../img/login_icon_white.svg";
 import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
 import ReservedModal from "./ReservedModal";
+import AdminTabs from "../utils/AdminTabs";
 // import PropTypes from "prop-types";
 
 const ReservedLoan = () => {
@@ -85,15 +85,7 @@ const ReservedLoan = () => {
   return (
     <main>
       <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />
-      <section className="reservedLoan-main">
-        <div className="reservedLoan-subtitle">
-          <SubTitle
-            subTitle="예약대출에 필요한 정보를 입력해주세요."
-            description="검색어를 입력하여 예약대출 현황을 확인하세요."
-            alignItems="center"
-          />
-        </div>
-      </section>
+      <AdminTabs />
       <section className="reservedLoan-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle

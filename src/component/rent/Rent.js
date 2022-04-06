@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import Modal, { isModalOpen } from "./Modal";
 import Banner from "../utils/Banner";
-import SubTitle from "../utils/SubTitle";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import RentModal from "./RentModal";
 import RentButton from "./RentButton";
-import Login from "../../img/login_icon.svg";
+import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 import "../../css/Rent.css";
 import InquireBoxUser from "./InquireBoxUser";
 import InquireBoxBook from "./InquireBoxBook";
+import AdminTabs from "../utils/AdminTabs";
 
 const Rent = () => {
   const userModal = useRecoilValue(isModalOpen);
@@ -25,13 +25,7 @@ const Rent = () => {
   return (
     <main>
       <Banner img="admin" titleKo="대출" titleEn="RENT BOOK" />
-      <div className="rent-subtitle">
-        <SubTitle
-          subTitle="대출에 필요한 정보를 입력해주세요"
-          description="카뎃정보, 도서정보, 비고사항을 입력해주세요"
-          alignItems="center"
-        />
-      </div>
+      <AdminTabs />
       <div className="inquire-box-wrapper">
         <InquireBoxTitle
           Icon={Login}
