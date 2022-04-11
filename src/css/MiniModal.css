@@ -1,13 +1,12 @@
 @import url(./Modal.css);
 
-
 .modal__background.mini {
   width: 100%;
 }
 
 .modal__container.mini {
-  width: 800px;
-  height: 460px;
+  width: 80rem;
+  height: 46rem;
   border: 0;
   padding: 0;
   text-align: left;
@@ -21,14 +20,15 @@
   right: 0;
 }
 .modal__wrapper {
-  padding: 80px 40px 40px 64px;
+  padding: 8rem 6rem;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  align-items: center;
 }
 
 .mini-modal__text {
-  height: 290px;
+  height: 29rem;
   position: relative;
 }
 
@@ -36,30 +36,33 @@
   content: " ";
   background-color: #a4a4a4;
   position: absolute;
-  left: 0;
-  right: 650px;
-  height: 4px;
+  top: 0;
+  width: 6.5rem;
+  height: 0.44rem;
 }
 
 .mini-modal__text__title {
-  padding-top: 40px;
-  line-height: 56px;
+  padding-top: 5rem;
+  line-height: 1.5;
   white-space: pre-wrap;
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: #2d2d2d;
 }
 
 .mini-modal__text__message {
-  margin-top: 40px;
+  margin-top: 4rem;
   width: 100%;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
 
 .modal__button {
-  margin-right: 24px;
+  margin-right: 2.4rem;
   border: 0;
   padding: 0.5rem 2rem;
   text-align: center;
-  border-radius: 24px;
+  border-radius: 2.4rem;
   background-color: #a4a4a4;
   cursor: pointer;
 }
@@ -74,4 +77,18 @@
 
 .modal__button.confirm.mini {
   margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .modal__wrapper {
+    padding: 8rem 4rem;
+  }
+  .modal__container.mini {
+    width: 100%;
+    height: auto;
+  }
+
+  .mini-modal__text__title {
+    line-height: normal;
+  }
 }
