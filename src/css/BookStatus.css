@@ -2,26 +2,36 @@
   margin-bottom: 1.2rem;
   display: flex;
 }
+
 .book-status__id {
-  width: auto;
-  margin-right: 6rem;
+  width: 2rem;
+  margin-right: 3%;
 }
+
 .book-status__callSign {
-  margin-right: 6rem;
-  width: auto;
+  margin-right: 4%;
+  width: 10rem;
 }
+
 .book-status__status {
-  margin-right: 6rem;
-  width: auto;
+  margin-right: 5%;
+  width: 6rem;
 }
+
 .book-status__dueDate {
-  width: auto;
-  margin-right: 6rem;
+  width: 5rem;
+  margin-right: 5%;
 }
+
+.reservation-btn, .book-status__toggle {
+  margin-top: 0.3rem;
+}
+
 .reservation-btn {
   background: none;
   border: none;
 }
+
 .reservation-btn.cursor-pointer {
   cursor: pointer;
 }
@@ -44,23 +54,6 @@
   display: none;
 }
 
-@media screen and (min-width:768px) and (max-width: 1200px) {
-
-  .book-status__id {
-    margin-right: 3rem;
-  }
-  .book-status__callSign {
-    margin-right: 3rem;
-  }
-  .book-status__status {
-    margin-right: 3rem;
-  }
-  .book-status__dueDate {
-    margin-right: 3rem;
-  }
-
-}
-
 @media screen and (max-width:767px) {
 
   .book-status__callSign{
@@ -73,7 +66,8 @@
 
   .book-status {
     flex-wrap: wrap;
-    padding: 2rem 0;
+    padding: 1rem 0;
+    margin-bottom: 0;
     border-bottom: 0.1rem dotted black;
   }
 
@@ -85,19 +79,23 @@
 
   .book-status__toggle {
     margin-left: auto !important;
-    width: 2rem;
+    width: 1.8rem;
   }
 
   .book-status__toggle-img {
     width: 100%;
     cursor: pointer;
     transform: rotate(90deg);
+    margin-left: 0;
+    margin-top: 1rem;
   }
 
   .book-status__toggle-img-clicked {
     width: 100%;
     cursor: pointer;
     transform: rotate(270deg);
+    margin-left: 0;
+    margin-top: 1rem;
   }
 
   .book-status__mobile-info {
@@ -130,16 +128,6 @@
 
   .book-status > .reservation-btn > span {
     font-size: 2rem;
-  }
-
-  .book-status__toggle-img {
-    margin-left: 0;
-    margin-top: 0;
-  }
-
-  .book-status__toggle-img-clicked {
-    margin-left: 0;
-    margin-top: 0;
   }
 
 }

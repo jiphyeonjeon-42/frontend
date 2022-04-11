@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-// import React, { useEffect, useState, useRef } from "react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import "../../css/BookDetail.css";
 import Banner from "../utils/Banner";
@@ -11,14 +10,14 @@ import IMGERR from "../../img/image_onerror.svg";
 const BookDetail = ({ location, match }) => {
   const [data, setData] = useState({ books: [] });
   const { id } = match.params;
-  // const myRef = useRef(null);
+  const myRef = useRef(null);
 
   const fetchData = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/books/info/${id}`,
     );
     setData(response.data);
-    // myRef.current.scrollIntoView();
+    myRef.current.scrollIntoView();
   };
 
   useEffect(fetchData, []);
@@ -35,7 +34,7 @@ const BookDetail = ({ location, match }) => {
         titleEn="DETAIL & RESERVATION"
       />
       <section className="book-detail-body">
-        <div className="breadcrumb">
+        <div className="breadcrumb" ref={myRef}>
           <span className="font-16 color-a4">
             {location.state ? `${location.state.bread} ` : "집현전 "} &gt;
             도서상세페이지 및 예약
@@ -46,7 +45,7 @@ const BookDetail = ({ location, match }) => {
             <img src={data.image} alt={data.title} onError={subtituteImg} />
           </div>
           <div className="book-detail">
-            <span className="book-detail__title color-red">도서정보</span>
+            <span className="color-red">도서정보</span>
             <div className="book-detail__title">{data.title}</div>
             <div className="book-detail__info">
               <div>

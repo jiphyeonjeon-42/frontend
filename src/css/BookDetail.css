@@ -1,17 +1,7 @@
-.book-detail-main {
-  margin: 0 auto 30rem;
-}
-.book-detail-title {
+.book-detail-body {
+  max-width: 100rem;
   position: relative;
-  padding: 8.9rem 0 6rem ;
-  min-width: 90rem;
-  height: 10.7rem;
-  z-index: 2;
-}
-.book-content {
-  display: flex;
-  width: 100%;
-  margin: 6rem 0;
+  margin: 6rem auto;
 }
 
 .breadcrumb {
@@ -21,10 +11,10 @@
   margin-right: 3rem;
 }
 
-.book-detail-body {
-  width: 80%;
-  position: relative;
-  margin: 0 auto;
+.book-content {
+  display: flex;
+  width: 100%;
+  margin: 6rem 0;
 }
 
 .book-detail__photo {
@@ -36,10 +26,16 @@
   height: 51.1rem;
 }
 
-.book-photo {
-  width: 100%;
-  height: auto;
+.book-detail {
+  width: 70%;
+  overflow: hidden;
 }
+
+.book-detail > span:first-child {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
 .book-detail__title {
   width: auto;
   height: 4.1rem;
@@ -49,10 +45,6 @@
   margin-bottom: 2.4rem;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.book-detail {
-  width: 70%;
-  margin-right: 3rem;
 }
 
 .book-detail__info {
@@ -65,17 +57,12 @@
   width: 100%;
 }
 
-.book-detail__info > div:nth-child(1) {
-  width: 30%;
+.book-detail__info > div:first-child {
+  width: 15%;
 }
 
 .book-detail__info > div:nth-child(2) {
-  width: 70%;
-}
-
-.book-detail__info > div:nth-child(2) > span {
-  text-overflow: ellipsis;
-  overflow: hidden;
+  width: 85%;
 }
 
 .book-detail__info-key {
@@ -90,45 +77,46 @@
   display: block;
   font-size: 1.8rem;
   margin-top: 1.5rem;
-  margin-left: 5rem;
+  margin-left: 10rem;
   font-weight: normal;
-}
-.book-info__title {
-  font-size: 1.6rem;
-  font-weight: normal;
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
 }
+
 .book-state {
   margin-top: 2rem;
 }
+
 .book-state__list {
   margin-top: 2rem;
 }
 
 @media screen and (min-width:768px) and (max-width: 1200px) {
 
-  .book-detail-body {
-    width: 90%;
-  }
-
   .book-detail {
-    width: 65%;
-  }
-
-  .book-content > div {
-    margin: auto;
+    width: 55%;
+    margin-right: auto;
   }
 
   .book-detail__photo img {
-    width: 25rem;
-    margin: 0 2rem 0 0;
+    width: 33.4rem;
+    margin: 0 1rem 0 0;
   }
+
+  .book-detail__photo {
+    margin: 0 0.4rem 0 auto;
+  }
+
+  .book-detail__info-value {
+    margin-left: 4rem;
+  }
+
 }
 
 @media screen and (max-width:767px){
 
   .book-detail-body {
+    padding: 0;
     width: 100%;
     min-width: 36rem;
     position: relative;
@@ -146,8 +134,8 @@
 
   .book-detail__photo {
     margin: 0 auto 3rem auto !important;
-    width: 95%;
-    height: 70rem;
+    width: 80%;
+    height: 25%;
   }
 
   .book-detail__photo img {
@@ -172,6 +160,18 @@
   .book-detail__info {
     height: auto;
     padding: 0 0 2rem 0;
+  }
+
+  .book-detail__info > div:first-child {
+    width: 25%;
+  }
+
+  .book-detail__info > div:nth-child(2) {
+    width: 75%;
+  }
+
+  .book-detail__info-value {
+    margin-left: 2.5rem;
   }
 
   .detail-info span {
