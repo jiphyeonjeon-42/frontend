@@ -3,20 +3,22 @@ import Banner from "../utils/Banner";
 import Question from "./Question";
 import "../../css/Information.css";
 import Toggle from "../../img/caret-right.svg";
+import ScrollTopButton from "../utils/ScrollTopButton";
 
 const Information = () => {
-  // window.scrollTo(0, 0);
   const [allOpen, setAllOpen] = useState(false);
   const mounted = useRef(true);
   const onClickAllOpen = () => {
     setAllOpen(prev => !prev);
     mounted.current = false;
   };
+
   return (
     <main>
       <Banner img="information" titleKo="이용안내" titleEn="INFORMATION" />
       <div className="information-wrapper">
         <section className="information-section">
+          <ScrollTopButton rightRem={-10} bottomRem={5} />
           <div className="information-subtitle">
             <div className="information-subtitle__line" />
             <div className="information-subtitle__titlebox">
