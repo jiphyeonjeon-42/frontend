@@ -3,6 +3,7 @@
 }
 
 .information-section {
+  position: relative;
   min-width: 90rem;
   max-width: 95rem;
   margin: 0 auto 0 auto;

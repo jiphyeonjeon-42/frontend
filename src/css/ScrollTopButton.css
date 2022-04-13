@@ -1,0 +1,53 @@
+.scroll-top-button__wrapper {
+  position: absolute;
+}
+
+.scroll-top-button__button {
+  position: fixed;
+  border: none;
+  background: none;
+}
+
+.scroll-top-button__image {
+  width: 40px;
+  transform: rotate(-90deg);
+  opacity: 0;
+}
+
+.scroll-top-button__image:hover {
+  transition: 0.3s;
+  transform: scale(1.1) rotate(-90deg);
+  cursor: pointer;
+}
+
+.active {
+  opacity: 0.6;
+  animation: smoothShow 0.5s;
+}
+
+@keyframes smoothShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.6;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .scroll-top-button__wrapper {
+    right: -2rem !important;
+  }
+  .scroll-top-button__image {
+    width: 36px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .scroll-top-button__wrapper {
+    right: 4rem !important;
+  }
+  .scroll-top-button__image {
+    width: 32px;
+  }
+}
