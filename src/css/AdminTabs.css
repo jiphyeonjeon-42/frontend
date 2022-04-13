@@ -52,12 +52,12 @@
 @media screen and (max-width: 767px) {
   .admin-tabs-wrapper {
     max-width: 50rem;
-	min-width: 36rem;
+    min-width: 36rem;
     margin: 6rem auto 4.5rem auto;
   }
   .admin-tabs {
     max-width: 42rem;
-	min-width: 32rem;
+    min-width: 32rem;
   }
   .admin-tab {
     font-size: 2rem;

@@ -13,7 +13,7 @@
   width: 100%;
   margin: auto;
   position: fixed;
-  z-index: 2;
+  z-index: 5;
   top: 0;
   left: 50%;
   transform: translate(-50%);
