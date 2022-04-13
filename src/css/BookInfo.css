@@ -1,39 +1,26 @@
-/* a:link {
-  color: black;
-  text-decoration: none;
-}
-a:visited {
-  color: rgb(101, 101, 101);
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-} */
-
 .book-info-wraper {
-  flex-basis: 600px;
+  flex-basis: 60rem;
   flex-grow: 1;
   flex-shrink: 0;
-  max-width: 1200px;
+  max-width: 120rem;
 }
 
 .book-info {
   display: flex;
-  /* width: 600px; */
 }
 
 .book-info__image {
-  width: 127px;
-  height: 183px;
+  width: 12.7rem;
+  height: 18.3rem;
   position: relative;
   z-index: 1;
 }
 
 .book-info__available {
   position: absolute;
-  width: 127px;
-  height: 36px;
-  margin-top: 147px;
+  width: 12.7rem;
+  height: 3.6rem;
+  margin-top: 14.7rem;
   background-color: #e63737;
   z-index: 2;
   display: flex;
@@ -42,38 +29,82 @@ a:hover {
 }
 
 .book-info__info {
-  margin-left: 24px;
+  margin-left: 2.4rem;
 }
 
 .book-info__title {
-  width: 400px;
-  max-width: 800px;
+  width: 40rem;
+  max-width: 80rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .book-info__others {
-  margin-top: 8px;
+  margin-top: 0.8rem;
 }
 
 .book-info__separator {
-  margin: 0 12px 0 12px;
+  margin: 0 1.2rem 0 1.2rem;
 }
 .book-info__separator-half {
-  margin: 0 0 0 12px;
+  margin: 0 0 0 1.2rem;
 }
 
 .book-info__published-at {
-  margin-top: 24px;
+  margin-top: 2.4rem;
 }
 
 .book-info__isbn {
-  margin: 8px 0 24px 0;
+  margin: 0.8rem 0 2.4rem 0;
 }
 
 .book-info__line {
-  height: 1px;
+  height: 0.1rem;
   background-color: rgba(112, 112, 112, 0.2);
-  margin: 32px 0 32px 0;
+  margin: 3.2rem 0 3.2rem 0;
 }
+
+@media screen and (min-width:768px) and (max-width: 1200px) {
+
+  .book-info-wraper {
+    flex-basis: 100%;
+  }
+
+}
+
+@media screen and (max-width:767px) {
+
+  .book-info-wraper {
+    width: 100%;
+    flex-basis: 100%;
+  }
+
+  .book-info__info {
+    width: 60%;
+    margin-left: 1.2rem;
+  }
+
+  .book-info__title {
+    width: 100%;
+  }
+
+  .book-info__others > span {
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .book-info__separator {
+    display: none !important;
+  }
+
+  .book-info__link-icon {
+    display: none !important;
+  }
+
+  .book-info__line {
+    margin: 0.8rem 0 3.2rem 0;
+  }
+
+}
+

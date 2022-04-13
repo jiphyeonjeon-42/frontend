@@ -1,16 +1,15 @@
 .wish-book-wraper {
-  min-width: 900px;
-  padding: 0 150px 0 150px;
-  height: 887px;
+  min-width: 36rem;
+  padding: 0 15rem 0 15rem;
+  height: 88.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .search-section {
-  padding: 0 150px 0 150px;
-  max-width: 1200px;
-  min-width: 900px;
+  padding: 0 15rem 0 15rem;
+  max-width: 120rem;
   margin: auto;
 }
 
@@ -19,19 +18,50 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 109px 150px 120px 150px;
-  min-width: 900px;
+  padding: 10.9rem 15rem 120rem 150rem;
+  min-width: 90rem;
   z-index: 2;
-  height: 231px;
+  height: 23.1rem;
 }
 
 .search-subtitle {
-  width: 400px;
-  padding: 100px 0 0 0;
+  width: 100%;
+  padding: 10rem 0 0 0;
 }
 
 .search-sort-available {
   display: flex;
-  margin-bottom: 80px;
+  margin-bottom: 8rem;
   align-items: center;
 }
+
+@media screen and (min-width:768px) and (max-width: 1200px) {
+
+  .search-section {
+    padding: 0 7.5rem 0 7.5rem;
+  }
+
+}
+
+@media screen and (max-width:767px) {
+
+  .search-section {
+    min-width: 32rem;
+    padding: 0 1.5rem 0 1.5rem;
+  }
+
+  .search-sort-available {
+    margin-bottom: 3rem !important;
+  }
+
+  .subtitle__title {
+    font-size: 3.2rem;
+  }
+
+  .wish-book-wraper {
+    padding: 0;
+    height: 48rem;
+  }
+
+}
+
