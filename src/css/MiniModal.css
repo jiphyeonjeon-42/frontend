@@ -1,9 +1,5 @@
 @import url(./Modal.css);
 
-.modal__background.mini {
-  width: 100%;
-}
-
 .modal__container.mini {
   width: 80rem;
   height: 46rem;
@@ -18,13 +14,6 @@
   float: right;
   top: 0;
   right: 0;
-}
-.modal__wrapper {
-  padding: 8rem 6rem;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  align-items: center;
 }
 
 .mini-modal__text {
@@ -57,23 +46,10 @@
   word-wrap: break-word;
 }
 
-.modal__button {
-  margin-right: 2.4rem;
-  border: 0;
-  padding: 0.5rem 2rem;
-  text-align: center;
-  border-radius: 2.4rem;
-  background-color: #a4a4a4;
-  cursor: pointer;
-}
-
 .modal__button.mini {
   float: right;
 }
 
-.modal__button.confirm {
-  background-color: #e63737;
-}
 
 .modal__button.confirm.mini {
   margin: 0;

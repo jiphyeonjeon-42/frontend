@@ -1,78 +1,78 @@
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
-import Modal, { isModalOpen } from "./Modal";
+
 import Banner from "../utils/Banner";
+import AdminTabs from "../utils/AdminTabs";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
+import RentInquireBoxUser from "./RentInquireBoxUser";
+import RentInquireBoxBook from "./RentInquireBoxBook";
 import RentModal from "./RentModal";
-import RentButton from "./RentButton";
+import RentConfirm from "./RentConfirm";
+
 import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
+
 import "../../css/Rent.css";
-import InquireBoxUser from "./InquireBoxUser";
-import InquireBoxBook from "./InquireBoxBook";
-import AdminTabs from "../utils/AdminTabs";
 
 const Rent = () => {
-  const userModal = useRecoilValue(isModalOpen);
-  const [selectUser, setSelectUser] = useState(null);
-  const [selectBooks, setSelectBooks] = useState([]);
-  const [midModal, setMidModal] = useState(false);
-
-  const closeModal = () => {
-    setMidModal(false);
-  };
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedBooks, setSelectedBooks] = useState([]);
+  const [midModalContents, setMidModalContents] = useState("");
 
   return (
     <main>
       <Banner img="admin" titleKo="대출" titleEn="RENT BOOK" />
       <AdminTabs />
-      <div className="inquire-box-wrapper">
+      <section className="inquire-box__wrapper">
         <InquireBoxTitle
           Icon={Login}
           titleKO="카뎃 정보"
           titleEN="Cadet info"
         />
-        <InquireBoxUser selectUser={selectUser} setSelectUser={setSelectUser} />
-      </div>
-      <div className="inquire-box-wrapper">
+        <RentInquireBoxUser
+          selectedUser={selectedUser}
+          setSelectedUser={setSelectedUser}
+          setMidModalContents={setMidModalContents}
+        />
+      </section>
+      <section className="inquire-box__wrapper">
         <InquireBoxTitle Icon={Book} titleKO="도서 정보" titleEN="Book info" />
-        {selectBooks.length > 0
-          ? selectBooks.map((book, index) => (
-              <InquireBoxBook
+        {selectedBooks.length > 0
+          ? selectedBooks.map((book, index) => (
+              <RentInquireBoxBook
                 key={book.id}
                 book={book}
-                shape={selectBooks.length === 2 && index === 0 ? "none" : "two"}
-                selectBooks={selectBooks}
-                setSelectBooks={setSelectBooks}
+                shape={
+                  selectedBooks.length === 2 && index === 0 ? "none" : "two"
+                }
+                selectedBooks={selectedBooks}
+                setSelectedBooks={setSelectedBooks}
+                setMidModalContents={setMidModalContents}
               />
             ))
           : null}
-        {selectBooks.length < 2 ? (
-          <InquireBoxBook
+        {selectedBooks.length < 2 ? (
+          <RentInquireBoxBook
             book={null}
-            shape={selectBooks.length === 0 ? "two" : "four"}
-            selectBooks={selectBooks}
-            setSelectBooks={setSelectBooks}
+            shape={selectedBooks.length === 0 ? "two" : "four"}
+            selectedBooks={selectedBooks}
+            setSelectedBooks={setSelectedBooks}
+            setMidModalContents={setMidModalContents}
           />
         ) : null}
-      </div>
-      <RentButton
-        selectUser={selectUser}
-        selectBooks={selectBooks}
-        setModal={setMidModal}
+      </section>
+      <RentConfirm
+        selectedUser={selectedUser}
+        selectedBooks={selectedBooks}
+        setMidModalContents={setMidModalContents}
       />
-      {userModal !== 0 ? (
-        <Modal
-          setSelectUser={setSelectUser}
-          setSelectBooks={setSelectBooks}
-          selectBooks={selectBooks}
-        />
-      ) : null}
-      {midModal && (
+      {midModalContents && (
         <RentModal
-          selectUser={selectUser}
-          selectBooks={selectBooks}
-          handleModal={closeModal}
+          selectedUser={selectedUser}
+          selectedBooks={selectedBooks}
+          midModalContents={midModalContents}
+          setSelectedUser={setSelectedUser}
+          setSelectedBooks={setSelectedBooks}
+          setMidModalContents={setMidModalContents}
         />
       )}
     </main>

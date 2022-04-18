@@ -1,14 +1,9 @@
+@import url(./MidModal.css);
+
 .modal-book__search-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
   margin: 28px 0 49px 0;
-}
-
-.modal-book {
-  display: flex;
-  flex-direction: column;
-  height: 616px;
 }
 
 .modal-book__text {
@@ -17,5 +12,10 @@
 
 .modal-book__pagination {
   margin-top: auto;
-  /* height: 150px; */
+}
+
+@media screen and (max-width: 767px) {
+  .modal-book__text {
+    margin-right: 3rem;
+  }
 }

@@ -31,10 +31,30 @@
   cursor: pointer;
 }
 
+.modal__wrapper {
+  padding: 8rem 6rem;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.modal__button {
+  margin-right: 2.4rem;
+  border: 0;
+  padding: 1rem 3rem;
+  text-align: center;
+  border-radius: 2.4rem;
+  background-color: #a4a4a4;
+  cursor: pointer;
+}
+
+.modal__button.confirm {
+  background-color: #e63737;
+}
 
 @media screen and (max-width: 1200px) {
   .modal__container {
     width: 100%;
-    height: auto;
   }
 }

@@ -2,25 +2,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Arrow from "../../img/arrow_right_black.svg";
-import "../../css/UserList.css";
+import "../../css/RentUserList.css";
 
-const UserList = ({ user, setSelectUser, setUserModal }) => {
+const UserList = ({ user, setSelectedUser, closeMidModal }) => {
   const seletUser = () => {
-    if (setSelectUser) {
-      setSelectUser(user);
+    if (setSelectedUser) {
+      setSelectedUser(user);
     }
-    if (setUserModal) {
-      setUserModal(0);
+    if (closeMidModal) {
+      closeMidModal(0);
     }
   };
 
   return (
-    <button
-      className="user-list"
-      type="button"
-      onClick={seletUser}
-      //   disabled={user.isPenalty || user.lendingCnt >= 2 ? "disabled" : ""}
-    >
+    <button className="user-list" type="button" onClick={seletUser}>
       <div className="user-list__name">
         <div className="font-18-bold color-54">{user.login}</div>
       </div>
@@ -42,8 +37,8 @@ const UserList = ({ user, setSelectUser, setUserModal }) => {
 export default UserList;
 
 UserList.propTypes = {
-  setSelectUser: PropTypes.func.isRequired,
-  setUserModal: PropTypes.func.isRequired,
+  setSelectedUser: PropTypes.func.isRequired,
+  closeMidModal: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   user: PropTypes.object.isRequired,
 };

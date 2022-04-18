@@ -1,9 +1,4 @@
-@import url(./MiniModal.css);
-
-.modal__background .mid-modal {
-  width: 1200px;
-  height: 680px;
-}
+@import url(./Modal.css);
 
 .modal__wrapper.mid {
   padding: 88px;
@@ -56,4 +51,41 @@
 
 .margin-8 {
   margin: 8px 0 8px 0;
+}
+
+@media screen and (max-width: 767px) {
+  
+  .mid-modal__cover {
+    float: none;
+    margin:auto;
+    width: 137px;
+    height: 200px;
+  }
+  .mid-modal__cover-img {
+    width: 137px;
+    height: 200px;
+  }
+  
+  .mid-modal__book {
+    height: 80px;
+  }
+  .mid-modal__lend{
+    height: 80px;
+  }
+  .mid-modal__user {
+    height: 80px;
+  }
+  .modal__wrapper .font-28-bold {
+    font-size: 2.3rem;
+  }
+
+  .margin-8 { 
+    margin:0;
+  }
+  .mid-modal__remark {
+    height:40px;
+  }
+  .mid-modal__remark__input {
+    height: 50px;
+  }
 }

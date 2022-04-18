@@ -5,10 +5,10 @@ import axios from "axios";
 import AdminSearchBar from "../utils/AdminSearchBar";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import AdminPagination from "../utils/AdminPagination";
-import BookList from "./BookList";
-import "../../css/ModalBook.css";
+import BookList from "./RentModalBookList";
+import "../../css/RentModalBook.css";
 
-const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
+const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
   const [bookSearchWord, setBookSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [bookSearchPage, setBookSearchPage] = useState(1);
@@ -66,7 +66,7 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
   }, []);
 
   return (
-    <section className="modal-book">
+    <section className="modal__wrapper modal-book">
       <div className="modal-book__search-bar">
         <div className="modal-book__text font-28-bold color-54">도서 정보</div>
         <AdminSearchBar
@@ -78,9 +78,9 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
         <BookList
           key={book.id}
           book={book}
-          setSelectBooks={setSelectBooks}
-          selectBooks={selectBooks}
-          setUserModal={setUserModal}
+          setSelectedBooks={setSelectedBooks}
+          selectedBooks={selectedBooks}
+          closeMidModal={closeMidModal}
         />
       ))}
       <div className="modal-user__pagination">
@@ -96,10 +96,10 @@ const ModalBook = ({ selectBooks, setSelectBooks, setUserModal }) => {
   );
 };
 
-export default ModalBook;
+export default RentModalBook;
 
-ModalBook.propTypes = {
-  setSelectBooks: PropTypes.func.isRequired,
-  setUserModal: PropTypes.func.isRequired,
-  selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+RentModalBook.propTypes = {
+  setSelectedBooks: PropTypes.func.isRequired,
+  closeMidModal: PropTypes.func.isRequired,
+  selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

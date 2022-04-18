@@ -2,16 +2,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Arrow from "../../img/arrow_right_black.svg";
-import "../../css/BookList.css";
+import "../../css/RentBookList.css";
 
-const BookList = ({ book, setSelectBooks, selectBooks, setUserModal }) => {
+const RentModalBookList = ({
+  book,
+  setSelectedBooks,
+  selectedBooks,
+  closeMidModal,
+}) => {
   const seletOneOfBook = () => {
-    if (setSelectBooks) {
-      selectBooks.push(book);
-      setSelectBooks(selectBooks);
-    }
-    if (setUserModal) {
-      setUserModal(0);
+    if (setSelectedBooks) {
+      selectedBooks.push(book);
+      setSelectedBooks(selectedBooks);
+      closeMidModal(0);
     }
   };
 
@@ -31,7 +34,7 @@ const BookList = ({ book, setSelectBooks, selectBooks, setUserModal }) => {
       type="button"
       onClick={seletOneOfBook}
       disabled={
-        isAlreadySelected(book, selectBooks) || book.isLenderable === false
+        isAlreadySelected(book, selectedBooks) || book.isLenderable === false
           ? "disabled"
           : ""
       }
@@ -43,7 +46,7 @@ const BookList = ({ book, setSelectBooks, selectBooks, setUserModal }) => {
           </div>
           <div className="modal-book-list__valid font-16 color-red">
             {book.isLenderable
-              ? isAlreadySelected(book, selectBooks)
+              ? isAlreadySelected(book, selectedBooks)
                 ? "이미 선택됨"
                 : "대출 가능"
               : "대출 불가능"}
@@ -71,12 +74,12 @@ const BookList = ({ book, setSelectBooks, selectBooks, setUserModal }) => {
   );
 };
 
-export default BookList;
+export default RentModalBookList;
 
-BookList.propTypes = {
-  setSelectBooks: PropTypes.func.isRequired,
-  setUserModal: PropTypes.func.isRequired,
-  selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+RentModalBookList.propTypes = {
+  setSelectedBooks: PropTypes.func.isRequired,
+  closeMidModal: PropTypes.func.isRequired,
+  selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   book: PropTypes.object.isRequired,
 };

@@ -5,10 +5,10 @@ import axios from "axios";
 import AdminSearchBar from "../utils/AdminSearchBar";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import AdminPagination from "../utils/AdminPagination";
-import UserList from "./UserList";
-import "../../css/ModalUser.css";
+import RentUserList from "./RentModalUserList";
+import "../../css/RentModalUser.css";
 
-const ModalUser = ({ setSelectUser, setUserModal }) => {
+const RentModalUser = ({ setSelectedUser, closeMidModal }) => {
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [userSearchPage, setUserSearchPage] = useState(1);
@@ -66,7 +66,7 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
   }, []);
 
   return (
-    <section className="modal-user">
+    <div className="modal__wrapper modal-user">
       <div className="modal-user__search-bar">
         <div className="modal-user__text font-28-bold color-54">카뎃 정보</div>
         <AdminSearchBar
@@ -75,11 +75,11 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
         />
       </div>
       {userList.map(user => (
-        <UserList
+        <RentUserList
           key={user.id}
           user={user}
-          setSelectUser={setSelectUser}
-          setUserModal={setUserModal}
+          setSelectedUser={setSelectedUser}
+          closeMidModal={closeMidModal}
         />
       ))}
       <div className="modal-user__pagination">
@@ -91,13 +91,13 @@ const ModalUser = ({ setSelectUser, setUserModal }) => {
           lastPage={lastUserSearchPage}
         />
       </div>
-    </section>
+    </div>
   );
 };
 
-export default ModalUser;
+export default RentModalUser;
 
-ModalUser.propTypes = {
-  setSelectUser: PropTypes.func.isRequired,
-  setUserModal: PropTypes.func.isRequired,
+RentModalUser.propTypes = {
+  setSelectedUser: PropTypes.func.isRequired,
+  closeMidModal: PropTypes.func.isRequired,
 };
