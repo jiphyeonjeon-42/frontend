@@ -3,7 +3,6 @@ import React from "react";
 import "../../css/ReturnBookFilter.css";
 
 const ReturnBookFilter = ({ lendingSort, setLendingSort }) => {
-  // const [lendingSort, setLendingSort] = useState(false);
   const toggleTrue = () => {
     setLendingSort(true);
   };

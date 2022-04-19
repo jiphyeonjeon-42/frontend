@@ -11,23 +11,22 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
   };
 
   return (
-    <div className="returnbook-table-list">
-      <div className="returnbook-table-list__name font-18-bold color-54">
+    <div className="return-book__table-list">
+      <div className="return-book__table-list__name font-18-bold color-54">
         {factor.user && factor.user.login}
       </div>
       <button
-        className="returnbook-table-list__button"
+        className="return-book__table-list__button"
         type="button"
         onClick={openSetModal}
       >
-        <div className="returnbook-table-list__title">
-          <span className="font-18-bold color-54">
+        <div className="return-book__table-list__title">
+          <span className="return-book__table-list__text font-18-bold color-54">
             {factor.book && factor.book.info.title}
-            {/* {factor.book && factor.book.info && factor.book.info.title} */}
           </span>
-          <img className="returnbook-table-list__arr" src={Arr} alt="arrow" />
+          <img className="return-book__table-list__arr" src={Arr} alt="arrow" />
         </div>
-        <div className="returnbook-table-list__info">
+        <div className="return-book__table-list__info">
           <span className="re-callSign font-16 color-54">
             도서등록번호 : {factor.book && factor.book.callSign}
           </span>

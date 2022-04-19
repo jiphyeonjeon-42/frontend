@@ -10,26 +10,30 @@ const ReservedTableList = ({ factor, openModal, setInfo }) => {
   };
 
   return (
-    <div className="reservedLoan-table-list">
-      <div className="reservedLoan-table-list__name font-18-bold color-54">
+    <div className="reserved-loan__table-list">
+      <div className="reserved-loan__table-list__name font-18-bold color-54">
         {factor.user && factor.user.login}
       </div>
       <button
-        className="reservedLoan-table-list__button"
+        className="reserved-loan__table-list__button"
         type="button"
         onClick={openSetModal}
       >
-        <div className="reservedLoan-table-list__title">
-          <span className="font-18-bold color-54">
+        <div className="reserved-loan__table-list__title">
+          <span className="reserved-loan__table-list__text font-18-bold color-54">
             {factor.book && factor.book.info && factor.book.info.title}
           </span>
-          <img className="reservedLoan-table-list__arr" src={Arr} alt="arrow" />
+          <img
+            className="reserved-loan__table-list__arr"
+            src={Arr}
+            alt="arrow"
+          />
         </div>
-        <div className="reservedLoan-table-list__info">
-          <span className="re-callSign font-16 color-54">
+        <div className="reserved-loan__table-list__info">
+          <span className="reserved-loan__table-list__call-sign font-16 color-54">
             도서등록번호 : {factor.book && factor.book.callSign}
           </span>
-          <span className="re-dueDate font-16 color-54">
+          <span className="font-16 color-54">
             {factor.book &&
               factor.book.lendings[0] &&
               `반납 예정일 : ${factor.book.lendings[0].dueDate}`}

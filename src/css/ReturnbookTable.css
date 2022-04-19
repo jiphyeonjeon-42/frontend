@@ -1,49 +1,85 @@
-.returnbook-table-list {
+.return-book__table-list {
   display: flex;
-  width: 1080px;
+  width: 108rem;
   margin-left: auto;
-  padding-top: 40px;
-  /* margin-top: 20px; */
+  padding-top: 4rem;
 }
 
-.returnbook-table-list__button {
-  width: 919px;
+.return-book__table-list__button {
+  width: 100%;
   background: none;
   margin: 0;
   border: 0;
   padding: 0;
   text-align: left;
-  border-bottom: 1px solid #a4a4a4;
-  padding-bottom: 40px;
+  border-bottom: 0.1rem solid #a4a4a4;
+  padding-bottom: 4rem;
   cursor: pointer;
 }
 
-.returnbook-table-list__title {
+.return-book__table-list__title {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* flex-shrink: auto; */
 }
 
-.returnbook-table-list__arr {
-  width: 8px;
-  height: 16px;
-  margin-right: 68px;
+.return-book__table-list__arr {
+  width: 0.8rem;
+  height: 1.6rem;
+  margin-right: 4rem;
   margin-left: auto;
 }
 
-.returnbook-table-list__name {
-  width: 161px;
+.return-book__table-list__name {
+  width: 16.1rem;
 }
 
-.returnbook-table-list__info {
+.return-book__table-list__info {
+  margin-right: 6rem;
 }
+
 .re-callSign {
-  margin-right: 28px;
+  margin-right: 2.8rem;
 }
 
 .re-dueDate {
-  margin-right: 28px;
+  margin-right: 2.8rem;
+}
+
+
+@media screen and (max-width:1200px) {
+  .return-book__table-list {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width:767px) {
+  .return-book__table-list {
+    display: block;
+  }
+  
+  .return-book__table-list__name {
+    margin-bottom: 1.1rem;
+  }
+  .return-book__table-list__text {
+    padding-right: 2rem;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+}
+
+@media screen and (max-width:600px) {
+  .return-book__table-list__info > span {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width:480px) {
+  .return-book__table-list__info > span {
+    display: block;
+  }
 }

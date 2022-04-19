@@ -97,10 +97,7 @@
     margin-right: 1rem;
   }
 
-  /* .font-18-bold {
-    font-size: 1.6rem !important;
-  } */
-  .font-16 {
+  .rent__modal-book-list .font-16 {
     font-size: 1.3rem !important;
   }
 }

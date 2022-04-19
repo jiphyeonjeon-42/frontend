@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "../../css/RentModalConfirm.css";
 import axios from "axios";
+import "../../css/RentModalConfirm.css";
 import getErrorMessage from "../utils/error";
 
 const RentModalConfirm = ({
@@ -65,7 +65,7 @@ const RentModalConfirm = ({
       });
   };
   return (
-    <div className="modal__wrapper mid">
+    <div className="modal__wrapper rent-modal">
       <div className="rent-modal__user">
         <p className="font-16 color-red">유저정보</p>
         <span className="rent-modal__user__id font-28-bold color-54 margin-8">
