@@ -52,6 +52,10 @@
   border: none;
 }
 
+.information-subtitle__titlebox__toggle:hover {
+  cursor: pointer;
+}
+
 .toggle_img {
   width: 1.8rem;
   transition: 0.8s;

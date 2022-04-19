@@ -1,12 +1,17 @@
 .main-new {
   width: 100%;
-  height: 69.5rem;
-  margin-top: 24rem;
+  /* height: 69.5rem; */
+  height: 100vh;
+  /* margin-top: 24rem; */
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-.main-new__wrapper {
-  margin: auto;
+.main-new__content {
+  position: relative;
+  margin-top: 10rem;
 }
 
 .main-new__arrow {
@@ -14,7 +19,7 @@
   height: 34rem;
   margin: 0;
   position: absolute;
-  top: 27.5rem;
+  /* top: 27.5rem; */
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   border: none;
@@ -38,7 +43,6 @@
   z-index: 0;
   width: 100%;
   overflow: hidden;
-  margin-top: 10rem;
 }
 
 .main-new__books {
@@ -84,10 +88,13 @@
 }
 
 .main-new__books_pagination {
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  /* bottom: 0; */
+  /* bottom: -13rem;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
+  text-align: center;
+  padding: 10rem 0 5rem 0;
 }
 
 .main-new__books_pag_circle {
