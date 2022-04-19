@@ -2,11 +2,10 @@
   background-color: #545454;
   height: 120px;
   max-width: 1200px;
-  min-width: 900px;
+  min-width: 300px;
   border-radius: 60px;
   display: flex;
   align-items: center;
-  /* margin: 0 270px 0 270px; */
   margin: auto;
   position: relative;
   z-index: 1;
@@ -20,4 +19,11 @@
 
 .inquire-box-title__en {
   margin-left: 16px;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .inquire-box-title {
+    width: 100%;
+  }
 }

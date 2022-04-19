@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DeleteButton from "../../img/x_button.svg";
-import "../../css/InquireBoxUser.css";
+import "../../css/RentInquireBoxUser.css";
 
 const InquireBoxUser = ({
   selectedUser,
@@ -24,34 +24,31 @@ const InquireBoxUser = ({
   };
 
   return (
-    <div className="inquire-box-user">
+    <div className="rent__inquire-box-user">
       {selectedUser ? (
-        <div className="inquire-box-user-active">
-          <div className="inquire-box-user__id-undo">
+        <div className="rent__inquire-box-user-active">
+          <div className="rent__inquire-box-user__id-undo">
             <div>
-              <span className="inquire-box-user__id font-28-bold color-54">
+              <span className="rent__inquire-box-user__id font-28-bold color-54">
                 {selectedUser.login}
               </span>
               <span className="font-16 color-red"> {displayPenalty()} </span>
             </div>
             <button
-              className="inquire-box-user__undo-button color-a4"
+              className="rent__inquire-box-user__undo-button color-a4"
               type="button"
               onClick={deleteUser}
             >
               <img src={DeleteButton} alt="delete" />
             </button>
           </div>
-          <div className="inquire-box-user__lendings">
+          <div className="rent__inquire-box-user__lendings">
             <div className="user__book-cnt font-18-bold color-54">
               {`대출중인 도서 (${selectedUser.lendingCnt})`}
             </div>
-            <div className="user__book-info">
+            <div className="user__book-info__total">
               {selectedUser.lendings.map((item, index) => (
-                <div key={item.id}>
-                  {index >= 1 ? (
-                    <div className="user__book-info__line" />
-                  ) : null}
+                <div key={item.id} className="user__book-info">
                   <div className="user__book-info__title font-18-bold color-54">
                     {`${index + 1}. ${item.book.info.title}`}
                   </div>
@@ -62,16 +59,13 @@ const InquireBoxUser = ({
               ))}
             </div>
           </div>
-          <div className="inquire-box-user__reservations">
+          <div className="rent__inquire-box-user__reservations">
             <div className="user__book-cnt font-18-bold color-54">
               {`예약중인 도서 (${selectedUser.reservations.length})`}
             </div>
-            <div className="user__book-info">
+            <div className="user__book-info__total">
               {selectedUser.reservations.map((item, index) => (
-                <div key={item.id}>
-                  {index >= 1 ? (
-                    <div className="user__book-info__line" />
-                  ) : null}
+                <div key={item.id} className="user__book-info">
                   <div className="user__book-info__title font-18-bold color-54">
                     {`${index + 1}. ${item.book.info.title}`}
                   </div>
@@ -92,7 +86,7 @@ const InquireBoxUser = ({
         </div>
       ) : (
         <button
-          className="inquire-box-user__add-button color-a4"
+          className="rent__inquire-box-user__add-button color-a4"
           type="button"
           onClick={openModal}
         >

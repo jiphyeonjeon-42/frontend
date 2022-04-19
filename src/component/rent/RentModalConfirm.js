@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "../../css/RentModal.css";
+import "../../css/RentModalConfirm.css";
 import axios from "axios";
 import getErrorMessage from "../utils/error";
 

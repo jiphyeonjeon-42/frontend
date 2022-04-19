@@ -1,5 +1,5 @@
-.rent-button {
-  min-width: 1200px;
+.rent__confirm-button {
+  width: 100%;
   flex: none;
   display: flex;
   flex-direction: column;
@@ -9,11 +9,14 @@
   margin-bottom: 300px;
 }
 
-.rent-button__text {
+.rent__confirm-button__text {
   margin-bottom: 24px;
+  white-space: normal;
+  padding: 0 6rem;
+  word-break:keep-all;
 }
 
-.rent-button__button {
+.rent__confirm-button__button {
   margin: 0;
   border: 0;
   padding: 0;

@@ -8,8 +8,8 @@ const RentConfirm = ({ selectedUser, selectedBooks, setMidModalContents }) => {
     setMidModalContents("last confirm");
   };
   return (
-    <section className="rent-button">
-      <div className="rent-button__text font-16 color-a4">
+    <section className="rent__confirm-button">
+      <div className="rent__confirm-button__text font-16 color-a4">
         {selectedUser && selectedBooks.length > 0
           ? `${selectedUser.login}님에게 ${selectedBooks[0].info.title}${
               selectedBooks[1] ? `, ${selectedBooks[1].info.title}` : ``
@@ -17,7 +17,7 @@ const RentConfirm = ({ selectedUser, selectedBooks, setMidModalContents }) => {
           : "정보를 입력해주세요."}
       </div>
       <button
-        className={`rent-button__button ${
+        className={`rent__confirm-button__button ${
           selectedUser &&
           !selectedUser.isPenalty &&
           selectedBooks.length > 0 &&

@@ -18,15 +18,11 @@
 }
 
 .rent-modal__books {
-  height: 300px;
+  height: 380px;
   margin-bottom: 35px;
   overflow: auto;
-}
 
-.rent-modal__title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  
 }
 
 .rent-modal__book-info {
@@ -36,14 +32,16 @@
 }
 
 .second-book {
-  margin-top: 40px;
-  padding-top: 40px;
+  margin-top: 20px;
+  padding-top: 20px;
   border-top: 1px solid #d4d4d4;
 }
 
+.rent-modal__detail {
+  width: 100%;
+  overflow: hidden;
+}
 .rent-modal__cover {
-  width: 205px;
-  height: 300px;
   margin-right: 38px;
   flex-shrink: 0;
 }
@@ -51,10 +49,8 @@
 .rent-modal__cover-img {
   width: 205px;
   height: 300px;
-}
-
-.rent-modal__detail {
-  width: 720px;
+  display: block;
+  margin: auto;
 }
 
 .rent-modal__user {
@@ -68,7 +64,7 @@
 }
 
 .rent-modal__remark {
-  height: 139px;
+  width: 100%;
 }
 
 .rent-modal__button {
@@ -77,4 +73,28 @@
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
+}
+
+@media screen and (max-width:767px) {
+  .rent__modal__container {
+    width:100%;
+    max-width: 300px;
+  }
+  .rent-modal__book-info {
+    /* display: block; */
+  }
+
+  .rent-modal__cover {
+    margin-right: 2rem;
+  }
+  .rent-modal__cover-img {
+    width:100px;
+    height:150px;
+
+  }
+  .modal__button {
+    padding: 0.7rem 2rem;
+    font-size: 1.8rem !important;
+    margin-right: 1.5rem;
+  }
 }

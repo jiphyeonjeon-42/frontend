@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DeleteButton from "../../img/x_button.svg";
-import "../../css/InquireBoxBook.css";
+import "../../css/RentInquireBoxBook.css";
 
 const InquireBoxBook = ({
   shape,
@@ -24,27 +24,27 @@ const InquireBoxBook = ({
   };
 
   return (
-    <div className={`inquire-box-book ${shape}`}>
+    <div className={`rent__inquire-box-book ${shape}`}>
       {book ? (
-        <div className="inquire-box-book-active">
-          <div className="inquire-box-book__id-undo">
-            <div className="inquire-box-book__id font-28-bold color-54">
+        <div className="rent__inquire-box-book-active">
+          <div className="rent__inquire-box-book__id-undo">
+            <div className="rent__inquire-box-book__id font-28-bold color-54">
               {book.info.title}
             </div>
             <button
-              className="inquire-box-book__undo-button color-a4"
+              className="rent__inquire-box-book__undo-button color-a4"
               type="button"
               onClick={deleteBook}
             >
               <img src={DeleteButton} alt="delete" />
             </button>
           </div>
-          <div className="inquire-box-book__info color-54">
+          <div className="rent__inquire-box-book__info color-54">
             <div className="book__info__factor">
               <span className="book__info__factor-half font-18-bold">
                 도서코드
               </span>
-              <span className="font-16">{book.callSign}</span>
+              <span className="font-18-bold">{book.callSign}</span>
             </div>
             <div className="book__info__factor">
               <span className="book__info__factor-half font-18-bold">저자</span>
@@ -66,7 +66,7 @@ const InquireBoxBook = ({
         </div>
       ) : (
         <button
-          className="inquire-box-book__add-button color-a4"
+          className="rent__inquire-box-book__add-button color-a4"
           type="button"
           onClick={openModal}
         >

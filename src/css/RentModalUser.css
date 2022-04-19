@@ -1,21 +1,26 @@
 @import url(./MidModal.css);
 
-.modal-user__search-bar {
+.rent__modal-user {
+  min-width: 30rem;
+}
+
+.rent__modal-user__search-bar {
   display: flex;
   align-items: center;
   margin: 2.8rem 0 4.9rem 0;
 }
 
-.modal-user__text {
+.rent__modal-user__text {
   margin-right: 6rem;
 }
 
-.modal-user__pagination {
+.rent__modal-user__pagination {
   margin-top: 5rem;
 }
 
 @media screen and (max-width: 767px) {
-  .modal-user__text {
+  .rent__modal-user__text {
     margin-right: 3rem;
   }
+
 }

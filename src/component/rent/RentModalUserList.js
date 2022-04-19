@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Arrow from "../../img/arrow_right_black.svg";
-import "../../css/RentUserList.css";
+import "../../css/RentModalUserList.css";
 
 const UserList = ({ user, setSelectedUser, closeMidModal }) => {
   const seletUser = () => {
@@ -15,21 +15,21 @@ const UserList = ({ user, setSelectedUser, closeMidModal }) => {
   };
 
   return (
-    <button className="user-list" type="button" onClick={seletUser}>
-      <div className="user-list__name">
+    <button className="rent__user-list" type="button" onClick={seletUser}>
+      <div className="rent__user-list__name">
         <div className="font-18-bold color-54">{user.login}</div>
       </div>
-      <div className="user-list__lent-cnt font-16 color-54">
+      <div className="rent__user-list__lent-cnt font-16 color-54">
         대출중인 도서 : {user.lendingCnt}권
       </div>
-      <div className="user-list__penalty font-16 color-red">
+      <div className="rent__user-list__penalty font-16 color-red">
         {user.isPenalty
           ? "대출제한(연체)"
           : user.lendingCnt >= 2
           ? "대출제한(2권 이상 대출)"
           : null}
       </div>
-      <img className="user-list__arrow" src={Arrow} alt="arrow" />
+      <img className="rent__user-list__arrow" src={Arrow} alt="arrow" />
     </button>
   );
 };

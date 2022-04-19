@@ -1,9 +1,5 @@
 @import url(./Modal.css);
 
-.modal__wrapper.mid {
-  padding: 88px;
-}
-
 .mid-modal__cover {
   float: left;
   width: 342px;
@@ -18,7 +14,7 @@
 
 .mid-modal__detail {
   display: inline-block;
-  width: 634px;
+  width: 100%;
 }
 
 .mid-modal__book {
@@ -44,7 +40,7 @@
 .mid-modal__remark__input {
   width: 100%;
   box-sizing: border-box;
-  height: 100px;
+  height: 80px;
   display: block;
   margin-bottom: 15px;
 }
@@ -68,6 +64,7 @@
   
   .mid-modal__book {
     height: 80px;
+    margin-bottom: 1.8rem;
   }
   .mid-modal__lend{
     height: 80px;

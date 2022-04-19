@@ -1,10 +1,8 @@
-.user-list {
+.rent__user-list {
   border: 0;
   margin: 0;
   padding: 0;
   display: flex;
-  max-width: 102.4rem;
-  min-width: 24rem;
   width: 100%;
   padding: 2.1rem 0 2.1rem 0;
   margin: 0 auto 0 auto;
@@ -23,7 +21,7 @@
   transition: 0.3s;
 }
 
-.user-list:hover {
+.rent__user-list:hover {
   -webkit-transform: scale(1.01);
   -moz-transform: scale(1.01);
   -ms-transform: scale(1.01);
@@ -31,18 +29,23 @@
   transform: scale(1.01);
 }
 
-.user-list__name {
+.rent__user-list__name {
   width: 16.1rem;
   display: flex;
 }
 
-.user-list__arrow {
+.rent__user-list__lent-cnt {
+  line-height: 2.4rem;
+}
+
+.rent__user-list__penalty {
+  margin-left: 1rem;
+  line-height: 2.4rem;
+}
+
+.rent__user-list__arrow {
   width: 0.8rem;
   height: 1.6rem;
   margin-top: 0.4rem;
   margin: 0.4rem 0 0 auto;
-}
-
-.user-list__penalty {
-  margin-left: 2.8rem;
 }
