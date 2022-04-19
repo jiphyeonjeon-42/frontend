@@ -118,3 +118,10 @@
     display: block;
   }
 }
+
+/* 767px : 해당 픽셀 이하는 태블릿 가로길이 */
+@media screen and (max-height: 767px) {
+  .main-banner__scroll {
+    display: none;
+  }
+}

@@ -1,8 +1,6 @@
 .main-new {
   width: 100%;
-  /* height: 69.5rem; */
   height: 100vh;
-  /* margin-top: 24rem; */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -19,7 +17,6 @@
   height: 34rem;
   margin: 0;
   position: absolute;
-  /* top: 27.5rem; */
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   border: none;
@@ -116,4 +113,21 @@
 
 .main-new__books_pag_circle.selected {
   background-color: #2d2d2d;
+}
+
+/* 1049px : 해당 픽셀 이하는 맥북 13인치 */
+@media screen and (max-height: 1049px) {
+  .main-new__content {
+    margin-top: 6rem;
+  }
+  .main-new__books_pagination {
+    padding: 6rem 0 4rem 0;
+  }
+}
+
+/* 767px : 해당 픽셀 이하는 태블릿 가로길이 */
+@media screen and (max-width: 767px), (max-height: 767px) {
+  .main-new__books_pagination {
+    display: none;
+  }
 }

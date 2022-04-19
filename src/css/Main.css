@@ -1,3 +1,13 @@
 .main-wrapper {
   min-width: 36rem;
 }
+
+/* 899px : 해당 픽셀 이하는 태블릿 */
+@media screen and (max-height: 899px) {
+  .subtitle__line {
+    visibility: hidden;
+  }
+  .subtitle__title {
+    font-size: 3.5rem;
+  }
+}

@@ -1,7 +1,5 @@
 .main__popular {
-  /* margin-top: 24rem; */
   padding: 0;
-  /* margin-bottom: 20rem; */
   box-sizing: border-box;
   height: 100vh;
   overflow: hidden;
@@ -147,5 +145,22 @@
 
   .main__popular__pagination {
     width: 10%;
+  }
+}
+
+/* 899px : 해당 픽셀 이하는 태블릿 */
+@media screen and (max-height: 899px) {
+  .main__popular__contents {
+    margin: 0 auto;
+  }
+}
+
+/* 767px : 해당 픽셀 이하는 태블릿 가로길이 */
+@media screen and (max-height: 767px) {
+  .main__popular__pagination {
+    display: none;
+  }
+  .main__popular__contents::after {
+    display: none;
   }
 }
