@@ -1,0 +1,34 @@
+@import url(./MidModal.css);
+
+.rent__modal-book {
+  min-width: 30rem;
+}
+
+.rent__modal-book__title {
+  display: flex;
+  align-items: center;
+  margin: 2.8rem 0 4rem 0;
+}
+
+.rent__modal-book__title-text {
+  margin-right: 6rem;
+}
+
+.rent__modal-book__total-list {
+  margin: auto;
+}
+
+.rent__modal-book__pagination {
+  margin-top: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .rent__modal-book__title-text {
+    margin-right: 3rem;
+  }
+
+  .rent__modal-book__title {
+    margin: 1rem 0 2rem 0;
+  }
+
+}

@@ -6,9 +6,15 @@ import AdminSearchBar from "./AdminSearchBar";
 const InquireBoxTitle = ({ Icon, titleKO, titleEN, placeHolder }) => {
   return (
     <div className="inquire-box-title">
-      <img className="inquire-box-title__icon" src={Icon} alt="icon" />
-      <span className="font-28-bold color-ff">
-        <span className="font-28-bold">{titleKO}</span>
+      <img
+        className={`inquire-box-title__icon ${placeHolder && "short"}`}
+        src={Icon}
+        alt="icon"
+      />
+      <span
+        className={`inquire-box-title__text ${placeHolder && "short"} color-ff`}
+      >
+        <span className="inquire-box-title__kr font-28-bold">{titleKO}</span>
         <span className="inquire-box-title__en font-16">{titleEN}</span>
       </span>
       {placeHolder ? (

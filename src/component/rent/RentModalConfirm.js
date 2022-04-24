@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "../../css/RentModal.css";
 import axios from "axios";
+import "../../css/RentModalConfirm.css";
 import getErrorMessage from "../utils/error";
 
-const RentModalContents = ({
-  selectUser,
-  selectBooks,
+const RentModalConfirm = ({
+  selectedUser,
+  selectedBooks,
   closeModal,
   setMiniModalContents,
-  setLendResult,
+  setRentResult,
 }) => {
   const [remark1, setRemark1] = useState("");
   const [remark2, setRemark2] = useState("");
@@ -26,23 +26,23 @@ const RentModalContents = ({
 
   const postData = async () => {
     const data =
-      selectBooks.length === 1
+      selectedBooks.length === 1
         ? [
             {
-              userId: selectUser.id,
-              bookId: selectBooks[0].id,
+              userId: selectedUser.id,
+              bookId: selectedBooks[0].id,
               condition: remark1,
             },
           ]
         : [
             {
-              userId: selectUser.id,
-              bookId: selectBooks[0].id,
+              userId: selectedUser.id,
+              bookId: selectedBooks[0].id,
               condition: remark1,
             },
             {
-              userId: selectUser.id,
-              bookId: selectBooks[1].id,
+              userId: selectedUser.id,
+              bookId: selectedBooks[1].id,
               condition: remark2,
             },
           ];
@@ -52,11 +52,11 @@ const RentModalContents = ({
       .post(`${process.env.REACT_APP_API}/lendings`, data)
       .then(() => {
         setMiniModalContents("success");
-        setLendResult(true);
+        setRentResult(true);
       })
       .catch(error => {
         const { status } = error.response;
-        setLendResult(false);
+        setRentResult(false);
         setMiniModalContents(
           status === 400
             ? getErrorMessage("lendings", error.response.data.errorCode)
@@ -65,16 +65,16 @@ const RentModalContents = ({
       });
   };
   return (
-    <div className="modal__wrapper mid">
+    <div className="modal__wrapper rent-modal">
       <div className="rent-modal__user">
         <p className="font-16 color-red">유저정보</p>
         <span className="rent-modal__user__id font-28-bold color-54 margin-8">
-          {selectUser.login}
+          {selectedUser.login}
         </span>
-        <span className="font-16 color-54">{`현재 대출권수 ( ${selectUser.lendingCnt} / 2 )`}</span>
+        <span className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendingCnt} / 2 )`}</span>
       </div>
       <div className="rent-modal__books">
-        {selectBooks.map((selectBook, index) => (
+        {selectedBooks.map((selectBook, index) => (
           <div
             key={selectBook.id}
             className={`rent-modal__book-info ${
@@ -112,14 +112,14 @@ const RentModalContents = ({
       <div className="rent-modal__button">
         <button
           className={`modal__button mid font-20 color-ff ${
-            ((selectBooks.length === 2 && remark1 && remark2) ||
-              (selectBooks.length === 1 && remark1)) &&
+            ((selectedBooks.length === 2 && remark1 && remark2) ||
+              (selectedBooks.length === 1 && remark1)) &&
             `confirm`
           }`}
           type="button"
           disabled={
-            (selectBooks.length === 2 && remark1 && remark2) ||
-            (selectBooks.length === 1 && remark1)
+            (selectedBooks.length === 2 && remark1 && remark2) ||
+            (selectedBooks.length === 1 && remark1)
               ? ""
               : "disabled"
           }
@@ -139,13 +139,13 @@ const RentModalContents = ({
   );
 };
 
-export default RentModalContents;
+export default RentModalConfirm;
 
-RentModalContents.propTypes = {
+RentModalConfirm.propTypes = {
   closeModal: PropTypes.func.isRequired,
   setMiniModalContents: PropTypes.func.isRequired,
-  setLendResult: PropTypes.func.isRequired,
+  setRentResult: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  selectUser: PropTypes.object.isRequired,
-  selectBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedUser: PropTypes.object.isRequired,
+  selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

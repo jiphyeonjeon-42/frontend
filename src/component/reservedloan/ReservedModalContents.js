@@ -57,10 +57,16 @@ const ReservedModalContents = ({
       <div className="mid-modal__detail">
         <div className="mid-modal__book">
           <p className="font-16 color-red">도서정보</p>
-          <p className="font-28-bold color-54  margin-8">
+          <p className="mid-modal__book-title font-28-bold color-54  margin-8">
             {reservedInfo.book.info.title}
           </p>
           <p className="font-16 color-54">{`도서코드 : ${reservedInfo.book.callSign}`}</p>
+        </div>
+        <div className="mid-modal__lend">
+          <p className="font-16 color-red">예약 만료일</p>
+          <p className="font-28-bold color-54  margin-8">
+            {reservedInfo.endAt ? reservedInfo.endAt.slice(0, 10) : "NULL"}
+          </p>
         </div>
         <div className="mid-modal__user">
           <p className="font-16 color-red">유저정보</p>
@@ -68,12 +74,6 @@ const ReservedModalContents = ({
             {reservedInfo.user.login}
           </p>
           <p className="font-16 color-54">{`연체일수 : ${reservedInfo.user.penaltyDays}`}</p>
-        </div>
-        <div className="mid-modal__lend">
-          <p className="font-16 color-red">예약 만료일</p>
-          <p className="font-28-bold color-54  margin-8">
-            {reservedInfo.endAt ? reservedInfo.endAt.slice(0, 10) : "NULL"}
-          </p>
         </div>
         <div className="mid-modal__remark">
           <p className="font-16 color-red">비고</p>
@@ -83,22 +83,24 @@ const ReservedModalContents = ({
             value={remark}
             onChange={handleRemark}
           />
-          <button
-            className={`modal__button mid font-20 color-ff ${
-              remark && `confirm`
-            }`}
-            type="button"
-            onClick={postData}
-          >
-            예약대출 완료하기
-          </button>
-          <button
-            className="modal__button mid font-20 color-ff"
-            type="button"
-            onClick={closeModal}
-          >
-            취소하기
-          </button>
+          <div className="modal__buttons">
+            <button
+              className={`modal__button mid font-20 color-ff ${
+                remark && `confirm`
+              }`}
+              type="button"
+              onClick={postData}
+            >
+              대출 완료하기
+            </button>
+            <button
+              className="modal__button mid font-20 color-ff"
+              type="button"
+              onClick={closeModal}
+            >
+              취소하기
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -77,7 +77,7 @@ const ReturnBook = () => {
         titleEn="INQUIRE & RETURN BOOK"
       />
       <AdminTabs />
-      <section className="returnbook-body">
+      <section className="return-book-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle
             Icon={Login}
@@ -86,8 +86,8 @@ const ReturnBook = () => {
             placeHolder="대출자의 성명 또는 대출중인 도서명을 입력해주세요."
           />
         </div>
-        <div className="inquire-box-returnBook-table">
-          <div className="returnBook-filter">
+        <div className="return-book-table__inquire-box">
+          <div className="return-book-filter">
             <ReturnBookFilter
               lendingSort={lendingSort}
               setLendingSort={setLendingSort}
@@ -101,7 +101,7 @@ const ReturnBook = () => {
               setLendingId={setLendingId}
             />
           ))}
-          <div className="returnBook-table__pagination">
+          <div className="return-book-table__pagination">
             <AdminPagination
               userPage={returnBookPage}
               setUserPage={setReturnBookPage}

@@ -86,7 +86,7 @@ const ReservedLoan = () => {
     <main>
       <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />
       <AdminTabs />
-      <section className="reservedLoan-body">
+      <section className="reserved-loan-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle
             Icon={Login}
@@ -95,8 +95,8 @@ const ReservedLoan = () => {
             placeHolder="예약 대출자의 성명 혹은 도서명을 입력해주세요."
           />
         </div>
-        <div className="inquire-box-reservedLoan-table">
-          <div className="reservedLoan-filter">
+        <div className="reserved-loan-table__inquire-box">
+          <div className="reserved-loan-filter">
             <ReservedFilter
               isProceeding={isProceeding}
               setProceeding={setProceeding}
@@ -112,7 +112,7 @@ const ReservedLoan = () => {
               setInfo={setReservedInfo}
             />
           ))}
-          <div className="reservedLoan-table__pagination">
+          <div className="reserved-loan-table__pagination">
             <AdminPagination
               userPage={resevedLoanPage}
               setUserPage={setResevedLoanPage}
