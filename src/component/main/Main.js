@@ -54,8 +54,6 @@ const Main = () => {
     setInputValue("");
   }, []);
 
-  console.log("render!");
-
   return (
     <main className="main-wrapper">
       {miniModal.view && (

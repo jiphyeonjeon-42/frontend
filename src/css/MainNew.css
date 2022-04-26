@@ -115,8 +115,7 @@
   background-color: #2d2d2d;
 }
 
-/* 1049px : 해당 픽셀 이하는 맥북 13인치 */
-@media screen and (max-height: 1049px) {
+@media screen and (max-height: 1050px) {
   .main-new__content {
     margin-top: 6rem;
   }
@@ -125,9 +124,17 @@
   }
 }
 
-/* 767px : 해당 픽셀 이하는 태블릿 가로길이 */
-@media screen and (max-width: 767px), (max-height: 767px) {
+@media screen and (max-height: 700px) {
+  .main-new__content {
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (min-height: 500px) and (max-height: 600px) {
+  .main-new__content {
+    margin-top: 0;
+  }
   .main-new__books_pagination {
-    display: none;
+    padding: 4rem 0;
   }
 }

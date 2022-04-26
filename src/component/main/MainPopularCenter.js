@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import IMGERR from "../../img/image_onerror.svg";
 
@@ -6,6 +6,7 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
   const [selected, setSelected] = useState(0);
   const [posX, setPosX] = useState(0);
   const [moveX, setMoveX] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   function linkToDetail(e) {
     if (posX) return;
@@ -55,6 +56,16 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
     setPosX(0);
   }
 
+  useEffect(() => {
+    const getWindowHeight = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", getWindowHeight);
+    return () => {
+      window.removeEventListener("resize", getWindowHeight);
+    };
+  }, [windowHeight]);
+
   const totalBooks = [docs.slice(0, 3), docs.slice(3, 6), docs.slice(6, 9)];
 
   return (
@@ -69,7 +80,11 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
         onTouchStart={touchStart}
         onTouchMove={touchMove}
         onTouchEnd={touchEnd}
-        style={{ transform: `translate(${(-750 - moveX) * 0.1}rem)` }}
+        style={{
+          transform: `translate(${
+            ((windowHeight > 700 ? -750 : -640) - moveX) * 0.1
+          }rem)`,
+        }}
       >
         {totalBooks.map(books => (
           <div className="main__popular__books">
@@ -95,16 +110,34 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
                   value={index}
                 />
                 <div className="main__popular__summary">
-                  <span className="main__popular__rank font-48-bold">
+                  <span
+                    className={`main__popular__rank ${
+                      windowHeight > 700 ? `font-48-bold` : `font-40-bold`
+                    }`}
+                  >
                     {book.rank}
                   </span>
-                  <p className="font-16-light color-2d"> #{book.category}</p>
-                  <p className="font-32-bold color-2d">{book.title}</p>
+                  <p
+                    className={` ${
+                      windowHeight > 700 ? `font-16-light` : `font-14-light`
+                    } color-2d`}
+                  >
+                    #{book.category}
+                  </p>
+                  <p
+                    className={`${
+                      windowHeight > 700 ? `font-32-bold` : `font-24-bold`
+                    } color-2d`}
+                  >
+                    {book.title}
+                  </p>
                 </div>
                 <div
                   className={`${
                     selected !== index && "hidden"
-                  } main__popular__detail font-16-light color-2d`}
+                  } main__popular__detail ${
+                    windowHeight > 700 ? `font-16-light` : `font-14-light`
+                  }  color-2d`}
                 >
                   <p>작가 | {book.author}</p>
                   <p>출판사 | {book.publisher}</p>

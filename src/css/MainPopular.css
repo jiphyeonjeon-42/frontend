@@ -148,19 +148,48 @@
   }
 }
 
-/* 899px : 해당 픽셀 이하는 태블릿 */
-@media screen and (max-height: 899px) {
+@media screen and (max-height: 900px) {
   .main__popular__contents {
     margin: 0 auto;
   }
 }
 
-/* 767px : 해당 픽셀 이하는 태블릿 가로길이 */
-@media screen and (max-height: 767px) {
-  .main__popular__pagination {
+@media screen and (max-height: 700px) {
+  /* .main__popular__pagination {
     display: none;
   }
   .main__popular__contents::after {
     display: none;
+  } */
+  .main__popular__wrapper {
+    width: 59rem;
+    height: 65rem;
+  }
+  .main__popular__basic-book.center {
+    width: 55rem;
+  }
+  .main__popular__basic-book.selected {
+    height: 18rem;
+  }
+  .false.main__popular__basic-book.center {
+    height: 8rem;
+  }
+  .main__popular__rank {
+    margin: 0 2rem;
+  }
+  .main__popular__detail {
+    margin: 1rem 0 1rem 17rem;
+  }
+}
+
+@media screen and (max-height: 630px) {
+  .main__popular__pagination {
+    top: 2rem;
+  }
+  .main__popular__contents::after {
+    top: 1.7rem;
+  }
+  .subtitle-start {
+    height: 14.5rem;
   }
 }

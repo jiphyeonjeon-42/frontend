@@ -199,6 +199,11 @@ body {
   font-weight: bold;
 }
 
+.font-24-bold {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
 .font-20-bold {
   font-size: 2rem;
   font-weight: bold;
@@ -243,6 +248,11 @@ body {
 .font-14 {
   font-size: 1.4rem;
   font-weight: normal;
+}
+
+.font-14-light {
+  font-size: 1.4rem;
+  font-weight: lighter;
 }
 
 .font-12 {

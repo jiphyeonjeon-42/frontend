@@ -2,12 +2,20 @@
   min-width: 36rem;
 }
 
-/* 899px : 해당 픽셀 이하는 태블릿 */
-@media screen and (max-height: 899px) {
+@media screen and (max-height: 900px) {
+  .subtitle__title {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-height: 750px) {
   .subtitle__line {
     visibility: hidden;
   }
+}
+
+@media screen and (max-height: 700px) {
   .subtitle__title {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
   }
 }
