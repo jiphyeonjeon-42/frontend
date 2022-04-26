@@ -1,17 +1,13 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import axios from "axios";
 import PropTypes from "prop-types";
-import Title from "../utils/Title";
 import SubTitle from "../utils/SubTitle";
-import SearchBar from "./SearchBar";
 import Books from "./Books";
 import Pagination from "./Pagination";
 import SearchBanner from "./SearchBanner";
 import CategoryFilter from "./CategoryFilter";
 import Sort from "./Sort";
-import Available from "./Available";
 import WishBook from "./WishBook";
 import { searchWord } from "../../atom/searchWord";
 import { useSearchInput } from "../../atom/useSearchInput";
@@ -23,8 +19,8 @@ const Search = ({ match, location }) => {
   const [userWord, setUserWord] = useRecoilState(searchWord);
   const [isLoading, setLoading] = useState(true);
   const [bookList, setBookList] = useState([]);
-  const [startCate, setStartCate] = useState(0);
   const [pageRange, setPageRange] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [isAvailable, setAvailable] = useState(false);
   const [userPage, setPage] = useState(1);
   const [userSort, setSort] = useState("accurate");
@@ -154,11 +150,7 @@ const Search = ({ match, location }) => {
 
   return (
     <main>
-      <SearchBanner
-        setStartCate={setStartCate}
-        setPageRange={setPageRange}
-        setAvailable={setAvailable}
-      />
+      <SearchBanner setPageRange={setPageRange} setAvailable={setAvailable} />
       <section className="search-section">
         <div className="search-subtitle" ref={myRef}>
           <SubTitle
@@ -172,8 +164,6 @@ const Search = ({ match, location }) => {
           userSort={userSort}
           userCate={parseInt(cateIndex, 10)}
           entireCate={entireCate}
-          startCate={startCate}
-          setStartCate={setStartCate}
         />
         <div className="search-sort-available">
           <Sort

@@ -7,7 +7,7 @@ import { useSearchInput } from "../../atom/useSearchInput";
 import "../../css/SearchBar.css";
 import SearchIcon from "../../img/search_icon.svg";
 
-const SearchBar = ({ setStartCate, setPageRange, setAvailable }) => {
+const SearchBar = ({ setPageRange, setAvailable }) => {
   // eslint-disable-next-line prefer-const
   let history = useHistory();
   const [input, setInput] = useRecoilState(useSearchInput);
@@ -24,8 +24,11 @@ const SearchBar = ({ setStartCate, setPageRange, setAvailable }) => {
     event.preventDefault();
     // setCategoryName("");
     if (setPageRange) setPageRange(0);
-    if (setStartCate) setStartCate(0);
     if (setAvailable) setAvailable(false);
+
+    const categories = document.querySelector(".categories");
+    if (categories) categories.scrollTo(0, 0);
+
     const searchForm = document.getElementById("search-form");
     const searchInputValue = searchForm.querySelector("#search-input").value;
     setUserWord(searchInputValue);
@@ -40,7 +43,7 @@ const SearchBar = ({ setStartCate, setPageRange, setAvailable }) => {
     const searchForm = document.getElementById("search-form");
     searchForm.addEventListener("submit", handleSearchSumbit);
     return () => searchForm.removeEventListener("submit", handleSearchSumbit);
-  }, [handleSearchSumbit, setStartCate, setPageRange, setAvailable]);
+  }, [handleSearchSumbit, setPageRange, setAvailable]);
 
   return (
     <div className="search-bar">
@@ -62,12 +65,8 @@ const SearchBar = ({ setStartCate, setPageRange, setAvailable }) => {
 };
 
 SearchBar.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  setStartCate: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
-  setPageRange: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
-  setAvailable: PropTypes.func,
+  setPageRange: PropTypes.func.isRequired,
+  setAvailable: PropTypes.func.isRequired,
 };
 
 export default SearchBar;
