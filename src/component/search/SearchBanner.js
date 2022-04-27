@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import "../../css/Banner.css";
 import "../../css/SearchBanner.css";
 
-const SearchBanner = ({ setStartCate, setPageRange, setAvailable }) => {
+const SearchBanner = ({ setPageRange, setAvailable }) => {
   return (
     <section className="banner search-img">
       <section className="search-banner">
@@ -16,23 +16,15 @@ const SearchBanner = ({ setStartCate, setPageRange, setAvailable }) => {
             SEARCH
           </span>
         </div>
-        <SearchBar
-          setStartCate={setStartCate}
-          setPageRange={setPageRange}
-          setAvailable={setAvailable}
-        />
+        <SearchBar setPageRange={setPageRange} setAvailable={setAvailable} />
       </section>
     </section>
   );
 };
 
 SearchBanner.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  setStartCate: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
-  setPageRange: PropTypes.func,
-  // eslint-disable-next-line react/require-default-props
-  setAvailable: PropTypes.func,
+  setPageRange: PropTypes.func.isRequired,
+  setAvailable: PropTypes.func.isRequired,
 };
 
 export default SearchBanner;

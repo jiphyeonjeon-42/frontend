@@ -1,25 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-import ArrLeft from "../../img/arrow_left_black.svg";
-import ArrRight from "../../img/arrow_right_black.svg";
+import ArrLeftGray from "../../img/arrow_left_gray.svg";
+import ArrLeftBlack from "../../img/arrow_left_black.svg";
+import ArrRightGray from "../../img/arrow_right_gray.svg";
+import ArrRightBlack from "../../img/arrow_right_black.svg";
 import "../../css/CategoryFilter.css";
 
-const PreCategory = ({ startCate, setStartCate }) => {
-  const slideLeft = () => {
-    if (startCate > 0) {
-      setStartCate(startCate - 1);
+const MARGIN_OF_CATEGORY_BUTTON = 36;
+
+const PreCategory = ({ startOfScroll }) => {
+  const scrollToPre = () => {
+    const categories = document.querySelector(".categories");
+    const categoriesScrollX = categories.scrollLeft;
+
+    const categoryButton = document.getElementsByClassName("category-button");
+    const categoryButtonWidth = Array.from(categoryButton).map(
+      items => items.clientWidth + MARGIN_OF_CATEGORY_BUTTON,
+    );
+
+    let sumOfCategory = 0;
+    // eslint-disable-next-line no-plusplus
+    for (let index = 0; index < categoryButtonWidth.length; index++) {
+      if (sumOfCategory + categoryButtonWidth[index] >= categoriesScrollX) {
+        break;
+      }
+      sumOfCategory += categoryButtonWidth[index];
     }
+    categories.scrollTo({ left: sumOfCategory, top: 0, behavior: "smooth" });
   };
 
   return (
-    <button className="pre-category" type="button" onClick={slideLeft}>
-      {startCate === 0 ? (
-        <img className="category-button-icon" src={ArrLeft} alt="preCategory" />
+    <button className="pre-category" type="button" onClick={scrollToPre}>
+      {startOfScroll ? (
+        <img
+          className="category-button-icon"
+          src={ArrLeftGray}
+          alt="preCategory"
+        />
       ) : (
         <img
-          className="category-button-icon-reverse"
-          src={ArrRight}
+          className="category-button-icon"
+          src={ArrLeftBlack}
           alt="preCategory"
         />
       )}
@@ -27,28 +49,49 @@ const PreCategory = ({ startCate, setStartCate }) => {
   );
 };
 
-const NextCategory = ({ hiddenCate, startCate, setStartCate }) => {
-  const slideRight = () => {
-    if (hiddenCate) {
-      const startCateText = document.querySelector(`.cateNum-${startCate}`);
-      console.log(startCateText.width);
-      setStartCate(startCate + 1);
+const NextCategory = ({ endOfScroll }) => {
+  const scrollToNext = () => {
+    const categories = document.querySelector(".categories");
+    const categoriesScrollX = categories.scrollLeft;
+    const categoriesOffsetWidth =
+      document.querySelector(".categories").offsetWidth;
+    const categoriesScrollWidth =
+      document.querySelector(".categories").scrollWidth;
+    const endOfScrollWidth = categoriesScrollWidth - categoriesOffsetWidth;
+
+    const categoryButton = document.getElementsByClassName("category-button");
+    const categoryButtonWidth = Array.from(categoryButton).map(
+      items => items.clientWidth + MARGIN_OF_CATEGORY_BUTTON,
+    );
+
+    let sumOfCategory = 0;
+    // eslint-disable-next-line no-plusplus
+    for (let index = 0; index < categoryButtonWidth.length; index++) {
+      sumOfCategory += categoryButtonWidth[index];
+      if (sumOfCategory > categoriesScrollX) {
+        break;
+      }
     }
+    categories.scrollTo({
+      left: sumOfCategory > endOfScrollWidth ? endOfScrollWidth : sumOfCategory,
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
-    <button className="next-category" type="button" onClick={slideRight}>
-      {hiddenCate ? (
+    <button className="next-category" type="button" onClick={scrollToNext}>
+      {endOfScroll ? (
         <img
           className="category-button-icon"
-          src={ArrRight}
-          alt="nextCategory"
+          src={ArrRightGray}
+          alt="preCategory"
         />
       ) : (
         <img
-          className="category-button-icon-reverse"
-          src={ArrLeft}
-          alt="preCategory"
+          className="category-button-icon"
+          src={ArrRightBlack}
+          alt="nextCategory"
         />
       )}
     </button>
@@ -93,75 +136,57 @@ const Category = ({
   );
 };
 
-const CategoryFilter = ({
-  userWord,
-  startCate,
-  setStartCate,
-  userSort,
-  userCate,
-  entireCate,
-}) => {
-  const [hiddenCate, setHiddenCate] = useState(false);
-  const [entireCateWidth, setEntireCateWidth] = useState([]);
+const CategoryFilter = ({ userWord, userSort, userCate, entireCate }) => {
+  const [startOfScroll, setStartOfScroll] = useState(true);
+  const [endOfScroll, setEndOfScroll] = useState(true);
 
-  const toggleCategoryButton = () => {
-    const categoryFileterWidth = document.querySelector(
-      ".category-filter__list",
-    ).offsetWidth;
-    const categoryArrowWidth =
-      document.querySelector(".pre-category").offsetWidth +
-      document.querySelector(".next-category").offsetWidth;
-    const categoryListWidth = categoryFileterWidth - categoryArrowWidth;
-    const categoryButtonWidthSum =
-      entireCateWidth.reduce((a, b) => a + b, 0) +
-      36 * (entireCateWidth.length - 1);
-    if (categoryListWidth >= categoryButtonWidthSum) setHiddenCate(false);
-    else setHiddenCate(true);
+  const setScrollState = () => {
+    const categoriesScrollX = document.querySelector(".categories").scrollLeft;
+    const categoriesOffsetWidth =
+      document.querySelector(".categories").offsetWidth;
+    const categoriesScrollWidth =
+      document.querySelector(".categories").scrollWidth;
+    const endOfScrollWidth = categoriesScrollWidth - categoriesOffsetWidth;
+
+    if (categoriesScrollX === 0) {
+      setStartOfScroll(true);
+    } else {
+      setStartOfScroll(false);
+    }
+
+    if (categoriesScrollX === endOfScrollWidth) {
+      setEndOfScroll(true);
+    } else {
+      setEndOfScroll(false);
+    }
   };
-
-  const calcEntireWidth = () => {
-    const categoryButton = document.getElementsByClassName("category-button");
-    const categoryButtonWidth = Array.from(categoryButton).map(
-      items => items.offsetWidth,
-    );
-    setEntireCateWidth(categoryButtonWidth);
-  };
-
-  useEffect(calcEntireWidth, [startCate, entireCate]);
-
-  useEffect(toggleCategoryButton, [entireCateWidth]);
 
   useEffect(() => {
-    window.addEventListener("resize", calcEntireWidth);
+    setScrollState();
+    window.addEventListener("resize", setScrollState);
     return () => {
-      window.removeEventListener("resize", calcEntireWidth);
+      window.removeEventListener("resize", setScrollState);
     };
-  }, [calcEntireWidth]);
+  }, [setScrollState]);
 
   return (
     <div className="category-filter">
       <div className="category-filter__list">
-        <PreCategory startCate={startCate} setStartCate={setStartCate} />
-        <div className="categories">
-          {entireCate.map((items, index) =>
-            startCate <= index ? (
-              <Category
-                key={items.name}
-                userWord={userWord}
-                userSort={userSort}
-                userCate={userCate}
-                categoryIndex={index}
-                categoryName={items.name}
-                categoryNum={items.count}
-              />
-            ) : null,
-          )}
+        <PreCategory startOfScroll={startOfScroll} />
+        <div className="categories" onScroll={setScrollState}>
+          {entireCate.map((items, index) => (
+            <Category
+              key={items.name}
+              userWord={userWord}
+              userSort={userSort}
+              userCate={userCate}
+              categoryIndex={index}
+              categoryName={items.name}
+              categoryNum={items.count}
+            />
+          ))}
         </div>
-        <NextCategory
-          startCate={startCate}
-          setStartCate={setStartCate}
-          hiddenCate={hiddenCate}
-        />
+        <NextCategory endOfScroll={endOfScroll} />
       </div>
       <div className="category-filter__line" />
     </div>
@@ -169,14 +194,11 @@ const CategoryFilter = ({
 };
 
 PreCategory.propTypes = {
-  startCate: PropTypes.number.isRequired,
-  setStartCate: PropTypes.func.isRequired,
+  startOfScroll: PropTypes.bool.isRequired,
 };
 
 NextCategory.propTypes = {
-  hiddenCate: PropTypes.bool.isRequired,
-  startCate: PropTypes.number.isRequired,
-  setStartCate: PropTypes.func.isRequired,
+  endOfScroll: PropTypes.bool.isRequired,
 };
 
 Category.propTypes = {
@@ -190,12 +212,9 @@ Category.propTypes = {
 
 CategoryFilter.propTypes = {
   userWord: PropTypes.string.isRequired,
-  startCate: PropTypes.number.isRequired,
-  setStartCate: PropTypes.func.isRequired,
   userSort: PropTypes.string.isRequired,
   userCate: PropTypes.number.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  entireCate: PropTypes.array.isRequired,
+  entireCate: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default CategoryFilter;
