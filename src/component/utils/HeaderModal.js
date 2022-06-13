@@ -19,16 +19,14 @@ const HeaderModal = ({ setHeaderModal }) => {
     setHeaderModal(false);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getHost = () => {
     return `${window.location.protocol}//${window.location.host}`;
   };
 
   const nowDate = new Date();
   const expireDate = new Date(user.expire);
-  if (nowDate > expireDate)
-    window.location = `${
-      process.env.REACT_APP_API
-    }/auth/oauth?clientURL=${getHost()}`;
+  if (nowDate > expireDate) window.location = `/login`;
 
   return (
     <div>
@@ -143,12 +141,7 @@ const HeaderModal = ({ setHeaderModal }) => {
                 </span>
               </Link>
             ) : (
-              <a
-                className="header-modal__button"
-                href={`${
-                  process.env.REACT_APP_API
-                }/auth/oauth?clientURL=${getHost()}`}
-              >
+              <a className="header-modal__button" href="/login">
                 <img src={Login} className="header-modal__icon-in" alt="user" />
                 <span className="header-modal__text font-16 color-2d">
                   로그인

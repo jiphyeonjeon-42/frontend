@@ -20,16 +20,14 @@ const Header = () => {
     setToggleLNB(!toggleLNB);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getHost = () => {
     return `${window.location.protocol}//${window.location.host}`;
   };
 
   const nowDate = new Date();
   const expireDate = new Date(user.expire);
-  if (nowDate > expireDate)
-    window.location = `${
-      process.env.REACT_APP_API
-    }/auth/oauth?clientURL=${getHost()}`;
+  if (nowDate > expireDate) window.location = `/login`;
 
   return (
     <header className="header">
@@ -128,12 +126,7 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <a
-                  className="gnb__button"
-                  href={`${
-                    process.env.REACT_APP_API
-                  }/auth/oauth?clientURL=${getHost()}`}
-                >
+                <a className="gnb__button" href="/login">
                   <img
                     src={User}
                     className="gnb__icon gnb__user__icon"

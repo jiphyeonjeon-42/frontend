@@ -18,6 +18,7 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
     setMobileToggle(!mobileToggle);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getHost = () => {
     return `${window.location.protocol}//${window.location.host}`;
   };
@@ -26,9 +27,7 @@ const BookStatus = ({ id, callSign, dueDate, status, index }) => {
       return;
     }
     if (!user.isLogin) {
-      window.location = `${
-        process.env.REACT_APP_API
-      }/auth/oauth?clientURL=${getHost()}`;
+      window.location = `/login`;
       return;
     }
     setMiniModalView(true);
