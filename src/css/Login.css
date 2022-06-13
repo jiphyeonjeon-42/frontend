@@ -1,0 +1,95 @@
+.login-main {
+    background-color: #FFFFFF;
+    width: 40rem;
+    height: 36rem;
+    margin: 20rem auto;
+    border-radius: 1.5em;
+    padding-top: 2.5rem;
+    box-shadow: 0 1.1rem 3.5rem 0.2rem rgba(0, 0, 0, 0.14);
+}
+
+.login-header {
+    padding-top: 1rem;
+    color: #8C55AA;
+    font-weight: bold;
+    font-size: 2.3rem;
+}
+
+.login-err {
+    color: orangered;
+    font-size: 1.4rem;
+}
+
+.login-input {
+    display: block;
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    outline: none;
+    box-sizing: border-box;
+    border: 0.2rem solid rgba(0, 0, 0, 0.02);
+    margin: 0 auto 2rem auto;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.login-form {
+    padding-top: 4rem;
+}
+
+.login-un:focus, .login-pass:focus {
+    border: 0.2rem solid rgba(0, 0, 0, 0.18) !important;
+}
+
+.login-btn {
+    cursor: pointer;
+    display: block;
+    width: 40%;
+    color: white;
+    background-color: #007bff;
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    outline: none;
+    box-sizing: border-box;
+    border: 0.2rem solid rgba(0, 0, 0, 0.02);
+    margin: 0 auto 1rem auto;
+    text-align: center;
+}
+
+.login-submit {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #9C27B0, #E040FB);
+    border: 0;
+    padding: 1rem 4rem;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 35%;
+    font-size: 1.3rem;
+    box-shadow: 0 0 2rem 0.1rem rgba(0, 0, 0, 0.04);
+}
+
+.login-oauth {
+    background-color: #34495e;
+}
+
+.login-register {
+    background-color: #2DB400;
+}
+
+@media screen and (max-width:500px){
+
+    .login-main {
+        width: 95%;
+    }
+
+}
