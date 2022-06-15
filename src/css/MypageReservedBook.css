@@ -1,0 +1,50 @@
+.mypage-reserved__book {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 30rem;
+}
+
+.mypage-reserved__book-wrapper {
+  display: flex;
+}
+
+.mypage-reserved__book-image {
+  height: 28rem;
+}
+
+.mypage-reserved__book-info {
+  position: relative;
+  width: 15rem;
+  margin-left: 3rem;
+}
+
+.mypage-reserved__book-info-titleBox {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid;
+  padding-bottom: 1rem;
+}
+
+.mypage-reserved__book-info-title {
+  margin-bottom: 1rem;
+}
+
+.mypage-reserved__book-info-rent {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid;
+  row-gap: 1rem;
+}
+
+.mypage-reserved__book-info-reserve {
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.mypage-reserved__book-cancle_reserve {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
