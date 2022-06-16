@@ -1,17 +1,5 @@
-.mypage-wrapper {
-  padding: 0 15rem 0 15rem;
-}
-
-.mypage-section {
-  position: relative;
-  min-width: 90rem;
-  max-width: 95rem;
-  margin: 0 auto 0 auto;
-}
-
 .mypage-subtitle {
   padding: 11rem 0 2rem 0;
-  margin-left: 4rem;
 }
 
 .mypage-qna {
@@ -62,7 +50,7 @@
 }
 
 .mypage-inquire-box-short-wrapper {
-  width: 40rem;
+  min-width: 40rem;
 }
 
 .mypage-inquire-box-short-wrapper .inquire-box-title {
@@ -79,7 +67,7 @@
   grid-template-columns: 25% 75%;
   row-gap: 1rem;
   box-sizing: border-box;
-  width: 40rem;
+  width: 100%;
   background-color: #e8e8e8;
   position: relative;
   z-index: 0;
@@ -97,13 +85,22 @@
   border-radius: 2rem;
 }
 
+.mypage-inquire-box-short-clickBox a {
+  text-align: center;
+}
+
+.mypage-inquire-box-short-clickBox a:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 .mypage-inquire-box-long-wrapper .inquire-box-title {
   height: 8rem;
 }
 
 .mypage-inquire-box-long {
   box-sizing: border-box;
-  width: 95rem;
+  max-width: 95rem;
   min-height: 40rem;
   background-color: #e8e8e8;
   display: flex;
@@ -114,5 +111,5 @@
   top: -5rem;
   border-bottom-left-radius: 6.1rem;
   border-bottom-right-radius: 6.1rem;
-  padding: 8.5rem 6rem 2.1rem 6rem;
+  padding: 8.5rem 4.5rem 2.1rem 4.5rem;
 }
