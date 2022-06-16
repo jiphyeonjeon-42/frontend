@@ -28,9 +28,13 @@
   margin-bottom: 4.2rem;
 }
 
-.mypage-subtitle__titlebox {
+.mypage-subtitle__user__info {
   display: flex;
   justify-content: space-between;
+}
+
+.mypage-subtitle__titlebox {
+  max-width: 55rem;
 }
 
 .mypage-subtitle__titlebox__title {
@@ -42,6 +46,14 @@
   color: #2d2d2d;
   word-break: keep-all;
   white-space: normal;
+}
+
+.mypage-subtitle__titlebox__guide__1 {
+  margin-top: 3rem;
+}
+
+.mypage-subtitle__titlebox__guide__2 {
+  margin-top: 1rem;
 }
 
 .mypage-inquire-box-short-wrapper {
@@ -74,7 +86,7 @@
 
 .mypage-inquire-box-short-overdue {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 34% 66%;
   margin-bottom: 2rem;
 }
 
@@ -90,7 +102,7 @@
 .mypage-inquire-box-long {
   box-sizing: border-box;
   width: 95rem;
-  height: 40rem;
+  min-height: 40rem;
   background-color: #e8e8e8;
   display: flex;
   flex-direction: column;
@@ -100,5 +112,5 @@
   top: -5rem;
   border-bottom-left-radius: 6.1rem;
   border-bottom-right-radius: 6.1rem;
-  padding: 8rem 6rem 5.1rem 6rem;
+  padding: 8.5rem 6rem 2.1rem 6rem;
 }

@@ -11,11 +11,12 @@
 
 .mypage-reserved__book-image {
   height: 28rem;
+  max-width: 20rem;
 }
 
 .mypage-reserved__book-info {
   position: relative;
-  width: 15rem;
+  width: 17.5rem;
   margin-left: 3rem;
 }
 
@@ -23,6 +24,7 @@
   margin-bottom: 1rem;
   border-bottom: 1px solid;
   padding-bottom: 1rem;
+  white-space: normal;
 }
 
 .mypage-reserved__book-info-title {
@@ -40,7 +42,7 @@
 
 .mypage-reserved__book-info-reserve {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 50% 50%;
 }
 
 .mypage-reserved__book-cancle_reserve {

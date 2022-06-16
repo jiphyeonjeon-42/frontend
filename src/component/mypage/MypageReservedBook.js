@@ -1,9 +1,11 @@
 import React from "react";
 import "../../css/MypageReservedBook.css";
+import PropTypes from "prop-types";
 import tempImg1 from "../../img/temp1.png";
 import tempImg2 from "../../img/temp2.png";
 
-const MypageReservedBook = () => {
+const MypageReservedBook = ({ reserveInfo }) => {
+  console.log(reserveInfo);
   return (
     <div className="mypage-reserved__book">
       <div className="mypage-reserved__book-wrapper">
@@ -14,7 +16,7 @@ const MypageReservedBook = () => {
         />
         <div className="mypage-reserved__book-info">
           <div className="mypage-reserved__book-info-titleBox">
-            <div className="mypage-reserved__book-info-title font-18">
+            <div className="mypage-reserved__book-info-title font-18-bold color-2d">
               보통의 존재
             </div>
             <div className="mypage-reserved__book-info-writter font-14">
@@ -22,11 +24,11 @@ const MypageReservedBook = () => {
             </div>
           </div>
           <div className="mypage-reserved__book-info-rent font-14">
-            <div>대출</div>
+            <div>대출일시</div>
             <div>4월 16일</div>
-            <div>반납 예정</div>
+            <div>반납예정</div>
             <div>4월 16일</div>
-            <div>연체</div>
+            <div>연체일</div>
             <div>4일</div>
             <div>비고</div>
             <div>이상 없음</div>
@@ -48,7 +50,7 @@ const MypageReservedBook = () => {
         />
         <div className="mypage-reserved__book-info">
           <div className="mypage-reserved__book-info-titleBox">
-            <div className="mypage-reserved__book-info-title font-16">
+            <div className="mypage-reserved__book-info-title font-18-bold color-2d">
               품위 있는 삶
             </div>
             <div className="mypage-reserved__book-info-writter font-14">
@@ -56,11 +58,11 @@ const MypageReservedBook = () => {
             </div>
           </div>
           <div className="mypage-reserved__book-info-rent font-14">
-            <div>대출</div>
+            <div>대출일시</div>
             <div>4월 16일</div>
-            <div>반납 예정</div>
+            <div>반납예정</div>
             <div>4월 16일</div>
-            <div>연체</div>
+            <div>연체일</div>
             <div>4일</div>
             <div>비고</div>
             <div>이상 없음</div>
@@ -76,6 +78,10 @@ const MypageReservedBook = () => {
       </div>
     </div>
   );
+};
+
+MypageReservedBook.propTypes = {
+  reserveInfo: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 export default MypageReservedBook;
