@@ -79,7 +79,6 @@ const Register = () => {
     } else if (confirmPasswordError) {
       confirmPasswordRef.current.focus();
     } else {
-      console.log("test");
       await axios
         .post(`${process.env.REACT_APP_API}/users/create`, {
           headers: {

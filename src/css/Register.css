@@ -13,7 +13,7 @@
     padding-top: 1rem;
     color: #8C55AA;
     font-weight: bold;
-    font-size: 2.3rem;
+    font-size: 2.8rem;
 }
 
 .register-err {
@@ -41,7 +41,7 @@
 }
 
 .register-form {
-    padding-top: 4rem;
+    padding-top: 2rem;
 }
 
 .register-un:focus, .register-pass:focus {
