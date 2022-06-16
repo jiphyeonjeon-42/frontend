@@ -12,6 +12,9 @@ import MypageReservedBook from "./MypageReservedBook";
 
 const Mypage = () => {
   const [userInfo, setUserInfo] = useState(null);
+  const getHost = () => {
+    return `${window.location.protocol}//${window.location.host}`;
+  };
 
   useEffect(async () => {
     await axios
@@ -20,7 +23,25 @@ const Mypage = () => {
           nickname: JSON.parse(window.localStorage.getItem("user")).userId,
         },
       })
-      .then(res => setUserInfo(res.data.items[0]));
+      .then(res =>
+        setUserInfo(() => {
+          const rtnObj = Object.assign(res.data.items[0]);
+          switch (rtnObj.role) {
+            case 1:
+              rtnObj.role = "카뎃";
+              break;
+            case 2:
+              rtnObj.role = "운영진";
+              break;
+            case 3:
+              rtnObj.role = "사서";
+              break;
+            default:
+              rtnObj.role = "미인증";
+          }
+          return rtnObj;
+        }),
+      );
   }, []);
 
   console.log(userInfo);
@@ -35,20 +56,34 @@ const Mypage = () => {
             <div className="mypage-subtitle__line" />
             <div className="mypage-subtitle__user__info">
               <div className="mypage-subtitle__titlebox">
-                <div className="mypage-subtitle__titlebox__title">
-                  {userInfo
-                    ? `${
-                        userInfo.nickname ? userInfo.nickname : userInfo.email
-                      }님, 반갑습니다!`
-                    : "-"}
-                </div>
                 <div>
-                  <p className="mypage-subtitle__titlebox__guide__1 font-14 color-2d">
-                    회원님의 정보를 확인해보세요.
-                  </p>
-                  <p className="mypage-subtitle__titlebox__guide__2 font-14 color-2d">
-                    개인정보 변경 및 대출, 예약 내역 확인이 가능합니다.
-                  </p>
+                  <div className="mypage-subtitle__titlebox__title">
+                    {userInfo
+                      ? `${
+                          userInfo.nickname ? userInfo.nickname : userInfo.email
+                        }님, 반갑습니다!`
+                      : "-"}
+                  </div>
+                  <div>
+                    <p className="mypage-subtitle__titlebox__guide__1 font-14 color-2d">
+                      회원님의 정보를 확인해보세요.
+                    </p>
+                    <p className="mypage-subtitle__titlebox__guide__2 font-14 color-2d">
+                      개인정보 변경 및 대출, 예약 내역 확인이 가능합니다.
+                    </p>
+                  </div>
+                </div>
+                <div className="mypage-inquire-box-short-clickBox">
+                  <a
+                    className="font-14-bold color-2d"
+                    href={`${
+                      process.env.REACT_APP_API
+                    }/auth/oauth?clientURL=${getHost()}`}
+                  >
+                    42 인증하기
+                  </a>
+                  <span className="font-14-bold color-2d">이메일 변경</span>
+                  <span className="font-14-bold color-2d">비밀번호 변경</span>
                 </div>
               </div>
               <div className="mypage-inquire-box-short-wrapper">
@@ -60,17 +95,24 @@ const Mypage = () => {
                   ENsize="font-14"
                 />
                 <div className="mypage-inquire-box-short">
-                  <div className="mypage-inquire-box-short-overdue">
-                    <span className="font-14-bold color-2d">연체</span>
-                    <span className="font-14">
-                      {userInfo ? `${userInfo.overDueDay}일` : "0일"}
-                    </span>
-                  </div>
-                  <div className="mypage-inquire-box-short-clickBox">
-                    <span className="font-14-bold color-2d">42 인증하기</span>
-                    <span className="font-14-bold color-2d">이메일 변경</span>
-                    <span className="font-14-bold color-2d">비밀번호 변경</span>
-                  </div>
+                  {userInfo ? (
+                    <>
+                      <span className="font-14-bold color-2d">이메일</span>
+                      <span className="font-14">{userInfo.email}</span>
+                      <span className="font-14-bold color-2d">역할</span>
+                      <span className="font-14">{userInfo.role}</span>
+                      <span className="font-14-bold color-2d">슬랙ID</span>
+                      <span className="font-14">{userInfo.slack}</span>
+                      <span className="font-14-bold color-2d">연체</span>
+                      <span className="font-14">
+                        {`${userInfo.overDueDay}일`}
+                      </span>
+                      <span className="font-14-bold color-2d">업데이트</span>
+                      <span className="font-14">
+                        {userInfo.updatedAt.slice(0, 10)}
+                      </span>
+                    </>
+                  ) : null}
                 </div>
               </div>
             </div>
