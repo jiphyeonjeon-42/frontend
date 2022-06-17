@@ -1,0 +1,207 @@
+
+
+.inquire-box {
+  max-width: 120rem;
+  min-width: 30rem;
+  background-color: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  position: relative;
+  top: -6rem;
+  border-bottom-left-radius: 6.1rem;
+  border-bottom-right-radius: 6.1rem;
+  padding: 6rem 0 0 0;
+  min-height: 2;
+  font-size: 1.6rem;
+}
+
+label, input , button
+{
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.add-book__basic-info {
+  display: flex;
+}
+
+.add-book__basic-info__cover {
+  width : 30rem;
+  margin: 5rem 5rem 3rem ;
+}
+
+.add-book__basic-info__cover > img {
+  object-fit: contain;
+  width : 100%;
+  margin: auto;
+  display: block;
+}
+.add-book__basic-info__detail {
+  width: 80%;
+  margin: 5rem 5rem 0 0;
+  align-items: center;
+}
+.add-book__basic-info__isbn-search {
+  text-align: center; 
+  width: 60%;
+  height: 5rem;
+  display: flex;
+  border-radius: 3rem;
+  padding: 0 3rem;
+  margin: 1rem auto;
+  border: solid 2px rgba(255, 255, 255, 0.8);
+  background-color: rgb(0, 0, 0, 0.5);
+}
+
+.add-book__basic-info__isbn-search > input {
+  border: 0;
+  padding: 0;
+  width: 100%;
+  min-width: 15rem;
+  background-color: rgb(255, 255, 255, 0);
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.add-book__basic-info__isbn-search  > button {
+  border: 0rem;
+  padding: 0.5rem;
+  margin-left: auto;
+  background-color: rgb(255, 255, 255, 0);
+}
+
+.add-book__basic-info__input {
+    border: none;
+    width: 80%;
+}
+.add-book__basic-info__input:read-only {
+    background: none;
+}
+.add-book__book-info__text-key {
+  display: inline-block;
+  width: 6rem;
+  margin-right: 3rem;
+  word-break: break-all;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
+.add-book__book-info__text {
+  margin: 1.5rem 0;
+  display: block;
+}
+
+.add-book__overlined {
+  display: block;
+  border-top: solid #a4a4a4 0.1rem;
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+.add-book__underlined {
+  display: block;
+  border-bottom: solid #a4a4a4 0.1rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+.add-book__extra-info {
+  width:90%;
+  margin: auto;
+}
+
+.add-book__existed-books {
+  background-color: white;
+  width:100%;
+  height: 10rem;
+  font-size: 1.4rem;
+  padding-left: 1rem;
+  overflow: scroll;
+  display: inline-block;
+}
+
+.add-book__existed-info__text {
+    margin-right:3rem;
+}
+.add-book__create-form { 
+  padding: 2rem 0;
+  width:90%;
+  display: block;
+  margin:auto;
+}
+
+.add-book__create-form > select {
+  margin: 0 3rem 2rem 0;
+  border: 0;
+  width: 34rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  padding: 0 1rem;
+}
+
+.add-book__create-form > input {
+  border: 0;
+  padding: 0 2rem 0 2rem;
+  width: 40%;
+  height: 4rem;
+  font-size: 1.6rem;
+}
+
+.add-book__create-form > button {
+  display: block;
+  margin: 4rem auto;
+  width: 15rem;
+  height: 6.4rem;
+  border:0;
+  color:#ffffff;
+  border-radius: 2.4rem;
+  height:3rem;
+  background: none;
+  background-color: #e63737;
+  cursor: pointer;
+  font-size:1.8rem
+
+}
+
+
+@media screen and (max-width: 1200px) {
+  .inquire-box {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+.inquire-box {
+  display: block;
+}
+
+.add-book__basic-info {
+  display: block;
+}
+
+
+.add-book__basic-info__cover {
+  width : 100%;
+  margin: 5% 0;
+}
+
+.add-book__basic-info__cover > img {
+  object-fit: contain;
+  width : 30%;
+  margin: auto;
+  display: block;
+}
+.add-book__basic-info__detail {
+  display: block;
+  width: 90%;
+  margin: 5%;
+  align-items: center;
+}
+
+.add-book__create-form > input {
+    display: block;
+    margin-bottom:1.2rem;
+
+}
+}
