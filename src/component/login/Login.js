@@ -34,7 +34,6 @@ const Login = () => {
       })
       .catch(error => {
         setErrorMessage(error.response.data.message);
-        console.log(errorMessage);
       });
   };
 
@@ -55,7 +54,7 @@ const Login = () => {
               </div>
             )}
             <p className="login-header" align="center">
-              Sign in
+              로그인
             </p>
             <form
               className="login-form"
