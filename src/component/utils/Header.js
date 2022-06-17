@@ -105,10 +105,10 @@ const Header = () => {
                             도서관리
                           </Link>
                         </li>
-                        <li className="lnb__return">
+                        <li className="lnb__mypage">
                           <Link
                             className="lnb__text font-16 color-ff"
-                            to={{ pathname: `/return` }}
+                            to={{ pathname: `/mypage` }}
                           >
                             마이페이지
                           </Link>
