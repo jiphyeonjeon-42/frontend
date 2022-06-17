@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// import Banner from "../utils/Banner";
 import "../../css/Mypage.css";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
@@ -13,15 +12,12 @@ import MypageReservedBook from "./MypageReservedBook";
 
 const Mypage = () => {
   const [userInfo, setUserInfo] = useState(null);
-  const getHost = () => {
-    return `${window.location.protocol}//${window.location.host}`;
-  };
 
   useEffect(async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/users/search`, {
         params: {
-          nickname: JSON.parse(window.localStorage.getItem("user")).userId,
+          id: JSON.parse(window.localStorage.getItem("user")).id,
         },
       })
       .then(res =>
@@ -74,9 +70,7 @@ const Mypage = () => {
             <div className="mypage-inquire-box-short-clickBox">
               <a
                 className="font-14-bold color-54"
-                href={`${
-                  process.env.REACT_APP_API
-                }/auth/oauth?clientURL=${getHost()}`}
+                href={`${process.env.REACT_APP_API}/auth/getIntraAuthentication`}
               >
                 42 인증하기
               </a>

@@ -91,7 +91,8 @@ const MypageReservedBook = ({ reserveInfo }) => {
 };
 
 MypageReservedBook.propTypes = {
-  reserveInfo: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  // eslint-disable-next-line react/require-default-props
+  reserveInfo: PropTypes.arrayOf(PropTypes.object.isRequired),
 };
 
 export default MypageReservedBook;
