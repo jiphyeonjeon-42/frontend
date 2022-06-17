@@ -30,7 +30,10 @@ const Register = () => {
     const { value, name } = e.target;
     switch (name) {
       case "email":
-        // ID 중복 체크
+        setErrorMessage({
+          ...errorMessage,
+          emailError: "",
+        });
         break;
       case "password":
         if (!passwordRegex.test(value)) {
@@ -88,11 +91,21 @@ const Register = () => {
           password,
         })
         .then(() => {
-          console.log("success");
-          // window.location.replace("/");
+          window.location.replace("/login");
         })
         .catch(error => {
-          setErrorMessage(error.response.data);
+          const { errorCode } = error.response.data;
+          if (errorCode === 203) {
+            setErrorMessage({
+              ...errorMessage,
+              emailError: "중복된 이메일 입니다.",
+            });
+          } else if (errorCode === 205) {
+            setErrorMessage({
+              ...errorMessage,
+              passwordError: "잘못된 패스워드 형식 입니다.",
+            });
+          }
         });
     }
   };
