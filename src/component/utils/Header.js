@@ -92,8 +92,9 @@ const Header = () => {
                         <div className="lnb__line" />
                         <div className="lnb__circle">
                           <div className="lnb__circle__shape lnb__circle__rent" />
-                          <div className="lnb__circle__shape lnb__circle__return" />
-                          <div className="lnb__circle__shape lnb__circle__reservation" />
+                          <div className="lnb__circle__shape lnb__circle__user" />
+                          <div className="lnb__circle__shape lnb__circle__mypage" />
+                          <div className="lnb__circle__shape lnb__circle__logout" />
                         </div>
                       </div>
                       <ul className="lnb__menu">
@@ -102,7 +103,15 @@ const Header = () => {
                             className="lnb__text font-16 color-ff"
                             to={{ pathname: `/rent` }}
                           >
-                            도서관리
+                            대출/반납
+                          </Link>
+                        </li>
+                        <li className="lnb__user">
+                          <Link
+                            className="lnb__text font-16 color-ff"
+                            to={{ pathname: `/user` }}
+                          >
+                            DB 관리
                           </Link>
                         </li>
                         <li className="lnb__mypage">
@@ -113,7 +122,7 @@ const Header = () => {
                             마이페이지
                           </Link>
                         </li>
-                        <li className="lnb__reservation">
+                        <li className="lnb__logout">
                           <Link
                             className="lnb__text font-16 color-ff"
                             to={{ pathname: `/logout` }}
