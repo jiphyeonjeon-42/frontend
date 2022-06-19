@@ -1,6 +1,4 @@
 import React, { useRef, useState } from "react";
-import "../../css/MainBanner.css";
-import "../../css/Banner.css";
 import "../../css/Register.css";
 import axios from "axios";
 
@@ -119,7 +117,7 @@ const Register = () => {
   return (
     <main>
       <section className="banner main-img">
-        <div className="main-banner">
+        <div className="main-banner register-banner">
           <div className="register-main">
             <p className="register-header" align="center">
               회원가입
