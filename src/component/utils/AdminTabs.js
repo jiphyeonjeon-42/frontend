@@ -15,7 +15,7 @@ const AdminTab = ({ tabName, tabLink, tabFocus }) => {
   );
 };
 
-const AdminTabs = () => {
+const AdminTabs = ({ tabList }) => {
   const [onFocus, setFocus] = useState("/rent");
   useEffect(() => {
     setFocus(location.pathname);
@@ -23,18 +23,17 @@ const AdminTabs = () => {
   return (
     <section className="admin-tabs-wrapper">
       <div className="admin-tabs">
-        <AdminTab tabName="대출" tabLink="/rent" tabFocus={onFocus} />
-        <AdminTab
-          tabName="예약대출"
-          tabLink="/reservation"
-          tabFocus={onFocus}
-        />
-        <AdminTab tabName="반납" tabLink="/return" tabFocus={onFocus} />
-        <AdminTab tabName="도서등록" tabLink="/addBook" tabFocus={onFocus} />
+        {tabList.map(tab => (
+          <AdminTab tabName={tab.name} tabLink={tab.link} tabFocus={onFocus} />
+        ))}
       </div>
       <div className="admin-tabs-line" />
     </section>
   );
+};
+
+AdminTabs.propTypes = {
+  tabList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 AdminTab.propTypes = {
