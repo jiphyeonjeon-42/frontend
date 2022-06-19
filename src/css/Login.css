@@ -1,10 +1,15 @@
+.login-banner {
+    height: 90rem !important;
+}
+
 .login-main {
     background-color: #FFFFFF;
     width: 40rem;
-    height: 36rem;
+    height: auto;
     margin: 25rem auto;
     border-radius: 1.5em;
-    padding-top: 2.5rem;
+    padding-top: 4.5rem;
+    padding-bottom: 4rem;
     box-shadow: 0 1.1rem 3.5rem 0.2rem rgba(0, 0, 0, 0.14);
 }
 
@@ -18,6 +23,8 @@
 .login-err {
     color: orangered;
     font-size: 1.4rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
 .login-input {
@@ -87,6 +94,10 @@
 }
 
 @media screen and (max-width:500px){
+
+    .login-btn {
+        width: 60%;
+    }
 
     .login-main {
         width: 95%;

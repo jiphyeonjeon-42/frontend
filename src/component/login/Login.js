@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "../../css/MainBanner.css";
 import "../../css/Banner.css";
 import "../../css/Login.css";
 import axios from "axios";
 
 const Login = () => {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [loginData, setLoginData] = useState({
     id: "",
@@ -21,6 +23,16 @@ const Login = () => {
   };
 
   const sendLoginData = async () => {
+    if (!id || !password) {
+      if (!id) {
+        emailRef.current.focus();
+        setErrorMessage("이메일을 입력해 주세요.");
+      } else if (!password) {
+        passwordRef.current.focus();
+        setErrorMessage("비밀번호를 입력해 주세요.");
+      }
+      return;
+    }
     await axios
       .post(`${process.env.REACT_APP_API}/auth/login`, {
         headers: {
@@ -33,7 +45,10 @@ const Login = () => {
         window.location.replace("/auth");
       })
       .catch(error => {
-        setErrorMessage(error.response.data.message);
+        const { errorCode } = error.response.data;
+        if (errorCode === 103) setErrorMessage("입력된 값이 없습니다.");
+        else if (errorCode === 104) setErrorMessage("잘못된 패스워드입니다.");
+        else if (errorCode === 107) setErrorMessage("존재하지 않는 ID 입니다.");
       });
   };
 
@@ -46,13 +61,8 @@ const Login = () => {
   return (
     <main>
       <section className="banner main-img">
-        <div className="main-banner">
+        <div className="main-banner login-banner">
           <div className="login-main">
-            {errorMessage && (
-              <div className="login-err" align="center">
-                {errorMessage}
-              </div>
-            )}
             <p className="login-header" align="center">
               로그인
             </p>
@@ -66,9 +76,10 @@ const Login = () => {
                 name="id"
                 type="email"
                 align="center"
-                placeholder="Username"
+                placeholder="Email"
                 value={id}
                 onChange={onChange}
+                ref={emailRef}
               />
               <input
                 className="login-input"
@@ -79,7 +90,13 @@ const Login = () => {
                 value={password}
                 onChange={onChange}
                 onKeyPress={onKeyPress}
+                ref={passwordRef}
               />
+              {errorMessage && (
+                <div className="login-err" align="center">
+                  {errorMessage}
+                </div>
+              )}
               <button
                 type="button"
                 onClick={sendLoginData}
