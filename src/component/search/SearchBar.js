@@ -35,7 +35,7 @@ const SearchBar = ({ setPageRange, setAvailable }) => {
     history.push(
       `/search?string=${encodeURIComponent(
         searchInputValue,
-      )}&page=${1}&category=${0}&sort=accurate`,
+      )}&page=${1}&category=${0}&sort=title`,
     );
   };
 
