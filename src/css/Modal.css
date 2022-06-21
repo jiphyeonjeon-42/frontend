@@ -15,9 +15,10 @@
   transform: translate(-50%, -50%);
   height: 67.6rem;
   width: 120rem;
-  min-width: 30rem;
+  min-width: 36rem;
   background: #ffffff;
   z-index: 7;
+  overflow: auto;
 }
 
 .modal__close-button {
@@ -34,7 +35,7 @@
 
 .modal__wrapper {
   padding: 8rem 6rem;
-  min-width: 30rem;
+  min-width: 36rem;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
