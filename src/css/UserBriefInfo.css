@@ -1,0 +1,167 @@
+.user-info {
+  display: flex;
+  padding: 2rem 5rem 2rem 3rem;
+  justify-content: space-between;
+  /* justify-items: center; */
+}
+
+.user-info-line {
+  border-top: 1px solid #a4a4a4;
+}
+
+.user-info__title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-info__id {
+  width: 10rem;
+  text-align: center;
+}
+
+.user-info__nickname {
+  width: 10rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.user-info__role {
+  width: 10rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.user-info__email {
+  width: 35rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.user-info__overdue {
+  width: 10rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.user-info__button {
+  all: unset;
+  cursor: pointer;
+  width: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-info__usage {
+  width: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-info__edit {
+  width: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .user-info {
+    padding: 2rem 3.5rem 2rem 2rem;
+  }
+
+  .user-info__id {
+    font-size: 1.6rem !important;
+  }
+
+  .user-info__nickname {
+    font-size: 1.6rem !important;
+  }
+
+  .user-info__role {
+    font-size: 1.6rem !important;
+  }
+
+  .user-info__email {
+    font-size: 1.6rem !important;
+  }
+
+  .user-info__overdue {
+    font-size: 1.6rem !important;
+  }
+
+  .user-info__usage {
+    font-size: 1.6rem !important;
+  }
+
+  .user-info__edit {
+    font-size: 1.6rem !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .user-info {
+    padding: 2rem 2rem 2rem 1rem;
+  }
+
+  .user-info__overdue {
+    display: none;
+  }
+
+  .user-info__role {
+    display: none;
+  }
+
+  .user-info__id {
+    width: 7rem;
+    font-size: 1.4rem !important;
+    font-weight: normal !important;
+  }
+
+  .user-info__nickname {
+    width: 7rem;
+    font-size: 1.4rem !important;
+    font-weight: normal !important;
+  }
+
+  .user-info__email {
+    font-size: 1.4rem !important;
+    width: 28rem;
+    font-weight: normal !important;
+  }
+
+  .user-info__button {
+    width: 4.5rem;
+  }
+
+  .user-info__usage {
+    width: 4.5rem;
+    font-weight: normal !important;
+    font-size: 1.4rem !important;
+  }
+
+  .user-info__edit {
+    width: 4.5rem;
+    font-weight: normal !important;
+    font-size: 1.4rem !important;
+  }
+
+  .user-info__button-img {
+    width: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* .user-info__info > span {
+    display: block;
+    font-size: 1.4rem;
+  } */
+}
