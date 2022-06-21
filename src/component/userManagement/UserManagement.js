@@ -45,7 +45,7 @@ const UserManagement = () => {
     await axios
       .get(`${process.env.REACT_APP_API}/users/search`, {
         params: {
-          nickname: userSearchWord,
+          nicknameOrEmail: userSearchWord,
           page: userListPage - 1,
           limit: 10,
         },
