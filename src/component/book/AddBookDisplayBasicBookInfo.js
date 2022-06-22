@@ -17,9 +17,6 @@ const DisplayBasicBookInfo = ({ isConfirmedInfo, bookBasicInfo }) => {
   }, [bookBasicInfo]);
   const onChangeInput = e => {
     const { id, value } = e.currentTarget;
-
-    console.log(id);
-    console.log(isConfirmedInfo);
     setUserInput({
       ...userInput,
       [id]: value,
