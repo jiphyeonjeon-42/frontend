@@ -20,6 +20,8 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
           response.data.isbnInNaver[0];
         const sameInfo = response.data.sameTitleOrAuthor;
         const sameIsbn = response.data.isbnInBookInfo;
+        const recommendCallSign =
+          response.data?.isbnInBookInfo[0]?.callSign?.slice(0, -1);
 
         const existedBooksInfo = sameInfo.filter(infoElement => {
           return sameIsbn.filter(isbnElement => {
@@ -37,6 +39,7 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
             pubdate,
           },
           existedBooksInfo,
+          recommendCallSign,
         });
       })
       .catch(error => {
@@ -54,6 +57,7 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
             pubdate: "",
           },
           existedBooksInfo: [],
+          recommendCallSign: "",
         });
       });
   };

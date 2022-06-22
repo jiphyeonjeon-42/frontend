@@ -22,6 +22,7 @@ const AddBook = () => {
       pubdate: "",
     },
     existedBooksInfo: [],
+    recommendCallSign: "",
   });
   function subtituteImg(e) {
     e.target.src = IMGERR;
@@ -55,7 +56,7 @@ const AddBook = () => {
           />
           <RegisterBookWithUsersExtraInput
             bookBasicInfo={bookInfo.newBookBasicInfo}
-            existedBooksInfo
+            recommendCallSign={bookInfo.recommendCallSign}
           />
         </div>
       </section>
