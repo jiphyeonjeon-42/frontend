@@ -18,6 +18,7 @@ import "./App.css";
 import ReservedLoan from "./component/reservedloan/ReservedLoan";
 import ReturnBook from "./component/return/ReturnBook";
 import userState from "./atom/userState";
+import Mypage from "./component/mypage/Routes";
 
 function Routes() {
   const [user, setUser] = useRecoilState(userState);
@@ -44,6 +45,7 @@ function Routes() {
         <Route path="/auth" exact component={Auth} />
         <Route path="/logout" exact component={Logout} />
         <Route path="/register" exact component={Register} />
+        <Route path="/mypage" component={Mypage} />
         {user.isAdmin && <Route path="/rent" exact component={Rent} />}
         {user.isAdmin && <Route path="/return" exact component={ReturnBook} />}
         {user.isAdmin && (

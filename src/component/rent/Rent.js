@@ -17,11 +17,16 @@ const Rent = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [midModalContents, setMidModalContents] = useState("");
+  const tabList = [
+    { name: "대출", link: "/rent" },
+    { name: "예약대출", link: "/reservation" },
+    { name: "반납", link: "/return" },
+  ];
 
   return (
     <main>
       <Banner img="admin" titleKo="대출" titleEn="RENT BOOK" />
-      <AdminTabs />
+      <AdminTabs tabList={tabList} />
       <section className="inquire-box__wrapper">
         <InquireBoxTitle
           Icon={Login}

@@ -26,6 +26,10 @@
   background-image: url("../img/admin_bg.png");
 }
 
+.mypage-img {
+  background-image: url("../img/mypage_bg.png");
+}
+
 .banner-wrapper {
   padding: 27rem 0rem 6rem 0rem;
   min-width: 36rem;

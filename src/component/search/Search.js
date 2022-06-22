@@ -23,7 +23,7 @@ const Search = ({ match, location }) => {
   // eslint-disable-next-line no-unused-vars
   const [isAvailable, setAvailable] = useState(false);
   const [userPage, setPage] = useState(1);
-  const [userSort, setSort] = useState("accurate");
+  const [userSort, setSort] = useState("title");
   const [cateIndex, setCateIndex] = useState(0);
   const [userCateName, setCategoryName] = useState("");
   const [entireCate, setEntireCate] = useState([]);
@@ -34,7 +34,7 @@ const Search = ({ match, location }) => {
       .get(`${process.env.REACT_APP_API}/books/info/search`, {
         params: {
           query: userWord,
-          page: userPage,
+          page: userPage - 1,
           sort: userSort,
           category: userCateName,
           limit: 20,
@@ -87,13 +87,7 @@ const Search = ({ match, location }) => {
     };
 
     const isSort = str => {
-      if (
-        str === "accurate" ||
-        str === "title" ||
-        str === "new" ||
-        str === "popular"
-      )
-        return true;
+      if (str === "title" || str === "new" || str === "popular") return true;
       return false;
     };
 
@@ -101,7 +95,7 @@ const Search = ({ match, location }) => {
     let queryString = "";
     let queryPage = 1;
     let queryCateIndex = 0;
-    let querySort = "accurate";
+    let querySort = "title";
 
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < queryArr.length; i++) {

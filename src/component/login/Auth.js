@@ -18,7 +18,7 @@ const Auth = () => {
         const { data } = response;
         const nowDate = new Date();
         const expireDate = new Date();
-        expireDate.setDate(nowDate.getDate() + 14);
+        expireDate.setTime(nowDate.getTime() + 480 * 60 * 1000);
         const newUser = {
           isLogin: true,
           id: data.id,

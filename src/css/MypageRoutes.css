@@ -1,0 +1,10 @@
+.mypage-wrapper {
+  padding: 0 15rem 0 15rem;
+}
+
+.mypage-section {
+  position: relative;
+  min-width: 90rem;
+  max-width: 95rem;
+  margin: 0 auto;
+}
