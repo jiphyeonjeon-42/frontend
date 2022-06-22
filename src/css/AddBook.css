@@ -1,5 +1,3 @@
-
-
 .inquire-box {
   max-width: 120rem;
   min-width: 30rem;
@@ -16,10 +14,14 @@
   font-size: 1.6rem;
 }
 
-label, input , button
+label, input , button, select
 {
   font-size: inherit;
   font-family: inherit;
+}
+
+.add-book > p {
+  margin: 2rem 5rem 0;
 }
 
 .add-book__basic-info {
@@ -28,9 +30,8 @@ label, input , button
 
 .add-book__basic-info__cover {
   width : 30rem;
-  margin: 5rem 5rem 3rem ;
+  margin: 0 5rem 3rem ;
 }
-
 .add-book__basic-info__cover > img {
   object-fit: contain;
   width : 100%;
@@ -39,14 +40,43 @@ label, input , button
 }
 .add-book__basic-info__detail {
   width: 80%;
-  margin: 5rem 5rem 0 0;
+  margin: 0 5rem 0 0;
   align-items: center;
 }
-.add-book__basic-info__isbn-search {
-  text-align: center; 
-  width: 60%;
+.add-book__basic-info__isbn-search > * {
+  display: block;
+  margin: auto;
+}
+
+.add-book__basic-info__isbn-search > video {
+  height: 30rem;
+}
+.add-book__basic-info__isbn-search > button {
+  display: inline-block;
+  margin: 2rem 5rem 2rem 6.5rem;
+  width: 22rem;
   height: 5rem;
-  display: flex;
+  border:0;
+  color:#ffffff;
+  border-radius: 2.4rem;
+  background: none;
+  background-color: #a4a4a4;
+  cursor: pointer;
+  font-size:1.8rem
+}
+.add-book__basic-info__isbn-search > select {
+  width: 40rem;
+  height: 4rem;
+  font-size: 1.8rem;
+  padding: 0 1rem;
+  margin: 2rem auto ;
+}
+
+.add-book__basic-info__search-bar {
+  text-align: center; 
+  width: calc(90% - 32rem);
+  height: 5rem;
+  display: inline-flex;
   border-radius: 3rem;
   padding: 0 3rem;
   margin: 1rem auto;
@@ -54,7 +84,7 @@ label, input , button
   background-color: rgb(0, 0, 0, 0.5);
 }
 
-.add-book__basic-info__isbn-search > input {
+.add-book__basic-info__search-bar > input {
   border: 0;
   padding: 0;
   width: 100%;
@@ -64,7 +94,7 @@ label, input , button
   font-size: 2rem;
 }
 
-.add-book__basic-info__isbn-search  > button {
+.add-book__basic-info__search-bar  > button {
   border: 0rem;
   padding: 0.5rem;
   margin-left: auto;
@@ -75,6 +105,10 @@ label, input , button
     border: none;
     width: 80%;
 }
+.add-book__basic-info__input:first-child {
+  width: calc(80% + 10rem);
+}
+
 .add-book__basic-info__input:read-only {
     background: none;
 }
@@ -117,6 +151,7 @@ label, input , button
   padding-left: 1rem;
   overflow: scroll;
   display: inline-block;
+  box-sizing: border-box;
 }
 
 .add-book__existed-info__text {
@@ -159,7 +194,6 @@ label, input , button
   background-color: #e63737;
   cursor: pointer;
   font-size:1.8rem
-
 }
 
 
@@ -175,11 +209,31 @@ label, input , button
 .inquire-box {
   display: block;
 }
+.add-book > p {
+  width: 90%;
+  margin:2rem auto;
+}
+
+.add-book__basic-info__isbn-search > video {
+  width: 90%;
+}
+
+.add-book__basic-info__isbn-search > select {
+  width: 80%;
+}
+
+.add-book__basic-info__isbn-search > button {
+  margin: auto;
+  display: block;
+}
+.add-book__basic-info__search-bar {
+  display: flex;
+  width: 80%
+}
 
 .add-book__basic-info {
   display: block;
 }
-
 
 .add-book__basic-info__cover {
   width : 100%;
@@ -200,8 +254,12 @@ label, input , button
 }
 
 .add-book__create-form > input {
-    display: block;
-    margin-bottom:1.2rem;
-
+  display: block;
+  margin-bottom:1.2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.add-book__create-form > select {
+  width: 100%;
 }
 }

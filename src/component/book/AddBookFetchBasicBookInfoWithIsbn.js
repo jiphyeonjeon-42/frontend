@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
-
 import PropTypes from "prop-types";
-import SearchBarNotHandleValueChange from "./SearchBarNotHandleValueChange";
+import IsbnSearchBarWithBarcodeReader from "./AddBookIsbnSearchBarWithBarcodeReader";
 
 const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
   const [message, setMessage] = useState("");
-  const fetchBasicBookInformation = async ref => {
-    const userInputIsbn = ref.current.value;
+
+  const fetchBasicBookInformation = async isbnQuery => {
     setMessage("");
     await axios
       .get(`${process.env.REACT_APP_API}/books/create`, {
         params: {
-          isbnQuery: userInputIsbn,
+          isbnQuery,
         },
       })
       .then(response => {
@@ -39,13 +38,16 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
             pubdate,
           },
           existedBooksInfo,
-          recommendCallSign,
+          recommendCallSign: recommendCallSign || "",
         });
       })
       .catch(error => {
-        console.log(error.response.status);
-        console.log(error.response.data.errorCode);
-        setMessage(`조회에 실패했습니다. 수동으로 입력해주세요!`);
+        const { status } = error.response;
+        setMessage(
+          status === 401
+            ? "로그인 유효시간이 지났습니다. 로그아웃 후 재로그인 해주세요! "
+            : "조회에 실패했습니다. 수동으로 입력해주세요!",
+        );
         setBookInfo({
           isConfirmedInfo: false,
           newBookBasicInfo: {
@@ -64,9 +66,8 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
 
   return (
     <>
-      <SearchBarNotHandleValueChange
+      <IsbnSearchBarWithBarcodeReader
         fetchFunction={fetchBasicBookInformation}
-        formStyleName="add-book__basic-info__isbn-search"
       />
       <p>{message}</p>
     </>

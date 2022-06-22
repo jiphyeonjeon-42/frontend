@@ -15,7 +15,7 @@ const AddBook = () => {
     isConfirmedInfo: true,
     newBookBasicInfo: {
       isbn: "",
-      title: "ISBN을 입력해주세요",
+      title: "제목",
       image: "",
       author: "",
       publisher: "",
@@ -34,6 +34,8 @@ const AddBook = () => {
       <section className="inquire-box__wrapper">
         <InquireBoxTitle Icon={Book} titleKO="도서 등록" titleEN="Add Book" />
         <div className="inquire-box add-book">
+          <p className="color-red">ISBN</p>
+          <FetchBasicBookInfoWithIsbn setBookInfo={setBookInfo} />
           <div className="add-book__basic-info">
             <div className="add-book__basic-info__cover">
               <img
@@ -43,8 +45,6 @@ const AddBook = () => {
               />
             </div>
             <div className="add-book__basic-info__detail">
-              <p className="color-red">ISBN</p>
-              <FetchBasicBookInfoWithIsbn setBookInfo={setBookInfo} />
               <DisplayBasicBookInfo
                 isConfirmedInfo={bookInfo.isConfirmedInfo}
                 bookBasicInfo={bookInfo.newBookBasicInfo}
