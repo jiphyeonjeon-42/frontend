@@ -20,7 +20,7 @@ const getOverDueDate = overDueDay => {
   return overDueDate;
 };
 
-const UserInfoEdit = ({ infoKey, infoId, infoValue }) => {
+const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
   const [input, setInput] = useState(infoValue);
 
   const onChange = event => {
@@ -30,12 +30,16 @@ const UserInfoEdit = ({ infoKey, infoId, infoValue }) => {
     setInput(value);
   };
 
+  if (infoType === "date") {
+    console.log(input);
+  }
+
   return (
     <div className="user-detail-info__edit color-54">
       <div className="user-detail-info__key font-18-bold">{infoKey}</div>
       <input
         className={`user-detail-info__edit-input edit-${infoId}`}
-        type="text"
+        type={infoType}
         autoComplete="off"
         value={input}
         onChange={onChange}
@@ -74,6 +78,10 @@ const UserInfoDisplay = ({ infoKey, infoValue }) => {
 
 const UserDetailInfo = ({ user }) => {
   const [editMode, setEditMode] = useState(false);
+  const [userIntraId, setUserIntraId] = useState(user.intraId);
+  const [userNickname, setUserNickname] = useState(user.nickname);
+  const [userSlack, setUserSlack] = useState(user.slack);
+  const [userRoleNum, setUserRoleNum] = useState(user.role);
 
   const onEditMode = () => {
     setEditMode(true);
@@ -87,7 +95,12 @@ const UserDetailInfo = ({ user }) => {
     await axios
       .patch(`${process.env.REACT_APP_API}/users/update/${user.id}`, data)
       .then(res => {
-        console.log(res.data);
+        const userInfo = res.data;
+        console.log(userInfo);
+        if (userInfo.intraId) setUserIntraId(userInfo.intraId);
+        if (userInfo.nickname) setUserNickname(userInfo.nickname);
+        if (userInfo.slack) setUserSlack(userInfo.slack);
+        if (userInfo.role) setUserRoleNum(userInfo.role);
       })
       .catch(error => {
         console.log(error);
@@ -101,7 +114,8 @@ const UserDetailInfo = ({ user }) => {
     const nickname = userEditForm.querySelector(".edit-nickname").value;
     const role = userEditForm.querySelector(".edit-role").value;
     const slack = userEditForm.querySelector(".edit-slack").value;
-    console.log(intra, nickname, slack, role);
+    const overDue = userEditForm.querySelector(".edit-over-due").value;
+    console.log(intra, nickname, slack, role, overDue);
     const data = {
       nickname,
       intraId: parseInt(intra, 10),
@@ -111,6 +125,8 @@ const UserDetailInfo = ({ user }) => {
     patchUserInfo(data);
     offEditMode();
   };
+
+  //   const overDueDay = 3;
 
   return (
     <div className="user-detail-info">
@@ -124,20 +140,33 @@ const UserDetailInfo = ({ user }) => {
           <UserInfoEdit
             infoKey="INTRA ID"
             infoId="intra-id"
-            infoValue={user.intraId}
+            infoType="text"
+            infoValue={userIntraId}
           />
           <UserInfoEdit
             infoKey="NICKNAME"
             infoId="nickname"
-            infoValue={user.nickname}
+            infoType="text"
+            infoValue={userNickname}
           />
-          <UserInfoEdit infoKey="SLACK" infoId="slack" infoValue={user.slack} />
-          <UserRoleEdit userRole={user.role} roleList={roles} />
+          <UserInfoEdit
+            infoKey="SLACK"
+            infoId="slack"
+            infoType="text"
+            infoValue={userSlack}
+          />
+          <UserRoleEdit userRole={userRoleNum} roleList={roles} />
           <div className="user-detail-info__line" />
-          <UserInfoDisplay
-            infoKey="대출 불가 기간"
-            infoValue={user.overDueDay ? getOverDueDate(user.overDueDay) : "-"}
-          />
+          {user.overDueDay ? (
+            <UserInfoEdit
+              infoKey="대출 불가 기간"
+              infoId="over-due"
+              infoType="date"
+              infoValue={getOverDueDate(user.overDueDay)}
+            />
+          ) : (
+            <UserInfoDisplay infoKey="대출 불가 기간" infoValue="-" />
+          )}
           <UserInfoDisplay
             infoKey="연체일"
             infoValue={user.overDueDay === 0 ? "-" : `${user.overDueDay}일`}
@@ -167,10 +196,10 @@ const UserDetailInfo = ({ user }) => {
         <>
           <UserInfoDisplay infoKey="ID" infoValue={user.id} />
           <UserInfoDisplay infoKey="EMAIL" infoValue={user.email} />
-          <UserInfoDisplay infoKey="INTRA ID" infoValue={user.intraId} />
-          <UserInfoDisplay infoKey="NICKNAME" infoValue={user.nickname} />
-          <UserInfoDisplay infoKey="SLACK" infoValue={user.slack} />
-          <UserInfoDisplay infoKey="ROLE" infoValue={roles[user.role]} />
+          <UserInfoDisplay infoKey="INTRA ID" infoValue={userIntraId} />
+          <UserInfoDisplay infoKey="NICKNAME" infoValue={userNickname} />
+          <UserInfoDisplay infoKey="SLACK" infoValue={userSlack} />
+          <UserInfoDisplay infoKey="ROLE" infoValue={roles[userRoleNum]} />
           <div className="user-detail-info__line" />
           <UserInfoDisplay
             infoKey="대출 불가 기간"
