@@ -11,7 +11,6 @@ import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
 import ReservedModal from "./ReservedModal";
 import AdminTabs from "../utils/AdminTabs";
-// import PropTypes from "prop-types";
 
 const ReservedLoan = () => {
   const [modal, setModal] = useState(false);
@@ -21,8 +20,9 @@ const ReservedLoan = () => {
   const [resevedLoanPageRange, setResevedLoanPageRange] = useState(0);
   const [lastresevedLoanPage, setLastresevedLoanPage] = useState(1);
   const [reservedLoanList, setReservedLoanList] = useState([]);
-  const [isProceeding, setProceeding] = useState(true);
-  const [isFinish, setFinish] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
   const [reservedInfo, setReservedInfo] = useState(null);
 
   const openModal = () => {
@@ -43,10 +43,10 @@ const ReservedLoan = () => {
   };
 
   const filterState = () => {
-    if (isProceeding && isFinish) return "proceeding,finish";
-    if (isProceeding) return "proceeding";
-    if (isFinish) return "finish";
-    return "proceeding";
+    if (isPending) return "pending";
+    if (isWaiting) return "waiting";
+    if (isExpired) return "expired";
+    return "all";
   };
 
   const fetchReservedLoanData = async () => {
@@ -55,7 +55,7 @@ const ReservedLoan = () => {
     } = await axios.get(`${process.env.REACT_APP_API}/reservations/search`, {
       params: {
         query: userSearchWord,
-        page: resevedLoanPage,
+        page: resevedLoanPage - 1,
         limit: 5,
         filter: filterState(),
       },
@@ -71,8 +71,8 @@ const ReservedLoan = () => {
   useEffect(fetchReservedLoanData, [
     userSearchWord,
     resevedLoanPage,
-    isProceeding,
-    isFinish,
+    isPending,
+    isExpired,
   ]);
 
   useEffect(() => {
@@ -82,11 +82,19 @@ const ReservedLoan = () => {
       searchForm.removeEventListener("submit", handleReservedLoanSumbit);
   }, [handleReservedLoanSumbit]);
 
+  useEffect(() => {
+    setResevedLoanPage(1);
+    setResevedLoanPageRange(0);
+    setResevedLoanPageRange(0);
+  }, [isPending, isWaiting, isExpired]);
+
   const tabList = [
     { name: "대출", link: "/rent" },
     { name: "예약대출", link: "/reservation" },
     { name: "반납", link: "/return" },
   ];
+
+  console.log(reservedInfo);
 
   return (
     <main>
@@ -104,15 +112,19 @@ const ReservedLoan = () => {
         <div className="reserved-loan-table__inquire-box">
           <div className="reserved-loan-filter">
             <ReservedFilter
-              isProceeding={isProceeding}
-              setProceeding={setProceeding}
-              isFinish={isFinish}
-              setFinish={setFinish}
+              isPending={isPending}
+              setIsPending={setIsPending}
+              isExpired={isExpired}
+              setIsExpired={setIsExpired}
+              isWaiting={isWaiting}
+              setIsWaiting={setIsWaiting}
             />
           </div>
           {reservedLoanList.map(factor => (
             <ReservedTableList
               key={factor.id}
+              isPending={isPending}
+              isWaiting={isWaiting}
               factor={factor}
               openModal={openModal}
               setInfo={setReservedInfo}

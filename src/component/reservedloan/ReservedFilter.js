@@ -5,16 +5,27 @@ import CheckIcon from "../../img/check_icon.svg";
 import RedCheckIcon from "../../img/check_icon_red.svg";
 
 const ReservedFilter = ({
-  isProceeding,
-  setProceeding,
-  isFinish,
-  setFinish,
+  isPending,
+  setIsPending,
+  isExpired,
+  setIsExpired,
+  isWaiting,
+  setIsWaiting,
 }) => {
   const toggleProceeding = () => {
-    setProceeding(!isProceeding);
+    setIsPending(!isPending);
+    setIsWaiting(false);
+    setIsExpired(false);
+  };
+  const toggleWaiting = () => {
+    setIsPending(false);
+    setIsWaiting(!isWaiting);
+    setIsExpired(false);
   };
   const toggleFinish = () => {
-    setFinish(!isFinish);
+    setIsPending(false);
+    setIsWaiting(false);
+    setIsExpired(!isExpired);
   };
   return (
     <div className="reserved-filter">
@@ -26,15 +37,33 @@ const ReservedFilter = ({
         >
           <img
             className="filter__icon"
-            src={`${isProceeding ? RedCheckIcon : CheckIcon}`}
+            src={`${isPending ? RedCheckIcon : CheckIcon}`}
             alt="check"
           />
           <span
             className={`proceeding-finsh__text font-16-bold ${
-              isProceeding ? "color-red" : "color-a4"
+              isPending ? "color-red" : "color-a4"
             }`}
           >
-            진행중 예약 보기
+            대출 대기 중
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={toggleWaiting}
+          className="finish filter-button"
+        >
+          <img
+            className="filter__icon"
+            src={`${isWaiting ? RedCheckIcon : CheckIcon}`}
+            alt="check"
+          />
+          <span
+            className={`proceeding-finish__text font-16-bold ${
+              isWaiting ? "color-red" : "color-a4"
+            }`}
+          >
+            예약 배정 대기 중
           </span>
         </button>
         <button
@@ -44,15 +73,15 @@ const ReservedFilter = ({
         >
           <img
             className="filter__icon"
-            src={`${isFinish ? RedCheckIcon : CheckIcon}`}
+            src={`${isExpired ? RedCheckIcon : CheckIcon}`}
             alt="check"
           />
           <span
             className={`proceeding-finish__text font-16-bold ${
-              isFinish ? "color-red" : "color-a4"
+              isExpired ? "color-red" : "color-a4"
             }`}
           >
-            종료된 예약 보기
+            종료된 예약
           </span>
         </button>
       </div>

@@ -1,11 +1,11 @@
 .reserved-filter {
-  padding-right: 6.8rem;
+  padding-right: 3rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .reserved-filter-wrapper {
-  width: 30rem;
   margin-top: 3rem;
-  margin-left: auto;
   margin-bottom: 2rem;
 }
 
