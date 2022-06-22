@@ -9,7 +9,7 @@ const DisplayExistedBookInfo = ({ existedBooksInfo }) => {
         <div className="add-book__existed-books">
           {existedBooksInfo.map(element => {
             return (
-              <p className="add-book__book-info__text">
+              <p className="add-book__book-info__text" key={element.id}>
                 <span className="add-book__existed-info__text">
                   {element.id}
                 </span>
