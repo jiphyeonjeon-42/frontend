@@ -7,6 +7,7 @@ import "../../css/UserDetailInfo.css";
 
 const roles = ["미인증", "일반", "사서", "스태프"];
 
+// eslint-disable-next-line no-unused-vars
 const getOverDueDate = overDueDay => {
   const today = new Date();
   let overDueDate = "";
@@ -20,6 +21,12 @@ const getOverDueDate = overDueDay => {
   return overDueDate;
 };
 
+// eslint-disable-next-line no-unused-vars
+const isOverDue = date => {
+  const today = new Date();
+  return date >= today;
+};
+
 const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
   const [input, setInput] = useState(infoValue);
 
@@ -29,10 +36,6 @@ const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
     } = event;
     setInput(value);
   };
-
-  if (infoType === "date") {
-    console.log(input);
-  }
 
   return (
     <div className="user-detail-info__edit color-54">
@@ -76,12 +79,31 @@ const UserInfoDisplay = ({ infoKey, infoValue }) => {
   );
 };
 
+const convertDatetoString = date => {
+  let overDueDate = "";
+
+  console.log(typeof date);
+  console.log(date);
+
+  overDueDate += date.getFullYear();
+  overDueDate += "-";
+  overDueDate += date.getMonth() + 1 < 10 ? "0" : "";
+  overDueDate += date.getMonth() + 1;
+  overDueDate += "-";
+  overDueDate += date.getDate() < 10 ? "0" : "";
+  overDueDate += date.getDate();
+  return overDueDate;
+};
+
 const UserDetailInfo = ({ user }) => {
+  const today = new Date();
   const [editMode, setEditMode] = useState(false);
   const [userIntraId, setUserIntraId] = useState(user.intraId);
   const [userNickname, setUserNickname] = useState(user.nickname);
   const [userSlack, setUserSlack] = useState(user.slack);
   const [userRoleNum, setUserRoleNum] = useState(user.role);
+  const [userPenalty, setUserPenalty] = useState(user.penaltyEndDate);
+  //   const [userPenalty, setUserPenalty] = useState(convertDatetoString(today));
 
   const onEditMode = () => {
     setEditMode(true);
@@ -101,6 +123,7 @@ const UserDetailInfo = ({ user }) => {
         if (userInfo.nickname) setUserNickname(userInfo.nickname);
         if (userInfo.slack) setUserSlack(userInfo.slack);
         if (userInfo.role) setUserRoleNum(userInfo.role);
+        if (userInfo.penaltyEndDate) setUserPenalty(userInfo.penaltyEndDate);
       })
       .catch(error => {
         console.log(error);
@@ -114,13 +137,14 @@ const UserDetailInfo = ({ user }) => {
     const nickname = userEditForm.querySelector(".edit-nickname").value;
     const role = userEditForm.querySelector(".edit-role").value;
     const slack = userEditForm.querySelector(".edit-slack").value;
-    const overDue = userEditForm.querySelector(".edit-over-due").value;
-    console.log(intra, nickname, slack, role, overDue);
+    const penalty = userEditForm.querySelector(".edit-penalty").value;
+    console.log(intra, nickname, slack, role, penalty);
     const data = {
       nickname,
       intraId: parseInt(intra, 10),
       slack,
       role: parseInt(role, 10),
+      penaltyEndDate: penalty,
     };
     patchUserInfo(data);
     offEditMode();
@@ -157,16 +181,17 @@ const UserDetailInfo = ({ user }) => {
           />
           <UserRoleEdit userRole={userRoleNum} roleList={roles} />
           <div className="user-detail-info__line" />
-          {user.overDueDay ? (
-            <UserInfoEdit
-              infoKey="대출 불가 기간"
-              infoId="over-due"
-              infoType="date"
-              infoValue={getOverDueDate(user.overDueDay)}
-            />
-          ) : (
-            <UserInfoDisplay infoKey="대출 불가 기간" infoValue="-" />
-          )}
+          <UserInfoEdit
+            infoKey="대출 불가 기간"
+            infoId="penalty"
+            infoType="date"
+            infoValue={
+              userPenalty &&
+              userPenalty.substring(0, 10) >= convertDatetoString(today)
+                ? userPenalty.substring(0, 10)
+                : convertDatetoString(today)
+            }
+          />
           <UserInfoDisplay
             infoKey="연체일"
             infoValue={user.overDueDay === 0 ? "-" : `${user.overDueDay}일`}
@@ -203,7 +228,12 @@ const UserDetailInfo = ({ user }) => {
           <div className="user-detail-info__line" />
           <UserInfoDisplay
             infoKey="대출 불가 기간"
-            infoValue={user.overDueDay ? getOverDueDate(user.overDueDay) : "-"}
+            infoValue={
+              userPenalty &&
+              userPenalty.substring(0, 10) >= convertDatetoString(today)
+                ? userPenalty.substring(0, 10)
+                : "-"
+            }
           />
           <UserInfoDisplay
             infoKey="연체일"
