@@ -17,15 +17,17 @@ const UserList = ({ user, setSelectedUser, closeMidModal }) => {
   return (
     <button className="rent__user-list" type="button" onClick={seletUser}>
       <div className="rent__user-list__name">
-        <div className="font-18-bold color-54">{user.login}</div>
+        <div className="font-18-bold color-54 rent__text-ellipsis">
+          {user.nickname ? user.nickname : user.email}
+        </div>
       </div>
       <div className="rent__user-list__lent-cnt font-16 color-54">
-        대출중인 도서 : {user.lendingCnt}권
+        대출중인 도서 : {user.lendings.length}권
       </div>
       <div className="rent__user-list__penalty font-16 color-red">
-        {user.isPenalty
+        {new Date(user.penaltyEndDate) > Date.now()
           ? "대출제한(연체)"
-          : user.lendingCnt >= 2
+          : user.lendings.length >= 2
           ? "대출제한(2권 이상 대출)"
           : null}
       </div>

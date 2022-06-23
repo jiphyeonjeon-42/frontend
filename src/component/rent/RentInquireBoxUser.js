@@ -18,9 +18,17 @@ const InquireBoxUser = ({
     }
   };
 
+  const displayDate = strDate => {
+    const date = new Date(strDate);
+    return `${date.getFullYear()}-${
+      date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth()
+    }-${date.getDay() < 10 ? `0${date.getDay()}` : date.getDay()}`;
+  };
+
   const displayPenalty = () => {
-    if (selectedUser.isPenalty) return "연체(연체종료일: )";
-    return selectedUser.lendingCnt >= 2 ? "대출제한(2권 이상 대출)" : null;
+    if (new Date(selectedUser.penaltyEndDate) > Date.now())
+      return `연체(연체종료일: ${displayDate(selectedUser.penaltyEndDate)}) `;
+    return selectedUser.lendings.length >= 2 ? "대출제한(2권 이상 대출)" : null;
   };
 
   return (
@@ -30,7 +38,9 @@ const InquireBoxUser = ({
           <div className="rent__inquire-box-user__id-undo">
             <div>
               <span className="rent__inquire-box-user__id font-28-bold color-54">
-                {selectedUser.login}
+                {selectedUser.nickname
+                  ? selectedUser.nickname
+                  : selectedUser.email}
               </span>
               <span className="font-16 color-red"> {displayPenalty()} </span>
             </div>
@@ -44,16 +54,16 @@ const InquireBoxUser = ({
           </div>
           <div className="rent__inquire-box-user__lendings">
             <div className="user__book-cnt font-18-bold color-54">
-              {`대출중인 도서 (${selectedUser.lendingCnt})`}
+              {`대출중인 도서 (${selectedUser.lendings.length})`}
             </div>
             <div className="user__book-info__total">
               {selectedUser.lendings.map((item, index) => (
-                <div key={item.id} className="user__book-info">
+                <div key={item.userId} className="user__book-info">
                   <div className="user__book-info__title font-18-bold color-54">
-                    {`${index + 1}. ${item.book.info.title}`}
+                    {`${index + 1}. ${item.title}`}
                   </div>
                   <div className="font-16 color-54">
-                    {`반납 예정일 : ${item.dueDate}`}
+                    {`반납 예정일 : ${displayDate(item.duedate)}`}
                   </div>
                 </div>
               ))}
@@ -67,11 +77,11 @@ const InquireBoxUser = ({
               {selectedUser.reservations.map((item, index) => (
                 <div key={item.id} className="user__book-info">
                   <div className="user__book-info__title font-18-bold color-54">
-                    {`${index + 1}. ${item.book.info.title}`}
+                    {`${index + 1}. ${item.title}`}
                   </div>
                   <div className="font-16 color-54">
                     <span>{`예약순위 : ${
-                      item.count ? `${item.count}순위` : "-"
+                      item.ranking ? `${item.ranking}순위` : "-"
                     }`}</span>
                     {item.endAt ? (
                       <span className="user__reservations-info">
@@ -101,11 +111,11 @@ export default InquireBoxUser;
 
 InquireBoxUser.propTypes = {
   selectedUser: PropTypes.shape({
-    is: PropTypes.number,
-    login: PropTypes.string,
-    isPenalty: PropTypes.bool,
-    lendingCnt: PropTypes.number,
-    lendings: PropTypes.number,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    lendings: PropTypes.arrayOf(PropTypes.object),
+    nickname: PropTypes.string,
+    penaltyEndDate: PropTypes.string,
     reservations: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   setSelectedUser: PropTypes.func.isRequired,
