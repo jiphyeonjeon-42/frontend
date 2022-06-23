@@ -4,9 +4,11 @@ import PropTypes from "prop-types";
 const labelText = {
   author: "저 자",
   publisher: "출판사",
-  pubdate: "출판연도",
+  pubdate: "출판일",
 };
+
 const DisplayBasicBookInfo = ({ isConfirmedInfo, bookBasicInfo }) => {
+  const [message, setMessage] = useState("");
   const [userInput, setUserInput] = useState({
     ...bookBasicInfo,
   });
@@ -15,8 +17,16 @@ const DisplayBasicBookInfo = ({ isConfirmedInfo, bookBasicInfo }) => {
       ...bookBasicInfo,
     });
   }, [bookBasicInfo]);
+
   const onChangeInput = e => {
     const { id, value } = e.currentTarget;
+    if (id === "pubdate") {
+      const isValidDate = RegExp(/^[0-9]{8}$/).test(value);
+      const currentMessage = !isValidDate
+        ? `날짜는 yyyymmdd 형식을 지켜주세요 ex.19450815`
+        : "";
+      if (message !== currentMessage) setMessage(currentMessage);
+    }
     setUserInput({
       ...userInput,
       [id]: value,
@@ -57,6 +67,7 @@ const DisplayBasicBookInfo = ({ isConfirmedInfo, bookBasicInfo }) => {
       {useInput("author")}
       {useInput("publisher")}
       {useInput("pubdate")}
+      {message && <p>{message}</p>}
     </>
   );
 };
