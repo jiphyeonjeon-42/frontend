@@ -69,7 +69,7 @@ const ReservedFilter = ({
         <button
           type="button"
           onClick={toggleFinish}
-          className="finish filter-button"
+          className=" finish filter-button "
         >
           <img
             className="filter__icon"

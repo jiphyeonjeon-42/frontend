@@ -23,8 +23,8 @@ const ReservedModalContents = ({
     await axios
       .post(`${process.env.REACT_APP_API}/lendings`, [
         {
-          userId: reservedInfo.user.id,
-          bookId: reservedInfo.book.id,
+          userId: reservedInfo.userId,
+          bookId: reservedInfo.bookId,
           condition,
         },
       ])

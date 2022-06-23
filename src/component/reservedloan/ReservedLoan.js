@@ -94,8 +94,6 @@ const ReservedLoan = () => {
     { name: "반납", link: "/return" },
   ];
 
-  console.log(reservedInfo);
-
   return (
     <main>
       <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />

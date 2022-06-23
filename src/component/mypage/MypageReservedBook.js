@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 
 const MypageReservedBook = ({ reserveInfo }) => {
   const onClickCancle = async id => {
-    await axios.patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`);
+    await axios
+      .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
+      .catch(err => console.log(err));
   };
 
   return (
