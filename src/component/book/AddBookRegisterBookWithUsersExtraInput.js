@@ -121,6 +121,7 @@ const RegisterBookWithUsersExtraInput = ({
         required
         onChange={onChangeCallSign}
       />
+      <p className="add-book__create-form__errror-Message">{message}</p>
 
       <p className="color-red">기부자 정보</p>
       <input type="text" id="donator" ref={donator} />
@@ -128,7 +129,6 @@ const RegisterBookWithUsersExtraInput = ({
       <button type="submit" className={isReadyToPost && "is-ready"}>
         등록하기
       </button>
-      <p>{message}</p>
     </form>
   );
 };
