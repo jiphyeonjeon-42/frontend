@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from "react";
 // import PropTypes from "prop-types";
@@ -22,6 +23,7 @@ const UserUsageInfo = ({ user }) => {
     overDueDate += date.getMonth() + 1 < 10 ? "0" : "";
     overDueDate += date.getMonth() + 1;
     overDueDate += "-";
+    overDueDate += date.getDate() < 10 ? "0" : "";
     overDueDate += date.getDate();
     return overDueDate.substring(2);
   };
@@ -36,22 +38,22 @@ const UserUsageInfo = ({ user }) => {
           {`대출중인 도서 (${user.lendings.length})`}
         </div>
         <div className="user-usage-info__books">
-          {user.lendings.map((item, index) => (
-            <div key={item.id} className="user-usage-info__book">
+          {user.lendings.map((lending, index) => (
+            <div className="user-usage-info__book">
               <div className="user-usage-info__book-number font-18-bold color-54">
                 {`${index + 1}.`}
               </div>
               <div>
                 <div className="user-usage-info__book-title font-18-bold color-54">
-                  {`${item.title}`}
+                  {`${lending.title}`}
                 </div>
-                {item.dueDate < today ? (
+                {lending.dueDate < today ? (
                   <div className="font-16 color-red">
-                    {`반납 예정일 : ${convertDatetoString(item.dueDate)}`}
+                    {`반납 예정일 : ${convertDatetoString(lending.dueDate)}`}
                   </div>
                 ) : (
                   <div className="font-16 color-54">
-                    {`반납 예정일 : ${convertDatetoString(item.dueDate)}`}
+                    {`반납 예정일 : ${convertDatetoString(lending.dueDate)}`}
                   </div>
                 )}
               </div>
@@ -65,7 +67,7 @@ const UserUsageInfo = ({ user }) => {
         </div>
         <div className="user-usage-info__books">
           {user.reservations.map((reservation, index) => (
-            <div key={reservation?.id} className="user-usage-info__book">
+            <div className="user-usage-info__book">
               <div className="user-usage-info__book-number font-18-bold color-54">
                 {`${index + 1}.`}
               </div>
@@ -77,8 +79,9 @@ const UserUsageInfo = ({ user }) => {
                   <div className="user-usage-info__reservation-info">{`예약순위 : ${reservation.rank}순위`}</div>
                   {reservation.lenderableDate && (
                     <div className="user-usage-info__reservation-info font-16 color-54">
-                      대출 가능일 : {reservation.lenderableDate} ~{" "}
-                      {reservation.endAt}
+                      대출 가능일 :{" "}
+                      {convertDatetoString(reservation.lenderableDate)} ~{" "}
+                      {convertDatetoString(reservation.endAt)}
                     </div>
                   )}
                 </div>
