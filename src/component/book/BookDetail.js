@@ -22,14 +22,13 @@ const BookDetail = ({ location, match }) => {
   const [miniModalClosable, setMiniModalClosable] = useState(true);
   const user = useRecoilValue(userState);
 
+  // eslint-disable-next-line no-unused-vars
   const getHost = () => {
     return `${window.location.protocol}//${window.location.host}`;
   };
   const openModal = () => {
     if (!user.isLogin) {
-      window.location = `${
-        process.env.REACT_APP_API
-      }/auth/oauth?clientURL=${getHost()}`;
+      window.location = `/login`;
       return;
     }
     setMiniModalView(true);
