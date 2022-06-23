@@ -1,16 +1,43 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState, useRef } from "react";
+import { useRecoilValue } from "recoil";
 import axios from "axios";
+import userState from "../../atom/userState";
 import "../../css/BookDetail.css";
 import Banner from "../utils/Banner";
 import BookStatus from "./BookStatus";
 import IMGERR from "../../img/image_onerror.svg";
+import MiniModal from "../utils/MiniModal";
+import Reservation from "../reservation/Reservation";
+import ArrRes from "../../img/arrow_right_res.svg";
+import ArrDef from "../../img/arrow_right_res_default.svg";
+// import { array } from "prop-types";
 // eslint-disable-next-line react/prop-types
 
 const BookDetail = ({ location, match }) => {
   const [data, setData] = useState({ books: [] });
   const { id } = match.params;
   const myRef = useRef(null);
+  const [miniModalView, setMiniModalView] = useState(false);
+  const [miniModalClosable, setMiniModalClosable] = useState(true);
+  const user = useRecoilValue(userState);
+
+  const getHost = () => {
+    return `${window.location.protocol}//${window.location.host}`;
+  };
+  const openModal = () => {
+    if (!user.isLogin) {
+      window.location = `${
+        process.env.REACT_APP_API
+      }/auth/oauth?clientURL=${getHost()}`;
+      return;
+    }
+    setMiniModalView(true);
+  };
+
+  const closeModal = () => {
+    if (miniModalClosable) setMiniModalView(false);
+  };
 
   const fetchData = async () => {
     const response = await axios.get(
@@ -46,7 +73,31 @@ const BookDetail = ({ location, match }) => {
           </div>
           <div className="book-detail">
             <span className="color-red">도서정보</span>
-            <div className="book-detail__title">{data.title}</div>
+            <div className="book-detail__reservation-button">
+              <div className="book-detail__title">{data.title}</div>
+              {data.books.reduce(
+                (accumulator, current) => accumulator + current.isLendable,
+                0,
+              ) === 0 ? (
+                <button
+                  className="reservation-active-button color-red font-18-bold"
+                  type="button"
+                  onClick={openModal}
+                >
+                  예약 하기
+                  <img src={ArrRes} alt="Arr" />
+                </button>
+              ) : (
+                <button
+                  className="reservation-disable-button color-a4 font-18"
+                  type="button"
+                  disabled
+                >
+                  예약 불가
+                  <img src={ArrDef} alt="Arr" />
+                </button>
+              )}
+            </div>
             <div className="book-detail__info">
               <div>
                 <span className="book-detail__info-key">저자</span>
@@ -73,15 +124,8 @@ const BookDetail = ({ location, match }) => {
               </span>
               <div className="book-state__list">
                 <div>
-                  {data.books.map((item, index) => (
-                    <BookStatus
-                      key={item.id}
-                      id={item.id}
-                      callSign={item.callSign}
-                      status={item.status}
-                      dueDate={item.dueDate}
-                      index={index}
-                    />
+                  {data.books.map((book, index) => (
+                    <BookStatus key={book.id} book={book} index={index} />
                   ))}
                 </div>
               </div>
@@ -89,6 +133,15 @@ const BookDetail = ({ location, match }) => {
           </div>
         </div>
       </section>
+      {miniModalView && (
+        <MiniModal closeModal={closeModal}>
+          <Reservation
+            bookInfoId={data.id}
+            closeModal={closeModal}
+            setClosable={setMiniModalClosable}
+          />
+        </MiniModal>
+      )}
     </main>
   );
 };
