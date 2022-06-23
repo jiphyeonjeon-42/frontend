@@ -49,6 +49,10 @@
 }
 
 @media screen and (max-width: 767px) {
+  .inquire-box-title {
+    min-width: unset;
+    max-width: unset;
+  }
   .reserved-loan-table__inquire-box {
     padding-top: 3rem;
     top: -9rem;

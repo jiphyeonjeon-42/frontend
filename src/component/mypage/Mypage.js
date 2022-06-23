@@ -12,6 +12,7 @@ import MypageReservedBook from "./MypageReservedBook";
 
 const Mypage = () => {
   const [userInfo, setUserInfo] = useState(null);
+  const [deviceMode, setDeviceMode] = useState(window.innerWidth);
 
   useEffect(async () => {
     await axios
@@ -41,9 +42,24 @@ const Mypage = () => {
       );
   }, []);
 
+  useEffect(() => {
+    const getWindowWidth = () => {
+      if (window.innerWidth >= 1200) setDeviceMode("desktop");
+      if (window.innerWidth < 1200 && window.innerWidth > 767)
+        setDeviceMode("pad");
+      if (window.innerWidth < 767) setDeviceMode("mobile");
+    };
+    window.addEventListener("resize", getWindowWidth);
+    return () => {
+      window.removeEventListener("resize", getWindowWidth);
+    };
+  }, []);
+
   return (
     <>
-      <ScrollTopButton rightRem={-10} bottomRem={5} />
+      {deviceMode === "desktop" && (
+        <ScrollTopButton rightRem={-10} bottomRem={5} />
+      )}
       <div className="mypage-subtitle">
         <div className="mypage-subtitle__line" />
         <div className="mypage-subtitle__user__info">
