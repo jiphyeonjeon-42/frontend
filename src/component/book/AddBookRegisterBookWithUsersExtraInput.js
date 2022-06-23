@@ -15,6 +15,10 @@ const RegisterBookWithUsersExtraInput = ({
   const callSignRef = useRef(null);
   const donator = useRef(null);
   useEffect(() => {
+    const recommendCategory = category.find(
+      element => element.code === recommendCallSign[0],
+    );
+    setCategoryId(recommendCategory?.id ? recommendCategory.id : 0);
     setCallSign(recommendCallSign);
   }, [recommendCallSign]);
 
