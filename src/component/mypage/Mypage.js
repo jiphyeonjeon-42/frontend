@@ -9,9 +9,13 @@ import Book from "../../img/admin_icon.svg";
 import Reserve from "../../img/list-check-solid.svg";
 import MypageRentedBook from "./MypageRentedBook";
 import MypageReservedBook from "./MypageReservedBook";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 
 const Mypage = () => {
   const [userInfo, setUserInfo] = useState(null);
+  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
+  const [miniModalContent, setMiniModalContent] = useState("");
   const [deviceMode, setDeviceMode] = useState(window.innerWidth);
 
   useEffect(async () => {
@@ -39,7 +43,11 @@ const Mypage = () => {
           }
           return rtnObj;
         }),
-      );
+      )
+      .catch(err => {
+        setMiniModalContent(err.message);
+        setIsMiniModalOpen(true);
+      });
   }, []);
 
   useEffect(() => {
@@ -159,6 +167,14 @@ const Mypage = () => {
           />
         </div>
       </div>
+      {isMiniModalOpen ? (
+        <MiniModal closeModal={() => setIsMiniModalOpen(false)}>
+          <ModalContentsOnlyTitle
+            closeModal={() => setIsMiniModalOpen(false)}
+            title={miniModalContent}
+          />
+        </MiniModal>
+      ) : null}
     </>
   );
 };

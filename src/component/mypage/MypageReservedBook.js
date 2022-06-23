@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../css/MypageReservedBook.css";
 import axios from "axios";
 import PropTypes from "prop-types";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 
 const MypageReservedBook = ({ reserveInfo }) => {
+  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
+  const [miniModalContent, setMiniModalContent] = useState("");
+
   const onClickCancle = async id => {
     await axios
       .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
-      .catch(err => console.log(err));
+      .then(() => {
+        setMiniModalContent("예약 취소 성공");
+        setIsMiniModalOpen(true);
+      })
+      .catch(err => {
+        setMiniModalContent(err.message);
+        setIsMiniModalOpen(true);
+      });
   };
 
   return (
@@ -87,6 +99,14 @@ const MypageReservedBook = ({ reserveInfo }) => {
             </button>
           </div>
         </div>
+      ) : null}
+      {isMiniModalOpen ? (
+        <MiniModal closeModal={() => setIsMiniModalOpen(false)}>
+          <ModalContentsOnlyTitle
+            title={miniModalContent}
+            closeModal={() => setIsMiniModalOpen(false)}
+          />
+        </MiniModal>
       ) : null}
     </div>
   );
