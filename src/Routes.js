@@ -18,6 +18,7 @@ import "./css/reset.css";
 import "./App.css";
 import ReservedLoan from "./component/reservedloan/ReservedLoan";
 import ReturnBook from "./component/return/ReturnBook";
+import UserManagement from "./component/userManagement/UserManagement";
 import userState from "./atom/userState";
 import Mypage from "./component/mypage/Routes";
 
@@ -52,6 +53,9 @@ function Routes() {
         {user.isAdmin && <Route path="/return" exact component={ReturnBook} />}
         {user.isAdmin && (
           <Route path="/reservation" exact component={ReservedLoan} />
+        )}
+        {user.isAdmin && (
+          <Route path="/user" exact component={UserManagement} />
         )}
         <Route component={NotFound} />
       </Switch>
