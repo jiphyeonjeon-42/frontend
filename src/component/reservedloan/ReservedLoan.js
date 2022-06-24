@@ -82,10 +82,16 @@ const ReservedLoan = () => {
       searchForm.removeEventListener("submit", handleReservedLoanSumbit);
   }, [handleReservedLoanSumbit]);
 
+  const tabList = [
+    { name: "대출", link: "/rent" },
+    { name: "예약대출", link: "/reservation" },
+    { name: "반납", link: "/return" },
+  ];
+
   return (
     <main>
       <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />
-      <AdminTabs />
+      <AdminTabs tabList={tabList} />
       <section className="reserved-loan-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle

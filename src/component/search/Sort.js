@@ -33,13 +33,6 @@ const Sort = ({ userWord, userSort, cateIndex }) => {
         userWord={userWord}
         cateIndex={cateIndex}
         userSort={userSort}
-        sortName="accurate"
-        text="정확도순"
-      />
-      <SortBy
-        userWord={userWord}
-        cateIndex={cateIndex}
-        userSort={userSort}
         sortName="title"
         text="이름순"
       />
