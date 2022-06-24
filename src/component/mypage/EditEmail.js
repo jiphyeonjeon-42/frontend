@@ -3,9 +3,13 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import arrowLeft from "../../img/arrow_left_black.svg";
 import "../../css/EditEmail.css";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 
 function EditEmail() {
   const history = useHistory();
+  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
+  const [miniModalContent, setMiniModalContent] = useState("");
   const [userInfo, setUserInfo] = useState(null);
   const [newEmail, setNewEmail] = useState("");
 
@@ -19,11 +23,21 @@ function EditEmail() {
 
   const onSubmitUpdate = async e => {
     e.preventDefault();
-    await axios.patch(`${process.env.REACT_APP_API}/users/myupdate`, {
-      params: {
-        email: newEmail,
-      },
-    });
+    await axios
+      .patch(`${process.env.REACT_APP_API}/users/myupdate`, {
+        params: {
+          email: newEmail,
+        },
+      })
+      .then(() => {
+        history.goBack();
+        setMiniModalContent("이메일 변경 성공");
+        setIsMiniModalOpen(true);
+      })
+      .catch(err => {
+        setMiniModalContent(err.message);
+        setIsMiniModalOpen(true);
+      });
   };
 
   useEffect(async () => {
@@ -33,7 +47,11 @@ function EditEmail() {
           nickname: JSON.parse(window.localStorage.getItem("user")).userId,
         },
       })
-      .then(res => setUserInfo(res.data.items[0]));
+      .then(res => setUserInfo(res.data.items[0]))
+      .catch(err => {
+        setMiniModalContent(err.message);
+        setIsMiniModalOpen(true);
+      });
   }, []);
 
   return (
@@ -46,7 +64,7 @@ function EditEmail() {
         </div>
         <div className="mypage-edit-email-title color-2d">
           <span>{`${
-            userInfo ? userInfo.nickname : "-"
+            JSON.parse(window.localStorage.getItem("user")).userId
           }님의, 이메일 변경 페이지입니다`}</span>
         </div>
         <div className="mypage-edit-email-curr_email">
@@ -68,12 +86,20 @@ function EditEmail() {
             />
           </div>
           <div className="mypage-edit-email-button">
-            <button className="font-14 " type="button">
+            <button className="font-14 " type="submit">
               변경
             </button>
           </div>
         </form>
       </div>
+      {isMiniModalOpen ? (
+        <MiniModal closeModal={() => setIsMiniModalOpen(false)}>
+          <ModalContentsOnlyTitle
+            title={miniModalContent}
+            closeModal={() => setIsMiniModalOpen(false)}
+          />
+        </MiniModal>
+      ) : null}
     </div>
   );
 }

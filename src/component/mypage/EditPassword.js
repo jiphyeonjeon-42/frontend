@@ -3,9 +3,13 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import arrowLeft from "../../img/arrow_left_black.svg";
 import "../../css/EditPassword.css";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 
 function EditPassword() {
   const history = useHistory();
+  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
+  const [miniModalContent, setMiniModalContent] = useState("");
   const [newPw, setNewPw] = useState("");
   const [checkPw, setCheckPw] = useState("");
 
@@ -20,15 +24,25 @@ function EditPassword() {
   const onSubmitUpdate = async e => {
     e.preventDefault();
     if (newPw !== checkPw) {
-      // eslint-disable-next-line no-alert
-      alert("비밀번호 재입력이 다릅니다.");
+      setMiniModalContent("비밀번호 재입력이 다릅니다.");
+      setIsMiniModalOpen(true);
       return;
     }
-    await axios.patch(`${process.env.REACT_APP_API}/users/myupdate`, {
-      params: {
-        password: newPw,
-      },
-    });
+    await axios
+      .patch(`${process.env.REACT_APP_API}/users/myupdate`, {
+        params: {
+          password: newPw,
+        },
+      })
+      .then(() => {
+        history.goBack();
+        setMiniModalContent("비밀번호 변경에 성공");
+        setIsMiniModalOpen(true);
+      })
+      .catch(err => {
+        setMiniModalContent(err.message);
+        setIsMiniModalOpen(true);
+      });
   };
 
   const onClickLeftArrow = () => {
@@ -74,12 +88,20 @@ function EditPassword() {
             />
           </div>
           <div className="mypage-edit-pw-button">
-            <button className="font-14" type="button">
+            <button className="font-14" type="submit">
               변경
             </button>
           </div>
         </form>
       </div>
+      {isMiniModalOpen ? (
+        <MiniModal closeModal={() => setIsMiniModalOpen(false)}>
+          <ModalContentsOnlyTitle
+            title={miniModalContent}
+            closeModal={() => setIsMiniModalOpen(false)}
+          />
+        </MiniModal>
+      ) : null}
     </div>
   );
 }
