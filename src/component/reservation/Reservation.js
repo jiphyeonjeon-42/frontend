@@ -6,14 +6,14 @@ import getErrorMessage from "../utils/error";
 import SuccessRsv from "./SuccessRsv";
 import ModalContentsOnlyTitle from "../utils/ModalContentsTitleWithMessage";
 
-const Reservation = ({ bookId, closeModal, setClosable }) => {
+const Reservation = ({ bookInfoId, closeModal, setClosable }) => {
   const [reservationStep, setReservationStep] = useState("waitUserConfirm");
   const [propsNumber, setPropsNumber] = useState(-1);
   const [propsString, setPropsString] = useState("");
   const postReservation = async () => {
     await axios
-      .post(`${process.env.REACT_APP_API}/reservations/`, {
-        bookId,
+      .post(`${process.env.REACT_APP_API}/reservations`, {
+        bookInfoId,
       })
       .then(response => {
         setPropsNumber(response.data.count);
@@ -47,7 +47,7 @@ const Reservation = ({ bookId, closeModal, setClosable }) => {
       case "waitUserConfirm":
         return (
           <UserConfirm
-            bookId={bookId}
+            bookInfoId={bookInfoId}
             closeModal={closeModal}
             onConfirm={tryReservation}
             setReservationStep={setReservationStep}

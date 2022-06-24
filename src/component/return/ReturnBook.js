@@ -47,9 +47,9 @@ const ReturnBook = () => {
     } = await axios.get(`${process.env.REACT_APP_API}/lendings/search`, {
       params: {
         query: userSearchWord,
-        page: returnBookPage,
+        page: returnBookPage - 1,
         limit: 5,
-        sort: lendingSort ? "older" : "new",
+        sort: lendingSort ? "old" : "new",
       },
     });
     setReturnBookList(items);
@@ -69,6 +69,12 @@ const ReturnBook = () => {
       searchForm.removeEventListener("submit", handlereturnBookSumbit);
   }, [handlereturnBookSumbit]);
 
+  const tabList = [
+    { name: "대출", link: "/rent" },
+    { name: "예약대출", link: "/reservation" },
+    { name: "반납", link: "/return" },
+  ];
+
   return (
     <main>
       <Banner
@@ -76,7 +82,7 @@ const ReturnBook = () => {
         titleKo="조회 및 반납"
         titleEn="INQUIRE & RETURN BOOK"
       />
-      <AdminTabs />
+      <AdminTabs tabList={tabList} />
       <section className="return-book-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle

@@ -10,6 +10,7 @@ import Mypage from "../../img/login_icon.svg";
 import User from "../../img/Freepik_user.png";
 import Login from "../../img/login_feen.png";
 import Logout from "../../img/logout_IconsBox.png";
+import DB from "../../img/database.svg";
 import "../../css/HeaderModal.css";
 
 const HeaderModal = ({ setHeaderModal }) => {
@@ -19,16 +20,14 @@ const HeaderModal = ({ setHeaderModal }) => {
     setHeaderModal(false);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getHost = () => {
     return `${window.location.protocol}//${window.location.host}`;
   };
 
   const nowDate = new Date();
   const expireDate = new Date(user.expire);
-  if (nowDate > expireDate)
-    window.location = `${
-      process.env.REACT_APP_API
-    }/auth/oauth?clientURL=${getHost()}`;
+  if (nowDate > expireDate) window.location = `/login`;
 
   return (
     <div>
@@ -72,9 +71,6 @@ const HeaderModal = ({ setHeaderModal }) => {
                   className="header-modal__anonymous__icon"
                   alt="user"
                 />
-                {/* <span className="header-modal__user__icon font-18 color-ff">
-                유저
-              </span> */}
                 <span className="profile__text font-20-bold color-ff">
                   익명
                 </span>
@@ -90,7 +86,17 @@ const HeaderModal = ({ setHeaderModal }) => {
                   alt="book"
                 />
                 <span className="header-modal__text font-16 color-2d">
-                  도서관리
+                  대출/반납
+                </span>
+              </Link>
+            ) : (
+              ``
+            )}
+            {user.id && user.isAdmin ? (
+              <Link className="header-modal__button" to={{ pathname: `/user` }}>
+                <img src={DB} className="header-modal__icon-db" alt="db" />
+                <span className="header-modal__text font-16 color-2d">
+                  DB 관리
                 </span>
               </Link>
             ) : (
@@ -143,12 +149,7 @@ const HeaderModal = ({ setHeaderModal }) => {
                 </span>
               </Link>
             ) : (
-              <a
-                className="header-modal__button"
-                href={`${
-                  process.env.REACT_APP_API
-                }/auth/oauth?clientURL=${getHost()}`}
-              >
+              <a className="header-modal__button" href="/login">
                 <img src={Login} className="header-modal__icon-in" alt="user" />
                 <span className="header-modal__text font-16 color-2d">
                   로그인

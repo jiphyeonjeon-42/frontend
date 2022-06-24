@@ -1,13 +1,39 @@
 .book-detail-body {
   max-width: 100rem;
   position: relative;
-  margin: 6rem auto;
+  margin: auto;
+  margin-top: 7rem;
+  margin-bottom: 10rem;
+}
+
+.book-detail__reservation-button {
+  display: flex;
+  /* flex-direction: column; */
+  margin-bottom: 2.4rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.book-detail__reservation-button img {
+  height: 1.3rem;
+  margin: 0 1rem 0 1rem;
+}
+
+.reservation-active-button {
+  all: unset;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.reservation-disable-button {
+  all: unset;
+  margin-top: 1rem;
 }
 
 .breadcrumb {
   display: flex;
   justify-content: flex-end;
-  margin-top: 12rem;
+  /* margin-top: 12rem; */
   margin-right: 3rem;
 }
 
@@ -19,6 +45,8 @@
 
 .book-detail__photo {
   margin: 0 4.8rem 0 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .book-detail__photo img {
@@ -38,13 +66,11 @@
 
 .book-detail__title {
   width: auto;
-  height: 4.1rem;
   font-size: 2.8rem;
   font-weight: bold;
-  margin-top: 0.8rem;
-  margin-bottom: 2.4rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-wrap: break-all;
+  white-space: normal;
+  padding-right: 2rem;
 }
 
 .book-detail__info {
@@ -91,8 +117,7 @@
   margin-top: 2rem;
 }
 
-@media screen and (min-width:768px) and (max-width: 1200px) {
-
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .book-detail {
     width: 55%;
     margin-right: auto;
@@ -110,17 +135,17 @@
   .book-detail__info-value {
     margin-left: 4rem;
   }
-
 }
 
-@media screen and (max-width:767px){
-
+@media screen and (max-width: 767px) {
   .book-detail-body {
     padding: 0;
     width: 100%;
     min-width: 36rem;
     position: relative;
-    margin: 0 auto;
+    margin: auto;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
   }
 
   .breadcrumb span {
@@ -130,6 +155,7 @@
 
   .book-content {
     display: block;
+	margin-top: 3rem;
   }
 
   .book-detail__photo {
@@ -185,5 +211,4 @@
   .book-state > span {
     font-size: 2rem;
   }
-
 }

@@ -119,7 +119,7 @@ const RentModalConfirm = ({
               <div className="rent-modal__remark">
                 <p className="font-16 color-red">비고</p>
                 <textarea
-                  className="mid-modal__remark__input margin-8 font-14"
+                  className="mid-modal__remark__input margin-8 font-16"
                   placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
                   value={index === 0 ? remark1 : remark2}
                   onChange={index === 0 ? handleRemark1 : handleRemark2}

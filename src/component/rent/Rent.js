@@ -28,7 +28,7 @@ const Rent = () => {
   return (
     <main>
       <Banner img="admin" titleKo="대출" titleEn="RENT BOOK" />
-      <AdminTabs />
+      <AdminTabs tabList={tabList} />
       <section className="inquire-box__wrapper">
         <InquireBoxTitle
           Icon={Login}
