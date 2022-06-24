@@ -11,16 +11,19 @@
 .book-status__callSign {
   margin-right: 4%;
   width: 10rem;
+  text-align: center;
 }
 
 .book-status__status {
   margin-right: 5%;
   width: 6rem;
+  text-align: center;
 }
 
 .book-status__dueDate {
   width: 5rem;
   margin-right: 5%;
+  text-align: center;
 }
 
 .reservation-btn, .book-status__toggle {
@@ -44,90 +47,4 @@
 .book-status__toggle-img-clicked {
   margin-left: 1.2rem;
   margin-top: 0.3rem;
-}
-
-.book-status__mobile-info {
-  display: none;
-}
-
-.book-status__mobile-info-hidden {
-  display: none;
-}
-
-@media screen and (max-width:767px) {
-
-  .book-status__callSign{
-    display: none;
-  }
-
-  .book-status__dueDate{
-    display: none;
-  }
-
-  .book-status {
-    flex-wrap: wrap;
-    padding: 1rem 0;
-    margin-bottom: 0;
-    border-bottom: 0.1rem dotted black;
-  }
-
-  .book-status div {
-    margin: auto 0;
-    padding-right: 2rem;
-    font-size: 2rem;
-  }
-
-  .book-status__toggle {
-    margin-left: auto !important;
-    width: 1.8rem;
-  }
-
-  .book-status__toggle-img {
-    width: 100%;
-    cursor: pointer;
-    transform: rotate(90deg);
-    margin-left: 0;
-    margin-top: 1rem;
-  }
-
-  .book-status__toggle-img-clicked {
-    width: 100%;
-    cursor: pointer;
-    transform: rotate(270deg);
-    margin-left: 0;
-    margin-top: 1rem;
-  }
-
-  .book-status__mobile-info {
-    display: block;
-    height: auto;
-    width: 100%;
-  }
-
-  .book-status__mobile-info-hidden {
-    display: none;
-  }
-
-  .book-status__mobile-info-item {
-    margin-top: 1.5rem;
-  }
-
-  .book-status__mobile-info-item span:first-child{
-    font-weight: bolder;
-    margin-left: 10%;
-  }
-
-  .book-status__mobile-info-item span:nth-child(2){
-    position: absolute;
-    left: 50%;
-  }
-
-  .book-status > .reservation-btn {
-    margin: 0.4rem 0 0 2rem;
-  }
-
-  .book-status > .reservation-btn > span {
-    font-size: 2rem;
-  }
-
 }

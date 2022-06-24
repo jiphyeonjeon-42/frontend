@@ -31,9 +31,10 @@
   width: 100%;
   overflow: hidden;
   max-height: 8.1rem;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
   word-wrap: break-all;
   white-space: normal;
+  word-break: break-all;
 }
 
 .mid-modal__lend {
