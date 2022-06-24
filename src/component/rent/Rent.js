@@ -12,11 +12,18 @@ import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 
 import "../../css/Rent.css";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 
 const Rent = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [midModalContents, setMidModalContents] = useState("");
+  const [miniModalContents, setMiniModalContents] = useState("");
+
+  const closeMiniModal = () => {
+    setMiniModalContents("");
+  };
 
   return (
     <main>
@@ -73,7 +80,17 @@ const Rent = () => {
           setSelectedUser={setSelectedUser}
           setSelectedBooks={setSelectedBooks}
           setMidModalContents={setMidModalContents}
+          setMiniModalContents={setMiniModalContents}
         />
+      )}
+      {miniModalContents && (
+        <MiniModal closeModal={closeMiniModal}>
+          <ModalContentsTitleWithMessage
+            closeModal={closeMiniModal}
+            title="대출 결과"
+            message={miniModalContents}
+          />
+        </MiniModal>
       )}
     </main>
   );

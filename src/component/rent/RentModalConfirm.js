@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "../../css/RentModalConfirm.css";
+import { useHistory } from "react-router-dom";
 import getErrorMessage from "../utils/error";
 
 const RentModalConfirm = ({
@@ -9,9 +10,8 @@ const RentModalConfirm = ({
   selectedBooks,
   closeModal,
   setMiniModalContents,
-  setRentResult,
 }) => {
-  const [errorMsg, setErrorMsg] = useState("");
+  const history = useHistory();
   const [remark1, setRemark1] = useState("");
   const [remark2, setRemark2] = useState("");
 
@@ -39,27 +39,19 @@ const RentModalConfirm = ({
       await axios
         .post(`${process.env.REACT_APP_API}/lendings`, data[i])
         .then(() => {
-          setMiniModalContents("success");
-          setRentResult(true);
+          setMiniModalContents(`대출 완료`);
           // eslint-disable-next-line no-param-reassign
           selectedUser.lendings.push(makeLending(selectedBooks.pop()));
         })
         .catch(error => {
-          const { status } = error.response;
-          setRentResult(false);
-          setMiniModalContents(
-            status === 400
-              ? getErrorMessage("lendings", error.response.data.errorCode)
-              : error.message,
-          );
           const { errorCode } = error.response.data;
-          // eslint-disable-next-line no-restricted-globals
-          if (errorCode === 100) location.replace("/");
-          if ([101, 102, 108, 109].includes(errorCode))
-            // eslint-disable-next-line no-restricted-globals
-            location.replace("/logout");
-          setErrorMsg(
-            `대출 불가 (사유 : ${getErrorMessage("lendings", errorCode)})`,
+          if (errorCode === 100) history.push("/");
+          if ([101, 102, 108, 109].includes(errorCode)) history.push("/logout");
+          setMiniModalContents(
+            `${selectedBooks[0].title} 대출 불가\n(사유 : ${getErrorMessage(
+              "lendings",
+              errorCode,
+            )})`,
           );
         });
     }
@@ -90,6 +82,7 @@ const RentModalConfirm = ({
     await axiosPost(data);
     setRemark1("");
     setRemark2("");
+    closeModal();
   };
   return (
     <div className="modal__wrapper rent-modal">
@@ -99,9 +92,6 @@ const RentModalConfirm = ({
           {selectedUser.nickname ? selectedUser.nickname : selectedUser.email}
         </span>
         <span className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</span>
-        <span className="rent-modal__error font-16 color-red">
-          {errorMsg || ""}
-        </span>
       </div>
       <div className="rent-modal__books">
         {selectedBooks.map((selectBook, index) => (
@@ -174,7 +164,7 @@ export default RentModalConfirm;
 RentModalConfirm.propTypes = {
   closeModal: PropTypes.func.isRequired,
   setMiniModalContents: PropTypes.func.isRequired,
-  setRentResult: PropTypes.func.isRequired,
+  // setRentResult: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   selectedUser: PropTypes.object.isRequired,
   selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
