@@ -44,3 +44,31 @@
   display: grid;
   grid-template-columns: 50% 50%;
 }
+
+@media screen and (max-width: 950px) {
+  .mypage-rented__book {
+    justify-content: space-evenly;
+  }
+  .mypage-rented__book-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mypage-rented__book-info {
+    width: 28rem;
+    margin-left: 0rem;
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mypage-rented__book {
+    flex-direction: column;
+    row-gap: 5rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .mypage-rented__book-info {
+    width: 100%;
+  }
+}

@@ -85,8 +85,8 @@ const ReturnModalContents = ({
         <div className="mid-modal__remark">
           <p className="font-16 color-red">비고</p>
           <textarea
-            className="mid-modal__remark__input margin-8"
-            placeholder={`대출당시 : ${data.lendingCondition}`}
+            className="mid-modal__remark__input margin-8 font-16"
+            placeholder={`대출당시 : ${data.condition}`}
             value={remark}
             onChange={handleRemark}
           />

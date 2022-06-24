@@ -8,3 +8,17 @@
   max-width: 95rem;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 1200px) {
+  .mypage-wrapper {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .mypage-section {
+    max-width: unset;
+    min-width: unset;
+    width: 90%;
+  }
+}

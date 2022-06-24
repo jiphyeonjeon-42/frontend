@@ -48,3 +48,23 @@ button:focus {
   width: 2.8rem;
   height: 2.8rem;
 }
+
+@media screen and (max-width: 1200px) {
+  .modal-search-form {
+    height: 5.4rem;
+  }
+  .modal-search__icon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modal-search-form {
+    height: 4.4rem;
+  }
+  .modal-search__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
