@@ -11,6 +11,7 @@ import Main from "./component/main/Main";
 import Search from "./component/search/Search";
 import Auth from "./component/login/Auth";
 import Logout from "./component/login/Logout";
+import Login from "./component/login/Login";
 import Register from "./component/login/Register";
 import Rent from "./component/rent/Rent";
 import "./css/reset.css";
@@ -42,6 +43,7 @@ function Routes() {
         <Route path="/information" exact component={Information} />
         <Route path="/search" exact component={Search} />
         <Route path="/info/:id" exact component={BookDetail} />
+        <Route path="/login" exact component={Login} />
         <Route path="/auth" exact component={Auth} />
         <Route path="/logout" exact component={Logout} />
         <Route path="/register" exact component={Register} />
