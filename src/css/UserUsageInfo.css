@@ -1,0 +1,102 @@
+.user-usage-info {
+  padding: 5rem 10rem 5rem 10rem;
+}
+
+.user-usage-info__nickname {
+  display: flex;
+  padding: 3rem 0 4rem 0;
+  border-bottom: 0.1rem solid #a4a4a4;
+}
+
+.user-usage-info__books {
+  flex-grow: 1;
+  word-break: break-all;
+  white-space: normal;
+}
+
+.user-usage-info__book-number {
+  margin-right: 1.5rem;
+}
+
+.user-usage-info__book {
+  display: flex;
+  margin-bottom: 2rem;
+  padding: 0 0 2rem 0;
+  border-bottom: 0.1rem solid #a4a4a4;
+}
+
+.user-usage-info__book:last-child {
+  margin: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.user-usage-info__lendings {
+  display: flex;
+  padding: 3.5rem 0 3.5rem 0;
+  border-bottom: 0.1rem solid #a4a4a4;
+}
+
+.user-usage-info__reservations {
+  display: flex;
+  padding: 3.5rem 0 3.5rem 0;
+}
+
+.user-usage-info__reservation {
+  display: flex;
+  word-break: keep-all !important;
+  flex-wrap: wrap;
+}
+
+.user-usage-info__reservation-info {
+  margin-right: 3rem;
+  flex-shrink: 0;
+}
+
+.user-usage-info__count {
+  margin-right: 4rem;
+}
+
+.user-usage-info__book-title {
+  margin-bottom: 1rem;
+}
+
+.user__reservations-info {
+  margin-left: 28rem;
+}
+
+@media screen and (max-width: 767px) {
+  .user-usage-info {
+    padding: 2rem 5rem 2rem 5rem;
+  }
+
+  .user-usage-info__books {
+    margin-left: 2rem;
+  }
+
+  .user-usage-info__book {
+    /* margin-bottom: 2rem; */
+    padding: 0 0 0 0;
+    border-bottom: none;
+  }
+
+  .user-usage-info__lendings {
+    display: block;
+  }
+
+  .user-usage-info__reservations {
+    display: block;
+  }
+
+  .user-usage-info__reservation {
+    display: block;
+  }
+
+  .user-usage-info__count {
+    margin-bottom: 3rem;
+  }
+
+  .user-usage-info__book-title {
+    margin-bottom: 0.5rem;
+  }
+}

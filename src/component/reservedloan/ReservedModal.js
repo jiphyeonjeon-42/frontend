@@ -19,13 +19,13 @@ const ReservedModal = ({ reservedInfo, closeModal }) => {
 
   return (
     <>
-      {miniModalContents ? (
+      {miniModalContents.length ? (
         <MiniModal closeModal={closeMiniModal}>
           {lendResult ? (
             <ModalContentsTitleWithMessage
               closeModal={closeMiniModal}
               title="대출이 완료되었습니다."
-              message={reservedInfo.book.info.title}
+              message={reservedInfo.title}
             />
           ) : (
             <ModalContentsOnlyTitle
@@ -38,7 +38,6 @@ const ReservedModal = ({ reservedInfo, closeModal }) => {
         <MidModal closeModal={closeModal}>
           <ReservedModalContents
             reservedInfo={reservedInfo}
-            closeModal={closeModal}
             setMiniModalContents={setMiniModalContents}
             setLendResult={setLendResult}
           />

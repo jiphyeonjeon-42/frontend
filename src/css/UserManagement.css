@@ -1,0 +1,73 @@
+.user-management-main {
+  margin: 0 auto;
+}
+.user-management-title {
+  position: relative;
+  padding: 8.9rem 0 6rem ;
+  min-width: 90rem;
+  height: 10.7rem;
+  z-index: 2;
+}
+.user-management-subtitle {
+  min-width: 90rem;
+  padding: 11.8rem 0 12rem ;
+  margin: auto;
+}
+
+.user-management-search {
+	padding: 0 2rem 0 2rem;
+}
+
+.user-management-table__inquire-title {
+  max-width: 120rem;
+  min-width: 36rem;
+  background-color: #545454;
+  margin: auto;
+  border-top-left-radius: 6.1rem;
+  border-top-right-radius: 6.1rem;
+  padding: 3rem 0 1.4rem 0;
+}
+
+.user-management-table__inquire-box {
+  max-width: 120rem;
+  min-width: 36rem;
+  background-color: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 12rem;
+  border-bottom-left-radius: 6.1rem;
+  border-bottom-right-radius: 6.1rem;
+  padding: 2rem 0 2rem 0;
+}
+
+.user-management-table__pagination {
+  margin-top: 3.6rem;
+}
+
+@media screen and (max-width: 120rem) {
+  .user-management-table__inquire-title {
+    border-top-left-radius: 4rem;
+    border-top-right-radius: 4rem;
+    padding: 1.5rem 0 0.8rem 0;
+  }
+
+  .user-management-table__inquire-box {
+    width: 100%;
+    border-bottom-left-radius: 4.2rem;
+    border-bottom-right-radius: 4.2rem;
+  }
+}
+
+@media screen and (max-width:767px) {
+  .user-management-table__inquire-title {
+    border-top-left-radius: 3.5rem;
+    border-top-right-radius: 3.5rem;
+    padding: 1.2rem 0 0.5rem 0;
+  }
+
+  .user-management-table__inquire-box {
+    border-bottom-left-radius: 3.5rem;
+    border-bottom-right-radius: 3.5rem;
+  }
+}

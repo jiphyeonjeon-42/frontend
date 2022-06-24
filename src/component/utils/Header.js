@@ -20,16 +20,14 @@ const Header = () => {
     setToggleLNB(!toggleLNB);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getHost = () => {
     return `${window.location.protocol}//${window.location.host}`;
   };
 
   const nowDate = new Date();
   const expireDate = new Date(user.expire);
-  if (nowDate > expireDate)
-    window.location = `${
-      process.env.REACT_APP_API
-    }/auth/oauth?clientURL=${getHost()}`;
+  if (nowDate > expireDate) window.location = `/login`;
 
   return (
     <header className="header">
@@ -92,8 +90,9 @@ const Header = () => {
                         <div className="lnb__line" />
                         <div className="lnb__circle">
                           <div className="lnb__circle__shape lnb__circle__rent" />
-                          <div className="lnb__circle__shape lnb__circle__return" />
-                          <div className="lnb__circle__shape lnb__circle__reservation" />
+                          <div className="lnb__circle__shape lnb__circle__user" />
+                          <div className="lnb__circle__shape lnb__circle__mypage" />
+                          <div className="lnb__circle__shape lnb__circle__logout" />
                         </div>
                       </div>
                       <ul className="lnb__menu">
@@ -102,18 +101,26 @@ const Header = () => {
                             className="lnb__text font-16 color-ff"
                             to={{ pathname: `/rent` }}
                           >
-                            도서관리
+                            대출/반납
                           </Link>
                         </li>
-                        <li className="lnb__return">
+                        <li className="lnb__user">
                           <Link
                             className="lnb__text font-16 color-ff"
-                            to={{ pathname: `/return` }}
+                            to={{ pathname: `/user` }}
+                          >
+                            DB 관리
+                          </Link>
+                        </li>
+                        <li className="lnb__mypage">
+                          <Link
+                            className="lnb__text font-16 color-ff"
+                            to={{ pathname: `/mypage` }}
                           >
                             마이페이지
                           </Link>
                         </li>
-                        <li className="lnb__reservation">
+                        <li className="lnb__logout">
                           <Link
                             className="lnb__text font-16 color-ff"
                             to={{ pathname: `/logout` }}
@@ -128,12 +135,7 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <a
-                  className="gnb__button"
-                  href={`${
-                    process.env.REACT_APP_API
-                  }/auth/oauth?clientURL=${getHost()}`}
-                >
+                <a className="gnb__button" href="/login">
                   <img
                     src={User}
                     className="gnb__icon gnb__user__icon"

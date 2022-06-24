@@ -17,6 +17,15 @@
   width: 100%;
 }
 
+.modal-search-form.center {
+  width: 80%;
+  margin: auto;
+  min-width: 280px;
+  max-width: 800px;
+  border: 1px solid #545454;
+  margin-bottom: 10rem;
+}
+
 input:focus {
   outline: none;
 }
@@ -47,4 +56,24 @@ button:focus {
   margin: 0;
   width: 2.8rem;
   height: 2.8rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .modal-search-form {
+    height: 5.4rem;
+  }
+  .modal-search__icon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modal-search-form {
+    height: 4.4rem;
+  }
+  .modal-search__icon {
+    width: 2rem;
+    height: 2rem;
+  }
 }
