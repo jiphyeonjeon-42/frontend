@@ -11,6 +11,7 @@ const RentModalConfirm = ({
   setMiniModalContents,
   setRentResult,
 }) => {
+  const [errorMsg, setErrorMsg] = useState("");
   const [remark1, setRemark1] = useState("");
   const [remark2, setRemark2] = useState("");
 
@@ -22,6 +23,46 @@ const RentModalConfirm = ({
   const handleRemark2 = e => {
     e.preventDefault();
     setRemark2(e.target.value);
+  };
+
+  const makeLending = book => {
+    const date = new Date();
+    date.setDate(date.getDate() + 14);
+    // eslint-disable-next-line no-param-reassign
+    book.duedate = date;
+    return book;
+  };
+
+  const axiosPost = async data => {
+    for (let i = 0; i < data.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await axios
+        .post(`${process.env.REACT_APP_API}/lendings`, data[i])
+        .then(() => {
+          setMiniModalContents("success");
+          setRentResult(true);
+          // eslint-disable-next-line no-param-reassign
+          selectedUser.lendings.push(makeLending(selectedBooks.pop()));
+        })
+        .catch(error => {
+          const { status } = error.response;
+          setRentResult(false);
+          setMiniModalContents(
+            status === 400
+              ? getErrorMessage("lendings", error.response.data.errorCode)
+              : error.message,
+          );
+          const { errorCode } = error.response.data;
+          // eslint-disable-next-line no-restricted-globals
+          if (errorCode === 100) location.replace("/");
+          if ([101, 102, 108, 109].includes(errorCode))
+            // eslint-disable-next-line no-restricted-globals
+            location.replace("/logout");
+          setErrorMsg(
+            `대출 불가 (사유 : ${getErrorMessage("lendings", errorCode)})`,
+          );
+        });
+    }
   };
 
   const postData = async () => {
@@ -46,46 +87,9 @@ const RentModalConfirm = ({
               condition: remark2,
             },
           ];
+    await axiosPost(data);
     setRemark1("");
     setRemark2("");
-    await axios
-      .post(`${process.env.REACT_APP_API}/lendings`, data[0])
-      .then(() => {
-        setMiniModalContents("success");
-        setRentResult(true);
-      })
-      .catch(error => {
-        const { status } = error.response;
-        setRentResult(false);
-        setMiniModalContents(
-          status === 400
-            ? getErrorMessage("lendings", error.response.data.errorCode)
-            : error.message,
-        );
-        const { errorCode } = error.response.data;
-        // eslint-disable-next-line no-restricted-globals
-        if (errorCode === 100) location.replace("/");
-        if ([101, 102, 108, 109].includes(errorCode))
-          // eslint-disable-next-line no-restricted-globals
-          location.replace("/logout");
-      });
-    if (selectedBooks.length > 1) {
-      await axios
-        .post(`${process.env.REACT_APP_API}/lendings`, data[1])
-        .then(() => {
-          setMiniModalContents("success");
-          setRentResult(true);
-        })
-        .catch(error => {
-          const { status } = error.response;
-          setRentResult(false);
-          setMiniModalContents(
-            status === 400
-              ? getErrorMessage("lendings", error.response.data.errorCode)
-              : error.message,
-          );
-        });
-    }
   };
   return (
     <div className="modal__wrapper rent-modal">
@@ -95,6 +99,9 @@ const RentModalConfirm = ({
           {selectedUser.nickname ? selectedUser.nickname : selectedUser.email}
         </span>
         <span className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</span>
+        <span className="rent-modal__error font-16 color-red">
+          {errorMsg || ""}
+        </span>
       </div>
       <div className="rent-modal__books">
         {selectedBooks.map((selectBook, index) => (
@@ -106,7 +113,7 @@ const RentModalConfirm = ({
           >
             <div className="rent-modal__cover">
               <img
-                // src={selectBook.info.image}
+                src={selectBook.image}
                 alt="cover"
                 className="rent-modal__cover-img"
               />

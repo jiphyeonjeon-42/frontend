@@ -1,11 +1,16 @@
 const lendingPostErrorCase = errorCode => {
   switch (errorCode) {
-    case 2:
-      return `더이상 대출이 불가능한 카뎃입니다.\n이미 2권 이상 대출했거나 연체패널티 기간입니다.`;
-    case 3:
-      return "예약자가 있어 대출하실 수 없습니다.";
-    case 4:
+    case 403:
+    case 404:
+      return `대출이 불가능한 카뎃입니다.\n이미 2권 이상 대출했거나 연체패널티 기간입니다.`;
+    case 405:
       return "이미 대출 중인 책입니다.";
+    case 406:
+      return "예약자가 있어 대출하실 수 없습니다.";
+    case 407:
+      return "분실된 책이라 대출하실 수 없습니다.";
+    case 408:
+      return "파손된 책이라 대출하실 수 없습니다.";
     default:
       return "예상치 못한 오류가 발생했습니다";
   }

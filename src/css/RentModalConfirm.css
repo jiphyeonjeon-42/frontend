@@ -75,6 +75,10 @@
   cursor: pointer;
 }
 
+.rent-modal__error {
+  margin-left: 1rem;
+}
+
 @media screen and (max-width:767px) {
   .rent__modal__container {
     width:100%;

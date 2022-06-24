@@ -21,8 +21,8 @@ const InquireBoxUser = ({
   const displayDate = strDate => {
     const date = new Date(strDate);
     return `${date.getFullYear()}-${
-      date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth()
-    }-${date.getDay() < 10 ? `0${date.getDay()}` : date.getDay()}`;
+      date.getMonth() < 9 ? `0${date.getMonth() + 1}` : date.getMonth()
+    }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
   };
 
   const displayPenalty = () => {
