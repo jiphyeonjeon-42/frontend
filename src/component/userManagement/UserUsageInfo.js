@@ -76,7 +76,7 @@ const UserUsageInfo = ({ user }) => {
                   {`${reservation.title}`}
                 </div>
                 <div className="user-usage-info__reservation font-16 color-54">
-                  <div className="user-usage-info__reservation-info">{`예약순위 : ${reservation.rank}순위`}</div>
+                  <div className="user-usage-info__reservation-info">{`예약순위 : ${reservation.ranking}순위`}</div>
                   {reservation.lenderableDate && (
                     <div className="user-usage-info__reservation-info font-16 color-54">
                       대출 가능일 :{" "}
