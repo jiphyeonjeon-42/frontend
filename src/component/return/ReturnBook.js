@@ -47,7 +47,7 @@ const ReturnBook = () => {
     } = await axios.get(`${process.env.REACT_APP_API}/lendings/search`, {
       params: {
         query: userSearchWord,
-        page: returnBookPage,
+        page: returnBookPage - 1,
         limit: 5,
         sort: lendingSort ? "old" : "new",
       },
