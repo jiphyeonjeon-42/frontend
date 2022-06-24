@@ -37,13 +37,19 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
         },
       })
       .then(res => {
+        console.log(res.data.items);
         setBookList(res.data.items);
         setLastBookSearchPage(
           res.data.meta.totalPages > 0 ? res.data.meta.totalPages : 1,
         );
       })
       .catch(error => {
-        console.log(error);
+        const { errorCode } = error.response.data;
+        // eslint-disable-next-line no-restricted-globals
+        if (errorCode === 100) location.replace("/");
+        if ([101, 102, 108, 109].includes(errorCode))
+          // eslint-disable-next-line no-restricted-globals
+          location.replace("/logout");
       });
   };
 

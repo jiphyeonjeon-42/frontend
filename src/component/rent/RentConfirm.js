@@ -11,8 +11,8 @@ const RentConfirm = ({ selectedUser, selectedBooks, setMidModalContents }) => {
     <section className="rent__confirm-button">
       <div className="rent__confirm-button__text font-16 color-a4">
         {selectedUser && selectedBooks.length > 0
-          ? `${selectedUser.login}님에게 ${selectedBooks[0].info.title}${
-              selectedBooks[1] ? `, ${selectedBooks[1].info.title}` : ``
+          ? `${selectedUser.nickname}님에게 ${selectedBooks[0].title}${
+              selectedBooks[1] ? `, ${selectedBooks[1].title}` : ``
             }를 대출합니다.`
           : "정보를 입력해주세요."}
       </div>
@@ -21,7 +21,7 @@ const RentConfirm = ({ selectedUser, selectedBooks, setMidModalContents }) => {
           selectedUser &&
           !selectedUser.isPenalty &&
           selectedBooks.length > 0 &&
-          2 - selectedUser.lendingCnt >= selectedBooks.length
+          2 - selectedUser.lendings.length >= selectedBooks.length
             ? "red"
             : "black"
         }-button font-20 color-ff`}
@@ -30,7 +30,7 @@ const RentConfirm = ({ selectedUser, selectedBooks, setMidModalContents }) => {
           selectedUser &&
           !selectedUser.isPenalty &&
           selectedBooks.length > 0 &&
-          2 - selectedUser.lendingCnt >= selectedBooks.length
+          2 - selectedUser.lendings.length >= selectedBooks.length
             ? ""
             : "disabled"
         }

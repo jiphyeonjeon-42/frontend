@@ -83,11 +83,11 @@ const RentModal = ({
 
 RentModal.propTypes = {
   selectedUser: PropTypes.shape({
-    is: PropTypes.number,
-    login: PropTypes.string,
-    isPenalty: PropTypes.bool,
-    lendingCnt: PropTypes.number,
-    lendings: PropTypes.number,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    lendings: PropTypes.arrayOf(PropTypes.object),
+    nickname: PropTypes.string,
+    penaltyEndDate: PropTypes.string,
     reservations: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,

@@ -49,7 +49,7 @@ const RentModalConfirm = ({
     setRemark1("");
     setRemark2("");
     await axios
-      .post(`${process.env.REACT_APP_API}/lendings`, data)
+      .post(`${process.env.REACT_APP_API}/lendings`, data[0])
       .then(() => {
         setMiniModalContents("success");
         setRentResult(true);
@@ -62,16 +62,39 @@ const RentModalConfirm = ({
             ? getErrorMessage("lendings", error.response.data.errorCode)
             : error.message,
         );
+        const { errorCode } = error.response.data;
+        // eslint-disable-next-line no-restricted-globals
+        if (errorCode === 100) location.replace("/");
+        if ([101, 102, 108, 109].includes(errorCode))
+          // eslint-disable-next-line no-restricted-globals
+          location.replace("/logout");
       });
+    if (selectedBooks.length > 1) {
+      await axios
+        .post(`${process.env.REACT_APP_API}/lendings`, data[1])
+        .then(() => {
+          setMiniModalContents("success");
+          setRentResult(true);
+        })
+        .catch(error => {
+          const { status } = error.response;
+          setRentResult(false);
+          setMiniModalContents(
+            status === 400
+              ? getErrorMessage("lendings", error.response.data.errorCode)
+              : error.message,
+          );
+        });
+    }
   };
   return (
     <div className="modal__wrapper rent-modal">
       <div className="rent-modal__user">
         <p className="font-16 color-red">유저정보</p>
         <span className="rent-modal__user__id font-28-bold color-54 margin-8">
-          {selectedUser.login}
+          {selectedUser.nickname ? selectedUser.nickname : selectedUser.email}
         </span>
-        <span className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendingCnt} / 2 )`}</span>
+        <span className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</span>
       </div>
       <div className="rent-modal__books">
         {selectedBooks.map((selectBook, index) => (
@@ -83,7 +106,7 @@ const RentModalConfirm = ({
           >
             <div className="rent-modal__cover">
               <img
-                src={selectBook.info.image}
+                // src={selectBook.info.image}
                 alt="cover"
                 className="rent-modal__cover-img"
               />
@@ -92,7 +115,7 @@ const RentModalConfirm = ({
               <div className="mid-modal__book">
                 <p className="font-16 color-red">도서정보</p>
                 <p className="rent-modal__title font-28-bold color-54 margin-8">
-                  {selectBook.info.title}
+                  {selectBook.title}
                 </p>
                 <p className="font-16 color-54">{`도서코드 : ${selectBook.callSign}`}</p>
               </div>

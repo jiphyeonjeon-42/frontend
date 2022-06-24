@@ -43,12 +43,12 @@ const RentModalBookList = ({
     >
       <div className="rent__modal-book-list__name">
         <span className="rent__modal-book-list__title font-18-bold color-54">
-          {book.info.title ? book.info.title : `Book${book.id}`}
+          {book.title ? book.title : `Book${book.id}`}
         </span>
         <span
           className={`rent__modal-book-list__valid font-16 color-red ${isDisabled()}`}
         >
-          {book.isLenderable
+          {book.isLendable
             ? isAlreadySelected(book, selectedBooks)
               ? "이미 선택됨"
               : "대출 가능"
@@ -57,19 +57,19 @@ const RentModalBookList = ({
       </div>
       <div className="rent__modal-book-list__info">
         <span className="font-16 color-54">
-          {book.info.author ? book.info.author : "저자"}
+          {book.author ? book.author : "저자"}
         </span>
         <span className="rent__modal-book-list__separator">|</span>
         <span className="font-16 color-54">
-          {book.info.publisher ? book.info.publisher : "출판사"}
+          {book.publisher ? book.publisher : "출판사"}
         </span>
         <span className="rent__modal-book-list__separator">|</span>
         <span className="font-16 color-54">
-          {book.info.category ? book.info.category : "카테고리"}
+          {book.category ? book.category : "카테고리"}
         </span>
       </div>
       <span className="rent__modal-book-list__callsign font-16 color-54">
-        {` ${book.callSign}`}
+        {book.callSign ? book.callSign : ""}
       </span>
       <img className="rent__modal-book-list__arrow" src={Arrow} alt="arrow" />
     </button>
