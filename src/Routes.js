@@ -20,6 +20,7 @@ import ReservedLoan from "./component/reservedloan/ReservedLoan";
 import ReturnBook from "./component/return/ReturnBook";
 import UserManagement from "./component/userManagement/UserManagement";
 import userState from "./atom/userState";
+import AddBook from "./component/book/AddBook";
 import Mypage from "./component/mypage/Routes";
 
 function Routes() {
@@ -54,6 +55,7 @@ function Routes() {
         {user.isAdmin && (
           <Route path="/reservation" exact component={ReservedLoan} />
         )}
+        {user.isAdmin && <Route path="/addbook" exact component={AddBook} />}
         {user.isAdmin && (
           <Route path="/user" exact component={UserManagement} />
         )}
