@@ -13,7 +13,7 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
   return (
     <div className="return-book__table-list">
       <div className="return-book__table-list__name font-18-bold color-54">
-        {factor.user && factor.user.login}
+        {factor.login}
       </div>
       <button
         className="return-book__table-list__button"
@@ -22,29 +22,23 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
       >
         <div className="return-book__table-list__title">
           <span className="return-book__table-list__text font-18-bold color-54">
-            {factor.book && factor.book.info.title}
+            {factor.title}
           </span>
           <img className="return-book__table-list__arr" src={Arr} alt="arrow" />
         </div>
         <div className="return-book__table-list__info">
           <span className="re-callSign font-16 color-54">
-            도서등록번호 : {factor.book && factor.book.callSign}
+            도서등록번호 : {factor.callSign}
           </span>
           <span className="re-dueDate font-16 color-54">
-            {`반납예정일 : ${factor.dueDate}`}
+            {`반납예정일 : ${factor.dueDate.slice(0, 10)}`}
           </span>
           <span
             className={`re-penaltyDays font-16 ${
-              factor && factor.user && factor.user.penaltyDays
-                ? "color-red"
-                : "color-54"
+              factor.penaltyDays ? "color-red" : "color-54"
             }`}
           >
-            {`대출연체일 : ${
-              factor && factor.user && factor.user.penaltyDays
-                ? factor.user.penaltyDays
-                : "0"
-            }`}
+            {`대출연체일 : ${factor.penaltyDays ? factor.penaltyDays : "0"}`}
           </span>
         </div>
       </button>

@@ -3,14 +3,14 @@
 }
 .reserved-loan-title {
   position: relative;
-  padding: 8.9rem 0 6rem ;
+  padding: 8.9rem 0 6rem;
   min-width: 90rem;
   height: 10.7rem;
   z-index: 2;
 }
 .reserved-loan-subtitle {
   min-width: 90rem;
-  padding: 11.8rem 0 12rem ;
+  padding: 11.8rem 0 12rem;
   margin: auto;
 }
 
@@ -33,8 +33,28 @@
   margin-top: 3.6rem;
 }
 
-@media screen and (max-width: 120rem) {
+.inquire-box-title__kr {
+  font-size: 2.2rem;
+}
+
+.inquire-box-title__en {
+  font-size: 1.4rem;
+}
+
+@media screen and (max-width: 1200px) {
   .reserved-loan-table__inquire-box {
-    width:100%;
-  }  
+    width: 100%;
+    top: -11rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .inquire-box-title {
+    min-width: unset;
+    max-width: unset;
+  }
+  .reserved-loan-table__inquire-box {
+    padding-top: 3rem;
+    top: -9rem;
+  }
 }

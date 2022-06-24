@@ -80,7 +80,7 @@
 .mypage-inquire-box-short-clickBox {
   display: grid;
   grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
-  background-color: #e8e8e8;
+  border: 1px solid #808080b8;
   padding: 1.5rem;
   border-radius: 2rem;
 }
@@ -112,4 +112,43 @@
   border-bottom-left-radius: 6.1rem;
   border-bottom-right-radius: 6.1rem;
   padding: 8.5rem 4.5rem 2.1rem 4.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .mypage-inquire-box-long-wrapper {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mypage-subtitle__titlebox {
+    max-width: unset;
+    margin-bottom: 5rem;
+  }
+  .mypage-subtitle__user__info {
+    display: flex;
+    justify-content: unset;
+    flex-direction: column;
+    height: unset;
+    margin-bottom: 0;
+  }
+  .mypage-inquire-box-short-clickBox {
+    margin-top: 2rem;
+  }
+  .mypage-inquire-box-short-wrapper {
+    min-width: unset;
+    width: 100%;
+  }
+  .mypage-subtitle__titlebox__guide__2 {
+    white-space: break-spaces;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .mypage-inquire-box-short {
+    padding: 5rem 1rem 3rem 1rem;
+  }
+  .mypage-inquire-box-short-clickBox {
+    padding: 1.5rem 0.5rem;
+  }
 }

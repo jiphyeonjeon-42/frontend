@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
 import axios from "axios";
 import PropTypes from "prop-types";
-import userState from "../../atom/userState";
 import getErrorMessage from "../utils/error";
 
 const ReturnModalContents = ({
@@ -12,13 +10,17 @@ const ReturnModalContents = ({
   setReturnResult,
 }) => {
   const defaultData = {
+    id: null,
+    condition: "",
     createdAt: "",
+    login: "",
+    penaltyDays: null,
+    callSign: "",
+    title: "",
+    image: "",
     dueDate: "",
-    user: { id: 0, login: "", penaltyDays: 0 },
-    book: { id: 0, callSign: "", info: { id: 0, title: "", image: "" } },
   };
   const [data, setData] = useState(defaultData);
-  const user = useRecoilValue(userState);
   const [remark, setRemark] = useState("");
 
   const handleRemark = e => {
@@ -37,13 +39,12 @@ const ReturnModalContents = ({
     const condition = remark;
     setRemark("");
     await axios
-      .post(`${process.env.REACT_APP_API}/returnings`, {
-        userId: user.id,
+      .patch(`${process.env.REACT_APP_API}/lendings/return`, {
         lendingId,
         condition,
       })
       .then(() => {
-        setMiniModalContents(data.book.info.title);
+        setMiniModalContents(data.title);
         setReturnResult(true);
       })
       .catch(error => {
@@ -52,7 +53,7 @@ const ReturnModalContents = ({
 
         setMiniModalContents(
           status === 400
-            ? getErrorMessage("returnings", error.response.data.errorCode)
+            ? getErrorMessage("return", error.response.data.errorCode)
             : error.message,
         );
       });
@@ -61,19 +62,15 @@ const ReturnModalContents = ({
   return (
     <div className="modal__wrapper mid">
       <div className="mid-modal__cover">
-        <img
-          src={data.book.info.image}
-          alt="cover"
-          className="mid-modal__cover-img"
-        />
+        <img src={data.image} alt="cover" className="mid-modal__cover-img" />
       </div>
       <div className="mid-modal__detail">
         <div className="mid-modal__book">
           <p className="font-16 color-red">도서정보</p>
           <p className="mid-modal__book-title font-28-bold color-54  margin-8">
-            {data.book.info.title}
+            {data.title}
           </p>
-          <p className="font-16 color-54">{`도서코드 : ${data.book.callSign}`}</p>
+          <p className="font-16 color-54">{`도서코드 : ${data.callSign}`}</p>
         </div>
         <div className="mid-modal__lend">
           <p className="font-16 color-red">대출정보</p>
@@ -82,13 +79,13 @@ const ReturnModalContents = ({
         </div>
         <div className="mid-modal__user">
           <p className="font-16 color-red">유저정보</p>
-          <p className="font-28-bold color-54  margin-8">{data.user.login}</p>
-          <p className="font-16 color-54">{`연체일수 : ${data.user.penaltyDays}일`}</p>
+          <p className="font-28-bold color-54  margin-8">{data.login}</p>
+          <p className="font-16 color-54">{`연체일수 : ${data.penaltyDays}일`}</p>
         </div>
         <div className="mid-modal__remark">
           <p className="font-16 color-red">비고</p>
           <textarea
-            className="mid-modal__remark__input margin-8"
+            className="mid-modal__remark__input margin-8 font-16"
             placeholder={`대출당시 : ${data.condition}`}
             value={remark}
             onChange={handleRemark}

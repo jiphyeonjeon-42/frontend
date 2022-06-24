@@ -58,9 +58,15 @@
 }
 
 .modal__buttons {
-  margin-top:4rem;
+  margin-top: 4rem;
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .mid-modal__book-title {
+    font-size: 2.4rem;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -71,7 +77,7 @@
 
   .mid-modal__cover {
     float: none;
-    margin:auto;
+    margin: auto;
     width: 137px;
     height: 200px;
   }
@@ -79,14 +85,19 @@
     width: 137px;
     height: 200px;
   }
-  
+
   .mid-modal__book {
     margin-bottom: 1.8rem;
   }
   .mid-modal__book-title {
-
     max-height: 6rem;
-}
+  }
+  .mid-modal__detail {
+    margin-bottom: 2rem;
+  }
+  .mid-modal__lend {
+    width: 30%;
+  }
 
   .modal__wrapper .font-28-bold {
     font-size: 2rem;
@@ -94,11 +105,10 @@
 
   .modal__wrapper .font-16 {
     font-size: 1.4rem;
-
   }
 
-  .margin-8 { 
-    margin:0;
+  .margin-8 {
+    margin: 0;
   }
   .mid-modal__remark__input {
     height: 50px;

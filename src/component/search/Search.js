@@ -135,6 +135,7 @@ const Search = ({ match, location }) => {
     setUserWord(decodeURIComponent(queryString));
     setInputValue(decodeURIComponent(queryString));
     setPage(queryPage);
+    setPageRange(parseInt((queryPage - 1) / 5, 10));
     setSort(querySort);
     setCateIndex(queryCateIndex);
     if (parseInt(queryCateIndex, 10) === 0) setCategoryName("");
@@ -148,7 +149,11 @@ const Search = ({ match, location }) => {
       <section className="search-section">
         <div className="search-subtitle" ref={myRef}>
           <SubTitle
-            subTitle={`'${userWord}' 도서 검색 결과`}
+            subTitle={
+              userWord === ""
+                ? "전체 도서 목록"
+                : `'${userWord}' 도서 검색 결과`
+            }
             alignItems="start"
             description=""
           />
