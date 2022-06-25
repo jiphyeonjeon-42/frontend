@@ -4,6 +4,7 @@ import axios from "axios";
 import "../../css/RentModalConfirm.css";
 import { useHistory } from "react-router-dom";
 import getErrorMessage from "../utils/error";
+import IMGERR from "../../img/image_onerror.svg";
 
 const RentModalConfirm = ({
   selectedUser,
@@ -32,6 +33,10 @@ const RentModalConfirm = ({
     book.duedate = date;
     return book;
   };
+
+  function subtituteImg(e) {
+    e.target.src = IMGERR;
+  }
 
   const axiosPost = async data => {
     for (let i = 0; i < data.length; i += 1) {
@@ -106,6 +111,7 @@ const RentModalConfirm = ({
                 src={selectBook.image}
                 alt="cover"
                 className="rent-modal__cover-img"
+                onError={subtituteImg}
               />
             </div>
             <div className="rent-modal__detail">
