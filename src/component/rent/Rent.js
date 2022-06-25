@@ -20,6 +20,11 @@ const Rent = () => {
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [midModalContents, setMidModalContents] = useState("");
   const [miniModalContents, setMiniModalContents] = useState("");
+  const tabList = [
+    { name: "대출", link: "/rent" },
+    { name: "예약대출", link: "/reservation" },
+    { name: "반납", link: "/return" },
+  ];
 
   const closeMiniModal = () => {
     setMiniModalContents("");
