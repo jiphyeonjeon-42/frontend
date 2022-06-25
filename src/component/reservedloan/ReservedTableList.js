@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import "../../css/ReservedTableList.css";
 import Arr from "../../img/arrow_right_black.svg";
 
@@ -21,8 +21,6 @@ const ReservedTableList = ({
     if (status === 2) return "예약 취소";
     return "예약 기한 만료";
   };
-
-  // console.log(factor && factor.endAt && factor.endAt.slice(0, 10));
 
   return (
     <div className="reserved-loan__table-list">
@@ -63,6 +61,15 @@ const ReservedTableList = ({
       </button>
     </div>
   );
+};
+
+ReservedTableList.propTypes = {
+  isPending: PropTypes.bool.isRequired,
+  isWaiting: PropTypes.bool.isRequired,
+  isExpired: PropTypes.bool.isRequired,
+  factor: PropTypes.shape.isRequired,
+  openModal: PropTypes.func.isRequired,
+  setInfo: PropTypes.func.isRequired,
 };
 
 export default ReservedTableList;

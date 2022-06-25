@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
@@ -114,7 +113,7 @@ const ReservedModalContents = ({
               대출 완료하기
             </button>
             <button
-              className="modal__button mid font-20 color-ff"
+              className="modal__button mid font-20 color-ff confirm"
               type="button"
               onClick={deleteReservation}
             >
@@ -128,7 +127,7 @@ const ReservedModalContents = ({
 };
 
 ReservedModalContents.propTypes = {
-  reservedInfo: PropTypes.object.isRequired,
+  reservedInfo: PropTypes.shape.isRequired,
   setMiniModalContents: PropTypes.func.isRequired,
   setLendResult: PropTypes.func.isRequired,
 };
