@@ -6,6 +6,7 @@ import Arr from "../../img/arrow_right_black.svg";
 const ReservedTableList = ({
   isPending,
   isWaiting,
+  isExpired,
   factor,
   openModal,
   setInfo,
@@ -13,6 +14,12 @@ const ReservedTableList = ({
   const openSetModal = () => {
     setInfo(factor);
     openModal();
+  };
+
+  const printEndReason = status => {
+    if (status === 1) return "대출 완료";
+    if (status === 2) return "예약 취소";
+    return "예약 기한 만료";
   };
 
   // console.log(factor && factor.endAt && factor.endAt.slice(0, 10));
@@ -47,6 +54,9 @@ const ReservedTableList = ({
               : null}
             {factor && factor.createdAt && isWaiting
               ? `예약 시작일 : ${factor.createdAt.slice(0, 10)}`
+              : null}
+            {factor && factor.status && isExpired
+              ? `예약 만료 이유 : ${printEndReason(factor.status)}`
               : null}
           </span>
         </div>

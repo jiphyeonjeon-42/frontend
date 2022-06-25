@@ -45,7 +45,7 @@ const ReservedFilter = ({
               isPending ? "color-red" : "color-a4"
             }`}
           >
-            대출 대기 중
+            예약 0순위
           </span>
         </button>
         <button
@@ -63,7 +63,7 @@ const ReservedFilter = ({
               isWaiting ? "color-red" : "color-a4"
             }`}
           >
-            예약 배정 대기 중
+            예약 후순위
           </span>
         </button>
         <button

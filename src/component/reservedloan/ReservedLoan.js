@@ -72,6 +72,7 @@ const ReservedLoan = () => {
     userSearchWord,
     resevedLoanPage,
     isPending,
+    isWaiting,
     isExpired,
   ]);
 
@@ -123,6 +124,7 @@ const ReservedLoan = () => {
               key={factor.id}
               isPending={isPending}
               isWaiting={isWaiting}
+              isExpired={isExpired}
               factor={factor}
               openModal={openModal}
               setInfo={setReservedInfo}
