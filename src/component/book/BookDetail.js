@@ -11,8 +11,6 @@ import MiniModal from "../utils/MiniModal";
 import Reservation from "../reservation/Reservation";
 import ArrRes from "../../img/arrow_right_res.svg";
 import ArrDef from "../../img/arrow_right_res_default.svg";
-// import { array } from "prop-types";
-// eslint-disable-next-line react/prop-types
 
 const BookDetail = ({ location, match }) => {
   const [data, setData] = useState({ books: [] });
@@ -22,10 +20,6 @@ const BookDetail = ({ location, match }) => {
   const [miniModalClosable, setMiniModalClosable] = useState(true);
   const user = useRecoilValue(userState);
 
-  // eslint-disable-next-line no-unused-vars
-  const getHost = () => {
-    return `${window.location.protocol}//${window.location.host}`;
-  };
   const openModal = () => {
     if (!user.isLogin) {
       window.location = `/login`;

@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import "../../css/BookStatus.css";
 
 const BookStatus = ({ book, index }) => {
@@ -28,3 +27,14 @@ const BookStatus = ({ book, index }) => {
 };
 
 export default BookStatus;
+
+BookStatus.propTypes = {
+  book: PropTypes.shape({
+    id: PropTypes.number,
+    callSign: PropTypes.string,
+    donator: PropTypes.string,
+    dueDate: PropTypes.string,
+    isLendable: PropTypes.bool,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+};
