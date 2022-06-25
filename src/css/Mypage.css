@@ -51,6 +51,7 @@
 
 .mypage-inquire-box-short-wrapper {
   min-width: 40rem;
+  margin-left: 3rem;
 }
 
 .mypage-inquire-box-short-wrapper .inquire-box-title {
@@ -59,7 +60,6 @@
 
 .mypage-inquire-box-short-wrapper .inquire-box-title__icon {
   height: 3rem;
-  margin-left: 4rem;
 }
 
 .mypage-inquire-box-short {
@@ -132,12 +132,20 @@
     height: unset;
     margin-bottom: 0;
   }
+  .mypage-inquire-box-long-wrapper .inquire-box-title {
+    height: 6rem;
+  }
+  .mypage-inquire-box-long-wrapper .inquire-box-title__icon {
+    height: unset;
+    width: 2.8rem;
+  }
   .mypage-inquire-box-short-clickBox {
     margin-top: 2rem;
   }
   .mypage-inquire-box-short-wrapper {
     min-width: unset;
     width: 100%;
+    margin-left: unset;
   }
   .mypage-subtitle__titlebox__guide__2 {
     white-space: break-spaces;

@@ -1,4 +1,5 @@
 .mypage-wrapper {
+  min-width: 360px;
   padding: 0 15rem 0 15rem;
 }
 

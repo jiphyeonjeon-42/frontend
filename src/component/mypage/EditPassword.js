@@ -56,9 +56,14 @@ function EditPassword() {
           </button>
         </div>
         <div className="mypage-edit-pw-title">
-          <span>{`${
-            JSON.parse(window.localStorage.getItem("user")).userId
-          }님의, 비밀번호 변경 페이지입니다`}</span>
+          <p className="margin-bottom-2rem">
+            <span className="font-22-bold">{`${
+              JSON.parse(window.localStorage.getItem("user")).userId
+            }님의, `}</span>
+            <span className="font-22-bold inline-block">
+              비밀번호 변경 페이지입니다
+            </span>
+          </p>
         </div>
         <div className="mypage-edit-pw-new_pw">
           <span className="font-14-bold">새로운 비밀번호</span>
@@ -86,6 +91,9 @@ function EditPassword() {
             />
           </div>
           <div className="mypage-edit-pw-button">
+            <p className="font-12 color-2d">
+              10 ~ 42 글자 사이, 숫자와 특수 기호 1개 포함해주세요
+            </p>
             <button className="font-14" type="submit">
               변경
             </button>
