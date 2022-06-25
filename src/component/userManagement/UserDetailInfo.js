@@ -7,26 +7,6 @@ import "../../css/UserDetailInfo.css";
 
 const roles = ["미인증", "일반", "사서", "스태프"];
 
-// eslint-disable-next-line no-unused-vars
-const getOverDueDate = overDueDay => {
-  const today = new Date();
-  let overDueDate = "";
-
-  today.setDate(today.getDate() + overDueDay);
-  overDueDate += today.getFullYear();
-  overDueDate += "-";
-  overDueDate += today.getMonth() + 1;
-  overDueDate += "-";
-  overDueDate += today.getDate();
-  return overDueDate;
-};
-
-// eslint-disable-next-line no-unused-vars
-const isOverDue = date => {
-  const today = new Date();
-  return date >= today;
-};
-
 const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
   const [input, setInput] = useState(infoValue);
 
@@ -118,12 +98,14 @@ const UserDetailInfo = ({ user }) => {
       .patch(`${process.env.REACT_APP_API}/users/update/${user.id}`, data)
       .then(res => {
         const userInfo = res.data;
-        console.log(userInfo);
         if (userInfo.intraId) setUserIntraId(userInfo.intraId);
         if (userInfo.nickname) setUserNickname(userInfo.nickname);
         if (userInfo.slack) setUserSlack(userInfo.slack);
         if (userInfo.role) setUserRoleNum(userInfo.role);
-        if (userInfo.penaltyEndDate) setUserPenalty(userInfo.penaltyEndDate);
+        if (userInfo.penaltyEndDate) {
+          const penaltyEndDate = new Date(userInfo.penaltyEndDate);
+          setUserPenalty(convertDatetoString(penaltyEndDate));
+        }
       })
       .catch(error => {
         console.log(error);
@@ -138,7 +120,7 @@ const UserDetailInfo = ({ user }) => {
     const role = userEditForm.querySelector(".edit-role").value;
     const slack = userEditForm.querySelector(".edit-slack").value;
     const penalty = userEditForm.querySelector(".edit-penalty").value;
-    console.log(intra, nickname, slack, role, penalty);
+
     const data = {
       nickname,
       intraId: parseInt(intra, 10),
