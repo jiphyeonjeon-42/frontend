@@ -30,9 +30,7 @@ function EditPassword() {
     }
     await axios
       .patch(`${process.env.REACT_APP_API}/users/myupdate`, {
-        params: {
-          password: newPw,
-        },
+        password: newPw,
       })
       .then(() => {
         history.goBack();
