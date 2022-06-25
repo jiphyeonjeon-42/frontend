@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import "../../css/UserUsageInfo.css";
 
 const UserUsageInfo = ({ user }) => {
@@ -96,14 +94,26 @@ const UserUsageInfo = ({ user }) => {
 
 export default UserUsageInfo;
 
-// UserUsageInfo.propTypes = {
-//   user: PropTypes.shape({
-//     id: PropTypes.number,
-//     role: PropTypes.number,
-//     nickname: PropTypes.string,
-//     email: PropTypes.string,
-//     penaltyEndDay: PropTypes. ,
-//     lendings: PropTypes.arrayOf(PropTypes.object),
-//     reservations: PropTypes.arrayOf(PropTypes.object),
-//   }).isRequired,
-// };
+UserUsageInfo.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    nickname: PropTypes.string,
+    intraId: PropTypes.number,
+    slack: PropTypes.string,
+    penaltyEndDate: PropTypes.string,
+    overDueDay: PropTypes.string,
+    role: PropTypes.number,
+    reservations: PropTypes.arrayOf(
+      PropTypes.shape({
+        ranking: PropTypes.number,
+        endAt: PropTypes.Date,
+        lenderableDate: PropTypes.Date,
+        title: PropTypes.string,
+      }),
+    ),
+    lendings: PropTypes.arrayOf(
+      PropTypes.shape({ dueDate: PropTypes.string, title: PropTypes.string }),
+    ),
+  }).isRequired,
+};

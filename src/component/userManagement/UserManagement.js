@@ -11,7 +11,6 @@ import AdminPagination from "../utils/AdminPagination";
 import MidModal from "../utils/MidModal";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import UserDetailInfo from "./UserDetailInfo";
-// import PropTypes from "prop-types";
 
 const USAGE = 1;
 // const EDIT = 2;
@@ -81,7 +80,7 @@ const UserManagement = () => {
 
   const tabList = [
     { name: "유저관리", link: "/user" },
-    { name: "도서등록", link: "/addBook" },
+    { name: "도서등록", link: "/addbook" },
   ];
 
   return (

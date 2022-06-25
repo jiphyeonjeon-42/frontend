@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import axios from "axios";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import "../../css/UserBriefInfo.css";
 import "../../css/UserDetailInfo.css";
 
@@ -83,7 +82,6 @@ const UserDetailInfo = ({ user }) => {
   const [userSlack, setUserSlack] = useState(user.slack);
   const [userRoleNum, setUserRoleNum] = useState(user.role);
   const [userPenalty, setUserPenalty] = useState(user.penaltyEndDate);
-  //   const [userPenalty, setUserPenalty] = useState(convertDatetoString(today));
 
   const onEditMode = () => {
     setEditMode(true);
@@ -131,8 +129,6 @@ const UserDetailInfo = ({ user }) => {
     patchUserInfo(data);
     offEditMode();
   };
-
-  //   const overDueDay = 3;
 
   return (
     <div className="user-detail-info">
@@ -239,3 +235,43 @@ const UserDetailInfo = ({ user }) => {
 };
 
 export default UserDetailInfo;
+
+UserDetailInfo.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    nickname: PropTypes.string,
+    intraId: PropTypes.number,
+    slack: PropTypes.string,
+    penaltyEndDate: PropTypes.string,
+    overDueDay: PropTypes.string,
+    role: PropTypes.number,
+    reservations: PropTypes.arrayOf(
+      PropTypes.shape({
+        ranking: PropTypes.number,
+        endAt: PropTypes.Date,
+        lenderableDate: PropTypes.Date,
+        title: PropTypes.string,
+      }),
+    ),
+    lendings: PropTypes.arrayOf(
+      PropTypes.shape({ dueDate: PropTypes.string, title: PropTypes.string }),
+    ),
+  }).isRequired,
+};
+
+UserInfoEdit.propTypes = {
+  infoKey: PropTypes.string.isRequired,
+  infoId: PropTypes.string.isRequired,
+  infoType: PropTypes.string.isRequired,
+  infoValue: PropTypes.string.isRequired,
+};
+
+UserRoleEdit.propTypes = {
+  userRole: PropTypes.string.isRequired,
+  roleList: PropTypes.string.isRequired,
+};
+UserInfoDisplay.propTypes = {
+  infoKey: PropTypes.string.isRequired,
+  infoValue: PropTypes.string.isRequired,
+};

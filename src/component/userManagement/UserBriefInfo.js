@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 import "../../css/UserBriefInfo.css";
@@ -19,7 +18,6 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
     setModal(EDIT);
   };
 
-  // eslint-disable-next-line no-unused-vars
   const getOverDueDate = overDueDay => {
     const today = new Date();
     let overDueDate = "";
@@ -81,6 +79,27 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
 export default UserBriefInfo;
 
 UserBriefInfo.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    nickname: PropTypes.string,
+    intraId: PropTypes.number,
+    slack: PropTypes.string,
+    penaltyEndDate: PropTypes.string,
+    overDueDay: PropTypes.string,
+    role: PropTypes.number,
+    reservations: PropTypes.arrayOf(
+      PropTypes.shape({
+        ranking: PropTypes.number,
+        endAt: PropTypes.Date,
+        lenderableDate: PropTypes.Date,
+        title: PropTypes.string,
+      }),
+    ),
+    lendings: PropTypes.arrayOf(
+      PropTypes.shape({ dueDate: PropTypes.string, title: PropTypes.string }),
+    ),
+  }).isRequired,
   line: PropTypes.bool.isRequired,
   setModal: PropTypes.func.isRequired,
   setSelectedUser: PropTypes.func.isRequired,
