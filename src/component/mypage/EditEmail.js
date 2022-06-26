@@ -25,9 +25,7 @@ function EditEmail() {
     e.preventDefault();
     await axios
       .patch(`${process.env.REACT_APP_API}/users/myupdate`, {
-        params: {
-          email: newEmail,
-        },
+        email: newEmail,
       })
       .then(() => {
         history.goBack();

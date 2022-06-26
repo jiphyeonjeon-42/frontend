@@ -123,7 +123,7 @@ const HeaderModal = ({ setHeaderModal }) => {
             {user.id ? (
               <Link
                 className="header-modal__button"
-                to={{ pathname: `/return` }}
+                to={{ pathname: `/mypage` }}
               >
                 <img src={Mypage} className="header-modal__icon" alt="user" />
                 <span className="header-modal__text font-16 color-2d">

@@ -1,11 +1,12 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import "../../css/ReservedTableList.css";
 import Arr from "../../img/arrow_right_black.svg";
 
 const ReservedTableList = ({
   isPending,
   isWaiting,
+  isExpired,
   factor,
   openModal,
   setInfo,
@@ -15,7 +16,11 @@ const ReservedTableList = ({
     openModal();
   };
 
-  // console.log(factor && factor.endAt && factor.endAt.slice(0, 10));
+  const printEndReason = status => {
+    if (status === 1) return "대출 완료";
+    if (status === 2) return "예약 취소";
+    return "예약 기한 만료";
+  };
 
   return (
     <div className="reserved-loan__table-list">
@@ -48,11 +53,23 @@ const ReservedTableList = ({
             {factor && factor.createdAt && isWaiting
               ? `예약 시작일 : ${factor.createdAt.slice(0, 10)}`
               : null}
+            {factor && factor.status && isExpired
+              ? `예약 만료 이유 : ${printEndReason(factor.status)}`
+              : null}
           </span>
         </div>
       </button>
     </div>
   );
+};
+
+ReservedTableList.propTypes = {
+  isPending: PropTypes.bool.isRequired,
+  isWaiting: PropTypes.bool.isRequired,
+  isExpired: PropTypes.bool.isRequired,
+  factor: PropTypes.shape.isRequired,
+  openModal: PropTypes.func.isRequired,
+  setInfo: PropTypes.func.isRequired,
 };
 
 export default ReservedTableList;
