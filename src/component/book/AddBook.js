@@ -25,6 +25,13 @@ const AddBook = () => {
     recommendCallSign: "",
   });
 
+  const setBasicInfo = newBasicInfo => {
+    setBookInfo({
+      ...bookInfo,
+      newBookBasicInfo: newBasicInfo,
+    });
+  };
+
   const tabList = [
     { name: "유저관리", link: "/user" },
     { name: "도서등록", link: "/addbook" },
@@ -52,8 +59,8 @@ const AddBook = () => {
             </div>
             <div className="add-book__basic-info__detail">
               <DisplayBasicBookInfo
-                isConfirmedInfo={bookInfo.isConfirmedInfo}
-                bookBasicInfo={bookInfo.newBookBasicInfo}
+                bookInfo={bookInfo}
+                setBasicInfo={setBasicInfo}
               />
             </div>
           </div>

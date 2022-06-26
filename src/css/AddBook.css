@@ -1,6 +1,6 @@
 .inquire-box {
   max-width: 120rem;
-  min-width: 30rem;
+  min-width: 36rem;
   background-color: #e8e8e8;
   display: flex;
   flex-direction: column;
@@ -28,21 +28,6 @@ label, input , button, select
   display: flex;
 }
 
-.add-book__basic-info__cover {
-  width : 30rem;
-  margin: 0 5rem 3rem ;
-}
-.add-book__basic-info__cover > img {
-  object-fit: contain;
-  width : 100%;
-  margin: auto;
-  display: block;
-}
-.add-book__basic-info__detail {
-  width: 80%;
-  margin: 0 5rem 0 0;
-  align-items: center;
-}
 .add-book__basic-info__isbn-search > * {
   display: block;
   margin: auto;
@@ -101,16 +86,38 @@ label, input , button, select
   background-color: rgb(255, 255, 255, 0);
 }
 
+.add-book__basic-info__cover {
+  width : 30rem;
+  margin: 0 5rem 3rem ;
+}
+.add-book__basic-info__cover > img {
+  object-fit: contain;
+  width : 100%;
+  margin: auto;
+  display: block;
+}
+.add-book__basic-info__detail {
+  width: 80%;
+  margin: 0 5rem 0 0;
+  align-items: center;
+}
+
+.add-book__basic-info__input.font-28-bold {
+  word-break: break-all;
+  background-color: white;
+  resize: none;
+}
+
 .add-book__basic-info__input {
-    border: none;
-    width: 80%;
+  border: none;
+  width: 80%;
 }
 .add-book__basic-info__input:first-child {
   width: calc(80% + 10rem);
 }
 
 .add-book__basic-info__input:read-only {
-    background: none;
+  background: none;
 }
 .add-book__book-info__text-key {
   display: inline-block;
@@ -209,64 +216,71 @@ label, input , button, select
 
 
 @media screen and (max-width: 767px) {
-.inquire-box {
-  display: block;
-}
-.add-book > p {
-  width: 90%;
-  margin:2rem auto;
-}
+  .inquire-box {
+    display: block;
+  }
+  .add-book > p {
+    width: 90%;
+    margin:2rem auto;
+  }
 
-.add-book__basic-info__isbn-search > video {
-  width: 90%;
-}
+  .add-book__basic-info__isbn-search > video {
+    width: 90%;
+  }
 
-.add-book__basic-info__isbn-search > select {
-  width: 80%;
-}
+  .add-book__basic-info__isbn-search > select {
+    width: 80%;
+  }
 
-.add-book__basic-info__isbn-search > button {
-  margin: auto;
-  display: block;
-}
-.add-book__basic-info__search-bar {
-  display: flex;
-  width: 80%
-}
+  .add-book__basic-info__isbn-search > button {
+    margin: auto;
+    display: block;
+  }
+  .add-book__basic-info__search-bar {
+    display: flex;
+    width: 80%
+  }
 
-.add-book__basic-info {
-  display: block;
-}
+  .add-book__basic-info {
+    display: block;
+  }
 
-.add-book__basic-info__cover {
-  width : 100%;
-  margin: 5% 0;
-}
+  .add-book__basic-info__cover {
+    width : 100%;
+    margin: 5% 0;
+  }
 
-.add-book__basic-info__cover > img {
-  object-fit: contain;
-  width : 30%;
-  margin: auto;
-  display: block;
-}
+  .add-book__basic-info__cover > img {
+    object-fit: contain;
+    width : 30%;
+    margin: auto;
+    display: block;
+  }
 
-.add-book__basic-info__detail {
-  display: block;
-  width: 90%;
-  margin: 5%;
-  align-items: center;
-}
+  .add-book__basic-info__detail {
+    display: block;
+    width: 90%;
+    margin: 5%;
+    align-items: center;
+  }
 
-.add-book__create-form > input {
-  display: block;
-  margin-bottom:1.2rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-.add-book__create-form > select {
-  width: 100%;
-}
-.add-book__create-form__errror-Message {
-  margin: -1rem 2rem 1rem;
-}
+  .add-book__basic-info__input {
+    width: calc(100% - 10rem);
+  }
+  .add-book__basic-info__input.font-28-bold {
+    width: 100%;
+  }
+
+  .add-book__create-form > input {
+    display: block;
+    margin-bottom:1.2rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .add-book__create-form > select {
+    width: 100%;
+  }
+  .add-book__create-form__errror-Message {
+    margin: -1rem 2rem 1rem;
+  }
 }

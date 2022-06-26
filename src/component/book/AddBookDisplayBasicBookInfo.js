@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 const labelText = {
@@ -7,16 +7,8 @@ const labelText = {
   pubdate: "출판일",
 };
 
-const DisplayBasicBookInfo = ({ isConfirmedInfo, bookBasicInfo }) => {
+const DisplayBasicBookInfo = ({ bookInfo, setBasicInfo }) => {
   const [message, setMessage] = useState("");
-  const [userInput, setUserInput] = useState({
-    ...bookBasicInfo,
-  });
-  useEffect(() => {
-    setUserInput({
-      ...bookBasicInfo,
-    });
-  }, [bookBasicInfo]);
 
   const onChangeInput = e => {
     const { id, value } = e.currentTarget;
@@ -27,8 +19,8 @@ const DisplayBasicBookInfo = ({ isConfirmedInfo, bookBasicInfo }) => {
         : "";
       if (message !== currentMessage) setMessage(currentMessage);
     }
-    setUserInput({
-      ...userInput,
+    setBasicInfo({
+      ...bookInfo.newBookBasicInfo,
       [id]: value,
     });
   };
@@ -43,9 +35,9 @@ const DisplayBasicBookInfo = ({ isConfirmedInfo, bookBasicInfo }) => {
           className="add-book__basic-info__input "
           type="text"
           id={key}
-          value={userInput[key]}
+          value={bookInfo.newBookBasicInfo[key]}
           onChange={onChangeInput}
-          readOnly={isConfirmedInfo}
+          readOnly={bookInfo.isConfirmedInfo}
           required
         />
       </label>
@@ -55,12 +47,11 @@ const DisplayBasicBookInfo = ({ isConfirmedInfo, bookBasicInfo }) => {
     <>
       <p className="color-red add-book__overlined ">ISBN 도서정보</p>
       <label htmlFor="title" className=" add-book__underlined">
-        <input
+        <textarea
           className="add-book__basic-info__input font-28-bold"
-          type="text"
           id="title"
-          readOnly={isConfirmedInfo}
-          value={userInput.title}
+          readOnly={bookInfo.isConfirmedInfo}
+          value={bookInfo.newBookBasicInfo.title}
           onChange={onChangeInput}
         />
       </label>
@@ -75,13 +66,18 @@ const DisplayBasicBookInfo = ({ isConfirmedInfo, bookBasicInfo }) => {
 export default DisplayBasicBookInfo;
 
 DisplayBasicBookInfo.propTypes = {
-  isConfirmedInfo: PropTypes.bool.isRequired,
-  bookBasicInfo: PropTypes.shape({
-    isbn: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    publisher: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    pubdate: PropTypes.string.isRequired,
+  bookInfo: PropTypes.shape({
+    isConfirmedInfo: PropTypes.bool.isRequired,
+    newBookBasicInfo: PropTypes.shape({
+      isbn: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      publisher: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      pubdate: PropTypes.string.isRequired,
+    }).isRequired,
+    existedBooksInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
+    recommendCallSign: PropTypes.string.isRequired,
   }).isRequired,
+  setBasicInfo: PropTypes.func.isRequired,
 };
