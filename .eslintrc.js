@@ -19,6 +19,12 @@ module.exports = {
         extensions: [".js", ".jsx"],
       },
     ],
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
     "no-console": 0,
   },
   settings: {
