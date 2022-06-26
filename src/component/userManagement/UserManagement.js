@@ -68,7 +68,9 @@ const UserManagement = () => {
         );
       })
       .catch(error => {
-        console.log(error);
+        closeModal();
+        setErrorCode(error.response.data.errorCode);
+        openMiniModal();
       });
   };
 
