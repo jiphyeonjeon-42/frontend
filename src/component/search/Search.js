@@ -9,6 +9,8 @@ import SearchBanner from "./SearchBanner";
 import CategoryFilter from "./CategoryFilter";
 import Sort from "./Sort";
 import WishBook from "./WishBook";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import { searchWord } from "../../atom/searchWord";
 import { useSearchInput } from "../../atom/useSearchInput";
 import "../../css/Search.css";
@@ -28,6 +30,12 @@ const Search = ({ match, location }) => {
   const [userCateName, setCategoryName] = useState("");
   const [entireCate, setEntireCate] = useState([]);
   const [lastPage, setLastPage] = useState(1);
+  const [errorCode, setErrorCode] = useState(-1);
+  const [miniModal, setMiniModal] = useState(0);
+
+  const closeMiniModal = () => {
+    setMiniModal(0);
+  };
 
   const fetchBookList = async () => {
     await axios
@@ -49,7 +57,8 @@ const Search = ({ match, location }) => {
         );
       })
       .catch(error => {
-        console.log(error);
+        setMiniModal(1);
+        setErrorCode(error.response.data.errorCode);
       });
   };
 
@@ -187,6 +196,14 @@ const Search = ({ match, location }) => {
       <section className="wish-book-wraper">
         <WishBook />
       </section>
+      {miniModal && errorCode >= 0 && (
+        <MiniModal closeModal={closeMiniModal}>
+          <ModalContentsOnlyTitle
+            closeModal={closeMiniModal}
+            title={`ERROR ${errorCode}`}
+          />
+        </MiniModal>
+      )}
     </main>
   );
 };

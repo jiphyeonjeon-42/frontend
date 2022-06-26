@@ -1,31 +1,10 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import axios from "axios";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import "../../css/UserBriefInfo.css";
 import "../../css/UserDetailInfo.css";
 
 const roles = ["미인증", "일반", "사서", "스태프"];
-
-// eslint-disable-next-line no-unused-vars
-const getOverDueDate = overDueDay => {
-  const today = new Date();
-  let overDueDate = "";
-
-  today.setDate(today.getDate() + overDueDay);
-  overDueDate += today.getFullYear();
-  overDueDate += "-";
-  overDueDate += today.getMonth() + 1;
-  overDueDate += "-";
-  overDueDate += today.getDate();
-  return overDueDate;
-};
-
-// eslint-disable-next-line no-unused-vars
-const isOverDue = date => {
-  const today = new Date();
-  return date >= today;
-};
 
 const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
   const [input, setInput] = useState(infoValue);
@@ -54,7 +33,7 @@ const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
 const UserRoleEdit = ({ userRole, roleList }) => {
   return (
     <div className="user-detail-info__edit color-54">
-      <div className="user-detail-info__key font-18-bold">ROLE</div>
+      <div className="user-detail-info__key font-18-bold">역할</div>
       <select className="user-detail-info__edit-select edit-role">
         {roleList.map((role, index) => {
           if (index === userRole)
@@ -95,7 +74,12 @@ const convertDatetoString = date => {
   return overDueDate;
 };
 
-const UserDetailInfo = ({ user }) => {
+const UserDetailInfo = ({
+  user,
+  setErrorCode,
+  closeMidModal,
+  openMiniModal,
+}) => {
   const today = new Date();
   const [editMode, setEditMode] = useState(false);
   const [userIntraId, setUserIntraId] = useState(user.intraId);
@@ -103,7 +87,6 @@ const UserDetailInfo = ({ user }) => {
   const [userSlack, setUserSlack] = useState(user.slack);
   const [userRoleNum, setUserRoleNum] = useState(user.role);
   const [userPenalty, setUserPenalty] = useState(user.penaltyEndDate);
-  //   const [userPenalty, setUserPenalty] = useState(convertDatetoString(today));
 
   const onEditMode = () => {
     setEditMode(true);
@@ -118,15 +101,19 @@ const UserDetailInfo = ({ user }) => {
       .patch(`${process.env.REACT_APP_API}/users/update/${user.id}`, data)
       .then(res => {
         const userInfo = res.data;
-        console.log(userInfo);
         if (userInfo.intraId) setUserIntraId(userInfo.intraId);
         if (userInfo.nickname) setUserNickname(userInfo.nickname);
         if (userInfo.slack) setUserSlack(userInfo.slack);
         if (userInfo.role) setUserRoleNum(userInfo.role);
-        if (userInfo.penaltyEndDate) setUserPenalty(userInfo.penaltyEndDate);
+        if (userInfo.penaltyEndDate) {
+          const penaltyEndDate = new Date(userInfo.penaltyEndDate);
+          setUserPenalty(convertDatetoString(penaltyEndDate));
+        }
       })
       .catch(error => {
-        console.log(error);
+        closeMidModal();
+        setErrorCode(error.response.data.errorCode);
+        openMiniModal();
       });
   };
 
@@ -138,7 +125,7 @@ const UserDetailInfo = ({ user }) => {
     const role = userEditForm.querySelector(".edit-role").value;
     const slack = userEditForm.querySelector(".edit-slack").value;
     const penalty = userEditForm.querySelector(".edit-penalty").value;
-    console.log(intra, nickname, slack, role, penalty);
+
     const data = {
       nickname,
       intraId: parseInt(intra, 10),
@@ -150,8 +137,6 @@ const UserDetailInfo = ({ user }) => {
     offEditMode();
   };
 
-  //   const overDueDay = 3;
-
   return (
     <div className="user-detail-info">
       <div className="user-detail-info__title font-28-bold color-54">
@@ -160,21 +145,21 @@ const UserDetailInfo = ({ user }) => {
       {editMode ? (
         <form id="edit-form">
           <UserInfoDisplay infoKey="ID" infoValue={user.id} />
-          <UserInfoDisplay infoKey="EMAIL" infoValue={user.email} />
+          <UserInfoDisplay infoKey="이메일" infoValue={user.email} />
           <UserInfoEdit
-            infoKey="INTRA ID"
+            infoKey="인트라ID"
             infoId="intra-id"
             infoType="text"
             infoValue={userIntraId}
           />
           <UserInfoEdit
-            infoKey="NICKNAME"
+            infoKey="닉네임"
             infoId="nickname"
             infoType="text"
             infoValue={userNickname}
           />
           <UserInfoEdit
-            infoKey="SLACK"
+            infoKey="슬랙ID"
             infoId="slack"
             infoType="text"
             infoValue={userSlack}
@@ -220,11 +205,11 @@ const UserDetailInfo = ({ user }) => {
       ) : (
         <>
           <UserInfoDisplay infoKey="ID" infoValue={user.id} />
-          <UserInfoDisplay infoKey="EMAIL" infoValue={user.email} />
-          <UserInfoDisplay infoKey="INTRA ID" infoValue={userIntraId} />
-          <UserInfoDisplay infoKey="NICKNAME" infoValue={userNickname} />
-          <UserInfoDisplay infoKey="SLACK" infoValue={userSlack} />
-          <UserInfoDisplay infoKey="ROLE" infoValue={roles[userRoleNum]} />
+          <UserInfoDisplay infoKey="이메일" infoValue={user.email} />
+          <UserInfoDisplay infoKey="인트라ID" infoValue={userIntraId} />
+          <UserInfoDisplay infoKey="닉네임" infoValue={userNickname} />
+          <UserInfoDisplay infoKey="슬랙ID" infoValue={userSlack} />
+          <UserInfoDisplay infoKey="역할" infoValue={roles[userRoleNum]} />
           <div className="user-detail-info__line" />
           <UserInfoDisplay
             infoKey="대출 불가 기간"
@@ -257,3 +242,46 @@ const UserDetailInfo = ({ user }) => {
 };
 
 export default UserDetailInfo;
+
+UserDetailInfo.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    nickname: PropTypes.string,
+    intraId: PropTypes.number,
+    slack: PropTypes.string,
+    penaltyEndDate: PropTypes.string,
+    overDueDay: PropTypes.string,
+    role: PropTypes.number,
+    reservations: PropTypes.arrayOf(
+      PropTypes.shape({
+        ranking: PropTypes.number,
+        endAt: PropTypes.Date,
+        lenderableDate: PropTypes.Date,
+        title: PropTypes.string,
+      }),
+    ),
+    lendings: PropTypes.arrayOf(
+      PropTypes.shape({ dueDate: PropTypes.string, title: PropTypes.string }),
+    ),
+  }).isRequired,
+  setErrorCode: PropTypes.func.isRequired,
+  closeMidModal: PropTypes.func.isRequired,
+  openMiniModal: PropTypes.func.isRequired,
+};
+
+UserInfoEdit.propTypes = {
+  infoKey: PropTypes.string.isRequired,
+  infoId: PropTypes.string.isRequired,
+  infoType: PropTypes.string.isRequired,
+  infoValue: PropTypes.string.isRequired,
+};
+
+UserRoleEdit.propTypes = {
+  userRole: PropTypes.string.isRequired,
+  roleList: PropTypes.string.isRequired,
+};
+UserInfoDisplay.propTypes = {
+  infoKey: PropTypes.string.isRequired,
+  infoValue: PropTypes.string.isRequired,
+};
