@@ -24,13 +24,19 @@ const AddBook = () => {
     existedBooksInfo: [],
     recommendCallSign: "",
   });
+
+  const tabList = [
+    { name: "유저관리", link: "/user" },
+    { name: "도서등록", link: "/addbook" },
+  ];
+
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
   return (
     <main>
       <Banner img="admin" titleKo="도서 신규 등록" titleEn="ADD BOOK" />
-      <AdminTabs />
+      <AdminTabs tabList={tabList} />
       <section className="inquire-box__wrapper">
         <InquireBoxTitle Icon={Book} titleKO="도서 등록" titleEN="Add Book" />
         <div className="inquire-box add-book">

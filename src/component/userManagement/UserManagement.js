@@ -81,7 +81,7 @@ const UserManagement = () => {
 
   const tabList = [
     { name: "유저관리", link: "/user" },
-    { name: "도서등록", link: "/addBook" },
+    { name: "도서등록", link: "/addbook" },
   ];
 
   return (
