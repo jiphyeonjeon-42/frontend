@@ -141,7 +141,13 @@ const Mypage = () => {
                       ? `${userInfo.overDueDay}일`
                       : "No Data"}
                   </span>
-                  <span className="font-14-bold color-54">업데이트</span>
+                  <span className="font-14-bold color-54">대출제한</span>
+                  <span className="font-14">
+                    {userInfo.penaltyEndDate
+                      ? `${userInfo.penaltyEndDate.slice(0, 10)} 까지`
+                      : "No Data"}
+                  </span>
+                  <span className="font-14-bold color-54">정보수정</span>
                   <span className="font-14">
                     {userInfo.updatedAt
                       ? userInfo.updatedAt.slice(0, 10)
