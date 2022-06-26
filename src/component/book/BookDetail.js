@@ -9,15 +9,17 @@ import BookStatus from "./BookStatus";
 import IMGERR from "../../img/image_onerror.svg";
 import MiniModal from "../utils/MiniModal";
 import Reservation from "../reservation/Reservation";
+import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import ArrRes from "../../img/arrow_right_res.svg";
 import ArrDef from "../../img/arrow_right_res_default.svg";
 
 const BookDetail = ({ location, match }) => {
-  const [data, setData] = useState({ books: [] });
+  const [bookDetailInfo, setbookDetailInfo] = useState({ books: [] });
   const { id } = match.params;
   const myRef = useRef(null);
   const [miniModalView, setMiniModalView] = useState(false);
   const [miniModalClosable, setMiniModalClosable] = useState(true);
+  const [errorCode, setErrorCode] = useState(-1);
   const user = useRecoilValue(userState);
 
   const openModal = () => {
@@ -32,15 +34,21 @@ const BookDetail = ({ location, match }) => {
     if (miniModalClosable) setMiniModalView(false);
   };
 
-  const fetchData = async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API}/books/info/${id}`,
-    );
-    setData(response.data);
+  const getBooksInfo = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_API}/books/info/${id}`)
+      .then(res => {
+        setErrorCode(-1);
+        setbookDetailInfo(res.data);
+      })
+      .catch(error => {
+        setMiniModalView(true);
+        setErrorCode(error.response.data.errorCode);
+      });
     myRef.current.scrollIntoView();
   };
 
-  useEffect(fetchData, []);
+  useEffect(getBooksInfo, []);
 
   function subtituteImg(e) {
     e.target.src = IMGERR;
@@ -62,13 +70,17 @@ const BookDetail = ({ location, match }) => {
         </div>
         <div className="book-content">
           <div className="book-detail__photo">
-            <img src={data.image} alt={data.title} onError={subtituteImg} />
+            <img
+              src={bookDetailInfo.image}
+              alt={bookDetailInfo.title}
+              onError={subtituteImg}
+            />
           </div>
           <div className="book-detail">
             <span className="color-red">도서정보</span>
             <div className="book-detail__reservation-button">
-              <div className="book-detail__title">{data.title}</div>
-              {data.books.reduce(
+              <div className="book-detail__title">{bookDetailInfo.title}</div>
+              {bookDetailInfo.books.reduce(
                 (accumulator, current) => accumulator + current.isLendable,
                 0,
               ) === 0 ? (
@@ -100,15 +112,21 @@ const BookDetail = ({ location, match }) => {
                 <span className="book-detail__info-key">기부자</span>
               </div>
               <div className="color-54">
-                <span className="book-detail__info-value">{data.author}</span>
                 <span className="book-detail__info-value">
-                  {data.publisher}
+                  {bookDetailInfo.author}
                 </span>
                 <span className="book-detail__info-value">
-                  {data.publishedAt}
+                  {bookDetailInfo.publisher}
                 </span>
-                <span className="book-detail__info-value">{data.category}</span>
-                <span className="book-detail__info-value">{data.donators}</span>
+                <span className="book-detail__info-value">
+                  {bookDetailInfo.publishedAt}
+                </span>
+                <span className="book-detail__info-value">
+                  {bookDetailInfo.category}
+                </span>
+                <span className="book-detail__info-value">
+                  {bookDetailInfo.donators}
+                </span>
               </div>
             </div>
             <div className="book-state">
@@ -117,7 +135,7 @@ const BookDetail = ({ location, match }) => {
               </span>
               <div className="book-state__list">
                 <div>
-                  {data.books.map((book, index) => (
+                  {bookDetailInfo.books.map((book, index) => (
                     <BookStatus key={book.id} book={book} index={index} />
                   ))}
                 </div>
@@ -128,11 +146,18 @@ const BookDetail = ({ location, match }) => {
       </section>
       {miniModalView && (
         <MiniModal closeModal={closeModal}>
-          <Reservation
-            bookInfoId={data.id}
-            closeModal={closeModal}
-            setClosable={setMiniModalClosable}
-          />
+          {errorCode < 0 ? (
+            <Reservation
+              bookInfoId={bookDetailInfo.id}
+              closeModal={closeModal}
+              setClosable={setMiniModalClosable}
+            />
+          ) : (
+            <ModalContentsOnlyTitle
+              closeModal={closeModal}
+              title={`ERROR ${errorCode}`}
+            />
+          )}
         </MiniModal>
       )}
     </main>

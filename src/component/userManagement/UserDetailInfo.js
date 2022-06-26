@@ -74,7 +74,12 @@ const convertDatetoString = date => {
   return overDueDate;
 };
 
-const UserDetailInfo = ({ user }) => {
+const UserDetailInfo = ({
+  user,
+  setErrorCode,
+  closeMidModal,
+  openMiniModal,
+}) => {
   const today = new Date();
   const [editMode, setEditMode] = useState(false);
   const [userIntraId, setUserIntraId] = useState(user.intraId);
@@ -106,7 +111,9 @@ const UserDetailInfo = ({ user }) => {
         }
       })
       .catch(error => {
-        console.log(error);
+        closeMidModal();
+        setErrorCode(error.response.data.errorCode);
+        openMiniModal();
       });
   };
 
@@ -258,6 +265,9 @@ UserDetailInfo.propTypes = {
       PropTypes.shape({ dueDate: PropTypes.string, title: PropTypes.string }),
     ),
   }).isRequired,
+  setErrorCode: PropTypes.func.isRequired,
+  closeMidModal: PropTypes.func.isRequired,
+  openMiniModal: PropTypes.func.isRequired,
 };
 
 UserInfoEdit.propTypes = {

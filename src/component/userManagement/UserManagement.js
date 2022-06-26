@@ -9,6 +9,8 @@ import UserUsageInfo from "./UserUsageInfo";
 import AdminSearchBar from "../utils/AdminSearchBar";
 import AdminPagination from "../utils/AdminPagination";
 import MidModal from "../utils/MidModal";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import UserDetailInfo from "./UserDetailInfo";
 
@@ -17,6 +19,7 @@ const USAGE = 1;
 
 const UserManagement = () => {
   const [modal, setModal] = useState(0);
+  const [miniModal, setMiniModal] = useState(0);
   const [selectedUser, setSelectedUser] = useState(0);
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
@@ -24,9 +27,18 @@ const UserManagement = () => {
   const [userListPageRange, setUserListPageRange] = useState(0);
   const [lastUserListPage, setLastUserListPage] = useState(1);
   const [userList, setUserList] = useState([]);
+  const [errorCode, setErrorCode] = useState(-1);
 
   const closeModal = () => {
     setModal(0);
+  };
+
+  const closeMiniModal = () => {
+    setMiniModal(0);
+  };
+
+  const openMiniModal = () => {
+    setMiniModal(1);
   };
 
   const handleUserSearchSumbit = event => {
@@ -126,14 +138,27 @@ const UserManagement = () => {
           </div>
         </div>
       </section>
-      {modal && (
+      {modal && !miniModal && (
         <MidModal closeModal={closeModal}>
           {modal === USAGE ? (
             <UserUsageInfo key={selectedUser.id} user={selectedUser} />
           ) : (
-            <UserDetailInfo user={selectedUser} />
+            <UserDetailInfo
+              user={selectedUser}
+              setErrorCode={setErrorCode}
+              closeMidModal={closeModal}
+              openMiniModal={openMiniModal}
+            />
           )}
         </MidModal>
+      )}
+      {miniModal && errorCode >= 0 && (
+        <MiniModal closeModal={closeMiniModal}>
+          <ModalContentsOnlyTitle
+            closeModal={closeMiniModal}
+            title={`ERROR ${errorCode}`}
+          />
+        </MiniModal>
       )}
     </main>
   );

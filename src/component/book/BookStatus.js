@@ -21,7 +21,9 @@ const BookStatus = ({ book, index }) => {
       <div className="book-status__status font-16">
         {getBookStatus(book.isLendable, book.dueDate)}
       </div>
-      <div className="book-status__dueDate font-16">{book.dueDate}</div>
+      <div className="book-status__dueDate font-16">
+        {book.dueDate === "-" ? "-" : book.dueDate.substring(2, 10)}
+      </div>
     </div>
   );
 };
