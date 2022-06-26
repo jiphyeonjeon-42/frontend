@@ -33,10 +33,10 @@ const Mypage = () => {
               rtnObj.role = "카뎃";
               break;
             case 2:
-              rtnObj.role = "운영진";
+              rtnObj.role = "사서";
               break;
             case 3:
-              rtnObj.role = "사서";
+              rtnObj.role = "운영진";
               break;
             default:
               rtnObj.role = "미인증";
@@ -75,7 +75,7 @@ const Mypage = () => {
             <div>
               <div className="mypage-subtitle__titlebox__title">
                 <span className="color-2d">
-                  {userInfo
+                  {userInfo && userInfo.email
                     ? `${
                         userInfo.nickname ? userInfo.nickname : userInfo.email
                       }님, 반갑습니다!`
@@ -124,16 +124,28 @@ const Mypage = () => {
               {userInfo ? (
                 <>
                   <span className="font-14-bold color-54">이메일</span>
-                  <span className="font-14">{userInfo.email}</span>
+                  <span className="font-14">
+                    {userInfo.email ? userInfo.email : "No Data"}
+                  </span>
                   <span className="font-14-bold color-54">역할</span>
-                  <span className="font-14">{userInfo.role}</span>
+                  <span className="font-14">
+                    {userInfo.role ? userInfo.role : "No Data"}
+                  </span>
                   <span className="font-14-bold color-54">슬랙ID</span>
-                  <span className="font-14">{userInfo.slack}</span>
+                  <span className="font-14">
+                    {userInfo.slack ? userInfo.slack : "No Data"}
+                  </span>
                   <span className="font-14-bold color-54">연체</span>
-                  <span className="font-14">{`${userInfo.overDueDay}일`}</span>
+                  <span className="font-14">
+                    {userInfo.overDueDay
+                      ? `${userInfo.overDueDay}일`
+                      : "No Data"}
+                  </span>
                   <span className="font-14-bold color-54">업데이트</span>
                   <span className="font-14">
-                    {userInfo.updatedAt.slice(0, 10)}
+                    {userInfo.updatedAt
+                      ? userInfo.updatedAt.slice(0, 10)
+                      : "No Data"}
                   </span>
                 </>
               ) : null}
