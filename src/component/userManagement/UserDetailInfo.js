@@ -33,7 +33,7 @@ const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
 const UserRoleEdit = ({ userRole, roleList }) => {
   return (
     <div className="user-detail-info__edit color-54">
-      <div className="user-detail-info__key font-18-bold">ROLE</div>
+      <div className="user-detail-info__key font-18-bold">역할</div>
       <select className="user-detail-info__edit-select edit-role">
         {roleList.map((role, index) => {
           if (index === userRole)
@@ -145,21 +145,21 @@ const UserDetailInfo = ({
       {editMode ? (
         <form id="edit-form">
           <UserInfoDisplay infoKey="ID" infoValue={user.id} />
-          <UserInfoDisplay infoKey="EMAIL" infoValue={user.email} />
+          <UserInfoDisplay infoKey="이메일" infoValue={user.email} />
           <UserInfoEdit
-            infoKey="INTRA ID"
+            infoKey="인트라ID"
             infoId="intra-id"
             infoType="text"
             infoValue={userIntraId}
           />
           <UserInfoEdit
-            infoKey="NICKNAME"
+            infoKey="닉네임"
             infoId="nickname"
             infoType="text"
             infoValue={userNickname}
           />
           <UserInfoEdit
-            infoKey="SLACK"
+            infoKey="슬랙ID"
             infoId="slack"
             infoType="text"
             infoValue={userSlack}
@@ -205,11 +205,11 @@ const UserDetailInfo = ({
       ) : (
         <>
           <UserInfoDisplay infoKey="ID" infoValue={user.id} />
-          <UserInfoDisplay infoKey="EMAIL" infoValue={user.email} />
-          <UserInfoDisplay infoKey="INTRA ID" infoValue={userIntraId} />
-          <UserInfoDisplay infoKey="NICKNAME" infoValue={userNickname} />
-          <UserInfoDisplay infoKey="SLACK" infoValue={userSlack} />
-          <UserInfoDisplay infoKey="ROLE" infoValue={roles[userRoleNum]} />
+          <UserInfoDisplay infoKey="이메일" infoValue={user.email} />
+          <UserInfoDisplay infoKey="인트라ID" infoValue={userIntraId} />
+          <UserInfoDisplay infoKey="닉네임" infoValue={userNickname} />
+          <UserInfoDisplay infoKey="슬랙ID" infoValue={userSlack} />
+          <UserInfoDisplay infoKey="역할" infoValue={roles[userRoleNum]} />
           <div className="user-detail-info__line" />
           <UserInfoDisplay
             infoKey="대출 불가 기간"
