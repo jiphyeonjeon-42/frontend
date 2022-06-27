@@ -30,7 +30,7 @@
 }
 
 .rent__user-list__name {
-  width: 16.1rem;
+  width: 30rem;
   display: flex;
 }
 
@@ -48,4 +48,18 @@
   height: 1.6rem;
   margin-top: 0.4rem;
   margin: 0.4rem 0 0 auto;
+}
+
+.rent__text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 767px) {
+
+  .rent__user-list__name {
+    width: 16.1rem;
+  }
+
 }

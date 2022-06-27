@@ -31,8 +31,8 @@ const RentModalUser = ({ setSelectedUser, closeMidModal }) => {
     await axios
       .get(`${process.env.REACT_APP_API}/users/search`, {
         params: {
-          query: userSearchWord,
-          page: userSearchPage,
+          nicknameOrEmail: userSearchWord,
+          page: userSearchPage - 1,
           limit: 5,
         },
       })

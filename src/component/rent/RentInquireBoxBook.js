@@ -29,7 +29,7 @@ const InquireBoxBook = ({
         <div className="rent__inquire-box-book-active">
           <div className="rent__inquire-box-book__id-undo">
             <div className="rent__inquire-box-book__id font-28-bold color-54">
-              {book.info.title}
+              {book.title}
             </div>
             <button
               className="rent__inquire-box-book__undo-button color-a4"
@@ -48,13 +48,13 @@ const InquireBoxBook = ({
             </div>
             <div className="book__info__factor">
               <span className="book__info__factor-half font-18-bold">저자</span>
-              <span className="font-16">{book.info.author}</span>
+              <span className="font-16">{book.author}</span>
             </div>
             <div className="book__info__factor">
               <span className="book__info__factor-half font-18-bold">
                 출판사
               </span>
-              <span className="font-16">{book.info.publisher}</span>
+              <span className="font-16">{book.publisher}</span>
             </div>
             <div className="book__info__factor">
               <span className="book__info__factor-half font-18-bold">

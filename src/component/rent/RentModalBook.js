@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useRecoilState } from "recoil";
 import axios from "axios";
@@ -9,6 +10,7 @@ import BookList from "./RentModalBookList";
 import "../../css/RentModalBook.css";
 
 const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
+  const history = useHistory();
   const [bookSearchWord, setBookSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [bookSearchPage, setBookSearchPage] = useState(1);
@@ -32,7 +34,7 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
       .get(`${process.env.REACT_APP_API}/books/search`, {
         params: {
           query: bookSearchWord,
-          page: bookSearchPage,
+          page: bookSearchPage - 1,
           limit: 3,
         },
       })
@@ -43,7 +45,10 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
         );
       })
       .catch(error => {
-        console.log(error);
+        const { errorCode } = error.response.data;
+        // eslint-disable-next-line no-restricted-globals
+        if (errorCode === 100) history.push("/");
+        if ([101, 102, 108, 109].includes(errorCode)) history.push("/logout");
       });
   };
 

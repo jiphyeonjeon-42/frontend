@@ -12,16 +12,28 @@ import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 
 import "../../css/Rent.css";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 
 const Rent = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [midModalContents, setMidModalContents] = useState("");
+  const [miniModalContents, setMiniModalContents] = useState("");
+  const [firstBookContents, setFirstBookContests] = useState("");
+  const [secondBookContents, setSecondBookContests] = useState("");
+
   const tabList = [
     { name: "대출", link: "/rent" },
     { name: "예약대출", link: "/reservation" },
     { name: "반납", link: "/return" },
   ];
+
+  const closeMiniModal = () => {
+    setMiniModalContents(null);
+    setFirstBookContests(null);
+    setSecondBookContests(null);
+  };
 
   return (
     <main>
@@ -78,7 +90,19 @@ const Rent = () => {
           setSelectedUser={setSelectedUser}
           setSelectedBooks={setSelectedBooks}
           setMidModalContents={setMidModalContents}
+          setMiniModalContents={setMiniModalContents}
+          setFirstBookContests={setFirstBookContests}
+          setSecondBookContests={setSecondBookContests}
         />
+      )}
+      {miniModalContents && (
+        <MiniModal closeModal={closeMiniModal}>
+          <ModalContentsTitleWithMessage
+            closeModal={closeMiniModal}
+            title="대출 결과"
+            message={`${firstBookContents} ${secondBookContents || ""}`}
+          />
+        </MiniModal>
       )}
     </main>
   );
