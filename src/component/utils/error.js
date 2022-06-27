@@ -30,6 +30,21 @@ const reservationPostErrorCase = errorCode => {
   }
 };
 
+const registerPostErrorCase = errorCode => {
+  switch (errorCode) {
+    case 101:
+      return {
+        title: "연결된 계정이 없습니다.",
+        content: "회원가입 후 마이페이지에서 연결해주세요.",
+      };
+    default:
+      return {
+        title: "에러",
+        content: "예상치 못한 오류가 발생했습니다",
+      };
+  }
+};
+
 const getErrorMessage = (apiName, errorCode) => {
   switch (apiName) {
     case "lendings":
@@ -38,6 +53,8 @@ const getErrorMessage = (apiName, errorCode) => {
       return returningPostErrorCase(errorCode);
     case "reservations":
       return reservationPostErrorCase(errorCode);
+    case "register":
+      return registerPostErrorCase(errorCode);
     default:
       return "예상치 못한 오류가 발생했습니다";
   }

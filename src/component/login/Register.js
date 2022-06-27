@@ -1,11 +1,25 @@
 import React, { useRef, useState } from "react";
+import qs from "qs";
 import "../../css/Register.css";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
+import getErrorMessage from "../utils/error";
 
 const Register = () => {
+  const location = useLocation();
+  const query = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
+  const [queryErrorCode, setQueryErrorCode] = useState(query.errorCode);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+
+  const closeMiniModal = () => {
+    setQueryErrorCode(null);
+  };
 
   const [errorMessage, setErrorMessage] = useState({
     emailError: "",
@@ -116,6 +130,19 @@ const Register = () => {
 
   return (
     <main>
+      {queryErrorCode && (
+        <MiniModal closeModal={closeMiniModal}>
+          <ModalContentsTitleWithMessage
+            closeModal={closeMiniModal}
+            title={
+              getErrorMessage("register", parseInt(queryErrorCode, 10)).title
+            }
+            message={
+              getErrorMessage("register", parseInt(queryErrorCode, 10)).content
+            }
+          />
+        </MiniModal>
+      )}
       <section className="banner main-img">
         <div className="main-banner register-banner">
           <div className="register-main">
