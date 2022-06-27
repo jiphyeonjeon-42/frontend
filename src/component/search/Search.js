@@ -55,6 +55,8 @@ const Search = ({ match, location }) => {
         setLastPage(
           res.data.meta.totalPages > 0 ? res.data.meta.totalPages : 1,
         );
+        setMiniModal(0);
+        setErrorCode(-1);
       })
       .catch(error => {
         setMiniModal(1);
