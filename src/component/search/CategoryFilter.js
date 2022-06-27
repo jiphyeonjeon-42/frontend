@@ -8,6 +8,7 @@ import ArrRightBlack from "../../img/arrow_right_black.svg";
 import "../../css/CategoryFilter.css";
 
 const MARGIN_OF_CATEGORY_BUTTON = 36;
+const EPSILON = 1;
 
 const PreCategory = ({ startOfScroll }) => {
   const scrollToPre = () => {
@@ -22,7 +23,10 @@ const PreCategory = ({ startOfScroll }) => {
     let sumOfCategory = 0;
     // eslint-disable-next-line no-plusplus
     for (let index = 0; index < categoryButtonWidth.length; index++) {
-      if (sumOfCategory + categoryButtonWidth[index] >= categoriesScrollX) {
+      if (
+        sumOfCategory + categoryButtonWidth[index] + EPSILON >=
+        categoriesScrollX
+      ) {
         break;
       }
       sumOfCategory += categoryButtonWidth[index];
@@ -68,7 +72,7 @@ const NextCategory = ({ endOfScroll }) => {
     // eslint-disable-next-line no-plusplus
     for (let index = 0; index < categoryButtonWidth.length; index++) {
       sumOfCategory += categoryButtonWidth[index];
-      if (sumOfCategory > categoriesScrollX) {
+      if (sumOfCategory - EPSILON > categoriesScrollX) {
         break;
       }
     }
