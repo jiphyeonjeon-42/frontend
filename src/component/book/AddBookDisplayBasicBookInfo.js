@@ -13,7 +13,9 @@ const DisplayBasicBookInfo = ({ bookInfo, setBasicInfo }) => {
   const onChangeInput = e => {
     const { id, value } = e.currentTarget;
     if (id === "pubdate") {
-      const isValidDate = RegExp(/^[0-9]{8}$/).test(value);
+      const isValidDate = RegExp(
+        /^\d{4}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/,
+      ).test(value);
       const currentMessage = !isValidDate
         ? `날짜는 yyyymmdd 형식을 지켜주세요 ex.19450815`
         : "";
