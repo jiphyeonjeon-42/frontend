@@ -11,6 +11,8 @@ const RentModalConfirm = ({
   selectedBooks,
   closeModal,
   setMiniModalContents,
+  setFirstBookContests,
+  setSecondBookContests,
 }) => {
   const history = useHistory();
   const [remark1, setRemark1] = useState("");
@@ -44,20 +46,23 @@ const RentModalConfirm = ({
       await axios
         .post(`${process.env.REACT_APP_API}/lendings`, data[i])
         .then(() => {
-          setMiniModalContents(`대출 완료`);
-          // eslint-disable-next-line no-param-reassign
-          selectedUser.lendings.push(makeLending(selectedBooks.pop()));
+          const msg = `${selectedBooks[i].title} - 대출완료\n\n`;
+          if (i === 0) setFirstBookContests(msg);
+          else setSecondBookContests(msg);
+          selectedUser.lendings.push(makeLending(selectedBooks[i]));
         })
         .catch(error => {
           const { errorCode } = error.response.data;
           if (errorCode === 100) history.push("/");
           if ([101, 102, 108, 109].includes(errorCode)) history.push("/logout");
-          setMiniModalContents(
-            `${selectedBooks[0].title} 대출 불가\n(사유 : ${getErrorMessage(
-              "lendings",
-              errorCode,
-            )})`,
-          );
+          const errMsg = `${
+            selectedBooks[i].title
+          } - 대출 실패\n(사유 : ${getErrorMessage(
+            "lendings",
+            errorCode,
+          )})\n\n`;
+          if (i === 0) setFirstBookContests(errMsg);
+          else setSecondBookContests(errMsg);
         });
     }
   };
@@ -85,8 +90,10 @@ const RentModalConfirm = ({
             },
           ];
     await axiosPost(data);
+    while (selectedBooks.length !== 0) selectedBooks.pop();
     setRemark1("");
     setRemark2("");
+    setMiniModalContents(true);
     closeModal();
   };
   return (
@@ -174,4 +181,6 @@ RentModalConfirm.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   selectedUser: PropTypes.object.isRequired,
   selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setFirstBookContests: PropTypes.func.isRequired,
+  setSecondBookContests: PropTypes.func.isRequired,
 };

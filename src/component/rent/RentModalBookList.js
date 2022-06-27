@@ -29,7 +29,9 @@ const RentModalBookList = ({
   };
 
   const isDisabled = () => {
-    return book.isLendable === 0 ? "disabled" : "";
+    if (book.isLendable === 0) return "disabled";
+    if (isAlreadySelected(book, selectedBooks)) return "disabled";
+    return "";
   };
 
   return (

@@ -20,6 +20,9 @@ const Rent = () => {
   const [selectedBooks, setSelectedBooks] = useState([]);
   const [midModalContents, setMidModalContents] = useState("");
   const [miniModalContents, setMiniModalContents] = useState("");
+  const [firstBookContents, setFirstBookContests] = useState("");
+  const [secondBookContents, setSecondBookContests] = useState("");
+
   const tabList = [
     { name: "대출", link: "/rent" },
     { name: "예약대출", link: "/reservation" },
@@ -27,7 +30,9 @@ const Rent = () => {
   ];
 
   const closeMiniModal = () => {
-    setMiniModalContents("");
+    setMiniModalContents(null);
+    setFirstBookContests(null);
+    setSecondBookContests(null);
   };
 
   return (
@@ -86,6 +91,8 @@ const Rent = () => {
           setSelectedBooks={setSelectedBooks}
           setMidModalContents={setMidModalContents}
           setMiniModalContents={setMiniModalContents}
+          setFirstBookContests={setFirstBookContests}
+          setSecondBookContests={setSecondBookContests}
         />
       )}
       {miniModalContents && (
@@ -93,7 +100,7 @@ const Rent = () => {
           <ModalContentsTitleWithMessage
             closeModal={closeMiniModal}
             title="대출 결과"
-            message={miniModalContents}
+            message={`${firstBookContents} ${secondBookContents || ""}`}
           />
         </MiniModal>
       )}
