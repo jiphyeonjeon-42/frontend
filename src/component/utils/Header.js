@@ -20,11 +20,6 @@ const Header = () => {
     setToggleLNB(!toggleLNB);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const getHost = () => {
-    return `${window.location.protocol}//${window.location.host}`;
-  };
-
   const nowDate = new Date();
   const expireDate = new Date(user.expire);
   if (nowDate > expireDate) window.location = `/login`;
@@ -60,7 +55,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              {user.id ? (
+              {user.isLogin ? (
                 <div>
                   <button
                     className="gnb__user__button"
@@ -86,47 +81,51 @@ const Header = () => {
                   </button>
                   {toggleLNB ? (
                     <div className="gnb__user__lnb">
-                      <div className="lnb__line__circle">
-                        <div className="lnb__line" />
-                        <div className="lnb__circle">
-                          <div className="lnb__circle__shape lnb__circle__rent" />
-                          <div className="lnb__circle__shape lnb__circle__user" />
-                          <div className="lnb__circle__shape lnb__circle__mypage" />
-                          <div className="lnb__circle__shape lnb__circle__logout" />
-                        </div>
-                      </div>
+                      <div className="lnb__line" />
                       <ul className="lnb__menu">
-                        <li className="lnb__rent">
-                          <Link
-                            className="lnb__text font-16 color-ff"
-                            to={{ pathname: `/rent` }}
-                          >
-                            대출/반납
-                          </Link>
-                        </li>
-                        <li className="lnb__user">
-                          <Link
-                            className="lnb__text font-16 color-ff"
-                            to={{ pathname: `/user` }}
-                          >
-                            DB 관리
-                          </Link>
-                        </li>
-                        <li className="lnb__mypage">
+                        {user.isAdmin ? (
+                          <li className="lnb__menu_button">
+                            <Link
+                              className="lnb__text font-16 color-ff"
+                              to={{ pathname: `/rent` }}
+                            >
+                              대출/반납
+                            </Link>
+                            <div className="lnb__circle" />
+                          </li>
+                        ) : (
+                          ``
+                        )}
+                        {user.isAdmin ? (
+                          <li className="lnb__menu_button">
+                            <Link
+                              className="lnb__text font-16 color-ff"
+                              to={{ pathname: `/user` }}
+                            >
+                              DB 관리
+                            </Link>
+                            <div className="lnb__circle" />
+                          </li>
+                        ) : (
+                          ``
+                        )}
+                        <li className="lnb__menu_button">
                           <Link
                             className="lnb__text font-16 color-ff"
                             to={{ pathname: `/mypage` }}
                           >
                             마이페이지
                           </Link>
+                          <div className="lnb__circle" />
                         </li>
-                        <li className="lnb__logout">
+                        <li className="lnb__menu_button">
                           <Link
                             className="lnb__text font-16 color-ff"
                             to={{ pathname: `/logout` }}
                           >
                             로그아웃
                           </Link>
+                          <div className="lnb__circle" />
                         </li>
                       </ul>
                     </div>

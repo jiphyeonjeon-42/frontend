@@ -126,30 +126,15 @@ a:active {
   right: 0.3rem;
 }
 
-.lnb__line__circle {
-  position: relative;
-  margin: 0 0 0 0.9rem;
-}
-
 .lnb__line {
   position: relative;
-  height: 15.5rem;
   width: 0;
   border-right: solid 0.1rem #fff;
   top: -1rem;
-  left: 0.3rem;
+  right: 0.3rem;
 }
 
 .lnb__circle {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  top: -16.4rem;
-}
-
-.lnb__circle__shape {
-  position: relative;
   width: 0.7rem;
   height: 0.7rem;
   border: 0;
@@ -158,28 +143,14 @@ a:active {
   border-radius: 100%;
 }
 
-.lnb__circle__rent {
-  top: 3.3rem;
-}
-
-.lnb__circle__user {
-  top: 6.6rem;
-}
-
-.lnb__circle__mypage {
-  top: 9.9rem;
-}
-
-.lnb__circle__logout {
-  top: 13.2rem;
-}
-
 .lnb__menu {
   list-style: none;
   padding-inline-start: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  position: relative;
+  left: 0.1rem;
 }
 
 .lnb__text {
@@ -191,6 +162,7 @@ a:active {
   letter-spacing: normal;
   text-align: right;
   opacity: 0.8;
+  margin-right: 1rem;
 }
 
 .lnb__text:hover {
@@ -198,20 +170,10 @@ a:active {
   font-weight: bold;
 }
 
-.lnb__rent {
-  margin-top: 1.4rem;
-}
-
-.lnb__user {
+.lnb__menu_button {
   margin-top: 1.6rem;
-}
-
-.lnb__mypage {
-  margin-top: 1.6rem;
-}
-
-.lnb__logout {
-  margin-top: 1.6rem;
+  display: flex;
+  align-items: center;
 }
 
 @media screen and (max-width: 1199px) {
@@ -254,50 +216,12 @@ a:active {
     margin: 0.6rem 0 0 0.8rem;
   }
 
-  .lnb__line {
-    height: 14.2rem;
-    top: -1rem;
-    left: 0.3rem;
-  }
-
   .lnb__circle {
-    top: -16.4rem;
-  }
-
-  .lnb__circle__shape {
     width: 0.7rem;
     height: 0.7rem;
   }
 
-  .lnb__circle__rent {
-    top: 4.3rem;
-  }
-
-  .lnb__circle__user {
-    top: 7.1rem;
-  }
-
-  .lnb__circle__mypage {
-    top: 9.8rem;
-  }
-
-  .lnb__circle__logout {
-    top: 12.6rem;
-  }
-
-  .lnb__rent {
-    margin-top: 1.4rem;
-  }
-
-  .lnb__user {
-    margin-top: 1.4rem;
-  }
-
-  .lnb__mypage {
-    margin-top: 1.4rem;
-  }
-
-  .lnb__logout {
+  .lnb__menu_button {
     margin-top: 1.4rem;
   }
 }
