@@ -4,26 +4,18 @@ import "../../css/UserUsageInfo.css";
 
 const UserUsageInfo = ({ user }) => {
   const today = new Date();
-  const oneWeekLater = new Date(today);
-  const oneWeekAgo = new Date(today);
-  const twoDaysLater = new Date(today);
-  const twoDaysAgo = new Date(today);
-  oneWeekLater.setDate(oneWeekLater.getDate() + 7);
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  twoDaysLater.setDate(twoDaysLater.getDate() + 2);
-  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
 
   const convertDatetoString = date => {
-    let overDueDate = "";
+    let stringDate = "";
 
-    overDueDate += date.getFullYear();
-    overDueDate += "-";
-    overDueDate += date.getMonth() + 1 < 10 ? "0" : "";
-    overDueDate += date.getMonth() + 1;
-    overDueDate += "-";
-    overDueDate += date.getDate() < 10 ? "0" : "";
-    overDueDate += date.getDate();
-    return overDueDate.substring(2);
+    stringDate += date.getFullYear();
+    stringDate += "-";
+    stringDate += date.getMonth() + 1 < 10 ? "0" : "";
+    stringDate += date.getMonth() + 1;
+    stringDate += "-";
+    stringDate += date.getDate() < 10 ? "0" : "";
+    stringDate += date.getDate();
+    return stringDate;
   };
 
   return (
@@ -45,13 +37,14 @@ const UserUsageInfo = ({ user }) => {
                 <div className="user-usage-info__book-title font-18-bold color-54">
                   {`${lending.title}`}
                 </div>
-                {lending.dueDate < today ? (
+                {lending.duedate.substring(0, 10) <
+                convertDatetoString(today) ? (
                   <div className="font-16 color-red">
-                    {`반납 예정일 : ${convertDatetoString(lending.dueDate)}`}
+                    {`반납 예정일 : ${lending.duedate.substring(0, 10)}`}
                   </div>
                 ) : (
                   <div className="font-16 color-54">
-                    {`반납 예정일 : ${convertDatetoString(lending.dueDate)}`}
+                    {`반납 예정일 : ${lending.duedate.substring(0, 10)}`}
                   </div>
                 )}
               </div>
@@ -113,7 +106,7 @@ UserUsageInfo.propTypes = {
       }),
     ),
     lendings: PropTypes.arrayOf(
-      PropTypes.shape({ dueDate: PropTypes.string, title: PropTypes.string }),
+      PropTypes.shape({ duedate: PropTypes.string, title: PropTypes.string }),
     ),
   }).isRequired,
 };
