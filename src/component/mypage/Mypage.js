@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../../css/Mypage.css";
+import qs from "qs";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Login from "../../img/login_icon_white.svg";
@@ -11,12 +12,19 @@ import MypageRentedBook from "./MypageRentedBook";
 import MypageReservedBook from "./MypageReservedBook";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
+import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
+import getErrorMessage from "../utils/error";
 
 const Mypage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
   const [miniModalContent, setMiniModalContent] = useState("");
   const [deviceMode, setDeviceMode] = useState(window.innerWidth);
+  const location = useLocation();
+  const query = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
+  const [queryErrorCode, setQueryErrorCode] = useState(query.errorCode);
 
   useEffect(async () => {
     await axios
@@ -175,6 +183,19 @@ const Mypage = () => {
           />
         </MiniModal>
       ) : null}
+      {queryErrorCode && (
+        <MiniModal closeModal={() => setQueryErrorCode(null)}>
+          <ModalContentsTitleWithMessage
+            closeModal={() => setQueryErrorCode(null)}
+            title={
+              getErrorMessage("mypage", parseInt(queryErrorCode, 10)).title
+            }
+            message={
+              getErrorMessage("mypage", parseInt(queryErrorCode, 10)).content
+            }
+          />
+        </MiniModal>
+      )}
     </>
   );
 };
