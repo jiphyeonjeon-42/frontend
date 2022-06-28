@@ -22,11 +22,15 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
         const recommendCallSign =
           response.data?.isbnInBookInfo[0]?.callSign?.slice(0, -1);
 
-        const existedBooksInfo = sameInfo.filter(infoElement => {
+        const distincedElement = sameInfo.filter(infoElement => {
           return sameIsbn.filter(isbnElement => {
             return JSON.stringify(isbnElement) !== JSON.stringify(infoElement);
           });
         });
+        const existedBooksInfo =
+          !sameInfo.length || !sameIsbn.length
+            ? [...sameInfo, ...sameIsbn]
+            : distincedElement;
         setBookInfo({
           isConfirmedInfo: true,
           newBookBasicInfo: {
