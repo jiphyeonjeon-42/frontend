@@ -136,8 +136,7 @@ const MypageRentedBook = ({ rentInfo }) => {
 };
 
 MypageRentedBook.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  rentInfo: PropTypes.arrayOf(PropTypes.object.isRequired),
+  rentInfo: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 export default MypageRentedBook;

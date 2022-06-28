@@ -26,7 +26,7 @@ const Mypage = () => {
   });
   const [queryErrorCode, setQueryErrorCode] = useState(query.errorCode);
 
-  useEffect(async () => {
+  const getUserInfo = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/users/search`, {
         params: {
@@ -56,6 +56,19 @@ const Mypage = () => {
         setMiniModalContent(err.message);
         setIsMiniModalOpen(true);
       });
+  };
+
+  const closeModal = async () => {
+    if (isMiniModalOpen) {
+      await getUserInfo();
+      setIsMiniModalOpen(false);
+    } else if (queryErrorCode) {
+      setQueryErrorCode(null);
+    }
+  };
+
+  useEffect(async () => {
+    await getUserInfo();
   }, []);
 
   useEffect(() => {
@@ -190,21 +203,23 @@ const Mypage = () => {
         <div className="mypage-inquire-box-long">
           <MypageReservedBook
             reserveInfo={userInfo ? userInfo.reservations : null}
+            setIsMiniModalOpen={setIsMiniModalOpen}
+            setMiniModalContent={setMiniModalContent}
           />
         </div>
       </div>
       {isMiniModalOpen ? (
-        <MiniModal closeModal={() => setIsMiniModalOpen(false)}>
+        <MiniModal closeModal={closeModal}>
           <ModalContentsOnlyTitle
-            closeModal={() => setIsMiniModalOpen(false)}
+            closeModal={closeModal}
             title={miniModalContent}
           />
         </MiniModal>
       ) : null}
       {queryErrorCode && (
-        <MiniModal closeModal={() => setQueryErrorCode(null)}>
+        <MiniModal closeModal={closeModal}>
           <ModalContentsTitleWithMessage
-            closeModal={() => setQueryErrorCode(null)}
+            closeModal={closeModal}
             title={
               getErrorMessage("mypage", parseInt(queryErrorCode, 10)).title
             }

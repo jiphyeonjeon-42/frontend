@@ -10,6 +10,7 @@ function EditEmail() {
   const history = useHistory();
   const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
   const [miniModalContent, setMiniModalContent] = useState("");
+  const [isGoBack, setIsGoBack] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [newEmail, setNewEmail] = useState("");
 
@@ -28,14 +29,19 @@ function EditEmail() {
         email: newEmail,
       })
       .then(() => {
-        history.goBack();
         setMiniModalContent("이메일 변경 성공");
         setIsMiniModalOpen(true);
+        setIsGoBack(true);
       })
       .catch(err => {
         setMiniModalContent(err.message);
         setIsMiniModalOpen(true);
       });
+  };
+
+  const closeModal = () => {
+    setIsMiniModalOpen(false);
+    if (isGoBack) history.goBack();
   };
 
   useEffect(async () => {
@@ -68,34 +74,38 @@ function EditEmail() {
         </div>
         <div className="mypage-edit-email-curr_email">
           <span className="font-14-bold color-2d">현재 이메일</span>
-          <span className="font-14">{userInfo ? userInfo.email : "-"}</span>
+          <span className="font-14 text-center">
+            {userInfo ? userInfo.email : "-"}
+          </span>
         </div>
         <form onSubmit={onSubmitUpdate}>
-          <div className="mypage-edit-email-new_email">
+          <div className="mypage-edit-email-new_email font-14">
             <span className="font-14-bold color-2d">새로운 이메일</span>
             <input
               value={newEmail}
               type="email"
               onChange={onChangeInput}
               placeholder="이메일을 입력해주세요"
-              // eslint-disable-next-line no-return-assign
-              onFocus={e => (e.target.placeholder = "")}
-              // eslint-disable-next-line no-return-assign
-              onBlur={e => (e.target.placeholder = "이메일을 입력해주세요")}
+              onFocus={e => {
+                e.target.placeholder = "";
+              }}
+              onBlur={e => {
+                e.target.placeholder = "이메일을 입력해주세요";
+              }}
             />
           </div>
           <div className="mypage-edit-email-button">
-            <button className="font-14 " type="submit">
+            <button className="font-14" type="submit">
               변경
             </button>
           </div>
         </form>
       </div>
       {isMiniModalOpen ? (
-        <MiniModal closeModal={() => setIsMiniModalOpen(false)}>
+        <MiniModal closeModal={closeModal}>
           <ModalContentsOnlyTitle
             title={miniModalContent}
-            closeModal={() => setIsMiniModalOpen(false)}
+            closeModal={closeModal}
           />
         </MiniModal>
       ) : null}

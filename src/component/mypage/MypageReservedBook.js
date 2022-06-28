@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../css/MypageReservedBook.css";
 import axios from "axios";
 import PropTypes from "prop-types";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 
-const MypageReservedBook = ({ reserveInfo }) => {
-  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
-  const [miniModalContent, setMiniModalContent] = useState("");
-
+const MypageReservedBook = ({
+  reserveInfo,
+  setIsMiniModalOpen,
+  setMiniModalContent,
+}) => {
   const onClickCancle = async id => {
     await axios
       .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
@@ -148,21 +147,14 @@ const MypageReservedBook = ({ reserveInfo }) => {
           </div>
         </div>
       ) : null}
-      {isMiniModalOpen ? (
-        <MiniModal closeModal={() => setIsMiniModalOpen(false)}>
-          <ModalContentsOnlyTitle
-            title={miniModalContent}
-            closeModal={() => setIsMiniModalOpen(false)}
-          />
-        </MiniModal>
-      ) : null}
     </div>
   );
 };
 
 MypageReservedBook.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  reserveInfo: PropTypes.arrayOf(PropTypes.object.isRequired),
+  reserveInfo: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  setIsMiniModalOpen: PropTypes.func.isRequired,
+  setMiniModalContent: PropTypes.func.isRequired,
 };
 
 export default MypageReservedBook;
