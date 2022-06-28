@@ -42,7 +42,8 @@ function EditEmail() {
     await axios
       .get(`${process.env.REACT_APP_API}/users/search`, {
         params: {
-          nickname: JSON.parse(window.localStorage.getItem("user")).userId,
+          nicknameOrEmail: JSON.parse(window.localStorage.getItem("user"))
+            .userId,
         },
       })
       .then(res => setUserInfo(res.data.items[0]))
