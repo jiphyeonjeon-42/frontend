@@ -50,6 +50,26 @@ const registerPostErrorCase = errorCode => {
   }
 };
 
+const mypagePostErrorCase = errorCode => {
+  switch (errorCode) {
+    case 105:
+      return {
+        title: "이미 인증된 회원입니다.",
+        content: "",
+      };
+    case 111:
+      return {
+        title: "이전에 연결된 계정이 있습니다.",
+        content: "로그인 페이지에서 42 Intra 로그인을 해주세요.",
+      };
+    default:
+      return {
+        title: "에러",
+        content: "예상치 못한 오류가 발생했습니다",
+      };
+  }
+};
+
 const getErrorMessage = (apiName, errorCode) => {
   switch (apiName) {
     case "lendings":
@@ -60,6 +80,8 @@ const getErrorMessage = (apiName, errorCode) => {
       return reservationPostErrorCase(errorCode);
     case "register":
       return registerPostErrorCase(errorCode);
+    case "mypage":
+      return mypagePostErrorCase(errorCode);
     default:
       return "예상치 못한 오류가 발생했습니다";
   }
