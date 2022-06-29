@@ -37,7 +37,7 @@ const Register = () => {
 
   const validateInput = e => {
     const passwordRegex = new RegExp(
-      "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@!%*#?&])[A-Za-z\\d$@!%*#?&]{10,42}$",
+      "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$&+,:;=?@#|'<>.^*()%!-])[A-Za-z\\d$&+,:;=?@#|'<>.^*()%!-]{10,42}$",
     );
     const { value, name } = e.target;
     switch (name) {
