@@ -20,7 +20,7 @@ const WishBook = () => {
       </a>
       <a
         href={process.env.REACT_APP_E_BOOK_LIBRARY}
-        className="e- font-20 color-ff"
+        className="e-book_library__button font-20 color-ff"
       >
         전자도서관에서 찾아보기
       </a>
