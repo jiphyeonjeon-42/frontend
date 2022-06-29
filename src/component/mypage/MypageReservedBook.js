@@ -10,7 +10,7 @@ const MypageReservedBook = ({
 }) => {
   const onClickCancle = async id => {
     await axios
-      .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
+      .patch(`${process.env.REACT_APP_API}/reservations/cancle/${id}`)
       .then(() => {
         setMiniModalContent("예약 취소 성공");
         setIsMiniModalOpen(true);
