@@ -46,7 +46,7 @@ const ReservedModalContents = ({
   const deleteReservation = async () => {
     await axios
       .patch(
-        `${process.env.REACT_APP_API}/reservations/cancle/${reservedInfo.reservationsId}`,
+        `${process.env.REACT_APP_API}/reservations/cancel/${reservedInfo.reservationsId}`,
       )
       .then(() => {
         setMiniModalContents("success");

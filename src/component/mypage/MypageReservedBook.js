@@ -8,9 +8,9 @@ const MypageReservedBook = ({
   setIsMiniModalOpen,
   setMiniModalContent,
 }) => {
-  const onClickCancle = async id => {
+  const onClickCancel = async id => {
     await axios
-      .patch(`${process.env.REACT_APP_API}/reservations/cancle/${id}`)
+      .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
       .then(() => {
         setMiniModalContent("예약 취소 성공");
         setIsMiniModalOpen(true);
@@ -70,10 +70,10 @@ const MypageReservedBook = ({
               </div>
             </div>
             <button
-              className="mypage-reserved__book-cancle_reserve font-14"
+              className="mypage-reserved__book-cancel_reserve font-14"
               type="button"
               onClick={() =>
-                onClickCancle(
+                onClickCancel(
                   reserveInfo[0].reservationId
                     ? reserveInfo[0].reservationId
                     : null,
@@ -132,10 +132,10 @@ const MypageReservedBook = ({
               </div>
             </div>
             <button
-              className="mypage-reserved__book-cancle_reserve font-14"
+              className="mypage-reserved__book-cancel_reserve font-14"
               type="button"
               onClick={() =>
-                onClickCancle(
+                onClickCancel(
                   reserveInfo[1].reservationId
                     ? reserveInfo[1].reservationId
                     : null,
