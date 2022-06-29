@@ -61,17 +61,13 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
       ) : (
         <div className="user-info__usage font-18 color-54">-</div>
       )}
-      {user.nickname ? (
-        <button
-          className="user-info__button"
-          type="button"
-          onClick={openEditModal}
-        >
-          <img className="user-info__button-img" src={UserEdit} alt="" />
-        </button>
-      ) : (
-        <div className="user-info__edit font-18 color-54">-</div>
-      )}
+      <button
+        className="user-info__button"
+        type="button"
+        onClick={openEditModal}
+      >
+        <img className="user-info__button-img" src={UserEdit} alt="" />
+      </button>
     </div>
   );
 };
