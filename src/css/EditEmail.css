@@ -36,6 +36,10 @@
   margin-bottom: 3.5rem;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .mypage-edit-email-new_email {
   width: 100%;
   display: grid;

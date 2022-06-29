@@ -10,8 +10,13 @@ function EditPassword() {
   const history = useHistory();
   const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
   const [miniModalContent, setMiniModalContent] = useState("");
+  const [isGoBack, setIsGoBack] = useState(false);
   const [newPw, setNewPw] = useState("");
   const [checkPw, setCheckPw] = useState("");
+
+  const onClickLeftArrow = () => {
+    history.goBack();
+  };
 
   const onChangeNewPw = e => {
     setNewPw(e.target.value);
@@ -33,9 +38,9 @@ function EditPassword() {
         password: newPw,
       })
       .then(() => {
-        history.goBack();
-        setMiniModalContent("비밀번호 변경에 성공");
+        setMiniModalContent("비밀번호 변경 성공");
         setIsMiniModalOpen(true);
+        setIsGoBack(true);
       })
       .catch(err => {
         setMiniModalContent(err.message);
@@ -43,8 +48,9 @@ function EditPassword() {
       });
   };
 
-  const onClickLeftArrow = () => {
-    history.goBack();
+  const closeModal = () => {
+    setIsMiniModalOpen(false);
+    if (isGoBack) history.goBack();
   };
 
   return (
@@ -68,12 +74,15 @@ function EditPassword() {
         <div className="mypage-edit-pw-new_pw">
           <span className="font-14-bold">새로운 비밀번호</span>
           <input
+            className="font-14"
             placeholder="비밀번호 입력"
             type="password"
-            // eslint-disable-next-line no-return-assign
-            onFocus={e => (e.target.placeholder = "")}
-            // eslint-disable-next-line no-return-assign
-            onBlur={e => (e.target.placeholder = "비밀번호 입력")}
+            onFocus={e => {
+              e.target.placeholder = "";
+            }}
+            onBlur={e => {
+              e.target.placeholder = "비밀번호 입력";
+            }}
             onChange={onChangeNewPw}
           />{" "}
         </div>
@@ -81,12 +90,15 @@ function EditPassword() {
           <div className="mypage-edit-pw-check_pw">
             <span className="font-14-bold">비밀번호 재입력</span>
             <input
+              className="font-14"
               placeholder="비밀번호 재입력"
               type="password"
-              // eslint-disable-next-line no-return-assign
-              onFocus={e => (e.target.placeholder = "")}
-              // eslint-disable-next-line no-return-assign
-              onBlur={e => (e.target.placeholder = "비밀번호 재입력")}
+              onFocus={e => {
+                e.target.placeholder = "";
+              }}
+              onBlur={e => {
+                e.target.placeholder = "비밀번호 재입력";
+              }}
               onChange={onChangeCheckPw}
             />
           </div>
@@ -101,10 +113,10 @@ function EditPassword() {
         </form>
       </div>
       {isMiniModalOpen ? (
-        <MiniModal closeModal={() => setIsMiniModalOpen(false)}>
+        <MiniModal closeModal={closeModal}>
           <ModalContentsOnlyTitle
             title={miniModalContent}
-            closeModal={() => setIsMiniModalOpen(false)}
+            closeModal={closeModal}
           />
         </MiniModal>
       ) : null}
