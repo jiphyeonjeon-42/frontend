@@ -29,6 +29,7 @@
   border-radius: 2.4rem;
   background-color: #545454;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .e-book_library__button {
@@ -40,6 +41,7 @@
   border-radius: 2.4rem;
   background-color: #545454;
   box-sizing: border-box;
+  text-align: center;
 }
 
 @media screen and (max-width:767px) {
