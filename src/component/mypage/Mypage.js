@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
 import "../../css/Mypage.css";
 import qs from "qs";
@@ -16,6 +16,7 @@ import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessag
 import getErrorMessage from "../utils/error";
 
 const Mypage = () => {
+  const history = useHistory();
   const [userInfo, setUserInfo] = useState(null);
   const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
   const [miniModalContent, setMiniModalContent] = useState("");
@@ -46,6 +47,7 @@ const Mypage = () => {
       setIsMiniModalOpen(false);
     } else if (queryErrorCode) {
       setQueryErrorCode(null);
+      history.push("/mypage");
     }
   };
 
@@ -78,6 +80,8 @@ const Mypage = () => {
       window.removeEventListener("resize", getWindowWidth);
     };
   }, []);
+
+  console.log(query.errorCode);
 
   return (
     <>
