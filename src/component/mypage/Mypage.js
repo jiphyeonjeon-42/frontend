@@ -33,25 +33,7 @@ const Mypage = () => {
           id: JSON.parse(window.localStorage.getItem("user")).id,
         },
       })
-      .then(res =>
-        setUserInfo(() => {
-          const rtnObj = Object.assign(res.data.items[0]);
-          switch (rtnObj.role) {
-            case 1:
-              rtnObj.role = "카뎃";
-              break;
-            case 2:
-              rtnObj.role = "사서";
-              break;
-            case 3:
-              rtnObj.role = "운영진";
-              break;
-            default:
-              rtnObj.role = "미인증";
-          }
-          return rtnObj;
-        }),
-      )
+      .then(res => setUserInfo(res.data.items[0]))
       .catch(err => {
         setMiniModalContent(err.message);
         setIsMiniModalOpen(true);
@@ -64,6 +46,19 @@ const Mypage = () => {
       setIsMiniModalOpen(false);
     } else if (queryErrorCode) {
       setQueryErrorCode(null);
+    }
+  };
+
+  const convertRoleToStr = roleInt => {
+    switch (roleInt) {
+      case 1:
+        return "카뎃";
+      case 2:
+        return "사서";
+      case 3:
+        return "운영진";
+      default:
+        return "미인증";
     }
   };
 
@@ -150,7 +145,9 @@ const Mypage = () => {
                   </span>
                   <span className="font-14-bold color-54">역할</span>
                   <span className="font-14">
-                    {userInfo.role ? userInfo.role : "No Data"}
+                    {userInfo.role
+                      ? convertRoleToStr(userInfo.role)
+                      : "No Data"}
                   </span>
                   <span className="font-14-bold color-54">슬랙ID</span>
                   <span className="font-14">
