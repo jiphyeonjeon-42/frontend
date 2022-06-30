@@ -85,7 +85,8 @@ const Information = () => {
             <Question
               isOpen={allOpen}
               question="실수로 다른 책을 예약했어요! 예약을 취소할 수 있을까요?"
-              answer="예약 취소는 아직 구현중인 기능입니다. 집현전 공식채널 #42seoul_club_42jiphyeonjeon 에 남겨주시면 처리해드리겠습니다! 예약은 1인당 최대 2권까지만 가능한 점 참고해주세요!"
+              answer=" 에서 예약 취소 가능합니다."
+              link="./mypage"
             />
             <Question
               isOpen={allOpen}
@@ -100,8 +101,8 @@ const Information = () => {
             <Question
               isOpen={allOpen}
               question="보고 싶은 책이 있는데 집현전에 없어요. 도서 신청을 할 수 있을까요?"
-              answer=" 여기를 누르세요!"
-              link
+              answer=" 를 클릭하세요."
+              link={process.env.REACT_APP_WISH}
             />
           </div>
         </section>
