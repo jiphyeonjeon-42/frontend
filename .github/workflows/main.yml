@@ -4,7 +4,7 @@ name: sub-branch
 on:
   push:
     branches:
-      - sub-branch develop   # sub-branch[branch name] 브랜치에서 push 이벤트가 일어났을 때 실행
+      - develop   # sub-branch[branch name] 브랜치에서 push 이벤트가 일어났을 때 실행
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: node_modules
-          key: ${{ runner.OS }}-master-build-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.OS }}-master-build-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
