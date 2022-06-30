@@ -54,6 +54,8 @@
   margin: 0 2rem 0 0;
   word-break: break-all;
   white-space:normal;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 .rent__modal-book-list__valid.disabled {
   color:#545454;
@@ -91,6 +93,8 @@
     max-height: 4rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 1.5rem;
+    font-weight: bold;
   }
   .rent__modal-book-list__valid {
     float: right;
@@ -98,13 +102,15 @@
   }
 
   .rent__modal-book-list .font-16 {
-    font-size: 1.3rem !important;
+    font-size: 1.2rem !important;
   }
 }
 
 
 @media screen and (max-width: 480px) {
   .rent__modal-book-list__title {
+    font-size: 1.4rem;
+    font-weight: bold;
     width: 70%;
   }
 }

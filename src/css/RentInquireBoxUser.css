@@ -47,6 +47,16 @@
   border-bottom: 0.1rem solid #a4a4a4;
 }
 
+.rent__inquire-box-user__id-undo > div:nth-child(1) {
+  overflow: hidden;
+}
+
+.rent__inquire-box-user__id-undo > div:nth-child(1) > span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .rent__inquire-box-user__id {
   margin-right: 2rem;
 }

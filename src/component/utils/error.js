@@ -1,5 +1,7 @@
 const lendingPostErrorCase = errorCode => {
   switch (errorCode) {
+    case 402:
+      return `대출 권한이 없는 사용자입니다. 사용자는 42 인증 후 대출이 가능합니다.`;
     case 403:
     case 404:
       return `대출이 불가능한 카뎃입니다.\n이미 2권 이상 대출했거나 연체패널티 기간입니다.`;

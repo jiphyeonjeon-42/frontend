@@ -11,7 +11,9 @@ const RentConfirm = ({ selectedUser, selectedBooks, setMidModalContents }) => {
     <section className="rent__confirm-button">
       <div className="rent__confirm-button__text font-16 color-a4">
         {selectedUser && selectedBooks.length > 0
-          ? `${selectedUser.nickname}님에게 ${selectedBooks[0].title}${
+          ? `${
+              selectedUser.nickname ? selectedUser.nickname : selectedUser.email
+            }님에게 ${selectedBooks[0].title}${
               selectedBooks[1] ? `, ${selectedBooks[1].title}` : ``
             }를 대출합니다.`
           : "정보를 입력해주세요."}

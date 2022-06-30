@@ -42,7 +42,7 @@ const RentModalBookList = ({
       disabled={isDisabled()}
     >
       <div className="rent__modal-book-list__name">
-        <span className="rent__modal-book-list__title font-18-bold color-54">
+        <span className="rent__modal-book-list__title color-54">
           {book.title ? book.title : `Book${book.id}`}
         </span>
         <span
