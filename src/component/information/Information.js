@@ -85,7 +85,7 @@ const Information = () => {
             <Question
               isOpen={allOpen}
               question="실수로 다른 책을 예약했어요! 예약을 취소할 수 있을까요?"
-              answer=" 마이페이지에서 예약 취소 가능합니다."
+              answer=" 에서 예약 취소 가능합니다."
               link="./mypage"
             />
             <Question
@@ -101,7 +101,7 @@ const Information = () => {
             <Question
               isOpen={allOpen}
               question="보고 싶은 책이 있는데 집현전에 없어요. 도서 신청을 할 수 있을까요?"
-              answer=" 여기를 누르세요!"
+              answer=" 를 클릭하세요."
               link={process.env.REACT_APP_WISH}
             />
           </div>
