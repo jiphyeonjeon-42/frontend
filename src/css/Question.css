@@ -41,6 +41,10 @@
   border: 0;
 }
 
+.url_text {
+  text-decoration: underline; 
+}
+
 @media screen and (max-width: 1199px) {
   .question__text {
     font-size: 1.8rem !important;
