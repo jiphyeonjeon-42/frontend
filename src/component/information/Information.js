@@ -101,7 +101,7 @@ const Information = () => {
               isOpen={allOpen}
               question="보고 싶은 책이 있는데 집현전에 없어요. 도서 신청을 할 수 있을까요?"
               answer=" 여기를 누르세요!"
-              link
+              link={process.env.REACT_APP_WISH}
             />
           </div>
         </section>
