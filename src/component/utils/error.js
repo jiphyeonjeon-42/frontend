@@ -64,6 +64,26 @@ const mypagePostErrorCase = errorCode => {
         title: "이전에 연결된 계정이 있습니다.",
         content: "로그인 페이지에서 42 Intra 로그인을 해주세요.",
       };
+    case 112:
+      return {
+        title: "42 API 접근을 거부하였습니다.",
+        content: "",
+      };
+    default:
+      return {
+        title: "에러",
+        content: "예상치 못한 오류가 발생했습니다",
+      };
+  }
+};
+
+const loginPostErrorCase = errorCode => {
+  switch (errorCode) {
+    case 112:
+      return {
+        title: "42 API 접근을 거부하였습니다.",
+        content: "",
+      };
     default:
       return {
         title: "에러",
@@ -84,6 +104,8 @@ const getErrorMessage = (apiName, errorCode) => {
       return registerPostErrorCase(errorCode);
     case "mypage":
       return mypagePostErrorCase(errorCode);
+    case "login":
+      return loginPostErrorCase(errorCode);
     default:
       return "예상치 못한 오류가 발생했습니다";
   }

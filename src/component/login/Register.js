@@ -2,12 +2,13 @@ import React, { useRef, useState } from "react";
 import qs from "qs";
 import "../../css/Register.css";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 import getErrorMessage from "../utils/error";
 
 const Register = () => {
+  const history = useHistory();
   const location = useLocation();
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -19,6 +20,7 @@ const Register = () => {
 
   const closeMiniModal = () => {
     setQueryErrorCode(null);
+    history.push("/register");
   };
 
   const [errorMessage, setErrorMessage] = useState({
