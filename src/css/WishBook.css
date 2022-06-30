@@ -23,19 +23,29 @@
 .wish-book__button {
   margin: 0;
   border: 0;
-  width: 26.5rem;
+  width: 30rem;
   height: 4.8rem;
   padding: 0.9rem 3.6rem 1rem;
   border-radius: 2.4rem;
-  background-color: #e63737;
+  background-color: #545454;
   box-sizing: border-box;
+  text-align: center;
+}
+
+.e-book_library__button {
+  margin-top: 3rem;
+  border: 0;
+  width: 30rem;
+  height: 4.8rem;
+  padding: 0.9rem 3.6rem 1rem;
+  border-radius: 2.4rem;
+  background-color: #545454;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 @media screen and (max-width:767px) {
-
   .wish-book__title {
     font-size: 2.7rem !important;
   }
-
-
 }
