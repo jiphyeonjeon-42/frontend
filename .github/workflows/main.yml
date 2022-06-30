@@ -4,7 +4,7 @@ name: sub-branch
 on:
   push:
     branches:
-      - sub-branch main   # sub-branch[branch name] 브랜치에서 push 이벤트가 일어났을 때 실행
+      - sub-branch develop   # sub-branch[branch name] 브랜치에서 push 이벤트가 일어났을 때 실행
 
 jobs:
   build:
@@ -23,10 +23,10 @@ jobs:
             ${{ runner.OS }}-
 
       - name: Install Dependencies # node module install
-        run: yarn
+        run: npm install
 
       - name: Build # project build
-        run: yarn build
+        run: npm run build
 
       - name: Deploy 
         env:
