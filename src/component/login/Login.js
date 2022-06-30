@@ -3,8 +3,14 @@ import "../../css/MainBanner.css";
 import "../../css/Banner.css";
 import "../../css/Login.css";
 import axios from "axios";
+import { useHistory, useLocation } from "react-router-dom";
+import qs from "qs";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
+import getErrorMessage from "../utils/error";
 
 const Login = () => {
+  const history = useHistory();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -13,6 +19,16 @@ const Login = () => {
     password: "",
   });
   const { id, password } = loginData;
+  const location = useLocation();
+  const query = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
+  const [queryErrorCode, setQueryErrorCode] = useState(query.errorCode);
+
+  const closeModal = async () => {
+    setQueryErrorCode(null);
+    history.push("/login");
+  };
 
   const onChange = e => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
@@ -60,6 +76,17 @@ const Login = () => {
 
   return (
     <main>
+      {queryErrorCode && (
+        <MiniModal closeModal={closeModal}>
+          <ModalContentsTitleWithMessage
+            closeModal={closeModal}
+            title={getErrorMessage("login", parseInt(queryErrorCode, 10)).title}
+            message={
+              getErrorMessage("login", parseInt(queryErrorCode, 10)).content
+            }
+          />
+        </MiniModal>
+      )}
       <section className="banner main-img">
         <div className="main-banner login-banner">
           <div className="login-main">
