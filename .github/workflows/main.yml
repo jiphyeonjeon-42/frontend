@@ -21,7 +21,17 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
-
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "REACT_APP_API=$REACT_APP_API" >> .env
+          echo "REACT_APP_WISH=$REACT_APP_WISH" >> .env
+          echo "REACT_APP_E_BOOK_LIBRARY=$REACT_APP_E_BOOK_LIBRARY" >> .env
+          echo "PORT=$PORT" >> .env
+        env:
+          REACT_APP_API: ${{ secrets.REACT_APP_API }}
+          REACT_APP_WISH: ${{ secrets.REACT_APP_WISH }}
+          REACT_APP_E_BOOK_LIBRARY: ${{ secrets.REACT_APP_E_BOOK_LIBRARY }}
+          PORT: ${{ secrets.PORT }}
       - name: Install Dependencies # node module install
         run: npm install
 
