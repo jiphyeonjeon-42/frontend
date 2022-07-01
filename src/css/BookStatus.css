@@ -1,0 +1,50 @@
+.book-status {
+  margin-bottom: 1.2rem;
+  display: flex;
+}
+
+.book-status__id {
+  width: 2rem;
+  margin-right: 3%;
+}
+
+.book-status__callSign {
+  margin-right: 4%;
+  width: 10rem;
+  text-align: center;
+}
+
+.book-status__status {
+  margin-right: 5%;
+  width: 6rem;
+  text-align: center;
+}
+
+.book-status__dueDate {
+  width: 5rem;
+  margin-right: 5%;
+  text-align: center;
+}
+
+.reservation-btn, .book-status__toggle {
+  margin-top: 0.3rem;
+}
+
+.reservation-btn {
+  background: none;
+  border: none;
+}
+
+.reservation-btn.cursor-pointer {
+  cursor: pointer;
+}
+
+.book-status__toggle-img {
+  margin-left: 1.2rem;
+  margin-top: 0.3rem;
+}
+
+.book-status__toggle-img-clicked {
+  margin-left: 1.2rem;
+  margin-top: 0.3rem;
+}

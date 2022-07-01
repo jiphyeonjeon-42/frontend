@@ -1,0 +1,85 @@
+.return-book__table-list {
+  display: flex;
+  width: 108rem;
+  margin-left: auto;
+  padding-top: 4rem;
+}
+
+.return-book__table-list__button {
+  width: 100%;
+  background: none;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  border-bottom: 0.1rem solid #a4a4a4;
+  padding-bottom: 4rem;
+  cursor: pointer;
+}
+
+.return-book__table-list__title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.return-book__table-list__arr {
+  width: 0.8rem;
+  height: 1.6rem;
+  margin-right: 4rem;
+  margin-left: auto;
+}
+
+.return-book__table-list__name {
+  width: 16.1rem;
+}
+
+.return-book__table-list__info {
+  margin-right: 6rem;
+}
+
+.re-callSign {
+  margin-right: 2.8rem;
+}
+
+.re-dueDate {
+  margin-right: 2.8rem;
+}
+
+
+@media screen and (max-width:1200px) {
+  .return-book__table-list {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width:767px) {
+  .return-book__table-list {
+    display: block;
+  }
+  
+  .return-book__table-list__name {
+    margin-bottom: 1.1rem;
+  }
+  .return-book__table-list__text {
+    padding-right: 2rem;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+}
+
+@media screen and (max-width:600px) {
+  .return-book__table-list__info > span {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width:480px) {
+  .return-book__table-list__info > span {
+    display: block;
+  }
+}

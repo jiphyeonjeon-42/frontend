@@ -1,0 +1,48 @@
+.inquire-box-title {
+  background-color: #545454;
+  height: 12rem;
+  max-width: 120rem;
+  min-width: 30rem;
+  border-radius: 6rem;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.inquire-box-title__icon {
+  height: 4rem;
+  margin: 0 2rem 0 6rem;
+}
+
+.inquire-box-title__text {
+  margin-right: 2.6rem;
+}
+
+.inquire-box-title__en {
+  margin-left: 1.6rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .inquire-box-title {
+    width: 100%;
+    height: 8rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .inquire-box-title {
+    height: 6rem;
+  }
+  .inquire-box-title__icon.short {
+    height: 3rem;
+    margin-left: 4rem;
+  }
+  .inquire-box-title__text.short {
+    display: none;
+  }
+  .inquire-box-title__en {
+    display: none;
+  }
+}

@@ -1,0 +1,20 @@
+<svg id="왼쪽넘기기_비활성화로시작_" data-name="왼쪽넘기기(비활성화로시작)" xmlns="http://www.w3.org/2000/svg" width="80" height="340" viewBox="0 0 80 340">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: rgba(0,0,0,0.4);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="오른쪽으로_넘기기" data-name="오른쪽으로 넘기기" transform="translate(44 182) rotate(180)">
+    <path id="패스_24" data-name="패스 24" class="cls-2" d="M12,24,0,12,12,0" transform="translate(12 24) rotate(180)"/>
+  </g>
+</svg>

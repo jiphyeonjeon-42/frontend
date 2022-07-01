@@ -1,0 +1,85 @@
+.banner {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  min-width: 36rem;
+}
+
+.main-img {
+  background-image: url("../img/main_bg.png");
+}
+
+.search-img {
+  background-image: url("../img/search_bg.png");
+}
+
+.information-img {
+  background-image: url("../img/information_bg.png");
+}
+
+.bookdetail-img {
+  background-image: url("../img/bookdetail_bg.png");
+}
+
+.admin-img {
+  background-image: url("../img/admin_bg.png");
+}
+
+.mypage-img {
+  background-image: url("../img/mypage_bg.png");
+}
+
+.banner-wrapper {
+  padding: 27rem 0rem 6rem 0rem;
+  min-width: 36rem;
+}
+
+.banner__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.banner__title__ko {
+  line-height: 1.48;
+}
+
+.banner__title__en {
+  margin-top: 1.2rem;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 1199px) {
+  .banner-wrapper {
+    padding: 22rem 0rem 5rem 0rem;
+  }
+
+  .banner__title__ko {
+    font-size: 4rem !important;
+  }
+
+  .banner__title__en {
+    margin-top: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .banner-wrapper {
+    padding: 13rem 0rem 3rem 0rem;
+  }
+
+  .banner__title__ko {
+    font-size: 3.2rem !important;
+  }
+
+  .banner__title__en {
+    margin-top: 0.6rem;
+    font-size: 1.4rem !important;
+  }
+}

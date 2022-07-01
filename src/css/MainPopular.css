@@ -1,0 +1,149 @@
+.main__popular {
+  margin-top: 24rem;
+  padding: 0;
+  margin-bottom: 20rem;
+  box-sizing: border-box;
+  height: 80rem;
+  overflow: hidden;
+}
+
+
+.main__popular__wrapper {
+  width: 70rem;
+  height: 75rem;
+  margin: 0 auto;
+}
+
+.main__popular__contents {
+  margin: 5rem auto 0;
+}
+
+.main__popular__content {
+  background-color: #f2f2f2;
+  padding: 0;
+  margin:0;
+  border-radius: 3rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: #f2f2f2 solid 2rem;
+}
+
+.main__popular__books {
+  margin: 0 1rem;
+}
+
+.main__popular__side {
+  height: 37rem;
+  padding: 0;
+  border: 0;
+  top: -42rem;
+}
+
+.main__popular__left {
+  float: left;
+  position: relative;
+  left:-20rem;
+}
+
+.main__popular__right{
+  float: right;
+  position: relative;
+  right:-20rem;
+}
+
+.main__popular__center {
+  display: flex;
+  flex-direction: row;
+}
+
+.main__popular__contents::after {
+  content: " ";
+  display: block;
+  position: relative;
+  background-color: #d5d5d5;
+  z-index: 0;
+  left:0;
+  right:0;
+  top:3.7rem;
+  height: 0.2rem;
+}
+
+.main__popular__basic-book {
+  display: block;
+  margin :0 2rem 1.5rem ;
+  padding: 0;
+  width: 14rem;
+  height: 10rem;
+  border: solid 1rem #ffffff;
+  border-radius: 2rem;
+  background-color: #ffffff;
+  text-align: left;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.main__popular__basic-book.center{
+  width: 66rem;
+  font: inherit;
+}
+
+.main__popular__basic-book.selected {
+  height: 21rem;
+}
+
+.main__popular__basic-book:last-child {
+  margin-bottom: 0;
+}
+
+.main__popular__basic-img {
+  width: 15rem;
+  float: left;
+}
+
+.main__popular__summary {
+  display: block;
+  overflow: hidden;
+  font:inherit;
+}
+
+.main__popular__rank {
+  float:left;
+  margin: 1rem 2rem;
+}
+
+.main__popular__detail {
+  display: block;
+  margin: 0 0 1rem 17rem;
+  line-height: 200%;
+}
+.main__popular__detail.hidden {
+  display: none;
+}
+
+.main__popular__pagination {
+  width:7.6rem;
+  height: 0.4rem;
+  position: relative;
+  background-color: #2d2d2d;
+  z-index: 1;
+  top:4rem;
+}
+
+@media screen and (max-width:767px) {
+  .main__popular__wrapper {
+    width:90%;
+  }
+
+   .main__popular__side{
+    display: none;
+  }
+
+  .main__popular__content.center {
+    width:95%;
+    margin:auto;
+  }
+
+  .main__popular__pagination {
+    width:10%
+  }
+}

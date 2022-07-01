@@ -1,0 +1,40 @@
+.returnbook-main {
+  margin:0 auto;
+}
+.returnbook-title {
+  position: relative;
+  padding: 8.9rem 15rem 6rem 15rem;
+  min-width: 90rem;
+  height: 10.7rem;
+  z-index: 2;
+}
+.return-book-subtitle {
+  min-width: 90rem;
+  padding: 11.8rem 15rem 12rem 15rem;
+  margin: auto;
+}
+
+.return-book-table__inquire-box {
+  max-width: 120rem;
+  min-width: 30rem;
+  background-color: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  position: relative;
+  z-index: 0;
+  top: -12rem;
+  border-bottom-left-radius: 6.1rem;
+  border-bottom-right-radius: 6.1rem;
+  padding: 9rem 0 5.1rem 0;
+}
+
+.return-book-table__pagination {
+  margin-top: 3.6rem;
+}
+
+@media screen and (max-width: 120rem) {
+  .reserved-loan-table__inquire-box {
+    width:100%;
+  }  
+}

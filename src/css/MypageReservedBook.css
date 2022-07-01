@@ -1,0 +1,86 @@
+.mypage-reserved__book {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 28rem;
+}
+
+.mypage-reserved__book-wrapper {
+  display: flex;
+}
+
+.mypage-reserved__book-image {
+  height: 28rem;
+  max-width: 20rem;
+}
+
+.mypage-reserved__book-info {
+  position: relative;
+  width: 17.5rem;
+  margin-left: 3rem;
+}
+
+.mypage-reserved__book-info-titleBox {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid;
+  padding-bottom: 1rem;
+  white-space: normal;
+}
+
+.mypage-reserved__book-info-title {
+  margin-bottom: 1rem;
+}
+
+.mypage-reserved__book-info-rent {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  row-gap: 1rem;
+}
+
+.mypage-reserved__book-info-reserve {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.mypage-reserved__book-cancel_reserve {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  background: none;
+}
+
+.mypage-reserved__book-cancel_reserve:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 950px) {
+  .mypage-reserved__book {
+    justify-content: space-evenly;
+  }
+  .mypage-reserved__book-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mypage-reserved__book-info {
+    width: 28rem;
+    margin-left: 0rem;
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mypage-reserved__book {
+    flex-direction: column;
+    row-gap: 5rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .mypage-reserved__book-info {
+    width: 100%;
+  }
+}

@@ -1,0 +1,112 @@
+.main-new {
+  width: 100%;
+  height: 69.5rem;
+  margin-top: 24rem;
+  position: relative;
+}
+
+.main-new__wrapper {
+  margin: auto;
+}
+
+.main-new__arrow {
+  width: 8rem;
+  height: 34rem;
+  margin: 0;
+  position: absolute;
+  top: 27.5rem;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: none;
+  z-index: 1;
+  padding: 0;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: 0.3s;
+}
+
+.main-new__arrow.right {
+  left: unset;
+  right: 0;
+}
+
+.main-new__arrow:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.main-new__booklist {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10rem;
+}
+
+.main-new__books {
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: 0.3s;
+}
+
+.main-new__book {
+  text-align: none;
+  width: 21.6rem;
+  height: 32rem;
+  display: inline-block;
+  margin-left: 2rem;
+  vertical-align: top;
+}
+
+.main-new__book:hover {
+  margin-top: 1rem;
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: 0.3s;
+}
+
+.main-new__book-img {
+  width: 21.6rem;
+  height: 32rem;
+}
+
+.main-new__book:first-child {
+  margin-left: 0;
+}
+
+.main-new__book:nth-child(even) {
+  margin-top: 2rem;
+}
+
+.main-new__book:nth-child(even):hover {
+  margin-top: 1rem;
+}
+
+.main-new__books_pagination {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.main-new__books_pag_circle {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background-color: #a4a4a4;
+  display: inline-block;
+  margin-left: 1.2rem;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: transparent;
+}
+
+.main-new__books_pag_circle:first-child {
+  margin: 0;
+}
+
+.main-new__books_pag_circle.selected {
+  background-color: #2d2d2d;
+}

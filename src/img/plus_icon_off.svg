@@ -1,0 +1,9 @@
+<svg id="plus_icon_off" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#e63737;stroke-width:4px}
+        </style>
+    </defs>
+    <path id="선_23" data-name="선 23" class="cls-1" transform="translate(0 10)" d="M0 0h20"/>
+    <path id="선_26" data-name="선 26" class="cls-1" transform="translate(10)" d="M0 0v20"/>
+</svg>

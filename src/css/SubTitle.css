@@ -1,0 +1,61 @@
+.subtitle-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 17.5rem;
+  margin: 0 2rem;
+}
+
+.subtitle-start {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 4rem;
+  height: 17.5rem;
+}
+
+.subtitle__line {
+  width: 4rem;
+  height: 0.4rem;
+  background-color: #a4a4a4;
+  margin-bottom: 4.2rem;
+  padding: 0;
+  border: 0;
+}
+
+.subtitle__title {
+  margin: 0;
+  font-size: 4rem;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.48;
+  letter-spacing: normal;
+  color: #2d2d2d;
+  word-break: keep-all;
+  white-space: normal;
+}
+
+.subtitle__description {
+  margin: 1.6rem 0 0 0;
+  font-size: 1.6rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #545454;
+  word-break: keep-all;
+  white-space: normal;
+}
+
+@media screen and (max-width: 767px) {
+  .subtitle__line {
+    margin-bottom: 3rem;
+  }
+  .subtitle__title {
+    font-size: 3rem;
+  }
+}

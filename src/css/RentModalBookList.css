@@ -1,0 +1,116 @@
+.rent__modal-book-list {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 100%;
+  padding: 2.1rem 0 2.1rem 0;
+  margin: 0 auto 0 auto;
+  align-items: center;
+  text-align: left;
+  border-bottom: 1px solid #a4a4a4;
+  cursor: pointer;
+  background: none;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  word-break: break-all;
+  white-space:inherit;
+}
+.rent__modal-book-list.disabled {
+  opacity: 0.7;
+}
+
+.rent__modal-book-list:hover {
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  -o-transform: scale(1.01);
+  transform: scale(1.01);
+}
+
+.rent__modal-book-list__info {
+  word-break: break-all;
+  white-space: normal;
+  padding-right:2rem;
+  max-height: 3.1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rent__modal-book-list__name {
+  width: 100%;
+  margin-bottom: 20px;
+
+}
+
+.rent__modal-book-list__title {
+  margin: 0 2rem 0 0;
+  word-break: break-all;
+  white-space:normal;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.rent__modal-book-list__valid.disabled {
+  color:#545454;
+  margin:0;
+}
+
+.rent__modal-book-list__author {
+  display: inline-block;
+
+}
+.rent__modal-book-list__separator {
+  margin: 0 12px 0 12px;
+}
+
+.rent__modal-book-list__arrow {
+  width: 8px;
+  height: 16px;
+  position: absolute;
+  top:45%;
+  right:0;
+}
+
+@media screen and (max-width: 767px) {
+  .rent__modal-book-list {
+    /* padding: 1.4rem 0 1.4rem 0; */
+    height: 13rem;
+  }
+  .rent__modal-book-list__name {
+    margin-bottom: 1.4rem;
+  }
+  .rent__modal-book-list__title {
+    display: inline-block;
+    margin: 0;
+    width: 80%;
+    max-height: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .rent__modal-book-list__valid {
+    float: right;
+    margin-right: 1rem;
+  }
+
+  .rent__modal-book-list .font-16 {
+    font-size: 1.2rem !important;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .rent__modal-book-list__title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    width: 70%;
+  }
+}

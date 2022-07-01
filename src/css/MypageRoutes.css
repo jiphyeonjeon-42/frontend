@@ -1,0 +1,25 @@
+.mypage-wrapper {
+  min-width: 360px;
+  padding: 0 15rem 0 15rem;
+}
+
+.mypage-section {
+  position: relative;
+  min-width: 90rem;
+  max-width: 95rem;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .mypage-wrapper {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .mypage-section {
+    max-width: unset;
+    min-width: unset;
+    width: 90%;
+  }
+}

@@ -1,0 +1,124 @@
+.rent__inquire-box-user {
+  width: 120rem;
+  min-width: 30rem;
+  background-color: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  position: relative;
+  z-index: 0;
+  top: -6rem;
+  border-bottom-left-radius: 6.1rem;
+  border-bottom-right-radius: 6.1rem;
+  padding: 6rem 0 0 0;
+}
+
+.rent__inquire-box-user-active {
+  width: 108rem;
+  margin-left: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.rent__inquire-box-user__add-button {
+  height: 10rem;
+  width: 100%;
+  border: 0;
+  margin: 0;
+  background: none;
+  font-size: 2.8rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.rent__inquire-box-user__undo-button {
+  all: unset;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 7.5rem 0 auto;
+  cursor: pointer;
+}
+
+.rent__inquire-box-user__id-undo {
+  display: flex;
+  align-items: center;
+  padding: 3rem 0 4rem 0;
+  border-bottom: 0.1rem solid #a4a4a4;
+}
+
+.rent__inquire-box-user__id-undo > div:nth-child(1) {
+  overflow: hidden;
+}
+
+.rent__inquire-box-user__id-undo > div:nth-child(1) > span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rent__inquire-box-user__id {
+  margin-right: 2rem;
+}
+
+.rent__inquire-box-user__lendings {
+  display: flex;
+  padding: 2rem 0 2rem 0;
+  border-bottom: 0.1rem solid #a4a4a4;
+}
+
+.rent__inquire-box-user__reservations {
+  display: flex;
+  padding: 2rem 0 4rem 0;
+}
+
+.user__book-cnt {
+  width: 17.6rem;
+}
+
+.user__book-info__total {
+  flex-grow: 1;
+}
+
+
+.user__book-info {
+  margin-bottom: 2rem;
+  padding: 0 3rem 1.4rem 0;
+  border-bottom: 0.1rem solid #a4a4a4;
+}
+
+.user__book-info:last-child{
+  margin:0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.user__book-info__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user__reservations-info {
+  margin-left: 28rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .rent__inquire-box-user {
+    width: 100%;
+  }
+
+  .rent__inquire-box-user-active {
+    width:90%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .rent__inquire-box-user__lendings {
+    display: block;
+  }
+
+    .user__book-cnt {
+      margin-bottom: 4rem;
+    }
+}

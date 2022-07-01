@@ -1,0 +1,12 @@
+.loader {
+  height: 6000px;
+}
+
+.books {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  white-space: normal;
+  flex-flow: row wrap;
+}

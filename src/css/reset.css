@@ -1,0 +1,261 @@
+html {
+  font-size: 62.5%;
+}
+
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+textarea {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  appearance: none;
+  background-color: transparent;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+  background-color: #f9f9f9;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.login-form input:focus {
+  outline: none;
+}
+a {
+  color: #2e363e;
+  text-decoration: none;
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+/* styleguide CSS */
+
+.color-81 {
+  color: #818181;
+}
+
+.color-2d {
+  color: #2d2d2d;
+}
+
+.color-d5 {
+  color: #d5d5d5;
+}
+
+.color-54 {
+  color: #545454;
+}
+
+.color-ff {
+  color: #ffffff;
+}
+.color-a4 {
+  color: #a4a4a4;
+}
+
+.color-e8 {
+  color: #e8e8e8;
+}
+
+.color-red {
+  color: #e63737;
+}
+
+.font-48-bold {
+  font-size: 4.8rem;
+  font-weight: bold;
+}
+
+.font-40-bold {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.font-32-bold {
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+.font-28-bold {
+  font-size: 2.8rem;
+  font-weight: bold;
+}
+
+.font-22-bold {
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.font-20-bold {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.font-20 {
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.font-18-bold--letterspacing {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: -0.36px;
+}
+
+.font-18 {
+  font-size: 1.8rem;
+  font-weight: normal;
+}
+
+.font-18-bold {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.font-16-bold {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.font-16 {
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+.font-16-light {
+  font-size: 1.6rem;
+  font-weight: lighter;
+}
+
+.font-14-bold {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.font-14 {
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+
+.font-12 {
+  font-size: 1.2rem;
+  font-weight: normal;
+}

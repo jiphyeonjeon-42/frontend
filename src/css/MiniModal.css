@@ -1,0 +1,70 @@
+@import url(./Modal.css);
+
+.modal__container.mini {
+  width: 80rem;
+  height: 46rem;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.modal__close-button.mini {
+  display: block;
+  float: right;
+  top: 0;
+  right: 0;
+}
+
+.mini-modal__text {
+  height: 29rem;
+  position: relative;
+}
+
+.mini-modal__text:before {
+  content: " ";
+  background-color: #a4a4a4;
+  position: absolute;
+  top: 0;
+  width: 6.5rem;
+  height: 0.44rem;
+}
+
+.mini-modal__text__title {
+  padding-top: 5rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: #2d2d2d;
+}
+
+.mini-modal__text__message {
+  margin-top: 4rem;
+  width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.modal__button.mini {
+  float: right;
+}
+
+
+.modal__button.confirm.mini {
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .modal__wrapper {
+    padding: 8rem 4rem;
+  }
+  .modal__container.mini {
+    width: 100%;
+    height: auto;
+  }
+
+  .mini-modal__text__title {
+    line-height: normal;
+  }
+}

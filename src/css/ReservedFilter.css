@@ -1,0 +1,48 @@
+.reserved-filter {
+  padding-right: 3rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reserved-filter-wrapper {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.filter-button {
+  cursor: pointer;
+}
+
+.proceeding {
+  background: none;
+  padding: 0;
+  border: 0;
+}
+
+.finish {
+  background: none;
+  padding: 0;
+  border: 0;
+  margin-left: 2.4rem;
+}
+
+.filter__icon {
+  margin-right: 1.2rem;
+}
+
+@media screen and (max-width: 480px) {
+  .reserved-filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-bottom: 0;
+  }
+
+  .filter-button {
+    text-align: end;
+    margin-bottom: 1rem;
+  }
+  .finish {
+    margin-left: 0rem !important;
+  }
+}

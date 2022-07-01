@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="76.707" height="20">
+    <text transform="translate(0 16)" style="fill:#a4a4a4;font-size:14px;font-family:NotoSansCJKkr-Regular,Noto Sans CJK KR"><tspan x="0" y="0">자세히보기</tspan></text>
+    <g data-name="오른쪽으로 넘기기">
+        <path data-name="패스 24" d="M4 8 0 4l4-4" transform="rotate(180 38 7.5)" style="fill:none;stroke:#a4a4a4;stroke-linecap:round;stroke-miterlimit:10"/>
+    </g>
+</svg>

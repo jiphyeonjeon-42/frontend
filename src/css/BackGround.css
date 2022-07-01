@@ -1,0 +1,41 @@
+.bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-width: 1200px;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+.not-found-bg {
+  background-color: #2d2d2d;
+  height: 100vh;
+}
+
+.information-bg {
+  background-image: url("../img/information_bg.png");
+  height: 500px;
+}
+
+.main-bg {
+  background-image: url("../img/main_bg.png");
+  height: 938px;
+}
+
+.search-bg {
+  background-image: url("../img/search_bg.png");
+  height: 704px;
+}
+
+.bookdetail-bg {
+  background-image: url("../img/bookdetail_bg.png");
+  height: 500px;
+}
+
+.admin-bg {
+  background-image: url("../img/admin_bg.png");
+  height: 500px;
+}
