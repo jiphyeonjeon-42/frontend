@@ -153,7 +153,7 @@ const Search = ({ match, location }) => {
     else if (entireCate[parseInt(queryCateIndex, 10)] !== undefined)
       setCategoryName(entireCate[parseInt(queryCateIndex, 10)].name);
   }, [match.params, location.search, entireCate, lastPage]);
-
+  
   return (
     <main>
       <SearchBanner setPageRange={setPageRange} setAvailable={setAvailable} />
@@ -198,13 +198,15 @@ const Search = ({ match, location }) => {
       <section className="wish-book-wraper">
         <WishBook />
       </section>
-      {miniModal && errorCode >= 0 && (
+      {miniModal && errorCode >= 0 ? (
         <MiniModal closeModal={closeMiniModal}>
           <ModalContentsOnlyTitle
             closeModal={closeMiniModal}
             title={`ERROR ${errorCode}`}
           />
         </MiniModal>
+      ) : (
+        ""
       )}
     </main>
   );
