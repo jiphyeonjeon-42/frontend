@@ -4,7 +4,7 @@ name: sub-branch
 on:
   push:
     branches:
-      - develop   # sub-branch[branch name] 브랜치에서 push 이벤트가 일어났을 때 실행
+      - main   # sub-branch[branch name] 브랜치에서 push 이벤트가 일어났을 때 실행
 
 jobs:
   build:
