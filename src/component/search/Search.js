@@ -153,7 +153,6 @@ const Search = ({ match, location }) => {
     else if (entireCate[parseInt(queryCateIndex, 10)] !== undefined)
       setCategoryName(entireCate[parseInt(queryCateIndex, 10)].name);
   }, [match.params, location.search, entireCate, lastPage]);
-  
   return (
     <main>
       <SearchBanner setPageRange={setPageRange} setAvailable={setAvailable} />
