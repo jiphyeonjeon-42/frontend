@@ -35,7 +35,6 @@ const QnA = ({ isOpen, question, answer, link }) => {
       ) : (
         ""
       )}
-      <div className="qna__line" />
     </div>
   );
 };

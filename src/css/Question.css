@@ -4,6 +4,15 @@
   padding: 0 0 0 0;
 }
 
+.qna::after {
+  content: " ";
+  left:0;
+  right:0;
+  height: 1px;
+  background-color: #a4a4a4;
+  margin: 4.4rem 0;
+}
+
 .qna__question {
   all: unset;
   display: flex;
@@ -33,14 +42,6 @@
   display: none;
 }
 
-.qna__line {
-  height: 1px;
-  background-color: #a4a4a4;
-  margin: 44px 0 44px 0;
-  padding: 0;
-  border: 0;
-}
-
 .url_text {
   text-decoration: underline; 
 }
@@ -61,8 +62,8 @@
     margin: 33px 0 0 52px;
   }
 
-  .qna__line {
-    margin: 3.5rem 0 3.5rem 0;
+  .qna::after {
+    margin: 3.5rem 0;
   }
 }
 
@@ -84,7 +85,7 @@
     margin: 0 25px 0 0;
   }
 
-  .qna__line {
-    margin: 2.7rem 0 2.7rem 0;
+  .qna::after {
+    margin: 2.7rem 0;
   }
 }
