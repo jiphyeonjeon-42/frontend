@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "../../css/UserBriefInfo.css";
 import "../../css/UserDetailInfo.css";
 
-const roles = ["미인증", "일반", "사서", "스태프"];
+const roles = ["미인증", "카뎃", "사서", "운영진"];
 
 const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
   const [input, setInput] = useState(infoValue);
@@ -59,19 +59,16 @@ const UserInfoDisplay = ({ infoKey, infoValue }) => {
 };
 
 const convertDatetoString = date => {
-  let overDueDate = "";
+  let stringDate = "";
 
-  console.log(typeof date);
-  console.log(date);
-
-  overDueDate += date.getFullYear();
-  overDueDate += "-";
-  overDueDate += date.getMonth() + 1 < 10 ? "0" : "";
-  overDueDate += date.getMonth() + 1;
-  overDueDate += "-";
-  overDueDate += date.getDate() < 10 ? "0" : "";
-  overDueDate += date.getDate();
-  return overDueDate;
+  stringDate += date.getFullYear();
+  stringDate += "-";
+  stringDate += date.getMonth() + 1 < 10 ? "0" : "";
+  stringDate += date.getMonth() + 1;
+  stringDate += "-";
+  stringDate += date.getDate() < 10 ? "0" : "";
+  stringDate += date.getDate();
+  return stringDate;
 };
 
 const UserDetailInfo = ({
@@ -171,9 +168,8 @@ const UserDetailInfo = ({
             infoId="penalty"
             infoType="date"
             infoValue={
-              userPenalty &&
-              userPenalty.substring(0, 10) >= convertDatetoString(today)
-                ? userPenalty.substring(0, 10)
+              userPenalty && userPenalty >= convertDatetoString(today)
+                ? userPenalty
                 : convertDatetoString(today)
             }
           />
@@ -214,9 +210,8 @@ const UserDetailInfo = ({
           <UserInfoDisplay
             infoKey="대출 불가 기간"
             infoValue={
-              userPenalty &&
-              userPenalty.substring(0, 10) >= convertDatetoString(today)
-                ? userPenalty.substring(0, 10)
+              userPenalty && userPenalty >= convertDatetoString(today)
+                ? userPenalty
                 : "-"
             }
           />
