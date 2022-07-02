@@ -13,7 +13,6 @@ const BookStatus = ({ book, index }) => {
     return "대출 불가";
   };
 
-  console.log("book", book);
   return (
     <div className="book-status color-54">
       <div className="book-status__id font-16">{doubleDigit(index + 1)}</div>

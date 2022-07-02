@@ -59,19 +59,16 @@ const UserInfoDisplay = ({ infoKey, infoValue }) => {
 };
 
 const convertDatetoString = date => {
-  let overDueDate = "";
+  let stringDate = "";
 
-  console.log(typeof date);
-  console.log(date);
-
-  overDueDate += date.getFullYear();
-  overDueDate += "-";
-  overDueDate += date.getMonth() + 1 < 10 ? "0" : "";
-  overDueDate += date.getMonth() + 1;
-  overDueDate += "-";
-  overDueDate += date.getDate() < 10 ? "0" : "";
-  overDueDate += date.getDate();
-  return overDueDate;
+  stringDate += date.getFullYear();
+  stringDate += "-";
+  stringDate += date.getMonth() + 1 < 10 ? "0" : "";
+  stringDate += date.getMonth() + 1;
+  stringDate += "-";
+  stringDate += date.getDate() < 10 ? "0" : "";
+  stringDate += date.getDate();
+  return stringDate;
 };
 
 const UserDetailInfo = ({

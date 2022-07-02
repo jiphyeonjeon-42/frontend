@@ -81,8 +81,6 @@ const Mypage = () => {
     };
   }, []);
 
-  console.log(query.errorCode);
-
   return (
     <>
       {deviceMode === "desktop" && (

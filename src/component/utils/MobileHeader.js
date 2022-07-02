@@ -15,9 +15,6 @@ const MobileHeader = () => {
   };
 
   const stickyHeader = () => {
-    // const mobileHeaderHeight =
-    //   document.querySelector(".mobile-header").offsetHeight;
-    // console.log(window.pageYOffset, mobileHeaderHeight);
     if (window.pageYOffset >= 17) {
       setFixed(true);
     } else {
