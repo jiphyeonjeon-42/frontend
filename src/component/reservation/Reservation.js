@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import UserConfirm from "./UserConfirm";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 import SuccessRsv from "./SuccessRsv";
 import ModalContentsOnlyTitle from "../utils/ModalContentsTitleWithMessage";
 
@@ -28,7 +28,7 @@ const Reservation = ({ bookInfoId, closeModal, setClosable }) => {
         const { status } = error.response;
         const errMessage =
           status === 400
-            ? getErrorMessage("reservations", error.response.data.errorCode)
+            ? getErrorMessage(error.response.data.errorCode)
             : error.message;
         setPropsString(errMessage);
         setReservationStep("failure");

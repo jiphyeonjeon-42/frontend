@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "../../css/RentModalConfirm.css";
 import { useHistory } from "react-router-dom";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 import IMGERR from "../../img/image_onerror.svg";
 
 const RentModalConfirm = ({
@@ -57,10 +57,7 @@ const RentModalConfirm = ({
           if ([101, 102, 108, 109].includes(errorCode)) history.push("/logout");
           const errMsg = `${
             selectedBooks[i].title
-          } - 대출 실패\n(사유 : ${getErrorMessage(
-            "lendings",
-            errorCode,
-          )})\n\n`;
+          } - 대출 실패\n(사유 : ${getErrorMessage(errorCode)})\n\n`;
           if (i === 0) setFirstBookContests(errMsg);
           else setSecondBookContests(errMsg);
         });

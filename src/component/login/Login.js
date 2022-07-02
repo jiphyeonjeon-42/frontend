@@ -8,7 +8,7 @@ import qs from "qs";
 import { useRecoilValue } from "recoil";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 import userState from "../../atom/userState";
 
 const Login = () => {
@@ -81,16 +81,18 @@ const Login = () => {
     }
   };
 
+  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
+    "\r\n",
+  );
+
   return (
     <main>
       {queryErrorCode && (
         <MiniModal closeModal={closeModal}>
           <ModalContentsTitleWithMessage
             closeModal={closeModal}
-            title={getErrorMessage("login", parseInt(queryErrorCode, 10)).title}
-            message={
-              getErrorMessage("login", parseInt(queryErrorCode, 10)).content
-            }
+            title={title}
+            message={content}
           />
         </MiniModal>
       )}

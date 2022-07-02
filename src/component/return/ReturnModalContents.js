@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 
 const ReturnModalContents = ({
   lendingId,
@@ -53,7 +53,7 @@ const ReturnModalContents = ({
 
         setMiniModalContents(
           status === 400
-            ? getErrorMessage("return", error.response.data.errorCode)
+            ? getErrorMessage(error.response.data.errorCode)
             : error.message,
         );
       });
