@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 
 const ReservedModalContents = ({
   reservedInfo,

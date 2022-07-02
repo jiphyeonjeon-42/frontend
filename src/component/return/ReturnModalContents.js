@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 
 const ReturnModalContents = ({
   lendingId,

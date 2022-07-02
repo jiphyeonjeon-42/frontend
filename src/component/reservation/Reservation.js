@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import UserConfirm from "./UserConfirm";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 import SuccessRsv from "./SuccessRsv";
 import ModalContentsOnlyTitle from "../utils/ModalContentsTitleWithMessage";
 

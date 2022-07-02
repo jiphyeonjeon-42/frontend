@@ -13,7 +13,7 @@ import MypageReservedBook from "./MypageReservedBook";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 
 const Mypage = () => {
   const history = useHistory();

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "../../css/RentModalConfirm.css";
 import { useHistory } from "react-router-dom";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 import IMGERR from "../../img/image_onerror.svg";
 
 const RentModalConfirm = ({

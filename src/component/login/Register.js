@@ -5,7 +5,7 @@ import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 
 const Register = () => {
   const history = useHistory();

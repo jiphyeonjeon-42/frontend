@@ -8,7 +8,7 @@ import qs from "qs";
 import { useRecoilValue } from "recoil";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 import userState from "../../atom/userState";
 
 const Login = () => {
