@@ -98,7 +98,7 @@ const getErrorMessage = errorCode => {
     case 508:
       return `존재하지 않는 예약입니다.`;
     case 509:
-      return `진행 중인 예약이 아닙니다.`;
+      return `이미 만료된 예약입니다.`;
 
     // 알 수 없는 오류
     default:
