@@ -101,14 +101,11 @@ const UserDetailInfo = ({
       .patch(`${process.env.REACT_APP_API}/users/update/${user.id}`, data)
       .then(res => {
         const userInfo = res.data;
-        if (userInfo.intraId) setUserIntraId(userInfo.intraId);
-        if (userInfo.nickname) setUserNickname(userInfo.nickname);
-        if (userInfo.slack) setUserSlack(userInfo.slack);
-        if (userInfo.role) setUserRoleNum(userInfo.role);
-        if (userInfo.penaltyEndDate) {
-          const penaltyEndDate = new Date(userInfo.penaltyEndDate);
-          setUserPenalty(convertDatetoString(penaltyEndDate));
-        }
+        setUserIntraId(userInfo.intraId);
+        setUserNickname(userInfo.nickname);
+        setUserSlack(userInfo.slack);
+        setUserRoleNum(userInfo.role);
+        setUserPenalty(userInfo.penaltyEndDate);
       })
       .catch(error => {
         closeMidModal();
@@ -122,15 +119,18 @@ const UserDetailInfo = ({
     const userEditForm = document.getElementById("edit-form");
     const intra = userEditForm.querySelector(".edit-intra-id").value;
     const nickname = userEditForm.querySelector(".edit-nickname").value;
-    const role = userEditForm.querySelector(".edit-role").value;
+    const roleNum = userEditForm.querySelector(".edit-role").value;
     const slack = userEditForm.querySelector(".edit-slack").value;
     const penalty = userEditForm.querySelector(".edit-penalty").value;
 
+    const intraId = parseInt(intra, 10);
+    const role = parseInt(roleNum, 10);
+
     const data = {
-      nickname,
-      intraId: parseInt(intra, 10),
-      slack,
-      role: parseInt(role, 10),
+      nickname: nickname === "" ? null : nickname,
+      intraId: Number.isNaN(intraId) ? null : intraId,
+      slack: slack === "" ? null : slack,
+      role: Number.isNaN(role) ? 0 : role,
       penaltyEndDate: penalty,
     };
     patchUserInfo(data);
