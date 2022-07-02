@@ -39,16 +39,14 @@ const getErrorMessage = errorCode => {
       return `이미 존재하는 이메일입니다.`;
     case 204:
       return `이미 존재하는 닉네임입니다.`;
-    case 205:
+    case 205: // 사용자
       return `비밀번호 형식이 잘못되었습니다.`;
-    case 206: // 사용자
-      return `존재하지 않는 역할입니다.`;
+    case 206:
+      return `역할은 0~3 사이의 값만 가능합니다.`;
     case 207:
       return `이미 존재하는 슬랙 ID 입니다.`;
 
     // 사서
-    case 301:
-      return `중복된 인트라 아이디가 존재합니다. 최근에 가입한 사용자의 아이디로 기부가 기록됩니다.`;
     case 302:
       return `ISBN 검색 결과가 없습니다.`;
     case 303:
