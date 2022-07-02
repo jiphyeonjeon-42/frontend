@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { Link } from "react-router-dom";
 import Logo from "../../img/jiphyeonjeon_logo.svg";
@@ -11,7 +11,8 @@ import Book from "../../img/admin_icon.svg";
 import "../../css/Header.css";
 import userState from "../../atom/userState";
 
-const Header = () => {
+// eslint-disable-next-line react/prop-types
+const Header = ({ location }) => {
   const user = useRecoilValue(userState);
   const [toggleLNB, setToggleLNB] = useState(false);
   const [hoverLNB, setHoverLNB] = useState(false);
@@ -23,6 +24,13 @@ const Header = () => {
   const nowDate = new Date();
   const expireDate = new Date(user.expire);
   if (nowDate > expireDate) window.location = `/login`;
+
+  const closeHeader = () => {
+    setToggleLNB(false);
+  };
+
+  // eslint-disable-next-line react/prop-types
+  useEffect(closeHeader, [location.pathname]);
 
   return (
     <header className="header">

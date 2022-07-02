@@ -20,11 +20,6 @@ const HeaderModal = ({ setHeaderModal }) => {
     setHeaderModal(false);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const getHost = () => {
-    return `${window.location.protocol}//${window.location.host}`;
-  };
-
   const nowDate = new Date();
   const expireDate = new Date(user.expire);
   if (nowDate > expireDate) window.location = `/login`;
