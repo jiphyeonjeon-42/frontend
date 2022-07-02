@@ -28,7 +28,7 @@ const Reservation = ({ bookInfoId, closeModal, setClosable }) => {
         const { status } = error.response;
         const errMessage =
           status === 400
-            ? getErrorMessage("reservations", error.response.data.errorCode)
+            ? getErrorMessage(error.response.data.errorCode)
             : error.message;
         setPropsString(errMessage);
         setReservationStep("failure");

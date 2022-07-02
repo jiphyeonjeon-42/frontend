@@ -53,7 +53,7 @@ const ReturnModalContents = ({
 
         setMiniModalContents(
           status === 400
-            ? getErrorMessage("return", error.response.data.errorCode)
+            ? getErrorMessage(error.response.data.errorCode)
             : error.message,
         );
       });

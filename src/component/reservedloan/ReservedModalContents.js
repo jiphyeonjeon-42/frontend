@@ -37,7 +37,7 @@ const ReservedModalContents = ({
         setLendResult(false);
         setMiniModalContents(
           status === 400
-            ? getErrorMessage("lendings", error.response.data.errorCode)
+            ? getErrorMessage(error.response.data.errorCode)
             : error.message,
         );
       });
@@ -58,7 +58,7 @@ const ReservedModalContents = ({
         setLendResult(false);
         setMiniModalContents(
           status === 400
-            ? getErrorMessage("lendings", error.response.data.errorCode)
+            ? getErrorMessage(error.response.data.errorCode)
             : error.message,
         );
       });

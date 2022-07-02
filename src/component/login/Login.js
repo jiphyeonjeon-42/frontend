@@ -81,16 +81,18 @@ const Login = () => {
     }
   };
 
+  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
+    "\r\n",
+  );
+
   return (
     <main>
       {queryErrorCode && (
         <MiniModal closeModal={closeModal}>
           <ModalContentsTitleWithMessage
             closeModal={closeModal}
-            title={getErrorMessage("login", parseInt(queryErrorCode, 10)).title}
-            message={
-              getErrorMessage("login", parseInt(queryErrorCode, 10)).content
-            }
+            title={title}
+            message={content}
           />
         </MiniModal>
       )}

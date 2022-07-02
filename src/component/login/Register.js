@@ -130,18 +130,18 @@ const Register = () => {
     }
   };
 
+  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
+    "\r\n",
+  );
+
   return (
     <main>
       {queryErrorCode && (
         <MiniModal closeModal={closeMiniModal}>
           <ModalContentsTitleWithMessage
             closeModal={closeMiniModal}
-            title={
-              getErrorMessage("register", parseInt(queryErrorCode, 10)).title
-            }
-            message={
-              getErrorMessage("register", parseInt(queryErrorCode, 10)).content
-            }
+            title={title}
+            message={content}
           />
         </MiniModal>
       )}

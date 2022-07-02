@@ -81,6 +81,10 @@ const Mypage = () => {
     };
   }, []);
 
+  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
+    "\r\n",
+  );
+
   return (
     <>
       {deviceMode === "desktop" && (
@@ -219,12 +223,8 @@ const Mypage = () => {
         <MiniModal closeModal={closeModal}>
           <ModalContentsTitleWithMessage
             closeModal={closeModal}
-            title={
-              getErrorMessage("mypage", parseInt(queryErrorCode, 10)).title
-            }
-            message={
-              getErrorMessage("mypage", parseInt(queryErrorCode, 10)).content
-            }
+            title={title}
+            message={content}
           />
         </MiniModal>
       )}

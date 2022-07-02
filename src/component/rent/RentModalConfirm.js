@@ -57,10 +57,7 @@ const RentModalConfirm = ({
           if ([101, 102, 108, 109].includes(errorCode)) history.push("/logout");
           const errMsg = `${
             selectedBooks[i].title
-          } - 대출 실패\n(사유 : ${getErrorMessage(
-            "lendings",
-            errorCode,
-          )})\n\n`;
+          } - 대출 실패\n(사유 : ${getErrorMessage(errorCode)})\n\n`;
           if (i === 0) setFirstBookContests(errMsg);
           else setSecondBookContests(errMsg);
         });
