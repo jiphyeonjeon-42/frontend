@@ -10,14 +10,13 @@
   right: 0;
   height: 0.1rem;
   background-color: #a4a4a4;
-  margin: 4.4rem 0;
 }
 
 .qna__question {
   all: unset;
   display: flex;
   align-items: center;
-  padding: 0 0.5rem 0 0;
+  padding: 4.4rem 0.5rem 4.4rem 0;
   border: 0;
   background: none;
   white-space: normal;
@@ -33,7 +32,7 @@
 
 .qna__answer {
   border-left: 0.1rem solid #a4a4a4;
-  margin: 4.4rem 0 0 7.2rem;
+  margin: 0 0 4.4rem 7.2rem;
   padding: 0 1rem 0 2.5rem;
   white-space: normal;
 }
@@ -47,6 +46,10 @@
 }
 
 @media screen and (max-width: 1199px) {
+  .qna__question {
+    padding: 3.5rem 0.5rem 3.3rem 0 ;
+  }
+
   .question__text {
     font-size: 1.8rem !important;
   }
@@ -59,15 +62,19 @@
 
   .qna__answer {
     font-size: 1.5rem !important;
-    margin: 3.3rem 0 0 5.2rem;
+    margin: 0 0 3.3rem 5.2rem;
   }
 
   .qna::after {
-    margin: 3.5rem 0;
+    margin-top: 0.2rem;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .qna__question {
+    padding: 2.7rem 0.5rem 2rem 0 ;
+  }
+
   .question__text {
     font-size: 1.6rem !important;
   }
@@ -75,7 +82,7 @@
   .qna__answer {
     border-left: 0;
     font-size: 1.4rem !important;
-    margin: 2rem 0 0 4rem;
+    margin: 0 0 2rem 4rem;
     padding: 0 1rem 0 0;
   }
 
@@ -86,6 +93,6 @@
   }
 
   .qna::after {
-    margin: 2.7rem 0;
+    margin-top: 0.7rem;
   }
 }
