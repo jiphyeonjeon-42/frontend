@@ -12,7 +12,7 @@ const getErrorMessage = errorCode => {
     case 100:
       return `권한이 없습니다.`;
     case 101:
-      return `연결된 계정이 없습니다.\n회원가입 후 마이페이지에서 연결해주세요.`;
+      return `연결된 계정이 없습니다.\r\n회원가입 후 마이페이지에서 연결해주세요.`;
     case 102:
       return `토큰이 발급되지 않았습니다. 다시 로그인해주세요.`;
     case 103:
@@ -30,7 +30,7 @@ const getErrorMessage = errorCode => {
     case 110: // 추후 1번 에러코드와 합칠 예정
       return `SQL 에러가 발생했습니다.`;
     case 111:
-      return `이전에 연결된 계정이 있습니다.\n로그인 페이지에서 42 Intra 로그인을 해주세요.`;
+      return `이전에 연결된 계정이 있습니다.\r\n로그인 페이지에서 42 Intra 로그인을 해주세요.`;
     case 112:
       return `42 API 접근을 거부하였습니다.`;
 
@@ -100,7 +100,7 @@ const getErrorMessage = errorCode => {
 
     // 알 수 없는 오류
     default:
-      return `예상치 못한 오류가 발생했습니다.\n오류 확인 및 수정을 위해 slack 으로 문의 부탁드립니다!`;
+      return `예상치 못한 오류가 발생했습니다.\r\n오류 확인 및 수정을 위해 slack 으로 문의 부탁드립니다!`;
   }
 };
 
