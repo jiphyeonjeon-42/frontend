@@ -7,8 +7,8 @@ const InquireBoxTitle = ({
   Icon,
   titleKO,
   titleEN,
-  KOsize = "font-28-bold",
-  ENsize = "font-16",
+  KOsize,
+  ENsize,
   placeHolder,
 }) => {
   return (
@@ -31,15 +31,18 @@ const InquireBoxTitle = ({
   );
 };
 
+InquireBoxTitle.defaultProps = {
+  KOsize: "font-28-bold",
+  ENsize: "font-16",
+  placeHolder: "",
+};
+
 InquireBoxTitle.propTypes = {
   Icon: PropTypes.string.isRequired,
   titleKO: PropTypes.string.isRequired,
   titleEN: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/require-default-props
   KOsize: PropTypes.string,
-  // eslint-disable-next-line react/require-default-props
   ENsize: PropTypes.string,
-  // eslint-disable-next-line react/require-default-props
   placeHolder: PropTypes.string,
 };
 
