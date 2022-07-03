@@ -104,6 +104,12 @@ const Information = () => {
               answer=" 를 클릭하세요."
               link={process.env.REACT_APP_WISH}
             />
+            <Question
+              isOpen={allOpen}
+              question="사이트에 다른 기능도 추가해주실 수 있나요?"
+              answer=" 에 의견을 남겨주세요! 더 개선해나가는 집현전 웹서비스 개발팀이 되겠습니다."
+              link={process.env.REACT_APP_SUGGESTION}
+            />
           </div>
         </section>
       </div>
