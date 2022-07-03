@@ -75,6 +75,12 @@ a:active {
   word-break: keep-all;
 }
 
+.gnb__user__text {
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .gnb__icon {
   margin: 0 1rem 0 0;
   object-fit: contain;
@@ -90,13 +96,6 @@ a:active {
   height: 2.2rem;
 }
 
-.gnb__button {
-  margin: 0 0 0 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .gnb__user__button {
   all: unset;
   margin: 0 0 0 5rem;
@@ -104,6 +103,13 @@ a:active {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.gnb__button {
+  margin: 0 0 0 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .gnb__user__icon {
@@ -182,11 +188,11 @@ a:active {
     min-width: 58.8rem;
   }
 
-  .gnb__button {
+  .gnb__user__button {
     margin: 0 0 0 4rem;
   }
 
-  .gnb__user__button {
+  .gnb__button {
     margin: 0 0 0 4rem;
   }
 
