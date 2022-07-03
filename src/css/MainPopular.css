@@ -26,6 +26,7 @@
   box-sizing: border-box;
   overflow: hidden;
   border: #f2f2f2 solid 2rem;
+  cursor: pointer;
 }
 
 .main__popular__books {
@@ -80,6 +81,7 @@
   text-align: left;
   overflow: hidden;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .main__popular__basic-book.center{
