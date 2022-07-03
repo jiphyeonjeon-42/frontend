@@ -16,7 +16,7 @@ const MobileHeader = ({ location }) => {
   };
 
   const stickyHeader = () => {
-    if (window.pageYOffset >= 17) {
+    if (window.pageYOffset > 0) {
       setFixed(true);
     } else {
       setFixed(false);
