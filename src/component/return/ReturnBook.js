@@ -83,15 +83,13 @@ const ReturnBook = () => {
         titleEn="INQUIRE & RETURN BOOK"
       />
       <AdminTabs tabList={tabList} />
-      <section className="return-book-body">
-        <div className="inquire-box-wrapper">
-          <InquireBoxTitle
-            Icon={Login}
-            titleKO="현재 대출정보"
-            titleEN="Rent info"
-            placeHolder="대출자의 성명 또는 대출중인 도서명을 입력해주세요."
-          />
-        </div>
+      <section className="inquire-box-wrapper">
+        <InquireBoxTitle
+          Icon={Login}
+          titleKO="현재 대출정보"
+          titleEN="Rent info"
+          placeHolder="대출자의 성명 또는 대출중인 도서명을 입력해주세요."
+        />
         <div className="return-book-table__inquire-box">
           <div className="return-book-filter">
             <ReturnBookFilter
