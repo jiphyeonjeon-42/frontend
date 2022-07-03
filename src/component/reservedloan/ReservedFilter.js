@@ -45,7 +45,7 @@ const ReservedFilter = ({
               isPending ? "color-red" : "color-a4"
             }`}
           >
-            예약 0순위
+            대출 대기중인 예약
           </span>
         </button>
         <button
@@ -63,7 +63,7 @@ const ReservedFilter = ({
               isWaiting ? "color-red" : "color-a4"
             }`}
           >
-            예약 후순위
+            책을 할당받지 못한 예약
           </span>
         </button>
         <button
