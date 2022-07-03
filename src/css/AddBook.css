@@ -279,6 +279,7 @@ label, input , button, select
   }
   .add-book__create-form > select {
     width: 100%;
+    margin: 0 0 1rem 0;
   }
   .add-book__create-form__errror-Message {
     margin: -1rem 2rem 1rem;
