@@ -132,6 +132,10 @@
 }
 
 @media screen and (max-width:767px) {
+  .main__popular {
+    margin-bottom: 0rem;
+  }
+
   .main__popular__wrapper {
     width:90%;
   }
@@ -147,5 +151,34 @@
 
   .main__popular__pagination {
     width:10%
+  }
+
+  .main__popular__basic-book.selected {
+    height: 14rem;
+  }
+  .main__popular__basic-book {
+    height: 7rem;
+  }
+  .main__popular__basic-img {
+    width: 10rem;
+  }
+  .main__popular__rank {
+    margin: 0.5rem 1rem;
+  }
+  .main__popular__rank.font-48-bold {
+    font-size: 3.2rem;
+  }
+  .main__popular__summary > .font-32-bold {
+    font-size: 2rem;
+  }
+  .main__popular__summary > .font-16-light {
+    font-size : 1rem;
+  }
+
+  .main__popular__detail.font-16-light {
+    font-size: 1rem;
+  }
+  .main__popular__detail {
+    margin: 0 0 1rem 11rem;    
   }
 }
