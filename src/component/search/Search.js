@@ -10,7 +10,8 @@ import CategoryFilter from "./CategoryFilter";
 import Sort from "./Sort";
 import WishBook from "./WishBook";
 import MiniModal from "../utils/MiniModal";
-import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
+import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
+import getErrorMessage from "../../data/error";
 import { searchWord } from "../../atom/searchWord";
 import { useSearchInput } from "../../atom/useSearchInput";
 import "../../css/Search.css";
@@ -153,6 +154,11 @@ const Search = ({ match, location }) => {
     else if (entireCate[parseInt(queryCateIndex, 10)] !== undefined)
       setCategoryName(entireCate[parseInt(queryCateIndex, 10)].name);
   }, [match.params, location.search, entireCate, lastPage]);
+
+  const [title, content] = getErrorMessage(parseInt(errorCode, 10)).split(
+    "\r\n",
+  );
+
   return (
     <main>
       <SearchBanner setPageRange={setPageRange} setAvailable={setAvailable} />
@@ -199,9 +205,10 @@ const Search = ({ match, location }) => {
       </section>
       {miniModal && errorCode >= 0 ? (
         <MiniModal closeModal={closeMiniModal}>
-          <ModalContentsOnlyTitle
+          <ModalContentsTitleWithMessage
             closeModal={closeMiniModal}
-            title={`ERROR ${errorCode}`}
+            title={title}
+            message={content}
           />
         </MiniModal>
       ) : (
