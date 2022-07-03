@@ -6,10 +6,10 @@
   flex-direction: column;
   margin: auto;
   position: relative;
-  top: -6rem;
+  top: -5rem;
   border-bottom-left-radius: 6.1rem;
   border-bottom-right-radius: 6.1rem;
-  padding: 6rem 0 0 0;
+  padding-top: 5rem;
   min-height: 2;
   font-size: 1.6rem;
 }
@@ -218,6 +218,8 @@ label, input , button, select
 @media screen and (max-width: 767px) {
   .inquire-box {
     display: block;
+    top: -3rem;
+    padding-top: 3rem;
   }
   .add-book > p {
     width: 90%;

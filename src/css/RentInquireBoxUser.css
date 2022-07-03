@@ -8,10 +8,10 @@
   margin: auto;
   position: relative;
   z-index: 0;
-  top: -6rem;
+  top: -5rem;
   border-bottom-left-radius: 6.1rem;
   border-bottom-right-radius: 6.1rem;
-  padding: 6rem 0 0 0;
+  padding-top: 5rem;
 }
 
 .rent__inquire-box-user-active {
@@ -105,6 +105,8 @@
 @media screen and (max-width: 1200px) {
   .rent__inquire-box-user {
     width: 100%;
+    top: -3rem;
+    padding-top: 3rem;
   }
 
   .rent__inquire-box-user-active {
