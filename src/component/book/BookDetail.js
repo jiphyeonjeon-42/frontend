@@ -37,6 +37,7 @@ const BookDetail = ({ location, match }) => {
   const closeModal = () => {
     if (miniModalClosable) setMiniModalView(false);
     if (errorCode === 304) history.push("/search");
+    window.scrollTo(0, 0);
   };
 
   const getBooksInfo = async () => {
