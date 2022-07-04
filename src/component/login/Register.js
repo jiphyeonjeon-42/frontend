@@ -41,13 +41,22 @@ const Register = () => {
     const passwordRegex = new RegExp(
       "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$&+,:;=?@#|'<>.^*()%!-])[A-Za-z\\d$&+,:;=?@#|'<>.^*()%!-]{10,42}$",
     );
+    const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    const emailRegex = new RegExp(emailPattern);
     const { value, name } = e.target;
     switch (name) {
       case "email":
-        setErrorMessage({
-          ...errorMessage,
-          emailError: "",
-        });
+        if (!emailRegex.test(value)) {
+          setErrorMessage({
+            ...errorMessage,
+            emailError: "이메일 형식이 아닙니다.",
+          });
+        } else {
+          setErrorMessage({
+            ...errorMessage,
+            emailError: "",
+          });
+        }
         break;
       case "password":
         if (!passwordRegex.test(value)) {
@@ -88,7 +97,30 @@ const Register = () => {
     });
   };
 
+  const checkEmptyRegisterData = () => {
+    if (!email) {
+      emailRef.current.focus();
+      setErrorMessage({
+        ...errorMessage,
+        emailError: "이메일을 입력해 주세요.",
+      });
+    } else if (!password) {
+      passwordRef.current.focus();
+      setErrorMessage({
+        ...errorMessage,
+        passwordError: "10~42자 영문 대 소문자, 숫자, 특수문자를 사용하세요.",
+      });
+    } else if (!confirmPassword) {
+      confirmPasswordRef.current.focus();
+      setErrorMessage({
+        ...errorMessage,
+        confirmPasswordError: "비밀번호를 재입력 해주세요.",
+      });
+    }
+  };
+
   const sendRegisterData = async () => {
+    checkEmptyRegisterData();
     if (emailError) {
       emailRef.current.focus();
     } else if (passwordError) {
