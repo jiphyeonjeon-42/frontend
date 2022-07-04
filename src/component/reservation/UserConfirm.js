@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import getErrorMessage from "../../data/error";
 
 const UserConfirm = ({
   bookInfoId,
@@ -20,9 +21,7 @@ const UserConfirm = ({
       })
       .catch(error => {
         setReservationStep("failure");
-        setErrorMessage(
-          error.response ? error.response.data.message : error.message,
-        );
+        setErrorMessage(getErrorMessage(error.response.data.errorCode));
       });
   }, []);
   const onCancel = () => {
