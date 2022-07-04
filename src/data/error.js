@@ -82,7 +82,7 @@ const getErrorMessage = errorCode => {
     case 501:
       return `존재하지 않는 도서입니다.\r\n예약이 불가능합니다.`;
     case 502:
-      return ``;
+      return `연체 패널티로 인해 예약이 불가합니다.`;
     case 503:
       return `비치 중인 책은 예약하실 수 없습니다`;
     case 504:
