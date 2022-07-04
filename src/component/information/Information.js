@@ -46,6 +46,8 @@ const Information = () => {
               isOpen={mounted.current || allOpen}
               question="이용 가능 시간은 어떻게 되나요?"
               answer="열람은 개포 클러스터가 오픈되어 있다면 언제나 가능하지만, 대출 및 반납은 사서가 있는 시간(평일 13~18시)에만 가능하니 유의해 주세요! 자세한 이용문의는 집현전 공식 채널 #42seoul_club_42jiphyeonjeon 에 질문을 남겨주시면 안내해드리겠습니다."
+              linkText="#42seoul_club_42jiphyeonjeon"
+              link="https://42born2code.slack.com/archives/C0174FTH8N6"
             />
             <Question
               isOpen={allOpen}
@@ -85,13 +87,16 @@ const Information = () => {
             <Question
               isOpen={allOpen}
               question="실수로 다른 책을 예약했어요! 예약을 취소할 수 있을까요?"
-              answer=" 에서 예약 취소 가능합니다."
+              answer="마이페이지에서 예약 취소 가능합니다."
+              linkText="마이페이지"
               link="./mypage"
             />
             <Question
               isOpen={allOpen}
               question="무인 대출 / 무인 반납 가능한가요?"
               answer="무인 시스템 도입은 여러 가지 고려할 사항들이 많아 당장 시도하기 어려운 상황입니다. 분실 및 파손 대책 등 무인 시스템을 위한 좋은 의견이 있다면 언제든 공유해주세요! 집현전 공식채널 #42seoul_club_42jiphyeonjeon 은 항상 열려있습니다!"
+              linkText="#42seoul_club_42jiphyeonjeon"
+              link="https://42born2code.slack.com/archives/C0174FTH8N6"
             />
             <Question
               isOpen={allOpen}
@@ -101,13 +106,15 @@ const Information = () => {
             <Question
               isOpen={allOpen}
               question="보고 싶은 책이 있는데 집현전에 없어요. 도서 신청을 할 수 있을까요?"
-              answer=" 를 클릭하세요."
+              answer="희망도서 신청폼에서 신청해주세요."
+              linkText="희망도서 신청폼"
               link={process.env.REACT_APP_WISH}
             />
             <Question
               isOpen={allOpen}
               question="사이트에 다른 기능도 추가해주실 수 있나요?"
-              answer=" 에 의견을 남겨주세요! 더 개선해나가는 집현전 웹서비스 개발팀이 되겠습니다."
+              answer="건의사항 시트에 의견을 남겨주세요! 더 개선해나가는 집현전 웹서비스 개발팀이 되겠습니다."
+              linkText="건의사항 시트"
               link={process.env.REACT_APP_SUGGESTION}
             />
           </div>
