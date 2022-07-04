@@ -1,6 +1,6 @@
 .rent__inquire-box-book {
   width: 120rem;
-  min-width: 30rem;
+  min-width: 36rem;
   background-color: #e8e8e8;
   display: flex;
   align-items: center;
@@ -18,8 +18,8 @@
 }
 
 .none {
-  top: -6rem;
-  padding: 6rem 0 0 0;
+  top: -5rem;
+  padding: 5rem;
   margin-bottom: -7.4rem;
 }
 
@@ -97,6 +97,8 @@
 @media screen and (max-width: 1200px) {
   .rent__inquire-box-book {
     width: 100%;
+    top: -3rem;
+    padding-top: 3rem;
   }
 
   .rent__inquire-box-book-active {

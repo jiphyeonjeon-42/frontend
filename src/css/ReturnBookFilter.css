@@ -12,19 +12,25 @@
   cursor: pointer;
 }
 
-.proceeding {
+.return-filter-wrapper >.proceeding {
   background: none;
   padding: 0;
   border: 0;
 }
 
-.finish {
+.return-filter-wrapper > .finish {
   background: none;
   padding: 0;
   border: 0;
-  margin-left: 2.4rem;
+  margin-left: 2.4rem !important;
 }
 
 .filter__icon {
   margin-right: 1.2rem;
+}
+
+@media screen and (max-width:600px) {
+  .return-filter-wrapper {
+    margin-bottom: 0;
+  }
 }
