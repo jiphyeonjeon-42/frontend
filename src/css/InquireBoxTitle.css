@@ -2,7 +2,7 @@
   background-color: #545454;
   height: 12rem;
   max-width: 120rem;
-  min-width: 30rem;
+  min-width: 36rem;
   border-radius: 6rem;
   display: flex;
   align-items: center;
@@ -29,15 +29,27 @@
     width: 100%;
     height: 8rem;
   }
+  .inquire-box-title__kr.font-28-bold{
+    font-size: 2.2rem;
+  }
+  .inquire-box-title__en.font-16{
+    font-size: 1.4rem;
+  }  
 }
 
 @media screen and (max-width: 767px) {
   .inquire-box-title {
     height: 6rem;
   }
+  .inquire-box-title__icon {
+    height: 3rem;
+  }
   .inquire-box-title__icon.short {
     height: 3rem;
     margin-left: 4rem;
+  }
+  .inquire-box-title__kr.font-28-bold{
+    font-size: 1.8rem;
   }
   .inquire-box-title__text.short {
     display: none;

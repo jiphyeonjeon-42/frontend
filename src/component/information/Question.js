@@ -4,16 +4,26 @@ import Plus from "../../img/plus_icon_off.svg";
 import Minus from "../../img/plus_icon_on.svg";
 import "../../css/Question.css";
 
-const QnA = ({ isOpen, question, answer, link }) => {
+const QnA = ({ isOpen, question, answer, linkText, link }) => {
   const [onOff, setOnOff] = useState(isOpen);
+
+  useEffect(() => {
+    setOnOff(isOpen);
+  }, [isOpen]);
 
   const clickQNA = () => {
     setOnOff(!onOff);
   };
 
-  useEffect(() => {
-    setOnOff(isOpen);
-  }, [isOpen]);
+  const beforeLinkText = () => {
+    if (answer.indexOf(linkText) === -1) return "";
+    return answer.substring(0, answer.indexOf(linkText));
+  };
+
+  const afterLinkText = () => {
+    if (answer.indexOf(linkText) === -1) return answer;
+    return answer.substring(answer.indexOf(linkText) + linkText.length);
+  };
 
   return (
     <div className="qna">
@@ -25,22 +35,23 @@ const QnA = ({ isOpen, question, answer, link }) => {
         />
         <span className="question__text font-20-bold color-54">{question}</span>
       </button>
-      {onOff ? (
+      {onOff && (
         <span className="qna__answer font-16 color-54">
-          <a href={link} className={`${link ? "url_text" : "display-none"}`}>
-            링크
-          </a>
-          {answer}
+          {beforeLinkText()}
+          {link && (
+            <a href={link} className="url_text">
+              {linkText}
+            </a>
+          )}
+          {afterLinkText()}
         </span>
-      ) : (
-        ""
       )}
-      <div className="qna__line" />
     </div>
   );
 };
 
 QnA.defaultProps = {
+  linkText: "링크",
   link: false,
 };
 
@@ -48,6 +59,7 @@ QnA.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   question: PropTypes.string.isRequired,
   answer: PropTypes.string.isRequired,
+  linkText: PropTypes.string,
   link: PropTypes.bool,
 };
 

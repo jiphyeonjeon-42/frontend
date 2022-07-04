@@ -5,7 +5,7 @@ import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 
 const Register = () => {
   const history = useHistory();
@@ -41,13 +41,22 @@ const Register = () => {
     const passwordRegex = new RegExp(
       "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$&+,:;=?@#|'<>.^*()%!-])[A-Za-z\\d$&+,:;=?@#|'<>.^*()%!-]{10,42}$",
     );
+    const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    const emailRegex = new RegExp(emailPattern);
     const { value, name } = e.target;
     switch (name) {
       case "email":
-        setErrorMessage({
-          ...errorMessage,
-          emailError: "",
-        });
+        if (!emailRegex.test(value)) {
+          setErrorMessage({
+            ...errorMessage,
+            emailError: "이메일 형식이 아닙니다.",
+          });
+        } else {
+          setErrorMessage({
+            ...errorMessage,
+            emailError: "",
+          });
+        }
         break;
       case "password":
         if (!passwordRegex.test(value)) {
@@ -88,7 +97,30 @@ const Register = () => {
     });
   };
 
+  const checkEmptyRegisterData = () => {
+    if (!email) {
+      emailRef.current.focus();
+      setErrorMessage({
+        ...errorMessage,
+        emailError: "이메일을 입력해 주세요.",
+      });
+    } else if (!password) {
+      passwordRef.current.focus();
+      setErrorMessage({
+        ...errorMessage,
+        passwordError: "10~42자 영문 대 소문자, 숫자, 특수문자를 사용하세요.",
+      });
+    } else if (!confirmPassword) {
+      confirmPasswordRef.current.focus();
+      setErrorMessage({
+        ...errorMessage,
+        confirmPasswordError: "비밀번호를 재입력 해주세요.",
+      });
+    }
+  };
+
   const sendRegisterData = async () => {
+    checkEmptyRegisterData();
     if (emailError) {
       emailRef.current.focus();
     } else if (passwordError) {
@@ -130,18 +162,18 @@ const Register = () => {
     }
   };
 
+  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
+    "\r\n",
+  );
+
   return (
     <main>
       {queryErrorCode && (
         <MiniModal closeModal={closeMiniModal}>
           <ModalContentsTitleWithMessage
             closeModal={closeMiniModal}
-            title={
-              getErrorMessage("register", parseInt(queryErrorCode, 10)).title
-            }
-            message={
-              getErrorMessage("register", parseInt(queryErrorCode, 10)).content
-            }
+            title={title}
+            message={content}
           />
         </MiniModal>
       )}

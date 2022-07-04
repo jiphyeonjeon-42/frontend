@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "../../css/UserBriefInfo.css";
 import "../../css/UserDetailInfo.css";
 
-const roles = ["미인증", "일반", "사서", "스태프"];
+const roles = ["미인증", "카뎃", "사서", "운영진"];
 
 const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
   const [input, setInput] = useState(infoValue);
@@ -59,19 +59,16 @@ const UserInfoDisplay = ({ infoKey, infoValue }) => {
 };
 
 const convertDatetoString = date => {
-  let overDueDate = "";
+  let stringDate = "";
 
-  console.log(typeof date);
-  console.log(date);
-
-  overDueDate += date.getFullYear();
-  overDueDate += "-";
-  overDueDate += date.getMonth() + 1 < 10 ? "0" : "";
-  overDueDate += date.getMonth() + 1;
-  overDueDate += "-";
-  overDueDate += date.getDate() < 10 ? "0" : "";
-  overDueDate += date.getDate();
-  return overDueDate;
+  stringDate += date.getFullYear();
+  stringDate += "-";
+  stringDate += date.getMonth() + 1 < 10 ? "0" : "";
+  stringDate += date.getMonth() + 1;
+  stringDate += "-";
+  stringDate += date.getDate() < 10 ? "0" : "";
+  stringDate += date.getDate();
+  return stringDate;
 };
 
 const UserDetailInfo = ({
@@ -101,14 +98,11 @@ const UserDetailInfo = ({
       .patch(`${process.env.REACT_APP_API}/users/update/${user.id}`, data)
       .then(res => {
         const userInfo = res.data;
-        if (userInfo.intraId) setUserIntraId(userInfo.intraId);
-        if (userInfo.nickname) setUserNickname(userInfo.nickname);
-        if (userInfo.slack) setUserSlack(userInfo.slack);
-        if (userInfo.role) setUserRoleNum(userInfo.role);
-        if (userInfo.penaltyEndDate) {
-          const penaltyEndDate = new Date(userInfo.penaltyEndDate);
-          setUserPenalty(convertDatetoString(penaltyEndDate));
-        }
+        setUserIntraId(userInfo.intraId);
+        setUserNickname(userInfo.nickname);
+        setUserSlack(userInfo.slack);
+        setUserRoleNum(userInfo.role);
+        setUserPenalty(userInfo.penaltyEndDate);
       })
       .catch(error => {
         closeMidModal();
@@ -122,15 +116,18 @@ const UserDetailInfo = ({
     const userEditForm = document.getElementById("edit-form");
     const intra = userEditForm.querySelector(".edit-intra-id").value;
     const nickname = userEditForm.querySelector(".edit-nickname").value;
-    const role = userEditForm.querySelector(".edit-role").value;
+    const roleNum = userEditForm.querySelector(".edit-role").value;
     const slack = userEditForm.querySelector(".edit-slack").value;
     const penalty = userEditForm.querySelector(".edit-penalty").value;
 
+    const intraId = parseInt(intra, 10);
+    const role = parseInt(roleNum, 10);
+
     const data = {
-      nickname,
-      intraId: parseInt(intra, 10),
-      slack,
-      role: parseInt(role, 10),
+      nickname: nickname === "" ? null : nickname,
+      intraId: Number.isNaN(intraId) ? null : intraId,
+      slack: slack === "" ? null : slack,
+      role: Number.isNaN(role) ? 0 : role,
       penaltyEndDate: penalty,
     };
     patchUserInfo(data);
@@ -171,9 +168,8 @@ const UserDetailInfo = ({
             infoId="penalty"
             infoType="date"
             infoValue={
-              userPenalty &&
-              userPenalty.substring(0, 10) >= convertDatetoString(today)
-                ? userPenalty.substring(0, 10)
+              userPenalty && userPenalty >= convertDatetoString(today)
+                ? userPenalty
                 : convertDatetoString(today)
             }
           />
@@ -214,9 +210,8 @@ const UserDetailInfo = ({
           <UserInfoDisplay
             infoKey="대출 불가 기간"
             infoValue={
-              userPenalty &&
-              userPenalty.substring(0, 10) >= convertDatetoString(today)
-                ? userPenalty.substring(0, 10)
+              userPenalty && userPenalty >= convertDatetoString(today)
+                ? userPenalty
                 : "-"
             }
           />

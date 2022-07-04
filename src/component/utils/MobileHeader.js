@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HeaderModal from "./HeaderModal";
 import Logo from "../../img/jiphyeonjeon_logo.svg";
@@ -6,7 +6,8 @@ import Hamburger from "../../img/Hamburger_OwlDsgnr.png";
 import SearchBook from "../../img/Search_VectorsMarket.png";
 import "../../css/MobileHeader.css";
 
-const MobileHeader = () => {
+// eslint-disable-next-line react/prop-types
+const MobileHeader = ({ location }) => {
   const [headerModal, setHeaderModal] = useState(false);
   const [isFixed, setFixed] = useState(false);
 
@@ -15,10 +16,7 @@ const MobileHeader = () => {
   };
 
   const stickyHeader = () => {
-    // const mobileHeaderHeight =
-    //   document.querySelector(".mobile-header").offsetHeight;
-    // console.log(window.pageYOffset, mobileHeaderHeight);
-    if (window.pageYOffset >= 17) {
+    if (window.pageYOffset > 0) {
       setFixed(true);
     } else {
       setFixed(false);
@@ -26,6 +24,13 @@ const MobileHeader = () => {
   };
 
   window.onscroll = stickyHeader;
+
+  const closeHeader = () => {
+    setHeaderModal(false);
+  };
+
+  // eslint-disable-next-line react/prop-types
+  useEffect(closeHeader, [location.pathname]);
 
   return (
     <header className={isFixed ? "fixed-header" : "mobile-header"}>

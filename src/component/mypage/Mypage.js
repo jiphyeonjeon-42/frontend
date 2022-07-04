@@ -13,7 +13,7 @@ import MypageReservedBook from "./MypageReservedBook";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 
 const Mypage = () => {
   const history = useHistory();
@@ -81,7 +81,9 @@ const Mypage = () => {
     };
   }, []);
 
-  console.log(query.errorCode);
+  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
+    "\r\n",
+  );
 
   return (
     <>
@@ -221,12 +223,8 @@ const Mypage = () => {
         <MiniModal closeModal={closeModal}>
           <ModalContentsTitleWithMessage
             closeModal={closeModal}
-            title={
-              getErrorMessage("mypage", parseInt(queryErrorCode, 10)).title
-            }
-            message={
-              getErrorMessage("mypage", parseInt(queryErrorCode, 10)).content
-            }
+            title={title}
+            message={content}
           />
         </MiniModal>
       )}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
 
 const ReservedModalContents = ({
   reservedInfo,
@@ -37,7 +37,7 @@ const ReservedModalContents = ({
         setLendResult(false);
         setMiniModalContents(
           status === 400
-            ? getErrorMessage("lendings", error.response.data.errorCode)
+            ? getErrorMessage(error.response.data.errorCode)
             : error.message,
         );
       });
@@ -58,7 +58,7 @@ const ReservedModalContents = ({
         setLendResult(false);
         setMiniModalContents(
           status === 400
-            ? getErrorMessage("lendings", error.response.data.errorCode)
+            ? getErrorMessage(error.response.data.errorCode)
             : error.message,
         );
       });

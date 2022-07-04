@@ -75,11 +75,7 @@
 @media screen and (max-width:600px) {
   .return-book__table-list__info > span {
     font-size: 1.4rem;
-  }
-}
-
-@media screen and (max-width:480px) {
-  .return-book__table-list__info > span {
     display: block;
   }
 }
+

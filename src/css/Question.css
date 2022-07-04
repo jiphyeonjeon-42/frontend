@@ -4,11 +4,19 @@
   padding: 0 0 0 0;
 }
 
+.qna::after {
+  content: " ";
+  left: 0;
+  right: 0;
+  height: 0.1rem;
+  background-color: #a4a4a4;
+}
+
 .qna__question {
   all: unset;
   display: flex;
   align-items: center;
-  padding: 0 0.5rem 0 0;
+  padding: 4.4rem 0.5rem 4.4rem 0;
   border: 0;
   background: none;
   white-space: normal;
@@ -17,15 +25,15 @@
 }
 
 .question__icon {
-  width: 20px;
-  height: 20px;
-  margin: 0 52px 0 0;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 5.2rem 0 0;
 }
 
 .qna__answer {
-  border-left: 1px solid #a4a4a4;
-  margin: 44px 0 0 72px;
-  padding: 0 1rem 0 25px;
+  border-left: 0.1rem solid #a4a4a4;
+  margin: 0 0 4.4rem 7.2rem;
+  padding: 0 1rem 0 2.5rem;
   white-space: normal;
 }
 
@@ -33,19 +41,15 @@
   display: none;
 }
 
-.qna__line {
-  height: 1px;
-  background-color: #a4a4a4;
-  margin: 44px 0 44px 0;
-  padding: 0;
-  border: 0;
-}
-
 .url_text {
   text-decoration: underline; 
 }
 
 @media screen and (max-width: 1199px) {
+  .qna__question {
+    padding: 3.5rem 0.5rem 3.3rem 0 ;
+  }
+
   .question__text {
     font-size: 1.8rem !important;
   }
@@ -53,20 +57,24 @@
   .question__icon {
     width: 16px;
     height: 16px;
-    margin: 0 35px 0 0;
+    margin: 0 3.5rem 0 0;
   }
 
   .qna__answer {
     font-size: 1.5rem !important;
-    margin: 33px 0 0 52px;
+    margin: 0 0 3.3rem 5.2rem;
   }
 
-  .qna__line {
-    margin: 3.5rem 0 3.5rem 0;
+  .qna::after {
+    margin-top: 0.2rem;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .qna__question {
+    padding: 2.7rem 0.5rem 2rem 0 ;
+  }
+
   .question__text {
     font-size: 1.6rem !important;
   }
@@ -74,17 +82,17 @@
   .qna__answer {
     border-left: 0;
     font-size: 1.4rem !important;
-    margin: 20px 0 0 40px;
+    margin: 0 0 2rem 4rem;
     padding: 0 1rem 0 0;
   }
 
   .question__icon {
-    width: 14px;
-    height: 14px;
-    margin: 0 25px 0 0;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin: 0 2.5rem 0 0;
   }
 
-  .qna__line {
-    margin: 2.7rem 0 2.7rem 0;
+  .qna::after {
+    margin-top: 0.7rem;
   }
 }

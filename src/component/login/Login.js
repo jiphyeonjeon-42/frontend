@@ -1,13 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../css/MainBanner.css";
 import "../../css/Banner.css";
 import "../../css/Login.css";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import qs from "qs";
+import { useRecoilValue } from "recoil";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../utils/error";
+import getErrorMessage from "../../data/error";
+import userState from "../../atom/userState";
 
 const Login = () => {
   const history = useHistory();
@@ -24,6 +26,11 @@ const Login = () => {
     ignoreQueryPrefix: true,
   });
   const [queryErrorCode, setQueryErrorCode] = useState(query.errorCode);
+  const user = useRecoilValue(userState);
+
+  useEffect(() => {
+    if (user.isLogin) history.push("/");
+  }, [user]);
 
   const closeModal = async () => {
     setQueryErrorCode(null);
@@ -74,16 +81,18 @@ const Login = () => {
     }
   };
 
+  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
+    "\r\n",
+  );
+
   return (
     <main>
       {queryErrorCode && (
         <MiniModal closeModal={closeModal}>
           <ModalContentsTitleWithMessage
             closeModal={closeModal}
-            title={getErrorMessage("login", parseInt(queryErrorCode, 10)).title}
-            message={
-              getErrorMessage("login", parseInt(queryErrorCode, 10)).content
-            }
+            title={title}
+            message={content}
           />
         </MiniModal>
       )}

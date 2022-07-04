@@ -53,7 +53,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .inquire-box-title {
+  .reserved-loan-body > .inquire-box-wrapper > .inquire-box-title { 
     min-width: unset;
     max-width: unset;
   }
