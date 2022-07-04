@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState, useRef } from "react";
 import { useRecoilValue } from "recoil";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import userState from "../../atom/userState";
 import "../../css/BookDetail.css";
@@ -9,7 +10,8 @@ import BookStatus from "./BookStatus";
 import IMGERR from "../../img/image_onerror.svg";
 import MiniModal from "../utils/MiniModal";
 import Reservation from "../reservation/Reservation";
-import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
+import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
+import getErrorMessage from "../../data/error";
 import ArrRes from "../../img/arrow_right_res.svg";
 import ArrDef from "../../img/arrow_right_res_default.svg";
 
@@ -21,6 +23,8 @@ const BookDetail = ({ location, match }) => {
   const [miniModalClosable, setMiniModalClosable] = useState(true);
   const [errorCode, setErrorCode] = useState(-1);
   const user = useRecoilValue(userState);
+  // eslint-disable-next-line prefer-const
+  let history = useHistory();
 
   const openModal = () => {
     if (!user.isLogin) {
@@ -32,6 +36,8 @@ const BookDetail = ({ location, match }) => {
 
   const closeModal = () => {
     if (miniModalClosable) setMiniModalView(false);
+    if (errorCode === 304) history.push("/search");
+    window.scrollTo(0, 0);
   };
 
   const getBooksInfo = async () => {
@@ -53,6 +59,10 @@ const BookDetail = ({ location, match }) => {
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
+
+  const [title, content] = getErrorMessage(parseInt(errorCode, 10)).split(
+    "\r\n",
+  );
 
   return (
     <main>
@@ -80,7 +90,8 @@ const BookDetail = ({ location, match }) => {
             <span className="color-red">도서정보</span>
             <div className="book-detail__reservation-button">
               <div className="book-detail__title">{bookDetailInfo.title}</div>
-              {bookDetailInfo.books.reduce(
+              {bookDetailInfo.books.length > 0 &&
+              bookDetailInfo.books.reduce(
                 (accumulator, current) => accumulator + current.isLendable,
                 0,
               ) === 0 ? (
@@ -125,7 +136,12 @@ const BookDetail = ({ location, match }) => {
                   {bookDetailInfo.category}
                 </span>
                 <span className="book-detail__info-value">
-                  {bookDetailInfo.donators}
+                  {bookDetailInfo.books.reduce((accumulator, current) => {
+                    if (accumulator === "")
+                      return accumulator + current.donator;
+                    // eslint-disable-next-line prefer-template
+                    return accumulator + ", " + current.donator;
+                  }, "")}
                 </span>
               </div>
             </div>
@@ -153,9 +169,10 @@ const BookDetail = ({ location, match }) => {
               setClosable={setMiniModalClosable}
             />
           ) : (
-            <ModalContentsOnlyTitle
+            <ModalContentsTitleWithMessage
               closeModal={closeModal}
-              title={`ERROR ${errorCode}`}
+              title={title}
+              message={content}
             />
           )}
         </MiniModal>
