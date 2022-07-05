@@ -36,7 +36,8 @@ const Mypage = () => {
       })
       .then(res => setUserInfo(res.data.items[0]))
       .catch(err => {
-        setMiniModalContent(err.message);
+        const errorCode = err.response.data.errCode;
+        setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });
   };

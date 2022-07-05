@@ -5,6 +5,7 @@ import arrowLeft from "../../img/arrow_left_black.svg";
 import "../../css/EditPassword.css";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
+import getErrorMessage from "../../data/error";
 
 function EditPassword() {
   const history = useHistory();
@@ -43,7 +44,8 @@ function EditPassword() {
         setIsGoBack(true);
       })
       .catch(err => {
-        setMiniModalContent(err.message);
+        const errorCode = err.response.data.errCode;
+        setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });
   };
