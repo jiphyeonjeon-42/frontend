@@ -43,8 +43,14 @@ const ReturnModalContents = ({
         lendingId,
         condition,
       })
-      .then(() => {
-        setMiniModalContents(data.title);
+      .then(res => {
+        setMiniModalContents(
+          `${data.title} \n ${
+            res.data?.reservedBook
+              ? "예약된 책입니다. 예약자를 위해 따로 보관해주세요."
+              : ""
+          }`,
+        );
         setReturnResult(true);
       })
       .catch(error => {
