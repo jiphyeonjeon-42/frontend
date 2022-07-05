@@ -20,15 +20,13 @@ const ReservedModalContents = ({
     const condition = remark;
     setRemark("");
     await axios
-      .post(`${process.env.REACT_APP_API}/lendings`, [
-        {
-          userId: reservedInfo.userId,
-          bookId: reservedInfo.bookId,
-          condition,
-        },
-      ])
+      .post(`${process.env.REACT_APP_API}/lendings`, {
+        userId: reservedInfo.userId,
+        bookId: reservedInfo.bookId,
+        condition,
+      })
       .then(() => {
-        setMiniModalContents("success");
+        setMiniModalContents("대출이 완료되었습니다.");
         setLendResult(true);
       })
       .catch(error => {
@@ -49,7 +47,7 @@ const ReservedModalContents = ({
         `${process.env.REACT_APP_API}/reservations/cancel/${reservedInfo.reservationsId}`,
       )
       .then(() => {
-        setMiniModalContents("success");
+        setMiniModalContents("예약 취소가 완료되었습니다.");
         setLendResult(true);
       })
       .catch(error => {
