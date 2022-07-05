@@ -35,7 +35,7 @@ function EditEmail() {
         setIsGoBack(true);
       })
       .catch(err => {
-        const errorCode = err.response.data.errCode;
+        const { errorCode } = err.response.data;
         setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });
@@ -56,7 +56,7 @@ function EditEmail() {
       })
       .then(res => setUserInfo(res.data.items[0]))
       .catch(err => {
-        const errorCode = err.response.data.errCode;
+        const { errorCode } = err.response.data;
         setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });

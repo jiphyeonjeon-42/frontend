@@ -44,7 +44,7 @@ function EditPassword() {
         setIsGoBack(true);
       })
       .catch(err => {
-        const errorCode = err.response.data.errCode;
+        const { errorCode } = err.response.data;
         setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });
