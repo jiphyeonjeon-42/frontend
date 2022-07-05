@@ -26,7 +26,7 @@ const RentConfirm = ({ selectedUser, selectedBooks, setMidModalContents }) => {
           2 - selectedUser.lendings.length >= selectedBooks.length
             ? "red"
             : "black"
-        }-button font-20 color-ff`}
+        }-button color-ff`}
         type="button"
         disabled={
           selectedUser &&
