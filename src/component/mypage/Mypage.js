@@ -68,7 +68,7 @@ const Mypage = () => {
   useEffect(async () => {
     if (JSON.parse(window.localStorage.getItem("user")).isLogin)
       await getUserInfo();
-    else history.push("/");
+    else history.push("/login");
   }, []);
 
   useEffect(() => {
