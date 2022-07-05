@@ -124,7 +124,7 @@ const RentModalConfirm = ({
                 <p className="rent-modal__title font-28-bold color-54 margin-8">
                   {selectBook.title}
                 </p>
-                <p className="font-16 color-54">{`도서코드 : ${selectBook.callSign}`}</p>
+                <p className="font-16 color-54">{`청구기호 : ${selectBook.callSign}`}</p>
               </div>
               <div className="rent-modal__remark">
                 <p className="font-16 color-red">비고</p>

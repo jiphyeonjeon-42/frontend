@@ -79,7 +79,7 @@ const ReservedModalContents = ({
           <p className="mid-modal__book-title font-28-bold color-54  margin-8">
             {reservedInfo.title}
           </p>
-          <p className="font-16 color-54">{`도서코드 : ${reservedInfo.callSign}`}</p>
+          <p className="font-16 color-54">{`청구기호 : ${reservedInfo.callSign}`}</p>
         </div>
         <div className="mid-modal__lend">
           <p className="font-16 color-red">예약 만료일</p>
