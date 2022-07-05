@@ -20,13 +20,11 @@ const ReservedModalContents = ({
     const condition = remark;
     setRemark("");
     await axios
-      .post(`${process.env.REACT_APP_API}/lendings`, [
-        {
-          userId: reservedInfo.userId,
-          bookId: reservedInfo.bookId,
-          condition,
-        },
-      ])
+      .post(`${process.env.REACT_APP_API}/lendings`, {
+        userId: reservedInfo.userId,
+        bookId: reservedInfo.bookId,
+        condition,
+      })
       .then(() => {
         setMiniModalContents("success");
         setLendResult(true);
