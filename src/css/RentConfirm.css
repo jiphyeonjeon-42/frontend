@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 8rem;
 }
 
 .rent__confirm-button__text {
@@ -42,5 +42,14 @@
   .rent__confirm-button__button {
     padding: 0.8rem 4rem 0.8rem 4rem;
     font-size: 1.8rem;
+  }
+
+  .rent__confirm-button__text {
+    margin-bottom: 1.5rem;
+  }
+
+  .rent__confirm-button {
+    margin-top: 2rem;
+    margin-bottom: 6rem;
   }
 }
