@@ -46,8 +46,6 @@
 
 .book-detail__photo {
   margin: 0 4.8rem 0 0;
-  /* display: flex; */
-  /* flex-direction: column; */
 }
 
 .book-detail__photo img {
@@ -105,14 +103,6 @@
   flex-shrink: 0;
 }
 
-/* .book-detail__info > div:first-child {
-  width: 15%;
-}
-
-.book-detail__info > div:nth-child(2) {
-  width: 85%;
-} */
-
 .book-state {
   margin-top: 2rem;
 }
@@ -129,7 +119,6 @@
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .book-detail {
     width: 55%;
-    /* margin-right: auto; */
   }
 
   .book-detail__photo img {
