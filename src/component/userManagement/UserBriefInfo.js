@@ -18,17 +18,23 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
     setModal(EDIT);
   };
 
-  const getOverDueDate = overDueDay => {
-    const today = new Date();
+  const concatDate = day => {
     let overDueDate = "";
 
-    today.setDate(today.getDate() + overDueDay);
-    overDueDate += today.getFullYear();
+    day.setDate(day.getDate() + user.overDueDay);
+    overDueDate += day.getFullYear();
     overDueDate += "-";
-    overDueDate += today.getMonth() + 1;
+    overDueDate += day.getMonth() + 1;
     overDueDate += "-";
-    overDueDate += today.getDate();
+    overDueDate += day.getDate();
     return overDueDate.substring(2);
+  };
+
+  const getOverDueDate = () => {
+    if (!user.penaltyEndDate || new Date(user.penaltyEndDate) < new Date()) {
+      return concatDate(new Date());
+    }
+    return concatDate(new Date(user.penaltyEndDate));
   };
 
   return (
@@ -48,7 +54,7 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
       )}
       <div className="user-info__email font-18-bold color-54">{user.email}</div>
       <div className="user-info__overdue font-18 color-54">
-        {user.overDueDay ? getOverDueDate(user.overDueDay) : "-"}
+        {user.overDueDay ? getOverDueDate() : "-"}
       </div>
       {user.nickname ? (
         <button
