@@ -10,8 +10,6 @@
 }
 
 .main-new__arrow {
-  width: 8rem;
-  height: 34rem;
   margin: 0;
   position: absolute;
   top: 27.5rem;
@@ -48,8 +46,6 @@
 
 .main-new__book {
   text-align: none;
-  width: 21.6rem;
-  height: 32rem;
   display: inline-block;
   margin-left: 2rem;
   vertical-align: top;
@@ -64,11 +60,6 @@
   transform: scale(1.05);
   transition: all 0.3s ease-in-out;
   -webkit-transition: 0.3s;
-}
-
-.main-new__book-img {
-  width: 21.6rem;
-  height: 32rem;
 }
 
 .main-new__book:first-child {
@@ -109,4 +100,10 @@
 
 .main-new__books_pag_circle.selected {
   background-color: #2d2d2d;
+}
+
+@media screen and (max-width:767px) {
+  .main-new {
+    height: 52rem;
+  }
 }

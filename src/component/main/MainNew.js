@@ -6,19 +6,6 @@ import SubTitle from "../utils/SubTitle";
 import MainNewBookList from "./MainNewBookList";
 import "../../css/MainNew.css";
 
-function useWidth() {
-  const [widthSize, setWidthSize] = useState(undefined);
-  useEffect(() => {
-    function handleSize() {
-      setWidthSize(window.innerWidth);
-    }
-    window.addEventListener("resize", handleSize);
-    handleSize();
-    return () => window.removeEventListener("resize", handleSize);
-  }, []);
-  return widthSize;
-}
-
 const MainNew = () => {
   const [docs, setDocs] = useState([]);
   const setGlobalError = useSetRecoilState(globalModal);
@@ -46,9 +33,6 @@ const MainNew = () => {
       });
   }, []);
 
-  const display = Math.ceil((useWidth() - 266) / 236);
-  const books = [...docs.slice(-1), ...docs, ...docs.slice(0, display + 1)];
-
   return (
     <section className="main-new">
       <div className="main-new__wrapper">
@@ -57,7 +41,7 @@ const MainNew = () => {
           description="책을 클릭하면 더 자세한 정보를 확인할 수 있습니다."
           alignItems="center"
         />
-        <MainNewBookList books={books} display={display} />
+        <MainNewBookList docs={docs} />
       </div>
     </section>
   );

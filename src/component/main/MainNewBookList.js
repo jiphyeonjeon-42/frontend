@@ -5,14 +5,41 @@ import MainNewBookPagination from "./MainNewBookPagination";
 import ArrLeft from "../../img/arrow_left.svg";
 import ArrRight from "../../img/arrow_right.svg";
 
-const MainNewBookList = ({ books, display }) => {
+function useWidth() {
+  const [widthSize, setWidthSize] = useState(undefined);
+  useEffect(() => {
+    function handleSize() {
+      setWidthSize(window.innerWidth);
+    }
+    window.addEventListener("resize", handleSize);
+    handleSize();
+    return () => window.removeEventListener("resize", handleSize);
+  }, []);
+  return widthSize;
+}
+
+const MainNewBookList = ({ docs }) => {
   const [page, setPage] = useState(1);
+  const [bookSize, setBookSize] = useState(220);
   const [transition, setTransition] = useState(true);
   const intervalId = useRef(0);
 
+  const display = Math.ceil((useWidth() - bookSize) / (bookSize + 10));
+  const books = [...docs.slice(-2), ...docs, ...docs.slice(0, display + 1)];
+
+  useEffect(() => {
+    if (window.innerWidth < 767 && bookSize !== 100) setBookSize(110);
+    if (window.innerWidth >= 767 && bookSize !== 200) setBookSize(220);
+  }, [window.innerWidth]);
+
+  useEffect(() => {
+    if (window.innerWidth < 767 && bookSize !== 100) setBookSize(110);
+    if (window.innerWidth >= 767 && bookSize !== 200) setBookSize(220);
+  }, [window.innerWidth]);
+
   const onNext = () => {
     const index = page;
-    if (index === books.length - display - 2) {
+    if (index === books.length - display - 3) {
       setTransition(false);
       setPage(0);
       setTimeout(() => {
@@ -24,7 +51,7 @@ const MainNewBookList = ({ books, display }) => {
 
   const onPrev = () => {
     let index = page;
-    if (index === 0) {
+    if (index === 1) {
       index = books.length - display - 2;
       setTransition(false);
       setPage(index);
@@ -51,21 +78,45 @@ const MainNewBookList = ({ books, display }) => {
 
   return (
     <div className="main-new__content">
-      <button className="main-new__arrow" onClick={onPrev} type="button">
-        <img src={ArrLeft} alt="" />
+      <button
+        className="main-new__arrow"
+        onClick={onPrev}
+        type="button"
+        onMouseEnter={pauseInterval}
+        onMouseLeave={startInterval}
+      >
+        <img
+          src={ArrLeft}
+          alt=""
+          style={{ width: bookSize / 4, height: bookSize * 1.5 + 20 }}
+        />
       </button>
-      <button className="main-new__arrow right" onClick={onNext} type="button">
-        <img src={ArrRight} alt="" />
-      </button>{" "}
+      <button
+        className="main-new__arrow right"
+        onClick={onNext}
+        type="button"
+        onMouseEnter={pauseInterval}
+        onMouseLeave={startInterval}
+      >
+        <img
+          src={ArrRight}
+          alt=""
+          style={{ width: bookSize / 4, height: bookSize * 1.5 + 20 }}
+        />
+      </button>
       <div className="main-new__booklist">
         <div
           className={`${transition && "main-new__books"}`}
-          style={{ transform: `translate(${-92 - 236 * page * 0.1}rem)` }}
+          style={{
+            transform: `translate(${
+              -(bookSize / 6) - (bookSize + 20) * page * 0.1
+            }rem)`,
+          }}
           onMouseEnter={pauseInterval}
           onMouseLeave={startInterval}
         >
           {books.map(book => (
-            <MainNewBook book={book} />
+            <MainNewBook book={book} bookSize={bookSize} />
           ))}
         </div>
       </div>
@@ -77,6 +128,5 @@ const MainNewBookList = ({ books, display }) => {
 export default MainNewBookList;
 
 MainNewBookList.propTypes = {
-  books: PropTypes.arrayOf(PropTypes.object).isRequired,
-  display: PropTypes.number.isRequired,
+  docs: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
