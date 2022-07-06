@@ -7,24 +7,23 @@
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 8rem;
 }
 
 .rent__confirm-button__text {
   margin-bottom: 2.4rem;
   white-space: normal;
   padding: 0 5rem;
-  word-break:keep-all;
+  word-break: keep-all;
+  text-align: center;
 }
 
 .rent__confirm-button__button {
-  margin: 0;
-  border: 0;
-  padding: 0;
-  width: 21.2rem;
-  height: 4.8rem;
-  background: none;
+  all: unset;
+  text-align: center;
+  padding: 1rem 5rem 1rem 5rem;
   border-radius: 2.4rem;
+  font-size: 2rem;
 }
 
 .black-button {
@@ -34,4 +33,23 @@
 .red-button {
   background-color: #e63737;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 767px) {
+  .rent__confirm-button__button {
+    padding: 0.8rem 4rem 0.8rem 4rem;
+    font-size: 1.8rem;
+  }
+
+  .rent__confirm-button__text {
+    margin-bottom: 1.5rem;
+  }
+
+  .rent__confirm-button {
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+  }
 }

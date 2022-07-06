@@ -28,7 +28,7 @@ const InquireBoxBook = ({
       {book ? (
         <div className="rent__inquire-box-book-active">
           <div className="rent__inquire-box-book__id-undo">
-            <div className="rent__inquire-box-book__id font-28-bold color-54">
+            <div className="rent__inquire-box-book__id color-54">
               {book.title}
             </div>
             <button
@@ -41,26 +41,12 @@ const InquireBoxBook = ({
           </div>
           <div className="rent__inquire-box-book__info color-54">
             <div className="book__info__factor">
-              <span className="book__info__factor-half font-18-bold">
-                도서코드
-              </span>
-              <span className="font-18-bold">{book.callSign}</span>
+              <span className="book__info__factor-key">ISBN</span>
+              <span className="book__info__factor-value">{book.isbn}</span>
             </div>
             <div className="book__info__factor">
-              <span className="book__info__factor-half font-18-bold">저자</span>
-              <span className="font-16">{book.author}</span>
-            </div>
-            <div className="book__info__factor">
-              <span className="book__info__factor-half font-18-bold">
-                출판사
-              </span>
-              <span className="font-16">{book.publisher}</span>
-            </div>
-            <div className="book__info__factor">
-              <span className="book__info__factor-half font-18-bold">
-                발행연도
-              </span>
-              <span className="font-16">{book.callSign}</span>
+              <span className="book__info__factor-key">청구기호</span>
+              <span className="book__info__factor-value">{book.callSign}</span>
             </div>
           </div>
         </div>

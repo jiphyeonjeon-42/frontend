@@ -26,9 +26,18 @@ const InquireBoxUser = ({
   };
 
   const displayPenalty = () => {
-    if (new Date(selectedUser.penaltyEndDate) > Date.now())
-      return `연체(연체종료일: ${displayDate(selectedUser.penaltyEndDate)}) `;
-    return selectedUser.lendings.length >= 2 ? "대출제한(2권 이상 대출)" : null;
+    let penalty = "";
+    if (
+      new Date(selectedUser.penaltyEndDate) > Date.now() ||
+      selectedUser.overDueDay > 0
+    )
+      penalty += "대출제한 (연체";
+    if (selectedUser.lendings.length >= 2) {
+      if (penalty !== "") penalty += ", 2권 이상 대출";
+      else penalty += "대출제한 (2권 이상 대출";
+    }
+    if (penalty !== "") penalty += ")";
+    return penalty;
   };
 
   return (
@@ -36,14 +45,12 @@ const InquireBoxUser = ({
       {selectedUser ? (
         <div className="rent__inquire-box-user-active">
           <div className="rent__inquire-box-user__id-undo">
-            <div>
-              <span className="rent__inquire-box-user__id font-28-bold color-54">
-                {selectedUser.nickname
-                  ? selectedUser.nickname
-                  : selectedUser.email}
-              </span>
-              <span className="font-16 color-red"> {displayPenalty()} </span>
+            <div className="rent__inquire-box-user__id color-54">
+              {selectedUser.nickname
+                ? selectedUser.nickname
+                : selectedUser.email}
             </div>
+            <div className="font-16 color-red"> {displayPenalty()} </div>
             <button
               className="rent__inquire-box-user__undo-button color-a4"
               type="button"
@@ -53,16 +60,16 @@ const InquireBoxUser = ({
             </button>
           </div>
           <div className="rent__inquire-box-user__lendings">
-            <div className="user__book-cnt font-18-bold color-54">
+            <div className="user__book-cnt color-54">
               {`대출중인 도서 (${selectedUser.lendings.length})`}
             </div>
             <div className="user__book-info__total">
               {selectedUser.lendings.map((item, index) => (
                 <div key={item.userId} className="user__book-info">
-                  <div className="user__book-info__title font-18-bold color-54">
+                  <div className="user__book-info__title color-54">
                     {`${index + 1}. ${item.title}`}
                   </div>
-                  <div className="font-16 color-54">
+                  <div className="user__book-info__description color-54">
                     {`반납 예정일 : ${displayDate(item.duedate)}`}
                   </div>
                 </div>
@@ -70,16 +77,16 @@ const InquireBoxUser = ({
             </div>
           </div>
           <div className="rent__inquire-box-user__reservations">
-            <div className="user__book-cnt font-18-bold color-54">
+            <div className="user__book-cnt color-54">
               {`예약중인 도서 (${selectedUser.reservations.length})`}
             </div>
             <div className="user__book-info__total">
               {selectedUser.reservations.map((item, index) => (
                 <div key={item.id} className="user__book-info">
-                  <div className="user__book-info__title font-18-bold color-54">
+                  <div className="user__book-info__title color-54">
                     {`${index + 1}. ${item.title}`}
                   </div>
-                  <div className="font-16 color-54">
+                  <div className="user__book-info__description color-54">
                     <span>{`예약순위 : ${
                       item.ranking ? `${item.ranking}순위` : "-"
                     }`}</span>
@@ -111,11 +118,15 @@ export default InquireBoxUser;
 
 InquireBoxUser.propTypes = {
   selectedUser: PropTypes.shape({
-    email: PropTypes.string,
     id: PropTypes.number,
-    lendings: PropTypes.arrayOf(PropTypes.object),
+    email: PropTypes.string,
     nickname: PropTypes.string,
+    intraId: PropTypes.number,
+    slack: PropTypes.string,
     penaltyEndDate: PropTypes.string,
+    overDueDay: PropTypes.string,
+    role: PropTypes.number,
+    lendings: PropTypes.arrayOf(PropTypes.object),
     reservations: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   setSelectedUser: PropTypes.func.isRequired,
