@@ -1,6 +1,7 @@
 .book-status {
   margin-bottom: 1.2rem;
   display: flex;
+  font-size: 1.8rem;
 }
 
 .book-status__id {
@@ -26,7 +27,8 @@
   text-align: center;
 }
 
-.reservation-btn, .book-status__toggle {
+.reservation-btn,
+.book-status__toggle {
   margin-top: 0.3rem;
 }
 
@@ -47,4 +49,11 @@
 .book-status__toggle-img-clicked {
   margin-left: 1.2rem;
   margin-top: 0.3rem;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .book-status {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
 }

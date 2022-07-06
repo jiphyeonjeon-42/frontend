@@ -8,7 +8,6 @@
 
 .book-detail__reservation-button {
   display: flex;
-  /* flex-direction: column; */
   margin-bottom: 2.4rem;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -23,17 +22,19 @@
   all: unset;
   cursor: pointer;
   margin-top: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
 .reservation-disable-button {
   all: unset;
   margin-top: 1rem;
+  font-size: 1.8rem;
 }
 
 .breadcrumb {
   display: flex;
   justify-content: flex-end;
-  /* margin-top: 12rem; */
   margin-right: 3rem;
 }
 
@@ -45,8 +46,6 @@
 
 .book-detail__photo {
   margin: 0 4.8rem 0 0;
-  display: flex;
-  flex-direction: column;
 }
 
 .book-detail__photo img {
@@ -78,35 +77,30 @@
   border-color: #a4a4a4 !important;
   border-top: solid 0.1rem;
   border-bottom: solid 0.1rem;
-  height: 24rem;
-  display: flex;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
   width: 100%;
 }
 
-.book-detail__info > div:first-child {
-  width: 15%;
-}
-
-.book-detail__info > div:nth-child(2) {
-  width: 85%;
+.book-detail__info-wrapper {
+  display: flex;
+  margin-bottom: 1.5rem;
 }
 
 .book-detail__info-key {
-  display: block;
   font-size: 1.8rem;
   font-weight: bold;
-  letter-spacing: -0.036rem;
-  margin-top: 1.5rem;
+  width: 12rem;
+  flex-shrink: 0;
 }
 
 .book-detail__info-value {
-  display: block;
   font-size: 1.8rem;
-  margin-top: 1.5rem;
-  margin-left: 10rem;
   font-weight: normal;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  width: 40rem;
+  word-break: break-all;
+  white-space: normal;
+  flex-shrink: 0;
 }
 
 .book-state {
@@ -117,23 +111,54 @@
   margin-top: 2rem;
 }
 
+.book-detail__info-status {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .book-detail {
     width: 55%;
-    margin-right: auto;
   }
 
   .book-detail__photo img {
-    width: 33.4rem;
-    margin: 0 1rem 0 0;
+    width: 32rem;
+    height: 47rem;
+    margin: 0 2rem 0 0;
   }
 
   .book-detail__photo {
-    margin: 0 0.4rem 0 auto;
+    margin: 0;
   }
 
   .book-detail__info-value {
-    margin-left: 4rem;
+    width: 30rem;
+    font-size: 1.6rem;
+  }
+
+  .book-detail__info-key {
+    width: 10rem;
+    font-size: 1.6rem;
+  }
+
+  .book-detail__title {
+    font-size: 2.4rem;
+  }
+
+  .reservation-active-button {
+    font-size: 1.6rem;
+  }
+
+  .reservation-disable-button {
+    font-size: 1.6rem;
+  }
+
+  .book-detail__info-status {
+	font-size: 1.6rem;
+  }
+
+  .book-content {
+	justify-content: space-evenly;
   }
 }
 
@@ -155,7 +180,7 @@
 
   .book-content {
     display: block;
-	margin-top: 3rem;
+    margin-top: 3rem;
   }
 
   .book-detail__photo {
@@ -185,7 +210,7 @@
 
   .book-detail__info {
     height: auto;
-    padding: 0 0 2rem 0;
+    padding: 1.5rem 0 2rem 0;
   }
 
   .book-detail__info > div:first-child {
