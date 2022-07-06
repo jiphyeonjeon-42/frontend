@@ -14,22 +14,43 @@ const UserList = ({ user, setSelectedUser, closeMidModal }) => {
     }
   };
 
+  const displayPenalty = () => {
+    let penalty = "";
+    if (new Date(user.penaltyEndDate) > Date.now() || user.overDueDay > 0)
+      penalty += "대출 불가 (연체";
+    if (user.lendings.length >= 2) {
+      if (penalty !== "") penalty += ", 2권 이상 대출";
+      else penalty += "대출 불가 (2권 이상 대출";
+    }
+    if (penalty !== "") penalty += ")";
+    return penalty;
+  };
+
   return (
-    <button className="rent__user-list" type="button" onClick={seletUser}>
+    <button
+      className={`rent__user-list ${
+        displayPenalty() === "" ? "color-54" : "disabled color-a4"
+      }`}
+      type="button"
+      onClick={seletUser}
+      disabled={displayPenalty() === "" ? "" : "disabled"}
+    >
       <div className="rent__user-list__name">
-        <div className="font-18-bold color-54 rent__text-ellipsis">
+        <div className="font-18-bold rent__text-ellipsis">
           {user.nickname ? user.nickname : user.email}
         </div>
       </div>
-      <div className="rent__user-list__lent-cnt font-16 color-54">
+      {/* <div className="rent__user-list__lent-cnt font-16">
         대출중인 도서 : {user.lendings.length}권
-      </div>
-      <div className="rent__user-list__penalty font-16 color-red">
-        {new Date(user.penaltyEndDate) > Date.now()
-          ? "대출제한(연체)"
-          : user.lendings.length >= 2
-          ? "대출제한(2권 이상 대출)"
-          : null}
+      </div> */}
+      <div
+        className={`rent__user-list__penalty ${
+          displayPenalty() === "" ? "available" : "disabled"
+        } font-16`}
+      >
+        {displayPenalty() === ""
+          ? `대출 가능 ${user.lendings.length === 0 ? "□" : "■"}□`
+          : displayPenalty()}
       </div>
       <img className="rent__user-list__arrow" src={Arrow} alt="arrow" />
     </button>

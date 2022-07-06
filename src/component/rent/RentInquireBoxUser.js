@@ -26,11 +26,18 @@ const InquireBoxUser = ({
   };
 
   const displayPenalty = () => {
-    if (new Date(selectedUser.penaltyEndDate) > Date.now())
-      return `연체 (패널티 종료일: ${displayDate(
-        selectedUser.penaltyEndDate,
-      )}) `;
-    return selectedUser.lendings.length >= 2 ? "대출제한(2권 이상 대출)" : null;
+    let penalty = "";
+    if (
+      new Date(selectedUser.penaltyEndDate) > Date.now() ||
+      selectedUser.overDueDay > 0
+    )
+      penalty += "대출제한 (연체";
+    if (selectedUser.lendings.length >= 2) {
+      if (penalty !== "") penalty += ", 2권 이상 대출";
+      else penalty += "대출제한 (2권 이상 대출";
+    }
+    if (penalty !== "") penalty += ")";
+    return penalty;
   };
 
   return (
@@ -111,11 +118,15 @@ export default InquireBoxUser;
 
 InquireBoxUser.propTypes = {
   selectedUser: PropTypes.shape({
-    email: PropTypes.string,
     id: PropTypes.number,
-    lendings: PropTypes.arrayOf(PropTypes.object),
+    email: PropTypes.string,
     nickname: PropTypes.string,
+    intraId: PropTypes.number,
+    slack: PropTypes.string,
     penaltyEndDate: PropTypes.string,
+    overDueDay: PropTypes.string,
+    role: PropTypes.number,
+    lendings: PropTypes.arrayOf(PropTypes.object),
     reservations: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   setSelectedUser: PropTypes.func.isRequired,

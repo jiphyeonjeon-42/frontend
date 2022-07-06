@@ -21,6 +21,10 @@
   transition: 0.3s;
 }
 
+.rent__user-list.disabled {
+  cursor: unset;
+}
+
 .rent__user-list:hover {
   -webkit-transform: scale(1.01);
   -moz-transform: scale(1.01);
@@ -43,6 +47,11 @@
   line-height: 2.4rem;
 }
 
+.rent__user-list__penalty.available {
+  color: #00a000;
+  font-weight: bold;
+}
+
 .rent__user-list__arrow {
   width: 0.8rem;
   height: 1.6rem;
@@ -57,9 +66,7 @@
 }
 
 @media screen and (max-width: 767px) {
-
   .rent__user-list__name {
     width: 16.1rem;
   }
-
 }
