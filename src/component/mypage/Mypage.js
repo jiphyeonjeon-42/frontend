@@ -88,37 +88,33 @@ const Mypage = () => {
     "\r\n",
   );
 
-  const getOverDueDate = () => {
-    const today = new Date();
+  const concatDate = day => {
     let overDueDate = "";
 
+    day.setDate(day.getDate() + userInfo.overDueDay);
+    overDueDate += day.getFullYear();
+    overDueDate += "-";
+    overDueDate +=
+      day.getMonth() + 1 >= 10
+        ? day.getMonth() + 1
+        : "0".concat(day.getMonth() + 1);
+    overDueDate += "-";
+    overDueDate +=
+      day.getDate() >= 10 ? day.getDate() : "0".concat(day.getDate());
+    return overDueDate;
+  };
+
+  const getOverDueDate = () => {
     if (
       !userInfo.penaltyEndDate ||
       new Date(userInfo.penaltyEndDate) < new Date()
     ) {
-      today.setDate(today.getDate() + userInfo.overDueDay);
-      overDueDate += today.getFullYear();
-      overDueDate += "-";
-      overDueDate += today.getMonth() + 1;
-      overDueDate += "-";
-      overDueDate += today.getDate();
-      return overDueDate;
+      return concatDate(new Date());
     }
-    const penaltyDay = new Date(userInfo.penaltyEndDate);
-    penaltyDay.setDate(penaltyDay.getDate() + userInfo.overDueDay - 1);
-    overDueDate += penaltyDay.getFullYear();
-    overDueDate += "-";
-    overDueDate +=
-      (penaltyDay.getMonth() + 1).length === 2
-        ? penaltyDay.getMonth() + 1
-        : "0".concat(penaltyDay.getMonth() + 1);
-    overDueDate += "-";
-    overDueDate +=
-      (penaltyDay.getDate() + 1).length === 2
-        ? penaltyDay.getDate() + 1
-        : "0".concat(penaltyDay.getDate());
-    return overDueDate;
+    return concatDate(new Date(userInfo.penaltyEndDate));
   };
+
+  console.log(new Date().getMonth());
 
   return (
     <>
