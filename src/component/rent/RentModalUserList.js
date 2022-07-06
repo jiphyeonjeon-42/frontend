@@ -40,16 +40,13 @@ const UserList = ({ user, setSelectedUser, closeMidModal }) => {
           {user.nickname ? user.nickname : user.email}
         </div>
       </div>
-      {/* <div className="rent__user-list__lent-cnt font-16">
-        대출중인 도서 : {user.lendings.length}권
-      </div> */}
       <div
         className={`rent__user-list__penalty ${
           displayPenalty() === "" ? "available" : "disabled"
         } font-16`}
       >
         {displayPenalty() === ""
-          ? `대출 가능 ${user.lendings.length === 0 ? "□" : "■"}□`
+          ? `대출 중인 도서 : ${user.lendings.length}권`
           : displayPenalty()}
       </div>
       <img className="rent__user-list__arrow" src={Arrow} alt="arrow" />
