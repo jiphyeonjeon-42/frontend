@@ -77,20 +77,33 @@ const ReservedModalContents = ({
           <p className="mid-modal__book-title font-28-bold color-54  margin-8">
             {reservedInfo.title}
           </p>
-          <p className="font-16 color-54">{`도서코드 : ${reservedInfo.callSign}`}</p>
+          {reservedInfo.bookId && reservedInfo.callSign ? (
+            <p className="font-16 color-54">{`도서코드 : ${reservedInfo.callSign}`}</p>
+          ) : null}
         </div>
-        <div className="mid-modal__lend">
-          <p className="font-16 color-red">예약 만료일</p>
-          <p className="font-28-bold color-54  margin-8">
-            {reservedInfo.endAt ? reservedInfo.endAt.slice(0, 10) : "NULL"}
-          </p>
-        </div>
+        {reservedInfo.bookId && reservedInfo.endAt ? (
+          <div className="mid-modal__lend">
+            <p className="font-16 color-red">예약 만료일</p>
+            <p className="font-28-bold color-54  margin-8">
+              {reservedInfo.endAt ? reservedInfo.endAt.slice(0, 10) : "NULL"}
+            </p>
+          </div>
+        ) : (
+          <div className="mid-modal__lend">
+            <p className="font-16 color-red">예약 시작일</p>
+            <p className="font-28-bold color-54  margin-8">
+              {reservedInfo.createdAt
+                ? reservedInfo.createdAt.slice(0, 10)
+                : "NULL"}
+            </p>
+          </div>
+        )}
         <div className="mid-modal__user">
           <p className="font-16 color-red">유저정보</p>
           <p className="font-28-bold color-54  margin-8">
             {reservedInfo.login}
           </p>
-          <p className="font-16 color-54">{`연체일수 : ${reservedInfo.penaltyDays}`}</p>
+          <p className="font-16 color-54">{`연체일수 : ${reservedInfo.penaltyDays}일`}</p>
         </div>
         <div className="mid-modal__remark">
           <p className="font-16 color-red">비고</p>
