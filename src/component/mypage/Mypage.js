@@ -88,6 +88,38 @@ const Mypage = () => {
     "\r\n",
   );
 
+  const getOverDueDate = () => {
+    const today = new Date();
+    let overDueDate = "";
+
+    if (
+      !userInfo.penaltyEndDate ||
+      new Date(userInfo.penaltyEndDate) < new Date()
+    ) {
+      today.setDate(today.getDate() + userInfo.overDueDay);
+      overDueDate += today.getFullYear();
+      overDueDate += "-";
+      overDueDate += today.getMonth() + 1;
+      overDueDate += "-";
+      overDueDate += today.getDate();
+      return overDueDate;
+    }
+    const penaltyDay = new Date(userInfo.penaltyEndDate);
+    penaltyDay.setDate(penaltyDay.getDate() + userInfo.overDueDay - 1);
+    overDueDate += penaltyDay.getFullYear();
+    overDueDate += "-";
+    overDueDate +=
+      (penaltyDay.getMonth() + 1).length === 2
+        ? penaltyDay.getMonth() + 1
+        : "0".concat(penaltyDay.getMonth() + 1);
+    overDueDate += "-";
+    overDueDate +=
+      (penaltyDay.getDate() + 1).length === 2
+        ? penaltyDay.getDate() + 1
+        : "0".concat(penaltyDay.getDate());
+    return overDueDate;
+  };
+
   return (
     <>
       {deviceMode === "desktop" && (
@@ -162,18 +194,8 @@ const Mypage = () => {
                   <span className="font-14">
                     {userInfo.slack ? userInfo.slack : "No Data"}
                   </span>
-                  <span className="font-14-bold color-54">연체</span>
-                  <span className="font-14">
-                    {userInfo.overDueDay
-                      ? `${userInfo.overDueDay}일`
-                      : "No Data"}
-                  </span>
                   <span className="font-14-bold color-54">대출제한</span>
-                  <span className="font-14">
-                    {userInfo.penaltyEndDate
-                      ? `${userInfo.penaltyEndDate.slice(0, 10)} 까지`
-                      : "No Data"}
-                  </span>
+                  <span className="font-14">{`${getOverDueDate()} 까지`}</span>
                   <span className="font-14-bold color-54">정보수정</span>
                   <span className="font-14">
                     {userInfo.updatedAt
