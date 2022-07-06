@@ -2,6 +2,7 @@ import React from "react";
 import "../../css/MypageReservedBook.css";
 import axios from "axios";
 import PropTypes from "prop-types";
+import getErrorMessage from "../../data/error";
 
 const MypageReservedBook = ({
   reserveInfo,
@@ -16,7 +17,8 @@ const MypageReservedBook = ({
         setIsMiniModalOpen(true);
       })
       .catch(err => {
-        setMiniModalContent(err.message);
+        const { errorCode } = err.response.data;
+        setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });
   };
