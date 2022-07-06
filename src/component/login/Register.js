@@ -41,7 +41,7 @@ const Register = () => {
     const passwordRegex = new RegExp(
       "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$&+,:;=?@#|'<>.^*()%!-])[A-Za-z\\d$&+,:;=?@#|'<>.^*()%!-]{10,42}$",
     );
-    const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const emailRegex = new RegExp(emailPattern);
     const { value, name } = e.target;
     switch (name) {
