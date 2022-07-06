@@ -22,10 +22,8 @@ const BookDetail = ({ location, match }) => {
   const [miniModalView, setMiniModalView] = useState(false);
   const [miniModalClosable, setMiniModalClosable] = useState(true);
   const [errorCode, setErrorCode] = useState(-1);
-  // eslint-disable-next-line no-unused-vars
   const user = useRecoilValue(userState);
-  // eslint-disable-next-line prefer-const
-  let history = useHistory();
+  const history = useHistory();
 
   const openModal = () => {
     setMiniModalView(true);

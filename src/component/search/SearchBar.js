@@ -9,7 +9,7 @@ import SearchIcon from "../../img/search_icon.svg";
 
 const SearchBar = ({ setPageRange, setAvailable }) => {
   // eslint-disable-next-line prefer-const
-  let history = useHistory();
+  const history = useHistory();
   const [input, setInput] = useRecoilState(useSearchInput);
   const setUserWord = useSetRecoilState(searchWord);
 
