@@ -5,6 +5,7 @@ import arrowLeft from "../../img/arrow_left_black.svg";
 import "../../css/EditEmail.css";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
+import getErrorMessage from "../../data/error";
 
 function EditEmail() {
   const history = useHistory();
@@ -34,7 +35,8 @@ function EditEmail() {
         setIsGoBack(true);
       })
       .catch(err => {
-        setMiniModalContent(err.message);
+        const { errorCode } = err.response.data;
+        setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });
   };
@@ -54,7 +56,8 @@ function EditEmail() {
       })
       .then(res => setUserInfo(res.data.items[0]))
       .catch(err => {
-        setMiniModalContent(err.message);
+        const { errorCode } = err.response.data;
+        setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });
   }, []);

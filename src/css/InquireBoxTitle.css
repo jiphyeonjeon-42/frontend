@@ -1,6 +1,6 @@
 .inquire-box-title {
   background-color: #545454;
-  height: 12rem;
+  height: 10rem;
   max-width: 120rem;
   min-width: 36rem;
   border-radius: 6rem;
@@ -12,7 +12,7 @@
 }
 
 .inquire-box-title__icon {
-  height: 4rem;
+  height: 3.6rem;
   margin: 0 2rem 0 6rem;
 }
 
@@ -27,33 +27,46 @@
 @media screen and (max-width: 1200px) {
   .inquire-box-title {
     width: 100%;
-    height: 8rem;
+    height: 8.5rem;
   }
-  .inquire-box-title__kr.font-28-bold{
-    font-size: 2.2rem;
+
+  .inquire-box-title__icon {
+    height: 3rem;
+    margin: 0 2rem 0 5rem;
   }
-  .inquire-box-title__en.font-16{
+
+  .inquire-box-title__kr.font-28-bold {
+    font-size: 2rem;
+  }
+
+  .inquire-box-title__en.font-16 {
     font-size: 1.4rem;
-  }  
+  }
 }
 
 @media screen and (max-width: 767px) {
   .inquire-box-title {
-    height: 6rem;
+    height: 7.2rem;
   }
+
   .inquire-box-title__icon {
-    height: 3rem;
+    height: 2.6rem;
+    margin: 0 1.5rem 0 4.2rem;
   }
+
   .inquire-box-title__icon.short {
-    height: 3rem;
+    /* height: 3rem; */
     margin-left: 4rem;
   }
-  .inquire-box-title__kr.font-28-bold{
+
+  .inquire-box-title__kr.font-28-bold {
     font-size: 1.8rem;
   }
+
   .inquire-box-title__text.short {
     display: none;
   }
+
   .inquire-box-title__en {
     display: none;
   }

@@ -111,7 +111,7 @@ const Category = ({
   categoryNum,
 }) => {
   // eslint-disable-next-line prefer-const
-  let history = useHistory();
+  const history = useHistory();
 
   const changeFilter = () => {
     history.push(

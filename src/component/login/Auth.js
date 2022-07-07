@@ -8,8 +8,7 @@ import globalModal from "../../atom/globalModal";
 const Auth = () => {
   const setUser = useSetRecoilState(userState);
   const setGlobalModal = useSetRecoilState(globalModal);
-  // eslint-disable-next-line prefer-const
-  let history = useHistory();
+  const history = useHistory();
 
   useEffect(async () => {
     await axios
@@ -29,7 +28,6 @@ const Auth = () => {
         };
         setUser(newUser);
         window.localStorage.setItem("user", JSON.stringify(newUser));
-        // window.history.go(-2);
         history.push("/");
       })
       .catch(error => {

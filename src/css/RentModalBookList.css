@@ -22,10 +22,11 @@
   -o-transition: 0.3s;
   transition: 0.3s;
   word-break: break-all;
-  white-space:inherit;
+  white-space: inherit;
 }
 .rent__modal-book-list.disabled {
   opacity: 0.7;
+  cursor: unset;
 }
 
 .rent__modal-book-list:hover {
@@ -39,33 +40,47 @@
 .rent__modal-book-list__info {
   word-break: break-all;
   white-space: normal;
-  padding-right:2rem;
+  padding-right: 2rem;
   max-height: 3.1rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .rent__modal-book-list__name {
   width: 100%;
   margin-bottom: 20px;
-
 }
 
 .rent__modal-book-list__title {
   margin: 0 2rem 0 0;
   word-break: break-all;
-  white-space:normal;
+  white-space: normal;
   font-size: 1.8rem;
   font-weight: bold;
 }
+
 .rent__modal-book-list__valid.disabled {
-  color:#545454;
-  margin:0;
+  color: #545454;
+  margin: 0;
+  cursor: unset;
+}
+
+.rent__modal-book-list__valid.available {
+  color: #00a000;
+}
+
+.rent__modal-book-list__valid.selected {
+  color: #e63737;
+}
+
+.rent__modal-book-list.selected {
+  cursor: unset;
 }
 
 .rent__modal-book-list__author {
   display: inline-block;
-
 }
+
 .rent__modal-book-list__separator {
   margin: 0 12px 0 12px;
 }
@@ -74,8 +89,8 @@
   width: 8px;
   height: 16px;
   position: absolute;
-  top:45%;
-  right:0;
+  top: 45%;
+  right: 0;
 }
 
 @media screen and (max-width: 767px) {
@@ -105,7 +120,6 @@
     font-size: 1.2rem !important;
   }
 }
-
 
 @media screen and (max-width: 480px) {
   .rent__modal-book-list__title {

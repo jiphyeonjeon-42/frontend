@@ -13,7 +13,7 @@ const PageButton = ({
   myRef,
 }) => {
   // eslint-disable-next-line prefer-const
-  let history = useHistory();
+  const history = useHistory();
 
   const changePage = () => {
     history.push(

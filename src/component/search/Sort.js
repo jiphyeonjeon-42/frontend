@@ -5,7 +5,7 @@ import "../../css/Sort.css";
 
 const SortBy = ({ userWord, cateIndex, userSort, sortName, text }) => {
   // eslint-disable-next-line prefer-const
-  let history = useHistory();
+  const history = useHistory();
 
   const changeSortBy = () => {
     history.push(

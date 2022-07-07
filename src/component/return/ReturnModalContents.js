@@ -43,8 +43,14 @@ const ReturnModalContents = ({
         lendingId,
         condition,
       })
-      .then(() => {
-        setMiniModalContents(data.title);
+      .then(res => {
+        setMiniModalContents(
+          `${data.title} \n ${
+            res.data?.reservedBook
+              ? "예약된 책입니다. 예약자를 위해 따로 보관해주세요."
+              : ""
+          }`,
+        );
         setReturnResult(true);
       })
       .catch(error => {
@@ -70,7 +76,7 @@ const ReturnModalContents = ({
           <p className="mid-modal__book-title font-28-bold color-54  margin-8">
             {data.title}
           </p>
-          <p className="font-16 color-54">{`도서코드 : ${data.callSign}`}</p>
+          <p className="font-16 color-54">{`청구기호 : ${data.callSign}`}</p>
         </div>
         <div className="mid-modal__lend">
           <p className="font-16 color-red">대출정보</p>

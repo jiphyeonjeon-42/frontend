@@ -36,7 +36,8 @@ const Mypage = () => {
       })
       .then(res => setUserInfo(res.data.items[0]))
       .catch(err => {
-        setMiniModalContent(err.message);
+        const { errorCode } = err.response.data;
+        setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });
   };
@@ -65,7 +66,9 @@ const Mypage = () => {
   };
 
   useEffect(async () => {
-    await getUserInfo();
+    if (JSON.parse(window.localStorage.getItem("user")).isLogin)
+      await getUserInfo();
+    else history.push("/login");
   }, []);
 
   useEffect(() => {
