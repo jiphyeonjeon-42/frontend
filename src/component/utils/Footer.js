@@ -39,22 +39,24 @@ const Footer = () => {
         </div>
         <div className="footer__contact-copyright">
           <div className="footer__contact__address">
-            <span className="footer__title">주소</span>
+            <span className="footer__title color-d5">주소</span>
             <span className="footer__description color-d5">
               서울시 강남구 개포로 416 이노베이션 아카데미
             </span>
           </div>
           <div className="footer__contact__slack">
-            <span className="footer__title">문의</span>
-            <span className="footer__description color-d5">
-              #42seoul_club_42jiphyeonjeon
-            </span>
+            <span className="footer__title color-d5">문의</span>
+            <a href="https://42born2code.slack.com/archives/C0174FTH8N6">
+              <span className="footer__description color-d5">
+                #42seoul_club_42jiphyeonjeon
+              </span>
+            </a>
           </div>
           <div className="footer__copyright color-81">
             Copyright 2021. Jiphyeonjeon All rights reserved.
           </div>
         </div>
-        <div className="footer__information">
+        <div className="footer__information color-d5">
           <Link className="color-ff" to={{ pathname: `/information` }}>
             이용안내
           </Link>
