@@ -116,7 +116,7 @@ const MainNewBookList = ({ docs }) => {
           onMouseLeave={startInterval}
         >
           {books.map(book => (
-            <MainNewBook book={book} bookSize={bookWidth} />
+            <MainNewBook book={book} bookWidth={bookWidth} />
           ))}
         </div>
       </div>

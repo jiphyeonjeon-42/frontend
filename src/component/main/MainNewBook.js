@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import IMGERR from "../../img/image_onerror.svg";
 
-const MainNewBook = ({ book, bookSize }) => {
+const MainNewBook = ({ book, bookWidth }) => {
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
   return (
     <div
       className="main-new__book"
-      style={{ width: bookSize, height: bookSize * 1.5 }}
+      style={{ width: bookWidth, height: bookWidth * 1.5 }}
     >
       <Link
         to={{
@@ -22,7 +22,7 @@ const MainNewBook = ({ book, bookSize }) => {
       >
         {book.image ? (
           <img
-            style={{ width: bookSize, height: bookSize * 1.5 }}
+            style={{ width: bookWidth, height: bookWidth * 1.5 }}
             src={book.image}
             alt="new"
             onError={subtituteImg}
@@ -43,5 +43,5 @@ MainNewBook.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string,
   }).isRequired,
-  bookSize: PropTypes.number.isRequired,
+  bookWidth: PropTypes.number.isRequired,
 };
