@@ -74,6 +74,16 @@
   margin-top: 1rem;
 }
 
+.main-new__book-sub-img {
+  width: 100%;
+  height: 100%;
+  background-color: #a4a4a4;
+  box-sizing: border-box;
+  padding: 20%;
+  color: #a4a4a4;
+  font-weight: bold;
+}
+
 .main-new__books_pagination {
   position: absolute;
   bottom: 0;

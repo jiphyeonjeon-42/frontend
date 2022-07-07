@@ -20,13 +20,16 @@ const MainNewBook = ({ book, bookSize }) => {
           },
         }}
       >
-        <img
-          style={{ width: bookSize, height: bookSize * 1.5 }}
-          className="main-new__book-img"
-          src={book.image}
-          alt="new"
-          onError={subtituteImg}
-        />
+        {book.image ? (
+          <img
+            style={{ width: bookSize, height: bookSize * 1.5 }}
+            src={book.image}
+            alt="new"
+            onError={subtituteImg}
+          />
+        ) : (
+          <p className="main-new__book-sub-img">{book.title}</p>
+        )}
       </Link>
     </div>
   );
@@ -38,6 +41,7 @@ MainNewBook.propTypes = {
   book: PropTypes.shape({
     id: PropTypes.number,
     image: PropTypes.string,
+    title: PropTypes.string,
   }).isRequired,
   bookSize: PropTypes.number.isRequired,
 };
