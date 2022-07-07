@@ -20,26 +20,26 @@ function useWidth() {
 
 const MainNewBookList = ({ docs }) => {
   const [page, setPage] = useState(1);
-  const [bookSize, setBookSize] = useState(220);
+  const [bookWidth, setBookWidth] = useState(200);
   const [transition, setTransition] = useState(true);
   const intervalId = useRef(0);
 
-  const display = Math.ceil((useWidth() - bookSize) / (bookSize + 10));
-  const books = [...docs.slice(-2), ...docs, ...docs.slice(0, display + 1)];
+  const displayCount = Math.ceil(useWidth() / (bookWidth + 10));
+  const books = [...docs.slice(-1), ...docs, ...docs.slice(0, displayCount)];
 
   useEffect(() => {
-    if (window.innerWidth < 767 && bookSize !== 100) setBookSize(110);
-    if (window.innerWidth >= 767 && bookSize !== 200) setBookSize(220);
+    if (window.innerWidth < 767 && bookWidth !== 100) setBookWidth(100);
+    if (window.innerWidth >= 767 && bookWidth !== 200) setBookWidth(200);
   }, [window.innerWidth]);
 
   useEffect(() => {
-    if (window.innerWidth < 767 && bookSize !== 100) setBookSize(110);
-    if (window.innerWidth >= 767 && bookSize !== 200) setBookSize(220);
+    if (window.innerWidth < 767 && bookWidth !== 100) setBookWidth(100);
+    if (window.innerWidth >= 767 && bookWidth !== 200) setBookWidth(200);
   }, [window.innerWidth]);
 
   const onNext = () => {
     const index = page;
-    if (index === books.length - display - 3) {
+    if (index === books.length - displayCount - 1) {
       setTransition(false);
       setPage(0);
       setTimeout(() => {
@@ -52,7 +52,7 @@ const MainNewBookList = ({ docs }) => {
   const onPrev = () => {
     let index = page;
     if (index === 1) {
-      index = books.length - display - 2;
+      index = books.length - displayCount;
       setTransition(false);
       setPage(index);
       setTimeout(() => {
@@ -88,7 +88,7 @@ const MainNewBookList = ({ docs }) => {
         <img
           src={ArrLeft}
           alt=""
-          style={{ width: bookSize / 4, height: bookSize * 1.5 + 20 }}
+          style={{ width: bookWidth / 4, height: bookWidth * 1.5 + 20 }}
         />
       </button>
       <button
@@ -101,7 +101,7 @@ const MainNewBookList = ({ docs }) => {
         <img
           src={ArrRight}
           alt=""
-          style={{ width: bookSize / 4, height: bookSize * 1.5 + 20 }}
+          style={{ width: bookWidth / 4, height: bookWidth * 1.5 + 20 }}
         />
       </button>
       <div className="main-new__booklist">
@@ -109,14 +109,14 @@ const MainNewBookList = ({ docs }) => {
           className={`${transition && "main-new__books"}`}
           style={{
             transform: `translate(${
-              -(bookSize / 6) - (bookSize + 20) * page * 0.1
+              +((bookWidth / 2) * 0.1) - (bookWidth + 20) * page * 0.1
             }rem)`,
           }}
           onMouseEnter={pauseInterval}
           onMouseLeave={startInterval}
         >
           {books.map(book => (
-            <MainNewBook book={book} bookSize={bookSize} />
+            <MainNewBook book={book} bookSize={bookWidth} />
           ))}
         </div>
       </div>
