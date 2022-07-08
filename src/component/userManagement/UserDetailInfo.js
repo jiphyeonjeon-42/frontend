@@ -76,6 +76,8 @@ const UserDetailInfo = ({
   setErrorCode,
   closeMidModal,
   openMiniModal,
+  isEdit,
+  setIsEdit,
 }) => {
   const today = new Date();
   const [editMode, setEditMode] = useState(false);
@@ -103,6 +105,7 @@ const UserDetailInfo = ({
         setUserSlack(userInfo.slack);
         setUserRoleNum(userInfo.role);
         setUserPenalty(userInfo.penaltyEndDate);
+        setIsEdit(!isEdit);
       })
       .catch(error => {
         closeMidModal();
@@ -263,6 +266,8 @@ UserDetailInfo.propTypes = {
   setErrorCode: PropTypes.func.isRequired,
   closeMidModal: PropTypes.func.isRequired,
   openMiniModal: PropTypes.func.isRequired,
+  isEdit: PropTypes.bool.isRequired,
+  setIsEdit: PropTypes.func.isRequired,
 };
 
 UserInfoEdit.propTypes = {

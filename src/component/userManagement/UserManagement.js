@@ -29,6 +29,7 @@ const UserManagement = () => {
   const [lastUserListPage, setLastUserListPage] = useState(1);
   const [userList, setUserList] = useState([]);
   const [errorCode, setErrorCode] = useState(-1);
+  const [isEdit, setIsEdit] = useState(false);
 
   const closeModal = () => {
     setModal(0);
@@ -75,7 +76,7 @@ const UserManagement = () => {
       });
   };
 
-  useEffect(getUserList, [userSearchWord, userListPage]);
+  useEffect(getUserList, [userSearchWord, userListPage, isEdit]);
 
   useEffect(() => {
     setUserListPageRange(0);
@@ -155,6 +156,8 @@ const UserManagement = () => {
               setErrorCode={setErrorCode}
               closeMidModal={closeModal}
               openMiniModal={openMiniModal}
+              isEdit={isEdit}
+              setIsEdit={setIsEdit}
             />
           )}
         </MidModal>
