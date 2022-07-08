@@ -5,38 +5,29 @@ import MainNewBookPagination from "./MainNewBookPagination";
 import ArrLeft from "../../img/arrow_left.svg";
 import ArrRight from "../../img/arrow_right.svg";
 
-function useWidth() {
-  const [widthSize, setWidthSize] = useState(undefined);
+const mobileWidth = 100;
+const pcWidth = 200;
+
+const MainNewBookList = ({ docs }) => {
+  const [page, setPage] = useState(1);
+  const [bookWidth, setBookWidth] = useState(pcWidth);
+  const [transition, setTransition] = useState(true);
+  const [displayCount, setDisplayCount] = useState(0);
+  const intervalId = useRef(0);
+
   useEffect(() => {
     function handleSize() {
-      setWidthSize(window.innerWidth);
+      const width = window.innerWidth < 767 ? mobileWidth : pcWidth;
+      if (width !== bookWidth) setBookWidth(width);
+      const count = Math.ceil(window.innerWidth / (width * 1.1));
+      if (count !== displayCount) setDisplayCount(count);
     }
     window.addEventListener("resize", handleSize);
     handleSize();
     return () => window.removeEventListener("resize", handleSize);
-  }, []);
-  return widthSize;
-}
+  }, [bookWidth, displayCount]);
 
-const MainNewBookList = ({ docs }) => {
-  const [page, setPage] = useState(1);
-  const [bookWidth, setBookWidth] = useState(200);
-  const [transition, setTransition] = useState(true);
-  const intervalId = useRef(0);
-
-  const displayCount = Math.ceil(useWidth() / (bookWidth + 10));
   const books = [...docs.slice(-1), ...docs, ...docs.slice(0, displayCount)];
-
-  useEffect(() => {
-    if (window.innerWidth < 767 && bookWidth !== 100) setBookWidth(100);
-    if (window.innerWidth >= 767 && bookWidth !== 200) setBookWidth(200);
-  }, [window.innerWidth]);
-
-  useEffect(() => {
-    if (window.innerWidth < 767 && bookWidth !== 100) setBookWidth(100);
-    if (window.innerWidth >= 767 && bookWidth !== 200) setBookWidth(200);
-  }, [window.innerWidth]);
-
   const onNext = () => {
     const index = page;
     if (index === books.length - displayCount - 1) {
@@ -109,7 +100,7 @@ const MainNewBookList = ({ docs }) => {
           className={`${transition && "main-new__books"}`}
           style={{
             transform: `translate(${
-              +((bookWidth / 2) * 0.1) - (bookWidth + 20) * page * 0.1
+              +((bookWidth / 2) * 0.1) - bookWidth * 1.1 * page * 0.1
             }rem)`,
           }}
           onMouseEnter={pauseInterval}

@@ -116,4 +116,8 @@
   .main-new {
     height: 52rem;
   }
+
+  .main-new__book {
+    margin-left:1rem;
+  }
 }
