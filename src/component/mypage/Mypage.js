@@ -150,35 +150,29 @@ const Mypage = () => {
                 <>
                   <span className="font-14-bold color-54">이메일</span>
                   <span className="font-14">
-                    {userInfo.email ? userInfo.email : "No Data"}
+                    {userInfo.email ? userInfo.email : "-"}
                   </span>
                   <span className="font-14-bold color-54">역할</span>
                   <span className="font-14">
-                    {userInfo.role
-                      ? convertRoleToStr(userInfo.role)
-                      : "No Data"}
+                    {userInfo.role ? convertRoleToStr(userInfo.role) : "-"}
                   </span>
                   <span className="font-14-bold color-54">슬랙ID</span>
                   <span className="font-14">
-                    {userInfo.slack ? userInfo.slack : "No Data"}
+                    {userInfo.slack ? userInfo.slack : "-"}
                   </span>
                   <span className="font-14-bold color-54">연체</span>
                   <span className="font-14">
-                    {userInfo.overDueDay
-                      ? `${userInfo.overDueDay}일`
-                      : "No Data"}
+                    {userInfo.overDueDay ? `${userInfo.overDueDay}일` : "-"}
                   </span>
                   <span className="font-14-bold color-54">대출제한</span>
                   <span className="font-14">
                     {userInfo.penaltyEndDate
                       ? `${userInfo.penaltyEndDate.slice(0, 10)} 까지`
-                      : "No Data"}
+                      : "-"}
                   </span>
                   <span className="font-14-bold color-54">정보수정</span>
                   <span className="font-14">
-                    {userInfo.updatedAt
-                      ? userInfo.updatedAt.slice(0, 10)
-                      : "No Data"}
+                    {userInfo.updatedAt ? userInfo.updatedAt.slice(0, 10) : "-"}
                   </span>
                 </>
               ) : null}

@@ -56,19 +56,15 @@ const MypageReservedBook = ({
               <div>
                 {reserveInfo[0].reservationDate
                   ? reserveInfo[0].reservationDate.slice(0, 10)
-                  : "No Data"}
+                  : "-"}
               </div>
               <div>예약만료</div>
               <div>
-                {reserveInfo[0].endAt
-                  ? reserveInfo[0].endAt.slice(0, 10)
-                  : "No Data"}
+                {reserveInfo[0].endAt ? reserveInfo[0].endAt.slice(0, 10) : "-"}
               </div>
               <div>예약순위</div>
               <div>
-                {reserveInfo[0].ranking
-                  ? `${reserveInfo[0].ranking}위`
-                  : "No Data"}
+                {reserveInfo[0].ranking ? `${reserveInfo[0].ranking}위` : "-"}
               </div>
             </div>
             <button
@@ -118,19 +114,15 @@ const MypageReservedBook = ({
               <div>
                 {reserveInfo[1].reservationDate
                   ? reserveInfo[1].reservationDate.slice(0, 10)
-                  : "No Data"}
+                  : "-"}
               </div>
               <div>예약만료</div>
               <div>
-                {reserveInfo[1].endAt
-                  ? reserveInfo[1].endAt.slice(0, 10)
-                  : "No Data"}
+                {reserveInfo[1].endAt ? reserveInfo[1].endAt.slice(0, 10) : "-"}
               </div>
               <div>예약순위</div>
               <div>
-                {reserveInfo[1].ranking
-                  ? `${reserveInfo[1].ranking}위`
-                  : "No Data"}
+                {reserveInfo[1].ranking ? `${reserveInfo[1].ranking}위` : "-"}
               </div>
             </div>
             <button
