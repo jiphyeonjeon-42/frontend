@@ -164,7 +164,7 @@ const UserDetailInfo = ({
           <UserRoleEdit userRole={userRoleNum} roleList={roles} />
           <div className="user-detail-info__line" />
           <UserInfoEdit
-            infoKey="대출 불가 기간"
+            infoKey="확정 연체일"
             infoId="penalty"
             infoType="date"
             infoValue={
@@ -174,7 +174,7 @@ const UserDetailInfo = ({
             }
           />
           <UserInfoDisplay
-            infoKey="연체일"
+            infoKey="추가 연체일"
             infoValue={user.overDueDay === 0 ? "-" : `${user.overDueDay}일`}
           />
           <div className="user-edit-button">
@@ -208,7 +208,7 @@ const UserDetailInfo = ({
           <UserInfoDisplay infoKey="역할" infoValue={roles[userRoleNum]} />
           <div className="user-detail-info__line" />
           <UserInfoDisplay
-            infoKey="대출 불가 기간"
+            infoKey="확정 연체일"
             infoValue={
               userPenalty && userPenalty >= convertDatetoString(today)
                 ? userPenalty
@@ -216,7 +216,7 @@ const UserDetailInfo = ({
             }
           />
           <UserInfoDisplay
-            infoKey="연체일"
+            infoKey="추가 연체일"
             infoValue={user.overDueDay === 0 ? "-" : `${user.overDueDay}일`}
           />
           <div className="user-edit-button">
