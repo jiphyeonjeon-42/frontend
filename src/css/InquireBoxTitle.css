@@ -42,6 +42,10 @@
   .inquire-box-title__en.font-16 {
     font-size: 1.4rem;
   }
+
+  .inquire-box-title__en.short {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -55,8 +59,7 @@
   }
 
   .inquire-box-title__icon.short {
-    /* height: 3rem; */
-    margin-left: 4rem;
+    margin: 0 1.5rem 0 3.5rem;
   }
 
   .inquire-box-title__kr.font-28-bold {

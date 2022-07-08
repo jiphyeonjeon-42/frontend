@@ -30,7 +30,7 @@
   top: -12rem;
   border-bottom-left-radius: 6.1rem;
   border-bottom-right-radius: 6.1rem;
-  padding: 9rem 0 5.1rem 0;
+  padding: 9rem 0 0 0;
 }
 
 .reserved-loan-table__pagination {
@@ -48,7 +48,12 @@
 @media screen and (max-width: 1200px) {
   .reserved-loan-table__inquire-box {
     width: 100%;
-    top: -11rem;
+    top: -9rem;
+	padding: 7rem 0 0 0;
+  }
+
+  .reserved-loan-body > .inquire-box-wrapper { 
+    margin-bottom: 4rem;
   }
 }
 
@@ -57,8 +62,9 @@
     min-width: unset;
     max-width: unset;
   }
+
   .reserved-loan-table__inquire-box {
     padding-top: 3rem;
-    top: -9rem;
+    top: -7rem;
   }
 }
