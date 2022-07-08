@@ -88,6 +88,32 @@ const Mypage = () => {
     "\r\n",
   );
 
+  const concatDate = day => {
+    let overDueDate = "";
+
+    day.setDate(day.getDate() + userInfo.overDueDay);
+    overDueDate += day.getFullYear();
+    overDueDate += "-";
+    overDueDate +=
+      day.getMonth() + 1 >= 10
+        ? day.getMonth() + 1
+        : "0".concat(day.getMonth() + 1);
+    overDueDate += "-";
+    overDueDate +=
+      day.getDate() >= 10 ? day.getDate() : "0".concat(day.getDate());
+    return overDueDate;
+  };
+
+  const getOverDueDate = () => {
+    if (
+      !userInfo.penaltyEndDate ||
+      new Date(userInfo.penaltyEndDate) < new Date()
+    ) {
+      return concatDate(new Date());
+    }
+    return concatDate(new Date(userInfo.penaltyEndDate));
+  };
+
   return (
     <>
       {deviceMode === "desktop" && (
@@ -160,14 +186,17 @@ const Mypage = () => {
                   <span className="font-14">
                     {userInfo.slack ? userInfo.slack : "-"}
                   </span>
-                  <span className="font-14-bold color-54">연체</span>
-                  <span className="font-14">
-                    {userInfo.overDueDay ? `${userInfo.overDueDay}일` : "-"}
-                  </span>
                   <span className="font-14-bold color-54">대출제한</span>
                   <span className="font-14">
-                    {userInfo.penaltyEndDate
-                      ? `${userInfo.penaltyEndDate.slice(0, 10)} 까지`
+                    {userInfo.overDueDay ||
+                    (userInfo.penaltyEndDate &&
+                      new Date(userInfo.penaltyEndDate) >=
+                        (() => {
+                          const nowDay = new Date();
+                          nowDay.setDate(nowDay.getDate() - 1);
+                          return nowDay;
+                        })())
+                      ? `${getOverDueDate()} 까지`
                       : "-"}
                   </span>
                   <span className="font-14-bold color-54">정보수정</span>

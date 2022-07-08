@@ -20,7 +20,7 @@ const Reservation = ({ bookInfoId, closeModal, setClosable }) => {
         setReservationStep("success");
         if (response.data.count === 1) {
           const date = response.data.lenderableDate;
-          setPropsString(date.slice(2, 10).replaceAll("-", "."));
+          setPropsString(date.slice(0, 10));
         }
       })
       .catch(error => {
