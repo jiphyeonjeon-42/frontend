@@ -80,8 +80,13 @@ const ReturnModalContents = ({
         </div>
         <div className="mid-modal__lend">
           <p className="font-16 color-red">대출정보</p>
-          <p className="font-28-bold color-54  margin-8">{data.createdAt}</p>
-          <p className="font-16 color-54">{`반납예정일 : ${data.dueDate}`}</p>
+          <p className="font-28-bold color-54  margin-8">
+            {data.createdAt.replaceAll(".", "-")}
+          </p>
+          <p className="font-16 color-54">{`반납예정일 : ${data.dueDate.replaceAll(
+            ".",
+            "-",
+          )}`}</p>
         </div>
         <div className="mid-modal__user">
           <p className="font-16 color-red">유저정보</p>

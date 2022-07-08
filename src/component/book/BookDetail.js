@@ -122,7 +122,7 @@ const BookDetail = ({ location, match }) => {
                 </div>
               </div>
               <div className="book-detail__info-wrapper color-54">
-                <div className="book-detail__info-key">발행연도</div>
+                <div className="book-detail__info-key">발행연월</div>
                 <div className="book-detail__info-value">
                   {bookDetailInfo.publishedAt}
                 </div>
