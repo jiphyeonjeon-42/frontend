@@ -4,7 +4,7 @@ import "../../css/UserBriefInfo.css";
 import UserUsage from "../../img/book-arrow-right.svg";
 import UserEdit from "../../img/edit.svg";
 
-const roles = ["미인증", "일반", "사서", "스태프"];
+const roles = ["미인증", "일반", "사서", "운영진"];
 const USAGE = 1;
 const EDIT = 2;
 
