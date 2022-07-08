@@ -2,7 +2,7 @@
   min-width: 36rem;
   padding: 0 15rem 0 15rem;
   height: 60rem;
-  display: flex;
+  margin-top: 12rem;
   align-items: center;
   justify-content: center;
 }
