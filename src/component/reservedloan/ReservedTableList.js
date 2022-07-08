@@ -7,6 +7,7 @@ const ReservedTableList = ({
   isPending,
   isWaiting,
   isExpired,
+  isAll,
   factor,
   openModal,
   setInfo,
@@ -33,7 +34,7 @@ const ReservedTableList = ({
         onClick={openSetModal}
       >
         <div className="reserved-loan__table-list__title">
-          <span className="reserved-loan__table-list__text font-18-bold color-54">
+          <span className="reserved-loan__table-list__text color-54">
             {factor && factor.title}
           </span>
           <img
@@ -43,17 +44,21 @@ const ReservedTableList = ({
           />
         </div>
         <div className="reserved-loan__table-list__info">
-          <span className="reserved-loan__table-list__call-sign font-16 color-54">
-            도서등록번호 : {factor && factor.callSign}
-          </span>
+          {factor && factor.callSign && (isPending || isAll) ? (
+            <span className="reserved-loan__table-list__call-sign font-16 color-54">
+              {`청구기호 : ${factor.callSign}`}
+            </span>
+          ) : (
+            ``
+          )}
           <span className="font-16 color-54">
-            {factor && factor.endAt && isPending
+            {factor && !factor.status && factor.endAt && (isPending || isAll)
               ? `예약 만료일 : ${factor.endAt.slice(0, 10)}`
               : null}
-            {factor && factor.createdAt && isWaiting
+            {factor && !factor.status && !factor.endAt && (isWaiting || isAll)
               ? `예약 시작일 : ${factor.createdAt.slice(0, 10)}`
               : null}
-            {factor && factor.status && isExpired
+            {factor && factor.status && (isExpired || isAll)
               ? `예약 만료 이유 : ${printEndReason(factor.status)}`
               : null}
           </span>
@@ -67,6 +72,7 @@ ReservedTableList.propTypes = {
   isPending: PropTypes.bool.isRequired,
   isWaiting: PropTypes.bool.isRequired,
   isExpired: PropTypes.bool.isRequired,
+  isAll: PropTypes.bool.isRequired,
   factor: PropTypes.shape.isRequired,
   openModal: PropTypes.func.isRequired,
   setInfo: PropTypes.func.isRequired,

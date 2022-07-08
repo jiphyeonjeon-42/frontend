@@ -6,7 +6,7 @@ import "../../css/ReservedLoan.css";
 import AdminPagination from "../utils/AdminPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
-import Login from "../../img/login_icon_white.svg";
+import Reserve from "../../img/list-check-solid.svg";
 import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
 import ReservedModal from "./ReservedModal";
@@ -102,7 +102,7 @@ const ReservedLoan = () => {
       <section className="reserved-loan-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle
-            Icon={Login}
+            Icon={Reserve}
             titleKO="예약 정보"
             titleEN="Reservation info"
             placeHolder="예약 대출자의 성명 혹은 도서명을 입력해주세요."
@@ -125,6 +125,7 @@ const ReservedLoan = () => {
               isPending={isPending}
               isWaiting={isWaiting}
               isExpired={isExpired}
+              isAll={!(isPending || isWaiting || isExpired)}
               factor={factor}
               openModal={openModal}
               setInfo={setReservedInfo}

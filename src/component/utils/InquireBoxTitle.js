@@ -21,8 +21,20 @@ const InquireBoxTitle = ({
       <span
         className={`inquire-box-title__text ${placeHolder && "short"} color-ff`}
       >
-        <span className={`inquire-box-title__kr ${KOsize}`}>{titleKO}</span>
-        <span className={`inquire-box-title__en ${ENsize}`}>{titleEN}</span>
+        <span
+          className={`inquire-box-title__kr ${
+            placeHolder && "short"
+          } ${KOsize}`}
+        >
+          {titleKO}
+        </span>
+        <span
+          className={`inquire-box-title__en ${
+            placeHolder && "short"
+          } ${ENsize}`}
+        >
+          {titleEN}
+        </span>
       </span>
       {placeHolder ? (
         <AdminSearchBar placeHolder={placeHolder} width="short" />

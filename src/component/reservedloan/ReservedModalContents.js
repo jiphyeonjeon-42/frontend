@@ -114,22 +114,30 @@ const ReservedModalContents = ({
             onChange={handleRemark}
           />
           <div className="modal__buttons">
-            <button
-              className={`modal__button mid font-20 color-ff ${
-                remark && `confirm`
-              }`}
-              type="button"
-              onClick={postData}
-            >
-              대출 완료하기
-            </button>
-            <button
-              className="modal__button mid font-20 color-ff confirm"
-              type="button"
-              onClick={deleteReservation}
-            >
-              예약취소
-            </button>
+            {!reservedInfo.status && reservedInfo.endAt ? (
+              <button
+                className={`modal__button mid font-20 color-ff ${
+                  remark && `confirm`
+                }`}
+                type="button"
+                onClick={postData}
+              >
+                대출 완료하기
+              </button>
+            ) : (
+              ``
+            )}
+            {reservedInfo.status ? (
+              ``
+            ) : (
+              <button
+                className="modal__button mid font-20 color-ff confirm"
+                type="button"
+                onClick={deleteReservation}
+              >
+                예약취소
+              </button>
+            )}
           </div>
         </div>
       </div>

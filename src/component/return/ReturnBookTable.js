@@ -21,7 +21,7 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
         onClick={openSetModal}
       >
         <div className="return-book__table-list__title">
-          <span className="return-book__table-list__text font-18-bold color-54">
+          <span className="return-book__table-list__text color-54">
             {factor.title}
           </span>
           <img className="return-book__table-list__arr" src={Arr} alt="arrow" />

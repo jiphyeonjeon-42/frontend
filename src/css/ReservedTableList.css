@@ -1,7 +1,7 @@
 .reserved-loan__table-list {
   display: flex;
-  margin-left: 6rem;
-  margin-right: 3rem;
+  width: 108rem;
+  margin-left: auto;
   padding-top: 4rem;
 }
 
@@ -21,8 +21,10 @@
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: normal;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
 .reserved-loan__table-list__arr {
@@ -37,6 +39,8 @@
   padding-right: 4rem;
   overflow-x: hidden;
   text-overflow: ellipsis;
+  /* font-size: 1.8rem;
+  font-weight: bold; */
 }
 
 .reserved-loan__table-list__info {
@@ -47,11 +51,11 @@
   margin-right: 2.8rem;
 }
 
-/* @media screen and (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
   .reserved-loan__table-list {
     width: 90%;
   }
-} */
+}
 
 @media screen and (max-width: 767px) {
   .reserved-loan__table-list {
@@ -61,17 +65,23 @@
   .reserved-loan__table-list__name {
     margin-bottom: 1.1rem;
   }
+
+  .reserved-loan__table-list__title {
+    font-size: 1.6rem;
+  }
+
   .reserved-loan__table-list__text {
     padding-right: 2rem;
     width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: keep-all;
+    white-space: normal;
+  }
+
+  .reserved-loan__table-list__info > span {
+    font-size: 1.4rem;
+    display: block;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .reserved-loan__table-list__info > span {
-    display: block;
-    font-size: 1.4rem;
-  }
 }
