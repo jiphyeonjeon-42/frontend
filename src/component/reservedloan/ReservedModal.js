@@ -7,7 +7,7 @@ import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 import ReservedModalContents from "./ReservedModalContents";
 
-const ReservedModal = ({ reservedInfo, closeModal, isExpired }) => {
+const ReservedModal = ({ reservedInfo, closeModal }) => {
   const [miniModalContents, setMiniModalContents] = useState("");
   const [lendResult, setLendResult] = useState(false);
 
@@ -37,7 +37,6 @@ const ReservedModal = ({ reservedInfo, closeModal, isExpired }) => {
       ) : (
         <MidModal closeModal={closeModal}>
           <ReservedModalContents
-            isExpired={isExpired}
             reservedInfo={reservedInfo}
             setMiniModalContents={setMiniModalContents}
             setLendResult={setLendResult}
@@ -51,7 +50,6 @@ const ReservedModal = ({ reservedInfo, closeModal, isExpired }) => {
 ReservedModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
   reservedInfo: PropTypes.object.isRequired,
-  isExpired: PropTypes.bool.isRequired,
 };
 
 export default ReservedModal;

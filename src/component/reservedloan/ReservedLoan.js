@@ -143,11 +143,7 @@ const ReservedLoan = () => {
         </div>
       </section>
       {modal && (
-        <ReservedModal
-          reservedInfo={reservedInfo}
-          isExpired={isExpired}
-          closeModal={closeModal}
-        />
+        <ReservedModal reservedInfo={reservedInfo} closeModal={closeModal} />
       )}
     </main>
   );

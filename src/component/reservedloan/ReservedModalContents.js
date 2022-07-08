@@ -7,7 +7,6 @@ const ReservedModalContents = ({
   reservedInfo,
   setMiniModalContents,
   setLendResult,
-  isExpired,
 }) => {
   const [remark, setRemark] = useState("");
 
@@ -102,7 +101,20 @@ const ReservedModalContents = ({
             onChange={handleRemark}
           />
           <div className="modal__buttons">
-            <button
+            {!reservedInfo.status && reservedInfo.endAt ? (
+              <button
+                className={`modal__button mid font-20 color-ff ${
+                  remark && `confirm`
+                }`}
+                type="button"
+                onClick={postData}
+              >
+                대출 완료하기
+              </button>
+            ) : (
+              ``
+            )}
+            {/* <button
               className={`modal__button mid font-20 color-ff ${
                 remark && `confirm`
               }`}
@@ -110,8 +122,8 @@ const ReservedModalContents = ({
               onClick={postData}
             >
               대출 완료하기
-            </button>
-            {isExpired || reservedInfo.status ? (
+            </button> */}
+            {reservedInfo.status ? (
               ``
             ) : (
               <button
@@ -133,7 +145,6 @@ ReservedModalContents.propTypes = {
   reservedInfo: PropTypes.shape.isRequired,
   setMiniModalContents: PropTypes.func.isRequired,
   setLendResult: PropTypes.func.isRequired,
-  isExpired: PropTypes.bool.isRequired,
 };
 
 export default ReservedModalContents;
