@@ -112,7 +112,7 @@ const Login = () => {
                 name="id"
                 type="email"
                 align="center"
-                placeholder="Email"
+                placeholder="이메일"
                 value={id}
                 onChange={onChange}
                 ref={emailRef}
@@ -122,7 +122,7 @@ const Login = () => {
                 name="password"
                 type="password"
                 align="center"
-                placeholder="Password"
+                placeholder="비밀번호"
                 value={password}
                 onChange={onChange}
                 onKeyPress={onKeyPress}
