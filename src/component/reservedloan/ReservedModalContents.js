@@ -114,15 +114,6 @@ const ReservedModalContents = ({
             ) : (
               ``
             )}
-            {/* <button
-              className={`modal__button mid font-20 color-ff ${
-                remark && `confirm`
-              }`}
-              type="button"
-              onClick={postData}
-            >
-              대출 완료하기
-            </button> */}
             {reservedInfo.status ? (
               ``
             ) : (
