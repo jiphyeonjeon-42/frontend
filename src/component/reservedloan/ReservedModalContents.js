@@ -7,6 +7,7 @@ const ReservedModalContents = ({
   reservedInfo,
   setMiniModalContents,
   setLendResult,
+  isExpired,
 }) => {
   const [remark, setRemark] = useState("");
 
@@ -110,13 +111,17 @@ const ReservedModalContents = ({
             >
               대출 완료하기
             </button>
-            <button
-              className="modal__button mid font-20 color-ff confirm"
-              type="button"
-              onClick={deleteReservation}
-            >
-              예약취소
-            </button>
+            {isExpired || reservedInfo.status ? (
+              ``
+            ) : (
+              <button
+                className="modal__button mid font-20 color-ff confirm"
+                type="button"
+                onClick={deleteReservation}
+              >
+                예약취소
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -128,6 +133,7 @@ ReservedModalContents.propTypes = {
   reservedInfo: PropTypes.shape.isRequired,
   setMiniModalContents: PropTypes.func.isRequired,
   setLendResult: PropTypes.func.isRequired,
+  isExpired: PropTypes.bool.isRequired,
 };
 
 export default ReservedModalContents;

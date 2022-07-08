@@ -60,7 +60,7 @@
 .modal__buttons {
   margin-top: 4rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 @media screen and (max-width: 1200px) {
