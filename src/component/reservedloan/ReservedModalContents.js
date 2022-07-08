@@ -42,24 +42,27 @@ const ReservedModalContents = ({
   };
 
   const deleteReservation = async () => {
-    await axios
-      .patch(
-        `${process.env.REACT_APP_API}/reservations/cancel/${reservedInfo.reservationsId}`,
-      )
-      .then(() => {
-        setMiniModalContents("예약 취소가 완료되었습니다.");
-        setLendResult(true);
-      })
-      .catch(error => {
-        if (!error.response) return;
-        const { status } = error.response;
-        setLendResult(false);
-        setMiniModalContents(
-          status === 400
-            ? getErrorMessage(error.response.data.errorCode)
-            : error.message,
-        );
-      });
+    // eslint-disable-next-line no-alert
+    if (window.confirm("정말로 취소하시나요?")) {
+      await axios
+        .patch(
+          `${process.env.REACT_APP_API}/reservations/cancel/${reservedInfo.reservationsId}`,
+        )
+        .then(() => {
+          setMiniModalContents("예약 취소가 완료되었습니다.");
+          setLendResult(true);
+        })
+        .catch(error => {
+          if (!error.response) return;
+          const { status } = error.response;
+          setLendResult(false);
+          setMiniModalContents(
+            status === 400
+              ? getErrorMessage(error.response.data.errorCode)
+              : error.message,
+          );
+        });
+    }
   };
 
   return (

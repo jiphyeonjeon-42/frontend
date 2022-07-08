@@ -10,17 +10,20 @@ const MypageReservedBook = ({
   setMiniModalContent,
 }) => {
   const onClickCancel = async id => {
-    await axios
-      .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
-      .then(() => {
-        setMiniModalContent("예약 취소 성공");
-        setIsMiniModalOpen(true);
-      })
-      .catch(err => {
-        const { errorCode } = err.response.data;
-        setMiniModalContent(getErrorMessage(errorCode));
-        setIsMiniModalOpen(true);
-      });
+    // eslint-disable-next-line no-alert
+    if (window.confirm("정말로 취소하시나요?")) {
+      await axios
+        .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
+        .then(() => {
+          setMiniModalContent("예약 취소 성공");
+          setIsMiniModalOpen(true);
+        })
+        .catch(err => {
+          const { errorCode } = err.response.data;
+          setMiniModalContent(getErrorMessage(errorCode));
+          setIsMiniModalOpen(true);
+        });
+    }
   };
 
   return (
