@@ -121,12 +121,14 @@ const BookDetail = ({ location, match }) => {
                   {bookDetailInfo.publisher}
                 </div>
               </div>
-              <div className="book-detail__info-wrapper color-54">
-                <div className="book-detail__info-key">발행연월</div>
-                <div className="book-detail__info-value">
-                  {bookDetailInfo.publishedAt}
+              {bookDetailInfo.publishedAt && (
+                <div className="book-detail__info-wrapper color-54">
+                  <div className="book-detail__info-key">발행연월</div>
+                  <div className="book-detail__info-value">
+                    {bookDetailInfo.publishedAt}
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="book-detail__info-wrapper color-54">
                 <div className="book-detail__info-key">카테고리</div>
                 <div className="book-detail__info-value">

@@ -23,7 +23,7 @@ const BookInfo = ({
     return { year, month, day };
   };
 
-  const { year, month } = parseDate(publishedAt);
+  const { year, month } = parseDate(publishedAt) ?? { year: 0, month: 0 };
 
   function subtituteImg(e) {
     e.target.src = IMGERR;
