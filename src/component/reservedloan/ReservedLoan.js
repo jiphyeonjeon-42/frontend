@@ -64,12 +64,16 @@ const ReservedLoan = () => {
     setLastresevedLoanPage(meta.totalPages);
   };
 
+  useEffect(async () => {
+    setResevedLoanPage(1);
+    await fetchReservedLoanData();
+  }, [userSearchWord]);
+
   useEffect(() => {
     setUserSearchWord("");
   }, []);
 
   useEffect(fetchReservedLoanData, [
-    userSearchWord,
     resevedLoanPage,
     isPending,
     isWaiting,
