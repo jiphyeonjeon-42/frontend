@@ -60,7 +60,12 @@ const ReturnBook = () => {
     setUserSearchWord("");
   }, []);
 
-  useEffect(fetchreturnBookData, [userSearchWord, returnBookPage, lendingSort]);
+  useEffect(async () => {
+    setReturnBookPage(1);
+    await fetchreturnBookData();
+  }, [userSearchWord]);
+
+  useEffect(fetchreturnBookData, [returnBookPage, lendingSort]);
 
   useEffect(() => {
     const searchForm = document.querySelector(".modal-search-form");
