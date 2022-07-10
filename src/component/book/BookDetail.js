@@ -23,20 +23,16 @@ const BookDetail = ({ location, match }) => {
   const [miniModalClosable, setMiniModalClosable] = useState(true);
   const [errorCode, setErrorCode] = useState(-1);
   const user = useRecoilValue(userState);
-  // eslint-disable-next-line prefer-const
-  let history = useHistory();
+  const history = useHistory();
 
   const openModal = () => {
-    if (!user.isLogin) {
-      window.location = `/login`;
-      return;
-    }
     setMiniModalView(true);
   };
 
   const closeModal = () => {
     if (miniModalClosable) setMiniModalView(false);
     if (errorCode === 304) history.push("/search");
+    else if (!user.isLogin) history.push("/login");
     window.scrollTo(0, 0);
   };
 
@@ -68,15 +64,13 @@ const BookDetail = ({ location, match }) => {
     <main>
       <Banner
         img="bookdetail"
-        titleKo="도서 상세페이지 및 예약"
+        titleKo="도서 상세 및 예약"
         titleEn="DETAIL & RESERVATION"
       />
       <section className="book-detail-body">
-        <div className="breadcrumb" ref={myRef}>
-          <span className="font-16 color-a4">
-            {location.state ? `${location.state.bread} ` : "집현전 "} &gt;
-            도서상세페이지 및 예약
-          </span>
+        <div className="breadcrumb font-16 color-a4" ref={myRef}>
+          {location.state ? `${location.state.bread} ` : "집현전 "} &gt;
+          도서상세페이지 및 예약
         </div>
         <div className="book-content">
           <div className="book-detail__photo">
@@ -96,7 +90,7 @@ const BookDetail = ({ location, match }) => {
                 0,
               ) === 0 ? (
                 <button
-                  className="reservation-active-button color-red font-18-bold"
+                  className="reservation-active-button color-red"
                   type="button"
                   onClick={openModal}
                 >
@@ -105,7 +99,7 @@ const BookDetail = ({ location, match }) => {
                 </button>
               ) : (
                 <button
-                  className="reservation-disable-button color-a4 font-18"
+                  className="reservation-disable-button color-a4"
                   type="button"
                   disabled
                 >
@@ -115,38 +109,46 @@ const BookDetail = ({ location, match }) => {
               )}
             </div>
             <div className="book-detail__info">
-              <div>
-                <span className="book-detail__info-key">저자</span>
-                <span className="book-detail__info-key">출판사</span>
-                <span className="book-detail__info-key">발행연도</span>
-                <span className="book-detail__info-key">카테고리</span>
-                <span className="book-detail__info-key">기부자</span>
-              </div>
-              <div className="color-54">
-                <span className="book-detail__info-value">
+              <div className="book-detail__info-wrapper color-54">
+                <div className="book-detail__info-key">저자</div>
+                <div className="book-detail__info-value">
                   {bookDetailInfo.author}
-                </span>
-                <span className="book-detail__info-value">
+                </div>
+              </div>
+              <div className="book-detail__info-wrapper color-54">
+                <div className="book-detail__info-key">출판사</div>
+                <div className="book-detail__info-value">
                   {bookDetailInfo.publisher}
-                </span>
-                <span className="book-detail__info-value">
-                  {bookDetailInfo.publishedAt}
-                </span>
-                <span className="book-detail__info-value">
+                </div>
+              </div>
+              {bookDetailInfo.publishedAt && (
+                <div className="book-detail__info-wrapper color-54">
+                  <div className="book-detail__info-key">발행연월</div>
+                  <div className="book-detail__info-value">
+                    {bookDetailInfo.publishedAt}
+                  </div>
+                </div>
+              )}
+              <div className="book-detail__info-wrapper color-54">
+                <div className="book-detail__info-key">카테고리</div>
+                <div className="book-detail__info-value">
                   {bookDetailInfo.category}
-                </span>
-                <span className="book-detail__info-value">
+                </div>
+              </div>
+              <div className="book-detail__info-wrapper color-54">
+                <div className="book-detail__info-key">기부자</div>
+                <div className="book-detail__info-value">
                   {bookDetailInfo.books.reduce((accumulator, current) => {
-                    if (accumulator === "")
+                    if (accumulator === "" || current.donator === "")
                       return accumulator + current.donator;
                     // eslint-disable-next-line prefer-template
                     return accumulator + ", " + current.donator;
                   }, "")}
-                </span>
+                </div>
               </div>
             </div>
             <div className="book-state">
-              <span className="font-18-bold--letterspacing color-54">
+              <span className="book-detail__info-status color-54">
                 도서 상태 정보
               </span>
               <div className="book-state__list">

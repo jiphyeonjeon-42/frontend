@@ -21,8 +21,10 @@
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: normal;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
 .return-book__table-list__arr {
@@ -34,6 +36,8 @@
 
 .return-book__table-list__name {
   width: 16.1rem;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .return-book__table-list__info {
@@ -48,34 +52,36 @@
   margin-right: 2.8rem;
 }
 
-
-@media screen and (max-width:1200px) {
+@media screen and (max-width: 1200px) {
   .return-book__table-list {
     width: 90%;
   }
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .return-book__table-list {
     display: block;
   }
-  
+
   .return-book__table-list__name {
     margin-bottom: 1.1rem;
   }
+
+  .return-book__table-list__title {
+	font-size: 1.6rem;
+  }
+
   .return-book__table-list__text {
     padding-right: 2rem;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
   .return-book__table-list__info > span {
     font-size: 1.4rem;
     display: block;
   }
 }
-

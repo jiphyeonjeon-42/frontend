@@ -19,14 +19,15 @@
 .mypage-subtitle__user__info {
   display: flex;
   justify-content: space-between;
-  height: 23rem;
-  margin-bottom: 5rem;
+  height: 24rem;
+  margin-bottom: 3rem;
 }
 
 .mypage-subtitle__titlebox {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 2rem;
   max-width: 55rem;
 }
 
@@ -37,8 +38,11 @@
   letter-spacing: normal;
   text-align: left;
   color: #2d2d2d;
-  word-break: keep-all;
   white-space: normal;
+}
+
+.mypage-subtitle__titlebox__title > span {
+  word-break: break-all;
 }
 
 .mypage-subtitle__titlebox__guide__1 {
@@ -56,6 +60,7 @@
 
 .mypage-inquire-box-short-wrapper .inquire-box-title {
   height: 6rem;
+  min-width: unset;
 }
 
 .mypage-inquire-box-short-wrapper .inquire-box-title__icon {
@@ -75,6 +80,11 @@
   border-bottom-left-radius: 6.1rem;
   border-bottom-right-radius: 6.1rem;
   padding: 5rem 4rem 3rem 4rem;
+  white-space: break-spaces;
+}
+
+.mypage-inquire-box-short > span {
+  word-break: break-all;
 }
 
 .mypage-inquire-box-short-clickBox {
@@ -133,6 +143,7 @@
     margin-bottom: 0;
   }
   .mypage-inquire-box-long-wrapper .inquire-box-title {
+    min-width: unset;
     height: 6rem;
   }
   .mypage-inquire-box-long-wrapper .inquire-box-title__icon {

@@ -3,7 +3,6 @@
   height: 6.4rem;
   display: flex;
   border-radius: 6.1rem;
-  padding: 0 3.6rem 0 2.6rem;
   background-color: #f2f2f2;
 }
 
@@ -11,19 +10,21 @@
   width: 100%;
   margin-left: auto;
   margin-right: 2.8rem;
+  padding: 0 3.6rem 0 2.6rem;
 }
 
 .modal-search-form.long {
   width: 100%;
+  padding: 0 3.6rem 0 2.6rem;
 }
 
 .modal-search-form.center {
   width: 80%;
   margin: auto;
-  min-width: 280px;
-  max-width: 800px;
+  /* min-width: 200px; */
+  max-width: 790px;
   border: 1px solid #545454;
-  margin-bottom: 10rem;
+  padding: 0 3.5rem 0 3.5rem;
 }
 
 input:focus {
@@ -44,8 +45,7 @@ button:focus {
 }
 
 .modal-search__button {
-  border: 0;
-  padding: 0;
+  all: unset;
   margin-left: auto;
   background-color: #f2f2f2;
 }
@@ -60,20 +60,47 @@ button:focus {
 
 @media screen and (max-width: 1200px) {
   .modal-search-form {
-    height: 5.4rem;
+    height: 5.5rem;
   }
+
   .modal-search__icon {
     width: 2.4rem;
     height: 2.4rem;
+  }
+
+  .modal-search__input {
+    font-size: 1.4rem;
+  }
+
+  .modal-search-form.center {
+    padding: 0 3rem 0 2.5rem;
+  }
+
+  .modal-search-form.short {
+    margin-right: 2.4rem;
   }
 }
 
 @media screen and (max-width: 767px) {
   .modal-search-form {
-    height: 4.4rem;
+    height: 5rem;
   }
+
   .modal-search__icon {
-    width: 2rem;
-    height: 2rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .modal-search-form.center {
+    padding: 0 2rem 0 2rem;
+  }
+
+  .modal-search-form.short {
+    margin-right: 1.8rem;
+	padding: 0 2.5rem 0 2.2rem;
+  }
+
+  .modal-search__input {
+	padding: 0 1rem 0 0.5rem;
   }
 }

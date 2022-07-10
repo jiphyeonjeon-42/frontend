@@ -7,7 +7,7 @@ import AdminPagination from "../utils/AdminPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
-import Login from "../../img/login_icon_white.svg";
+import Book from "../../img/book-arrow-up-free-icon-font.svg";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import ReturnModal from "./ReturnModal";
 import AdminTabs from "../utils/AdminTabs";
@@ -60,7 +60,12 @@ const ReturnBook = () => {
     setUserSearchWord("");
   }, []);
 
-  useEffect(fetchreturnBookData, [userSearchWord, returnBookPage, lendingSort]);
+  useEffect(async () => {
+    setReturnBookPage(1);
+    await fetchreturnBookData();
+  }, [userSearchWord]);
+
+  useEffect(fetchreturnBookData, [returnBookPage, lendingSort]);
 
   useEffect(() => {
     const searchForm = document.querySelector(".modal-search-form");
@@ -85,7 +90,7 @@ const ReturnBook = () => {
       <AdminTabs tabList={tabList} />
       <section className="inquire-box-wrapper">
         <InquireBoxTitle
-          Icon={Login}
+          Icon={Book}
           titleKO="현재 대출정보"
           titleEN="Rent info"
           placeHolder="대출자의 성명 또는 대출중인 도서명을 입력해주세요."

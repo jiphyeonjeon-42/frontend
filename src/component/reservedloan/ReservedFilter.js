@@ -41,7 +41,7 @@ const ReservedFilter = ({
             alt="check"
           />
           <span
-            className={`proceeding-finsh__text font-16-bold ${
+            className={`proceeding-finish__text ${
               isPending ? "color-red" : "color-a4"
             }`}
           >
@@ -59,7 +59,7 @@ const ReservedFilter = ({
             alt="check"
           />
           <span
-            className={`proceeding-finish__text font-16-bold ${
+            className={`proceeding-finish__text ${
               isWaiting ? "color-red" : "color-a4"
             }`}
           >
@@ -77,7 +77,7 @@ const ReservedFilter = ({
             alt="check"
           />
           <span
-            className={`proceeding-finish__text font-16-bold ${
+            className={`proceeding-finish__text ${
               isExpired ? "color-red" : "color-a4"
             }`}
           >

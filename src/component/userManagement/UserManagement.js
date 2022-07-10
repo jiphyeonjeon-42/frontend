@@ -29,6 +29,7 @@ const UserManagement = () => {
   const [lastUserListPage, setLastUserListPage] = useState(1);
   const [userList, setUserList] = useState([]);
   const [errorCode, setErrorCode] = useState(-1);
+  const [isEdit, setIsEdit] = useState(false);
 
   const closeModal = () => {
     setModal(0);
@@ -75,7 +76,7 @@ const UserManagement = () => {
       });
   };
 
-  useEffect(getUserList, [userSearchWord, userListPage]);
+  useEffect(getUserList, [userSearchWord, userListPage, isEdit]);
 
   useEffect(() => {
     setUserListPageRange(0);
@@ -110,7 +111,7 @@ const UserManagement = () => {
         <div className="user-management-search">
           <AdminSearchBar
             width="center"
-            placeHolder="유저의 nickname 혹은 email을 입력해주세요."
+            placeHolder="nickname 또는 email을 입력해주세요."
           />
         </div>
         <div className="user-management-table__inquire-title">
@@ -145,7 +146,7 @@ const UserManagement = () => {
           </div>
         </div>
       </section>
-      {modal && !miniModal && (
+      {modal && !miniModal ? (
         <MidModal closeModal={closeModal}>
           {modal === USAGE ? (
             <UserUsageInfo key={selectedUser.id} user={selectedUser} />
@@ -155,11 +156,15 @@ const UserManagement = () => {
               setErrorCode={setErrorCode}
               closeMidModal={closeModal}
               openMiniModal={openMiniModal}
+              isEdit={isEdit}
+              setIsEdit={setIsEdit}
             />
           )}
         </MidModal>
+      ) : (
+        ``
       )}
-      {miniModal && errorCode >= 0 && (
+      {miniModal && errorCode >= 0 ? (
         <MiniModal closeModal={closeMiniModal}>
           <ModalContentsTitleWithMessage
             closeModal={closeMiniModal}
@@ -167,6 +172,8 @@ const UserManagement = () => {
             message={content}
           />
         </MiniModal>
+      ) : (
+        ``
       )}
     </main>
   );

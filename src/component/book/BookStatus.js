@@ -15,13 +15,13 @@ const BookStatus = ({ book, index }) => {
 
   return (
     <div className="book-status color-54">
-      <div className="book-status__id font-16">{doubleDigit(index + 1)}</div>
-      <div className="book-status__callSign font-16">{book.callSign}</div>
-      <div className="book-status__status font-16">
+      <div className="book-status__id">{doubleDigit(index + 1)}</div>
+      <div className="book-status__callSign">{book.callSign}</div>
+      <div className="book-status__status">
         {getBookStatus(book.isLendable, book.dueDate)}
       </div>
-      <div className="book-status__dueDate font-16">
-        {book.dueDate === "-" ? "-" : book.dueDate.substring(2, 10)}
+      <div className="book-status__dueDate">
+        {book.dueDate === "-" ? "-" : book.dueDate.slice(0, 10)}
       </div>
     </div>
   );

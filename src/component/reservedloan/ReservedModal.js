@@ -24,7 +24,7 @@ const ReservedModal = ({ reservedInfo, closeModal }) => {
           {lendResult ? (
             <ModalContentsTitleWithMessage
               closeModal={closeMiniModal}
-              title="대출이 완료되었습니다."
+              title={miniModalContents}
               message={reservedInfo.title}
             />
           ) : (

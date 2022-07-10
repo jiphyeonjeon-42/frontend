@@ -23,7 +23,7 @@ const BookInfo = ({
     return { year, month, day };
   };
 
-  const { year, month } = parseDate(publishedAt);
+  const { year, month } = parseDate(publishedAt) ?? { year: 0, month: 0 };
 
   function subtituteImg(e) {
     e.target.src = IMGERR;
@@ -66,9 +66,11 @@ const BookInfo = ({
             <span>{category}</span>
           </div>
           <div className="book-info__published-at font-16 color-54">
-            <span>발행연도</span>
+            <span>발행연월</span>
             <span className="book-info__separator-half" />
-            <span>{year && month ? `${year}.${month}` : "-"}</span>
+            <span>
+              {year && month ? `${year}년 ${parseInt(month, 10)}월` : "-"}
+            </span>
           </div>
           <div className="book-info__isbn font-16 color-54">
             <span>표준부호</span>

@@ -108,7 +108,9 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
                 >
                   <p>작가 | {book.author}</p>
                   <p>출판사 | {book.publisher}</p>
-                  <p>발행일자 | {book.publishedAt.slice(0, 10)}</p>
+                  {book.publishedAt && (
+                    <p>발행일자 | {book.publishedAt.slice(0, 10)}</p>
+                  )}
                 </div>
               </button>
             ))}

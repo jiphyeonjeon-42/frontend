@@ -36,7 +36,8 @@ const Mypage = () => {
       })
       .then(res => setUserInfo(res.data.items[0]))
       .catch(err => {
-        setMiniModalContent(err.message);
+        const { errorCode } = err.response.data;
+        setMiniModalContent(getErrorMessage(errorCode));
         setIsMiniModalOpen(true);
       });
   };
@@ -65,7 +66,9 @@ const Mypage = () => {
   };
 
   useEffect(async () => {
-    await getUserInfo();
+    if (JSON.parse(window.localStorage.getItem("user")).isLogin)
+      await getUserInfo();
+    else history.push("/login");
   }, []);
 
   useEffect(() => {
@@ -84,6 +87,32 @@ const Mypage = () => {
   const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
     "\r\n",
   );
+
+  const concatDate = day => {
+    let overDueDate = "";
+
+    day.setDate(day.getDate() + userInfo.overDueDay);
+    overDueDate += day.getFullYear();
+    overDueDate += "-";
+    overDueDate +=
+      day.getMonth() + 1 >= 10
+        ? day.getMonth() + 1
+        : "0".concat(day.getMonth() + 1);
+    overDueDate += "-";
+    overDueDate +=
+      day.getDate() >= 10 ? day.getDate() : "0".concat(day.getDate());
+    return overDueDate;
+  };
+
+  const getOverDueDate = () => {
+    if (
+      !userInfo.penaltyEndDate ||
+      new Date(userInfo.penaltyEndDate) < new Date()
+    ) {
+      return concatDate(new Date());
+    }
+    return concatDate(new Date(userInfo.penaltyEndDate));
+  };
 
   return (
     <>
@@ -147,35 +176,32 @@ const Mypage = () => {
                 <>
                   <span className="font-14-bold color-54">이메일</span>
                   <span className="font-14">
-                    {userInfo.email ? userInfo.email : "No Data"}
+                    {userInfo.email ? userInfo.email : "-"}
                   </span>
                   <span className="font-14-bold color-54">역할</span>
                   <span className="font-14">
-                    {userInfo.role
-                      ? convertRoleToStr(userInfo.role)
-                      : "No Data"}
+                    {userInfo.role ? convertRoleToStr(userInfo.role) : "-"}
                   </span>
                   <span className="font-14-bold color-54">슬랙ID</span>
                   <span className="font-14">
-                    {userInfo.slack ? userInfo.slack : "No Data"}
-                  </span>
-                  <span className="font-14-bold color-54">연체</span>
-                  <span className="font-14">
-                    {userInfo.overDueDay
-                      ? `${userInfo.overDueDay}일`
-                      : "No Data"}
+                    {userInfo.slack ? userInfo.slack : "-"}
                   </span>
                   <span className="font-14-bold color-54">대출제한</span>
                   <span className="font-14">
-                    {userInfo.penaltyEndDate
-                      ? `${userInfo.penaltyEndDate.slice(0, 10)} 까지`
-                      : "No Data"}
+                    {userInfo.overDueDay ||
+                    (userInfo.penaltyEndDate &&
+                      new Date(userInfo.penaltyEndDate) >=
+                        (() => {
+                          const nowDay = new Date();
+                          nowDay.setDate(nowDay.getDate() - 1);
+                          return nowDay;
+                        })())
+                      ? `${getOverDueDate()} 까지`
+                      : "-"}
                   </span>
                   <span className="font-14-bold color-54">정보수정</span>
                   <span className="font-14">
-                    {userInfo.updatedAt
-                      ? userInfo.updatedAt.slice(0, 10)
-                      : "No Data"}
+                    {userInfo.updatedAt ? userInfo.updatedAt.slice(0, 10) : "-"}
                   </span>
                 </>
               ) : null}

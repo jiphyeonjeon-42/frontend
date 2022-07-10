@@ -2,6 +2,7 @@ import React from "react";
 import "../../css/MypageReservedBook.css";
 import axios from "axios";
 import PropTypes from "prop-types";
+import getErrorMessage from "../../data/error";
 
 const MypageReservedBook = ({
   reserveInfo,
@@ -9,16 +10,20 @@ const MypageReservedBook = ({
   setMiniModalContent,
 }) => {
   const onClickCancel = async id => {
-    await axios
-      .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
-      .then(() => {
-        setMiniModalContent("예약 취소 성공");
-        setIsMiniModalOpen(true);
-      })
-      .catch(err => {
-        setMiniModalContent(err.message);
-        setIsMiniModalOpen(true);
-      });
+    // eslint-disable-next-line no-alert
+    if (window.confirm("정말로 취소하시나요?")) {
+      await axios
+        .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
+        .then(() => {
+          setMiniModalContent("예약 취소 성공");
+          setIsMiniModalOpen(true);
+        })
+        .catch(err => {
+          const { errorCode } = err.response.data;
+          setMiniModalContent(getErrorMessage(errorCode));
+          setIsMiniModalOpen(true);
+        });
+    }
   };
 
   return (
@@ -54,19 +59,15 @@ const MypageReservedBook = ({
               <div>
                 {reserveInfo[0].reservationDate
                   ? reserveInfo[0].reservationDate.slice(0, 10)
-                  : "No Data"}
+                  : "-"}
               </div>
               <div>예약만료</div>
               <div>
-                {reserveInfo[0].endAt
-                  ? reserveInfo[0].endAt.slice(0, 10)
-                  : "No Data"}
+                {reserveInfo[0].endAt ? reserveInfo[0].endAt.slice(0, 10) : "-"}
               </div>
               <div>예약순위</div>
               <div>
-                {reserveInfo[0].ranking
-                  ? `${reserveInfo[0].ranking}위`
-                  : "No Data"}
+                {reserveInfo[0].ranking ? `${reserveInfo[0].ranking}위` : "-"}
               </div>
             </div>
             <button
@@ -116,19 +117,15 @@ const MypageReservedBook = ({
               <div>
                 {reserveInfo[1].reservationDate
                   ? reserveInfo[1].reservationDate.slice(0, 10)
-                  : "No Data"}
+                  : "-"}
               </div>
               <div>예약만료</div>
               <div>
-                {reserveInfo[1].endAt
-                  ? reserveInfo[1].endAt.slice(0, 10)
-                  : "No Data"}
+                {reserveInfo[1].endAt ? reserveInfo[1].endAt.slice(0, 10) : "-"}
               </div>
               <div>예약순위</div>
               <div>
-                {reserveInfo[1].ranking
-                  ? `${reserveInfo[1].ranking}위`
-                  : "No Data"}
+                {reserveInfo[1].ranking ? `${reserveInfo[1].ranking}위` : "-"}
               </div>
             </div>
             <button

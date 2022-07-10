@@ -14,7 +14,7 @@ const getErrorMessage = errorCode => {
     case 101:
       return `연결된 계정이 없습니다.\r\n회원가입 후 마이페이지에서 연결해주세요.`;
     case 102:
-      return `토큰이 발급되지 않았습니다.\r\n다시 로그인해주세요.`;
+      return `로그인 후 이용할 수 있는 기능입니다.`;
     case 103:
       return `이메일과 비밀번호를 모두 입력해주세요.`;
     case 104:

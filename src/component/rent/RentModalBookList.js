@@ -30,8 +30,8 @@ const RentModalBookList = ({
 
   const isDisabled = () => {
     if (book.isLendable === 0) return "disabled";
-    if (isAlreadySelected(book, selectedBooks)) return "disabled";
-    return "";
+    if (isAlreadySelected(book, selectedBooks)) return "selected";
+    return "available";
   };
 
   return (
@@ -39,20 +39,20 @@ const RentModalBookList = ({
       className={`rent__modal-book-list ${isDisabled()}`}
       type="button"
       onClick={seletOneOfBook}
-      disabled={isDisabled()}
+      disabled={isDisabled() !== "available" ? "disabled" : ""}
     >
       <div className="rent__modal-book-list__name">
         <span className="rent__modal-book-list__title color-54">
           {book.title ? book.title : `Book${book.id}`}
         </span>
         <span
-          className={`rent__modal-book-list__valid font-16 color-red ${isDisabled()}`}
+          className={`rent__modal-book-list__valid font-16 ${isDisabled()}`}
         >
           {book.isLendable
             ? isAlreadySelected(book, selectedBooks)
               ? "이미 선택됨"
               : "대출 가능"
-            : "대출 불가능"}
+            : "대출 불가"}
         </span>
       </div>
       <div className="rent__modal-book-list__info">

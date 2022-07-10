@@ -4,11 +4,12 @@ import "../../css/UserBriefInfo.css";
 import UserUsage from "../../img/book-arrow-right.svg";
 import UserEdit from "../../img/edit.svg";
 
-const roles = ["미인증", "일반", "사서", "스태프"];
+const roles = ["미인증", "일반", "사서", "운영진"];
 const USAGE = 1;
 const EDIT = 2;
 
 const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
+  const nowDay = new Date();
   const openUsageModal = () => {
     setSelectedUser(user);
     setModal(USAGE);
@@ -18,17 +19,25 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
     setModal(EDIT);
   };
 
-  const getOverDueDate = overDueDay => {
-    const today = new Date();
+  const concatDate = day => {
     let overDueDate = "";
 
-    today.setDate(today.getDate() + overDueDay);
-    overDueDate += today.getFullYear();
+    day.setDate(day.getDate() + user.overDueDay);
+    overDueDate += day.getFullYear();
     overDueDate += "-";
-    overDueDate += today.getMonth() + 1;
+    overDueDate += day.getMonth() + 1 < 10 ? "0" : "";
+    overDueDate += day.getMonth() + 1;
     overDueDate += "-";
-    overDueDate += today.getDate();
-    return overDueDate.substring(2);
+    overDueDate += day.getDate() < 10 ? "0" : "";
+    overDueDate += day.getDate();
+    return overDueDate;
+  };
+
+  const getOverDueDate = () => {
+    if (!user.penaltyEndDate || new Date(user.penaltyEndDate) < new Date()) {
+      return concatDate(nowDay);
+    }
+    return concatDate(new Date(user.penaltyEndDate));
   };
 
   return (
@@ -48,7 +57,16 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
       )}
       <div className="user-info__email font-18-bold color-54">{user.email}</div>
       <div className="user-info__overdue font-18 color-54">
-        {user.overDueDay ? getOverDueDate(user.overDueDay) : "-"}
+        {user.overDueDay ||
+        (user.penaltyEndDate &&
+          new Date(user.penaltyEndDate) >=
+            (() => {
+              const nowDayInFunc = new Date();
+              nowDayInFunc.setDate(nowDayInFunc.getDate() - 1);
+              return nowDayInFunc;
+            })())
+          ? getOverDueDate()
+          : "-"}
       </div>
       {user.nickname ? (
         <button

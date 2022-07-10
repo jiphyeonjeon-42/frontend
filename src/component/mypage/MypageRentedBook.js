@@ -34,35 +34,27 @@ const MypageRentedBook = ({ rentInfo }) => {
             <div className="mypage-rented__book-info-rent font-14">
               <div>대출일시</div>
               <div>
-                {rentInfo[0].lendDate
-                  ? rentInfo[0].lendDate.slice(0, 10)
-                  : "No Data"}
+                {rentInfo[0].lendDate ? rentInfo[0].lendDate.slice(0, 10) : "-"}
               </div>
               <div>반납기한</div>
               <div>
-                {rentInfo[0].duedate
-                  ? rentInfo[0].duedate.slice(0, 10)
-                  : "No Data"}
+                {rentInfo[0].duedate ? rentInfo[0].duedate.slice(0, 10) : "-"}
               </div>
               <div>연체일</div>
               <div>
-                {rentInfo[0].overDueDay
-                  ? `${rentInfo[0].overDueDay}일`
-                  : "No Data"}
+                {rentInfo[0].overDueDay ? `${rentInfo[0].overDueDay}일` : "-"}
               </div>
               <div>비고</div>
               <div>
                 {rentInfo[0].lendingCondition
                   ? rentInfo[0].lendingCondition
-                  : "No Data"}
+                  : "-"}
               </div>
             </div>
             <div className="mypage-rented__book-info-reserve font-14">
               <div>예약</div>
               <div>
-                {rentInfo[0].reservedNum
-                  ? `${rentInfo[0].reservedNum}명`
-                  : "No Data"}
+                {rentInfo[0].reservedNum ? `${rentInfo[0].reservedNum}명` : "-"}
               </div>
             </div>
           </div>
@@ -103,29 +95,23 @@ const MypageRentedBook = ({ rentInfo }) => {
               </div>
               <div>반납기한</div>
               <div>
-                {rentInfo[1].duedate
-                  ? rentInfo[1].duedate.slice(0, 10)
-                  : "No Data"}
+                {rentInfo[1].duedate ? rentInfo[1].duedate.slice(0, 10) : "-"}
               </div>
               <div>연체일</div>
               <div>
-                {rentInfo[1].overDueDay
-                  ? `${rentInfo[1].overDueDay}일`
-                  : "No Data"}
+                {rentInfo[1].overDueDay ? `${rentInfo[1].overDueDay}일` : "-"}
               </div>
               <div>비고</div>
               <div>
                 {rentInfo[1].lendingCondition
                   ? rentInfo[1].lendingCondition
-                  : "No Data"}
+                  : "-"}
               </div>
             </div>
             <div className="mypage-rented__book-info-reserve font-14">
               <div>예약</div>
               <div>
-                {rentInfo[1].reservedNum
-                  ? `${rentInfo[1].reservedNum}명`
-                  : "No Data"}
+                {rentInfo[1].reservedNum ? `${rentInfo[1].reservedNum}명` : "-"}
               </div>
             </div>
           </div>

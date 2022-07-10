@@ -19,7 +19,7 @@
 
 .none {
   top: -5rem;
-  padding: 5rem;
+  padding: 5rem 0 5rem 0;
   margin-bottom: -7.4rem;
 }
 
@@ -48,13 +48,10 @@
 }
 
 .rent__inquire-box-book__undo-button {
-  width: 2rem;
-  height: 2rem;
   border: 0;
-  margin: 0 7.5rem 0 auto;
+  margin: 0 7rem 0 auto;
+  padding-left: 1rem;
   background: none;
-  font-size: 2.8rem;
-  text-decoration: none;
   cursor: pointer;
 }
 
@@ -62,23 +59,26 @@
   display: flex;
   padding: 3rem 0 4.1rem 0;
   align-items: center;
-  border-bottom: .1rem solid #a4a4a4;
+  border-bottom: 0.1rem solid #a4a4a4;
+  justify-content: center;
 }
 
-.rent__inquire-box-book__id{
+.rent__inquire-box-book__id {
   word-wrap: normal;
   overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: normal;
+  font-size: 2.8rem;
+  font-weight: bold;
 }
 
 .rent__inquire-box-book__info {
   display: flex;
-  margin-right: 4rem;
+  /* flex-wrap: wrap; */
   padding: 2rem 0 4rem 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 .book__info__factor {
   margin-right: 4rem;
@@ -90,25 +90,99 @@
   overflow: normal;
 }
 
-.book__info__factor-half {
+.book__info__factor-key {
   margin-right: 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.book__info__factor-value {
+  font-size: 1.8rem;
 }
 
 @media screen and (max-width: 1200px) {
   .rent__inquire-box-book {
     width: 100%;
+  }
+
+  .none {
     top: -3rem;
-    padding-top: 3rem;
+    padding: 3rem 0 3rem 0;
+  }
+
+  .two {
+    padding: 3rem 0 0 0;
+    top: -3rem;
+  }
+
+  .four {
+    top: 0rem;
   }
 
   .rent__inquire-box-book-active {
-    width:90%;
+    width: 90%;
+  }
+
+  .rent__inquire-box-book__id {
+    font-size: 2.4rem;
+  }
+
+  .rent__inquire-box-book__id-undo {
+    padding: 1.5rem 0 3rem 0;
+  }
+
+  .rent__inquire-box-book__info {
+    padding: 1.5rem 0 3rem 0;
+  }
+
+  .rent__inquire-box-book__undo-button {
+    margin: 0 4.5rem 0 auto;
+  }
+
+  .rent__inquire-box-book__undo-button img {
+    width: 1.8rem;
+    height: 1.8rem;
   }
 }
 
-
 @media screen and (max-width: 767px) {
-  .book__info__factor:not(:first-child) {
-    display: none;
+  .rent__inquire-box-book-active {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .rent__inquire-box-book__id {
+    font-size: 2rem;
+  }
+
+  .book__info__factor-key {
+    width: 5rem;
+    font-size: 1.6rem;
+  }
+
+  .book__info__factor-value {
+    font-size: 1.6rem;
+  }
+
+  .rent__inquire-box-book__id-undo {
+    padding: 0.5rem 0 2rem 0;
+  }
+
+  .rent__inquire-box-book__info {
+    display: block;
+    padding: 1.5rem 0 2rem 0;
+  }
+
+  .rent__inquire-box-book__undo-button {
+    margin: 0 2rem 0 auto;
+  }
+
+  .rent__inquire-box-book__undo-button img {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .rent__inquire-box-book__add-button {
+    height: 8rem;
   }
 }
