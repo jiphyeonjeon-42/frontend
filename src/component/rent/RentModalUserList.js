@@ -18,7 +18,7 @@ const UserList = ({ user, setSelectedUser, closeMidModal }) => {
     let penalty = "";
     if (
       new Date(user.penaltyEndDate).setHours(0, 0, 0, 0) >=
-        Date.now().setHours(0, 0, 0, 0) ||
+        new Date().setHours(0, 0, 0, 0) ||
       user.overDueDay > 0
     )
       penalty += "대출 불가 (연체";
