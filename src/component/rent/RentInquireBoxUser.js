@@ -28,7 +28,8 @@ const InquireBoxUser = ({
   const displayPenalty = () => {
     let penalty = "";
     if (
-      new Date(selectedUser.penaltyEndDate) > Date.now() ||
+      new Date(selectedUser.penaltyEndDate).setHours(0, 0, 0, 0) >=
+        Date.now().setHours(0, 0, 0, 0) ||
       selectedUser.overDueDay > 0
     )
       penalty += "대출제한 (연체";

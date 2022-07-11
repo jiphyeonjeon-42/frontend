@@ -16,7 +16,11 @@ const UserList = ({ user, setSelectedUser, closeMidModal }) => {
 
   const displayPenalty = () => {
     let penalty = "";
-    if (new Date(user.penaltyEndDate) > Date.now() || user.overDueDay > 0)
+    if (
+      new Date(user.penaltyEndDate).setHours(0, 0, 0, 0) >=
+        Date.now().setHours(0, 0, 0, 0) ||
+      user.overDueDay > 0
+    )
       penalty += "대출 불가 (연체";
     if (user.lendings.length >= 2) {
       if (penalty !== "") penalty += ", 2권 이상 대출";
