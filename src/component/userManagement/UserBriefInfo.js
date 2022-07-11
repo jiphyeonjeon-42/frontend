@@ -34,7 +34,11 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
   };
 
   const getOverDueDate = () => {
-    if (!user.penaltyEndDate || new Date(user.penaltyEndDate) < new Date()) {
+    if (
+      !user.penaltyEndDate ||
+      new Date(user.penaltyEndDate).setHours(0, 0, 0, 0) <
+        new Date().setHours(0, 0, 0, 0)
+    ) {
       return concatDate(nowDay);
     }
     return concatDate(new Date(user.penaltyEndDate));
@@ -59,12 +63,8 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
       <div className="user-info__overdue font-18 color-54">
         {user.overDueDay ||
         (user.penaltyEndDate &&
-          new Date(user.penaltyEndDate) >=
-            (() => {
-              const nowDayInFunc = new Date();
-              nowDayInFunc.setDate(nowDayInFunc.getDate() - 1);
-              return nowDayInFunc;
-            })())
+          new Date(user.penaltyEndDate).setHours(0, 0, 0, 0) >=
+            new Date().setHours(0, 0, 0, 0))
           ? getOverDueDate()
           : "-"}
       </div>
