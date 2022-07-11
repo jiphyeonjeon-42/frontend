@@ -107,7 +107,8 @@ const Mypage = () => {
   const getOverDueDate = () => {
     if (
       !userInfo.penaltyEndDate ||
-      new Date(userInfo.penaltyEndDate) < new Date()
+      new Date(userInfo.penaltyEndDate).setHours(0, 0, 0, 0) <
+        new Date().setHours(0, 0, 0, 0)
     ) {
       return concatDate(new Date());
     }
@@ -190,12 +191,8 @@ const Mypage = () => {
                   <span className="font-14">
                     {userInfo.overDueDay ||
                     (userInfo.penaltyEndDate &&
-                      new Date(userInfo.penaltyEndDate) >=
-                        (() => {
-                          const nowDay = new Date();
-                          nowDay.setDate(nowDay.getDate() - 1);
-                          return nowDay;
-                        })())
+                      new Date(userInfo.penaltyEndDate).setHours(0, 0, 0, 0) >=
+                        new Date().setHours(0, 0, 0, 0))
                       ? `${getOverDueDate()} 까지`
                       : "-"}
                   </span>
