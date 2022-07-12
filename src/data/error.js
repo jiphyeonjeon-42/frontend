@@ -36,7 +36,7 @@ const getErrorMessage = errorCode => {
 
     // 사서
     case 203:
-      return `이미 존재하는 이메일입니다.`;
+      return `이미 존재하는 이메일입니다.\r\n사서에게 문의해주세요.`;
     case 204:
       return `이미 존재하는 닉네임입니다.`;
     case 205: // 사용자
