@@ -7,8 +7,8 @@ import AdminSearchBar from "../utils/AdminSearchBar";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import AdminPagination from "../utils/AdminPagination";
 import BookList from "./RentModalBookList";
+import RentBookWithBarcodeReader from "./RentBookWithBarcodeReader";
 import "../../css/RentModalBook.css";
-import BarCodeIcon from "../../img/barcode-lines-svgrepo-com.svg";
 
 const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
   const history = useHistory();
@@ -81,12 +81,12 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
           width="long"
           placeHolder="도서의 이름을 입력해주세요."
         />
-        <img
-          className="rent__modal-book__barCode-icon"
-          src={BarCodeIcon}
-          alt="barcode icon"
-        />
       </div>
+      <RentBookWithBarcodeReader
+        setSelectedBooks={setSelectedBooks}
+        selectedBooks={selectedBooks}
+        closeMidModal={closeMidModal}
+      />
       <div className="rent__modal-book__total-list">
         {bookList.map(book => (
           <BookList
