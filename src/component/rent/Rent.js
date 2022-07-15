@@ -53,7 +53,6 @@ const Rent = () => {
       </section>
       <section className="inquire-box__wrapper">
         <InquireBoxTitle Icon={Book} titleKO="도서 정보" titleEN="Book info" />
-        {console.log("selected books.length : ", selectedBooks.length)}
         {selectedBooks.length > 0
           ? selectedBooks.map((book, index) => (
               <RentInquireBoxBook
