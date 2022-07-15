@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import BarcodeReader from "./BarcodeReader";
+import BarcodeReader from "../utils/BarcodeReader";
 import SearchIcon from "../../img/search_icon.svg";
 
 const IsbnSearchBarWithBarcodeReader = ({ fetchFunction }) => {
