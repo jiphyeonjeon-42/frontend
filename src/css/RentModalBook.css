@@ -22,10 +22,6 @@
   margin-top: auto;
 }
 
-.rent__modal-book__barCode-icon {
-  background-color:transparent;
-}
-
 @media screen and (max-width: 767px) {
   .rent__modal-book__title-text {
     margin-right: 3rem;
