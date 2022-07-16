@@ -7,6 +7,7 @@ import AdminSearchBar from "../utils/AdminSearchBar";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import AdminPagination from "../utils/AdminPagination";
 import BookList from "./RentModalBookList";
+import RentBookWithBarcodeReader from "./RentBookWithBarcodeReader";
 import "../../css/RentModalBook.css";
 
 const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
@@ -81,6 +82,11 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
           placeHolder="도서의 이름을 입력해주세요."
         />
       </div>
+      <RentBookWithBarcodeReader
+        setSelectedBooks={setSelectedBooks}
+        selectedBooks={selectedBooks}
+        closeMidModal={closeMidModal}
+      />
       <div className="rent__modal-book__total-list">
         {bookList.map(book => (
           <BookList
