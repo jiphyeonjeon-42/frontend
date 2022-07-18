@@ -126,13 +126,21 @@ const UserDetailInfo = ({
     const intraId = parseInt(intra, 10);
     const role = parseInt(roleNum, 10);
 
-    const data = {
-      nickname: nickname === "" ? null : nickname,
-      intraId: Number.isNaN(intraId) ? null : intraId,
-      slack: slack === "" ? null : slack,
-      role: Number.isNaN(role) ? 0 : role,
-      penaltyEndDate: penalty,
-    };
+    const data =
+      penalty && penalty !== ""
+        ? {
+            nickname: nickname === "" ? null : nickname,
+            intraId: Number.isNaN(intraId) ? null : intraId,
+            slack: slack === "" ? null : slack,
+            role: Number.isNaN(role) ? 0 : role,
+            penaltyEndDate: penalty,
+          }
+        : {
+            nickname: nickname === "" ? null : nickname,
+            intraId: Number.isNaN(intraId) ? null : intraId,
+            slack: slack === "" ? null : slack,
+            role: Number.isNaN(role) ? 0 : role,
+          };
     patchUserInfo(data);
     offEditMode();
   };
@@ -173,7 +181,7 @@ const UserDetailInfo = ({
             infoValue={
               userPenalty && userPenalty >= convertDatetoString(today)
                 ? userPenalty
-                : convertDatetoString(today)
+                : ""
             }
           />
           <UserInfoDisplay
