@@ -9,7 +9,7 @@
 
 .rent-book__basic-info__qr-search > button {
   margin: 0rem;
-  width: 22rem;
+  width: 20rem;
   height: 5rem;
   border:0;
   color:#ffffff;
@@ -26,5 +26,20 @@
   height: 4rem;
   font-size: 1.8rem;
   padding: 0 1rem;
-  margin: 2rem auto ;
+  margin: 2rem auto;
+}
+
+@media screen and (max-width: 767px) {
+  .rent-book__basic-info__qr-search > video {
+    width: 90%;
+  }
+
+  .rent-book__basic-info__qr-search > button {
+    margin: auto;
+    display: block;
+  }
+
+  .rent-book__basic-info__qr-search > select {
+    width: 80%;
+  }
 }
