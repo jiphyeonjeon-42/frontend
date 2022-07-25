@@ -17,6 +17,7 @@ const Register = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+  const [registerComplete, setRegisterComplete] = useState(null);
 
   const closeMiniModal = () => {
     setQueryErrorCode(null);
@@ -137,7 +138,7 @@ const Register = () => {
           password,
         })
         .then(() => {
-          window.location.replace("/login");
+          setRegisterComplete(true);
         })
         .catch(error => {
           const { errorCode } = error.response.data;
@@ -174,6 +175,15 @@ const Register = () => {
             closeModal={closeMiniModal}
             title={title}
             message={content}
+          />
+        </MiniModal>
+      )}
+      {registerComplete && (
+        <MiniModal closeModal={() => history.push("/login")}>
+          <ModalContentsTitleWithMessage
+            closeModal={() => history.push("/login")}
+            title="회원가입 완료"
+            message="환영합니다. 로그인후 집현전 서비스를 이용하세요."
           />
         </MiniModal>
       )}
