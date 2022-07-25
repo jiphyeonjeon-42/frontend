@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+## 서울42의 도서관, 집현전
+<p align='center'>
+<img width='70%' src='https://user-images.githubusercontent.com/79993356/180756135-0f622d3c-e5aa-4ac8-8d50-fa768aeaf5f9.png'>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p>
+    <p align='center'>
+		<img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
+		<img src="https://img.shields.io/badge/PropTypes-v15.7.2-18A497?logo=Photopea" />
+		<img src="https://img.shields.io/badge/Recoil-^0.4.0-A6A9AA?logo=recoil" />
+		<img src="https://img.shields.io/badge/Eslint-^7.32.0-4B32C3?logo=eslint" />
+		<img src="https://img.shields.io/badge/Slack-alert-4A154B?logo=Slack" />
+	</p>
+	<p align='center'>
+		<img src="https://img.shields.io/badge/Docker-v1.17.1-2496ED?logo=Docker" />
+		<img src="https://img.shields.io/badge/Express-v4.17.2-000000?logo=Express" />
+		<img src="https://img.shields.io/badge/Jest-v27.5.1-C21325?logo=Jest">
+		<img src="https://img.shields.io/badge/Swagger-v6.0.1-85EA2D?logo=Swagger" />
+		<img src="https://img.shields.io/badge/MySQL-v2.3.3-4479A1?logo=MySQL" />
+	</p>
+</p>
 
-## Available Scripts
+## 🏠 [HOME PAGE](https://42library.kr/)
 
-In the project directory, you can run:
+**1,000명 이상**이 사용하는 Seoul42 공식 도서관 웹사이트입니다. 
 
-### `yarn start`
+사용자와 사서님들에게 피드백을 매주 받는 것은 물론, 사이트에 대한 건의 사항을 **Seoul 42 재단**에서 직접 받기도 합니다. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+매주 유지보수 팀이 도서관에 상주하여 해당 건의 사항을 해결합니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 📌 집현전 서비스 소개
+###  👩‍👩‍👧‍👦 도서검색
+> - 네이버에서 제공하는 모든 도서를 검색 가능합니다.
+> - 도서명, ISBN, 저자명으로 검색합니다.
+### 📈 도서 대출과 반납, 등록 가능
+> - 도서의 **QR코드** 및 바코드를 읽어 간단하게 책을 대출해드릴 수 있습니다.
+> - 같은 방법으로, 집현전에 새로운 도서를 등록하여 DB에 저장 가능합니다.
+### 📆 간편한 마이페이지 제공
+> - 자신의 연체 날짜를 확인하며, 대출하거나 예약한 책의 내역을 봅니다.
+> - 이메일과 비밀번호를 변경할 수 있습니다.
+> - 연체 날짜가 잘못된 경우, 사서가 이를 수정해줄 수 있습니다.
+### 📩 서울42 API 인증
+> - 이메일과 비밀번호로 회원가입은 물론, **서울42의 API**를 통한 인증이 가능합니다.
 
-### `yarn test`
+## 📌 시연 영상
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[<img src="https://user-images.githubusercontent.com/79993356/180759895-1c65c0d6-eebb-4778-a35d-d8988b3b300d.png" width="40%"></img>](https://youtu.be/WqC7n-4r-ZU)
+[<img src="https://user-images.githubusercontent.com/79993356/180759916-e5d3b0a9-c8a1-4bd9-8280-79c68427642a.png" width="40%"></img>](https://youtu.be/AROfBfmo01g)
 
-### `yarn build`
+## 📌 백엔드 ERD
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![집현전 ERD](https://user-images.githubusercontent.com/79993356/180768082-2031ae7f-4fe5-4595-8791-773ef3bece12.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ⚙️ 프로젝트 구동 방법
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+프론트 코드와 백엔드 코드 모두 클론합니다.
 
-### `yarn eject`
+[백엔드 코드](https://github.com/jiphyeonjeon-42/backend)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**1. MySQL 다운로드 후 워크벤치에 DB 스키마 설계 후 실행**
+**2. 백엔드**
+- 백엔드 환경 변수 설정
+  - backend폴더 바로 안에 .env 파일 생성
+  - .env 예시
+    ```
+    MYSQL_ROOT_PASSWORD=...
+    MYSQL_DATABASE=...
+    MYSQL_USER=...
+    MYSQL_PASSWORD=...
+    DB_SCHEMA=42library
+    MODE=local
+    NODE_ENV=development
+    CLIENT_ID=...
+    CLIENT_SECRET=...
+    REDIRECT_URL=...
+    CLIENT_URL=...
+    BOT_USER_OAUTH_ACCESS_TOKEN=...
+    JWT_SECRET=...
+    NAVER_BOOK_SEARCH_CLIENT_ID = ...
+    NAVER_BOOK_SEARCH_SECRET = ...
+    ```
+  - 실행
+    ```jsx
+    cd backend
+    yarn 
+    yarn dev
+    ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**3. 프론트엔드**
+- 프론트엔드 환경 변수 설정
+   - 폴더에 .env 파일 생성
+   - .env 예시
+      ```
+      REACT_APP_API=...
+      REACT_APP_WISH=...
+      REACT_APP_E_BOOK_LIBRARY=...
+      PORT=...
+      REACT_APP_SUGGESTION=...
+      ```
+  - 실행
+    ```jsx
+    npm install 
+    npm start
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 📌 팀원소개
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+서울42 인트라 아이디로 소개합니다!
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Jwoo](https://github.com/Jiwon-Woo)
+- [Sujikim](https://github.com/notusing11)
+- [Chulee](https://github.com/tmam444)
+- [Kyungsle](https://github.com/keinn51)
