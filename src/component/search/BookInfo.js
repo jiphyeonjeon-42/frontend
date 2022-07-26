@@ -16,6 +16,7 @@ const BookInfo = ({
   publishedAt,
   category,
   bread,
+  lendingCnt,
 }) => {
   const parseDate = publishedDate => {
     if (!publishedDate) return { year: null, month: null, day: null };
@@ -53,7 +54,6 @@ const BookInfo = ({
           title={title}
           onError={subtituteImg}
         />
-        {/* <div className="book-info__available color-ff font-14">대여가능</div> */}
         <div className="book-info__info">
           <div className="book-info__title font-18-bold--letterspacing color-54">
             {title}
@@ -65,17 +65,22 @@ const BookInfo = ({
             <span className="book-info__separator">|</span>
             <span>{category}</span>
           </div>
-          <div className="book-info__published-at font-16 color-54">
+          <div className="book-info__published-at font-14 color-54">
             <span>발행연월</span>
             <span className="book-info__separator-half" />
             <span>
               {year && month ? `${year}년 ${parseInt(month, 10)}월` : "-"}
             </span>
           </div>
-          <div className="book-info__isbn font-16 color-54">
+          <div className="book-info__isbn font-14 color-54">
             <span>표준부호</span>
             <span className="book-info__separator-half" />
             <span>{isbn}</span>
+          </div>
+          <div className="book-info__lendingCnt font-14 color-54">
+            <span>대여가능</span>
+            <span className="book-info__separator-half" />
+            <span>{`${lendingCnt} 권`}</span>
           </div>
           <img
             className="book-info__link-icon"
@@ -100,6 +105,7 @@ BookInfo.propTypes = {
   publishedAt: PropTypes.object,
   category: PropTypes.string.isRequired,
   bread: PropTypes.string.isRequired,
+  lendingCnt: PropTypes.number.isRequired,
 };
 
 export default BookInfo;

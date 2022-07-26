@@ -20,6 +20,7 @@ const Books = ({ bookList, isLoading }) => {
             publisher={items.publisher}
             image={items.image}
             publishedAt={items.publishedAt}
+            lendingCnt={items.lendingCnt}
             category={items.category}
             bread="검색"
           />
