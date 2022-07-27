@@ -46,4 +46,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           aws s3 sync ./build s3://42library.kr --region ap-northeast-2
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CDN_DISTRIBUTION_ID }} --paths "/*"
