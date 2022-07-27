@@ -183,7 +183,7 @@ const Register = () => {
           <ModalContentsTitleWithMessage
             closeModal={() => history.push("/login")}
             title="회원가입 완료"
-            message="환영합니다. 로그인후 집현전 서비스를 이용하세요."
+            message="환영합니다. 로그인 후 집현전 서비스를 이용하세요."
           />
         </MiniModal>
       )}
