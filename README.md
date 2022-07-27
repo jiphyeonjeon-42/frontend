@@ -7,16 +7,16 @@
     <p align='center'>
 		<img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
 		<img src="https://img.shields.io/badge/PropTypes-v15.7.2-18A497?logo=Photopea" />
-		<img src="https://img.shields.io/badge/Recoil-^0.4.0-A6A9AA?logo=recoil" />
-		<img src="https://img.shields.io/badge/Eslint-^7.32.0-4B32C3?logo=eslint" />
-		<img src="https://img.shields.io/badge/Slack-alert-4A154B?logo=Slack" />
+		<img src="https://img.shields.io/badge/Recoil-^0.4.0-A6A9AA?logo=Coil" />
+    <img src="https://img.shields.io/badge/CRA-react-09D3AC?logo=Create React App
+" />
 	</p>
 	<p align='center'>
-		<img src="https://img.shields.io/badge/Docker-v1.17.1-2496ED?logo=Docker" />
-		<img src="https://img.shields.io/badge/Express-v4.17.2-000000?logo=Express" />
-		<img src="https://img.shields.io/badge/Jest-v27.5.1-C21325?logo=Jest">
-		<img src="https://img.shields.io/badge/Swagger-v6.0.1-85EA2D?logo=Swagger" />
-		<img src="https://img.shields.io/badge/MySQL-v2.3.3-4479A1?logo=MySQL" />
+    <img src="https://img.shields.io/badge/Eslint-^7.32.0-4B32C3?logo=eslint" />
+		<img src="https://img.shields.io/badge/Slack-alert-4A154B?logo=Slack" />
+		<img src="https://img.shields.io/badge/zxing/library-QR code-2496ED" />
+		<img src="https://img.shields.io/badge/QS-v6.11.0-000000" />
+    <img src="https://img.shields.io/badge/42Oauth-^2.0-EB5424?logo=Auth0" />
 	</p>
 </p>
 
@@ -24,7 +24,7 @@
 
 **1,000명 이상**이 사용하는 42 SEOUL 공식 도서관 웹사이트입니다. 
 
-사용자와 사서님들에게 피드백을 매주 받는 것은 물론, 사이트에 대한 건의 사항을 **Seoul 42 재단**에서 직접 받기도 합니다. 
+사용자와 사서님들에게 피드백을 매주 받는 것은 물론, 사이트에 대한 건의 사항을 **42 Seoul 재단**에서 직접 받기도 합니다. 
 
 매주 유지보수 팀이 도서관에 상주하여 해당 건의 사항을 해결합니다.
 
