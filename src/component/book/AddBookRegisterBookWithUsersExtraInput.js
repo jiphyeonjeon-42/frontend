@@ -4,6 +4,7 @@ import axios from "axios";
 import category from "../../data/category";
 
 const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
+  const [isDevBook, setIsDevBook] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
   const [message, setMessage] = useState("");
   const donator = useRef(null);
@@ -43,12 +44,42 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
     setMessage("");
     registerBook();
   };
+
   const isReadyToPost = () => {
     return categoryId;
   };
+
+  const setDev = () => {
+    if (isDevBook) return;
+    setIsDevBook(true);
+  };
+
+  const setNonDev = () => {
+    if (!isDevBook) return;
+    setIsDevBook(false);
+  };
+
   return (
     <form className="add-book__create-form" onSubmit={onSubmit}>
-      <p className="color-red">신규 등록 도서 관리 정보</p>
+      <p className="color-red">신규 도서 카테고리 정보</p>
+      <button
+        type="button"
+        className={`add-book__create-form__category-button ${
+          isDevBook && "red"
+        }`}
+        onClick={setDev}
+      >
+        개발
+      </button>
+      <button
+        type="button"
+        className={`add-book__create-form__category-button ${
+          !isDevBook && "red"
+        } `}
+        onClick={setNonDev}
+      >
+        비개발
+      </button>
       <select
         name="category"
         required
@@ -57,20 +88,20 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
         onChange={onChangeCategory}
       >
         <option value="">카테고리를 선택하세요</option>
-        {category.map(element => {
-          return (
-            <option value={element.id} key={element.id}>
-              {element.name}
-            </option>
-          );
-        })}
+        {category
+          .filter(items => items.isDev === isDevBook)
+          .map(element => {
+            return (
+              <option value={element.id} key={element.id}>
+                {element.name}
+              </option>
+            );
+          })}
       </select>
       <p className="add-book__create-form__errror-Message">{message}</p>
-
       <p className="color-red">기부자 정보</p>
       <input type="text" id="donator" ref={donator} />
-
-      <button type="submit" className={isReadyToPost && "is-ready"}>
+      <button type="submit" className={isReadyToPost() && "red"}>
         등록하기
       </button>
     </form>
