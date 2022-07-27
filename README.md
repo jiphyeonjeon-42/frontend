@@ -1,4 +1,4 @@
-## 서울42의 도서관, 집현전
+## 42서울의 도서관, 집현전
 <p align='center'>
 <img width='70%' src='https://user-images.githubusercontent.com/79993356/180756135-0f622d3c-e5aa-4ac8-8d50-fa768aeaf5f9.png'>
 </p>
