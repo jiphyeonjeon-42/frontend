@@ -45,6 +45,8 @@ const getErrorMessage = errorCode => {
       return `역할은 0~3 사이의 값만 가능합니다.`;
     case 207:
       return `이미 존재하는 슬랙 ID 입니다.`;
+    case 208:
+      return `42 카뎃 인증 완료\r\n해당 계정으로 대출, 예약 서비스 사용이 가능합니다.`;
 
     // 사서
     case 302:
