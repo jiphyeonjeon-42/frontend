@@ -17,20 +17,7 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
       .then(response => {
         const { isbn, title, image, author, publisher, pubdate } =
           response.data.isbnInNaver[0];
-        const sameInfo = response.data.sameTitleOrAuthor;
-        const sameIsbn = response.data.isbnInBookInfo;
-        const recommendCallSign =
-          response.data?.isbnInBookInfo[0]?.callSign?.slice(0, -1);
 
-        const distincedElement = sameInfo.filter(infoElement => {
-          return sameIsbn.filter(isbnElement => {
-            return JSON.stringify(isbnElement) !== JSON.stringify(infoElement);
-          });
-        });
-        const existedBooksInfo =
-          !sameInfo.length || !sameIsbn.length
-            ? [...sameInfo, ...sameIsbn]
-            : distincedElement;
         setBookInfo({
           isConfirmedInfo: true,
           newBookBasicInfo: {
@@ -41,8 +28,6 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
             publisher,
             pubdate,
           },
-          existedBooksInfo,
-          recommendCallSign: recommendCallSign || "",
         });
       })
       .catch(error => {
@@ -62,8 +47,6 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
             publisher: "",
             pubdate: "",
           },
-          existedBooksInfo: [],
-          recommendCallSign: "",
         });
       });
   };

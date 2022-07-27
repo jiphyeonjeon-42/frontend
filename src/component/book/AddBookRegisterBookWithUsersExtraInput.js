@@ -1,26 +1,12 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import category from "../../data/category";
 
-const callSignRegex = RegExp(/^[A-Za-z][0-9]{1,2}\.[0-9]{2}\.v[1-9]\.c[1-9]$/);
-
-const RegisterBookWithUsersExtraInput = ({
-  bookBasicInfo,
-  recommendCallSign,
-}) => {
+const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
   const [categoryId, setCategoryId] = useState(0);
-  const [callSign, setCallSign] = useState(recommendCallSign);
   const [message, setMessage] = useState("");
-  const callSignRef = useRef(null);
   const donator = useRef(null);
-  useEffect(() => {
-    const recommendCategory = category.find(
-      element => element.code === recommendCallSign[0],
-    );
-    setCategoryId(recommendCategory?.id ? recommendCategory.id : 0);
-    setCallSign(recommendCallSign);
-  }, [recommendCallSign]);
 
   const registerBook = async () => {
     setMessage("");
@@ -33,7 +19,6 @@ const RegisterBookWithUsersExtraInput = ({
       pubdate: bookBasicInfo.pubdate,
       categoryId,
       donator: donator.current.value,
-      callSign,
     };
     await axios
       .post(`${process.env.REACT_APP_API}/books/create`, newBook)
@@ -43,59 +28,23 @@ const RegisterBookWithUsersExtraInput = ({
       })
       .catch(error => {
         const { status, data } = error.response;
-        if (status === 400 && data.errorCode === 305) {
-          setMessage("이미 존재하는 청구기호입니다");
-          // setMessage(error[data.errorCode]); 이런식으로 수정될 예정
-          callSignRef.current.focus();
-        } else {
-          setMessage(
-            `실패했습니다 status : ${status} 에러코드 : ${data.errorCode}`,
-          );
-        }
+        setMessage(
+          `실패했습니다 status : ${status} 에러코드 : ${data.errorCode}`,
+        );
       });
   };
 
   const onChangeCategory = e => {
     setCategoryId(parseInt(e.currentTarget.value, 10));
   };
-  const onChangeCallSign = e => {
-    setCallSign(e.currentTarget.value);
-  };
 
   const onSubmit = e => {
     e.preventDefault();
     setMessage("");
-    const pubYear = callSign.split(".");
-    if (!callSignRegex.test(callSign)) {
-      setMessage("청구기호 형식을 확인해주세요");
-      callSignRef.current.focus();
-      return;
-    }
-    if (bookBasicInfo.pubdate.substring(2, 4) !== pubYear[1]) {
-      setMessage("청구기호 출판연도가 입력된 값과 다릅니다");
-      callSignRef.current.focus();
-      return;
-    }
-    if (
-      recommendCallSign &&
-      recommendCallSign.substr(0, -3) !== callSign.substr(0, -4)
-    ) {
-      setMessage("isbn이 동일한 책과 청구기호가 너무 많이 다릅니다");
-      callSignRef.current.focus();
-      return;
-    }
-    const selectedCategory = category.find(
-      element => element.id === categoryId,
-    );
-    if (selectedCategory.code !== callSign[0]) {
-      setMessage("청구기호의 첫문자는 카테고리 정보와 일치해야 합니다");
-      callSignRef.current.focus();
-      return;
-    }
     registerBook();
   };
   const isReadyToPost = () => {
-    return categoryId && callSign.length();
+    return categoryId;
   };
   return (
     <form className="add-book__create-form" onSubmit={onSubmit}>
@@ -116,15 +65,6 @@ const RegisterBookWithUsersExtraInput = ({
           );
         })}
       </select>
-      <input
-        type="text"
-        id="callSign"
-        placeholder="청구기호를 입력하세요"
-        ref={callSignRef}
-        value={callSign}
-        required
-        onChange={onChangeCallSign}
-      />
       <p className="add-book__create-form__errror-Message">{message}</p>
 
       <p className="color-red">기부자 정보</p>
@@ -148,5 +88,4 @@ RegisterBookWithUsersExtraInput.propTypes = {
     image: PropTypes.string.isRequired,
     pubdate: PropTypes.string.isRequired,
   }).isRequired,
-  recommendCallSign: PropTypes.string.isRequired,
 };
