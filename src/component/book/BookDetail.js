@@ -85,8 +85,10 @@ const BookDetail = ({ location, match }) => {
             <div className="book-detail__reservation-button">
               <div className="book-detail__title">{bookDetailInfo.title}</div>
               {bookDetailInfo.books.length > 0 &&
+              // 대출가능한 책들 중에서 예약이 가능한지 판단
               bookDetailInfo.books.reduce(
-                (accumulator, current) => accumulator + current.isLendable,
+                (accumulator, current) =>
+                  accumulator + (current.isLendable + current.status),
                 0,
               ) === 0 ? (
                 <button
