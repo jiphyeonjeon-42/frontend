@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { install } from "ga-gtag";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import BookDetail from "./component/book/BookDetail";
@@ -27,6 +28,7 @@ function Routes() {
   const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
+    install(process.env.REACT_APP_GA_ID);
     const localUser = JSON.parse(window.localStorage.getItem("user"));
 
     const nowDate = new Date();
