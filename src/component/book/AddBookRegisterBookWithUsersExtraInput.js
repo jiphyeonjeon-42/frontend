@@ -46,7 +46,7 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
   };
 
   const isReadyToPost = () => {
-    return categoryId;
+    return categoryId && bookBasicInfo.title && bookBasicInfo.author;
   };
 
   const setDev = () => {
@@ -95,9 +95,9 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
             })}
         </select>
       </div>
-      <p className="add-book__create-form__errror-Message">{message}</p>
       <p className="color-red">기부자 정보</p>
       <input type="text" id="donator" ref={donator} />
+      <p className="add-book__create-form__errror-Message">{message}</p>
       <button type="submit" className={isReadyToPost() && "red"}>
         등록하기
       </button>

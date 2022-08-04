@@ -214,7 +214,8 @@ select {
 }
 
 .add-book__create-form__errror-Message {
-  margin: -1rem 38rem 2rem;
+  margin: 1rem auto;
+  text-align: center;
 }
 
 .add-book__create-form > button {
@@ -310,8 +311,5 @@ select {
     width: 100%;
     margin: 0 0 1rem 0;
     display: block;
-  }
-  .add-book__create-form__errror-Message {
-    margin: -1rem 2rem 1rem;
   }
 }
