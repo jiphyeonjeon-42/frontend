@@ -78,8 +78,6 @@ DisplayBasicBookInfo.propTypes = {
       image: PropTypes.string.isRequired,
       pubdate: PropTypes.string.isRequired,
     }).isRequired,
-    existedBooksInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
-    recommendCallSign: PropTypes.string.isRequired,
   }).isRequired,
   setBasicInfo: PropTypes.func.isRequired,
 };
