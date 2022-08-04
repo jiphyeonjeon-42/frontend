@@ -1,4 +1,4 @@
-const category = [
+export const category = [
   { id: "1", name: "데이터 분석/AI/ML", code: "K", isDev: true },
   { id: "2", name: "네트워크", code: "C", isDev: true },
   { id: "3", name: "IT 일반", code: "O", isDev: true },
@@ -29,4 +29,15 @@ const category = [
   { id: "28", name: "종교", code: "l", isDev: false },
 ];
 
-export { category as default };
+export const koreanDemicalClassification = [
+  { id: "0", categoryId: "25" }, // 총류
+  { id: "1", categoryId: "11" }, // 철학
+  { id: "2", categoryId: "28" }, // 종교
+  { id: "3", categoryId: "8" }, // 사회과학
+  { id: "4", categoryId: "27" }, // 자연과학
+  { id: "5", categoryId: "18" }, // 기술과학
+  { id: "6", categoryId: "13" }, // 예술
+  { id: "7", categoryId: "23" }, // 언어
+  { id: "8", categoryId: "15" }, // 문학
+  { id: "9", categoryId: "21" }, // 역사
+];

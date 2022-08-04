@@ -19,7 +19,7 @@ const AddBook = () => {
       author: "",
       publisher: "",
       pubdate: "",
-      category: "",
+      koreanDemicalClassification: "",
     },
   });
 

@@ -28,6 +28,7 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
             publisher,
             pubdate,
             category,
+            koreanDemicalClassification: category,
           },
         });
       })
@@ -47,6 +48,7 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
             author: "",
             publisher: "",
             pubdate: "",
+            koreanDemicalClassification: "",
           },
         });
       });

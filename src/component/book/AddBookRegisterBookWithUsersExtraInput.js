@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import category from "../../data/category";
+import { category, koreanDemicalClassification } from "../../data/category";
 
 const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
   const [isDevBook, setIsDevBook] = useState(true);
@@ -55,13 +55,18 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
   };
 
   const setNonDev = () => {
-    if (!isDevBook) return;
+    if (!isDevBook || !bookBasicInfo.koreanDemicalClassification.length) return;
+    setCategoryId(
+      koreanDemicalClassification.find(
+        i => i.id === bookBasicInfo.koreanDemicalClassification,
+      ).categoryId,
+    );
     setIsDevBook(false);
   };
 
   return (
     <form className="add-book__create-form" onSubmit={onSubmit}>
-      <p className="color-red">신규 도서 카테고리 정보</p>
+      <p className="color-red">신규 도서 대분류 정보</p>
       <button
         type="button"
         className={`add-book__create-form__category-button ${
@@ -80,6 +85,7 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
       >
         비개발
       </button>
+      <p className="color-red">신규 도서 카테고리 정보</p>
       <select
         name="category"
         required
@@ -118,6 +124,6 @@ RegisterBookWithUsersExtraInput.propTypes = {
     publisher: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     pubdate: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
+    koreanDemicalClassification: PropTypes.string.isRequired,
   }).isRequired,
 };
