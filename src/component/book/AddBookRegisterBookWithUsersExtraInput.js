@@ -118,5 +118,6 @@ RegisterBookWithUsersExtraInput.propTypes = {
     publisher: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     pubdate: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
   }).isRequired,
 };

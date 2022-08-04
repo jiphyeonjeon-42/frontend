@@ -14,6 +14,7 @@ const IsbnSearchBarWithBarcodeReader = ({ fetchFunction }) => {
   const onChangeText = e => {
     setSearchText(e.currentTarget.value);
   };
+
   const onSubmitForm = e => {
     e.preventDefault();
     fetchFunction(searchText);

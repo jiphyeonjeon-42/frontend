@@ -15,8 +15,8 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
         },
       })
       .then(response => {
-        const { isbn, title, image, author, publisher, pubdate } =
-          response.data.isbnInNaver[0];
+        const { isbn, title, image, author, publisher, pubdate, category } =
+          response.data.bookInfo;
 
         setBookInfo({
           isConfirmedInfo: true,
@@ -27,6 +27,7 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
             author,
             publisher,
             pubdate,
+            category,
           },
         });
       })
