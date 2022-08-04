@@ -40,12 +40,12 @@ select {
 }
 .add-book__basic-info__isbn-search > button {
   display: inline-block;
-  margin: 2rem 5rem 2rem 6.5rem;
+  margin: 2rem 5% 2rem 6.5rem;
   width: 22rem;
-  height: 5rem;
+  height: 6rem;
   border: 0;
   color: #ffffff;
-  border-radius: 2.4rem;
+  border-radius: 6rem;
   background: none;
   background-color: #a4a4a4;
   cursor: pointer;
@@ -61,24 +61,35 @@ select {
 
 .add-book__basic-info__search-bar {
   text-align: center;
-  width: calc(90% - 32rem);
-  height: 5rem;
+  width: 85%;
+  height: 6rem;
   display: inline-flex;
   border-radius: 3rem;
   padding: 0 3rem;
-  margin: 1rem auto;
+  margin: 1rem 5rem;
   border: solid 2px rgba(255, 255, 255, 0.8);
   background-color: rgb(0, 0, 0, 0.5);
 }
 
 .add-book__basic-info__search-bar > input {
   border: 0;
-  padding: 0;
+  padding: 0 1rem;
   width: 100%;
   min-width: 15rem;
   background-color: rgb(255, 255, 255, 0);
   color: #ffffff;
   font-size: 2rem;
+}
+
+.add-book__basic-info__search-bar > input::placeholder {
+  color: #ffffff;
+}
+
+.add-book__basic-info__barcode-icon {
+  background-color: rgb(255, 255, 255, 0);
+  color: white;
+  width: 2.8rem;
+  margin: 0.5rem 2rem 0 0;
 }
 
 .add-book__basic-info__search-bar > button {
@@ -90,7 +101,7 @@ select {
 
 .add-book__basic-info__cover {
   width: 30rem;
-  margin: 0 5rem 3rem;
+  margin: 0 6rem 3rem;
 }
 .add-book__basic-info__cover > img {
   object-fit: contain;
@@ -173,19 +184,31 @@ select {
   margin: auto;
 }
 
-.add-book__create-form > select {
-  margin: 0 3rem 2rem 0;
-  border: 0;
-  width: 34rem;
+.add-book__select {
+  display: flex;
+}
+
+.add-book__isDev-select {
+  padding: 0 2rem;
   height: 4rem;
-  font-size: 1.6rem;
-  padding: 0 1rem;
+  border: 0;
+  width: 25rem;
+  margin-right: 3rem;
+}
+
+.add-book__category-select {
+  padding: 0 2rem;
+  height: 4rem;
+  border: 0;
+  width: 73%;
+  margin-bottom: 3rem;
 }
 
 .add-book__create-form > input {
   border: 0;
-  padding: 0 2rem 0 2rem;
-  width: 40%;
+  padding: 0 2rem;
+  width: 95%;
+
   height: 4rem;
   font-size: 1.6rem;
 }
@@ -286,6 +309,7 @@ select {
   .add-book__create-form > select {
     width: 100%;
     margin: 0 0 1rem 0;
+    display: block;
   }
   .add-book__create-form__errror-Message {
     margin: -1rem 2rem 1rem;

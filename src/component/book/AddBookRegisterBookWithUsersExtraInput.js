@@ -4,7 +4,7 @@ import axios from "axios";
 import { category, koreanDemicalClassification } from "../../data/category";
 
 const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
-  const [isDevBook, setIsDevBook] = useState(true);
+  const [isDevBook, setIsDevBook] = useState("");
   const [categoryId, setCategoryId] = useState("0");
   const [message, setMessage] = useState("");
   const donator = useRef(null);
@@ -50,60 +50,51 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
   };
 
   const setDev = () => {
-    if (isDevBook) return;
-    setIsDevBook(true);
-  };
-
-  const setNonDev = () => {
-    if (!isDevBook || !bookBasicInfo.koreanDemicalClassification.length) return;
-    setCategoryId(
-      koreanDemicalClassification.find(
-        i => i.id === bookBasicInfo.koreanDemicalClassification,
-      ).categoryId,
-    );
-    setIsDevBook(false);
+    if (isDevBook && bookBasicInfo?.koreanDemicalClassification)
+      setCategoryId(
+        koreanDemicalClassification.find(
+          i => i.id === bookBasicInfo.koreanDemicalClassification,
+        ).categoryId,
+      );
+    setIsDevBook(!isDevBook);
   };
 
   return (
     <form className="add-book__create-form" onSubmit={onSubmit}>
-      <p className="color-red">신규 도서 대분류 정보</p>
-      <button
-        type="button"
-        className={`add-book__create-form__category-button ${
-          isDevBook && "red"
-        }`}
-        onClick={setDev}
-      >
-        개발
-      </button>
-      <button
-        type="button"
-        className={`add-book__create-form__category-button ${
-          !isDevBook && "red"
-        } `}
-        onClick={setNonDev}
-      >
-        비개발
-      </button>
       <p className="color-red">신규 도서 카테고리 정보</p>
-      <select
-        name="category"
-        required
-        id="category-select"
-        value={categoryId}
-        onChange={onChangeCategory}
-      >
-        <option value="">카테고리를 선택하세요</option>
-        {category
-          .filter(items => items.isDev === isDevBook)
-          .map(element => {
-            return (
-              <option value={element.id} key={element.id}>
-                {element.name}
-              </option>
-            );
-          })}
-      </select>
+      <div className="add-book__select">
+        <select
+          required
+          className="add-book__isDev-select"
+          name="isDevCategory"
+          id="isDevCategory"
+          value={isDevBook}
+          onChange={setDev}
+        >
+          <option value="">대분류를 선택해주세요</option>
+          <option value>개발</option>
+          <option value={false}>비개발</option>
+        </select>
+        <select
+          required
+          className="add-book__category-select"
+          name="category"
+          id="category-select"
+          value={categoryId}
+          onChange={onChangeCategory}
+        >
+          <option value="">카테고리를 선택하세요</option>
+          {category
+            .filter(items => items.isDev === isDevBook)
+            .map(element => {
+              return (
+                <option value={element.id} key={element.id}>
+                  {element.name}
+                </option>
+              );
+            })}
+        </select>
+      </div>
       <p className="add-book__create-form__errror-Message">{message}</p>
       <p className="color-red">기부자 정보</p>
       <input type="text" id="donator" ref={donator} />

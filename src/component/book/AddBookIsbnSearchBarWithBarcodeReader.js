@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import BarcodeReader from "../utils/BarcodeReader";
 import SearchIcon from "../../img/search_icon.svg";
+import BarcodeIcon from "../../img/barcode.svg";
 
 const IsbnSearchBarWithBarcodeReader = ({ fetchFunction }) => {
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(false);
@@ -29,9 +30,6 @@ const IsbnSearchBarWithBarcodeReader = ({ fetchFunction }) => {
   return (
     <form onSubmit={onSubmitForm} className="add-book__basic-info__isbn-search">
       {isUsingBarcodeReader && <BarcodeReader toDoAfterRead={toDoAfterRead} />}
-      <button type="button" onClick={toggleBarcodeReader}>
-        {isUsingBarcodeReader ? "바코드 리더 숨기기" : "바코드로 isbn읽기"}
-      </button>
       <div className="add-book__basic-info__search-bar">
         <input
           type="text"
@@ -40,8 +38,19 @@ const IsbnSearchBarWithBarcodeReader = ({ fetchFunction }) => {
           required
           placeholder="isbn을 입력해주세요"
         />
+        <button type="button" onClick={toggleBarcodeReader}>
+          <img
+            className="add-book__basic-info__barcode-icon"
+            src={BarcodeIcon}
+            alt="barcode"
+          />
+        </button>
         <button type="submit">
-          <img className="search-icon" src={SearchIcon} alt="search" />
+          <img
+            className="add-book__basic-info__search-icon"
+            src={SearchIcon}
+            alt="search"
+          />
         </button>
       </div>
     </form>
