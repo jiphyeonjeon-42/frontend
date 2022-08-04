@@ -5,7 +5,7 @@ import category from "../../data/category";
 
 const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
   const [isDevBook, setIsDevBook] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
+  const [categoryId, setCategoryId] = useState("0");
   const [message, setMessage] = useState("");
   const donator = useRef(null);
 
