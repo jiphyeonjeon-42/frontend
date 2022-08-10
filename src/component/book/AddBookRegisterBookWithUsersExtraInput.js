@@ -49,14 +49,15 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
     return categoryId && bookBasicInfo.title && bookBasicInfo.author;
   };
 
-  const setDev = () => {
-    if (isDevBook && bookBasicInfo?.koreanDemicalClassification)
+  const setDev = e => {
+    const { value } = e.currentTarget;
+    if (!value && bookBasicInfo?.koreanDemicalClassification)
       setCategoryId(
         koreanDemicalClassification.find(
           i => i.id === bookBasicInfo.koreanDemicalClassification,
         ).categoryId,
       );
-    setIsDevBook(!isDevBook);
+    setIsDevBook(value);
   };
 
   return (
