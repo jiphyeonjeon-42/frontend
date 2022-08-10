@@ -5,7 +5,6 @@ import InquireBoxTitle from "../utils/InquireBoxTitle";
 import FetchBasicBookInfoWithIsbn from "./AddBookFetchBasicBookInfoWithIsbn";
 import RegisterBookWithUsersExtraInput from "./AddBookRegisterBookWithUsersExtraInput";
 import DisplayBasicBookInfo from "./AddBookDisplayBasicBookInfo";
-import DisplayExistedBookInfo from "./AddBookDisplayExistedBookInfo";
 import Book from "../../img/admin_icon.svg";
 import "../../css/AddBook.css";
 import IMGERR from "../../img/image_onerror.svg";
@@ -20,9 +19,8 @@ const AddBook = () => {
       author: "",
       publisher: "",
       pubdate: "",
+      koreanDemicalClassification: "",
     },
-    existedBooksInfo: [],
-    recommendCallSign: "",
   });
 
   const setBasicInfo = newBasicInfo => {
@@ -64,12 +62,8 @@ const AddBook = () => {
               />
             </div>
           </div>
-          <DisplayExistedBookInfo
-            existedBooksInfo={bookInfo.existedBooksInfo}
-          />
           <RegisterBookWithUsersExtraInput
             bookBasicInfo={bookInfo.newBookBasicInfo}
-            recommendCallSign={bookInfo.recommendCallSign}
           />
         </div>
       </section>
