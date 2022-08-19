@@ -177,7 +177,7 @@ RentModalConfirm.propTypes = {
   // setRentResult: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   selectedUser: PropTypes.object.isRequired,
-  selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   setFirstBookContests: PropTypes.func.isRequired,
   setSecondBookContests: PropTypes.func.isRequired,
 };

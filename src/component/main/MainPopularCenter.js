@@ -124,7 +124,7 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
 export default MainPopularCenter;
 
 MainPopularCenter.propTypes = {
-  docs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  docs: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   centerTop: PropTypes.number.isRequired,
   onLeft: PropTypes.func.isRequired,
   onRight: PropTypes.func.isRequired,

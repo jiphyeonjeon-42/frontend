@@ -115,5 +115,5 @@ export default RentModalBook;
 RentModalBook.propTypes = {
   setSelectedBooks: PropTypes.func.isRequired,
   closeMidModal: PropTypes.func.isRequired,
-  selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };

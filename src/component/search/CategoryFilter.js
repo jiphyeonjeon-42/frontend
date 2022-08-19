@@ -217,7 +217,7 @@ CategoryFilter.propTypes = {
   userWord: PropTypes.string.isRequired,
   userSort: PropTypes.string.isRequired,
   userCate: PropTypes.number.isRequired,
-  entireCate: PropTypes.arrayOf(PropTypes.object).isRequired,
+  entireCate: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 export default CategoryFilter;
