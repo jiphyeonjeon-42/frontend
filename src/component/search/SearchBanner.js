@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import "../../css/Banner.css";
 import "../../css/SearchBanner.css";
 
-const SearchBanner = ({ setPageRange, setAvailable }) => {
+const SearchBanner = ({ setPageRange }) => {
   return (
     <section className="banner search-img">
       <section className="search-banner">
@@ -16,7 +16,7 @@ const SearchBanner = ({ setPageRange, setAvailable }) => {
             SEARCH
           </span>
         </div>
-        <SearchBar setPageRange={setPageRange} setAvailable={setAvailable} />
+        <SearchBar setPageRange={setPageRange} />
       </section>
     </section>
   );
@@ -24,7 +24,6 @@ const SearchBanner = ({ setPageRange, setAvailable }) => {
 
 SearchBanner.propTypes = {
   setPageRange: PropTypes.func.isRequired,
-  setAvailable: PropTypes.func.isRequired,
 };
 
 export default SearchBanner;

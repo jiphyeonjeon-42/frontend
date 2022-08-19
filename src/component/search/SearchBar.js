@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import PropTypes from "prop-types";
 import { searchWord } from "../../atom/searchWord";
@@ -7,9 +7,8 @@ import { useSearchInput } from "../../atom/useSearchInput";
 import "../../css/SearchBar.css";
 import SearchIcon from "../../img/search_icon.svg";
 
-const SearchBar = ({ setPageRange, setAvailable }) => {
-  // eslint-disable-next-line prefer-const
-  const history = useHistory();
+const SearchBar = ({ setPageRange }) => {
+  const navigate = useNavigate();
   const [input, setInput] = useRecoilState(useSearchInput);
   const setUserWord = useSetRecoilState(searchWord);
 
@@ -22,9 +21,7 @@ const SearchBar = ({ setPageRange, setAvailable }) => {
 
   const handleSearchSumbit = event => {
     event.preventDefault();
-    // setCategoryName("");
     if (setPageRange) setPageRange(0);
-    if (setAvailable) setAvailable(false);
 
     const categories = document.querySelector(".categories");
     if (categories) categories.scrollTo(0, 0);
@@ -32,7 +29,7 @@ const SearchBar = ({ setPageRange, setAvailable }) => {
     const searchForm = document.getElementById("search-form");
     const searchInputValue = searchForm.querySelector("#search-input").value;
     setUserWord(searchInputValue);
-    history.push(
+    navigate(
       `/search?string=${encodeURIComponent(
         searchInputValue,
       )}&page=${1}&category=${0}&sort=title`,
@@ -43,7 +40,7 @@ const SearchBar = ({ setPageRange, setAvailable }) => {
     const searchForm = document.getElementById("search-form");
     searchForm.addEventListener("submit", handleSearchSumbit);
     return () => searchForm.removeEventListener("submit", handleSearchSumbit);
-  }, [handleSearchSumbit, setPageRange, setAvailable]);
+  }, [handleSearchSumbit, setPageRange]);
 
   return (
     <div className="search-bar">
@@ -66,7 +63,6 @@ const SearchBar = ({ setPageRange, setAvailable }) => {
 
 SearchBar.propTypes = {
   setPageRange: PropTypes.func.isRequired,
-  setAvailable: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

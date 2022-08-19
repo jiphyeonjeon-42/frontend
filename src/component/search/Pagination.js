@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import ArrRight from "../../img/arrow_right_black.svg";
 import "../../css/Pagination.css";
@@ -12,11 +12,10 @@ const PageButton = ({
   pageNum,
   myRef,
 }) => {
-  // eslint-disable-next-line prefer-const
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const changePage = () => {
-    history.push(
+    navigate(
       `?string=${userWord}&page=${pageNum}&category=${userCateIndex}&sort=${userSort}`,
     );
     // 페이지 전환시 돔이 참조하고 있는 곳으로 현재 스크롤 이동

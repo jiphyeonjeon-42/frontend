@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { Redirect, useHistory } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import userState from "../../atom/userState";
 import globalModal from "../../atom/globalModal";
@@ -8,7 +8,7 @@ import globalModal from "../../atom/globalModal";
 const Auth = () => {
   const setUser = useSetRecoilState(userState);
   const setGlobalModal = useSetRecoilState(globalModal);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(async () => {
     await axios
@@ -28,7 +28,7 @@ const Auth = () => {
         };
         setUser(newUser);
         window.localStorage.setItem("user", JSON.stringify(newUser));
-        history.push("/");
+        navigate("/");
       })
       .catch(error => {
         const message = error.response
@@ -42,7 +42,7 @@ const Auth = () => {
   }, []);
   return (
     <div>
-      <Redirect to="/" />
+      <Navigate to="/" />
     </div>
   );
 };

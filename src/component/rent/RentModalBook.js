@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useRecoilState } from "recoil";
 import axios from "axios";
@@ -11,7 +11,7 @@ import RentBookWithBarcodeReader from "./RentBookWithBarcodeReader";
 import "../../css/RentModalBook.css";
 
 const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [bookSearchWord, setBookSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [bookSearchPage, setBookSearchPage] = useState(1);
@@ -47,9 +47,8 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
       })
       .catch(error => {
         const { errorCode } = error.response.data;
-        // eslint-disable-next-line no-restricted-globals
-        if (errorCode === 100) history.push("/");
-        if ([101, 102, 108, 109].includes(errorCode)) history.push("/logout");
+        if (errorCode === 100) navigate(-1);
+        if ([101, 102, 108, 109].includes(errorCode)) navigate(-1);
       });
   };
 
