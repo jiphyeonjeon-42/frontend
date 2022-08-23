@@ -9,7 +9,7 @@ module.exports = {
     useTabs: false,
     // 들여쓰기 너비는 2칸
     tabWidth: 2,
-    // 객체나 배열을 작성 할 때, 원소 혹은 key-valueㅇ의 맨 뒤에 있는 것에도 쉼표를 붙임
+    // 객체나 배열을 작성 할 때, 원소 혹은 key-value의 맨 뒤에 있는 것에도 쉼표를 붙임
     trailingComma: "all",
     // 코드 한줄이 maximum 80칸
     printWidth: 80,
