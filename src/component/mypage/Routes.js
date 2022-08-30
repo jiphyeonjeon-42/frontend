@@ -3,8 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Banner from "../utils/Banner";
 import Mypage from "./Mypage";
 import "../../css/MypageRoutes.css";
-import EditEmail from "./EditEmail";
-import EditPassword from "./EditPassword";
+import EditEmailOrPassword from "./EditEmailOrPassword";
 
 function Routes() {
   return (
@@ -14,8 +13,11 @@ function Routes() {
         <section className="mypage-section">
           <Switch>
             <Route path="/mypage" exact component={Mypage} />
-            <Route path="/mypage/edit/email" exact component={EditEmail} />
-            <Route path="/mypage/edit/pw" exact component={EditPassword} />
+            <Route
+              path="/mypage/edit/:mode"
+              exact
+              component={EditEmailOrPassword}
+            />
           </Switch>
         </section>
       </div>
