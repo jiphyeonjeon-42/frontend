@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import arrowLeft from "../../img/arrow_left_black.svg";
-import "../../css/EditEmail.css";
-import "../../css/EditPassword.css";
+import "../../css/EditEmailOrPassword.css";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import getErrorMessage from "../../data/error";
@@ -18,6 +17,7 @@ function EditEmailOrPassword() {
   const [newEmail, setNewEmail] = useState("");
   const [newPw, setNewPw] = useState("");
   const [checkPw, setCheckPw] = useState("");
+  const MODE_TO_KOREAN = mode === "email" ? "이메일" : "비밀번호";
 
   const onClickLeftArrow = () => {
     history.goBack();
@@ -97,11 +97,9 @@ function EditEmailOrPassword() {
       });
   }, []);
 
-  console.log(mode);
-
   return (
-    <div className={`mypage-edit-${mode}`}>
-      <div className={`mypage-edit-${mode}-box`}>
+    <div className="mypage-edit">
+      <div className="mypage-edit-box">
         <div className="mypage-edit-leftArrow">
           <button type="button" onClick={onClickLeftArrow}>
             <img src={arrowLeft} alt={arrowLeft} />
@@ -111,7 +109,7 @@ function EditEmailOrPassword() {
           <span>{`${
             JSON.parse(window.localStorage.getItem("user")).userId
           }님의, `}</span>
-          <span className="inline-block">이메일 변경 페이지입니다</span>
+          <span className="inline-block">{`${MODE_TO_KOREAN} 변경 페이지입니다`}</span>
         </div>
         {mode === "email" ? (
           <>
