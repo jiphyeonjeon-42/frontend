@@ -135,7 +135,7 @@ function EditEmailOrPassword() {
                   }}
                 />
               </div>
-              <div className="mypage-edit-button">
+              <div className={`mypage-edit-${mode}-button`}>
                 <button className="font-14" type="submit">
                   변경
                 </button>
@@ -176,7 +176,7 @@ function EditEmailOrPassword() {
                   onChange={onChangeCheckPw}
                 />
               </div>
-              <div className="mypage-edit-button">
+              <div className={`mypage-edit-${mode}-button`}>
                 <p className="font-12 color-2d">
                   10 ~ 42 글자 사이, 숫자와 특수 기호 1개 포함해주세요
                 </p>
