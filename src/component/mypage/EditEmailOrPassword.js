@@ -35,37 +35,27 @@ function EditEmailOrPassword() {
     setCheckPw(e.target.value);
   };
 
-  const onSubmitUpdateEmail = async e => {
+  const onSubmitUpdate = async e => {
     e.preventDefault();
-    await axios
-      .patch(`${process.env.REACT_APP_API}/users/myupdate`, {
-        email: newEmail,
-      })
-      .then(() => {
-        setMiniModalContent("이메일 변경 성공");
-        setIsMiniModalOpen(true);
-        setIsGoBack(true);
-      })
-      .catch(err => {
-        const { errorCode } = err.response.data;
-        setMiniModalContent(getErrorMessage(errorCode));
-        setIsMiniModalOpen(true);
-      });
-  };
-
-  const onSubmitUpdatePassword = async e => {
-    e.preventDefault();
-    if (newPw !== checkPw) {
+    if (mode === "pw" && newPw !== checkPw) {
       setMiniModalContent("비밀번호 재입력이 다릅니다.");
       setIsMiniModalOpen(true);
       return;
     }
     await axios
-      .patch(`${process.env.REACT_APP_API}/users/myupdate`, {
-        password: newPw,
-      })
+      .patch(
+        `${process.env.REACT_APP_API}/users/myupdate`,
+        mode === "email"
+          ? {
+              email: newEmail,
+            }
+          : {
+              password: newPw,
+            },
+      )
       .then(() => {
-        setMiniModalContent("비밀번호 변경 성공");
+        if (mode === "email") setMiniModalContent("이메일 변경 성공");
+        else setMiniModalContent("비밀번호 변경 성공");
         setIsMiniModalOpen(true);
         setIsGoBack(true);
       })
@@ -119,7 +109,7 @@ function EditEmailOrPassword() {
                 {userInfo ? userInfo.email : "-"}
               </span>
             </div>
-            <form onSubmit={onSubmitUpdateEmail}>
+            <form onSubmit={onSubmitUpdate}>
               <div className="mypage-edit-input-box font-14">
                 <span className="font-14-bold color-2d">새로운 이메일</span>
                 <input
@@ -160,7 +150,7 @@ function EditEmailOrPassword() {
                 onChange={onChangeNewPw}
               />{" "}
             </div>
-            <form onSubmit={onSubmitUpdatePassword}>
+            <form onSubmit={onSubmitUpdate}>
               <div className="mypage-edit-input-box font-14">
                 <span className="font-14-bold">비밀번호 재입력</span>
                 <input
