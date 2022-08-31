@@ -75,8 +75,7 @@ function EditEmailOrPassword() {
     await axios
       .get(`${process.env.REACT_APP_API}/users/search`, {
         params: {
-          nicknameOrEmail: JSON.parse(window.localStorage.getItem("user"))
-            .userId,
+          id: JSON.parse(window.localStorage.getItem("user")).id,
         },
       })
       .then(res => setUserInfo(res.data.items[0]))
@@ -96,9 +95,7 @@ function EditEmailOrPassword() {
           </button>
         </div>
         <div className="mypage-edit-title color-2d">
-          <span>{`${
-            JSON.parse(window.localStorage.getItem("user")).userId
-          }님의, `}</span>
+          <span>{`${userInfo ? userInfo.email : "-"}님의, `}</span>
           <span className="inline-block">{`${MODE_TO_KOREAN} 변경 페이지입니다`}</span>
         </div>
         {mode === "email" ? (
