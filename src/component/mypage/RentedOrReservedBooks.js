@@ -1,14 +1,14 @@
 import React from "react";
-import "../../css/RentedOrReservedBooks.css";
 import axios from "axios";
 import PropTypes from "prop-types";
 import getErrorMessage from "../../data/error";
+import "../../css/RentedOrReservedBooks.css";
 
 const RentedOrReservedBooks = ({
   componentMode,
   bookInfoArr,
-  setIsMiniModalOpen,
-  setMiniModalContent,
+  setIsMiniModalOpen = null,
+  setMiniModalContent = null,
 }) => {
   const onClickReserveCancel = async reserveId => {
     // eslint-disable-next-line no-alert
@@ -31,7 +31,7 @@ const RentedOrReservedBooks = ({
     <div className="mypage-books_box">
       {bookInfoArr &&
         bookInfoArr.map(bookInfo => (
-          <div className="mypage-books_box-wrapper">
+          <div key={bookInfo.title} className="mypage-books_box-wrapper">
             <img
               className="mypage-books_box-image"
               src={bookInfo.image}
@@ -125,9 +125,15 @@ const RentedOrReservedBooks = ({
 
 RentedOrReservedBooks.propTypes = {
   componentMode: PropTypes.string.isRequired,
-  bookInfoArr: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  setIsMiniModalOpen: PropTypes.func.isRequired,
-  setMiniModalContent: PropTypes.func.isRequired,
+  bookInfoArr: PropTypes.arrayOf(PropTypes.object.isRequired),
+  setIsMiniModalOpen: PropTypes.func,
+  setMiniModalContent: PropTypes.func,
+};
+
+RentedOrReservedBooks.defaultProps = {
+  bookInfoArr: null,
+  setIsMiniModalOpen: null,
+  setMiniModalContent: null,
 };
 
 export default RentedOrReservedBooks;
