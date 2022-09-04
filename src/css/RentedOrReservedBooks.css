@@ -52,6 +52,7 @@
   right: 0;
   border: none;
   background: none;
+  padding: 0;
 }
 
 .mypage-books_box-cancel_reserve:hover {
@@ -71,6 +72,9 @@
     width: 28rem;
     margin-left: 0rem;
     margin-top: 3rem;
+  }
+  .mypage-books_box-cancel_reserve {
+    bottom: -15px;
   }
 }
 

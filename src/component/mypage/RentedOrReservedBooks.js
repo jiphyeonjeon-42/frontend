@@ -7,8 +7,8 @@ import "../../css/RentedOrReservedBooks.css";
 const RentedOrReservedBooks = ({
   componentMode,
   bookInfoArr,
-  setIsMiniModalOpen = null,
-  setMiniModalContent = null,
+  setIsMiniModalOpen,
+  setMiniModalContent,
 }) => {
   const onClickReserveCancel = async reserveId => {
     // eslint-disable-next-line no-alert
