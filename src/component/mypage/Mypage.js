@@ -8,7 +8,7 @@ import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 import Reserve from "../../img/list-check-solid.svg";
-import MypageRentedBook from "./MypageRentedBook";
+import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
@@ -214,7 +214,7 @@ const Mypage = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          <MypageRentedBook
+          <RentedOrReservedBooks
             componentMode="rent"
             bookInfoArr={userInfo ? userInfo.lendings : null}
           />
@@ -229,7 +229,7 @@ const Mypage = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          <MypageRentedBook
+          <RentedOrReservedBooks
             componentMode="reserve"
             bookInfoArr={userInfo ? userInfo.reservations : null}
             setIsMiniModalOpen={setIsMiniModalOpen}

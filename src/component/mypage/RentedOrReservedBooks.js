@@ -1,10 +1,10 @@
 import React from "react";
-import "../../css/MypageRentedBook.css";
+import "../../css/RentedOrReservedBooks.css";
 import axios from "axios";
 import PropTypes from "prop-types";
 import getErrorMessage from "../../data/error";
 
-const MypageRentedBook = ({
+const RentedOrReservedBooks = ({
   componentMode,
   bookInfoArr,
   setIsMiniModalOpen,
@@ -123,11 +123,11 @@ const MypageRentedBook = ({
   );
 };
 
-MypageRentedBook.propTypes = {
+RentedOrReservedBooks.propTypes = {
   componentMode: PropTypes.string.isRequired,
   bookInfoArr: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   setIsMiniModalOpen: PropTypes.func.isRequired,
   setMiniModalContent: PropTypes.func.isRequired,
 };
 
-export default MypageRentedBook;
+export default RentedOrReservedBooks;
