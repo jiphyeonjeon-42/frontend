@@ -215,7 +215,7 @@ const Mypage = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          <MypageRentedBook rentInfo={userInfo ? userInfo.lendings : null} />
+          <MypageRentedBook rentInfoArr={userInfo ? userInfo.lendings : null} />
         </div>
       </div>
       <div className="mypage-inquire-box-long-wrapper">
