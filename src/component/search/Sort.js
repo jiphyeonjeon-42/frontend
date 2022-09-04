@@ -41,7 +41,7 @@ const Sort = ({ userWord, userSort, cateIndex }) => {
         cateIndex={cateIndex}
         userSort={userSort}
         sortName="new"
-        text="발행연도순"
+        text="신착도서순"
       />
       <SortBy
         userWord={userWord}
