@@ -215,8 +215,8 @@ const Mypage = () => {
         />
         <div className="mypage-inquire-box-long">
           <MypageRentedBook
-            mode="rent"
-            rentInfoArr={userInfo ? userInfo.lendings : null}
+            componentMode="rent"
+            bookInfoArr={userInfo ? userInfo.lendings : null}
           />
         </div>
       </div>
@@ -230,8 +230,8 @@ const Mypage = () => {
         />
         <div className="mypage-inquire-box-long">
           <MypageRentedBook
-            mode="reserve"
-            rentInfoArr={userInfo ? userInfo.reservations : null}
+            componentMode="reserve"
+            bookInfoArr={userInfo ? userInfo.reservations : null}
             setIsMiniModalOpen={setIsMiniModalOpen}
             setMiniModalContent={setMiniModalContent}
           />

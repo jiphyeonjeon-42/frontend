@@ -5,16 +5,16 @@ import PropTypes from "prop-types";
 import getErrorMessage from "../../data/error";
 
 const MypageRentedBook = ({
-  rentInfoArr,
+  componentMode,
+  bookInfoArr,
   setIsMiniModalOpen,
   setMiniModalContent,
-  mode,
 }) => {
-  const onClickCancel = async id => {
+  const onClickReserveCancel = async reserveId => {
     // eslint-disable-next-line no-alert
     if (window.confirm("정말로 취소하시나요?")) {
       await axios
-        .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
+        .patch(`${process.env.REACT_APP_API}/reservations/cancel/${reserveId}`)
         .then(() => {
           setMiniModalContent("예약 취소 성공");
           setIsMiniModalOpen(true);
@@ -28,87 +28,87 @@ const MypageRentedBook = ({
   };
 
   return (
-    <div className="mypage-rented__book">
-      {rentInfoArr &&
-        rentInfoArr.map(rentInfo => (
-          <div className="mypage-rented__book-wrapper">
+    <div className="mypage-books_box">
+      {bookInfoArr &&
+        bookInfoArr.map(bookInfo => (
+          <div className="mypage-books_box-wrapper">
             <img
-              className="mypage-rented__book-image"
-              src={rentInfo.image}
-              alt={rentInfo.image}
+              className="mypage-books_box-image"
+              src={bookInfo.image}
+              alt={bookInfo.image}
             />
-            <div className="mypage-rented__book-info">
-              <div className="mypage-rented__book-info-titleBox">
-                <div className="mypage-rented__book-info-title font-18-bold color-2d">
-                  {rentInfo.title && rentInfo.title.length < 22
-                    ? rentInfo.title
+            <div className="mypage-books_box-all_info">
+              <div className="mypage-books_box-all_info-book_info">
+                <div className="mypage-books_box-all_info-book_info-title font-18-bold color-2d">
+                  {bookInfo.title && bookInfo.title.length < 22
+                    ? bookInfo.title
                     : null}
-                  {rentInfo.title && rentInfo.title.length >= 22
-                    ? rentInfo.title.slice(0, 22).concat("...")
+                  {bookInfo.title && bookInfo.title.length >= 22
+                    ? bookInfo.title.slice(0, 22).concat("...")
                     : null}
                 </div>
-                <div className="mypage-rented__book-info-writter font-14">
-                  {rentInfo.author && rentInfo.author.length < 14
-                    ? rentInfo.author
+                <div className="font-14">
+                  {bookInfo.author && bookInfo.author.length < 14
+                    ? bookInfo.author
                     : null}
-                  {rentInfo.author && rentInfo.author.length >= 14
-                    ? rentInfo.author.slice(0, 14).concat("...")
+                  {bookInfo.author && bookInfo.author.length >= 14
+                    ? bookInfo.author.slice(0, 14).concat("...")
                     : null}
                 </div>
               </div>
-              {mode === "rent" ? (
+              {componentMode === "rent" ? (
                 <>
-                  <div className="mypage-rented__book-info-rent font-14">
+                  <div className="mypage-books_box-all_info-rent_info font-14">
                     <div>대출일시</div>
                     <div>
-                      {rentInfo.lendDate ? rentInfo.lendDate.slice(0, 10) : "-"}
+                      {bookInfo.lendDate ? bookInfo.lendDate.slice(0, 10) : "-"}
                     </div>
                     <div>반납기한</div>
                     <div>
-                      {rentInfo.duedate ? rentInfo.duedate.slice(0, 10) : "-"}
+                      {bookInfo.duedate ? bookInfo.duedate.slice(0, 10) : "-"}
                     </div>
                     <div>연체일</div>
                     <div>
-                      {rentInfo.overDueDay ? `${rentInfo.overDueDay}일` : "-"}
+                      {bookInfo.overDueDay ? `${bookInfo.overDueDay}일` : "-"}
                     </div>
                     <div>비고</div>
                     <div>
-                      {rentInfo.lendingCondition
-                        ? rentInfo.lendingCondition
+                      {bookInfo.lendingCondition
+                        ? bookInfo.lendingCondition
                         : "-"}
                     </div>
                   </div>
-                  <div className="mypage-rented__book-info-reserve font-14">
+                  <div className="mypage-books_box-all_info-reserve_count font-14">
                     <div>예약</div>
                     <div>
-                      {rentInfo.reservedNum ? `${rentInfo.reservedNum}명` : "-"}
+                      {bookInfo.reservedNum ? `${bookInfo.reservedNum}명` : "-"}
                     </div>
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="mypage-rented__book-info-rent font-14">
+                  <div className="mypage-books_box-all_info-rent_info font-14">
                     <div>예약일시</div>
                     <div>
-                      {rentInfo.reservationDate
-                        ? rentInfo.reservationDate.slice(0, 10)
+                      {bookInfo.reservationDate
+                        ? bookInfo.reservationDate.slice(0, 10)
                         : "-"}
                     </div>
                     <div>예약만료</div>
                     <div>
-                      {rentInfo.endAt ? rentInfo.endAt.slice(0, 10) : "-"}
+                      {bookInfo.endAt ? bookInfo.endAt.slice(0, 10) : "-"}
                     </div>
                     <div>예약순위</div>
                     <div>
-                      {rentInfo.ranking ? `${rentInfo.ranking}위` : "-"}
+                      {bookInfo.ranking ? `${bookInfo.ranking}위` : "-"}
                     </div>
                   </div>
                   <button
-                    className="mypage-rented__book-cancel_reserve font-14"
+                    className="mypage-books_box-cancel_reserve font-14"
                     type="button"
                     onClick={() =>
-                      onClickCancel(
-                        rentInfo.reservationId ? rentInfo.reservationId : null,
+                      onClickReserveCancel(
+                        bookInfo.reservationId ? bookInfo.reservationId : null,
                       )
                     }
                   >
@@ -124,10 +124,10 @@ const MypageRentedBook = ({
 };
 
 MypageRentedBook.propTypes = {
-  rentInfoArr: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  componentMode: PropTypes.string.isRequired,
+  bookInfoArr: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   setIsMiniModalOpen: PropTypes.func.isRequired,
   setMiniModalContent: PropTypes.func.isRequired,
-  mode: PropTypes.string.isRequired,
 };
 
 export default MypageRentedBook;
