@@ -9,7 +9,6 @@ import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 import Reserve from "../../img/list-check-solid.svg";
 import MypageRentedBook from "./MypageRentedBook";
-import MypageReservedBook from "./MypageReservedBook";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
@@ -215,7 +214,10 @@ const Mypage = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          <MypageRentedBook rentInfoArr={userInfo ? userInfo.lendings : null} />
+          <MypageRentedBook
+            mode="rent"
+            rentInfoArr={userInfo ? userInfo.lendings : null}
+          />
         </div>
       </div>
       <div className="mypage-inquire-box-long-wrapper">
@@ -227,8 +229,9 @@ const Mypage = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          <MypageReservedBook
-            reserveInfo={userInfo ? userInfo.reservations : null}
+          <MypageRentedBook
+            mode="reserve"
+            rentInfoArr={userInfo ? userInfo.reservations : null}
             setIsMiniModalOpen={setIsMiniModalOpen}
             setMiniModalContent={setMiniModalContent}
           />

@@ -15,6 +15,7 @@
 }
 
 .mypage-rented__book-info {
+  position: relative;
   width: 17.5rem;
   margin-left: 3rem;
 }
@@ -34,15 +35,28 @@
   display: grid;
   grid-template-columns: 50% 50%;
   white-space: normal;
-  margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid;
   row-gap: 1rem;
 }
 
 .mypage-rented__book-info-reserve {
   display: grid;
   grid-template-columns: 50% 50%;
+  padding-top: 1rem;
+  border-top: 1px solid;
+}
+
+.mypage-rented__book-cancel_reserve {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  background: none;
+}
+
+.mypage-rented__book-cancel_reserve:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 @media screen and (max-width: 950px) {

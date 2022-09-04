@@ -87,7 +87,7 @@ const MypageRentedBook = ({
                 </>
               ) : (
                 <>
-                  <div className="mypage-reserved__book-info-rent font-14">
+                  <div className="mypage-rented__book-info-rent font-14">
                     <div>예약일시</div>
                     <div>
                       {rentInfo.reservationDate
@@ -104,7 +104,7 @@ const MypageRentedBook = ({
                     </div>
                   </div>
                   <button
-                    className="mypage-reserved__book-cancel_reserve font-14"
+                    className="mypage-rented__book-cancel_reserve font-14"
                     type="button"
                     onClick={() =>
                       onClickCancel(
