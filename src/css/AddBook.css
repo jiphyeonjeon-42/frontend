@@ -129,9 +129,6 @@ select {
   width: calc(80% + 10rem);
 }
 
-.add-book__basic-info__input:read-only {
-  background: none;
-}
 .add-book__book-info__text-key {
   display: inline-block;
   width: 6rem;

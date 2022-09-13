@@ -11,24 +11,14 @@ import IMGERR from "../../img/image_onerror.svg";
 
 const AddBook = () => {
   const [bookInfo, setBookInfo] = useState({
-    isConfirmedInfo: true,
-    newBookBasicInfo: {
-      isbn: "",
-      title: "제목",
-      image: "",
-      author: "",
-      publisher: "",
-      pubdate: "",
-      koreanDemicalClassification: "",
-    },
+    isbn: "",
+    title: "제목",
+    image: "",
+    author: "",
+    publisher: "",
+    pubdate: "",
+    koreanDemicalClassification: "",
   });
-
-  const setBasicInfo = newBasicInfo => {
-    setBookInfo({
-      ...bookInfo,
-      newBookBasicInfo: newBasicInfo,
-    });
-  };
 
   const tabList = [
     { name: "유저관리", link: "/user" },
@@ -50,21 +40,19 @@ const AddBook = () => {
           <div className="add-book__basic-info">
             <div className="add-book__basic-info__cover">
               <img
-                src={bookInfo.newBookBasicInfo.image}
-                alt={bookInfo.newBookBasicInfo.title}
+                src={bookInfo.image}
+                alt={bookInfo.title}
                 onError={subtituteImg}
               />
             </div>
             <div className="add-book__basic-info__detail">
               <DisplayBasicBookInfo
                 bookInfo={bookInfo}
-                setBasicInfo={setBasicInfo}
+                setBookInfo={setBookInfo}
               />
             </div>
           </div>
-          <RegisterBookWithUsersExtraInput
-            bookBasicInfo={bookInfo.newBookBasicInfo}
-          />
+          <RegisterBookWithUsersExtraInput bookInfo={bookInfo} />
         </div>
       </section>
     </main>
