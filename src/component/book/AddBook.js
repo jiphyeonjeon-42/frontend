@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Banner from "../utils/Banner";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import FetchBasicBookInfoWithIsbn from "./AddBookFetchBasicBookInfoWithIsbn";
 import RegisterBookWithUsersExtraInput from "./AddBookRegisterBookWithUsersExtraInput";
@@ -41,7 +41,7 @@ const AddBook = () => {
   return (
     <main>
       <Banner img="admin" titleKo="도서 신규 등록" titleEn="ADD BOOK" />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={tabList} />
       <section className="inquire-box__wrapper">
         <InquireBoxTitle Icon={Book} titleKO="도서 등록" titleEN="Add Book" />
         <div className="inquire-box add-book">

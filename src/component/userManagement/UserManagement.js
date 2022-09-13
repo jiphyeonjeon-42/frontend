@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import Banner from "../utils/Banner";
 import "../../css/UserManagement.css";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
 import UserBriefInfo from "./UserBriefInfo";
 import UserUsageInfo from "./UserUsageInfo";
 import AdminSearchBar from "../utils/AdminSearchBar";
@@ -14,6 +14,8 @@ import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessag
 import getErrorMessage from "../../data/error";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import UserDetailInfo from "./UserDetailInfo";
+
+import { managementTabList } from "../../data/tablist";
 
 const USAGE = 1;
 // const EDIT = 2;
@@ -106,7 +108,7 @@ const UserManagement = () => {
   return (
     <main>
       <Banner img="admin" titleKo="유저 관리" titleEn="USER MANAGEMENT" />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={tabList} />
       <section className="user-management-body">
         <div className="user-management-search">
           <AdminSearchBar

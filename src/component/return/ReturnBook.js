@@ -10,7 +10,7 @@ import ReturnBookFilter from "./ReturnBookFilter";
 import Book from "../../img/book-arrow-up-free-icon-font.svg";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import ReturnModal from "./ReturnModal";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
 
 const ReturnBook = () => {
   const [modal, setModal] = useState(false);
@@ -87,7 +87,7 @@ const ReturnBook = () => {
         titleKo="조회 및 반납"
         titleEn="INQUIRE & RETURN BOOK"
       />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={tabList} />
       <section className="inquire-box-wrapper">
         <InquireBoxTitle
           Icon={Book}
