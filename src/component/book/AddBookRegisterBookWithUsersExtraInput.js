@@ -4,7 +4,7 @@ import axios from "axios";
 import { category, koreanDemicalClassification } from "../../data/category";
 
 const RegisterBookWithUsersExtraInput = ({ bookInfo }) => {
-  const [isDevBook, setIsDevBook] = useState(undefined);
+  const [isDevBook, setIsDevBook] = useState("");
   const [categoryId, setCategoryId] = useState("0");
   const [message, setMessage] = useState("");
   const donator = useRef(null);
@@ -50,7 +50,7 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }) => {
   };
 
   const setDev = e => {
-    const { value } = e.currentTarget;
+    const value = e.currentTarget.value === "true";
     if (!value && bookInfo?.koreanDemicalClassification)
       setCategoryId(
         koreanDemicalClassification.find(
@@ -86,8 +86,8 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }) => {
         >
           <option value="">카테고리를 선택하세요</option>
           {category
-            .filter(items => items.isDev === isDevBook)
-            .map(element => {
+            ?.filter(items => items.isDev === isDevBook)
+            ?.map(element => {
               return (
                 <option value={element.id} key={element.id}>
                   {element.name}
