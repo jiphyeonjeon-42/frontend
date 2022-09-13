@@ -13,6 +13,7 @@ import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessag
 import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 
+import { rentTabList } from "../../data/tablist";
 import "../../css/Rent.css";
 
 const Rent = () => {
@@ -23,12 +24,6 @@ const Rent = () => {
   const [firstBookContents, setFirstBookContests] = useState("");
   const [secondBookContents, setSecondBookContests] = useState("");
 
-  const tabList = [
-    { name: "대출", link: "/rent" },
-    { name: "예약대출", link: "/reservation" },
-    { name: "반납", link: "/return" },
-  ];
-
   const closeMiniModal = () => {
     setMiniModalContents(null);
     setFirstBookContests(null);
@@ -38,7 +33,7 @@ const Rent = () => {
   return (
     <main>
       <Banner img="admin" titleKo="대출" titleEn="RENT BOOK" />
-      <Tabs tabList={tabList} />
+      <Tabs tabList={rentTabList} />
       <section className="inquire-box__wrapper">
         <InquireBoxTitle
           Icon={Login}

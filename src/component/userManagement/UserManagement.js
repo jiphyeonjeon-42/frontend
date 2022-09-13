@@ -11,10 +11,10 @@ import AdminPagination from "../utils/AdminPagination";
 import MidModal from "../utils/MidModal";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../../data/error";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import UserDetailInfo from "./UserDetailInfo";
 
+import getErrorMessage from "../../data/error";
 import { managementTabList } from "../../data/tablist";
 
 const USAGE = 1;
@@ -96,11 +96,6 @@ const UserManagement = () => {
     setUserSearchWord("");
   }, []);
 
-  const tabList = [
-    { name: "유저관리", link: "/user" },
-    { name: "도서등록", link: "/addbook" },
-  ];
-
   const [title, content] = getErrorMessage(parseInt(errorCode, 10)).split(
     "\r\n",
   );
@@ -108,7 +103,7 @@ const UserManagement = () => {
   return (
     <main>
       <Banner img="admin" titleKo="유저 관리" titleEn="USER MANAGEMENT" />
-      <Tabs tabList={tabList} />
+      <Tabs tabList={managementTabList} />
       <section className="user-management-body">
         <div className="user-management-search">
           <AdminSearchBar
