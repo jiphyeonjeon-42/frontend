@@ -266,9 +266,11 @@ select {
     margin: auto;
     display: block;
   }
+
   .add-book__basic-info__search-bar {
     display: flex;
     width: 80%;
+    margin: auto;
   }
 
   .add-book__basic-info {
