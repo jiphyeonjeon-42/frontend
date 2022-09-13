@@ -11,6 +11,7 @@ import Book from "../../img/book-arrow-up-free-icon-font.svg";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import ReturnModal from "./ReturnModal";
 import Tabs from "../utils/Tabs";
+import { rentTabList } from "../../data/tablist";
 
 const ReturnBook = () => {
   const [modal, setModal] = useState(false);
@@ -74,12 +75,6 @@ const ReturnBook = () => {
       searchForm.removeEventListener("submit", handlereturnBookSumbit);
   }, [handlereturnBookSumbit]);
 
-  const tabList = [
-    { name: "대출", link: "/rent" },
-    { name: "예약대출", link: "/reservation" },
-    { name: "반납", link: "/return" },
-  ];
-
   return (
     <main>
       <Banner
@@ -87,7 +82,7 @@ const ReturnBook = () => {
         titleKo="조회 및 반납"
         titleEn="INQUIRE & RETURN BOOK"
       />
-      <Tabs tabList={tabList} />
+      <Tabs tabList={rentTabList} />
       <section className="inquire-box-wrapper">
         <InquireBoxTitle
           Icon={Book}

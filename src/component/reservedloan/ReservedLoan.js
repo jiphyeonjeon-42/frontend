@@ -11,6 +11,7 @@ import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
 import ReservedModal from "./ReservedModal";
 import Tabs from "../utils/Tabs";
+import { rentTabList } from "../../data/tablist";
 
 const ReservedLoan = () => {
   const [modal, setModal] = useState(false);
@@ -93,16 +94,10 @@ const ReservedLoan = () => {
     setResevedLoanPageRange(0);
   }, [isPending, isWaiting, isExpired]);
 
-  const tabList = [
-    { name: "대출", link: "/rent" },
-    { name: "예약대출", link: "/reservation" },
-    { name: "반납", link: "/return" },
-  ];
-
   return (
     <main>
       <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />
-      <Tabs tabList={tabList} />
+      <Tabs tabList={rentTabList} />
       <section className="reserved-loan-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle
