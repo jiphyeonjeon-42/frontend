@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 
 import Banner from "../utils/Banner";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import RentInquireBoxUser from "./RentInquireBoxUser";
 import RentInquireBoxBook from "./RentInquireBoxBook";
 import RentModal from "./RentModal";
 import RentConfirm from "./RentConfirm";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 
 import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 
 import "../../css/Rent.css";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 
 const Rent = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -38,7 +38,7 @@ const Rent = () => {
   return (
     <main>
       <Banner img="admin" titleKo="대출" titleEn="RENT BOOK" />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={tabList} />
       <section className="inquire-box__wrapper">
         <InquireBoxTitle
           Icon={Login}

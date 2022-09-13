@@ -10,7 +10,7 @@ import Reserve from "../../img/list-check-solid.svg";
 import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
 import ReservedModal from "./ReservedModal";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
 
 const ReservedLoan = () => {
   const [modal, setModal] = useState(false);
@@ -102,7 +102,7 @@ const ReservedLoan = () => {
   return (
     <main>
       <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={tabList} />
       <section className="reserved-loan-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle

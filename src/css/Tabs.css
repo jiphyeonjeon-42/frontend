@@ -1,9 +1,9 @@
-.admin-tabs-wrapper {
+.tabs-wrapper {
   max-width: 90rem;
   margin: 12rem auto 10rem auto;
 }
 
-.admin-tabs {
+.tabs {
   max-width: 75rem;
   margin: 0 auto 0 auto;
   display: flex;
@@ -13,7 +13,7 @@
   padding: 0 2rem 0 2rem;
 }
 
-.admin-tabs-line {
+.tabs-line {
   height: 1px;
   background-color: #d5d5d5;
   position: relative;
@@ -21,7 +21,7 @@
   z-index: 0;
 }
 
-.admin-tab {
+.tab {
   font-size: 3.2rem;
   padding: 0 0 2rem 0;
 }
@@ -36,30 +36,30 @@
 }
 
 @media screen and (max-width: 1199px) {
-  .admin-tabs-wrapper {
+  .tabs-wrapper {
     max-width: 76.8rem;
     margin: 8rem auto 6rem auto;
   }
-  .admin-tabs {
+  .tabs {
     max-width: 64rem;
   }
-  .admin-tab {
+  .tab {
     font-size: 2.8rem;
     padding: 0 0 1.5rem 0;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .admin-tabs-wrapper {
+  .tabs-wrapper {
     max-width: 50rem;
     min-width: 36rem;
     margin: 6rem auto 4.5rem auto;
   }
-  .admin-tabs {
+  .tabs {
     max-width: 42rem;
     min-width: 32rem;
   }
-  .admin-tab {
+  .tab {
     font-size: 2rem;
     padding: 0 0 1.5rem 0;
   }
