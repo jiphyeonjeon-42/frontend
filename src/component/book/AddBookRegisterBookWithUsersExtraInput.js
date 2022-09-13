@@ -1,13 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { category, koreanDemicalClassification } from "../../data/category";
 
 const RegisterBookWithUsersExtraInput = ({ bookInfo }) => {
   const [isDevBook, setIsDevBook] = useState("");
-  const [categoryId, setCategoryId] = useState("0");
+  const [categoryId, setCategoryId] = useState("");
   const [message, setMessage] = useState("");
   const donator = useRef(null);
+
+  useEffect(() => {
+    setIsDevBook("");
+    setCategoryId("");
+    setMessage("");
+  }, [bookInfo]);
 
   const registerBook = async () => {
     setMessage("");
