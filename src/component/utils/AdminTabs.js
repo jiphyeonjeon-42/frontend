@@ -33,7 +33,7 @@ const AdminTabs = ({ tabList }) => {
 };
 
 AdminTabs.propTypes = {
-  tabList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tabList: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 AdminTab.propTypes = {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import arrowLeft from "../../img/arrow_left_black.svg";
 import "../../css/EditEmail.css";
@@ -8,7 +8,7 @@ import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import getErrorMessage from "../../data/error";
 
 function EditEmail() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
   const [miniModalContent, setMiniModalContent] = useState("");
   const [isGoBack, setIsGoBack] = useState(false);
@@ -16,7 +16,7 @@ function EditEmail() {
   const [newEmail, setNewEmail] = useState("");
 
   const onClickLeftArrow = () => {
-    history.goBack();
+    navigate(-1);
   };
 
   const onChangeInput = e => {
@@ -43,7 +43,7 @@ function EditEmail() {
 
   const closeModal = () => {
     setIsMiniModalOpen(false);
-    if (isGoBack) history.goBack();
+    if (isGoBack) navigate(-1);
   };
 
   useEffect(async () => {

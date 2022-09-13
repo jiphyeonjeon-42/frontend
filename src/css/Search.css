@@ -29,28 +29,25 @@
   padding: 10rem 0 0 0;
 }
 
-.search-sort-available {
+.search-sort {
   display: flex;
   margin-bottom: 8rem;
   align-items: center;
 }
 
-@media screen and (min-width:768px) and (max-width: 1200px) {
-
+@media screen and (min-width: 768px) and (max-width: 1200px) {
   .search-section {
     padding: 0 7.5rem 0 7.5rem;
   }
-
 }
 
-@media screen and (max-width:767px) {
-
+@media screen and (max-width: 767px) {
   .search-section {
     min-width: 32rem;
     padding: 0 1.5rem 0 1.5rem;
   }
 
-  .search-sort-available {
+  .search-sort {
     margin-bottom: 3rem !important;
   }
 
@@ -62,6 +59,4 @@
     padding: 0;
     height: 48rem;
   }
-
 }
-

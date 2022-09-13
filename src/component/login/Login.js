@@ -3,7 +3,7 @@ import "../../css/MainBanner.css";
 import "../../css/Banner.css";
 import "../../css/Login.css";
 import axios from "axios";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import qs from "qs";
 import { useRecoilValue } from "recoil";
 import MiniModal from "../utils/MiniModal";
@@ -12,7 +12,7 @@ import getErrorMessage from "../../data/error";
 import userState from "../../atom/userState";
 
 const Login = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -29,12 +29,12 @@ const Login = () => {
   const user = useRecoilValue(userState);
 
   useEffect(() => {
-    if (user.isLogin) history.push("/");
+    if (user.isLogin) navigate("/");
   }, [user]);
 
   const closeModal = async () => {
     setQueryErrorCode(null);
-    history.push("/login");
+    navigate("/login");
   };
 
   const onChange = e => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../css/Mypage.css";
 import qs from "qs";
@@ -16,7 +16,7 @@ import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessag
 import getErrorMessage from "../../data/error";
 
 const Mypage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
   const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
   const [miniModalContent, setMiniModalContent] = useState("");
@@ -48,7 +48,7 @@ const Mypage = () => {
       setIsMiniModalOpen(false);
     } else if (queryErrorCode) {
       setQueryErrorCode(null);
-      history.push("/mypage");
+      navigate("/mypage");
     }
   };
 
@@ -68,7 +68,7 @@ const Mypage = () => {
   useEffect(async () => {
     if (JSON.parse(window.localStorage.getItem("user")).isLogin)
       await getUserInfo();
-    else history.push("/login");
+    else navigate("/login");
   }, []);
 
   useEffect(() => {
