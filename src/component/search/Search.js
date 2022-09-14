@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import SubTitle from "../utils/SubTitle";
 import Books from "./Books";
-import Pagination from "./Pagination";
+import Pagination from "../utils/Pagination";
 import SearchBanner from "./SearchBanner";
 import CategoryFilter from "./CategoryFilter";
 import Sort from "./Sort";
@@ -22,7 +22,6 @@ const Search = () => {
   const [userWord, setUserWord] = useRecoilState(searchWord);
   const [isLoading, setLoading] = useState(true);
   const [bookList, setBookList] = useState([]);
-  const [pageRange, setPageRange] = useState(0);
   const [userPage, setPage] = useState(1);
   const [userSort, setSort] = useState("title");
   const [cateIndex, setCateIndex] = useState(0);
@@ -146,7 +145,6 @@ const Search = () => {
     setUserWord(decodeURIComponent(queryString));
     setInputValue(decodeURIComponent(queryString));
     setPage(queryPage);
-    setPageRange(parseInt((queryPage - 1) / 5, 10));
     setSort(querySort);
     setCateIndex(queryCateIndex);
     if (parseInt(queryCateIndex, 10) === 0) setCategoryName("");
@@ -160,7 +158,7 @@ const Search = () => {
 
   return (
     <main>
-      <SearchBanner setPageRange={setPageRange} />
+      <SearchBanner />
       <section className="search-section">
         <div className="search-subtitle" ref={myRef}>
           <SubTitle
@@ -188,14 +186,11 @@ const Search = () => {
         </div>
         <Books bookList={bookList} isLoading={isLoading} />
         <Pagination
-          userWord={userWord}
           lastPage={lastPage}
-          userPage={parseInt(userPage, 10)}
-          userSort={userSort}
-          userCateIndex={parseInt(cateIndex, 10)}
-          pageRange={pageRange}
-          setPageRange={setPageRange}
-          myRef={myRef}
+          page={parseInt(userPage, 10)}
+          setPage={setPage}
+          isReplaceUrl
+          scrollRef={myRef}
         />
       </section>
       <section className="wish-book-wraper">
