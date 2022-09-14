@@ -5,16 +5,21 @@ import ArrRight from "../../img/arrow_right_black.svg";
 import ArrRightDouble from "../../img/arrow_right_black_double.svg";
 import "../../css/Pagination.css";
 
-const COUNT = 5;
-
-const Pagination = ({ page, setPage, lastPage, isReplaceUrl, scrollRef }) => {
-  const startNum = Math.floor((page - 1) / COUNT) * COUNT + 1;
+const Pagination = ({
+  page,
+  setPage,
+  lastPage,
+  isReplaceUrl,
+  scrollRef,
+  count,
+}) => {
+  const startNum = Math.floor((page - 1) / count) * count + 1;
   const pageRange = [];
-  for (let i = 0; i < COUNT; i += 1) {
+  for (let i = 0; i < count; i += 1) {
     if (startNum + i <= lastPage) pageRange.push(startNum + i);
   }
   const isPrevAvailable = startNum > 1;
-  const isNextAvailable = startNum <= lastPage - COUNT;
+  const isNextAvailable = startNum <= lastPage - count;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const changePage = newPage => {
@@ -32,11 +37,11 @@ const Pagination = ({ page, setPage, lastPage, isReplaceUrl, scrollRef }) => {
 
   const changePageRange = e => {
     const type = e.currentTarget.value;
-    if (type === "previous" && startNum > COUNT + 1)
-      changePage(startNum - COUNT);
+    if (type === "previous" && startNum > count + 1)
+      changePage(startNum - count);
     else if (type.includes("prev")) changePage(1);
-    else if (type === "next" && startNum + COUNT < lastPage)
-      changePage(startNum + COUNT);
+    else if (type === "next" && startNum + count < lastPage)
+      changePage(startNum + count);
     else if (type.includes("next")) changePage(lastPage);
   };
 
@@ -132,9 +137,11 @@ Pagination.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
+  count: PropTypes.number,
 };
 
 Pagination.defaultProps = {
   isReplaceUrl: false,
   scrollRef: undefined,
+  count: 5,
 };
