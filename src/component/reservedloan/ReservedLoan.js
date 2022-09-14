@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import Banner from "../utils/Banner";
 import "../../css/ReservedLoan.css";
-import AdminPagination from "../utils/AdminPagination";
+import Pagination from "../utils/Pagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import Reserve from "../../img/list-check-solid.svg";
@@ -131,7 +131,7 @@ const ReservedLoan = () => {
             />
           ))}
           <div className="reserved-loan-table__pagination">
-            <AdminPagination
+            <Pagination
               userPage={resevedLoanPage}
               setUserPage={setResevedLoanPage}
               pageRange={resevedLoanPageRange}
