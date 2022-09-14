@@ -1,4 +1,5 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import ArrRight from "../../img/arrow_right_black.svg";
 import ArrRightDouble from "../../img/arrow_right_black_double.svg";
@@ -6,7 +7,7 @@ import "../../css/Pagination.css";
 
 const COUNT = 5;
 
-const Pagination = ({ page, setPage, lastPage }) => {
+const Pagination = ({ page, setPage, lastPage, isReplaceUrl, scrollRef }) => {
   const startNum = Math.floor((page - 1) / COUNT) * COUNT + 1;
   const pageRange = [];
   for (let i = 0; i < COUNT; i += 1) {
@@ -14,19 +15,29 @@ const Pagination = ({ page, setPage, lastPage }) => {
   }
   const isPrevAvailable = startNum > 1;
   const isNextAvailable = startNum <= lastPage - COUNT;
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const changePage = e => {
+  const changePage = newPage => {
+    setPage(newPage);
+    if (isReplaceUrl) {
+      searchParams.set("page", newPage);
+      setSearchParams(searchParams);
+      scrollRef?.current.scrollIntoView(); // 페이지 전환시 돔이 참조하고 있는 곳으로 현재 스크롤 이동
+    }
+  };
+  const onClickPage = e => {
     const { value } = e.currentTarget;
-    setPage(parseInt(value, 10));
+    changePage(parseInt(value, 10));
   };
 
   const changePageRange = e => {
     const type = e.currentTarget.value;
-    if (type === "previous" && startNum > COUNT + 1) setPage(startNum - COUNT);
-    else if (type.includes("prev")) setPage(1);
+    if (type === "previous" && startNum > COUNT + 1)
+      changePage(startNum - COUNT);
+    else if (type.includes("prev")) changePage(1);
     else if (type === "next" && startNum + COUNT < lastPage)
-      setPage(startNum + COUNT);
-    else if (type.includes("next")) setPage(lastPage);
+      changePage(startNum + COUNT);
+    else if (type.includes("next")) changePage(lastPage);
   };
 
   return (
@@ -69,7 +80,7 @@ const Pagination = ({ page, setPage, lastPage }) => {
             type="button"
             key={pageNum}
             value={pageNum}
-            onClick={changePage}
+            onClick={onClickPage}
             className={`pagination__page-button font-20 ${
               page === pageNum ? "color-54" : "color-a4"
             }`}
@@ -116,4 +127,14 @@ Pagination.propTypes = {
   page: PropTypes.number.isRequired,
   setPage: PropTypes.func.isRequired,
   lastPage: PropTypes.number.isRequired,
+  isReplaceUrl: PropTypes.bool,
+  scrollRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+};
+
+Pagination.defaultProps = {
+  isReplaceUrl: false,
+  scrollRef: undefined,
 };
