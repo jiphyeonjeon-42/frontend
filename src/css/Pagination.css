@@ -6,7 +6,6 @@
 
 .pagination__pages {
   margin: 0 1rem;
-  width: 31rem;
 }
 .pagination__page-ranges {
   width: 7.4rem;
@@ -49,9 +48,6 @@
 }
 
 @media screen and (max-width: 767px) {
-  .pagination__pages {
-    width: 24rem;
-  }
   .pagination__page-ranges {
     width: 5.8rem;
   }
