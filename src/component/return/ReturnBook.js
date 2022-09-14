@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import Banner from "../utils/Banner";
 import "../../css/ReturnBook.css";
-import AdminPagination from "../utils/AdminPagination";
+import Pagination from "../utils/Pagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
@@ -106,7 +106,7 @@ const ReturnBook = () => {
             />
           ))}
           <div className="return-book-table__pagination">
-            <AdminPagination
+            <Pagination
               userPage={returnBookPage}
               setUserPage={setReturnBookPage}
               pageRange={returnBookPageRange}

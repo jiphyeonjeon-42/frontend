@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import AdminSearchBar from "../utils/AdminSearchBar";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
-import AdminPagination from "../utils/AdminPagination";
+import Pagination from "../utils/Pagination";
 import BookList from "./RentModalBookList";
 import RentBookWithBarcodeReader from "./RentBookWithBarcodeReader";
 import "../../css/RentModalBook.css";
@@ -98,7 +98,7 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
         ))}
       </div>
       <div className="rent__modal-user__pagination">
-        <AdminPagination
+        <Pagination
           userPage={bookSearchPage}
           setUserPage={setBookSearchPage}
           pageRange={bookSearchPageRange}

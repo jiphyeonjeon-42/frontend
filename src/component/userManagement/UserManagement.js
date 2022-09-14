@@ -7,7 +7,7 @@ import Tabs from "../utils/Tabs";
 import UserBriefInfo from "./UserBriefInfo";
 import UserUsageInfo from "./UserUsageInfo";
 import AdminSearchBar from "../utils/AdminSearchBar";
-import AdminPagination from "../utils/AdminPagination";
+import Pagination from "../utils/Pagination";
 import MidModal from "../utils/MidModal";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
@@ -133,7 +133,7 @@ const UserManagement = () => {
             />
           ))}
           <div className="user-management-table__pagination">
-            <AdminPagination
+            <Pagination
               userPage={userListPage}
               setUserPage={setUserListPage}
               pageRange={userListPageRange}

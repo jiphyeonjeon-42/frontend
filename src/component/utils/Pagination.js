@@ -59,7 +59,7 @@ const NextPageButton = ({ pageRange, setPageRange, lastPage }) => {
   );
 };
 
-const AdminPagination = ({
+const Pagination = ({
   userPage,
   setUserPage,
   pageRange,
@@ -93,7 +93,7 @@ const AdminPagination = ({
   );
 };
 
-export default AdminPagination;
+export default Pagination;
 
 PageButton.propTypes = {
   pageNum: PropTypes.number.isRequired,
@@ -112,7 +112,7 @@ NextPageButton.propTypes = {
   lastPage: PropTypes.number.isRequired,
 };
 
-AdminPagination.propTypes = {
+Pagination.propTypes = {
   userPage: PropTypes.number.isRequired,
   setUserPage: PropTypes.func.isRequired,
   pageRange: PropTypes.number.isRequired,
