@@ -27,7 +27,6 @@ const UserManagement = () => {
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [userListPage, setUserListPage] = useState(1);
-  const [userListPageRange, setUserListPageRange] = useState(0);
   const [lastUserListPage, setLastUserListPage] = useState(1);
   const [userList, setUserList] = useState([]);
   const [errorCode, setErrorCode] = useState(-1);
@@ -53,7 +52,6 @@ const UserManagement = () => {
     ).value;
     setUserSearchWord(searchInputValue);
     setUserListPage(1);
-    setUserListPageRange(0);
   };
 
   const getUserList = async () => {
@@ -81,7 +79,6 @@ const UserManagement = () => {
   useEffect(getUserList, [userSearchWord, userListPage, isEdit]);
 
   useEffect(() => {
-    setUserListPageRange(0);
     setUserListPage(1);
   }, [userSearchWord]);
 
@@ -134,11 +131,9 @@ const UserManagement = () => {
           ))}
           <div className="user-management-table__pagination">
             <Pagination
-              userPage={userListPage}
-              setUserPage={setUserListPage}
-              pageRange={userListPageRange}
-              setPageRange={setUserListPageRange}
-              lastPage={lastUserListPage}
+              page={userListPage}
+              setPage={setUserListPage}
+              lastPage={parseInt(lastUserListPage, 10)}
             />
           </div>
         </div>
