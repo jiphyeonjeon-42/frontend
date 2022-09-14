@@ -1,0 +1,12 @@
+<svg width="20" height="18.828" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1" data-name="오른쪽으로 넘기기">
+   <path id="svg_2" stroke-width="2px" stroke-miterlimit="10" stroke-linecap="round" stroke="#545454" fill="none" transform="rotate(180 4.707 8.707)" d="m8,16l-8,-8l8,-8" data-name="패스 24"/>
+  </g>
+  <g id="svg_4" data-name="오른쪽으로 넘기기">
+   <path transform="rotate(180 12.921 8.707)" id="svg_3" stroke-width="2px" stroke-miterlimit="10" stroke-linecap="round" stroke="#545454" fill="none" d="m16.21398,16l-8,-8l8,-8" data-name="패스 24"/>
+  </g>
+ </g>
+</svg>

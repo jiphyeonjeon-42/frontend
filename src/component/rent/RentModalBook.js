@@ -15,7 +15,6 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
   const [bookSearchWord, setBookSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [bookSearchPage, setBookSearchPage] = useState(1);
-  const [bookSearchPageRange, setBookSearchPageRange] = useState(0);
   const [lastBookSearchPage, setLastBookSearchPage] = useState(1);
   const [bookList, setBookList] = useState([]);
 
@@ -27,7 +26,6 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
     ).value;
     setBookSearchWord(searchInputValue);
     setBookSearchPage(1);
-    setBookSearchPageRange(0);
   };
 
   const fetchBookData = async () => {
@@ -55,7 +53,6 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
   useEffect(fetchBookData, [bookSearchWord, bookSearchPage]);
 
   useEffect(() => {
-    setBookSearchPageRange(0);
     setBookSearchPage(1);
   }, [bookSearchWord]);
 
@@ -99,10 +96,8 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
       </div>
       <div className="rent__modal-user__pagination">
         <Pagination
-          userPage={bookSearchPage}
-          setUserPage={setBookSearchPage}
-          pageRange={bookSearchPageRange}
-          setPageRange={setBookSearchPageRange}
+          page={bookSearchPage}
+          setPage={setBookSearchPage}
           lastPage={lastBookSearchPage}
         />
       </div>

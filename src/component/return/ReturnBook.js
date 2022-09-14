@@ -19,7 +19,6 @@ const ReturnBook = () => {
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [returnBookPage, setReturnBookPage] = useState(1);
-  const [returnBookPageRange, setReturnBookPageRange] = useState(0);
   const [lastreturnBookPage, setLastreturnBookPage] = useState(1);
   const [returnBookList, setReturnBookList] = useState([]);
   const [lendingSort, setLendingSort] = useState(false);
@@ -40,7 +39,6 @@ const ReturnBook = () => {
     ).value;
     setUserSearchWord(searchInputValue);
     setReturnBookPage(1);
-    setReturnBookPageRange(0);
   };
 
   const fetchreturnBookData = async () => {
@@ -112,10 +110,8 @@ const ReturnBook = () => {
           ))}
           <div className="return-book-table__pagination">
             <Pagination
-              userPage={returnBookPage}
-              setUserPage={setReturnBookPage}
-              pageRange={returnBookPageRange}
-              setPageRange={setReturnBookPageRange}
+              page={returnBookPage}
+              setPage={setReturnBookPage}
               lastPage={lastreturnBookPage}
             />
           </div>

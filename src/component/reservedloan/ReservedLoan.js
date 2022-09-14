@@ -18,7 +18,6 @@ const ReservedLoan = () => {
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [resevedLoanPage, setResevedLoanPage] = useState(1);
-  const [resevedLoanPageRange, setResevedLoanPageRange] = useState(0);
   const [lastresevedLoanPage, setLastresevedLoanPage] = useState(1);
   const [reservedLoanList, setReservedLoanList] = useState([]);
   const [isPending, setIsPending] = useState(false);
@@ -40,7 +39,6 @@ const ReservedLoan = () => {
     ).value;
     setUserSearchWord(searchInputValue);
     setResevedLoanPage(1);
-    setResevedLoanPageRange(0);
   };
 
   const filterState = () => {
@@ -90,8 +88,6 @@ const ReservedLoan = () => {
 
   useEffect(() => {
     setResevedLoanPage(1);
-    setResevedLoanPageRange(0);
-    setResevedLoanPageRange(0);
   }, [isPending, isWaiting, isExpired]);
 
   return (
@@ -132,10 +128,8 @@ const ReservedLoan = () => {
           ))}
           <div className="reserved-loan-table__pagination">
             <Pagination
-              userPage={resevedLoanPage}
-              setUserPage={setResevedLoanPage}
-              pageRange={resevedLoanPageRange}
-              setPageRange={setResevedLoanPageRange}
+              page={resevedLoanPage}
+              setPage={setResevedLoanPage}
               lastPage={lastresevedLoanPage}
             />
           </div>

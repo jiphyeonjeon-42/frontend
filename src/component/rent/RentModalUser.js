@@ -12,7 +12,6 @@ const RentModalUser = ({ setSelectedUser, closeMidModal }) => {
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [userSearchPage, setUserSearchPage] = useState(1);
-  const [userSearchPageRange, setUserSearchPageRange] = useState(0);
   const [lastUserSearchPage, setLastUserSearchPage] = useState(1);
   const [userList, setUserList] = useState([]);
 
@@ -24,7 +23,6 @@ const RentModalUser = ({ setSelectedUser, closeMidModal }) => {
     ).value;
     setUserSearchWord(searchInputValue);
     setUserSearchPage(1);
-    setUserSearchPageRange(0);
   };
 
   const fetchUserData = async () => {
@@ -50,7 +48,6 @@ const RentModalUser = ({ setSelectedUser, closeMidModal }) => {
   useEffect(fetchUserData, [userSearchWord, userSearchPage]);
 
   useEffect(() => {
-    setUserSearchPageRange(0);
     setUserSearchPage(1);
   }, [userSearchWord]);
 
@@ -86,10 +83,8 @@ const RentModalUser = ({ setSelectedUser, closeMidModal }) => {
       ))}
       <div className="rent__modal-user__pagination">
         <Pagination
-          userPage={userSearchPage}
-          setUserPage={setUserSearchPage}
-          pageRange={userSearchPageRange}
-          setPageRange={setUserSearchPageRange}
+          page={userSearchPage}
+          setPage={setUserSearchPage}
           lastPage={lastUserSearchPage}
         />
       </div>

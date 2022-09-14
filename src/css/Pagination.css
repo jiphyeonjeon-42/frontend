@@ -1,48 +1,67 @@
 .pagination {
-  margin-top: 8px;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-}
-
-.admin-pagination {
-  padding: 0 0 60px 0;
+  padding: 0 0 6rem 0;
   display: flex;
   justify-content: center;
 }
 
-.page-button {
-  margin: 0 16px 0 16px;
+.pagination__pages {
+  margin: 0 1rem;
+  width: 31rem;
+}
+.pagination__page-ranges {
+  width: 7.4rem;
+  overflow: hidden;
+}
+
+.pagination__page-button {
+  width: 3rem;
+  margin: 0 1.6rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  vertical-align: center;
+}
+
+.pagination__page-range-button {
+  margin: 0.8rem 1.6rem 0;
   padding: 0;
   border: 0;
   background: none;
   cursor: pointer;
 }
 
-.page-button-icon {
-  width: 8px;
-  height: 16px;
+.pagination__page-range-button.double {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
-.page-button-icon-reverse {
-  width: 8px;
-  height: 16px;
+.pagination__page-range-button > img {
+  width: 0.8rem;
+  height: 1.6rem;
+}
+.pagination__page-range-button > img.double {
+  width: 1.4rem;
+}
+.pagination__page-range-button > .reverse {
   transform-origin: 50% 50%;
   transform: rotate(180deg);
 }
 
-.pre-page-button {
-  margin: 6px 16px 0 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-}
-
-.next-page-button {
-  margin: 6px 0 0 16px;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
+@media screen and (max-width: 767px) {
+  .pagination__pages {
+    width: 24rem;
+  }
+  .pagination__page-ranges {
+    width: 5.8rem;
+  }
+  .pagination__page-button {
+    width: 2rem;
+    height: 2.9rem;
+    margin: 0 1.4rem;
+  }
+  .pagination__page-range-button {
+    width: 2rem;
+    margin: 0.8rem 0.4rem 0;
+  }
 }
