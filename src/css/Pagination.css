@@ -1,4 +1,5 @@
 .pagination {
+  min-width: 30rem;
   padding: 0 0 6rem 0;
   display: flex;
   justify-content: center;
@@ -8,13 +9,13 @@
   margin: 0 1rem;
 }
 .pagination__page-ranges {
-  width: 7.4rem;
+  width: 7.8rem;
   overflow: hidden;
 }
 
 .pagination__page-button {
-  width: 3rem;
-  margin: 0 1.6rem;
+  width: 4rem;
+  margin: 0 0.6rem;
   padding: 0;
   border: 0;
   background: none;
@@ -23,16 +24,10 @@
 }
 
 .pagination__page-range-button {
-  margin: 0.8rem 1.6rem 0;
-  padding: 0;
+  padding: 0.8rem 1.4rem 0;
   border: 0;
   background: none;
   cursor: pointer;
-}
-
-.pagination__page-range-button.double {
-  margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 .pagination__page-range-button > img {
@@ -47,17 +42,21 @@
   transform: rotate(180deg);
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 50com0px) {
+  .pagination__pages {
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+  }
   .pagination__page-ranges {
-    width: 5.8rem;
+    width: 4rem;
   }
   .pagination__page-button {
     width: 2rem;
-    height: 2.9rem;
-    margin: 0 1.4rem;
+    margin: 0 0.4rem;
   }
   .pagination__page-range-button {
     width: 2rem;
-    margin: 0.8rem 0.4rem 0;
+    padding: 0.8rem 0.4rem 0;
   }
 }
