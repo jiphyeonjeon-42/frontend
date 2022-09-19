@@ -23,24 +23,6 @@
 	float: right;
 }
 
-.return-book__basic-info__barcode-icon {
-	background-color: rgb(255, 255, 255, 0);
-	color: white;
-	width: 2.8rem;
-	margin: 0.5rem 2rem 0 0;
-  }
-
-.return-book__basic-info__qr-search > select {
-	width: 40rem;
-	height: 4rem;
-	font-size: 1.8rem;
-	padding: 0 1rem;
-	margin: 2rem auto;
-
-}
-
-
-
 @media screen and (max-width: 767px) {
 	.return-book__basic-info__qr-search > video {
 	  width: 90%;
