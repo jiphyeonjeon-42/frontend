@@ -8,11 +8,11 @@ const getLendingIdbyBookId = async bookId => {
   let lendingId;
   await axios
     .get(
-      `${process.env.REACT_APP_API}/lendings/search/?query=${bookId}&?type=bookId`,
+      `${process.env.REACT_APP_API}/lendings/search?query=${bookId}&type=bookId`,
     )
     .then(response => {
       if (response?.data?.items.length === 0) lendingId = -1;
-      else lendingId = response.data.items.id;
+      else lendingId = response.data.items[0].id;
     });
   return lendingId;
 };
