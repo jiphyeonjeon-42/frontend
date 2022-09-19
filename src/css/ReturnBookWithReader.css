@@ -4,7 +4,7 @@
   }
   
 
-  .return-book__basic-info__qr-search > video {
+.return-book__basic-info__qr-search > video {
 	height: 30rem;
 
 }
@@ -21,6 +21,15 @@
 	cursor: pointer;
 	font-size:1.8rem;
 	float: right;
+}
+
+.return-book__basic-info__qr-search > select {
+	width: 40rem;
+	height: 4rem;
+	font-size: 1.8rem;
+	padding: 0 1rem;
+	margin: 2rem auto;
+
 }
 
 @media screen and (max-width: 767px) {
