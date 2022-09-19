@@ -89,7 +89,10 @@ const ReturnBook = () => {
         titleEn="INQUIRE & RETURN BOOK"
       />
       <AdminTabs tabList={tabList} />
-      <ReturnBookWithBarcodeReader />
+      <ReturnBookWithBarcodeReader
+        openModal={openModal}
+        setLendingId={setLendingId}
+      />
       <section className="inquire-box-wrapper">
         <InquireBoxTitle
           Icon={Book}
