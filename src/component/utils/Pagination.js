@@ -18,8 +18,8 @@ const Pagination = ({
   for (let i = 0; i < count; i += 1) {
     if (startNum + i <= lastPage) pageRange.push(startNum + i);
   }
-  const isPrevAvailable = startNum > 1;
-  const isNextAvailable = startNum <= lastPage - count;
+  const isPrevAvailable = page > 1;
+  const isNextAvailable = page < lastPage;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const changePage = newPage => {
@@ -35,13 +35,11 @@ const Pagination = ({
     changePage(parseInt(value, 10));
   };
 
-  const changePageRange = e => {
+  const onClickPageRange = e => {
     const type = e.currentTarget.value;
-    if (type === "previous" && startNum > count + 1)
-      changePage(startNum - count);
+    if (type === "previous" && page > 1) changePage(page - 1);
     else if (type.includes("prev")) changePage(1);
-    else if (type === "next" && startNum + count < lastPage)
-      changePage(startNum + count);
+    else if (type === "next" && page < lastPage) changePage(page + 1);
     else if (type.includes("next")) changePage(lastPage);
   };
 
@@ -55,7 +53,7 @@ const Pagination = ({
               type="button"
               className="pagination__page-range-button double reverse"
               value="previousStart"
-              onClick={changePageRange}
+              onClick={onClickPageRange}
             >
               <img
                 className="reverse double"
@@ -67,7 +65,7 @@ const Pagination = ({
               className="pagination__page-range-button reverse"
               type="button"
               value="previous"
-              onClick={changePageRange}
+              onClick={onClickPageRange}
             >
               <img
                 className="reverse"
@@ -103,7 +101,7 @@ const Pagination = ({
               type="button"
               className="pagination__page-range-button"
               value="next"
-              onClick={changePageRange}
+              onClick={onClickPageRange}
             >
               <img src={ArrRight} alt="go to next page range" />
             </button>
@@ -111,7 +109,7 @@ const Pagination = ({
               className="pagination__page-range-button double"
               type="button"
               value="nextLast"
-              onClick={changePageRange}
+              onClick={onClickPageRange}
             >
               <img
                 className="double"
