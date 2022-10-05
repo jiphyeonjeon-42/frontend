@@ -106,7 +106,7 @@ const BookDetail = () => {
                   type="button"
                   disabled
                 >
-                  예약 불가
+                  대출 가능
                   <img src={ArrDef} alt="Arr" />
                 </button>
               )}
