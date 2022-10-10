@@ -42,21 +42,20 @@
   transform: rotate(180deg);
 }
 
-@media screen and (max-width: 50com0px) {
-  .pagination__pages {
+@media screen and (max-width: 767px) {
+  .pagination {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex: 1;
   }
   .pagination__page-ranges {
-    width: 4rem;
+    width: 5.4rem;
   }
   .pagination__page-button {
-    width: 2rem;
+    width: 3rem;
     margin: 0 0.4rem;
   }
   .pagination__page-range-button {
-    width: 2rem;
-    padding: 0.8rem 0.4rem 0;
+    padding: 0.8rem 0.8rem 0;
   }
 }
