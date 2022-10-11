@@ -3,7 +3,7 @@ import Modal from "../component/utils/Modal";
 
 const useModal = size => {
   // 모달에 필요한 기본 로직, 상태를 함께 제공
-  const [isOpen, setIsOpen] = useState();
+  const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
