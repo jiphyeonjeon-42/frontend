@@ -57,8 +57,8 @@ const MainPopular = () => {
     <section className="main__popular">
       <div className="main__popular__wrapper">
         <SubTitle
-          subTitle="이번 달 인기 도서를 소개합니다"
-          description="42서울 카뎃들이 이번 달 가장 많이 본 책들은 무엇일까요?"
+          subTitle="42일 인기 도서를 소개합니다"
+          description="42서울 카뎃들이 42일 동안 가장 많이 본 책들은 무엇일까요?"
           alignItems="start"
         />
         <div className="main__popular__contents">
