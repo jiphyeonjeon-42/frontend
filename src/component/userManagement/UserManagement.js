@@ -3,17 +3,19 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import Banner from "../utils/Banner";
 import "../../css/UserManagement.css";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
 import UserBriefInfo from "./UserBriefInfo";
 import UserUsageInfo from "./UserUsageInfo";
 import AdminSearchBar from "../utils/AdminSearchBar";
-import AdminPagination from "../utils/AdminPagination";
+import Pagination from "../utils/Pagination";
 import MidModal from "../utils/MidModal";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../../data/error";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import UserDetailInfo from "./UserDetailInfo";
+
+import getErrorMessage from "../../data/error";
+import { managementTabList } from "../../data/tablist";
 
 const USAGE = 1;
 // const EDIT = 2;
@@ -25,7 +27,6 @@ const UserManagement = () => {
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [userListPage, setUserListPage] = useState(1);
-  const [userListPageRange, setUserListPageRange] = useState(0);
   const [lastUserListPage, setLastUserListPage] = useState(1);
   const [userList, setUserList] = useState([]);
   const [errorCode, setErrorCode] = useState(-1);
@@ -51,7 +52,6 @@ const UserManagement = () => {
     ).value;
     setUserSearchWord(searchInputValue);
     setUserListPage(1);
-    setUserListPageRange(0);
   };
 
   const getUserList = async () => {
@@ -79,7 +79,6 @@ const UserManagement = () => {
   useEffect(getUserList, [userSearchWord, userListPage, isEdit]);
 
   useEffect(() => {
-    setUserListPageRange(0);
     setUserListPage(1);
   }, [userSearchWord]);
 
@@ -94,11 +93,6 @@ const UserManagement = () => {
     setUserSearchWord("");
   }, []);
 
-  const tabList = [
-    { name: "유저관리", link: "/user" },
-    { name: "도서등록", link: "/addbook" },
-  ];
-
   const [title, content] = getErrorMessage(parseInt(errorCode, 10)).split(
     "\r\n",
   );
@@ -106,7 +100,7 @@ const UserManagement = () => {
   return (
     <main>
       <Banner img="admin" titleKo="유저 관리" titleEn="USER MANAGEMENT" />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={managementTabList} />
       <section className="user-management-body">
         <div className="user-management-search">
           <AdminSearchBar
@@ -136,12 +130,10 @@ const UserManagement = () => {
             />
           ))}
           <div className="user-management-table__pagination">
-            <AdminPagination
-              userPage={userListPage}
-              setUserPage={setUserListPage}
-              pageRange={userListPageRange}
-              setPageRange={setUserListPageRange}
-              lastPage={lastUserListPage}
+            <Pagination
+              page={userListPage}
+              setPage={setUserListPage}
+              lastPage={parseInt(lastUserListPage, 10)}
             />
           </div>
         </div>

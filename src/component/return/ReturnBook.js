@@ -3,21 +3,21 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import Banner from "../utils/Banner";
 import "../../css/ReturnBook.css";
-import AdminPagination from "../utils/AdminPagination";
+import Pagination from "../utils/Pagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
 import Book from "../../img/book-arrow-up-free-icon-font.svg";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import ReturnModal from "./ReturnModal";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
+import { rentTabList } from "../../data/tablist";
 
 const ReturnBook = () => {
   const [modal, setModal] = useState(false);
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [returnBookPage, setReturnBookPage] = useState(1);
-  const [returnBookPageRange, setReturnBookPageRange] = useState(0);
   const [lastreturnBookPage, setLastreturnBookPage] = useState(1);
   const [returnBookList, setReturnBookList] = useState([]);
   const [lendingSort, setLendingSort] = useState(false);
@@ -38,7 +38,6 @@ const ReturnBook = () => {
     ).value;
     setUserSearchWord(searchInputValue);
     setReturnBookPage(1);
-    setReturnBookPageRange(0);
   };
 
   const fetchreturnBookData = async () => {
@@ -74,12 +73,6 @@ const ReturnBook = () => {
       searchForm.removeEventListener("submit", handlereturnBookSumbit);
   }, [handlereturnBookSumbit]);
 
-  const tabList = [
-    { name: "대출", link: "/rent" },
-    { name: "예약대출", link: "/reservation" },
-    { name: "반납", link: "/return" },
-  ];
-
   return (
     <main>
       <Banner
@@ -87,7 +80,7 @@ const ReturnBook = () => {
         titleKo="조회 및 반납"
         titleEn="INQUIRE & RETURN BOOK"
       />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={rentTabList} />
       <section className="inquire-box-wrapper">
         <InquireBoxTitle
           Icon={Book}
@@ -111,11 +104,9 @@ const ReturnBook = () => {
             />
           ))}
           <div className="return-book-table__pagination">
-            <AdminPagination
-              userPage={returnBookPage}
-              setUserPage={setReturnBookPage}
-              pageRange={returnBookPageRange}
-              setPageRange={setReturnBookPageRange}
+            <Pagination
+              page={returnBookPage}
+              setPage={setReturnBookPage}
               lastPage={lastreturnBookPage}
             />
           </div>
