@@ -7,7 +7,7 @@ const labelText = {
   pubdate: "출판일",
 };
 
-const DisplayBasicBookInfo = ({ bookInfo, setBasicInfo }) => {
+const DisplayBasicBookInfo = ({ bookInfo, setBookInfo }) => {
   const [message, setMessage] = useState("");
 
   const onChangeInput = e => {
@@ -21,8 +21,8 @@ const DisplayBasicBookInfo = ({ bookInfo, setBasicInfo }) => {
         : "";
       if (message !== currentMessage) setMessage(currentMessage);
     }
-    setBasicInfo({
-      ...bookInfo.newBookBasicInfo,
+    setBookInfo({
+      ...bookInfo,
       [id]: value,
     });
   };
@@ -37,9 +37,8 @@ const DisplayBasicBookInfo = ({ bookInfo, setBasicInfo }) => {
           className="add-book__basic-info__input "
           type="text"
           id={key}
-          value={bookInfo.newBookBasicInfo[key]}
+          value={bookInfo[key]}
           onChange={onChangeInput}
-          readOnly={bookInfo.isConfirmedInfo}
           required
         />
       </label>
@@ -52,8 +51,7 @@ const DisplayBasicBookInfo = ({ bookInfo, setBasicInfo }) => {
         <textarea
           className="add-book__basic-info__input font-28-bold"
           id="title"
-          readOnly={bookInfo.isConfirmedInfo}
-          value={bookInfo.newBookBasicInfo.title}
+          value={bookInfo.title}
           onChange={onChangeInput}
         />
       </label>
@@ -69,15 +67,12 @@ export default DisplayBasicBookInfo;
 
 DisplayBasicBookInfo.propTypes = {
   bookInfo: PropTypes.shape({
-    isConfirmedInfo: PropTypes.bool.isRequired,
-    newBookBasicInfo: PropTypes.shape({
-      isbn: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      publisher: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      pubdate: PropTypes.string.isRequired,
-    }).isRequired,
+    isbn: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    publisher: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    pubdate: PropTypes.string.isRequired,
   }).isRequired,
-  setBasicInfo: PropTypes.func.isRequired,
+  setBookInfo: PropTypes.func.isRequired,
 };

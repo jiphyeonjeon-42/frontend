@@ -1,23 +1,29 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { category, koreanDemicalClassification } from "../../data/category";
 
-const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
+const RegisterBookWithUsersExtraInput = ({ bookInfo }) => {
   const [isDevBook, setIsDevBook] = useState("");
-  const [categoryId, setCategoryId] = useState("0");
+  const [categoryId, setCategoryId] = useState("");
   const [message, setMessage] = useState("");
   const donator = useRef(null);
+
+  useEffect(() => {
+    setIsDevBook("");
+    setCategoryId("");
+    setMessage("");
+  }, [bookInfo]);
 
   const registerBook = async () => {
     setMessage("");
     const newBook = {
-      title: bookBasicInfo.title,
-      isbn: bookBasicInfo.isbn,
-      author: bookBasicInfo.author,
-      publisher: bookBasicInfo.publisher,
-      image: bookBasicInfo.image,
-      pubdate: bookBasicInfo.pubdate,
+      title: bookInfo.title,
+      isbn: bookInfo.isbn,
+      author: bookInfo.author,
+      publisher: bookInfo.publisher,
+      image: bookInfo.image,
+      pubdate: bookInfo.pubdate,
       categoryId,
       donator: donator.current.value,
     };
@@ -46,17 +52,18 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
   };
 
   const isReadyToPost = () => {
-    return categoryId && bookBasicInfo.title && bookBasicInfo.author;
+    return categoryId && bookInfo.title && bookInfo.author;
   };
 
-  const setDev = () => {
-    if (isDevBook && bookBasicInfo?.koreanDemicalClassification)
+  const setDev = e => {
+    const value = e.currentTarget.value === "true";
+    if (!value && bookInfo?.koreanDemicalClassification)
       setCategoryId(
         koreanDemicalClassification.find(
-          i => i.id === bookBasicInfo.koreanDemicalClassification,
+          i => i.id === bookInfo.koreanDemicalClassification,
         ).categoryId,
       );
-    setIsDevBook(!isDevBook);
+    setIsDevBook(value);
   };
 
   return (
@@ -85,8 +92,8 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
         >
           <option value="">카테고리를 선택하세요</option>
           {category
-            .filter(items => items.isDev === isDevBook)
-            .map(element => {
+            ?.filter(items => items.isDev === isDevBook)
+            ?.map(element => {
               return (
                 <option value={element.id} key={element.id}>
                   {element.name}
@@ -108,7 +115,7 @@ const RegisterBookWithUsersExtraInput = ({ bookBasicInfo }) => {
 export default RegisterBookWithUsersExtraInput;
 
 RegisterBookWithUsersExtraInput.propTypes = {
-  bookBasicInfo: PropTypes.shape({
+  bookInfo: PropTypes.shape({
     title: PropTypes.string.isRequired,
     isbn: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
