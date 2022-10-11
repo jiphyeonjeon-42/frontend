@@ -106,7 +106,7 @@ const BookDetail = () => {
                   type="button"
                   disabled
                 >
-                  예약 불가
+                  대출 가능
                   <img src={ArrDef} alt="Arr" />
                 </button>
               )}
@@ -142,6 +142,7 @@ const BookDetail = () => {
                 <div className="book-detail__info-key">기부자</div>
                 <div className="book-detail__info-value">
                   {bookDetailInfo.books.reduce((accumulator, current) => {
+                    if (!current.donator) return accumulator;
                     if (accumulator === "" || current.donator === "")
                       return accumulator + current.donator;
                     // eslint-disable-next-line prefer-template
