@@ -13,10 +13,30 @@
 }
 
 .modal__container {
+  min-width: 30rem;
   position: absolute;
   align-self: center;
-  text-align: center;
-  background-color: white;
+  background-color: #ffffff;
+}
+
+.modal__container.full {
+  width: 120rem;
+}
+.modal__container.basic {
+  width: 70rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .modal__container {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modal__container {
+    width: 100%;
+    overflow-y: scroll;
+  }
 }
 
 /* legacy 
@@ -78,10 +98,4 @@
   background-color: #e63737;
 }
 
-@media screen and (max-width: 1200px) {
-  .modal__container {
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-  }
-} */
+*/

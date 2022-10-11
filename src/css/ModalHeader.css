@@ -39,3 +39,10 @@
 .modal__header__button:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 767px) {
+  .modal__header__title {
+    font-size: 2.8rem;
+    padding: 9rem 4rem 0;
+  }
+}

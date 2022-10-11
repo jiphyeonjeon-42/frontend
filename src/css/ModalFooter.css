@@ -27,3 +27,10 @@
 .modal__footer > button:first-child {
   background-color: #e63737;
 }
+
+@media screen and (max-width: 767px) {
+  .modal__footer > button {
+    font-size: 1.4rem;
+    padding: 1rem 2rem 1rem 2rem;
+  }
+}

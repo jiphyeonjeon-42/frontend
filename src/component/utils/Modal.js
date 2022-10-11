@@ -6,10 +6,10 @@ import "../../css/Modal.css";
 
 /* chidren 컴포넌트를 조립해서 사용하는 모달, 최소 기능만 포함된 기본형
     modal__backdrop 어두워지는 뒷배경, 클릭시 모달 종료
-    modal__container 모달의 기본 뼈대 chidren의 사이즈에 맞게 조절
+    modal__container 모달의 기본 뼈대
  */
 
-const Modal = ({ isOpen, onCloseModal, children }) => {
+const Modal = ({ isOpen, onCloseModal, children, size }) => {
   useEffect(() => {
     // 모달 활성화시 기본화면의 스크롤 제한
     document.body.style.cssText = `overflow: hidden`;
@@ -40,7 +40,7 @@ const Modal = ({ isOpen, onCloseModal, children }) => {
         aria-hidden="true"
       >
         <div
-          className="modal__container"
+          className={`modal__container ${size}`}
           onClick={onClickContainer}
           onKeyPress={onClickContainer}
         >
@@ -61,7 +61,7 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   isOpen: false,
-  size: "",
+  size: "basic",
   onCloseModal: undefined,
 };
 
