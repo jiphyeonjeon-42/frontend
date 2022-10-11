@@ -1,3 +1,25 @@
+.modal__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 6;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__container {
+  position: absolute;
+  align-self: center;
+  text-align: center;
+  background-color: white;
+}
+
+/* legacy 
 .modal__background {
   position: fixed;
   top: 0;
@@ -62,4 +84,4 @@
     height: 100%;
     overflow-y: scroll;
   }
-}
+} */
