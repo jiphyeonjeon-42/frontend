@@ -19,17 +19,14 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
           response.data.bookInfo;
 
         setBookInfo({
-          isConfirmedInfo: true,
-          newBookBasicInfo: {
-            isbn,
-            title,
-            image,
-            author,
-            publisher,
-            pubdate,
-            category,
-            koreanDemicalClassification: category,
-          },
+          isbn,
+          title,
+          image,
+          author,
+          publisher,
+          pubdate,
+          category,
+          koreanDemicalClassification: category,
         });
       })
       .catch(error => {
@@ -40,16 +37,13 @@ const FetchBasicBookInfoWithIsbn = ({ setBookInfo }) => {
             : "조회에 실패했습니다. 수동으로 입력해주세요!",
         );
         setBookInfo({
-          isConfirmedInfo: false,
-          newBookBasicInfo: {
-            isbn: "",
-            title: "",
-            image: "",
-            author: "",
-            publisher: "",
-            pubdate: "",
-            koreanDemicalClassification: "",
-          },
+          isbn: "",
+          title: "",
+          image: "",
+          author: "",
+          publisher: "",
+          pubdate: "",
+          koreanDemicalClassification: "",
         });
       });
   };

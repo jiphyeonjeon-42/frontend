@@ -81,7 +81,7 @@ export default RentModalBookList;
 RentModalBookList.propTypes = {
   setSelectedBooks: PropTypes.func.isRequired,
   closeMidModal: PropTypes.func.isRequired,
-  selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   book: PropTypes.object.isRequired,
 };

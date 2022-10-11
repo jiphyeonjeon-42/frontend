@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState, useRef } from "react";
 import { useRecoilValue } from "recoil";
-import { useHistory } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import userState from "../../atom/userState";
 import "../../css/BookDetail.css";
@@ -15,15 +15,16 @@ import getErrorMessage from "../../data/error";
 import ArrRes from "../../img/arrow_right_res.svg";
 import ArrDef from "../../img/arrow_right_res_default.svg";
 
-const BookDetail = ({ location, match }) => {
+const BookDetail = () => {
   const [bookDetailInfo, setbookDetailInfo] = useState({ books: [] });
-  const { id } = match.params;
+  const { id } = useParams();
   const myRef = useRef(null);
   const [miniModalView, setMiniModalView] = useState(false);
   const [miniModalClosable, setMiniModalClosable] = useState(true);
   const [errorCode, setErrorCode] = useState(-1);
   const user = useRecoilValue(userState);
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const openModal = () => {
     setMiniModalView(true);
@@ -31,8 +32,8 @@ const BookDetail = ({ location, match }) => {
 
   const closeModal = () => {
     if (miniModalClosable) setMiniModalView(false);
-    if (errorCode === 304) history.push("/search");
-    else if (!user.isLogin) history.push("/login");
+    if (errorCode === 304) navigate("/search");
+    else if (!user.isLogin) navigate("/login");
     window.scrollTo(0, 0);
   };
 
@@ -105,7 +106,7 @@ const BookDetail = ({ location, match }) => {
                   type="button"
                   disabled
                 >
-                  예약 불가
+                  대출 가능
                   <img src={ArrDef} alt="Arr" />
                 </button>
               )}
@@ -141,6 +142,7 @@ const BookDetail = ({ location, match }) => {
                 <div className="book-detail__info-key">기부자</div>
                 <div className="book-detail__info-value">
                   {bookDetailInfo.books.reduce((accumulator, current) => {
+                    if (!current.donator) return accumulator;
                     if (accumulator === "" || current.donator === "")
                       return accumulator + current.donator;
                     // eslint-disable-next-line prefer-template

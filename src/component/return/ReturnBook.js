@@ -7,6 +7,7 @@ import AdminPagination from "../utils/AdminPagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
+import ReturnBookWithBarcodeReader from "./ReturnBookWithBarcodeReader";
 import Book from "../../img/book-arrow-up-free-icon-font.svg";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import ReturnModal from "./ReturnModal";
@@ -88,6 +89,10 @@ const ReturnBook = () => {
         titleEn="INQUIRE & RETURN BOOK"
       />
       <AdminTabs tabList={tabList} />
+      <ReturnBookWithBarcodeReader
+        openModal={openModal}
+        setLendingId={setLendingId}
+      />
       <section className="inquire-box-wrapper">
         <InquireBoxTitle
           Icon={Book}

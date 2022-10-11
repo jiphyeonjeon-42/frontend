@@ -2,13 +2,13 @@ import React, { useRef, useState } from "react";
 import qs from "qs";
 import "../../css/Register.css";
 import axios from "axios";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import MiniModal from "../utils/MiniModal";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 import getErrorMessage from "../../data/error";
 
 const Register = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -21,7 +21,7 @@ const Register = () => {
 
   const closeMiniModal = () => {
     setQueryErrorCode(null);
-    history.push("/register");
+    navigate("/register");
   };
 
   const [errorMessage, setErrorMessage] = useState({
@@ -179,9 +179,9 @@ const Register = () => {
         </MiniModal>
       )}
       {registerComplete && (
-        <MiniModal closeModal={() => history.push("/login")}>
+        <MiniModal closeModal={() => navigate("/login")}>
           <ModalContentsTitleWithMessage
-            closeModal={() => history.push("/login")}
+            closeModal={() => navigate("/login")}
             title="회원가입 완료"
             message="환영합니다. 로그인 후 집현전 서비스를 이용하세요."
           />

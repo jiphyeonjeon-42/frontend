@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import HeaderModal from "./HeaderModal";
 import Logo from "../../img/jiphyeonjeon_logo.svg";
 import Hamburger from "../../img/Hamburger_OwlDsgnr.png";
 import SearchBook from "../../img/Search_VectorsMarket.png";
 import "../../css/MobileHeader.css";
 
-// eslint-disable-next-line react/prop-types
-const MobileHeader = ({ location }) => {
+const MobileHeader = () => {
   const [headerModal, setHeaderModal] = useState(false);
   const [isFixed, setFixed] = useState(false);
+  const location = useLocation();
 
   const openHeaderModal = () => {
     setHeaderModal(true);
@@ -29,7 +29,6 @@ const MobileHeader = ({ location }) => {
     setHeaderModal(false);
   };
 
-  // eslint-disable-next-line react/prop-types
   useEffect(closeHeader, [location.pathname]);
 
   return (
