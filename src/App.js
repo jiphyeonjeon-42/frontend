@@ -18,7 +18,7 @@ import Rent from "./component/rent/Rent";
 import ReservedLoan from "./component/reservedloan/ReservedLoan";
 import ReturnBook from "./component/return/ReturnBook";
 import UserManagement from "./component/userManagement/UserManagement";
-import AddBook from "./component/book/AddBook";
+import AddBook from "./component/addbook/AddBook";
 import MyPageRoutes from "./component/mypage/MyPageRoutes";
 import userState from "./atom/userState";
 import Mypage from "./component/mypage/Mypage";
