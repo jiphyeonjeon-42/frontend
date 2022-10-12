@@ -27,14 +27,14 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .modal__container {
-    width: 100% !important;
+  .modal__container.full {
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 767px) {
   .modal__container {
-    width: 100%;
+    width: 100% !important;
     overflow-y: scroll;
   }
 }
