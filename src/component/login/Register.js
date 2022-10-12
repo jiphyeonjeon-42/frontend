@@ -1,28 +1,21 @@
 import React, { useRef, useState } from "react";
-import qs from "qs";
-import "../../css/Register.css";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../../data/error";
+import { useNavigate } from "react-router-dom";
+import useDialog from "../../hook/useDialog";
+import "../../css/Register.css";
 
 const Register = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  const [queryErrorCode, setQueryErrorCode] = useState(query.errorCode);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
-  const [registerComplete, setRegisterComplete] = useState(null);
 
-  const closeMiniModal = () => {
-    setQueryErrorCode(null);
-    navigate("/register");
-  };
+  const {
+    setOpen: openDialog,
+    config: dialogConfig,
+    setConfig: setDialogConfig,
+    Dialog,
+  } = useDialog();
 
   const [errorMessage, setErrorMessage] = useState({
     emailError: "",
@@ -131,14 +124,17 @@ const Register = () => {
     } else {
       await axios
         .post(`${process.env.REACT_APP_API}/users/create`, {
-          headers: {
-            "Content-type": "application/x-www-form-urlencoded",
-          },
           email,
           password,
         })
         .then(() => {
-          setRegisterComplete(true);
+          setDialogConfig({
+            ...dialogConfig,
+            title: "회원가입 완료",
+            message: "환영합니다. 로그인 후 집현전 서비스를 이용하세요.",
+            afterCloseFunction: () => navigate("/login"),
+          });
+          openDialog();
         })
         .catch(error => {
           const { errorCode } = error.response.data;
@@ -163,30 +159,9 @@ const Register = () => {
     }
   };
 
-  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
-    "\r\n",
-  );
-
   return (
     <main>
-      {queryErrorCode && (
-        <MiniModal closeModal={closeMiniModal}>
-          <ModalContentsTitleWithMessage
-            closeModal={closeMiniModal}
-            title={title}
-            message={content}
-          />
-        </MiniModal>
-      )}
-      {registerComplete && (
-        <MiniModal closeModal={() => navigate("/login")}>
-          <ModalContentsTitleWithMessage
-            closeModal={() => navigate("/login")}
-            title="회원가입 완료"
-            message="환영합니다. 로그인 후 집현전 서비스를 이용하세요."
-          />
-        </MiniModal>
-      )}
+      <Dialog />
       <section className="banner main-img">
         <div className="main-banner register-banner">
           <div className="register-main">

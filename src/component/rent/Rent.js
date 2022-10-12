@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
@@ -7,8 +7,7 @@ import RentInquireBoxUser from "./RentInquireBoxUser";
 import RentInquireBoxBook from "./RentInquireBoxBook";
 import RentModal from "./RentModal";
 import RentConfirm from "./RentConfirm";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
+import useDialog from "../../hook/useDialog";
 
 import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
@@ -19,16 +18,28 @@ import "../../css/Rent.css";
 const Rent = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedBooks, setSelectedBooks] = useState([]);
+
+  const {
+    setOpen: openDialog,
+    config: dialogConfig,
+    setConfig: setDialogConfig,
+    Dialog,
+  } = useDialog();
   const [midModalContents, setMidModalContents] = useState("");
-  const [miniModalContents, setMiniModalContents] = useState("");
   const [firstBookContents, setFirstBookContests] = useState("");
   const [secondBookContents, setSecondBookContests] = useState("");
 
-  const closeMiniModal = () => {
-    setMiniModalContents(null);
-    setFirstBookContests(null);
-    setSecondBookContests(null);
-  };
+  useEffect(() => {
+    setDialogConfig({
+      ...dialogConfig,
+      title: "대출 결과",
+      message: `${firstBookContents} ${secondBookContents || ""}`,
+      afterCloseFunction: () => {
+        setFirstBookContests(null);
+        setSecondBookContests(null);
+      },
+    });
+  }, [firstBookContents, secondBookContents]);
 
   return (
     <main>
@@ -85,20 +96,12 @@ const Rent = () => {
           setSelectedUser={setSelectedUser}
           setSelectedBooks={setSelectedBooks}
           setMidModalContents={setMidModalContents}
-          setMiniModalContents={setMiniModalContents}
+          openDialog={openDialog}
           setFirstBookContests={setFirstBookContests}
           setSecondBookContests={setSecondBookContests}
         />
       )}
-      {miniModalContents && (
-        <MiniModal closeModal={closeMiniModal}>
-          <ModalContentsTitleWithMessage
-            closeModal={closeMiniModal}
-            title="대출 결과"
-            message={`${firstBookContents} ${secondBookContents || ""}`}
-          />
-        </MiniModal>
-      )}
+      <Dialog />
     </main>
   );
 };

@@ -6,8 +6,8 @@ import getErrorMessage from "../../data/error";
 const ReturnModalContents = ({
   lendingId,
   closeModal,
-  setMiniModalContents,
-  setReturnResult,
+  setDialogTitleAndMessage,
+  openDialog,
 }) => {
   const defaultData = {
     id: null,
@@ -32,6 +32,12 @@ const ReturnModalContents = ({
       .get(`${process.env.REACT_APP_API}/lendings/${lendingId}`)
       .then(response => {
         setData(response.data);
+      })
+      .catch(error => {
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogTitleAndMessage(title, message);
+        openDialog();
       });
   }, []);
   const postReturn = async () => {
@@ -44,24 +50,20 @@ const ReturnModalContents = ({
         condition,
       })
       .then(res => {
-        setMiniModalContents(
+        setDialogTitleAndMessage(
           `${data.title} \n ${
             res.data?.reservedBook
               ? "예약된 책입니다. 예약자를 위해 따로 보관해주세요."
               : ""
           }`,
         );
-        setReturnResult(true);
+        openDialog();
       })
       .catch(error => {
-        setReturnResult(false);
-        const { status } = error.response;
-
-        setMiniModalContents(
-          status === 400
-            ? getErrorMessage(error.response.data.errorCode)
-            : error.message,
-        );
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogTitleAndMessage(title, message);
+        openDialog();
       });
   };
 
@@ -130,6 +132,6 @@ export default ReturnModalContents;
 ReturnModalContents.propTypes = {
   lendingId: PropTypes.number.isRequired,
   closeModal: PropTypes.func.isRequired,
-  setMiniModalContents: PropTypes.func.isRequired,
-  setReturnResult: PropTypes.func.isRequired,
+  setDialogTitleAndMessage: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
 };

@@ -9,12 +9,11 @@ import SearchBanner from "./SearchBanner";
 import CategoryFilter from "./CategoryFilter";
 import Sort from "./Sort";
 import WishBook from "./WishBook";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 import getErrorMessage from "../../data/error";
 import { searchWord } from "../../atom/searchWord";
 import { useSearchInput } from "../../atom/useSearchInput";
 import "../../css/Search.css";
+import useDialog from "../../hook/useDialog";
 
 const Search = () => {
   const myRef = useRef(null);
@@ -28,13 +27,12 @@ const Search = () => {
   const [userCateName, setCategoryName] = useState("");
   const [entireCate, setEntireCate] = useState([]);
   const [lastPage, setLastPage] = useState(1);
-  const [errorCode, setErrorCode] = useState(-1);
-  const [miniModal, setMiniModal] = useState(0);
   const location = useLocation();
-
-  const closeMiniModal = () => {
-    setMiniModal(0);
-  };
+  const {
+    setOpen: openDialog,
+    setTitleAndMessage: setDialogTitleAndMessage,
+    Dialog,
+  } = useDialog();
 
   const fetchBookList = async () => {
     await axios
@@ -54,12 +52,14 @@ const Search = () => {
         setLastPage(
           res.data.meta.totalPages > 0 ? res.data.meta.totalPages : 1,
         );
-        setMiniModal(0);
-        setErrorCode(-1);
       })
       .catch(error => {
-        setMiniModal(1);
-        setErrorCode(error.response.data.errorCode);
+        const errorCode = error?.response?.data?.errorCode;
+        const [title, message] = getErrorMessage(parseInt(errorCode, 10)).split(
+          "\r\n",
+        );
+        setDialogTitleAndMessage(title, message);
+        openDialog();
       });
   };
 
@@ -152,10 +152,6 @@ const Search = () => {
       setCategoryName(entireCate[parseInt(queryCateIndex, 10)].name);
   }, [location.search, entireCate, lastPage]);
 
-  const [title, content] = getErrorMessage(parseInt(errorCode, 10)).split(
-    "\r\n",
-  );
-
   return (
     <main>
       <SearchBanner />
@@ -196,17 +192,7 @@ const Search = () => {
       <section className="wish-book-wraper">
         <WishBook />
       </section>
-      {miniModal && errorCode >= 0 ? (
-        <MiniModal closeModal={closeMiniModal}>
-          <ModalContentsTitleWithMessage
-            closeModal={closeMiniModal}
-            title={title}
-            message={content}
-          />
-        </MiniModal>
-      ) : (
-        ""
-      )}
+      <Dialog />
     </main>
   );
 };

@@ -1,48 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import MiniModal from "../utils/MiniModal";
 import MidModal from "../utils/MidModal";
-import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 import ReturnModalContents from "./ReturnModalContents";
+import useDialog from "../../hook/useDialog";
 
 const ReturnModal = ({ lendingId, closeModal }) => {
-  const [miniModalContents, setMiniModalContents] = useState("");
-  const [returnResult, setReturnResult] = useState(false);
+  const {
+    setOpen: openDialog,
+    config: dialogConfig,
+    setConfig: setDialogConfig,
+    Dialog,
+  } = useDialog();
 
-  const closeMiniModal = () => {
-    setMiniModalContents("");
-    closeModal();
-    window.location.reload();
+  const setDialogTitleAndMessage = (title, message) => {
+    setDialogConfig({
+      ...dialogConfig,
+      title,
+      message,
+      afterCloseFunction: () => {
+        closeModal();
+        window.location.reload();
+      },
+    });
   };
 
   return (
     <>
-      {miniModalContents ? (
-        <MiniModal closeModal={closeMiniModal}>
-          {returnResult ? (
-            <ModalContentsTitleWithMessage
-              closeModal={closeMiniModal}
-              title="반납이 완료되었습니다."
-              message={miniModalContents}
-            />
-          ) : (
-            <ModalContentsOnlyTitle
-              closeModal={closeMiniModal}
-              title={miniModalContents}
-            />
-          )}
-        </MiniModal>
-      ) : (
-        <MidModal closeModal={closeModal}>
-          <ReturnModalContents
-            lendingId={lendingId}
-            closeModal={closeModal}
-            setMiniModalContents={setMiniModalContents}
-            setReturnResult={setReturnResult}
-          />
-        </MidModal>
-      )}
+      <Dialog />
+      <MidModal closeModal={closeModal}>
+        <ReturnModalContents
+          lendingId={lendingId}
+          closeModal={closeModal}
+          openDialog={openDialog}
+          setDialogTitleAndMessage={setDialogTitleAndMessage}
+        />
+      </MidModal>
     </>
   );
 };

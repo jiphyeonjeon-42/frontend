@@ -9,8 +9,7 @@ import UserUsageInfo from "./UserUsageInfo";
 import AdminSearchBar from "../utils/AdminSearchBar";
 import Pagination from "../utils/Pagination";
 import MidModal from "../utils/MidModal";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
+import useDialog from "../../hook/useDialog";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import UserDetailInfo from "./UserDetailInfo";
 
@@ -22,26 +21,21 @@ const USAGE = 1;
 
 const UserManagement = () => {
   const [modal, setModal] = useState(0);
-  const [miniModal, setMiniModal] = useState(0);
   const [selectedUser, setSelectedUser] = useState(0);
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [userListPage, setUserListPage] = useState(1);
   const [lastUserListPage, setLastUserListPage] = useState(1);
   const [userList, setUserList] = useState([]);
-  const [errorCode, setErrorCode] = useState(-1);
   const [isEdit, setIsEdit] = useState(false);
+  const {
+    setOpen: openDialog,
+    setTitleAndMessage: setDialogTitleAndMessage,
+    Dialog,
+  } = useDialog();
 
   const closeModal = () => {
     setModal(0);
-  };
-
-  const closeMiniModal = () => {
-    setMiniModal(0);
-  };
-
-  const openMiniModal = () => {
-    setMiniModal(1);
   };
 
   const handleUserSearchSumbit = event => {
@@ -71,8 +65,10 @@ const UserManagement = () => {
       })
       .catch(error => {
         closeModal();
-        setErrorCode(error.response.data.errorCode);
-        openMiniModal();
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogTitleAndMessage(title, message);
+        openDialog();
       });
   };
 
@@ -92,10 +88,6 @@ const UserManagement = () => {
   useEffect(() => {
     setUserSearchWord("");
   }, []);
-
-  const [title, content] = getErrorMessage(parseInt(errorCode, 10)).split(
-    "\r\n",
-  );
 
   return (
     <main>
@@ -138,35 +130,23 @@ const UserManagement = () => {
           </div>
         </div>
       </section>
-      {modal && !miniModal ? (
+      {modal && (
         <MidModal closeModal={closeModal}>
           {modal === USAGE ? (
             <UserUsageInfo key={selectedUser.id} user={selectedUser} />
           ) : (
             <UserDetailInfo
               user={selectedUser}
-              setErrorCode={setErrorCode}
               closeMidModal={closeModal}
-              openMiniModal={openMiniModal}
+              openDialog={openDialog}
               isEdit={isEdit}
               setIsEdit={setIsEdit}
+              setDialogTitleAndMessage={setDialogTitleAndMessage}
             />
           )}
         </MidModal>
-      ) : (
-        ``
       )}
-      {miniModal && errorCode >= 0 ? (
-        <MiniModal closeModal={closeMiniModal}>
-          <ModalContentsTitleWithMessage
-            closeModal={closeMiniModal}
-            title={title}
-            message={content}
-          />
-        </MiniModal>
-      ) : (
-        ``
-      )}
+      <Dialog />
     </main>
   );
 };

@@ -3,15 +3,18 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import arrowLeft from "../../img/arrow_left_black.svg";
 import "../../css/EditPassword.css";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import getErrorMessage from "../../data/error";
+import useDialog from "../../hook/useDialog";
 
 function EditPassword() {
+  const {
+    setOpen: openDialog,
+    config: dialogConfig,
+    setConfig: setDialogConfig,
+    setTitleAndMessage: setDialogTitleAndMessage,
+    Dialog,
+  } = useDialog();
   const navigate = useNavigate();
-  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
-  const [miniModalContent, setMiniModalContent] = useState("");
-  const [isGoBack, setIsGoBack] = useState(false);
   const [newPw, setNewPw] = useState("");
   const [checkPw, setCheckPw] = useState("");
 
@@ -30,8 +33,8 @@ function EditPassword() {
   const onSubmitUpdate = async e => {
     e.preventDefault();
     if (newPw !== checkPw) {
-      setMiniModalContent("비밀번호 재입력이 다릅니다.");
-      setIsMiniModalOpen(true);
+      setDialogTitleAndMessage("비밀번호 재입력이 다릅니다.", "");
+      openDialog();
       return;
     }
     await axios
@@ -39,20 +42,19 @@ function EditPassword() {
         password: newPw,
       })
       .then(() => {
-        setMiniModalContent("비밀번호 변경 성공");
-        setIsMiniModalOpen(true);
-        setIsGoBack(true);
+        setDialogConfig({
+          ...dialogConfig,
+          title: "비밀번호 변경 성공",
+          afterCloseFunction: () => navigate(-1),
+        });
+        openDialog();
       })
-      .catch(err => {
-        const { errorCode } = err.response.data;
-        setMiniModalContent(getErrorMessage(errorCode));
-        setIsMiniModalOpen(true);
+      .catch(error => {
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogTitleAndMessage(title, message);
+        openDialog();
       });
-  };
-
-  const closeModal = () => {
-    setIsMiniModalOpen(false);
-    if (isGoBack) navigate(-1);
   };
 
   return (
@@ -114,14 +116,7 @@ function EditPassword() {
           </div>
         </form>
       </div>
-      {isMiniModalOpen ? (
-        <MiniModal closeModal={closeModal}>
-          <ModalContentsOnlyTitle
-            title={miniModalContent}
-            closeModal={closeModal}
-          />
-        </MiniModal>
-      ) : null}
+      <Dialog />
     </div>
   );
 }

@@ -10,7 +10,7 @@ const RentModalConfirm = ({
   selectedUser,
   selectedBooks,
   closeModal,
-  setMiniModalContents,
+  openDialog,
   setFirstBookContests,
   setSecondBookContests,
 }) => {
@@ -50,6 +50,7 @@ const RentModalConfirm = ({
           if (i === 0) setFirstBookContests(msg);
           else setSecondBookContests(msg);
           selectedUser.lendings.push(makeLending(selectedBooks[i]));
+          openDialog();
         })
         .catch(error => {
           const { errorCode } = error.response.data;
@@ -60,6 +61,7 @@ const RentModalConfirm = ({
           } - 대출 실패\n(사유 : ${getErrorMessage(errorCode)})\n\n`;
           if (i === 0) setFirstBookContests(errMsg);
           else setSecondBookContests(errMsg);
+          openDialog();
         });
     }
   };
@@ -90,7 +92,6 @@ const RentModalConfirm = ({
     while (selectedBooks.length !== 0) selectedBooks.pop();
     setRemark1("");
     setRemark2("");
-    setMiniModalContents(true);
     closeModal();
   };
   return (
@@ -173,7 +174,7 @@ export default RentModalConfirm;
 
 RentModalConfirm.propTypes = {
   closeModal: PropTypes.func.isRequired,
-  setMiniModalContents: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
   // setRentResult: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   selectedUser: PropTypes.object.isRequired,

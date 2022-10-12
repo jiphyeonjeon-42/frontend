@@ -1,15 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import userState from "../../atom/userState";
 import "../../css/MainBanner.css";
 import "../../css/Banner.css";
 import "../../css/Login.css";
-import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
-import qs from "qs";
-import { useRecoilValue } from "recoil";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../../data/error";
-import userState from "../../atom/userState";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,21 +17,11 @@ const Login = () => {
     password: "",
   });
   const { id, password } = loginData;
-  const location = useLocation();
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  const [queryErrorCode, setQueryErrorCode] = useState(query.errorCode);
   const user = useRecoilValue(userState);
 
   useEffect(() => {
     if (user.isLogin) navigate("/");
   }, [user]);
-
-  const closeModal = async () => {
-    setQueryErrorCode(null);
-    navigate("/login");
-  };
 
   const onChange = e => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
@@ -58,14 +44,11 @@ const Login = () => {
     }
     await axios
       .post(`${process.env.REACT_APP_API}/auth/login`, {
-        headers: {
-          "Content-type": "application/x-www-form-urlencoded",
-        },
         id,
         password,
       })
       .then(() => {
-        window.location.replace("/auth");
+        navigate("/auth");
       })
       .catch(error => {
         const { errorCode } = error.response.data;
@@ -81,32 +64,15 @@ const Login = () => {
     }
   };
 
-  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
-    "\r\n",
-  );
-
   return (
     <main>
-      {queryErrorCode && (
-        <MiniModal closeModal={closeModal}>
-          <ModalContentsTitleWithMessage
-            closeModal={closeModal}
-            title={title}
-            message={content}
-          />
-        </MiniModal>
-      )}
       <section className="banner main-img">
         <div className="main-banner login-banner">
           <div className="login-main">
             <p className="login-header" align="center">
               로그인
             </p>
-            <form
-              className="login-form"
-              method="post"
-              action={`${process.env.REACT_APP_API}/auth/login`}
-            >
+            <form className="login-form">
               <input
                 className="login-input"
                 name="id"

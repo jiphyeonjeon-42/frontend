@@ -6,8 +6,9 @@ import getErrorMessage from "../../data/error";
 
 const MypageReservedBook = ({
   reserveInfo,
-  setIsMiniModalOpen,
-  setMiniModalContent,
+  openDialog,
+  dialogConfig,
+  setDialogConfig,
 }) => {
   const onClickCancel = async id => {
     // eslint-disable-next-line no-alert
@@ -15,13 +16,14 @@ const MypageReservedBook = ({
       await axios
         .patch(`${process.env.REACT_APP_API}/reservations/cancel/${id}`)
         .then(() => {
-          setMiniModalContent("예약 취소 성공");
-          setIsMiniModalOpen(true);
+          setDialogConfig({ ...dialogConfig, title: "예약 취소 성공" });
+          openDialog();
         })
-        .catch(err => {
-          const { errorCode } = err.response.data;
-          setMiniModalContent(getErrorMessage(errorCode));
-          setIsMiniModalOpen(true);
+        .catch(error => {
+          const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+          const [title, message] = getErrorMessage(errorCode).split("\r\n");
+          setDialogConfig({ ...dialogConfig, title, message });
+          openDialog();
         });
     }
   };
@@ -150,8 +152,13 @@ const MypageReservedBook = ({
 
 MypageReservedBook.propTypes = {
   reserveInfo: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  setIsMiniModalOpen: PropTypes.func.isRequired,
-  setMiniModalContent: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
+  dialogConfig: PropTypes.objectOf({
+    title: PropTypes.string,
+    message: PropTypes.string,
+    afterCloseFunction: PropTypes.func,
+  }).isRequired,
+  setDialogConfig: PropTypes.func.isRequired,
 };
 
 export default MypageReservedBook;

@@ -12,7 +12,7 @@ const RentModal = ({
   setSelectedUser,
   setSelectedBooks,
   setMidModalContents,
-  setMiniModalContents,
+  openDialog,
   setFirstBookContests,
   setSecondBookContests,
 }) => {
@@ -41,7 +41,7 @@ const RentModal = ({
             selectedUser={selectedUser}
             selectedBooks={selectedBooks}
             closeModal={closeMidModal}
-            setMiniModalContents={setMiniModalContents}
+            openDialog={openDialog}
             setFirstBookContests={setFirstBookContests}
             setSecondBookContests={setSecondBookContests}
           />
@@ -65,7 +65,7 @@ RentModal.propTypes = {
   setSelectedUser: PropTypes.func.isRequired,
   setSelectedBooks: PropTypes.func.isRequired,
   setMidModalContents: PropTypes.func.isRequired,
-  setMiniModalContents: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
   setFirstBookContests: PropTypes.func.isRequired,
   setSecondBookContests: PropTypes.func.isRequired,
 };

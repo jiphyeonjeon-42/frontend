@@ -6,17 +6,18 @@ import getErrorMessage from "../../data/error";
 import SuccessRsv from "./SuccessRsv";
 import ModalContentsOnlyTitle from "../utils/ModalContentsTitleWithMessage";
 
-const Reservation = ({ bookInfoId, closeModal, setClosable }) => {
+const Reservation = ({ bookInfoId, closeModal }) => {
   const [reservationStep, setReservationStep] = useState("waitUserConfirm");
-  const [propsNumber, setPropsNumber] = useState(-1);
+  const [rank, setRank] = useState(-1);
   const [propsString, setPropsString] = useState("");
+
   const postReservation = async () => {
     await axios
       .post(`${process.env.REACT_APP_API}/reservations`, {
         bookInfoId,
       })
       .then(response => {
-        setPropsNumber(response.data.count);
+        setRank(response.data.count);
         setReservationStep("success");
         if (response.data.count === 1) {
           const date = response.data.lenderableDate;
@@ -36,10 +37,8 @@ const Reservation = ({ bookInfoId, closeModal, setClosable }) => {
   };
 
   const tryReservation = async () => {
-    setClosable(false);
     setReservationStep("");
     postReservation();
-    setClosable(true);
   };
 
   const ComponentForStep = () => {
@@ -58,7 +57,7 @@ const Reservation = ({ bookInfoId, closeModal, setClosable }) => {
         return (
           <SuccessRsv
             closeModal={closeModal}
-            rank={propsNumber}
+            rank={rank}
             lendabledate={propsString}
           />
         );

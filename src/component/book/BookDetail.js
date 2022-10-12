@@ -8,9 +8,9 @@ import "../../css/BookDetail.css";
 import Banner from "../utils/Banner";
 import BookStatus from "./BookStatus";
 import IMGERR from "../../img/image_onerror.svg";
-import MiniModal from "../utils/MiniModal";
 import Reservation from "../reservation/Reservation";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
+import useDialog from "../../hook/useDialog";
+import useModal from "../../hook/useModal";
 import getErrorMessage from "../../data/error";
 import ArrRes from "../../img/arrow_right_res.svg";
 import ArrDef from "../../img/arrow_right_res_default.svg";
@@ -19,34 +19,40 @@ const BookDetail = () => {
   const [bookDetailInfo, setbookDetailInfo] = useState({ books: [] });
   const { id } = useParams();
   const myRef = useRef(null);
-  const [miniModalView, setMiniModalView] = useState(false);
-  const [miniModalClosable, setMiniModalClosable] = useState(true);
-  const [errorCode, setErrorCode] = useState(-1);
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const openModal = () => {
-    setMiniModalView(true);
-  };
+  const {
+    setOpen: openDialog,
+    config: dialogConfig,
+    setConfig: setDialogConfig,
+    Dialog,
+  } = useDialog();
 
-  const closeModal = () => {
-    if (miniModalClosable) setMiniModalView(false);
-    if (errorCode === 304) navigate("/search");
-    else if (!user.isLogin) navigate("/login");
-    window.scrollTo(0, 0);
-  };
+  const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
 
   const getBooksInfo = async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/books/info/${id}`)
-      .then(res => {
-        setErrorCode(-1);
+      ?.then(res => {
         setbookDetailInfo(res.data);
       })
-      .catch(error => {
-        setMiniModalView(true);
-        setErrorCode(error.response.data.errorCode);
+      ?.catch(error => {
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        const afterCloseDialog = () => {
+          if (errorCode === 304) navigate("/search");
+          else if (!user.isLogin) navigate("/login");
+          window.scrollTo(0, 0);
+        };
+        setDialogConfig({
+          ...dialogConfig,
+          afterClose: afterCloseDialog,
+          title,
+          message,
+        });
+        openDialog();
       });
     myRef.current.scrollIntoView();
   };
@@ -56,10 +62,6 @@ const BookDetail = () => {
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
-
-  const [title, content] = getErrorMessage(parseInt(errorCode, 10)).split(
-    "\r\n",
-  );
 
   return (
     <main>
@@ -166,23 +168,10 @@ const BookDetail = () => {
           </div>
         </div>
       </section>
-      {miniModalView && (
-        <MiniModal closeModal={closeModal}>
-          {errorCode < 0 ? (
-            <Reservation
-              bookInfoId={bookDetailInfo.id}
-              closeModal={closeModal}
-              setClosable={setMiniModalClosable}
-            />
-          ) : (
-            <ModalContentsTitleWithMessage
-              closeModal={closeModal}
-              title={title}
-              message={content}
-            />
-          )}
-        </MiniModal>
-      )}
+      <Dialog />
+      <Modal>
+        <Reservation bookInfoId={bookDetailInfo.id} closeModal={closeModal} />
+      </Modal>
     </main>
   );
 };

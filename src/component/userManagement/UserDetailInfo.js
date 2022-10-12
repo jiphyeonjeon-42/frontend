@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import getErrorMessage from "../../data/error";
 import "../../css/UserBriefInfo.css";
 import "../../css/UserDetailInfo.css";
 
@@ -73,11 +74,11 @@ const convertDatetoString = date => {
 
 const UserDetailInfo = ({
   user,
-  setErrorCode,
   closeMidModal,
-  openMiniModal,
+  openDialog,
   isEdit,
   setIsEdit,
+  setDialogTitleAndMessage,
 }) => {
   const today = new Date();
   const [editMode, setEditMode] = useState(false);
@@ -109,8 +110,10 @@ const UserDetailInfo = ({
       })
       .catch(error => {
         closeMidModal();
-        setErrorCode(error.response.data.errorCode);
-        openMiniModal();
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogTitleAndMessage(title, message);
+        openDialog();
       });
   };
 
@@ -271,9 +274,9 @@ UserDetailInfo.propTypes = {
       PropTypes.shape({ dueDate: PropTypes.string, title: PropTypes.string }),
     ),
   }).isRequired,
-  setErrorCode: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
   closeMidModal: PropTypes.func.isRequired,
-  openMiniModal: PropTypes.func.isRequired,
+  setDialogTitleAndMessage: PropTypes.func.isRequired,
   isEdit: PropTypes.bool.isRequired,
   setIsEdit: PropTypes.func.isRequired,
 };

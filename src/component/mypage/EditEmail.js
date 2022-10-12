@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useRecoilState } from "recoil";
 import arrowLeft from "../../img/arrow_left_black.svg";
-import "../../css/EditEmail.css";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
 import getErrorMessage from "../../data/error";
+import useDialog from "../../hook/useDialog";
+import userState from "../../atom/userState";
+import "../../css/EditEmail.css";
 
 function EditEmail() {
   const navigate = useNavigate();
-  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
-  const [miniModalContent, setMiniModalContent] = useState("");
-  const [isGoBack, setIsGoBack] = useState(false);
+  const [openDialog, , dialogConfig, setDialogConfig, Dialog] = useDialog();
+  const [user, setUser] = useRecoilState(userState);
   const [userInfo, setUserInfo] = useState(null);
   const [newEmail, setNewEmail] = useState("");
 
@@ -29,36 +29,38 @@ function EditEmail() {
       .patch(`${process.env.REACT_APP_API}/users/myupdate`, {
         email: newEmail,
       })
-      .then(() => {
-        setMiniModalContent("이메일 변경 성공");
-        setIsMiniModalOpen(true);
-        setIsGoBack(true);
+      ?.then(() => {
+        const newUser = { ...user, userId: newEmail };
+        setUser(newUser);
+        window.localStorage.setItem("user", JSON.stringify(newUser));
+        setDialogConfig({
+          title: "이메일 변경 성공",
+          message: "",
+          afterCloseFunction: () => navigate(-1),
+        });
+        openDialog();
       })
-      .catch(err => {
-        const { errorCode } = err.response.data;
-        setMiniModalContent(getErrorMessage(errorCode));
-        setIsMiniModalOpen(true);
+      ?.catch(error => {
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogConfig({ ...dialogConfig, title, message });
+        openDialog();
       });
-  };
-
-  const closeModal = () => {
-    setIsMiniModalOpen(false);
-    if (isGoBack) navigate(-1);
   };
 
   useEffect(async () => {
     await axios
       .get(`${process.env.REACT_APP_API}/users/search`, {
         params: {
-          nicknameOrEmail: JSON.parse(window.localStorage.getItem("user"))
-            .userId,
+          nicknameOrEmail: user.userId,
         },
       })
-      .then(res => setUserInfo(res.data.items[0]))
-      .catch(err => {
-        const { errorCode } = err.response.data;
-        setMiniModalContent(getErrorMessage(errorCode));
-        setIsMiniModalOpen(true);
+      ?.then(res => setUserInfo(res.data.items[0]))
+      ?.catch(error => {
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogConfig({ ...dialogConfig, title, message });
+        openDialog();
       });
   }, []);
 
@@ -71,9 +73,7 @@ function EditEmail() {
           </button>
         </div>
         <div className="mypage-edit-email-title color-2d">
-          <span>{`${
-            JSON.parse(window.localStorage.getItem("user")).userId
-          }님의, 이메일 변경 페이지입니다`}</span>
+          <span>{`${user.userId}님의, 이메일 변경 페이지입니다`}</span>
         </div>
         <div className="mypage-edit-email-curr_email">
           <span className="font-14-bold color-2d">현재 이메일</span>
@@ -104,14 +104,7 @@ function EditEmail() {
           </div>
         </form>
       </div>
-      {isMiniModalOpen ? (
-        <MiniModal closeModal={closeModal}>
-          <ModalContentsOnlyTitle
-            title={miniModalContent}
-            closeModal={closeModal}
-          />
-        </MiniModal>
-      ) : null}
+      <Dialog />
     </div>
   );
 }

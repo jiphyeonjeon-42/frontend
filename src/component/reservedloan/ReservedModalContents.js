@@ -5,8 +5,8 @@ import getErrorMessage from "../../data/error";
 
 const ReservedModalContents = ({
   reservedInfo,
-  setMiniModalContents,
-  setLendResult,
+  setDialogTitleAndMessage,
+  openDialog,
 }) => {
   const [remark, setRemark] = useState("");
 
@@ -26,18 +26,15 @@ const ReservedModalContents = ({
         condition,
       })
       .then(() => {
-        setMiniModalContents("대출이 완료되었습니다.");
-        setLendResult(true);
+        setDialogTitleAndMessage("대출이 완료되었습니다.", reservedInfo.title);
+        openDialog();
       })
       .catch(error => {
         if (!error.response) return;
-        const { status } = error.response;
-        setLendResult(false);
-        setMiniModalContents(
-          status === 400
-            ? getErrorMessage(error.response.data.errorCode)
-            : error.message,
-        );
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogTitleAndMessage(title, message);
+        openDialog();
       });
   };
 
@@ -49,18 +46,15 @@ const ReservedModalContents = ({
           `${process.env.REACT_APP_API}/reservations/cancel/${reservedInfo.reservationsId}`,
         )
         .then(() => {
-          setMiniModalContents("예약 취소가 완료되었습니다.");
-          setLendResult(true);
+          setDialogTitleAndMessage("예약 취소가 완료되었습니다.", "");
+          openDialog();
         })
         .catch(error => {
           if (!error.response) return;
-          const { status } = error.response;
-          setLendResult(false);
-          setMiniModalContents(
-            status === 400
-              ? getErrorMessage(error.response.data.errorCode)
-              : error.message,
-          );
+          const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+          const [title, message] = getErrorMessage(errorCode).split("\r\n");
+          setDialogTitleAndMessage(title, message);
+          openDialog();
         });
     }
   };
@@ -150,8 +144,8 @@ const ReservedModalContents = ({
 
 ReservedModalContents.propTypes = {
   reservedInfo: PropTypes.shape.isRequired,
-  setMiniModalContents: PropTypes.func.isRequired,
-  setLendResult: PropTypes.func.isRequired,
+  setDialogTitleAndMessage: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
 };
 
 export default ReservedModalContents;
