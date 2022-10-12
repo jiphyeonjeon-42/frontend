@@ -28,7 +28,7 @@ const useModal = size => {
       </>
     );
   };
-  return [isOpen, setOpen, setClose, config, setConfig, modalElement];
+  return { isOpen, setOpen, setClose, config, setConfig, Modal: modalElement };
 };
 
 export default useModal;

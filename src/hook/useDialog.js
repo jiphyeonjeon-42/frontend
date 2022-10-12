@@ -71,7 +71,7 @@ const useDialog = () => {
       </>
     );
   };
-  return [
+  return {
     isOpen,
     setOpen,
     setClose,
@@ -79,7 +79,7 @@ const useDialog = () => {
     setConfig,
     setTitleAndMessage,
     Dialog,
-  ];
+  };
 };
 
 export default useDialog;
