@@ -20,10 +20,6 @@ const HeaderModal = ({ setHeaderModal }) => {
     setHeaderModal(false);
   };
 
-  const nowDate = new Date();
-  const expireDate = new Date(user.expire);
-  if (nowDate > expireDate) window.location = `/login`;
-
   return (
     <div>
       <button

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../../img/jiphyeonjeon_logo.svg";
 import Information from "../../img/information_icon.svg";
 import User from "../../img/Uniconlabs.png";
@@ -16,15 +16,10 @@ const Header = () => {
   const [toggleLNB, setToggleLNB] = useState(false);
   const [hoverLNB, setHoverLNB] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   const clickUserButton = () => {
     setToggleLNB(!toggleLNB);
   };
-
-  const nowDate = new Date();
-  const expireDate = new Date(user.expire);
-  if (nowDate > expireDate) navigate(`/login`);
 
   const closeHeader = () => {
     setToggleLNB(false);
