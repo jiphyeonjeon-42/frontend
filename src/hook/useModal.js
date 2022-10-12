@@ -4,22 +4,31 @@ import Modal from "../component/utils/Modal";
 const useModal = size => {
   // 모달에 필요한 기본 로직, 상태를 함께 제공
   const [isOpen, setIsOpen] = useState(false);
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
+
+  const setOpen = () => {
+    setIsOpen(true);
   };
+
+  const setClose = () => {
+    setIsOpen(false);
+  };
+
+  const [config, setConfig] = useState({
+    afterClose: () => {},
+  });
 
   const modalElement = ({ children }) => {
     return (
       <>
         {isOpen && (
-          <Modal isOpen={isOpen} onCloseModal={toggleModal} size={size}>
+          <Modal isOpen={isOpen} onCloseModal={setClose} size={size}>
             {children}
           </Modal>
         )}
       </>
     );
   };
-  return [isOpen, toggleModal, modalElement];
+  return [isOpen, setOpen, setClose, config, setConfig, modalElement];
 };
 
 export default useModal;

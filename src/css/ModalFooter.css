@@ -17,6 +17,9 @@
   font-size: 1.6rem;
   color: #ffffff;
   cursor: pointer;
+}
+
+.modal__footer > button.grey {
   background-color: #a4a4a4;
 }
 
@@ -24,7 +27,7 @@
   opacity: 0.6;
 }
 
-.modal__footer > button:first-child {
+.modal__footer > button.red {
   background-color: #e63737;
 }
 
