@@ -38,7 +38,12 @@ const Reservation = ({ bookInfoId, isAvailableReservation }) => {
           rank === 1 && lendabledate
             ? `대출 가능 예상일자는 ${lendabledate}.입니다.`
             : "대출이 가능해지면 Slack 알림을 보내드리겠습니다.";
-        setDialogConfig({ ...dialogDefaultConfig, title, message });
+        setDialogConfig({
+          ...dialogDefaultConfig,
+          title,
+          titleEmphasis: `${rank}순위`,
+          message,
+        });
         openDialog();
       })
       .catch(error => {
@@ -68,6 +73,7 @@ const Reservation = ({ bookInfoId, isAvailableReservation }) => {
             onClick: postReservation,
           },
           title,
+          titleEmphasis: `${expectedRank}명`,
           message,
         });
         openDialog();

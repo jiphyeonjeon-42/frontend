@@ -13,6 +13,7 @@ const useDialog = () => {
   const defaultConfig = {
     afterClose: () => {},
     title: "",
+    titleEmphasis: "",
     message: "",
     buttonAlign: "basic",
     numberOfButtons: 1,
@@ -45,6 +46,7 @@ const useDialog = () => {
           <Modal isOpen={isOpen} onCloseModal={onClose}>
             <ModalHeader
               title={config.title}
+              emphasis={config.titleEmphasis}
               isWithCloseButton
               onCloseModal={onClose}
             />
