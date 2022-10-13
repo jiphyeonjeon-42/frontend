@@ -7,16 +7,10 @@ import "../css/Dialog.css";
 const useDialog = () => {
   // 모달의 기본 로직 + 미리 조립해둔 대화창 형태의 모달 제공
   const [isOpen, setIsOpen] = useState(false);
+  const setOpen = () => setIsOpen(true);
+  const setClose = () => setIsOpen(false);
 
-  const setOpen = () => {
-    setIsOpen(true);
-  };
-
-  const setClose = () => {
-    setIsOpen(false);
-  };
-
-  const [config, setConfig] = useState({
+  const defaultConfig = {
     afterClose: () => {},
     title: "",
     message: "",
@@ -25,22 +19,19 @@ const useDialog = () => {
     firstButton: {
       text: "확인하기",
       color: "red",
-      onClick: () => {
-        setClose();
-      },
+      onClick: setClose,
     },
     secondButton: {
       text: "취소하기",
       color: "grey",
-      onClick: () => {
-        setClose();
-      },
+      onClick: setClose,
     },
-  });
-
-  const setTitleAndMessage = (title, message) => {
-    setConfig(...config, title, message);
   };
+
+  const [config, setConfig] = useState(defaultConfig);
+
+  const setTitleAndMessage = (title, message) =>
+    setConfig(...config, title, message);
 
   const onClose = () => {
     setClose();
@@ -75,7 +66,8 @@ const useDialog = () => {
     isOpen,
     setOpen,
     setClose,
-    config,
+    config, // for update
+    defaultConfig, // for reset
     setConfig,
     setTitleAndMessage,
     Dialog,
