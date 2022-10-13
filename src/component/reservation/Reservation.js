@@ -1,15 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import UserConfirm from "./UserConfirm";
+import useDialog from "../../hook/useDialog";
 import getErrorMessage from "../../data/error";
-import SuccessRsv from "./SuccessRsv";
-import ModalContentsOnlyTitle from "../utils/ModalContentsTitleWithMessage";
+import "../../css/Reservation.css";
+import Available from "../../img/arrow_right_res.svg";
+import Unavailable from "../../img/arrow_right_res_default.svg";
 
-const Reservation = ({ bookInfoId, closeModal }) => {
-  const [reservationStep, setReservationStep] = useState("waitUserConfirm");
-  const [rank, setRank] = useState(-1);
-  const [propsString, setPropsString] = useState("");
+const Reservation = ({ bookInfoId, isAvailableReservation }) => {
+  if (!isAvailableReservation)
+    return (
+      <div className="reservation__rentable">
+        대출 가능
+        <img src={Unavailable} alt="대출" />
+      </div>
+    );
+
+  const {
+    setOpen: openDialog,
+    config: dialogConfig,
+    setConfig: setDialogConfig,
+    defaultConfig: dialogDefaultConfig,
+    setTitleAndMessage: setDialogTitleAndMessage,
+    Dialog,
+  } = useDialog();
 
   const postReservation = async () => {
     await axios
@@ -17,66 +31,79 @@ const Reservation = ({ bookInfoId, closeModal }) => {
         bookInfoId,
       })
       .then(response => {
-        setRank(response.data.count);
-        setReservationStep("success");
-        if (response.data.count === 1) {
-          const date = response.data.lenderableDate;
-          setPropsString(date.slice(0, 10));
-        }
+        const rank = response?.data?.count;
+        const lendabledate = response?.data?.lenderableDate?.slice(0, 10);
+        const title = `예약 ${rank}순위로 등록되셨습니다.`;
+        const message =
+          rank === 1 && lendabledate
+            ? `대출 가능 예상일자는 ${lendabledate}.입니다.`
+            : "대출이 가능해지면 Slack 알림을 보내드리겠습니다.";
+        setDialogConfig({ ...dialogDefaultConfig, title, message });
+        openDialog();
       })
       .catch(error => {
         if (!error.response) return;
-        const { status } = error.response;
-        const errMessage =
-          status === 400
-            ? getErrorMessage(error.response.data.errorCode)
-            : error.message;
-        setPropsString(errMessage);
-        setReservationStep("failure");
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogConfig({ ...dialogDefaultConfig, title, message });
+        openDialog();
+      });
+  };
+
+  const getCountReservation = async () => {
+    await axios
+      .get(
+        `${process.env.REACT_APP_API}/reservations/count?bookInfo=${bookInfoId}`,
+      )
+      .then(response => {
+        const expectedRank = response?.data?.count;
+
+        const title = `현재 예약대기자는 ${expectedRank}명입니다.
+예약하시겠습니까?`;
+        const message = `주의: 예약도서는 2권 이상 대출할 수 없거나, 연체회원일 경우 대출이 제한됩니다.`;
+        setDialogConfig({
+          ...dialogConfig,
+          firstButton: {
+            ...dialogConfig.firstButton,
+            onClick: postReservation,
+          },
+          title,
+          message,
+        });
+        openDialog();
+      })
+      .catch(error => {
+        if (!error.response) return;
+        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+        const [title, message] = getErrorMessage(errorCode).split("\r\n");
+        setDialogTitleAndMessage(title, message);
+        openDialog();
       });
   };
 
   const tryReservation = async () => {
-    setReservationStep("");
-    postReservation();
+    setDialogConfig(dialogDefaultConfig);
+    await getCountReservation();
   };
 
-  const ComponentForStep = () => {
-    switch (reservationStep) {
-      case "waitUserConfirm":
-        return (
-          <UserConfirm
-            bookInfoId={bookInfoId}
-            closeModal={closeModal}
-            onConfirm={tryReservation}
-            setReservationStep={setReservationStep}
-            setErrorMessage={setPropsString}
-          />
-        );
-      case "success":
-        return (
-          <SuccessRsv
-            closeModal={closeModal}
-            rank={rank}
-            lendabledate={propsString}
-          />
-        );
-      case "failure":
-        return (
-          <ModalContentsOnlyTitle closeModal={closeModal} title={propsString} />
-        );
-      default:
-        return null;
-    }
-  };
-  useEffect(ComponentForStep, [reservationStep]);
-  return ComponentForStep();
+  return (
+    <>
+      <button
+        className="reservation__button"
+        type="button"
+        onClick={tryReservation}
+      >
+        예약 하기
+        <img src={Available} alt="예약" />
+      </button>
+      <Dialog />
+    </>
+  );
 };
 
 export default Reservation;
 
 Reservation.propTypes = {
-  bookId: PropTypes.number.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  setClosable: PropTypes.func.isRequired,
+  bookInfoId: PropTypes.number.isRequired,
+  isAvailableReservation: PropTypes.bool.isRequired,
 };

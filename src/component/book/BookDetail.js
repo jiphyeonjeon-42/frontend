@@ -10,10 +10,7 @@ import BookStatus from "./BookStatus";
 import IMGERR from "../../img/image_onerror.svg";
 import Reservation from "../reservation/Reservation";
 import useDialog from "../../hook/useDialog";
-import useModal from "../../hook/useModal";
 import getErrorMessage from "../../data/error";
-import ArrRes from "../../img/arrow_right_res.svg";
-import ArrDef from "../../img/arrow_right_res_default.svg";
 
 const BookDetail = () => {
   const [bookDetailInfo, setbookDetailInfo] = useState({ books: [] });
@@ -29,8 +26,6 @@ const BookDetail = () => {
     setConfig: setDialogConfig,
     Dialog,
   } = useDialog();
-
-  const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
 
   const getBooksInfo = async () => {
     await axios
@@ -62,6 +57,13 @@ const BookDetail = () => {
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
+  const isAvailableReservation = () => {
+    const { books } = bookDetailInfo;
+    return (
+      books.length > 0 &&
+      books.reduce((sum, i) => sum + (i.isLendable + i.status), 0) === 0
+    );
+  };
 
   return (
     <main>
@@ -87,31 +89,10 @@ const BookDetail = () => {
             <span className="color-red">도서정보</span>
             <div className="book-detail__reservation-button">
               <div className="book-detail__title">{bookDetailInfo.title}</div>
-              {bookDetailInfo.books.length > 0 &&
-              // 대출가능한 책들 중에서 예약이 가능한지 판단
-              bookDetailInfo.books.reduce(
-                (accumulator, current) =>
-                  accumulator + (current.isLendable + current.status),
-                0,
-              ) === 0 ? (
-                <button
-                  className="reservation-active-button color-red"
-                  type="button"
-                  onClick={openModal}
-                >
-                  예약 하기
-                  <img src={ArrRes} alt="Arr" />
-                </button>
-              ) : (
-                <button
-                  className="reservation-disable-button color-a4"
-                  type="button"
-                  disabled
-                >
-                  대출 가능
-                  <img src={ArrDef} alt="Arr" />
-                </button>
-              )}
+              <Reservation
+                bookInfoId={bookDetailInfo.id}
+                isAvailableReservation={isAvailableReservation()}
+              />
             </div>
             <div className="book-detail__info">
               <div className="book-detail__info-wrapper color-54">
@@ -169,9 +150,6 @@ const BookDetail = () => {
         </div>
       </section>
       <Dialog />
-      <Modal>
-        <Reservation bookInfoId={bookDetailInfo.id} closeModal={closeModal} />
-      </Modal>
     </main>
   );
 };
