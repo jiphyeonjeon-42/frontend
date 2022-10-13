@@ -20,6 +20,11 @@ const Modal = ({ isOpen, onCloseModal, children, size }) => {
 
   if (!isOpen) return null;
 
+  const modalSize = () => {
+    const candidate = ["full", "basic"];
+    return candidate.includes(size) ? size : "basic";
+  };
+
   const onClickBackdrop = e => {
     e.preventDefault();
     onCloseModal();
@@ -40,7 +45,7 @@ const Modal = ({ isOpen, onCloseModal, children, size }) => {
         aria-hidden="true"
       >
         <div
-          className={`modal__container ${size}`}
+          className={`modal__container ${modalSize()}`}
           onClick={onClickContainer}
           onKeyPress={onClickContainer}
         >

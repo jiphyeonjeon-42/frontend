@@ -1,27 +1,27 @@
 import React, { useState } from "react";
 import Modal from "../component/utils/Modal";
 
-const useModal = size => {
-  // 모달에 필요한 기본 로직, 상태를 함께 제공
+const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const setOpen = () => {
-    setIsOpen(true);
-  };
-
-  const setClose = () => {
-    setIsOpen(false);
-  };
+  const setOpen = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
 
   const [config, setConfig] = useState({
+    size: "basic",
     afterClose: () => {},
   });
+
+  const setClose = () => {
+    close();
+    config.afterClose();
+  };
 
   const modalElement = ({ children }) => {
     return (
       <>
         {isOpen && (
-          <Modal isOpen={isOpen} onCloseModal={setClose} size={size}>
+          <Modal isOpen={isOpen} onCloseModal={setClose} size={config.size}>
             {children}
           </Modal>
         )}
