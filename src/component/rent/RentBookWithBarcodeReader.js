@@ -4,7 +4,7 @@ import axios from "axios";
 import BarcodeReader from "../utils/BarcodeReader";
 import "../../css/RentBookWithBarcodeReader.css";
 
-const RentBookWithBarcodeReader = ({ setSelectedBooks, closeMidModal }) => {
+const RentBookWithBarcodeReader = ({ setSelectedBooks, closeModal }) => {
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
 
   const toggleBarcodeReader = () => {
@@ -18,7 +18,7 @@ const RentBookWithBarcodeReader = ({ setSelectedBooks, closeMidModal }) => {
       .then(response => {
         book = response.data;
         setSelectedBooks(prev => [...prev, book]);
-        closeMidModal(0);
+        closeModal(0);
       });
   };
 
@@ -26,7 +26,7 @@ const RentBookWithBarcodeReader = ({ setSelectedBooks, closeMidModal }) => {
     const bookId = text.split(" ")[0];
     toggleBarcodeReader();
     seletOneOfBook(bookId);
-    closeMidModal(0);
+    closeModal(0);
   };
 
   return (
@@ -43,5 +43,5 @@ export default RentBookWithBarcodeReader;
 
 RentBookWithBarcodeReader.propTypes = {
   setSelectedBooks: PropTypes.func.isRequired,
-  closeMidModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };

@@ -8,19 +8,15 @@ const RentModalBookList = ({
   book,
   setSelectedBooks,
   selectedBooks,
-  closeMidModal,
+  closeModal,
 }) => {
   const seletOneOfBook = () => {
-    if (setSelectedBooks) {
-      selectedBooks.push(book);
-      setSelectedBooks(selectedBooks);
-      closeMidModal(0);
-    }
+    setSelectedBooks([...selectedBooks, book]);
+    closeModal();
   };
 
   const isAlreadySelected = (userBook, alreadySelect) => {
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < alreadySelect.length; i++) {
+    for (let i = 0; i < alreadySelect.length; i += 1) {
       if (userBook.id === alreadySelect[i].id) {
         return true;
       }
@@ -80,7 +76,7 @@ export default RentModalBookList;
 
 RentModalBookList.propTypes = {
   setSelectedBooks: PropTypes.func.isRequired,
-  closeMidModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
   selectedBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   book: PropTypes.object.isRequired,

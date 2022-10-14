@@ -1,7 +1,10 @@
-@import url(./MidModal.css);
-
 .rent__modal-user {
   min-width: 30rem;
+  padding: 0rem 6rem;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
 }
 
 .rent__modal-user__search-bar {
@@ -22,5 +25,4 @@
   .rent__modal-user__text {
     margin-right: 3rem;
   }
-
 }

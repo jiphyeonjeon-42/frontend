@@ -7,15 +7,18 @@ import Pagination from "../utils/Pagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
+import ReturnModalContents from "./ReturnModalContents";
 import ReturnBookWithBarcodeReader from "./ReturnBookWithBarcodeReader";
 import Book from "../../img/book-arrow-up-free-icon-font.svg";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
-import ReturnModal from "./ReturnModal";
+
 import Tabs from "../utils/Tabs";
 import { rentTabList } from "../../data/tablist";
 
+import useDialog from "../../hook/useDialog";
+import useModal from "../../hook/useModal";
+
 const ReturnBook = () => {
-  const [modal, setModal] = useState(false);
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [returnBookPage, setReturnBookPage] = useState(1);
@@ -24,11 +27,24 @@ const ReturnBook = () => {
   const [lendingSort, setLendingSort] = useState(false);
   const [lendingId, setLendingId] = useState(0);
 
-  const openModal = () => {
-    setModal(true);
-  };
-  const closeModal = () => {
-    setModal(false);
+  const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
+  const {
+    setOpen: openDialog,
+    config: dialogConfig,
+    setConfig: setDialogConfig,
+    Dialog,
+  } = useDialog();
+
+  const setDialogTitleAndMessage = (title, message) => {
+    setDialogConfig({
+      ...dialogConfig,
+      title,
+      message,
+      afterCloseFunction: () => {
+        closeModal();
+        window.location.reload();
+      },
+    });
   };
 
   const handlereturnBookSumbit = event => {
@@ -117,7 +133,15 @@ const ReturnBook = () => {
           </div>
         </div>
       </section>
-      {modal && <ReturnModal lendingId={lendingId} closeModal={closeModal} />}
+      <Dialog />
+      <Modal>
+        <ReturnModalContents
+          lendingId={lendingId}
+          closeModal={closeModal}
+          openDialog={openDialog}
+          setDialogTitleAndMessage={setDialogTitleAndMessage}
+        />
+      </Modal>
     </main>
   );
 };

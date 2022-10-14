@@ -2,19 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import Banner from "../utils/Banner";
-import "../../css/UserManagement.css";
 import Tabs from "../utils/Tabs";
 import UserBriefInfo from "./UserBriefInfo";
 import UserUsageInfo from "./UserUsageInfo";
 import AdminSearchBar from "../utils/AdminSearchBar";
 import Pagination from "../utils/Pagination";
-import MidModal from "../utils/MidModal";
+import Modal from "../utils/Modal";
+import ModalHeader from "../utils/ModalHeader";
 import useDialog from "../../hook/useDialog";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import UserDetailInfo from "./UserDetailInfo";
 
 import getErrorMessage from "../../data/error";
 import { managementTabList } from "../../data/tablist";
+import "../../css/UserManagement.css";
 
 const USAGE = 1;
 // const EDIT = 2;
@@ -131,20 +132,21 @@ const UserManagement = () => {
         </div>
       </section>
       {modal && (
-        <MidModal closeModal={closeModal}>
+        <Modal isOpen={modal} onCloseModal={closeModal} size="full">
+          <ModalHeader onCloseModal={closeModal} isWithCloseButton />
           {modal === USAGE ? (
             <UserUsageInfo key={selectedUser.id} user={selectedUser} />
           ) : (
             <UserDetailInfo
               user={selectedUser}
-              closeMidModal={closeModal}
+              closeModal={closeModal}
               openDialog={openDialog}
               isEdit={isEdit}
               setIsEdit={setIsEdit}
               setDialogTitleAndMessage={setDialogTitleAndMessage}
             />
           )}
-        </MidModal>
+        </Modal>
       )}
       <Dialog />
     </main>

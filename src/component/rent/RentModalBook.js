@@ -10,7 +10,7 @@ import BookList from "./RentModalBookList";
 import RentBookWithBarcodeReader from "./RentBookWithBarcodeReader";
 import "../../css/RentModalBook.css";
 
-const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
+const RentModalBook = ({ selectedBooks, setSelectedBooks, closeModal }) => {
   const navigate = useNavigate();
   const [bookSearchWord, setBookSearchWord] =
     useRecoilState(useAdminSearchInput);
@@ -68,7 +68,7 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
   }, []);
 
   return (
-    <section className="modal__wrapper rent__modal-book">
+    <section className="rent__modal-book">
       <div className="rent__modal-book__title">
         <div className="rent__modal-book__title-text font-28-bold color-54">
           도서 정보
@@ -81,7 +81,7 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
       <RentBookWithBarcodeReader
         setSelectedBooks={setSelectedBooks}
         selectedBooks={selectedBooks}
-        closeMidModal={closeMidModal}
+        closeModal={closeModal}
       />
       <div className="rent__modal-book__total-list">
         {bookList.map(book => (
@@ -90,7 +90,7 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
             book={book}
             setSelectedBooks={setSelectedBooks}
             selectedBooks={selectedBooks}
-            closeMidModal={closeMidModal}
+            closeModal={closeModal}
           />
         ))}
       </div>
@@ -109,6 +109,6 @@ export default RentModalBook;
 
 RentModalBook.propTypes = {
   setSelectedBooks: PropTypes.func.isRequired,
-  closeMidModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
   selectedBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };

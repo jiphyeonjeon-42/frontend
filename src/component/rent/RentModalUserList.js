@@ -4,14 +4,10 @@ import PropTypes from "prop-types";
 import Arrow from "../../img/arrow_right_black.svg";
 import "../../css/RentModalUserList.css";
 
-const UserList = ({ user, setSelectedUser, closeMidModal }) => {
+const UserList = ({ user, setSelectedUser, closeModal }) => {
   const seletUser = () => {
-    if (setSelectedUser) {
-      setSelectedUser(user);
-    }
-    if (closeMidModal) {
-      closeMidModal(0);
-    }
+    setSelectedUser(user);
+    closeModal();
   };
 
   const displayPenalty = () => {
@@ -62,7 +58,7 @@ export default UserList;
 
 UserList.propTypes = {
   setSelectedUser: PropTypes.func.isRequired,
-  closeMidModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   user: PropTypes.object.isRequired,
 };

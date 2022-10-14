@@ -1,7 +1,10 @@
-@import url(./MidModal.css);
-
 .rent__modal-book {
   min-width: 30rem;
+  padding: 0 6rem;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
 }
 
 .rent__modal-book__title {
@@ -30,5 +33,4 @@
   .rent__modal-book__title {
     margin: 1rem 0 2rem 0;
   }
-
 }

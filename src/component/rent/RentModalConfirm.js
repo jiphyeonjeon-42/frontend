@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import "../../css/RentModalConfirm.css";
 import { useNavigate } from "react-router-dom";
 import getErrorMessage from "../../data/error";
 import IMGERR from "../../img/image_onerror.svg";
+
+import "../../css/RentModalConfirm.css";
 
 const RentModalConfirm = ({
   selectedUser,
@@ -22,6 +23,8 @@ const RentModalConfirm = ({
     e.preventDefault();
     setRemark1(e.target.value);
   };
+
+  console.log(selectedBooks);
 
   const handleRemark2 = e => {
     e.preventDefault();
@@ -95,10 +98,10 @@ const RentModalConfirm = ({
     closeModal();
   };
   return (
-    <div className="modal__wrapper rent-modal">
+    <div className="rent-modal">
       <div className="rent-modal__user">
         <p className="font-16 color-red">유저정보</p>
-        <span className="rent-modal__user__id font-28-bold color-54 margin-8">
+        <span className="rent-modal__user__id font-28-bold color-54">
           {selectedUser.nickname ? selectedUser.nickname : selectedUser.email}
         </span>
         <span className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</span>
@@ -120,9 +123,9 @@ const RentModalConfirm = ({
               />
             </div>
             <div className="rent-modal__detail">
-              <div className="mid-modal__book">
+              <div className="rent-modal__book">
                 <p className="font-16 color-red">도서정보</p>
-                <p className="rent-modal__title font-28-bold color-54 margin-8">
+                <p className="rent-modal__title font-28-bold color-54">
                   {selectBook.title}
                 </p>
                 <p className="font-16 color-54">{`청구기호 : ${selectBook.callSign}`}</p>
@@ -130,7 +133,7 @@ const RentModalConfirm = ({
               <div className="rent-modal__remark">
                 <p className="font-16 color-red">비고</p>
                 <textarea
-                  className="mid-modal__remark__input margin-8 font-16"
+                  className="rent-modal__remark__input font-16"
                   placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
                   value={index === 0 ? remark1 : remark2}
                   onChange={index === 0 ? handleRemark1 : handleRemark2}
@@ -140,9 +143,9 @@ const RentModalConfirm = ({
           </div>
         ))}
       </div>
-      <div className="rent-modal__button">
+      <div className="rent-modal__buttons">
         <button
-          className={`modal__button mid font-20 color-ff ${
+          className={`rent-modal__button font-20 color-ff ${
             ((selectedBooks.length === 2 && remark1 && remark2) ||
               (selectedBooks.length === 1 && remark1)) &&
             `confirm`
@@ -159,7 +162,7 @@ const RentModalConfirm = ({
           대출 완료하기
         </button>
         <button
-          className="modal__button mid font-20 color-ff"
+          className="rent-modal__button font-20 color-ff"
           type="button"
           onClick={closeModal}
         >

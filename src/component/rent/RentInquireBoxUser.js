@@ -2,15 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import DeleteButton from "../../img/x_button.svg";
 import "../../css/RentInquireBoxUser.css";
+import useModal from "../../hook/useModal";
+import RentModalUser from "./RentModalUser";
 
-const InquireBoxUser = ({
-  selectedUser,
-  setSelectedUser,
-  setMidModalContents,
-}) => {
-  const openModal = () => {
-    setMidModalContents("inquire user");
-  };
+const InquireBoxUser = ({ selectedUser, setSelectedUser }) => {
+  const { setOpen, setClose, Modal } = useModal();
 
   const deleteUser = () => {
     if (setSelectedUser) {
@@ -106,11 +102,17 @@ const InquireBoxUser = ({
         <button
           className="rent__inquire-box-user__add-button color-a4"
           type="button"
-          onClick={openModal}
+          onClick={setOpen}
         >
           +
         </button>
       )}
+      <Modal>
+        <RentModalUser
+          setSelectedUser={setSelectedUser}
+          closeModal={setClose}
+        />
+      </Modal>
     </div>
   );
 };
@@ -131,5 +133,4 @@ InquireBoxUser.propTypes = {
     reservations: PropTypes.arrayOf(PropTypes.object.isRequired),
   }).isRequired,
   setSelectedUser: PropTypes.func.isRequired,
-  setMidModalContents: PropTypes.func.isRequired,
 };

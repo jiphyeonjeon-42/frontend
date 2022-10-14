@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import Banner from "../utils/Banner";
-import "../../css/ReservedLoan.css";
-import Pagination from "../utils/Pagination";
-import InquireBoxTitle from "../utils/InquireBoxTitle";
-import { useAdminSearchInput } from "../../atom/useSearchInput";
-import Reserve from "../../img/list-check-solid.svg";
 import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
-import ReservedModal from "./ReservedModal";
+import ReservedModalContents from "./ReservedModalContents";
 import Tabs from "../utils/Tabs";
+import Banner from "../utils/Banner";
+import Pagination from "../utils/Pagination";
+import InquireBoxTitle from "../utils/InquireBoxTitle";
+import useModal from "../../hook/useModal";
+import { useAdminSearchInput } from "../../atom/useSearchInput";
 import { rentTabList } from "../../data/tablist";
+import Reserve from "../../img/list-check-solid.svg";
+import "../../css/ReservedLoan.css";
 
 const ReservedLoan = () => {
-  const [modal, setModal] = useState(false);
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [resevedLoanPage, setResevedLoanPage] = useState(1);
@@ -24,13 +24,8 @@ const ReservedLoan = () => {
   const [isWaiting, setIsWaiting] = useState(false);
   const [isExpired, setIsExpired] = useState(false);
   const [reservedInfo, setReservedInfo] = useState(null);
+  const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
 
-  const openModal = () => {
-    setModal(true);
-  };
-  const closeModal = () => {
-    setModal(false);
-  };
   const handleReservedLoanSumbit = event => {
     event.preventDefault();
     const searchForm = document.querySelector(".modal-search-form");
@@ -67,10 +62,6 @@ const ReservedLoan = () => {
     setResevedLoanPage(1);
     await fetchReservedLoanData();
   }, [userSearchWord]);
-
-  useEffect(() => {
-    setUserSearchWord("");
-  }, []);
 
   useEffect(fetchReservedLoanData, [
     resevedLoanPage,
@@ -126,6 +117,12 @@ const ReservedLoan = () => {
               setInfo={setReservedInfo}
             />
           ))}
+          <Modal>
+            <ReservedModalContents
+              reservedInfo={reservedInfo}
+              closeModal={closeModal}
+            />
+          </Modal>
           <div className="reserved-loan-table__pagination">
             <Pagination
               page={resevedLoanPage}
@@ -135,9 +132,6 @@ const ReservedLoan = () => {
           </div>
         </div>
       </section>
-      {modal && (
-        <ReservedModal reservedInfo={reservedInfo} closeModal={closeModal} />
-      )}
     </main>
   );
 };

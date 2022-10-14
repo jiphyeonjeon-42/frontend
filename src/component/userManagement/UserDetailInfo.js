@@ -74,7 +74,7 @@ const convertDatetoString = date => {
 
 const UserDetailInfo = ({
   user,
-  closeMidModal,
+  closeModal,
   openDialog,
   isEdit,
   setIsEdit,
@@ -109,7 +109,7 @@ const UserDetailInfo = ({
         setIsEdit(!isEdit);
       })
       .catch(error => {
-        closeMidModal();
+        closeModal();
         const errorCode = parseInt(error?.response?.data?.errorCode, 10);
         const [title, message] = getErrorMessage(errorCode).split("\r\n");
         setDialogTitleAndMessage(title, message);
@@ -275,7 +275,7 @@ UserDetailInfo.propTypes = {
     ),
   }).isRequired,
   openDialog: PropTypes.func.isRequired,
-  closeMidModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
   setDialogTitleAndMessage: PropTypes.func.isRequired,
   isEdit: PropTypes.bool.isRequired,
   setIsEdit: PropTypes.func.isRequired,

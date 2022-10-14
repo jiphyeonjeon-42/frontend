@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../component/utils/Modal";
+import ModalHeader from "../component/utils/ModalHeader";
 
 const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,7 +9,8 @@ const useModal = () => {
   const close = () => setIsOpen(false);
 
   const [config, setConfig] = useState({
-    size: "basic",
+    size: "full",
+    isWithCloseButton: true,
     afterClose: () => {},
   });
 
@@ -22,6 +24,9 @@ const useModal = () => {
       <>
         {isOpen && (
           <Modal isOpen={isOpen} onCloseModal={setClose} size={config.size}>
+            {config.isWithCloseButton && (
+              <ModalHeader isWithCloseButton onCloseModal={setClose} />
+            )}
             {children}
           </Modal>
         )}

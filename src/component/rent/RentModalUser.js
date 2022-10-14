@@ -8,7 +8,7 @@ import Pagination from "../utils/Pagination";
 import RentUserList from "./RentModalUserList";
 import "../../css/RentModalUser.css";
 
-const RentModalUser = ({ setSelectedUser, closeMidModal }) => {
+const RentModalUser = ({ setSelectedUser, closeModal }) => {
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [userSearchPage, setUserSearchPage] = useState(1);
@@ -63,7 +63,7 @@ const RentModalUser = ({ setSelectedUser, closeMidModal }) => {
   }, []);
 
   return (
-    <div className="modal__wrapper rent__modal-user">
+    <div className="rent__modal-user">
       <div className="rent__modal-user__search-bar">
         <div className="rent__modal-user__text font-28-bold color-54">
           카뎃 정보
@@ -78,7 +78,7 @@ const RentModalUser = ({ setSelectedUser, closeMidModal }) => {
           key={user.id}
           user={user}
           setSelectedUser={setSelectedUser}
-          closeMidModal={closeMidModal}
+          closeModal={closeModal}
         />
       ))}
       <div className="rent__modal-user__pagination">
@@ -96,5 +96,5 @@ export default RentModalUser;
 
 RentModalUser.propTypes = {
   setSelectedUser: PropTypes.func.isRequired,
-  closeMidModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
