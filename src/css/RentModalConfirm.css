@@ -26,7 +26,7 @@
 }
 
 .rent-modal__books {
-  height: 38rem;
+  height: 50rem;
   margin-bottom: 3.5rem;
   overflow: auto;
 }
@@ -65,8 +65,17 @@
   margin-bottom: 3.5rem;
 }
 
+.rent-modal__user__detail {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 .rent-modal__user__id {
   margin: 0.8rem 3.5rem 0 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .rent-modal__remark {
@@ -89,19 +98,8 @@
   margin-bottom: 8rem;
   cursor: pointer;
 }
-
-.rent-modal__button {
-  margin-right: 2.4rem;
-  border: 0;
-  padding: 1rem 3rem;
-  text-align: center;
-  border-radius: 2.4rem;
-  background-color: #a4a4a4;
-  cursor: pointer;
-}
-
-.rent-modal__button.confirm {
-  background-color: #e63737;
+.rent-modal__cancel {
+  margin-left: 2.4rem;
 }
 
 @media screen and (max-width: 767px) {
@@ -120,9 +118,7 @@
     width: 10rem;
     height: 15rem;
   }
-  .modal__button {
-    padding: 0.7rem 2rem;
-    font-size: 1.8rem !important;
+  .rent-modal__cancel {
     margin-right: 1.5rem;
   }
 }

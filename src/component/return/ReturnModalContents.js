@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import BookInformationWithCover from "../utils/BookInformationWithCover";
+import TextWithLabel from "../utils/TextWithLabel";
+import TextareaWithLabel from "../utils/TextareaWithLabel";
+import Button from "../utils/Button";
 import getErrorMessage from "../../data/error";
+import "../../css/ReturnModalContents.css";
 
 const ReturnModalContents = ({
   lendingId,
@@ -22,6 +27,7 @@ const ReturnModalContents = ({
   };
   const [data, setData] = useState(defaultData);
   const [remark, setRemark] = useState("");
+  const [remarkMessage, setRemarkMessage] = useState("");
 
   const handleRemark = e => {
     e.preventDefault();
@@ -40,6 +46,7 @@ const ReturnModalContents = ({
         openDialog();
       });
   }, []);
+
   const postReturn = async () => {
     if (!remark) return;
     const condition = remark;
@@ -66,64 +73,55 @@ const ReturnModalContents = ({
         openDialog();
       });
   };
-
+  const onClickReturn = () => {
+    if (remark.length) postReturn();
+    setRemarkMessage("비고를 입력해주세요");
+  };
   return (
-    <div className="modal__wrapper mid">
-      <div className="mid-modal__cover">
-        <img src={data.image} alt="cover" className="mid-modal__cover-img" />
+    <BookInformationWithCover
+      wrapperClassName="return-modal__wrapper"
+      bookCoverImg={data.image}
+      bookCoverAlt={data.title}
+    >
+      <TextWithLabel
+        wrapperClassName="return-modal__book"
+        topLabelText="도서정보"
+        mainText={data.title}
+        bottomLabelText={`청구기호 : ${data.callSign}`}
+      />
+      <TextWithLabel
+        wrapperClassName="return-modal__lend"
+        topLabelText="대출정보"
+        mainText={data.createdAt.replaceAll(".", "-")}
+        bottomLabelText={`반납예정일 : ${data.dueDate.replaceAll(".", "-")}`}
+      />
+      <TextWithLabel
+        topLabelText="유저정보"
+        mainText={data.login}
+        bottomLabelText={`연체일수 : ${data.penaltyDays}일`}
+      />
+      <TextareaWithLabel
+        wrapperClassName="return-modal__remark"
+        topLabelText="비고"
+        textareaValue={remark}
+        onChangeTextarea={handleRemark}
+        textareaPlaceHolder={`대출당시 : ${data.lendingCondition}`}
+        bottomMessageText={remarkMessage}
+      />
+      <div className="return-modal__buttons">
+        <Button
+          value="반납 완료하기"
+          color={`${remark.length && "red"}`}
+          disabled={remark.length === 0}
+          onClick={onClickReturn}
+        />
+        <Button
+          value="취소하기"
+          className="return-modal__cancel"
+          onClick={closeModal}
+        />
       </div>
-      <div className="mid-modal__detail">
-        <div className="mid-modal__book">
-          <p className="font-16 color-red">도서정보</p>
-          <p className="mid-modal__book-title font-28-bold color-54  margin-8">
-            {data.title}
-          </p>
-          <p className="font-16 color-54">{`청구기호 : ${data.callSign}`}</p>
-        </div>
-        <div className="mid-modal__lend">
-          <p className="font-16 color-red">대출정보</p>
-          <p className="font-28-bold color-54  margin-8">
-            {data.createdAt.replaceAll(".", "-")}
-          </p>
-          <p className="font-16 color-54">{`반납예정일 : ${data.dueDate.replaceAll(
-            ".",
-            "-",
-          )}`}</p>
-        </div>
-        <div className="mid-modal__user">
-          <p className="font-16 color-red">유저정보</p>
-          <p className="font-28-bold color-54  margin-8">{data.login}</p>
-          <p className="font-16 color-54">{`연체일수 : ${data.penaltyDays}일`}</p>
-        </div>
-        <div className="mid-modal__remark">
-          <p className="font-16 color-red">비고</p>
-          <textarea
-            className="mid-modal__remark__input margin-8 font-16"
-            placeholder={`대출당시 : ${data.lendingCondition}`}
-            value={remark}
-            onChange={handleRemark}
-          />
-          <div className="modal__buttons">
-            <button
-              className={`modal__button mid font-20 color-ff ${
-                remark && `confirm`
-              }`}
-              type="button"
-              onClick={postReturn}
-            >
-              반납 완료하기
-            </button>
-            <button
-              className="modal__button mid font-20 color-ff"
-              type="button"
-              onClick={closeModal}
-            >
-              취소하기
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    </BookInformationWithCover>
   );
 };
 

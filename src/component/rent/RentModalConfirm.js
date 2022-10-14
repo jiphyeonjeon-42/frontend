@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import PropTypes from "prop-types";
+import Button from "../utils/Button";
+import BookInformationWithCover from "../utils/BookInformationWithCover";
+import TextWithLabel from "../utils/TextWithLabel";
+import TextareaWithLabel from "../utils/TextareaWithLabel";
 import getErrorMessage from "../../data/error";
-import IMGERR from "../../img/image_onerror.svg";
-
 import "../../css/RentModalConfirm.css";
 
 const RentModalConfirm = ({
@@ -38,10 +40,6 @@ const RentModalConfirm = ({
     book.duedate = date;
     return book;
   };
-
-  function subtituteImg(e) {
-    e.target.src = IMGERR;
-  }
 
   const axiosPost = async data => {
     for (let i = 0; i < data.length; i += 1) {
@@ -97,14 +95,21 @@ const RentModalConfirm = ({
     setRemark2("");
     closeModal();
   };
+
+  const isRentable =
+    (selectedBooks.length === 1 && remark1) ||
+    (selectedBooks.length === 2 && remark1 && remark2);
+
   return (
     <div className="rent-modal">
       <div className="rent-modal__user">
         <p className="font-16 color-red">유저정보</p>
-        <span className="rent-modal__user__id font-28-bold color-54">
-          {selectedUser.nickname ? selectedUser.nickname : selectedUser.email}
-        </span>
-        <span className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</span>
+        <div className="rent-modal__user__detail">
+          <p className="rent-modal__user__id font-28-bold color-54">
+            {selectedUser.nickname ? selectedUser.nickname : selectedUser.email}
+          </p>
+          <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</p>
+        </div>
       </div>
       <div className="rent-modal__books">
         {selectedBooks.map((selectBook, index) => (
@@ -114,60 +119,40 @@ const RentModalConfirm = ({
               index === 0 ? "" : "second-book"
             }`}
           >
-            <div className="rent-modal__cover">
-              <img
-                src={selectBook.image}
-                alt="cover"
-                className="rent-modal__cover-img"
-                onError={subtituteImg}
+            <BookInformationWithCover
+              bookCoverAlt={selectBook.title}
+              bookCoverImg={selectBook.image}
+            >
+              <TextWithLabel
+                wrapperClassName="rent-modal__book"
+                topLabelText="도서정보"
+                mainText={selectBook.title}
+                bottomLabelText={`청구기호 : ${selectBook.callSign}`}
               />
-            </div>
-            <div className="rent-modal__detail">
-              <div className="rent-modal__book">
-                <p className="font-16 color-red">도서정보</p>
-                <p className="rent-modal__title font-28-bold color-54">
-                  {selectBook.title}
-                </p>
-                <p className="font-16 color-54">{`청구기호 : ${selectBook.callSign}`}</p>
-              </div>
-              <div className="rent-modal__remark">
-                <p className="font-16 color-red">비고</p>
-                <textarea
-                  className="rent-modal__remark__input font-16"
-                  placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
-                  value={index === 0 ? remark1 : remark2}
-                  onChange={index === 0 ? handleRemark1 : handleRemark2}
-                />
-              </div>
-            </div>
+              <TextareaWithLabel
+                wrapperClassName="rent-modal__remark"
+                topLabelText="비고"
+                textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
+                textareaValue={index === 0 ? remark1 : remark2}
+                onChangeTextarea={index === 0 ? handleRemark1 : handleRemark2}
+                isTextareaFocusedOnMount={index === 0}
+              />
+            </BookInformationWithCover>
           </div>
         ))}
       </div>
       <div className="rent-modal__buttons">
-        <button
-          className={`rent-modal__button font-20 color-ff ${
-            ((selectedBooks.length === 2 && remark1 && remark2) ||
-              (selectedBooks.length === 1 && remark1)) &&
-            `confirm`
-          }`}
-          type="button"
-          disabled={
-            (selectedBooks.length === 2 && remark1 && remark2) ||
-            (selectedBooks.length === 1 && remark1)
-              ? ""
-              : "disabled"
-          }
+        <Button
+          value="대출 완료하기"
           onClick={postData}
-        >
-          대출 완료하기
-        </button>
-        <button
-          className="rent-modal__button font-20 color-ff"
-          type="button"
+          disabled={isRentable}
+          className={`${isRentable && `confirm`}`}
+        />
+        <Button
+          value="취소하기"
+          className="rent-modal__cancel"
           onClick={closeModal}
-        >
-          취소하기
-        </button>
+        />
       </div>
     </div>
   );

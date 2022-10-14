@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import getErrorMessage from "../../data/error";
 import useDialog from "../../hook/useDialog";
+import BookInformationWithCover from "../utils/BookInformationWithCover";
+import TextWithLabel from "../utils/TextWithLabel";
+import TextareaWithLabel from "../utils/TextareaWithLabel";
+import Button from "../utils/Button";
+import dateFormat from "../../util/date";
+import getErrorMessage from "../../data/error";
 import "../../css/ReservedModalContents.css";
 
 const ReservedModalContents = ({ reservedInfo, closeModal }) => {
-  if (!reservedInfo) return <div>!!</div>;
   const [remark, setRemark] = useState("");
 
   const {
@@ -42,7 +46,7 @@ const ReservedModalContents = ({ reservedInfo, closeModal }) => {
     setRemark(e.target.value);
   };
 
-  const postData = async () => {
+  const postRent = async () => {
     if (!remark) return;
     const condition = remark;
     setRemark("");
@@ -84,7 +88,7 @@ const ReservedModalContents = ({ reservedInfo, closeModal }) => {
       });
   };
 
-  const confirmReservation = () => {
+  const confirmDeleteReservation = () => {
     setDialogConfig({
       ...dialogConfig,
       title: "예약을 취소하시겠습니까?",
@@ -97,85 +101,63 @@ const ReservedModalContents = ({ reservedInfo, closeModal }) => {
     openDialog();
   };
 
+  const isRentable = !reservedInfo.status && reservedInfo?.endAt;
+  const isAvaliableReservation = !reservedInfo.status && !reservedInfo?.endAt;
+
   return (
-    <div className="reserved-modal__wrapper">
+    <BookInformationWithCover
+      wrapperClassName="reserved-modal__wrapper"
+      bookCoverAlt={reservedInfo.title}
+      bookCoverImg={reservedInfo.image}
+    >
       <Dialog />
-      <div className="reserved-modal__cover">
-        <img
-          src={reservedInfo.image}
-          alt="cover"
-          className="reserved-modal__cover-img"
-        />
-      </div>
-      <div className="reserved-modal__detail">
-        <div className="reserved-modal__book">
-          <p className="reserved-modal__red-title">도서정보</p>
-          <p className="reserved-modal__book-title reserved-modal__content">
-            {reservedInfo.title}
-          </p>
-          {reservedInfo.bookId && reservedInfo.callSign ? (
-            <p className="reserved-modal__sub-content">{`도서코드 : ${reservedInfo.callSign}`}</p>
-          ) : null}
-        </div>
-        {reservedInfo.bookId && reservedInfo.endAt ? (
-          <div className="reserved-modal__lend">
-            <p className="reserved-modal__red-title">예약 만료일</p>
-            <p className="reserved-modal__content">
-              {reservedInfo.endAt ? reservedInfo.endAt.slice(0, 10) : "NULL"}
-            </p>
-          </div>
-        ) : (
-          <div className="reserved-modal__lend">
-            <p className="reserved-modal__red-title">예약 시작일</p>
-            <p className="reserved-modal__content">
-              {reservedInfo.createdAt
-                ? reservedInfo.createdAt.slice(0, 10)
-                : "NULL"}
-            </p>
-          </div>
-        )}
-        <div className="reserved-modal__user">
-          <p className="reserved-modal__red-title">유저정보</p>
-          <p className="reserved-modal__content">{reservedInfo.login}</p>
-          <p className="reserved-modal__sub-content">{`연체일수 : ${reservedInfo.penaltyDays}일`}</p>
-        </div>
-        <div className="reserved-modal__remark">
-          <p className="reserved-modal__red-title">비고</p>
-          <textarea
-            className="reserved-modal__remark__input"
-            placeholder="비고를 입력해주세요. (반납 시 책 상태 등)"
-            value={remark}
-            onChange={handleRemark}
+      <TextWithLabel
+        wrapperClassName="reserved-modal__book"
+        topLabelText="도서정보"
+        mainText={reservedInfo.title}
+        bottomLabelText={
+          reservedInfo.callSign && `도서코드 : ${reservedInfo.callSign}`
+        }
+      />
+      <TextWithLabel
+        wrapperClassName="reserved-modal__lend"
+        topLabelText={reservedInfo?.endAt ? "예약 만료일" : "예약 신청일"}
+        mainText={dateFormat(reservedInfo?.endAt || reservedInfo?.createdAt)}
+      />
+      <TextWithLabel
+        wrapperClassName="reserved-modal__user"
+        topLabelText="유저정보"
+        mainText={reservedInfo?.login || ""}
+        bottomLabelText={`연체일수 : ${reservedInfo.penaltyDays}일`}
+      />
+      {isRentable && (
+        <>
+          <TextareaWithLabel
+            wrapperClassName="reserved-modal__remark"
+            topLabelText="비고"
+            textareaValue={remark}
+            onChangeTextarea={handleRemark}
+            textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
           />
-          <div className="reserved-modal__buttons">
-            {!reservedInfo.status && reservedInfo.endAt ? (
-              <button
-                className={`reserved-modal__button  font-20 color-ff ${
-                  remark && `confirm`
-                }`}
-                type="button"
-                onClick={postData}
-              >
-                대출 완료하기
-              </button>
-            ) : (
-              ``
-            )}
-            {reservedInfo.status ? (
-              ``
-            ) : (
-              <button
-                className="reserved-modal__button  font-20 color-ff confirm"
-                type="button"
-                onClick={confirmReservation}
-              >
-                예약취소
-              </button>
-            )}
+          <div className="reserved-modal__button">
+            <Button
+              color={remark && "red"}
+              onClick={postRent}
+              value="대출 완료하기"
+            />
           </div>
+        </>
+      )}
+      {isAvaliableReservation && (
+        <div className="reserved-modal__button cancel">
+          <Button
+            value="예약 취소"
+            color="red"
+            onClick={confirmDeleteReservation}
+          />
         </div>
-      </div>
-    </div>
+      )}
+    </BookInformationWithCover>
   );
 };
 
