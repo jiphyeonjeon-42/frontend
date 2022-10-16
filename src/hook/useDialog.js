@@ -31,8 +31,10 @@ const useDialog = () => {
 
   const [config, setConfig] = useState(defaultConfig);
 
-  const setTitleAndMessage = (title, message) =>
-    setConfig(...config, title, message);
+  const setOpenTitleAndMessage = (title, message) => {
+    setConfig({ ...config, title, message });
+    setOpen();
+  };
 
   const setClose = () => {
     close();
@@ -71,7 +73,7 @@ const useDialog = () => {
     config, // for update
     defaultConfig, // for reset
     setConfig,
-    setTitleAndMessage,
+    setOpenTitleAndMessage,
     Dialog,
   };
 };
