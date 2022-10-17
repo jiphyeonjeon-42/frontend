@@ -31,14 +31,26 @@ const useDialog = () => {
 
   const [config, setConfig] = useState(defaultConfig);
 
-  const setOpenTitleAndMessage = (title, message) => {
-    setConfig({ ...config, title, message });
-    setOpen();
-  };
-
   const setClose = () => {
     close();
     config.afterClose();
+  };
+
+  const setOpenTitleAndMessage = (title, message, afterClose = () => {}) => {
+    setConfig({
+      ...config,
+      title,
+      message,
+      afterClose,
+      firstButton: {
+        ...config.firstButton,
+        onClick: () => {
+          afterClose();
+          setClose();
+        },
+      },
+    });
+    setOpen();
   };
 
   const Dialog = () => {
