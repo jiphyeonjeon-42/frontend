@@ -50,10 +50,12 @@ function App() {
         <Route path="/information" element={<Information />} />
         <Route path="/search" element={<Search />} />
         <Route path="/info/:id" element={<BookDetail />} />
-        <Route path="/login" element={<Login />} />
+        <Route element={<LimitedRoute isLogoutOnly />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
         <Route path="/auth" element={<Auth />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/register" element={<Register />} />
         <Route element={<LimitedRoute isAdminOnly />}>
           <Route path="/rent" element={<Rent />} />
           <Route path="/return" element={<ReturnBook />} />
