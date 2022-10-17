@@ -1,5 +1,5 @@
 .modal__dialog {
-  height: 10rem;
+  min-height: 10rem;
   color: #545454;
   font-size: 1.8rem;
 
