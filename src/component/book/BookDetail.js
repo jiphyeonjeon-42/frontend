@@ -9,6 +9,7 @@ import Banner from "../utils/Banner";
 import BookStatus from "./BookStatus";
 import IMGERR from "../../img/image_onerror.svg";
 import MiniModal from "../utils/MiniModal";
+import Review from "./review/Review";
 import Reservation from "../reservation/Reservation";
 import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 import getErrorMessage from "../../data/error";
@@ -165,6 +166,16 @@ const BookDetail = () => {
             </div>
           </div>
         </div>
+        {/* 테스트용 prop 만들기
+        ex)
+        const info = () = {
+            test1: test11,
+            test2: test22
+        }
+
+        <Review info={info} />
+        */}
+        <Review />
       </section>
       {miniModalView && (
         <MiniModal closeModal={closeModal}>
