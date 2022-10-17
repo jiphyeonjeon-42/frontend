@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const api = axios.create({ baseURL: `${process.env.REACT_APP_API}` });
+const api = axios.create({
+  baseURL: `${process.env.REACT_APP_API}`,
+  withCredentials: true,
+});
 
 const axiosPromise = (method, url, data) => {
   if (method === "post") return api.post(url, data);
