@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import arrowLeft from "../../img/arrow_left_black.svg";
 import "../../css/EditEmailOrPassword.css";
@@ -9,7 +9,7 @@ import getErrorMessage from "../../data/error";
 
 function EditEmailOrPassword() {
   const { mode } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
   const [miniModalContent, setMiniModalContent] = useState("");
   const [isGoBack, setIsGoBack] = useState(false);
@@ -20,7 +20,7 @@ function EditEmailOrPassword() {
   const MODE_TO_KOREAN = mode === "email" ? "이메일" : "비밀번호";
 
   const onClickLeftArrow = () => {
-    history.goBack();
+    navigate(-1);
   };
 
   const onChangeInput = e => {
@@ -68,7 +68,7 @@ function EditEmailOrPassword() {
 
   const closeModal = () => {
     setIsMiniModalOpen(false);
-    if (isGoBack) history.goBack();
+    if (isGoBack) navigate(-1);
   };
 
   useEffect(async () => {

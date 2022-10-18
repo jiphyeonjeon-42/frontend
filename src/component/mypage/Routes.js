@@ -12,12 +12,8 @@ function Routes() {
       <div className="mypage-wrapper">
         <section className="mypage-section">
           <Switch>
-            <Route path="/mypage" exact component={Mypage} />
-            <Route
-              path="/mypage/edit/:mode"
-              exact
-              component={EditEmailOrPassword}
-            />
+            <Route path="/mypage" element={Mypage} />
+            <Route path="/mypage/edit/:mode" element={EditEmailOrPassword} />
           </Switch>
         </section>
       </div>
