@@ -1,20 +1,20 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 import PropTypes from "prop-types";
 import NotFound from "./component/utils/NotFound";
-import userState from "./atom/userState";
 
 const LimitedRoute = ({ isLoginOnly, isAdminOnly, isLogoutOnly }) => {
-  const user = useRecoilValue(userState);
+  // 로그인 정보를 확인
+  // recoil 전역상태는 새로고침시 초기화되기 때문에 로컬스토리지 참고
+  const user = JSON.parse(window.localStorage.getItem("user"));
 
-  if (isAdminOnly && !user.isAdmin) {
+  if (isAdminOnly && !user?.isAdmin) {
     return <NotFound />;
   }
-  if (isLoginOnly && !user.isLogin) {
+  if (isLoginOnly && !user?.isLogin) {
     return <Navigate to="/login" />;
   }
-  if (isLogoutOnly && user.isLogin) {
+  if (isLogoutOnly && user?.isLogin) {
     return <Navigate to="/" />;
   }
   return <Outlet />;
@@ -24,12 +24,12 @@ export default LimitedRoute;
 
 LimitedRoute.propTypes = {
   isLoginOnly: PropTypes.bool,
-  isLogoutOnly: PropTypes.bool,
   isAdminOnly: PropTypes.bool,
+  isLogoutOnly: PropTypes.bool,
 };
 
 LimitedRoute.defaultProps = {
   isLoginOnly: false,
-  isLogoutOnly: false,
   isAdminOnly: false,
+  isLogoutOnly: false,
 };

@@ -21,7 +21,6 @@ const AddBook = () => {
     koreanDemicalClassification: "",
   });
 
-
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
