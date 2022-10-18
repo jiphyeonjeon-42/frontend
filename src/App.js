@@ -22,8 +22,7 @@ import AddBook from "./component/book/AddBook";
 import MyPageRoutes from "./component/mypage/MyPageRoutes";
 import userState from "./atom/userState";
 import Mypage from "./component/mypage/Mypage";
-import EditEmail from "./component/mypage/EditEmail";
-import EditPassword from "./component/mypage/EditPassword";
+import EditEmailOrPassword from "./component/mypage/EditEmailOrPassword";
 import "./css/reset.css";
 import LimitedRoute from "./LimitedRoute";
 import isExpiredDate from "./utils/date";
@@ -61,8 +60,7 @@ function App() {
         <Route element={<LimitedRoute isLoginOnly />}>
           <Route path="/mypage" element={<MyPageRoutes />}>
             <Route index element={<Mypage />} />
-            <Route path="edit/email" element={<EditEmail />} />
-            <Route path="edit/pw" element={<EditPassword />} />
+            <Route path="edit/:mode" element={EditEmailOrPassword} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
