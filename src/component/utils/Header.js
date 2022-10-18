@@ -8,14 +8,17 @@ import ToggleDownArrow from "../../img/caret-down_DaveGandy.png";
 import DownArrow from "../../img/drop-down_Freepik.png";
 import "../../css/Header.css";
 import userState from "../../atom/userState";
-import * as headerMenu from "../../data/headerMenu";
+import {
+  basicGnbMenu,
+  adminLnbMenu,
+  loginLnbMenu,
+} from "../../data/headerMenu";
 
 const Header = () => {
   const user = useRecoilValue(userState);
   const [toggleLNB, setToggleLNB] = useState(false);
   const [hoverLNB, setHoverLNB] = useState(false);
   const location = useLocation();
-  const { basicGnbMenu, adminLnbMenu, loginLnbMenu } = headerMenu;
 
   const clickUserButton = () => {
     setToggleLNB(!toggleLNB);
