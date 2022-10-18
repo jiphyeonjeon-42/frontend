@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 
 import Banner from "../utils/Banner";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import RentInquireBoxUser from "./RentInquireBoxUser";
 import RentInquireBoxBook from "./RentInquireBoxBook";
 import RentModal from "./RentModal";
 import RentConfirm from "./RentConfirm";
+import MiniModal from "../utils/MiniModal";
+import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 
 import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 
+import { rentTabList } from "../../data/tablist";
 import "../../css/Rent.css";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 
 const Rent = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -22,12 +23,6 @@ const Rent = () => {
   const [miniModalContents, setMiniModalContents] = useState("");
   const [firstBookContents, setFirstBookContests] = useState("");
   const [secondBookContents, setSecondBookContests] = useState("");
-
-  const tabList = [
-    { name: "대출", link: "/rent" },
-    { name: "예약대출", link: "/reservation" },
-    { name: "반납", link: "/return" },
-  ];
 
   const closeMiniModal = () => {
     setMiniModalContents(null);
@@ -38,7 +33,7 @@ const Rent = () => {
   return (
     <main>
       <Banner img="admin" titleKo="대출" titleEn="RENT BOOK" />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={rentTabList} />
       <section className="inquire-box__wrapper">
         <InquireBoxTitle
           Icon={Login}

@@ -119,5 +119,5 @@ const MainNewBookList = ({ docs }) => {
 export default MainNewBookList;
 
 MainNewBookList.propTypes = {
-  docs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  docs: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };

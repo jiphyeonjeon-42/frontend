@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../img/jiphyeonjeon_logo.svg";
 import Information from "../../img/information_icon.svg";
 import User from "../../img/Uniconlabs.png";
@@ -11,11 +11,12 @@ import Book from "../../img/admin_icon.svg";
 import "../../css/Header.css";
 import userState from "../../atom/userState";
 
-// eslint-disable-next-line react/prop-types
-const Header = ({ location }) => {
+const Header = () => {
   const user = useRecoilValue(userState);
   const [toggleLNB, setToggleLNB] = useState(false);
   const [hoverLNB, setHoverLNB] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const clickUserButton = () => {
     setToggleLNB(!toggleLNB);
@@ -23,27 +24,26 @@ const Header = ({ location }) => {
 
   const nowDate = new Date();
   const expireDate = new Date(user.expire);
-  if (nowDate > expireDate) window.location = `/login`;
+  if (nowDate > expireDate) navigate(`/login`);
 
   const closeHeader = () => {
     setToggleLNB(false);
   };
 
-  // eslint-disable-next-line react/prop-types
   useEffect(closeHeader, [location.pathname]);
 
   return (
     <header className="header">
       <section className="header-wrapper">
         <div className="header__logo">
-          <Link to={{ pathname: `/` }}>
+          <Link to="/">
             <img src={Logo} className="logo_img" alt="logo" />
           </Link>
         </div>
         <nav className="header__gnb">
           <ul className="gnb__menu">
             <li>
-              <Link className="gnb__button" to={{ pathname: `/information` }}>
+              <Link className="gnb__button" to="/information">
                 <img
                   src={Information}
                   className="gnb__icon gnb__info__icon"
@@ -53,7 +53,7 @@ const Header = ({ location }) => {
               </Link>
             </li>
             <li>
-              <Link className="gnb__button" to={{ pathname: `/search` }}>
+              <Link className="gnb__button" to="/search">
                 <img
                   src={Book}
                   className="gnb__icon gnb__book__icon"
@@ -95,7 +95,7 @@ const Header = ({ location }) => {
                           <li className="lnb__menu_button">
                             <Link
                               className="lnb__text font-16 color-ff"
-                              to={{ pathname: `/rent` }}
+                              to="/rent"
                             >
                               대출/반납
                             </Link>
@@ -108,7 +108,7 @@ const Header = ({ location }) => {
                           <li className="lnb__menu_button">
                             <Link
                               className="lnb__text font-16 color-ff"
-                              to={{ pathname: `/user` }}
+                              to="/user"
                             >
                               DB 관리
                             </Link>
@@ -120,7 +120,7 @@ const Header = ({ location }) => {
                         <li className="lnb__menu_button">
                           <Link
                             className="lnb__text font-16 color-ff"
-                            to={{ pathname: `/mypage` }}
+                            to="/mypage"
                           >
                             마이페이지
                           </Link>
@@ -129,7 +129,7 @@ const Header = ({ location }) => {
                         <li className="lnb__menu_button">
                           <Link
                             className="lnb__text font-16 color-ff"
-                            to={{ pathname: `/logout` }}
+                            to="/logout"
                           >
                             로그아웃
                           </Link>

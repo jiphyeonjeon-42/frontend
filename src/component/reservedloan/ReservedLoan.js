@@ -3,21 +3,21 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import Banner from "../utils/Banner";
 import "../../css/ReservedLoan.css";
-import AdminPagination from "../utils/AdminPagination";
+import Pagination from "../utils/Pagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
 import Reserve from "../../img/list-check-solid.svg";
 import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
 import ReservedModal from "./ReservedModal";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
+import { rentTabList } from "../../data/tablist";
 
 const ReservedLoan = () => {
   const [modal, setModal] = useState(false);
   const [userSearchWord, setUserSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [resevedLoanPage, setResevedLoanPage] = useState(1);
-  const [resevedLoanPageRange, setResevedLoanPageRange] = useState(0);
   const [lastresevedLoanPage, setLastresevedLoanPage] = useState(1);
   const [reservedLoanList, setReservedLoanList] = useState([]);
   const [isPending, setIsPending] = useState(false);
@@ -39,7 +39,6 @@ const ReservedLoan = () => {
     ).value;
     setUserSearchWord(searchInputValue);
     setResevedLoanPage(1);
-    setResevedLoanPageRange(0);
   };
 
   const filterState = () => {
@@ -89,20 +88,12 @@ const ReservedLoan = () => {
 
   useEffect(() => {
     setResevedLoanPage(1);
-    setResevedLoanPageRange(0);
-    setResevedLoanPageRange(0);
   }, [isPending, isWaiting, isExpired]);
-
-  const tabList = [
-    { name: "대출", link: "/rent" },
-    { name: "예약대출", link: "/reservation" },
-    { name: "반납", link: "/return" },
-  ];
 
   return (
     <main>
       <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={rentTabList} />
       <section className="reserved-loan-body">
         <div className="inquire-box-wrapper">
           <InquireBoxTitle
@@ -136,11 +127,9 @@ const ReservedLoan = () => {
             />
           ))}
           <div className="reserved-loan-table__pagination">
-            <AdminPagination
-              userPage={resevedLoanPage}
-              setUserPage={setResevedLoanPage}
-              pageRange={resevedLoanPageRange}
-              setPageRange={setResevedLoanPageRange}
+            <Pagination
+              page={resevedLoanPage}
+              setPage={setResevedLoanPage}
               lastPage={lastresevedLoanPage}
             />
           </div>

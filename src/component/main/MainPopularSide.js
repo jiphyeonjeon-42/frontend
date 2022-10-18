@@ -31,7 +31,7 @@ const MainPopularSide = ({ books, onClick, side }) => {
 export default MainPopularSide;
 
 MainPopularSide.propTypes = {
-  books: PropTypes.arrayOf(PropTypes.object).isRequired,
+  books: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   onClick: PropTypes.func.isRequired,
   side: PropTypes.string.isRequired,
 };

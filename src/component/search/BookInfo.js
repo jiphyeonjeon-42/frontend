@@ -33,17 +33,15 @@ const BookInfo = ({
     <div className="book-info-wraper">
       <Link
         className="book-info"
-        to={{
-          pathname: `/info/${id}`,
-          state: {
-            title,
-            author,
-            publisher,
-            image,
-            publishedAt,
-            category,
-            bread,
-          },
+        to={`/info/${id}`}
+        state={{
+          title,
+          author,
+          publisher,
+          image,
+          publishedAt,
+          category,
+          bread,
         }}
       >
         <img
@@ -53,7 +51,6 @@ const BookInfo = ({
           title={title}
           onError={subtituteImg}
         />
-        {/* <div className="book-info__available color-ff font-14">대여가능</div> */}
         <div className="book-info__info">
           <div className="book-info__title font-18-bold--letterspacing color-54">
             {title}

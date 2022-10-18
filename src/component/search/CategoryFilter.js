@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import ArrLeftGray from "../../img/arrow_left_gray.svg";
 import ArrLeftBlack from "../../img/arrow_left_black.svg";
@@ -110,11 +110,10 @@ const Category = ({
   categoryName,
   categoryNum,
 }) => {
-  // eslint-disable-next-line prefer-const
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const changeFilter = () => {
-    history.push(
+    navigate(
       `?string=${userWord}&page=${1}&category=${categoryIndex}&sort=${userSort}`,
     );
   };
@@ -218,7 +217,7 @@ CategoryFilter.propTypes = {
   userWord: PropTypes.string.isRequired,
   userSort: PropTypes.string.isRequired,
   userCate: PropTypes.number.isRequired,
-  entireCate: PropTypes.arrayOf(PropTypes.object).isRequired,
+  entireCate: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 export default CategoryFilter;

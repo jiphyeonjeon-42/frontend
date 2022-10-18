@@ -12,14 +12,7 @@ const MainNewBook = ({ book, bookWidth }) => {
       className="main-new__book"
       style={{ width: bookWidth, height: bookWidth * 1.5 }}
     >
-      <Link
-        to={{
-          pathname: `/info/${book.id}`,
-          state: {
-            bread: "신간 도서",
-          },
-        }}
-      >
+      <Link to={`/info/${book.id}`} state={{ bread: "신간 도서" }}>
         {book.image ? (
           <img
             style={{ width: bookWidth, height: bookWidth * 1.5 }}

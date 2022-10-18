@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import AdminSearchBar from "../utils/AdminSearchBar";
 import { useAdminSearchInput } from "../../atom/useSearchInput";
-import AdminPagination from "../utils/AdminPagination";
+import Pagination from "../utils/Pagination";
 import BookList from "./RentModalBookList";
 import RentBookWithBarcodeReader from "./RentBookWithBarcodeReader";
 import "../../css/RentModalBook.css";
 
 const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [bookSearchWord, setBookSearchWord] =
     useRecoilState(useAdminSearchInput);
   const [bookSearchPage, setBookSearchPage] = useState(1);
-  const [bookSearchPageRange, setBookSearchPageRange] = useState(0);
   const [lastBookSearchPage, setLastBookSearchPage] = useState(1);
   const [bookList, setBookList] = useState([]);
 
@@ -27,7 +26,6 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
     ).value;
     setBookSearchWord(searchInputValue);
     setBookSearchPage(1);
-    setBookSearchPageRange(0);
   };
 
   const fetchBookData = async () => {
@@ -47,16 +45,14 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
       })
       .catch(error => {
         const { errorCode } = error.response.data;
-        // eslint-disable-next-line no-restricted-globals
-        if (errorCode === 100) history.push("/");
-        if ([101, 102, 108, 109].includes(errorCode)) history.push("/logout");
+        if (errorCode === 100) navigate(-1);
+        if ([101, 102, 108, 109].includes(errorCode)) navigate(-1);
       });
   };
 
   useEffect(fetchBookData, [bookSearchWord, bookSearchPage]);
 
   useEffect(() => {
-    setBookSearchPageRange(0);
     setBookSearchPage(1);
   }, [bookSearchWord]);
 
@@ -99,11 +95,9 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeMidModal }) => {
         ))}
       </div>
       <div className="rent__modal-user__pagination">
-        <AdminPagination
-          userPage={bookSearchPage}
-          setUserPage={setBookSearchPage}
-          pageRange={bookSearchPageRange}
-          setPageRange={setBookSearchPageRange}
+        <Pagination
+          page={bookSearchPage}
+          setPage={setBookSearchPage}
           lastPage={lastBookSearchPage}
         />
       </div>
@@ -116,5 +110,5 @@ export default RentModalBook;
 RentModalBook.propTypes = {
   setSelectedBooks: PropTypes.func.isRequired,
   closeMidModal: PropTypes.func.isRequired,
-  selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };

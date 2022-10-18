@@ -1,16 +1,14 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../../css/Sort.css";
 
 const SortBy = ({ userWord, cateIndex, userSort, sortName, text }) => {
-  // eslint-disable-next-line prefer-const
-  const history = useHistory();
+  const naviate = useNavigate();
 
   const changeSortBy = () => {
-    history.push(
-      `?string=${userWord}&page=${1}&category=${cateIndex}&sort=${sortName}`,
-    );
+    const path = `?string=${userWord}&page=${1}&category=${cateIndex}&sort=${sortName}`;
+    naviate(path);
   };
 
   return (
@@ -41,7 +39,7 @@ const Sort = ({ userWord, userSort, cateIndex }) => {
         cateIndex={cateIndex}
         userSort={userSort}
         sortName="new"
-        text="발행연도순"
+        text="신착도서순"
       />
       <SortBy
         userWord={userWord}

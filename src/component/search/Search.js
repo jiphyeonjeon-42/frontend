@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
-import PropTypes from "prop-types";
 import SubTitle from "../utils/SubTitle";
 import Books from "./Books";
-import Pagination from "./Pagination";
+import Pagination from "../utils/Pagination";
 import SearchBanner from "./SearchBanner";
 import CategoryFilter from "./CategoryFilter";
 import Sort from "./Sort";
@@ -16,15 +16,12 @@ import { searchWord } from "../../atom/searchWord";
 import { useSearchInput } from "../../atom/useSearchInput";
 import "../../css/Search.css";
 
-const Search = ({ match, location }) => {
+const Search = () => {
   const myRef = useRef(null);
   const setInputValue = useSetRecoilState(useSearchInput);
   const [userWord, setUserWord] = useRecoilState(searchWord);
   const [isLoading, setLoading] = useState(true);
   const [bookList, setBookList] = useState([]);
-  const [pageRange, setPageRange] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [isAvailable, setAvailable] = useState(false);
   const [userPage, setPage] = useState(1);
   const [userSort, setSort] = useState("title");
   const [cateIndex, setCateIndex] = useState(0);
@@ -33,6 +30,7 @@ const Search = ({ match, location }) => {
   const [lastPage, setLastPage] = useState(1);
   const [errorCode, setErrorCode] = useState(-1);
   const [miniModal, setMiniModal] = useState(0);
+  const location = useLocation();
 
   const closeMiniModal = () => {
     setMiniModal(0);
@@ -147,13 +145,12 @@ const Search = ({ match, location }) => {
     setUserWord(decodeURIComponent(queryString));
     setInputValue(decodeURIComponent(queryString));
     setPage(queryPage);
-    setPageRange(parseInt((queryPage - 1) / 5, 10));
     setSort(querySort);
     setCateIndex(queryCateIndex);
     if (parseInt(queryCateIndex, 10) === 0) setCategoryName("");
     else if (entireCate[parseInt(queryCateIndex, 10)] !== undefined)
       setCategoryName(entireCate[parseInt(queryCateIndex, 10)].name);
-  }, [match.params, location.search, entireCate, lastPage]);
+  }, [location.search, entireCate, lastPage]);
 
   const [title, content] = getErrorMessage(parseInt(errorCode, 10)).split(
     "\r\n",
@@ -161,7 +158,7 @@ const Search = ({ match, location }) => {
 
   return (
     <main>
-      <SearchBanner setPageRange={setPageRange} setAvailable={setAvailable} />
+      <SearchBanner />
       <section className="search-section">
         <div className="search-subtitle" ref={myRef}>
           <SubTitle
@@ -180,24 +177,20 @@ const Search = ({ match, location }) => {
           userCate={parseInt(cateIndex, 10)}
           entireCate={entireCate}
         />
-        <div className="search-sort-available">
+        <div className="search-sort">
           <Sort
             userWord={userWord}
             userSort={userSort}
             cateIndex={parseInt(cateIndex, 10)}
           />
-          {/* <Available isAvailable={isAvailable} setAvailable={setAvailable} /> */}
         </div>
         <Books bookList={bookList} isLoading={isLoading} />
         <Pagination
-          userWord={userWord}
           lastPage={lastPage}
-          userPage={parseInt(userPage, 10)}
-          userSort={userSort}
-          userCateIndex={parseInt(cateIndex, 10)}
-          pageRange={pageRange}
-          setPageRange={setPageRange}
-          myRef={myRef}
+          page={parseInt(userPage, 10)}
+          setPage={setPage}
+          isReplaceUrl
+          scrollRef={myRef}
         />
       </section>
       <section className="wish-book-wraper">
@@ -216,13 +209,6 @@ const Search = ({ match, location }) => {
       )}
     </main>
   );
-};
-
-Search.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  match: PropTypes.object.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  location: PropTypes.object.isRequired,
 };
 
 export default Search;

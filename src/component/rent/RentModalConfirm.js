@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import "../../css/RentModalConfirm.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import getErrorMessage from "../../data/error";
 import IMGERR from "../../img/image_onerror.svg";
 
@@ -14,7 +14,7 @@ const RentModalConfirm = ({
   setFirstBookContests,
   setSecondBookContests,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [remark1, setRemark1] = useState("");
   const [remark2, setRemark2] = useState("");
 
@@ -53,8 +53,8 @@ const RentModalConfirm = ({
         })
         .catch(error => {
           const { errorCode } = error.response.data;
-          if (errorCode === 100) history.push("/");
-          if ([101, 102, 108, 109].includes(errorCode)) history.push("/logout");
+          if (errorCode === 100) navigate("/");
+          if ([101, 102, 108, 109].includes(errorCode)) navigate("/logout");
           const errMsg = `${
             selectedBooks[i].title
           } - 대출 실패\n(사유 : ${getErrorMessage(errorCode)})\n\n`;
@@ -177,7 +177,7 @@ RentModalConfirm.propTypes = {
   // setRentResult: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   selectedUser: PropTypes.object.isRequired,
-  selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectedBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   setFirstBookContests: PropTypes.func.isRequired,
   setSecondBookContests: PropTypes.func.isRequired,
 };
