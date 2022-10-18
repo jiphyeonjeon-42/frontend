@@ -8,10 +8,10 @@ const LimitedRoute = ({ isLoginOnly, isAdminOnly }) => {
   // recoil 전역상태는 새로고침시 초기화되기 때문에 로컬스토리지 참고
   const user = JSON.parse(window.localStorage.getItem("user"));
 
-  if (isAdminOnly && !user.isAdmin) {
+  if (isAdminOnly && !user?.isAdmin) {
     return <NotFound />;
   }
-  if (isLoginOnly && !user.isLogin) {
+  if (isLoginOnly && !user?.isLogin) {
     return <Navigate to="/login" />;
   }
   return <Outlet />;
