@@ -26,6 +26,7 @@ import EditEmail from "./component/mypage/EditEmail";
 import EditPassword from "./component/mypage/EditPassword";
 import "./css/reset.css";
 import LimitedRoute from "./LimitedRoute";
+import isExpiredDate from "./utils/date";
 
 function App() {
   const setUser = useSetRecoilState(userState);
@@ -33,11 +34,8 @@ function App() {
     install(process.env.REACT_APP_GA_ID);
     const localUser = JSON.parse(window.localStorage.getItem("user"));
 
-    const nowDate = new Date();
-    if (localUser && localUser.isLogin) {
-      const expireDate = new Date(localUser.expire);
-      if (nowDate < expireDate) setUser(localUser);
-    }
+    if (localUser?.isLogin && !isExpiredDate(localUser?.expire))
+      setUser(localUser);
   }, []);
 
   return (
