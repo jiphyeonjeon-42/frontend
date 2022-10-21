@@ -17,6 +17,8 @@
   position: absolute;
   align-self: center;
   background-color: #ffffff;
+  max-height: 100%;
+  overflow: scroll;
 }
 
 .modal__container.full {
