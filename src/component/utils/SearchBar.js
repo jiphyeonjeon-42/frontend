@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../../css/SearchBar.css";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = ({
   setQuery, // 검색 호출을 위한 세터
   wrapperClassName,
   placeHolder,
   width,
+  isNavigate,
 }) => {
   const [searchWord, setSearchWord] = useState("");
+  const navigate = useNavigate();
 
   const onChange = event => {
     const { value } = event.currentTarget;
     if (typeof setQuery === "function") {
-      console.log("!!", value);
-      setQuery(value);
+      if (!isNavigate) setQuery(value);
     }
     setSearchWord(value);
   };
 
   const onSubmit = event => {
     event.preventDefault();
+    if (isNavigate) navigate(`/search?search=${searchWord}`);
   };
 
   return (
@@ -49,11 +52,13 @@ SearchBar.propTypes = {
   placeHolder: PropTypes.string,
   wrapperClassName: PropTypes.string,
   width: PropTypes.string.isRequired,
+  isNavigate: PropTypes.bool,
 };
 
 SearchBar.defaultProps = {
   setQuery: undefined,
   wrapperClassName: "",
   placeHolder: "",
+  isNavigate: false,
 };
 export default SearchBar;

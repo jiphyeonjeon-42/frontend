@@ -20,7 +20,7 @@ const MainBanner = () => {
           <span className="main-banner__guide2 font-16 color-d5">
             검색창에 원하는 도서를 입력해주세요.
           </span>
-          <SearchBar />
+          <SearchBar width="banner" isNavigate />
         </div>
         <div className="main-banner__scroll">
           <p className="font-12 color-d5">스크롤을 내려주세요</p>
