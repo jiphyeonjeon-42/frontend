@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "../search/SearchBar";
+import SearchBar from "../utils/SearchBar";
 import ScrollIcon from "../../img/scroll-icon.svg";
 import "../../css/Banner.css";
 import "../../css/MainBanner.css";
