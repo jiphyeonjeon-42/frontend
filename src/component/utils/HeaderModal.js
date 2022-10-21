@@ -108,7 +108,7 @@ const HeaderModal = ({ setHeaderModal }) => {
                 {user.isAdmin ? "사서" : "유저"}
               </span>
               <span className="profile__text font-20-bold color-ff">
-                {user.userId}
+                {user.userName}
               </span>
             </div>
           </div>

@@ -1,162 +1,52 @@
-import React, { useRef, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import useDialog from "../../hook/useDialog";
+import React from "react";
+import usePostUsersCreate from "../../api/users/usePostUsersCreate";
+import { registerRule } from "../../data/validate";
 import "../../css/Register.css";
 
 const Register = () => {
-  const navigate = useNavigate();
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const confirmPasswordRef = useRef(null);
+  const { registerData, setRegisterData, requestRegister, Dialog } =
+    usePostUsersCreate();
 
-  const {
-    setOpen: openDialog,
-    config: dialogConfig,
-    setConfig: setDialogConfig,
-    Dialog,
-  } = useDialog();
-
-  const [errorMessage, setErrorMessage] = useState({
-    emailError: "",
-    passwordError: "",
-    confirmPasswordError: "",
-  });
-  const { emailError, passwordError, confirmPasswordError } = errorMessage;
-
-  const [registerData, setRegisterData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const { email, password, confirmPassword } = registerData;
-
-  const validateInput = e => {
-    const passwordRegex = new RegExp(
-      "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$&+,:;=?@#|'<>.^*()%!-])[A-Za-z\\d$&+,:;=?@#|'<>.^*()%!-]{10,42}$",
+  const validateInput = (value, name) => {
+    return (
+      value.length > 0 &&
+      registerRule[name].validator(value, registerData.password.value)
     );
-    const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    const emailRegex = new RegExp(emailPattern);
-    const { value, name } = e.target;
-    switch (name) {
-      case "email":
-        if (!emailRegex.test(value)) {
-          setErrorMessage({
-            ...errorMessage,
-            emailError: "이메일 형식이 아닙니다.",
-          });
-        } else {
-          setErrorMessage({
-            ...errorMessage,
-            emailError: "",
-          });
-        }
-        break;
-      case "password":
-        if (!passwordRegex.test(value)) {
-          setErrorMessage({
-            ...errorMessage,
-            passwordError:
-              "10~42자 영문 대 소문자, 숫자, 특수문자를 사용하세요.",
-          });
-        } else {
-          setErrorMessage({
-            ...errorMessage,
-            passwordError: "",
-          });
-        }
-        break;
-      case "confirmPassword":
-        if (password !== confirmPassword) {
-          setErrorMessage({
-            ...errorMessage,
-            confirmPasswordError: "비밀번호가 일치하지 않습니다.",
-          });
-        } else
-          setErrorMessage({
-            ...errorMessage,
-            confirmPasswordError: "",
-          });
-        break;
-      default:
-        break;
+  };
+
+  const checkValidation = (value, name) => {
+    const rule = registerRule[name];
+
+    if (validateInput(value, name)) {
+      setRegisterData({
+        ...registerData,
+        [name]: { ...registerData[name], value, error: "" },
+      });
+      return true;
     }
+    setRegisterData({
+      ...registerData,
+      [name]: {
+        ...registerData[name],
+        value,
+        error: value.length ? rule.invalidMessage : rule.emptyMessage,
+      },
+    });
+    registerData[name].ref.current.focus();
+    return false;
   };
 
   const onChange = e => {
-    const { value, name } = e.target;
-    setRegisterData({
-      ...registerData,
-      [name]: value,
-    });
+    const { value, name } = e.currentTarget;
+    checkValidation(value, name);
   };
 
-  const checkEmptyRegisterData = () => {
-    if (!email) {
-      emailRef.current.focus();
-      setErrorMessage({
-        ...errorMessage,
-        emailError: "이메일을 입력해 주세요.",
-      });
-    } else if (!password) {
-      passwordRef.current.focus();
-      setErrorMessage({
-        ...errorMessage,
-        passwordError: "10~42자 영문 대 소문자, 숫자, 특수문자를 사용하세요.",
-      });
-    } else if (!confirmPassword) {
-      confirmPasswordRef.current.focus();
-      setErrorMessage({
-        ...errorMessage,
-        confirmPasswordError: "비밀번호를 재입력 해주세요.",
-      });
-    }
-  };
-
-  const sendRegisterData = async () => {
-    checkEmptyRegisterData();
-    if (emailError) {
-      emailRef.current.focus();
-    } else if (passwordError) {
-      passwordRef.current.focus();
-    } else if (confirmPasswordError) {
-      confirmPasswordRef.current.focus();
-    } else {
-      await axios
-        .post(`${process.env.REACT_APP_API}/users/create`, {
-          email,
-          password,
-        })
-        .then(() => {
-          setDialogConfig({
-            ...dialogConfig,
-            title: "회원가입 완료",
-            message: "환영합니다. 로그인 후 집현전 서비스를 이용하세요.",
-            afterCloseFunction: () => navigate("/login"),
-          });
-          openDialog();
-        })
-        .catch(error => {
-          const { errorCode } = error.response.data;
-          if (errorCode === 203) {
-            setErrorMessage({
-              ...errorMessage,
-              emailError: "중복된 이메일 입니다.",
-            });
-          } else if (errorCode === 205) {
-            setErrorMessage({
-              ...errorMessage,
-              passwordError: "잘못된 패스워드 형식 입니다.",
-            });
-          }
-        });
-    }
-  };
-
-  const onKeyPress = e => {
-    if (e.key === "Enter") {
-      sendRegisterData();
-    }
+  const submitRegister = e => {
+    e.preventDefault();
+    const isAllValid = Object.keys(registerData).every(name =>
+      checkValidation(registerData[name].value, name),
+    );
+    if (isAllValid) requestRegister();
   };
 
   return (
@@ -175,14 +65,13 @@ const Register = () => {
                 type="email"
                 align="center"
                 placeholder="이메일"
-                value={email}
+                value={registerData.email.value}
                 onChange={onChange}
-                onBlur={validateInput}
-                ref={emailRef}
+                ref={registerData.email.ref}
               />
-              {emailError && (
+              {registerData.email.error && (
                 <div className="register-err" align="center">
-                  {emailError}
+                  {registerData.email.error}
                 </div>
               )}
               <input
@@ -191,14 +80,13 @@ const Register = () => {
                 type="password"
                 align="center"
                 placeholder="비밀번호"
-                value={password}
+                value={registerData.password.value}
                 onChange={onChange}
-                onBlur={validateInput}
-                ref={passwordRef}
+                ref={registerData.password.ref}
               />
-              {passwordError && (
+              {registerData.password.error && (
                 <div className="register-err" align="center">
-                  {passwordError}
+                  {registerData.password.error}
                 </div>
               )}
               <input
@@ -207,20 +95,18 @@ const Register = () => {
                 type="password"
                 align="center"
                 placeholder="비밀번호 재입력"
-                value={confirmPassword}
+                value={registerData.confirmPassword.value}
                 onChange={onChange}
-                onKeyPress={onKeyPress}
-                onBlur={validateInput}
-                ref={confirmPasswordRef}
+                ref={registerData.confirmPassword.ref}
               />
-              {confirmPasswordError && (
+              {registerData.confirmPassword.error && (
                 <div className="register-err" align="center">
-                  {confirmPasswordError}
+                  {registerData.confirmPassword.error}
                 </div>
               )}
               <button
-                type="button"
-                onClick={sendRegisterData}
+                type="submit"
+                onClick={submitRegister}
                 className="register-btn register-register"
                 align="center"
               >

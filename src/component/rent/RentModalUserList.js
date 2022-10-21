@@ -26,14 +26,21 @@ const UserList = ({ user, setSelectedUser, closeModal }) => {
     return penalty;
   };
 
+  const displayErrorPermission = () => {
+    return !user.role ? "대출 불가 (미인증)" : "";
+  };
+
+  const isLendable =
+    displayPenalty().length === 0 && displayErrorPermission().length === 0;
+
   return (
     <button
       className={`rent__user-list ${
-        displayPenalty() === "" ? "color-54" : "disabled color-a4"
+        isLendable ? "color-54" : "disabled color-a4"
       }`}
       type="button"
       onClick={seletUser}
-      disabled={displayPenalty() === "" ? "" : "disabled"}
+      disabled={isLendable ? "" : "disabled"}
     >
       <div className="rent__user-list__name">
         <div className="font-18-bold rent__text-ellipsis">
@@ -42,12 +49,12 @@ const UserList = ({ user, setSelectedUser, closeModal }) => {
       </div>
       <div
         className={`rent__user-list__penalty ${
-          displayPenalty() === "" ? "available" : "disabled"
+          isLendable ? "available" : "disabled"
         } font-16`}
       >
-        {displayPenalty() === ""
+        {isLendable
           ? `대출 중인 도서 : ${user.lendings.length}권`
-          : displayPenalty()}
+          : displayErrorPermission() || displayPenalty()}
       </div>
       <img className="rent__user-list__arrow" src={Arrow} alt="arrow" />
     </button>

@@ -25,7 +25,7 @@ import Mypage from "./component/mypage/Mypage";
 import EditEmailOrPassword from "./component/mypage/EditEmailOrPassword";
 import "./css/reset.css";
 import LimitedRoute from "./LimitedRoute";
-import isExpiredDate from "./utils/date";
+import { isExpiredDate } from "./util/date";
 
 function App() {
   const setUser = useSetRecoilState(userState);
@@ -33,8 +33,10 @@ function App() {
     install(process.env.REACT_APP_GA_ID);
     const localUser = JSON.parse(window.localStorage.getItem("user"));
 
-    if (localUser?.isLogin && !isExpiredDate(localUser?.expire))
-      setUser(localUser);
+    if (localUser?.isLogin) {
+      if (!isExpiredDate(localUser?.expire)) setUser(localUser);
+      else window.localStorage.removeItem("user");
+    }
   }, []);
 
   return (
@@ -63,7 +65,7 @@ function App() {
         <Route element={<LimitedRoute isLoginOnly />}>
           <Route path="/mypage" element={<MyPageRoutes />}>
             <Route index element={<Mypage />} />
-            <Route path="edit/:mode" element={EditEmailOrPassword} />
+            <Route path="edit/:mode" element={<EditEmailOrPassword />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

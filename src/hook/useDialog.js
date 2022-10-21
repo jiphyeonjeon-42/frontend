@@ -38,7 +38,7 @@ const useDialog = () => {
 
   const setOpenTitleAndMessage = (title, message, afterClose = () => {}) => {
     setConfig({
-      ...config,
+      ...defaultConfig,
       title,
       message,
       afterClose,

@@ -1,58 +1,28 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState, useRef } from "react";
-import { useRecoilValue } from "recoil";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
-import axios from "axios";
-import userState from "../../atom/userState";
+import React, { useEffect, useRef } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import "../../css/BookDetail.css";
 import Banner from "../utils/Banner";
 import BookStatus from "./BookStatus";
 import IMGERR from "../../img/image_onerror.svg";
-import Reservation from "../reservation/Reservation";
+import BookReservation from "./BookReservation";
+import useGetBooksInfoId from "../../api/books/useGetBooksInfoId";
 import useDialog from "../../hook/useDialog";
-import getErrorMessage from "../../data/error";
 
 const BookDetail = () => {
-  const [bookDetailInfo, setbookDetailInfo] = useState({ books: [] });
   const { id } = useParams();
   const myRef = useRef(null);
-  const user = useRecoilValue(userState);
-  const navigate = useNavigate();
   const location = useLocation();
+  useEffect(() => myRef.current.scrollIntoView(), []);
 
   const {
-    setOpen: openDialog,
-    config: dialogConfig,
-    setConfig: setDialogConfig,
     Dialog,
+    defaultConfig: dialogDefaultConfig,
+    setConfig: setDialogConfig,
+    setOpen: openDialog,
+    setOpenTitleAndMessage,
   } = useDialog();
-
-  const getBooksInfo = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/books/info/${id}`)
-      ?.then(res => {
-        setbookDetailInfo(res.data);
-      })
-      ?.catch(error => {
-        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-        const [title, message] = getErrorMessage(errorCode).split("\r\n");
-        const afterCloseDialog = () => {
-          if (errorCode === 304) navigate("/search");
-          else if (!user.isLogin) navigate("/login");
-          window.scrollTo(0, 0);
-        };
-        setDialogConfig({
-          ...dialogConfig,
-          afterClose: afterCloseDialog,
-          title,
-          message,
-        });
-        openDialog();
-      });
-    myRef.current.scrollIntoView();
-  };
-
-  useEffect(getBooksInfo, []);
+  const { bookDetailInfo } = useGetBooksInfoId({ id, setOpenTitleAndMessage });
 
   function subtituteImg(e) {
     e.target.src = IMGERR;
@@ -89,9 +59,13 @@ const BookDetail = () => {
             <span className="color-red">도서정보</span>
             <div className="book-detail__reservation-button">
               <div className="book-detail__title">{bookDetailInfo.title}</div>
-              <Reservation
-                bookInfoId={bookDetailInfo.id}
+              <BookReservation
+                bookInfoId={id}
                 isAvailableReservation={isAvailableReservation()}
+                dialogDefaultConfig={dialogDefaultConfig}
+                setDialogConfig={setDialogConfig}
+                setOpenTitleAndMessage={setOpenTitleAndMessage}
+                openDialog={openDialog}
               />
             </div>
             <div className="book-detail__info">

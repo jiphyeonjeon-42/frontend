@@ -1,123 +1,37 @@
 .user-detail-info {
-  padding: 0 8rem 8rem 8rem;
+  padding: 0 8rem 5rem 8rem;
 }
 
-.user-detail-info__title {
-  display: flex;
-  padding-bottom: 3rem;
-  margin-bottom: 3rem;
-  border-bottom: 0.1rem solid #a4a4a4;
+.user-detail-info__detail {
+  margin: 2rem 0 0;
 }
-
-.user-detail-info__block {
-  display: flex;
-  flex-direction: column;
-}
-
-.user-detail-info__line {
-  height: 1px;
-  background-color: #a4a4a4;
-  margin: 3rem 0 3rem 0;
-}
-
-.user-detail-info__display {
-  display: flex;
-  margin-bottom: 1.5rem;
-}
-
-.user-detail-info__key {
-  width: 15rem;
-  flex-shrink: 0;
-}
-
-.user-detail-info__value {
-  width: 30rem;
-  word-break: break-all;
-  white-space: normal;
-}
-
-.user-detail-info__edit {
-  display: flex;
-  align-items: center;
-  justify-items: center;
+.user-detail-info__detail > div {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #545454;
   margin-bottom: 1.1rem;
 }
 
-.user-detail-info__edit-input {
-  all: unset;
-  font-family: inherit;
-  font-size: 1.6rem;
-  color: #545454;
-  border: 1px solid #a4a4a4;
-  border-radius: 6px;
-  padding: 0.1rem 1rem 0.3rem 1rem;
-  width: 28rem;
+div.user-detail-info__line {
+  height: 0.1rem;
+  background-color: #a4a4a4;
+  margin: 3rem 0;
 }
-
-.user-detail-info__edit-select {
-  font-family: inherit;
-  font-size: 1.6rem;
-  color: #545454;
-  border: 1px solid #a4a4a4;
-  border-radius: 6px;
-  padding: 0.2rem 2rem 0.2rem 0.5rem;
-  width: 30rem;
-}
-
-.user-edit-on-button__text {
-  display: flex;
-  justify-content: center;
-}
-
 .user-edit-button {
   margin: 2rem 0 0 0;
   display: flex;
+  justify-content: flex-end;
 }
 
-.user-edit-on-button {
-  all: unset;
-  width: 15rem;
-  padding: 0.5rem 0 1rem 0;
-  background: none;
-  border-radius: 2.4rem;
-  background-color: #e63737;
-  cursor: pointer;
-  margin-left: auto;
-  margin-top: 0.4rem;
-}
-
-.user-edit-submit-button {
-  all: unset;
-  width: 15rem;
-  padding: 0.5rem 0 1rem 0;
-  background: none;
-  border-radius: 2.4rem;
-  background-color: #e63737;
-  cursor: pointer;
+.user-edit-button > button {
   margin-left: 2rem;
-}
-
-.user-edit-off-button {
-  all: unset;
-  width: 15rem;
-  padding: 0.5rem 0 1rem 0;
-  background: none;
-  border-radius: 2.4rem;
-  background-color: #a4a4a4;
-  cursor: pointer;
-  margin-left: auto;
 }
 
 @media screen and (max-width: 767px) {
   .user-detail-info {
-    padding: 2rem 5rem 2rem 5rem;
+    padding: 2rem 2rem;
   }
-
-  .user-detail-info__edit {
-    flex-wrap: wrap;
-  }
-
-  .user-detail-info__display {
-    flex-wrap: wrap;
+  .user-detail-info__detail {
+    margin-bottom: 2rem;
   }
 }

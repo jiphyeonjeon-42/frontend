@@ -4,10 +4,12 @@ import Youtube from "../../img/youtube.svg";
 import Github from "../../img/github.svg";
 import Information from "../../img/information_icon.svg";
 import "../../css/Footer.css";
+import HiddenModal from "./HiddenModal";
 
 const Footer = () => {
   return (
     <footer className="footer font-16 color-ff">
+      <HiddenModal />
       <div className="footer-wrapper">
         <div className="footer__name-contents">
           <div className="footer__name">42서울 집현전</div>

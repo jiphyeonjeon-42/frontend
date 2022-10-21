@@ -1,0 +1,41 @@
+.select__wrapper.horizontal {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.select__label {
+  width: 15rem;
+  flex-shrink: 0;
+}
+
+.select__select {
+  font-weight: normal;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  width: 30rem;
+}
+
+.select__select:enabled {
+  padding: 0 1rem 0 0.8rem;
+  font-size: 1.6rem;
+  border: 0.1rem solid #a4a4a4;
+  border-radius: 6px;
+}
+
+.select__select:disabled {
+  font-size: 1.8rem;
+  background-color: transparent;
+  color: inherit;
+  opacity: 1;
+  border: 0;
+  appearance: unset;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 767px) {
+  .select__wrapper.horizontal {
+    flex-wrap: wrap;
+  }
+}

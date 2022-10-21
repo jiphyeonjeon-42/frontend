@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
@@ -21,27 +21,8 @@ const Rent = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedBooks, setSelectedBooks] = useState([]);
 
-  const {
-    setOpen: openDialog,
-    config: dialogConfig,
-    setConfig: setDialogConfig,
-    Dialog,
-  } = useDialog();
-  const [firstBookContents, setFirstBookContests] = useState("");
-  const [secondBookContents, setSecondBookContests] = useState("");
-  const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
-
-  useEffect(() => {
-    setDialogConfig({
-      ...dialogConfig,
-      title: "대출 결과",
-      message: `${firstBookContents} ${secondBookContents || ""}`,
-      afterCloseFunction: () => {
-        setFirstBookContests(null);
-        setSecondBookContests(null);
-      },
-    });
-  }, [firstBookContents, secondBookContents]);
+  const { Dialog, setOpenTitleAndMessage } = useDialog();
+  const { Modal, setOpen: openModal, setClose: closeModal } = useModal();
 
   return (
     <main>
@@ -91,10 +72,10 @@ const Rent = () => {
         <RentModalConfirm
           selectedUser={selectedUser}
           selectedBooks={selectedBooks}
+          setSelectedBooks={setSelectedBooks}
+          setSelectedUser={setSelectedUser}
           closeModal={closeModal}
-          openDialog={openDialog}
-          setFirstBookContests={setFirstBookContests}
-          setSecondBookContests={setSecondBookContests}
+          setError={setOpenTitleAndMessage}
         />
       </Modal>
       <Dialog />

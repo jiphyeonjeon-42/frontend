@@ -1,45 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { category, koreanDemicalClassification } from "../../data/category";
+import usePostBooksCreate from "../../api/books/usePostBooksCreate";
 
 const RegisterBookWithUsersExtraInput = ({ bookInfo }) => {
   const [isDevBook, setIsDevBook] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  const [message, setMessage] = useState("");
   const donator = useRef(null);
 
   useEffect(() => {
     setIsDevBook("");
     setCategoryId("");
-    setMessage("");
   }, [bookInfo]);
-
-  const registerBook = async () => {
-    setMessage("");
-    const newBook = {
-      title: bookInfo.title,
-      isbn: bookInfo.isbn,
-      author: bookInfo.author,
-      publisher: bookInfo.publisher,
-      image: bookInfo.image,
-      pubdate: bookInfo.pubdate,
-      categoryId,
-      donator: donator.current.value,
-    };
-    await axios
-      .post(`${process.env.REACT_APP_API}/books/create`, newBook)
-      .then(() => {
-        setMessage("등록되었습니다!");
-        window.location.reload();
-      })
-      .catch(error => {
-        const { status, data } = error.response;
-        setMessage(
-          `실패했습니다 status : ${status} 에러코드 : ${data.errorCode}`,
-        );
-      });
-  };
+  const { message, registerBook } = usePostBooksCreate();
 
   const onChangeCategory = e => {
     setCategoryId(parseInt(e.currentTarget.value, 10));
@@ -47,8 +20,11 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    setMessage("");
-    registerBook();
+    registerBook({
+      ...bookInfo,
+      categoryId: `${categoryId}`,
+      donator: donator.current.value,
+    });
   };
 
   const isReadyToPost = () => {

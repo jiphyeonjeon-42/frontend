@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+.button-default:focus-visible {
+  outline: 0.2rem solid blue;
+}
+
 .bg-color-red {
   background-color: #e63737;
 }

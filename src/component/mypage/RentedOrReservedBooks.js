@@ -1,34 +1,23 @@
 import React from "react";
-import axios from "axios";
 import PropTypes from "prop-types";
-import getErrorMessage from "../../data/error";
+import useDialog from "../../hook/useDialog";
+import usePatchReservationsCancel from "../../api/reservations/usePatchReservationsCancel";
+import { isNumber } from "../../util/typeCheck";
 import "../../css/RentedOrReservedBooks.css";
 
-const RentedOrReservedBooks = ({
-  componentMode,
-  bookInfoArr,
-  setIsMiniModalOpen,
-  setMiniModalContent,
-}) => {
-  const onClickReserveCancel = async reserveId => {
-    // eslint-disable-next-line no-alert
-    if (window.confirm("정말로 취소하시나요?")) {
-      await axios
-        .patch(`${process.env.REACT_APP_API}/reservations/cancel/${reserveId}`)
-        .then(() => {
-          setMiniModalContent("예약 취소 성공");
-          setIsMiniModalOpen(true);
-        })
-        .catch(err => {
-          const { errorCode } = err.response.data;
-          setMiniModalContent(getErrorMessage(errorCode));
-          setIsMiniModalOpen(true);
-        });
-    }
-  };
+const RentedOrReservedBooks = ({ componentMode, bookInfoArr }) => {
+  const { setOpen, defaultConfig, setConfig, Dialog, setOpenTitleAndMessage } =
+    useDialog();
+  const { setReservationId } = usePatchReservationsCancel({
+    setOpen,
+    setConfig,
+    defaultConfig,
+    setOpenTitleAndMessage,
+  });
 
   return (
     <div className="mypage-books_box">
+      <Dialog />
       {bookInfoArr &&
         bookInfoArr.map(bookInfo => (
           <div key={bookInfo.title} className="mypage-books_box-wrapper">
@@ -106,11 +95,10 @@ const RentedOrReservedBooks = ({
                   <button
                     className="mypage-books_box-cancel_reserve font-14"
                     type="button"
-                    onClick={() =>
-                      onClickReserveCancel(
-                        bookInfo.reservationId ? bookInfo.reservationId : null,
-                      )
-                    }
+                    onClick={() => {
+                      if (isNumber(bookInfo?.reservationId))
+                        setReservationId(bookInfo.reservationId);
+                    }}
                   >
                     예약 취소
                   </button>
@@ -126,14 +114,10 @@ const RentedOrReservedBooks = ({
 RentedOrReservedBooks.propTypes = {
   componentMode: PropTypes.string.isRequired,
   bookInfoArr: PropTypes.arrayOf(PropTypes.object.isRequired),
-  setIsMiniModalOpen: PropTypes.func,
-  setMiniModalContent: PropTypes.func,
 };
 
 RentedOrReservedBooks.defaultProps = {
   bookInfoArr: null,
-  setIsMiniModalOpen: null,
-  setMiniModalContent: null,
 };
 
 export default RentedOrReservedBooks;

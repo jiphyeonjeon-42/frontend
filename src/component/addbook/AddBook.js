@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import FetchBasicBookInfoWithIsbn from "./AddBookFetchBasicBookInfoWithIsbn";
+import IsbnSearchBarWithBarcodeReader from "./AddBookIsbnSearchBarWithBarcodeReader";
 import RegisterBookWithUsersExtraInput from "./AddBookRegisterBookWithUsersExtraInput";
 import DisplayBasicBookInfo from "./AddBookDisplayBasicBookInfo";
 import Book from "../../img/admin_icon.svg";
 import "../../css/AddBook.css";
 import IMGERR from "../../img/image_onerror.svg";
 import { managementTabList } from "../../data/tablist";
+import useGetBooksCreate from "../../api/books/useGetBooksCreate";
 
 const AddBook = () => {
-  const [bookInfo, setBookInfo] = useState({
+  const defaultBook = {
     isbn: "",
     title: "제목",
     image: "",
@@ -19,7 +20,10 @@ const AddBook = () => {
     publisher: "",
     pubdate: "",
     koreanDemicalClassification: "",
-  });
+  };
+
+  const { bookInfo, errorMessage, fetchData, setBookInfo } =
+    useGetBooksCreate(defaultBook);
 
   function subtituteImg(e) {
     e.target.src = IMGERR;
@@ -32,7 +36,8 @@ const AddBook = () => {
         <InquireBoxTitle Icon={Book} titleKO="도서 등록" titleEN="Add Book" />
         <div className="inquire-box add-book">
           <p className="color-red">ISBN</p>
-          <FetchBasicBookInfoWithIsbn setBookInfo={setBookInfo} />
+          <IsbnSearchBarWithBarcodeReader fetchFunction={fetchData} />
+          <p>{errorMessage}</p>
           <div className="add-book__basic-info">
             <div className="add-book__basic-info__cover">
               <img

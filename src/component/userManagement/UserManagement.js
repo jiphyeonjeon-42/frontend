@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
-import axios from "axios";
+import React, { useState } from "react";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
 import UserBriefInfo from "./UserBriefInfo";
 import UserUsageInfo from "./UserUsageInfo";
-import AdminSearchBar from "../utils/AdminSearchBar";
+import SearchBar from "../utils/SearchBar";
 import Pagination from "../utils/Pagination";
 import Modal from "../utils/Modal";
 import ModalHeader from "../utils/ModalHeader";
-import useDialog from "../../hook/useDialog";
-import { useAdminSearchInput } from "../../atom/useSearchInput";
 import UserDetailInfo from "./UserDetailInfo";
 
-import getErrorMessage from "../../data/error";
 import { managementTabList } from "../../data/tablist";
+import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 import "../../css/UserManagement.css";
 
 const USAGE = 1;
@@ -23,72 +19,10 @@ const USAGE = 1;
 const UserManagement = () => {
   const [modal, setModal] = useState(0);
   const [selectedUser, setSelectedUser] = useState(0);
-  const [userSearchWord, setUserSearchWord] =
-    useRecoilState(useAdminSearchInput);
-  const [userListPage, setUserListPage] = useState(1);
-  const [lastUserListPage, setLastUserListPage] = useState(1);
-  const [userList, setUserList] = useState([]);
-  const [isEdit, setIsEdit] = useState(false);
-  const {
-    setOpen: openDialog,
-    setTitleAndMessage: setDialogTitleAndMessage,
-    Dialog,
-  } = useDialog();
+  const { userList, lastPage, setQuery, page, setPage, Dialog } =
+    useGetUsersSearch();
 
-  const closeModal = () => {
-    setModal(0);
-  };
-
-  const handleUserSearchSumbit = event => {
-    event.preventDefault();
-    const searchForm = document.querySelector(".modal-search-form");
-    const searchInputValue = searchForm.querySelector(
-      ".modal-search__input",
-    ).value;
-    setUserSearchWord(searchInputValue);
-    setUserListPage(1);
-  };
-
-  const getUserList = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/users/search`, {
-        params: {
-          nicknameOrEmail: userSearchWord,
-          page: userListPage - 1,
-          limit: 10,
-        },
-      })
-      .then(res => {
-        setUserList(res.data.items);
-        setLastUserListPage(
-          res.data.meta.totalPages > 0 ? res.data.meta.totalPages : 1,
-        );
-      })
-      .catch(error => {
-        closeModal();
-        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-        const [title, message] = getErrorMessage(errorCode).split("\r\n");
-        setDialogTitleAndMessage(title, message);
-        openDialog();
-      });
-  };
-
-  useEffect(getUserList, [userSearchWord, userListPage, isEdit]);
-
-  useEffect(() => {
-    setUserListPage(1);
-  }, [userSearchWord]);
-
-  useEffect(() => {
-    const searchForm = document.querySelector(".modal-search-form");
-    searchForm.addEventListener("submit", handleUserSearchSumbit);
-    return () =>
-      searchForm.removeEventListener("submit", handleUserSearchSumbit);
-  }, [handleUserSearchSumbit]);
-
-  useEffect(() => {
-    setUserSearchWord("");
-  }, []);
+  const closeModal = () => setModal(0);
 
   return (
     <main>
@@ -96,9 +30,10 @@ const UserManagement = () => {
       <Tabs tabList={managementTabList} />
       <section className="user-management-body">
         <div className="user-management-search">
-          <AdminSearchBar
+          <SearchBar
             width="center"
             placeHolder="nickname 또는 email을 입력해주세요."
+            setQuery={setQuery}
           />
         </div>
         <div className="user-management-table__inquire-title">
@@ -123,11 +58,7 @@ const UserManagement = () => {
             />
           ))}
           <div className="user-management-table__pagination">
-            <Pagination
-              page={userListPage}
-              setPage={setUserListPage}
-              lastPage={parseInt(lastUserListPage, 10)}
-            />
+            <Pagination page={page} setPage={setPage} lastPage={lastPage} />
           </div>
         </div>
       </section>
@@ -137,14 +68,7 @@ const UserManagement = () => {
           {modal === USAGE ? (
             <UserUsageInfo key={selectedUser.id} user={selectedUser} />
           ) : (
-            <UserDetailInfo
-              user={selectedUser}
-              closeModal={closeModal}
-              openDialog={openDialog}
-              isEdit={isEdit}
-              setIsEdit={setIsEdit}
-              setDialogTitleAndMessage={setDialogTitleAndMessage}
-            />
+            <UserDetailInfo user={selectedUser} />
           )}
         </Modal>
       )}

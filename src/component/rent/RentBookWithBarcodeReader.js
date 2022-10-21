@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import BarcodeReader from "../utils/BarcodeReader";
+import useGetBooksId from "../../api/books/useGetBooksId";
 import "../../css/RentBookWithBarcodeReader.css";
 
 const RentBookWithBarcodeReader = ({ setSelectedBooks, closeModal }) => {
@@ -11,22 +11,12 @@ const RentBookWithBarcodeReader = ({ setSelectedBooks, closeModal }) => {
     setUsingBarcodeReader(!isUsingBarcodeReader);
   };
 
-  const seletOneOfBook = async bookId => {
-    let book;
-    await axios
-      .get(`${process.env.REACT_APP_API}/books/${bookId}`)
-      .then(response => {
-        book = response.data;
-        setSelectedBooks(prev => [...prev, book]);
-        closeModal(0);
-      });
-  };
+  const { setBookId } = useGetBooksId({ setSelectedBooks, closeModal });
 
   const toDoAfterRead = text => {
     const bookId = text.split(" ")[0];
     toggleBarcodeReader();
-    seletOneOfBook(bookId);
-    closeModal(0);
+    setBookId(bookId);
   };
 
   return (

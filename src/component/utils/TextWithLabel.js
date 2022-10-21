@@ -19,7 +19,6 @@ const TextWithLabel = ({
     return `color-${colorClassName}` || "color-54";
   };
 
-  console.log("this", bottomLabelText, bottomLabelText?.length);
   const textSizeCandidate = ["normal"];
   const textSize = textSizeCandidate.includes(size) ? size : "normal";
   const ellipsis = isMainTextEllipsis ? "ellipsis" : "";

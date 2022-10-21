@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import "../../css/Mypage.css";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
@@ -9,35 +8,23 @@ import Book from "../../img/admin_icon.svg";
 import Reserve from "../../img/list-check-solid.svg";
 import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import useDialog from "../../hook/useDialog";
-import getErrorMessage from "../../data/error";
+import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
 
 const Mypage = () => {
-  const [userInfo, setUserInfo] = useState(null);
-
   const {
     setOpen: openDialog,
     config: dialogConfig,
     setConfig: setDialogConfig,
-    setTitleAndMessage: setDialogTitleAndMessage,
+    setOpenTitleAndMessage: setDialogTitleAndMessage,
     Dialog,
   } = useDialog();
-  const [deviceMode, setDeviceMode] = useState(window.innerWidth);
 
-  const getUserInfo = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/users/search`, {
-        params: {
-          id: JSON.parse(window.localStorage.getItem("user")).id,
-        },
-      })
-      .then(res => setUserInfo(res.data.items[0]))
-      .catch(error => {
-        const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-        const [title, message] = getErrorMessage(errorCode).split("\r\n");
-        setDialogTitleAndMessage(title, message);
-        openDialog();
-      });
-  };
+  const userId = JSON.parse(window.localStorage.getItem("user")).id;
+  const { userInfo } = useGetUsersSearchId({
+    setDialogTitleAndMessage,
+    userId,
+  });
+  const [deviceMode, setDeviceMode] = useState(window.innerWidth);
 
   const convertRoleToStr = roleInt => {
     switch (roleInt) {
@@ -51,10 +38,6 @@ const Mypage = () => {
         return "미인증";
     }
   };
-
-  useEffect(async () => {
-    await getUserInfo();
-  }, []);
 
   useEffect(() => {
     const getWindowWidth = () => {
@@ -214,8 +197,9 @@ const Mypage = () => {
           <RentedOrReservedBooks
             componentMode="reserve"
             bookInfoArr={userInfo ? userInfo.reservations : null}
-            setIsMiniModalOpen={setIsMiniModalOpen}
-            setMiniModalContent={setMiniModalContent}
+            openDialog={openDialog}
+            dialogConfig={dialogConfig}
+            setDialogConfig={setDialogConfig}
           />
         </div>
       </div>
