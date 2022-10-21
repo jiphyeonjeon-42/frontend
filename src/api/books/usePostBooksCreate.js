@@ -32,12 +32,8 @@ const usePostBooksCreate = () => {
   };
 
   const registerBook = newBook => {
-    try {
-      const book = compareExpect("books/create", [newBook], expectedItem);
-      setNewBookInfo(...book);
-    } catch (e) {
-      console.log(e);
-    }
+    const book = compareExpect("books/create", [newBook], expectedItem);
+    setNewBookInfo(...book);
   };
 
   useEffect(() => {
