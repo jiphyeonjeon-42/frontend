@@ -7,7 +7,7 @@ const Review = () => {
       <div>
         <h1>토글</h1>
       </div>
-      <ReviewBox color="red" />
+      <ReviewBox />
       <div>
         <h1>페이지네이션</h1>
       </div>
