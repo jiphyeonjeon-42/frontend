@@ -1,6 +1,8 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import "../../../css/Review.css";
+
+const text =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
 
 const ReviewBox = () => {
   return (
@@ -10,14 +12,14 @@ const ReviewBox = () => {
         <span className="review-day">리뷰 날짜</span>
       </div>
       <div className="review-content">
-        <span>리뷰 내용</span>
+        <span>{text}</span>
+      </div>
+      <div className="review-manage">
+        <p>수정</p>
+        <p>삭제</p>
       </div>
     </div>
   );
 };
 
 export default ReviewBox;
-
-// ReviewBox.propTypes = {
-//   color: PropTypes.string.isRequired,
-// };
