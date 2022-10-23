@@ -40,7 +40,7 @@ const usePostLendings = ({
           title,
           dueDate: addDay(14),
         };
-        resultMessage += `${selectedBooks[index].title} - 대출완료`;
+        resultMessage += `${selectedBooks[index].title} - 대출완료\n`;
         lendingSuccess.push(newLending);
       } else {
         const errorCode = result.reason?.response?.data?.errorCode;

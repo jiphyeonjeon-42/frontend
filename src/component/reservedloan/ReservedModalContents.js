@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import useDialog from "../../hook/useDialog";
 import BookInformationWithCover from "../utils/BookInformationWithCover";
@@ -12,7 +12,7 @@ import { isValidString } from "../../util/typeCheck";
 import usePostLendings from "../../api/lendings/usePostLendings";
 
 const ReservedModalContents = ({ reservedInfo }) => {
-  const remarkRef = useRef(null);
+  const [remark, setRemark] = useState("");
   const { Dialog, setOpen, defaultConfig, setConfig, setOpenTitleAndMessage } =
     useDialog();
 
@@ -23,7 +23,6 @@ const ReservedModalContents = ({ reservedInfo }) => {
     setOpenTitleAndMessage,
   });
   const { requestLending } = usePostLendings({
-    // TODO 수정
     selectedBooks: [],
     selectedUser: {},
     setSelectedBooks: () => {},
@@ -34,11 +33,11 @@ const ReservedModalContents = ({ reservedInfo }) => {
 
   const postRent = e => {
     e.preventDefault();
-    requestLending([remarkRef.current?.value]);
+    requestLending([remark]);
   };
 
   const isRent = !reservedInfo.status && reservedInfo?.endAt;
-  const isRentable = isRent && isValidString(remarkRef.current?.value);
+  const isRentable = isRent && isValidString(remark);
   const isAvaliableReservation = !reservedInfo.status && !reservedInfo?.endAt;
 
   return (
@@ -73,7 +72,11 @@ const ReservedModalContents = ({ reservedInfo }) => {
             wrapperClassName="reserved-modal__remark"
             topLabelText="비고"
             textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
-            ref={remarkRef}
+            textareaValue={remark}
+            setTextareaValue={setRemark}
+            isVisibleBottomMessage={remark.length}
+            bottomMessageText="비고를 입력해주세요"
+            bottomMessageColor="red"
           />
           <div className="reserved-modal__button">
             <Button

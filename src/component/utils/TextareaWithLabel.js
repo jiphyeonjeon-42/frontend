@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import colorPalette from "../../data/color";
 import "../../css/TextareaWithLabel.css";
@@ -16,13 +16,13 @@ const TextareaWithLabel = ({
   bottomMessageText,
   bottomMessageColor,
   isTextareaFocusedOnMount,
-  textareaRef,
 }) => {
   const [text, setText] = useState("");
+  const textareaRef = useRef(null);
 
   /* props로 넘겨받은 value와 세터가 유효하지 않으면 내부 상태 이용 */
   const [textarea, setTextarea] =
-    textareaValue && setTextareaValue
+    typeof textareaValue === "string" && typeof setTextareaValue === "function"
       ? [textareaValue, setTextareaValue]
       : [text, setText];
 
@@ -56,7 +56,7 @@ const TextareaWithLabel = ({
         ref={textareaRef}
         disabled={textareaDisabled}
       />
-      {isVisibleBottomMessage && (
+      {bottomMessageText?.length > 0 && isVisibleBottomMessage && (
         <p className={`textarea__label ${color(bottomMessageColor)}`}>
           {bottomMessageText}
         </p>
@@ -76,10 +76,6 @@ TextareaWithLabel.propTypes = {
   textareaDisabled: PropTypes.bool,
   setTextareaValue: PropTypes.func,
   isVisibleBottomMessage: PropTypes.bool,
-  textareaRef: PropTypes.oneOf([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
   bottomMessageText: PropTypes.string,
   bottomMessageColor: PropTypes.string,
   isTextareaFocusedOnMount: PropTypes.bool,
@@ -93,7 +89,6 @@ TextareaWithLabel.defaultProps = {
   setTextareaValue: undefined,
   textareaName: "",
   textareaValue: undefined,
-  textareaRef: { current: null },
   textareaDisabled: false,
   isVisibleBottomMessage: true,
   bottomMessageText: "",

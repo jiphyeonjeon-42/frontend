@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../utils/Button";
 import BookInformationWithCover from "../utils/BookInformationWithCover";
@@ -6,7 +6,6 @@ import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";
 import "../../css/RentModalConfirm.css";
 import usePostLendings from "../../api/lendings/usePostLendings";
-import { isValidString } from "../../util/typeCheck";
 
 const RentModalConfirm = ({
   selectedUser,
@@ -16,6 +15,9 @@ const RentModalConfirm = ({
   setError,
   closeModal,
 }) => {
+  const [first, setFirst] = useState("");
+  const [second, setSecond] = useState("");
+
   const { requestLending } = usePostLendings({
     selectedBooks,
     selectedUser,
@@ -24,27 +26,11 @@ const RentModalConfirm = ({
     setError,
     closeModal,
   });
-  const firstRemarkRef = useRef(null);
-  const secondRemarkRef = useRef(null);
 
   const postData = e => {
     e.preventDefault();
-    requestLending([
-      firstRemarkRef?.current?.value,
-      secondRemarkRef?.current?.ref || null,
-    ]);
+    requestLending([first, second]);
   };
-
-  console.log(
-    selectedBooks.length === 1 && isValidString(firstRemarkRef.current?.value),
-    firstRemarkRef.current?.value,
-  );
-  const isRentable = () =>
-    (selectedBooks.length === 1 &&
-      isValidString(firstRemarkRef.current?.value)) ||
-    (selectedBooks.length === 2 &&
-      isValidString(firstRemarkRef.current?.value) &&
-      isValidString(secondRemarkRef.current?.value));
 
   return (
     <form className="rent-modal">
@@ -80,8 +66,12 @@ const RentModalConfirm = ({
                   wrapperClassName="rent-modal__remark"
                   topLabelText="비고"
                   textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
-                  textarearRef={isFirst ? firstRemarkRef : secondRemarkRef}
+                  textareaValue={isFirst ? first : second}
+                  setTextareaValue={isFirst ? setFirst : setSecond}
                   isTextareaFocusedOnMount={isFirst}
+                  isVisibleBottomMessage={
+                    isFirst ? !first.length : !second.length
+                  }
                   bottomMessageText="비고를 입력해주세요"
                   bottomMessageColor="red"
                 />
@@ -95,8 +85,7 @@ const RentModalConfirm = ({
           type="submit"
           value="대출 완료하기"
           onClick={postData}
-          disabled={!isRentable()}
-          color={`${isRentable() && `red`}`}
+          color={first.length > 0 && second.length > 0 ? "red" : "lightgrey2"}
         />
         <Button
           value="취소하기"
