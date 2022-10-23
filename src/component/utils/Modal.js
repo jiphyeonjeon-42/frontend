@@ -11,9 +11,13 @@ import "../../css/Modal.css";
 
 const Modal = ({ isOpen, onCloseModal, children, size }) => {
   useEffect(() => {
+    const closeModalWithESC = e => e.keyCode === 27 && onCloseModal();
+    window.addEventListener("keydown", closeModalWithESC);
     // 모달 활성화시 기본화면의 스크롤 제한
     document.body.style.cssText = `overflow: hidden`;
+
     return () => {
+      window.removeEventListener("keydown", closeModalWithESC);
       document.body.style.cssText = `overflow: none`;
     };
   }, []);
@@ -29,6 +33,8 @@ const Modal = ({ isOpen, onCloseModal, children, size }) => {
     e.preventDefault();
     onCloseModal();
   };
+
+  useEffect(() => {}, []);
 
   const onClickContainer = e => {
     // 이벤트 버블링 방지
