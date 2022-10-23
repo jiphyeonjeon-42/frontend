@@ -68,7 +68,7 @@ const UserManagement = () => {
           {modal === USAGE ? (
             <UserUsageInfo key={selectedUser.id} user={selectedUser} />
           ) : (
-            <UserDetailInfo user={selectedUser} />
+            <UserDetailInfo user={selectedUser} closeModal={closeModal} />
           )}
         </Modal>
       )}

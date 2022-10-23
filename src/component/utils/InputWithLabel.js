@@ -1,19 +1,18 @@
-import React, { forwardRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../../css/InputWithLabel.css";
 
-const InputWithLabel = (
-  {
-    wrapperClassName,
-    labelText,
-    inputInitialValue,
-    inputType,
-    isAutoComplete,
-    disabled,
-    align,
-  },
+const InputWithLabel = ({
+  wrapperClassName,
+  labelText,
+  inputInitialValue,
+  inputType,
+  isAutoComplete,
+  disabled,
+  align,
   inputRef,
-) => {
+  resetDependency,
+}) => {
   const [inputValue, setInput] = useState(inputInitialValue);
 
   const alignType = () => {
@@ -36,6 +35,10 @@ const InputWithLabel = (
       return "text";
     return inputType;
   };
+
+  useEffect(() => {
+    setInput(inputInitialValue || "");
+  }, [resetDependency]);
 
   return (
     <div className={`input__wrapper ${alignType()} ${wrapperClassName} `}>
@@ -63,6 +66,11 @@ InputWithLabel.propTypes = {
   align: PropTypes.string,
   disabled: PropTypes.bool,
   isAutoComplete: PropTypes.bool,
+  inputRef: PropTypes.oneOf([
+    PropTypes.func,
+    PropTypes.instanceOf(PropTypes.element),
+  ]),
+  resetDependency: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
 };
 
 InputWithLabel.defaultProps = {
@@ -73,6 +81,8 @@ InputWithLabel.defaultProps = {
   align: "horizontal",
   disabled: false,
   isAutoComplete: false,
+  inputRef: { current: null },
+  resetDependency: undefined,
 };
 
-export default forwardRef(InputWithLabel);
+export default InputWithLabel;

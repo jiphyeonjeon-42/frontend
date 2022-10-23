@@ -11,19 +11,24 @@ const roles = ["미인증", "카뎃", "사서", "운영진"];
 
 const UserDetailInfo = ({ user }) => {
   const [editMode, setEditMode] = useState(false);
+  const [reset, setReset] = useState(false);
   const intraIdRef = useRef(null);
   const nickNameRef = useRef(null);
   const slackRef = useRef(null);
   const roleRef = useRef(null);
   const penaltyRef = useRef(null);
 
-  const toggelEditMode = () => {
-    setEditMode(!editMode);
+  const onEditMode = () => {
+    setEditMode(true);
+  };
+
+  const exitEditMode = () => {
+    setEditMode(false);
   };
 
   const { requestUpdate, Dialog } = usePatchUsersUpdate({
     userId: user.id,
-    setEditMode,
+    exitEditMode,
   });
 
   const submitEdit = event => {
@@ -50,31 +55,36 @@ const UserDetailInfo = ({ user }) => {
         <InputWithLabel
           labelText="이메일"
           inputInitialValue={user.email}
+          resetDependency={reset}
           disabled
         />
         <InputWithLabel
           labelText="인트라ID"
           inputInitialValue={user.intraId}
-          ref={intraIdRef}
+          resetDependency={reset}
+          inputRef={intraIdRef}
           disabled={!editMode}
         />
         <InputWithLabel
           labelText="닉네임"
           inputInitialValue={user.nickname}
-          ref={nickNameRef}
+          resetDependency={reset}
+          inputRef={nickNameRef}
           disabled={!editMode}
         />
         <InputWithLabel
           labelText="슬랙ID"
           inputInitialValue={user.slack}
-          ref={slackRef}
+          resetDependency={reset}
+          inputRef={slackRef}
           disabled={!editMode}
         />
         <SelectWithLabel
           labelText="역할"
           optionList={roles}
+          resetDependency={reset}
           disabled={!editMode}
-          ref={roleRef}
+          selectRef={roleRef}
           initialSelectedIndex={user.role}
         />
         <div className="user-detail-info__line" />
@@ -86,7 +96,8 @@ const UserDetailInfo = ({ user }) => {
               ? "-"
               : user.penaltyEndDate
           }
-          ref={penaltyRef}
+          resetDependency={reset}
+          inputRef={penaltyRef}
           disabled={!editMode}
         />
         <InputWithLabel
@@ -98,10 +109,18 @@ const UserDetailInfo = ({ user }) => {
         />
 
         <div className="user-edit-button">
-          {editMode && <Button value="취소하기" onClick={toggelEditMode} />}
+          {editMode && (
+            <Button
+              value="취소하기"
+              onClick={() => {
+                setReset(!reset);
+                exitEditMode();
+              }}
+            />
+          )}
           <Button
             value={editMode ? "저장하기" : "수정하기"}
-            onClick={editMode ? submitEdit : toggelEditMode}
+            onClick={editMode ? submitEdit : onEditMode}
             color="red"
           />
         </div>

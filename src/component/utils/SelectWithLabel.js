@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../../css/SelectWithLabel.css";
 
@@ -11,9 +11,10 @@ const SelectWithLabel = ({
   defaultText,
   disabled,
   align,
+  selectRef,
+  resetDependency,
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
-  const isSelected = index => index === selectedIndex;
 
   const alignType = () => {
     const candidate = ["horizontal", "vertical"];
@@ -24,6 +25,9 @@ const SelectWithLabel = ({
   const onChangeSelect = e => {
     setSelectedIndex(e.currentTarget.value);
   };
+  useEffect(() => {
+    setSelectedIndex(initialSelectedIndex);
+  }, [resetDependency]);
 
   return (
     <div className={`select__wrapper ${alignType()} ${wrapperClassName}`}>
@@ -37,9 +41,11 @@ const SelectWithLabel = ({
         onChange={onChangeSelect}
         name={selectName}
         disabled={disabled}
+        ref={selectRef}
       >
         {defaultText && <option>{defaultText}</option>}
         {optionList.map((optionString, index) => {
+          const isSelected = index === selectedIndex;
           return (
             <option value={index} selected={isSelected}>
               {optionString}
@@ -51,7 +57,7 @@ const SelectWithLabel = ({
   );
 };
 
-export default forwardRef(SelectWithLabel);
+export default SelectWithLabel;
 
 SelectWithLabel.propTypes = {
   wrapperClassName: PropTypes.string,
@@ -62,6 +68,11 @@ SelectWithLabel.propTypes = {
   defaultText: PropTypes.string,
   disabled: PropTypes.bool,
   align: PropTypes.string,
+  selectRef: PropTypes.oneOf([
+    PropTypes.func,
+    PropTypes.instanceOf(PropTypes.element),
+  ]),
+  resetDependency: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
 };
 
 SelectWithLabel.defaultProps = {
@@ -72,4 +83,6 @@ SelectWithLabel.defaultProps = {
   defaultText: undefined,
   disabled: false,
   align: "horizontal",
+  selectRef: { current: null },
+  resetDependency: undefined,
 };
