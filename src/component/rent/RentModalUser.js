@@ -8,7 +8,7 @@ import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 
 const RentModalUser = ({ setSelectedUser, closeModal }) => {
   const { userList, lastPage, page, setPage, setQuery, Dialog } =
-    useGetUsersSearch();
+    useGetUsersSearch({ limit: 5 });
   return (
     <div className="rent__modal-user">
       <div className="rent__modal-user__search-bar">

@@ -17,7 +17,11 @@ function EditEmailOrPassword() {
   });
 
   const userId = JSON.parse(window.localStorage.getItem("user")).userName;
-  const { userList, Dialog: Error, setQueryNoDelay } = useGetUsersSearch();
+  const {
+    userList,
+    Dialog: Error,
+    setQueryNoDelay,
+  } = useGetUsersSearch({ limit: 1 });
 
   useEffect(() => {
     setQueryNoDelay(userId);

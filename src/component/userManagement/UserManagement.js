@@ -20,7 +20,7 @@ const UserManagement = () => {
   const [modal, setModal] = useState(0);
   const [selectedUser, setSelectedUser] = useState(0);
   const { userList, lastPage, setQuery, page, setPage, Dialog } =
-    useGetUsersSearch();
+    useGetUsersSearch({ limit: 10 });
 
   const closeModal = () => setModal(0);
 

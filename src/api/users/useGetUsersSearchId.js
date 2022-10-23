@@ -52,7 +52,6 @@ const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }) => {
   };
 
   const onError = error => {
-    console.log(error);
     setErrorDialog(error, setDialogTitleAndMessage);
   };
 
