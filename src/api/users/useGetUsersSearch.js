@@ -44,11 +44,7 @@ const useGetUsersSearch = ({ limit }) => {
       ],
       isNullable: false,
     },
-    {
-      key: "reservations",
-      type: [{ key: "author", type: "string", isNullable: true }],
-      isNullable: false,
-    },
+    { key: "reservations", type: "*", isNullable: false },
   ];
 
   const refineResponse = response => {

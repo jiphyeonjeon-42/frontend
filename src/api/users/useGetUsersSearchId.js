@@ -35,11 +35,8 @@ const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }) => {
       ],
       isNullable: false,
     },
-    {
-      key: "reservations",
-      type: [{ key: "author", type: "string", isNullable: true }],
-      isNullable: false,
-    },
+    // reservations는 상황에 따라 key 변동성이 너무 큼
+    { key: "reservations", type: "*", isNullable: false },
   ];
 
   const refineResponse = response => {

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import useDialog from "../../hook/useDialog";
-import BookInformationWithCover from "../utils/BookInformationWithCover";
+import usePostLendings from "../../api/lendings/usePostLendings";
+import usePatchReservationsCancel from "../../api/reservations/usePatchReservationsCancel";
+import Button from "../utils/Button";
 import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";
-import Button from "../utils/Button";
+import BookInformationWithCover from "../utils/BookInformationWithCover";
+import { isValidString } from "../../util/typeCheck";
 import { dateFormat } from "../../util/date";
 import "../../css/ReservedModalContents.css";
-import usePatchReservationsCancel from "../../api/reservations/usePatchReservationsCancel";
-import { isValidString } from "../../util/typeCheck";
-import usePostLendings from "../../api/lendings/usePostLendings";
 
-const ReservedModalContents = ({ reservedInfo }) => {
+const ReservedModalContents = ({ reservedInfo, closeModal }) => {
   const [remark, setRemark] = useState("");
   const { Dialog, setOpen, defaultConfig, setConfig, setOpenTitleAndMessage } =
     useDialog();
@@ -22,18 +22,18 @@ const ReservedModalContents = ({ reservedInfo }) => {
     defaultConfig,
     setOpenTitleAndMessage,
   });
+
   const { requestLending } = usePostLendings({
-    selectedBooks: [],
-    selectedUser: {},
-    setSelectedBooks: () => {},
-    setSelectedUser: () => {},
-    setError: setOpenTitleAndMessage,
-    closeModal: () => {},
+    title: reservedInfo?.title,
+    userId: reservedInfo?.userId,
+    bookId: reservedInfo?.bookId,
+    setOpenTitleAndMessage,
+    closeModal,
   });
 
   const postRent = e => {
     e.preventDefault();
-    requestLending([remark]);
+    requestLending(remark);
   };
 
   const isRent = !reservedInfo.status && reservedInfo?.endAt;
@@ -74,13 +74,13 @@ const ReservedModalContents = ({ reservedInfo }) => {
             textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
             textareaValue={remark}
             setTextareaValue={setRemark}
-            isVisibleBottomMessage={remark.length}
+            isVisibleBottomMessage={!remark.length}
             bottomMessageText="비고를 입력해주세요"
             bottomMessageColor="red"
           />
           <div className="reserved-modal__button">
             <Button
-              color={isRentable && "red"}
+              color={(isRentable && "red") || undefined}
               disabled={!isRentable}
               onClick={postRent}
               value="대출 완료하기"
@@ -103,6 +103,7 @@ const ReservedModalContents = ({ reservedInfo }) => {
 
 ReservedModalContents.propTypes = {
   reservedInfo: PropTypes.shape.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default ReservedModalContents;

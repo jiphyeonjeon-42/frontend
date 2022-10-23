@@ -66,11 +66,11 @@ InputWithLabel.propTypes = {
   align: PropTypes.string,
   disabled: PropTypes.bool,
   isAutoComplete: PropTypes.bool,
-  inputRef: PropTypes.oneOf([
+  inputRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.instanceOf(PropTypes.element),
   ]),
-  resetDependency: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  resetDependency: PropTypes.bool,
 };
 
 InputWithLabel.defaultProps = {

@@ -5,8 +5,10 @@ import "../../css/EditEmailOrPassword.css";
 import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 import useDialog from "../../hook/useDialog";
 import usePatchUsersMyupdate from "../../api/users/usePatchUsersMyupdate";
+import { registerRule } from "../../data/validate";
 
-const modeString = mode => (mode === "email" ? "이메일" : "비밀번호");
+const modeStringKorean = mode => (mode === "email" ? "이메일" : "비밀번호");
+const modeString = mode => (mode === "email" ? "email" : "password");
 
 function EditEmailOrPassword() {
   const { mode } = useParams();
@@ -16,7 +18,6 @@ function EditEmailOrPassword() {
     check: "",
   });
 
-  const userId = JSON.parse(window.localStorage.getItem("user")).userName;
   const {
     userList,
     Dialog: Error,
@@ -24,6 +25,7 @@ function EditEmailOrPassword() {
   } = useGetUsersSearch({ limit: 1 });
 
   useEffect(() => {
+    const userId = JSON.parse(window.localStorage.getItem("user")).userName;
     setQueryNoDelay(userId);
   }, []);
 
@@ -42,7 +44,7 @@ function EditEmailOrPassword() {
   const { Dialog, setOpenTitleAndMessage } = useDialog();
 
   const { setPatchData } = usePatchUsersMyupdate({
-    modeString: modeString(mode),
+    modeString: modeStringKorean(mode),
     setOpenTitleAndMessage,
   });
 
@@ -52,7 +54,15 @@ function EditEmailOrPassword() {
       setOpenTitleAndMessage("비밀번호 재입력이 다릅니다.");
       return;
     }
-    setPatchData({ [mode]: revision.text });
+    if (!registerRule[mode].validator(revision.text)) {
+      setOpenTitleAndMessage(registerRule[mode].invalidMessage);
+      return;
+    }
+    if (!revision.text) {
+      setOpenTitleAndMessage(`${modeStringKorean(mode)}를 다시 확인해주세요`);
+      return;
+    }
+    setPatchData({ [modeString(mode)]: revision.text });
   };
 
   return (
@@ -67,7 +77,7 @@ function EditEmailOrPassword() {
         </div>
         <div className="mypage-edit-title color-2d">
           <span>{`${userInfo ? userInfo.email : "-"}님의, `}</span>
-          <span className="inline-block">{`${modeString(
+          <span className="inline-block">{`${modeStringKorean(
             mode,
           )} 변경 페이지입니다`}</span>
         </div>
@@ -117,7 +127,7 @@ function EditEmailOrPassword() {
                 onBlur={e => {
                   e.target.placeholder = "비밀번호 입력";
                 }}
-                onChange={onChangeCheck}
+                onChange={onChangeInput}
               />
             </div>
             <form onSubmit={onSubmitUpdate}>

@@ -5,7 +5,7 @@ import BookInformationWithCover from "../utils/BookInformationWithCover";
 import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";
 import "../../css/RentModalConfirm.css";
-import usePostLendings from "../../api/lendings/usePostLendings";
+import usePostLendingsMultiple from "../../api/lendings/usePostLendingsMultiple";
 
 const RentModalConfirm = ({
   selectedUser,
@@ -18,7 +18,7 @@ const RentModalConfirm = ({
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
 
-  const { requestLending } = usePostLendings({
+  const { requestLending } = usePostLendingsMultiple({
     selectedBooks,
     selectedUser,
     setSelectedBooks,
@@ -31,6 +31,10 @@ const RentModalConfirm = ({
     e.preventDefault();
     requestLending([first, second]);
   };
+  const isRentable =
+    selectedBooks.length > 1
+      ? first.length > 0 && second.length > 0
+      : first.length > 0;
 
   return (
     <form className="rent-modal">
@@ -85,7 +89,8 @@ const RentModalConfirm = ({
           type="submit"
           value="대출 완료하기"
           onClick={postData}
-          color={first.length > 0 && second.length > 0 ? "red" : "lightgrey2"}
+          disabled={!isRentable}
+          color={isRentable ? "red" : "lightgrey2"}
         />
         <Button
           value="취소하기"

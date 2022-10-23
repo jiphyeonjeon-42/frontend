@@ -1,70 +1,36 @@
-import { useState, useEffect, useMemo } from "react";
-import { addDay } from "../../util/date";
-import getErrorMessage from "../../data/error";
-import useApiMultiple from "../../hook/useApiMultiple";
+import { useState, useEffect } from "react";
+import useApi from "../../hook/useApi";
+import { setErrorDialog } from "../../data/error";
 
 const usePostLendings = ({
-  selectedBooks,
-  setSelectedBooks,
-  selectedUser,
-  setSelectedUser,
-  setError,
+  title,
+  userId,
+  bookId,
+  setOpenTitleAndMessage,
   closeModal,
 }) => {
-  const [conditions, setConditions] = useState([]);
-  const apiArray = useMemo(
-    () =>
-      selectedBooks.map((book, index) => {
-        return {
-          method: "post",
-          url: "lendings",
-          data: {
-            userId: selectedUser.id,
-            bookId: book.id,
-            condition: conditions[index],
-          },
-        };
-      }),
-    [conditions],
-  );
-  const { requestIndividual } = useApiMultiple(apiArray);
+  const [condition, setCondition] = useState(undefined);
+  const { request } = useApi("post", "lendings", {
+    userId,
+    bookId,
+    condition,
+  });
 
-  let resultMessage = "";
-  const lendingSuccess = selectedUser.lendings;
-
-  const handleResult = results => {
-    results.forEach((result, index) => {
-      const title = selectedBooks[index]?.title;
-      if (result.status === "fulfilled") {
-        const newLending = {
-          title,
-          dueDate: addDay(14),
-        };
-        resultMessage += `${selectedBooks[index].title} - 대출완료\n`;
-        lendingSuccess.push(newLending);
-      } else {
-        const errorCode = result.reason?.response?.data?.errorCode;
-        resultMessage += `${title} - 대출 실패
-(사유 : ${getErrorMessage(errorCode)})\n\n`;
-      }
-    });
-    setSelectedBooks([]);
-    setSelectedUser({ ...selectedUser, lendingSuccess });
-    setError("대출결과", resultMessage);
-    closeModal();
+  const onSuccess = () => {
+    setOpenTitleAndMessage("대출결과", `${title} - 대출완료`, closeModal);
   };
 
-  const requestLending = remarks => {
-    setConditions([...remarks.filter(remark => remark !== undefined)]);
+  const onError = error => {
+    setErrorDialog(error, setOpenTitleAndMessage, closeModal);
   };
 
   useEffect(() => {
-    if (conditions.length) {
-      requestIndividual(handleResult);
+    if (condition?.length > 0) {
+      request(onSuccess, onError);
     }
-  }, [conditions]);
+  }, [condition]);
 
-  return { setConditions, requestLending };
+  return { requestLending: setCondition };
 };
 
 export default usePostLendings;

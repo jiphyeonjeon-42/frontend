@@ -6,6 +6,7 @@ import { isNumber } from "../../util/typeCheck";
 import "../../css/RentedOrReservedBooks.css";
 
 const RentedOrReservedBooks = ({ componentMode, bookInfoArr }) => {
+  if (!bookInfoArr) return null;
   const { setOpen, defaultConfig, setConfig, Dialog, setOpenTitleAndMessage } =
     useDialog();
   const { setReservationId } = usePatchReservationsCancel({
@@ -14,7 +15,6 @@ const RentedOrReservedBooks = ({ componentMode, bookInfoArr }) => {
     defaultConfig,
     setOpenTitleAndMessage,
   });
-
   return (
     <div className="mypage-books_box">
       <Dialog />

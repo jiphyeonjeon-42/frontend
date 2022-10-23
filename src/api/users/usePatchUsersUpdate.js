@@ -21,7 +21,7 @@ const usePatchUsersUpdate = ({ userId, exitEditMode }) => {
     Object.keys(data).forEach(key => {
       const value =
         expectedItem[key] === "number" ? parseInt(data[key], 10) : data[key];
-      if (value) refinedData[key] = value;
+      if (value || (key === "role" && value === 0)) refinedData[key] = value;
     });
     if (Object.keys(refinedData).length > 0) setPatchData(refinedData);
   };

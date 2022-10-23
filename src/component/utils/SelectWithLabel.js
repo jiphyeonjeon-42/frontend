@@ -40,17 +40,13 @@ const SelectWithLabel = ({
         className="select__select"
         onChange={onChangeSelect}
         name={selectName}
+        defaultValue={selectedIndex}
         disabled={disabled}
         ref={selectRef}
       >
         {defaultText && <option>{defaultText}</option>}
         {optionList.map((optionString, index) => {
-          const isSelected = index === selectedIndex;
-          return (
-            <option value={index} selected={isSelected}>
-              {optionString}
-            </option>
-          );
+          return <option value={index}>{optionString}</option>;
         })}
       </select>
     </div>
@@ -68,11 +64,11 @@ SelectWithLabel.propTypes = {
   defaultText: PropTypes.string,
   disabled: PropTypes.bool,
   align: PropTypes.string,
-  selectRef: PropTypes.oneOf([
+  selectRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.instanceOf(PropTypes.element),
   ]),
-  resetDependency: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  resetDependency: PropTypes.bool,
 };
 
 SelectWithLabel.defaultProps = {

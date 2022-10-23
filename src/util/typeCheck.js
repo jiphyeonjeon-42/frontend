@@ -19,7 +19,9 @@ export const compareExpect = (url, responseItems, expectedItem) => {
     const refinedData = {};
     expectedItem.forEach(expect => {
       const value = item[expect.key];
-      if (typeof expect.type === "object") {
+      if (expect.type === "*") {
+        refinedData[expect.key] = value;
+      } else if (typeof expect.type === "object") {
         const object = compareExpect(url, value, expect.type);
         refinedData[expect.key] = object;
       } else {
