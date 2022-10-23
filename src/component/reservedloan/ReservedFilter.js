@@ -1,48 +1,35 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import "../../css/ReservedFilter.css";
 import CheckIcon from "../../img/check_icon.svg";
 import RedCheckIcon from "../../img/check_icon_red.svg";
 
-const ReservedFilter = ({
-  isPending,
-  setIsPending,
-  isExpired,
-  setIsExpired,
-  isWaiting,
-  setIsWaiting,
-}) => {
-  const toggleProceeding = () => {
-    setIsPending(!isPending);
-    setIsWaiting(false);
-    setIsExpired(false);
+const ReservedFilter = ({ filter, setFilter }) => {
+  const toggleFilter = type => {
+    const newFilter = {};
+    Object.keys(filter).forEach(key => {
+      if (key === type) newFilter[key] = !filter[key];
+      else newFilter[key] = false;
+    });
+    setFilter(newFilter);
   };
-  const toggleWaiting = () => {
-    setIsPending(false);
-    setIsWaiting(!isWaiting);
-    setIsExpired(false);
-  };
-  const toggleFinish = () => {
-    setIsPending(false);
-    setIsWaiting(false);
-    setIsExpired(!isExpired);
-  };
+
   return (
     <div className="reserved-filter">
       <div className="reserved-filter-wrapper">
         <button
           type="button"
-          onClick={toggleProceeding}
+          onClick={() => toggleFilter("isPending")}
           className="proceeding filter-button"
         >
           <img
             className="filter__icon"
-            src={`${isPending ? RedCheckIcon : CheckIcon}`}
+            src={`${filter.isPending ? RedCheckIcon : CheckIcon}`}
             alt="check"
           />
           <span
             className={`proceeding-finish__text ${
-              isPending ? "color-red" : "color-a4"
+              filter.isPending ? "color-red" : "color-a4"
             }`}
           >
             예약 0순위
@@ -50,17 +37,17 @@ const ReservedFilter = ({
         </button>
         <button
           type="button"
-          onClick={toggleWaiting}
+          onClick={() => toggleFilter("isWaiting")}
           className="finish filter-button"
         >
           <img
             className="filter__icon"
-            src={`${isWaiting ? RedCheckIcon : CheckIcon}`}
+            src={`${filter.isWaiting ? RedCheckIcon : CheckIcon}`}
             alt="check"
           />
           <span
             className={`proceeding-finish__text ${
-              isWaiting ? "color-red" : "color-a4"
+              filter.isWaiting ? "color-red" : "color-a4"
             }`}
           >
             예약 후순위
@@ -68,17 +55,17 @@ const ReservedFilter = ({
         </button>
         <button
           type="button"
-          onClick={toggleFinish}
+          onClick={() => toggleFilter("isExpired")}
           className=" finish filter-button "
         >
           <img
             className="filter__icon"
-            src={`${isExpired ? RedCheckIcon : CheckIcon}`}
+            src={`${filter.isExpired ? RedCheckIcon : CheckIcon}`}
             alt="check"
           />
           <span
             className={`proceeding-finish__text ${
-              isExpired ? "color-red" : "color-a4"
+              filter.isExpired ? "color-red" : "color-a4"
             }`}
           >
             종료된 예약
@@ -90,3 +77,12 @@ const ReservedFilter = ({
 };
 
 export default ReservedFilter;
+
+ReservedFilter.propTypes = {
+  filter: PropTypes.shape({
+    isPending: PropTypes.bool,
+    isWaiting: PropTypes.bool,
+    isExpired: PropTypes.bool,
+  }).isRequired,
+  setFilter: PropTypes.func.isRequired,
+};

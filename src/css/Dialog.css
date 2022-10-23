@@ -1,0 +1,13 @@
+.modal__dialog {
+  min-height: 10rem;
+  color: #545454;
+  font-size: 1.8rem;
+
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 3rem 6rem 0;
+}
+
+.modal__dialog__message {
+  text-align: left;
+}

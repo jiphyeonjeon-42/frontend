@@ -114,7 +114,7 @@ const Category = ({
 
   const changeFilter = () => {
     navigate(
-      `?string=${userWord}&page=${1}&category=${categoryIndex}&sort=${userSort}`,
+      `?search=${userWord}&page=${1}&category=${categoryIndex}&sort=${userSort}`,
     );
   };
 

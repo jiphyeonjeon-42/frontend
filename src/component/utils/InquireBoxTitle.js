@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "../../css/InquireBoxTitle.css";
-import AdminSearchBar from "./AdminSearchBar";
+import SearchBar from "./SearchBar";
 
 const InquireBoxTitle = ({
   Icon,
@@ -10,6 +10,7 @@ const InquireBoxTitle = ({
   KOsize,
   ENsize,
   placeHolder,
+  setQuery,
 }) => {
   return (
     <div className="inquire-box-title">
@@ -37,7 +38,11 @@ const InquireBoxTitle = ({
         </span>
       </span>
       {placeHolder ? (
-        <AdminSearchBar placeHolder={placeHolder} width="short" />
+        <SearchBar
+          placeHolder={placeHolder}
+          width="short"
+          setQuery={setQuery}
+        />
       ) : null}
     </div>
   );
@@ -47,6 +52,7 @@ InquireBoxTitle.defaultProps = {
   KOsize: "font-28-bold",
   ENsize: "font-16",
   placeHolder: "",
+  setQuery: undefined,
 };
 
 InquireBoxTitle.propTypes = {
@@ -56,6 +62,7 @@ InquireBoxTitle.propTypes = {
   KOsize: PropTypes.string,
   ENsize: PropTypes.string,
   placeHolder: PropTypes.string,
+  setQuery: PropTypes.func,
 };
 
 export default InquireBoxTitle;

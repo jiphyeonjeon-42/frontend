@@ -1,102 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import arrowLeft from "../../img/arrow_left_black.svg";
 import "../../css/EditEmailOrPassword.css";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
-import getErrorMessage from "../../data/error";
+import useGetUsersSearch from "../../api/users/useGetUsersSearch";
+import useDialog from "../../hook/useDialog";
+import usePatchUsersMyupdate from "../../api/users/usePatchUsersMyupdate";
+
+const modeString = mode => (mode === "email" ? "이메일" : "비밀번호");
 
 function EditEmailOrPassword() {
   const { mode } = useParams();
   const navigate = useNavigate();
-  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
-  const [miniModalContent, setMiniModalContent] = useState("");
-  const [isGoBack, setIsGoBack] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
-  const [newEmail, setNewEmail] = useState("");
-  const [newPw, setNewPw] = useState("");
-  const [checkPw, setCheckPw] = useState("");
-  const MODE_TO_KOREAN = mode === "email" ? "이메일" : "비밀번호";
+  const [revision, setRevision] = useState({
+    text: "",
+    check: "",
+  });
 
-  const onClickLeftArrow = () => {
-    navigate(-1);
-  };
+  const userId = JSON.parse(window.localStorage.getItem("user")).userName;
+  const { userList, Dialog: Error, setQueryNoDelay } = useGetUsersSearch();
+
+  useEffect(() => {
+    setQueryNoDelay(userId);
+  }, []);
+
+  const userInfo = userList[0];
 
   const onChangeInput = e => {
-    setNewEmail(e.target.value);
+    const { value } = e.currentTarget;
+    setRevision({ ...revision, text: value });
   };
 
-  const onChangeNewPw = e => {
-    setNewPw(e.target.value);
+  const onChangeCheck = e => {
+    const { value } = e.currentTarget;
+    setRevision({ ...revision, check: value });
   };
 
-  const onChangeCheckPw = e => {
-    setCheckPw(e.target.value);
-  };
+  const { Dialog, setOpenTitleAndMessage } = useDialog();
+
+  const { setPatchData } = usePatchUsersMyupdate({
+    modeString: modeString(mode),
+    setOpenTitleAndMessage,
+  });
 
   const onSubmitUpdate = async e => {
     e.preventDefault();
-    if (mode === "pw" && newPw !== checkPw) {
-      setMiniModalContent("비밀번호 재입력이 다릅니다.");
-      setIsMiniModalOpen(true);
+    if (mode === "pw" && revision.text !== revision.check) {
+      setOpenTitleAndMessage("비밀번호 재입력이 다릅니다.");
       return;
     }
-    await axios
-      .patch(
-        `${process.env.REACT_APP_API}/users/myupdate`,
-        mode === "email"
-          ? {
-              email: newEmail,
-            }
-          : {
-              password: newPw,
-            },
-      )
-      .then(() => {
-        if (mode === "email") setMiniModalContent("이메일 변경 성공");
-        else setMiniModalContent("비밀번호 변경 성공");
-        setIsMiniModalOpen(true);
-        setIsGoBack(true);
-      })
-      .catch(err => {
-        const { errorCode } = err.response.data;
-        setMiniModalContent(getErrorMessage(errorCode));
-        setIsMiniModalOpen(true);
-      });
+    setPatchData({ [mode]: revision.text });
   };
-
-  const closeModal = () => {
-    setIsMiniModalOpen(false);
-    if (isGoBack) navigate(-1);
-  };
-
-  useEffect(async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/users/search`, {
-        params: {
-          id: JSON.parse(window.localStorage.getItem("user")).id,
-        },
-      })
-      .then(res => setUserInfo(res.data.items[0]))
-      .catch(err => {
-        const { errorCode } = err.response.data;
-        setMiniModalContent(getErrorMessage(errorCode));
-        setIsMiniModalOpen(true);
-      });
-  }, []);
 
   return (
     <div className="mypage-edit">
+      <Dialog />
+      <Error />
       <div className="mypage-edit-box">
         <div className="mypage-edit-leftArrow">
-          <button type="button" onClick={onClickLeftArrow}>
+          <button type="button" onClick={() => navigate(-1)}>
             <img src={arrowLeft} alt={arrowLeft} />
           </button>
         </div>
         <div className="mypage-edit-title color-2d">
           <span>{`${userInfo ? userInfo.email : "-"}님의, `}</span>
-          <span className="inline-block">{`${MODE_TO_KOREAN} 변경 페이지입니다`}</span>
+          <span className="inline-block">{`${modeString(
+            mode,
+          )} 변경 페이지입니다`}</span>
         </div>
         {mode === "email" ? (
           <>
@@ -110,7 +79,7 @@ function EditEmailOrPassword() {
               <div className="mypage-edit-input-box font-14">
                 <span className="font-14-bold color-2d">새로운 이메일</span>
                 <input
-                  value={newEmail}
+                  value={revision.text}
                   type="email"
                   onChange={onChangeInput}
                   placeholder="이메일을 입력해주세요"
@@ -144,8 +113,8 @@ function EditEmailOrPassword() {
                 onBlur={e => {
                   e.target.placeholder = "비밀번호 입력";
                 }}
-                onChange={onChangeNewPw}
-              />{" "}
+                onChange={onChangeCheck}
+              />
             </div>
             <form onSubmit={onSubmitUpdate}>
               <div className="mypage-edit-input-box font-14">
@@ -160,7 +129,7 @@ function EditEmailOrPassword() {
                   onBlur={e => {
                     e.target.placeholder = "비밀번호 재입력";
                   }}
-                  onChange={onChangeCheckPw}
+                  onChange={onChangeCheck}
                 />
               </div>
               <div className={`mypage-edit-${mode}-button`}>
@@ -175,14 +144,6 @@ function EditEmailOrPassword() {
           </>
         ) : null}
       </div>
-      {isMiniModalOpen ? (
-        <MiniModal closeModal={closeModal}>
-          <ModalContentsOnlyTitle
-            title={miniModalContent}
-            closeModal={closeModal}
-          />
-        </MiniModal>
-      ) : null}
     </div>
   );
 }

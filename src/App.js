@@ -18,14 +18,14 @@ import Rent from "./component/rent/Rent";
 import ReservedLoan from "./component/reservedloan/ReservedLoan";
 import ReturnBook from "./component/return/ReturnBook";
 import UserManagement from "./component/userManagement/UserManagement";
-import AddBook from "./component/book/AddBook";
+import AddBook from "./component/addbook/AddBook";
 import MyPageRoutes from "./component/mypage/MyPageRoutes";
 import userState from "./atom/userState";
 import Mypage from "./component/mypage/Mypage";
 import EditEmailOrPassword from "./component/mypage/EditEmailOrPassword";
 import "./css/reset.css";
 import LimitedRoute from "./LimitedRoute";
-import isExpiredDate from "./utils/date";
+import { isExpiredDate } from "./util/date";
 
 function App() {
   const setUser = useSetRecoilState(userState);
@@ -33,12 +33,15 @@ function App() {
     install(process.env.REACT_APP_GA_ID);
     const localUser = JSON.parse(window.localStorage.getItem("user"));
 
-    if (localUser?.isLogin && !isExpiredDate(localUser?.expire))
-      setUser(localUser);
+    if (localUser?.isLogin) {
+      if (!isExpiredDate(localUser?.expire)) setUser(localUser);
+      else window.localStorage.removeItem("user");
+    }
   }, []);
 
   return (
     <BrowserRouter>
+      <div id="modal" />
       <Header />
       <MobileHeader />
       <Routes>
@@ -46,10 +49,12 @@ function App() {
         <Route path="/information" element={<Information />} />
         <Route path="/search" element={<Search />} />
         <Route path="/info/:id" element={<BookDetail />} />
-        <Route path="/login" element={<Login />} />
+        <Route element={<LimitedRoute isLogoutOnly />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
         <Route path="/auth" element={<Auth />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/register" element={<Register />} />
         <Route element={<LimitedRoute isAdminOnly />}>
           <Route path="/rent" element={<Rent />} />
           <Route path="/return" element={<ReturnBook />} />
@@ -60,7 +65,7 @@ function App() {
         <Route element={<LimitedRoute isLoginOnly />}>
           <Route path="/mypage" element={<MyPageRoutes />}>
             <Route index element={<Mypage />} />
-            <Route path="edit/:mode" element={EditEmailOrPassword} />
+            <Route path="edit/:mode" element={<EditEmailOrPassword />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

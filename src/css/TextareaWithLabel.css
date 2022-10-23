@@ -1,0 +1,25 @@
+.textarea__wrapper {
+  font-size: 1.6rem;
+}
+
+.textarea__label {
+  margin: 0.8rem 0;
+}
+.textarea__textarea {
+  width: 100%;
+  box-sizing: border-box;
+  height: 10rem;
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .textarea__wrapper {
+    font-size: 1.4rem;
+  }
+  .textarea__label {
+    margin: 0.4rem 0;
+  }
+  .textarea__textarea {
+    height: 5rem;
+  }
+}

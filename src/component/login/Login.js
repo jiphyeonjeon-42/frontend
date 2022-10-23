@@ -1,112 +1,44 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import usePostAuthLogin from "../../api/auth/usePostAuthLogin";
 import "../../css/MainBanner.css";
 import "../../css/Banner.css";
 import "../../css/Login.css";
-import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
-import qs from "qs";
-import { useRecoilValue } from "recoil";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../../data/error";
-import userState from "../../atom/userState";
 
 const Login = () => {
-  const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [loginData, setLoginData] = useState({
-    id: "",
-    password: "",
-  });
-  const { id, password } = loginData;
-  const location = useLocation();
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  const [queryErrorCode, setQueryErrorCode] = useState(query.errorCode);
-  const user = useRecoilValue(userState);
+  const { id, password, setLogin, requestLogin, message, setMessage } =
+    usePostAuthLogin();
 
-  useEffect(() => {
-    if (user.isLogin) navigate("/");
-  }, [user]);
-
-  const closeModal = async () => {
-    setQueryErrorCode(null);
-    navigate("/login");
+  const submitLogin = e => {
+    e.preventDefault();
+    if (!id) {
+      emailRef.current.focus();
+      setMessage("이메일을 입력해 주세요.");
+      return;
+    }
+    if (!password) {
+      passwordRef.current.focus();
+      setMessage("비밀번호를 입력해 주세요.");
+      return;
+    }
+    requestLogin();
   };
 
   const onChange = e => {
-    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
-    setLoginData({
-      ...loginData, // 기존의 input 객체를 복사한 뒤
-      [name]: value, // name 키를 가진 값을 value 로 설정
-    });
+    const { value, name } = e.currentTarget;
+    setLogin(name, value);
   };
-
-  const sendLoginData = async () => {
-    if (!id || !password) {
-      if (!id) {
-        emailRef.current.focus();
-        setErrorMessage("이메일을 입력해 주세요.");
-      } else if (!password) {
-        passwordRef.current.focus();
-        setErrorMessage("비밀번호를 입력해 주세요.");
-      }
-      return;
-    }
-    await axios
-      .post(`${process.env.REACT_APP_API}/auth/login`, {
-        headers: {
-          "Content-type": "application/x-www-form-urlencoded",
-        },
-        id,
-        password,
-      })
-      .then(() => {
-        window.location.replace("/auth");
-      })
-      .catch(error => {
-        const { errorCode } = error.response.data;
-        if (errorCode === 103) setErrorMessage("입력된 값이 없습니다.");
-        else if (errorCode === 104) setErrorMessage("잘못된 패스워드입니다.");
-        else if (errorCode === 107) setErrorMessage("존재하지 않는 ID 입니다.");
-      });
-  };
-
-  const onKeyPress = e => {
-    if (e.key === "Enter") {
-      sendLoginData();
-    }
-  };
-
-  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
-    "\r\n",
-  );
 
   return (
     <main>
-      {queryErrorCode && (
-        <MiniModal closeModal={closeModal}>
-          <ModalContentsTitleWithMessage
-            closeModal={closeModal}
-            title={title}
-            message={content}
-          />
-        </MiniModal>
-      )}
       <section className="banner main-img">
         <div className="main-banner login-banner">
           <div className="login-main">
             <p className="login-header" align="center">
               로그인
             </p>
-            <form
-              className="login-form"
-              method="post"
-              action={`${process.env.REACT_APP_API}/auth/login`}
-            >
+            <form className="login-form">
               <input
                 className="login-input"
                 name="id"
@@ -125,17 +57,16 @@ const Login = () => {
                 placeholder="비밀번호"
                 value={password}
                 onChange={onChange}
-                onKeyPress={onKeyPress}
                 ref={passwordRef}
               />
-              {errorMessage && (
+              {message && (
                 <div className="login-err" align="center">
-                  {errorMessage}
+                  {message}
                 </div>
               )}
               <button
-                type="button"
-                onClick={sendLoginData}
+                type="submit"
+                onClick={submitLogin}
                 className="login-btn"
                 align="center"
               >

@@ -1,248 +1,111 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import "../../css/UserBriefInfo.css";
+import usePatchUsersUpdate from "../../api/users/usePatchUsersUpdate";
+import InputWithLabel from "../utils/InputWithLabel";
+import SelectWithLabel from "../utils/SelectWithLabel";
+import Button from "../utils/Button";
+import { dateFormat, dateLessThan, nowDate } from "../../util/date";
 import "../../css/UserDetailInfo.css";
 
 const roles = ["미인증", "카뎃", "사서", "운영진"];
 
-const UserInfoEdit = ({ infoKey, infoId, infoType, infoValue }) => {
-  const [input, setInput] = useState(infoValue);
-
-  const onChange = event => {
-    const {
-      target: { value },
-    } = event;
-    setInput(value);
-  };
-
-  return (
-    <div className="user-detail-info__edit color-54">
-      <div className="user-detail-info__key font-18-bold">{infoKey}</div>
-      <input
-        className={`user-detail-info__edit-input edit-${infoId}`}
-        type={infoType}
-        autoComplete="off"
-        value={input}
-        onChange={onChange}
-      />
-    </div>
-  );
-};
-
-const UserRoleEdit = ({ userRole, roleList }) => {
-  return (
-    <div className="user-detail-info__edit color-54">
-      <div className="user-detail-info__key font-18-bold">역할</div>
-      <select className="user-detail-info__edit-select edit-role">
-        {roleList.map((role, index) => {
-          if (index === userRole)
-            return (
-              <option value={index} selected>
-                {role}
-              </option>
-            );
-          return <option value={index}>{role}</option>;
-        })}
-      </select>
-    </div>
-  );
-};
-
-const UserInfoDisplay = ({ infoKey, infoValue }) => {
-  return (
-    <div className="user-detail-info__display color-54">
-      <div className="user-detail-info__key font-18-bold">{infoKey}</div>
-      <div className="user-detail-info__value font-18">{infoValue}</div>
-    </div>
-  );
-};
-
-const convertDatetoString = date => {
-  let stringDate = "";
-
-  stringDate += date.getFullYear();
-  stringDate += "-";
-  stringDate += date.getMonth() + 1 < 10 ? "0" : "";
-  stringDate += date.getMonth() + 1;
-  stringDate += "-";
-  stringDate += date.getDate() < 10 ? "0" : "";
-  stringDate += date.getDate();
-  return stringDate;
-};
-
-const UserDetailInfo = ({
-  user,
-  setErrorCode,
-  closeMidModal,
-  openMiniModal,
-  isEdit,
-  setIsEdit,
-}) => {
-  const today = new Date();
+const UserDetailInfo = ({ user }) => {
   const [editMode, setEditMode] = useState(false);
-  const [userIntraId, setUserIntraId] = useState(user.intraId);
-  const [userNickname, setUserNickname] = useState(user.nickname);
-  const [userSlack, setUserSlack] = useState(user.slack);
-  const [userRoleNum, setUserRoleNum] = useState(user.role);
-  const [userPenalty, setUserPenalty] = useState(user.penaltyEndDate);
+  const intraIdRef = useRef(null);
+  const nickNameRef = useRef(null);
+  const slackRef = useRef(null);
+  const roleRef = useRef(null);
+  const penaltyRef = useRef(null);
 
-  const onEditMode = () => {
-    setEditMode(true);
+  const toggelEditMode = () => {
+    setEditMode(!editMode);
   };
 
-  const offEditMode = () => {
-    setEditMode(false);
-  };
-
-  const patchUserInfo = async data => {
-    await axios
-      .patch(`${process.env.REACT_APP_API}/users/update/${user.id}`, data)
-      .then(res => {
-        const userInfo = res.data;
-        setUserIntraId(userInfo.intraId);
-        setUserNickname(userInfo.nickname);
-        setUserSlack(userInfo.slack);
-        setUserRoleNum(userInfo.role);
-        setUserPenalty(userInfo.penaltyEndDate);
-        setIsEdit(!isEdit);
-      })
-      .catch(error => {
-        closeMidModal();
-        setErrorCode(error.response.data.errorCode);
-        openMiniModal();
-      });
-  };
+  const { requestUpdate, Dialog } = usePatchUsersUpdate({
+    userId: user.id,
+    setEditMode,
+  });
 
   const submitEdit = event => {
     event.preventDefault();
-    const userEditForm = document.getElementById("edit-form");
-    const intra = userEditForm.querySelector(".edit-intra-id").value;
-    const nickname = userEditForm.querySelector(".edit-nickname").value;
-    const roleNum = userEditForm.querySelector(".edit-role").value;
-    const slack = userEditForm.querySelector(".edit-slack").value;
-    const penalty = userEditForm.querySelector(".edit-penalty").value;
-
-    const intraId = parseInt(intra, 10);
-    const role = parseInt(roleNum, 10);
-
-    const data =
-      penalty && penalty !== ""
-        ? {
-            nickname: nickname === "" ? null : nickname,
-            intraId: Number.isNaN(intraId) ? null : intraId,
-            slack: slack === "" ? null : slack,
-            role: Number.isNaN(role) ? 0 : role,
-            penaltyEndDate: penalty,
-          }
-        : {
-            nickname: nickname === "" ? null : nickname,
-            intraId: Number.isNaN(intraId) ? null : intraId,
-            slack: slack === "" ? null : slack,
-            role: Number.isNaN(role) ? 0 : role,
-          };
-    patchUserInfo(data);
-    offEditMode();
+    const data = {
+      nickname: nickNameRef.current?.value,
+      intraId: intraIdRef.current?.value,
+      slack: slackRef.current?.value,
+      role: roleRef.current?.value,
+      penaltyEndDate: dateFormat(penaltyRef.current?.value),
+    };
+    requestUpdate(data);
   };
 
   return (
     <div className="user-detail-info">
+      <Dialog />
       <div className="user-detail-info__title font-28-bold color-54">
         유저정보
       </div>
-      {editMode ? (
-        <form id="edit-form">
-          <UserInfoDisplay infoKey="ID" infoValue={user.id} />
-          <UserInfoDisplay infoKey="이메일" infoValue={user.email} />
-          <UserInfoEdit
-            infoKey="인트라ID"
-            infoId="intra-id"
-            infoType="text"
-            infoValue={userIntraId}
+      <form className="user-detail-info__detail">
+        <div className="user-detail-info__line" />
+        <InputWithLabel labelText="ID" disabled inputInitialValue={user.id} />
+        <InputWithLabel
+          labelText="이메일"
+          inputInitialValue={user.email}
+          disabled
+        />
+        <InputWithLabel
+          labelText="인트라ID"
+          inputInitialValue={user.intraId}
+          ref={intraIdRef}
+          disabled={!editMode}
+        />
+        <InputWithLabel
+          labelText="닉네임"
+          inputInitialValue={user.nickname}
+          ref={nickNameRef}
+          disabled={!editMode}
+        />
+        <InputWithLabel
+          labelText="슬랙ID"
+          inputInitialValue={user.slack}
+          ref={slackRef}
+          disabled={!editMode}
+        />
+        <SelectWithLabel
+          labelText="역할"
+          optionList={roles}
+          disabled={!editMode}
+          ref={roleRef}
+          initialSelectedIndex={user.role}
+        />
+        <div className="user-detail-info__line" />
+        <InputWithLabel
+          labelText="확정 연체일"
+          inputType="date"
+          inputInitialValue={
+            dateLessThan(user.penaltyEndDate, nowDate)
+              ? "-"
+              : user.penaltyEndDate
+          }
+          ref={penaltyRef}
+          disabled={!editMode}
+        />
+        <InputWithLabel
+          labelText="추가 연체일"
+          inputInitialValue={
+            user.overDueDay === 0 ? "-" : `${user.overDueDay}일`
+          }
+          disabled
+        />
+
+        <div className="user-edit-button">
+          {editMode && <Button value="취소하기" onClick={toggelEditMode} />}
+          <Button
+            value={editMode ? "저장하기" : "수정하기"}
+            onClick={editMode ? submitEdit : toggelEditMode}
+            color="red"
           />
-          <UserInfoEdit
-            infoKey="닉네임"
-            infoId="nickname"
-            infoType="text"
-            infoValue={userNickname}
-          />
-          <UserInfoEdit
-            infoKey="슬랙ID"
-            infoId="slack"
-            infoType="text"
-            infoValue={userSlack}
-          />
-          <UserRoleEdit userRole={userRoleNum} roleList={roles} />
-          <div className="user-detail-info__line" />
-          <UserInfoEdit
-            infoKey="확정 연체일"
-            infoId="penalty"
-            infoType="date"
-            infoValue={
-              userPenalty && userPenalty >= convertDatetoString(today)
-                ? userPenalty
-                : ""
-            }
-          />
-          <UserInfoDisplay
-            infoKey="추가 연체일"
-            infoValue={user.overDueDay === 0 ? "-" : `${user.overDueDay}일`}
-          />
-          <div className="user-edit-button">
-            <button
-              className="user-edit-off-button"
-              type="button"
-              onClick={offEditMode}
-            >
-              <div className="user-edit-on-button__text font-20-bold color-ff">
-                취소
-              </div>
-            </button>
-            <button
-              className="user-edit-submit-button"
-              type="button"
-              onClick={submitEdit}
-            >
-              <div className="user-edit-on-button__text font-20-bold color-ff">
-                저장
-              </div>
-            </button>
-          </div>
-        </form>
-      ) : (
-        <>
-          <UserInfoDisplay infoKey="ID" infoValue={user.id} />
-          <UserInfoDisplay infoKey="이메일" infoValue={user.email} />
-          <UserInfoDisplay infoKey="인트라ID" infoValue={userIntraId} />
-          <UserInfoDisplay infoKey="닉네임" infoValue={userNickname} />
-          <UserInfoDisplay infoKey="슬랙ID" infoValue={userSlack} />
-          <UserInfoDisplay infoKey="역할" infoValue={roles[userRoleNum]} />
-          <div className="user-detail-info__line" />
-          <UserInfoDisplay
-            infoKey="확정 연체일"
-            infoValue={
-              userPenalty && userPenalty >= convertDatetoString(today)
-                ? userPenalty
-                : "-"
-            }
-          />
-          <UserInfoDisplay
-            infoKey="추가 연체일"
-            infoValue={user.overDueDay === 0 ? "-" : `${user.overDueDay}일`}
-          />
-          <div className="user-edit-button">
-            <button
-              className="user-edit-on-button"
-              type="button"
-              onClick={onEditMode}
-            >
-              <div className="user-edit-on-button__text font-20-bold color-ff">
-                수정
-              </div>
-            </button>
-          </div>
-        </>
-      )}
+        </div>
+      </form>
     </div>
   );
 };
@@ -267,29 +130,5 @@ UserDetailInfo.propTypes = {
         title: PropTypes.string,
       }),
     ),
-    lendings: PropTypes.arrayOf(
-      PropTypes.shape({ dueDate: PropTypes.string, title: PropTypes.string }),
-    ),
   }).isRequired,
-  setErrorCode: PropTypes.func.isRequired,
-  closeMidModal: PropTypes.func.isRequired,
-  openMiniModal: PropTypes.func.isRequired,
-  isEdit: PropTypes.bool.isRequired,
-  setIsEdit: PropTypes.func.isRequired,
-};
-
-UserInfoEdit.propTypes = {
-  infoKey: PropTypes.string.isRequired,
-  infoId: PropTypes.string.isRequired,
-  infoType: PropTypes.string.isRequired,
-  infoValue: PropTypes.string.isRequired,
-};
-
-UserRoleEdit.propTypes = {
-  userRole: PropTypes.string.isRequired,
-  roleList: PropTypes.string.isRequired,
-};
-UserInfoDisplay.propTypes = {
-  infoKey: PropTypes.string.isRequired,
-  infoValue: PropTypes.string.isRequired,
 };

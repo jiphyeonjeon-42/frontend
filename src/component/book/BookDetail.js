@@ -1,65 +1,39 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState, useRef } from "react";
-import { useRecoilValue } from "recoil";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
-import axios from "axios";
-import userState from "../../atom/userState";
+import React, { useEffect, useRef } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import "../../css/BookDetail.css";
 import Banner from "../utils/Banner";
 import BookStatus from "./BookStatus";
 import IMGERR from "../../img/image_onerror.svg";
-import MiniModal from "../utils/MiniModal";
-import Reservation from "../reservation/Reservation";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../../data/error";
-import ArrRes from "../../img/arrow_right_res.svg";
-import ArrDef from "../../img/arrow_right_res_default.svg";
+import BookReservation from "./BookReservation";
+import useGetBooksInfoId from "../../api/books/useGetBooksInfoId";
+import useDialog from "../../hook/useDialog";
 
 const BookDetail = () => {
-  const [bookDetailInfo, setbookDetailInfo] = useState({ books: [] });
   const { id } = useParams();
   const myRef = useRef(null);
-  const [miniModalView, setMiniModalView] = useState(false);
-  const [miniModalClosable, setMiniModalClosable] = useState(true);
-  const [errorCode, setErrorCode] = useState(-1);
-  const user = useRecoilValue(userState);
-  const navigate = useNavigate();
   const location = useLocation();
+  useEffect(() => myRef.current.scrollIntoView(), []);
 
-  const openModal = () => {
-    setMiniModalView(true);
-  };
-
-  const closeModal = () => {
-    if (miniModalClosable) setMiniModalView(false);
-    if (errorCode === 304) navigate("/search");
-    else if (!user.isLogin) navigate("/login");
-    window.scrollTo(0, 0);
-  };
-
-  const getBooksInfo = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/books/info/${id}`)
-      .then(res => {
-        setErrorCode(-1);
-        setbookDetailInfo(res.data);
-      })
-      .catch(error => {
-        setMiniModalView(true);
-        setErrorCode(error.response.data.errorCode);
-      });
-    myRef.current.scrollIntoView();
-  };
-
-  useEffect(getBooksInfo, []);
+  const {
+    Dialog,
+    defaultConfig: dialogDefaultConfig,
+    setConfig: setDialogConfig,
+    setOpen: openDialog,
+    setOpenTitleAndMessage,
+  } = useDialog();
+  const { bookDetailInfo } = useGetBooksInfoId({ id, setOpenTitleAndMessage });
 
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
-
-  const [title, content] = getErrorMessage(parseInt(errorCode, 10)).split(
-    "\r\n",
-  );
+  const isAvailableReservation = () => {
+    const { books } = bookDetailInfo;
+    return (
+      books.length > 0 &&
+      books.reduce((sum, i) => sum + (i.isLendable + i.status), 0) === 0
+    );
+  };
 
   return (
     <main>
@@ -85,31 +59,14 @@ const BookDetail = () => {
             <span className="color-red">도서정보</span>
             <div className="book-detail__reservation-button">
               <div className="book-detail__title">{bookDetailInfo.title}</div>
-              {bookDetailInfo.books.length > 0 &&
-              // 대출가능한 책들 중에서 예약이 가능한지 판단
-              bookDetailInfo.books.reduce(
-                (accumulator, current) =>
-                  accumulator + (current.isLendable + current.status),
-                0,
-              ) === 0 ? (
-                <button
-                  className="reservation-active-button color-red"
-                  type="button"
-                  onClick={openModal}
-                >
-                  예약 하기
-                  <img src={ArrRes} alt="Arr" />
-                </button>
-              ) : (
-                <button
-                  className="reservation-disable-button color-a4"
-                  type="button"
-                  disabled
-                >
-                  예약 불가
-                  <img src={ArrDef} alt="Arr" />
-                </button>
-              )}
+              <BookReservation
+                bookInfoId={id}
+                isAvailableReservation={isAvailableReservation()}
+                dialogDefaultConfig={dialogDefaultConfig}
+                setDialogConfig={setDialogConfig}
+                setOpenTitleAndMessage={setOpenTitleAndMessage}
+                openDialog={openDialog}
+              />
             </div>
             <div className="book-detail__info">
               <div className="book-detail__info-wrapper color-54">
@@ -142,6 +99,7 @@ const BookDetail = () => {
                 <div className="book-detail__info-key">기부자</div>
                 <div className="book-detail__info-value">
                   {bookDetailInfo.books.reduce((accumulator, current) => {
+                    if (!current.donator) return accumulator;
                     if (accumulator === "" || current.donator === "")
                       return accumulator + current.donator;
                     // eslint-disable-next-line prefer-template
@@ -165,23 +123,7 @@ const BookDetail = () => {
           </div>
         </div>
       </section>
-      {miniModalView && (
-        <MiniModal closeModal={closeModal}>
-          {errorCode < 0 ? (
-            <Reservation
-              bookInfoId={bookDetailInfo.id}
-              closeModal={closeModal}
-              setClosable={setMiniModalClosable}
-            />
-          ) : (
-            <ModalContentsTitleWithMessage
-              closeModal={closeModal}
-              title={title}
-              message={content}
-            />
-          )}
-        </MiniModal>
-      )}
+      <Dialog />
     </main>
   );
 };

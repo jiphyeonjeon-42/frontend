@@ -101,7 +101,7 @@ const Header = () => {
                     alt="user"
                   />
                   <span className="gnb__text font-18 gnb__user__text">
-                    {user.userId}
+                    {user.userName}
                   </span>
                   <img
                     src={toggleLNB || hoverLNB ? ToggleDownArrow : DownArrow}
