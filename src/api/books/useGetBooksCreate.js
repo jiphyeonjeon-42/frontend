@@ -33,6 +33,7 @@ const useGetBooksCreate = defalutBook => {
       isbn: isbnQuery,
       koreanDemicalClassification: books[0].category,
     });
+    setErrorMessage("");
   };
 
   const displayError = error => {

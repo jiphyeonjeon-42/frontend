@@ -1,17 +1,20 @@
-import React from "react";
-import Banner from "../utils/Banner";
-import Tabs from "../utils/Tabs";
-import InquireBoxTitle from "../utils/InquireBoxTitle";
-import IsbnSearchBarWithBarcodeReader from "./AddBookIsbnSearchBarWithBarcodeReader";
-import RegisterBookWithUsersExtraInput from "./AddBookRegisterBookWithUsersExtraInput";
-import DisplayBasicBookInfo from "./AddBookDisplayBasicBookInfo";
-import Book from "../../img/admin_icon.svg";
-import "../../css/AddBook.css";
-import IMGERR from "../../img/image_onerror.svg";
-import { managementTabList } from "../../data/tablist";
+import React, { useState } from "react";
 import useGetBooksCreate from "../../api/books/useGetBooksCreate";
 
+import RegisterBookWithUsersExtraInput from "./AddBookRegisterBookWithUsersExtraInput";
+import DisplayBasicBookInfo from "./AddBookDisplayBasicBookInfo";
+import Tabs from "../utils/Tabs";
+import Banner from "../utils/Banner";
+import BarcodeReader from "../utils/BarcodeReader";
+import InquireBoxTitle from "../utils/InquireBoxTitle";
+
+import { managementTabList } from "../../data/tablist";
+import Book from "../../img/admin_icon.svg";
+import IMGERR from "../../img/image_onerror.svg";
+import "../../css/AddBook.css";
+
 const AddBook = () => {
+  const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
   const defaultBook = {
     isbn: "",
     title: "제목",
@@ -28,15 +31,34 @@ const AddBook = () => {
   function subtituteImg(e) {
     e.target.src = IMGERR;
   }
+
+  const toggleBarcodeReader = () => {
+    setUsingBarcodeReader(!isUsingBarcodeReader);
+  };
+
+  const toDoAfterRead = text => {
+    fetchData(text);
+    setUsingBarcodeReader(false);
+  };
+
   return (
     <main>
       <Banner img="admin" titleKo="도서 신규 등록" titleEn="ADD BOOK" />
       <Tabs tabList={managementTabList} />
-      <section className="inquire-box__wrapper">
-        <InquireBoxTitle Icon={Book} titleKO="도서 등록" titleEN="Add Book" />
+      <section className="add-book__wrapper">
+        {isUsingBarcodeReader && (
+          <BarcodeReader toDoAfterRead={toDoAfterRead} />
+        )}
+        <InquireBoxTitle
+          Icon={Book}
+          titleKO="도서 등록"
+          titleEN="Add Book"
+          placeHolder="isbn을 입력해주세요. 바코드 버튼을 클릭하면 리더기를 끄고 킬 수 있습니다."
+          setQuery={fetchData}
+          isWithBarcodeButton
+          onClickBarcodeButton={toggleBarcodeReader}
+        />
         <div className="inquire-box add-book">
-          <p className="color-red">ISBN</p>
-          <IsbnSearchBarWithBarcodeReader fetchFunction={fetchData} />
           <p>{errorMessage}</p>
           <div className="add-book__basic-info">
             <div className="add-book__basic-info__cover">
