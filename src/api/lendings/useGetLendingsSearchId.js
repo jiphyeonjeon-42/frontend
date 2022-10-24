@@ -2,9 +2,13 @@ import { useEffect } from "react";
 import useApi from "../../hook/useApi";
 import useSearch from "../../hook/useSearch";
 
-const useGetLendingsSearchId = ({ setLendingId, openModal }) => {
+const useGetLendingsSearchId = ({
+  setLendingId,
+  openModal,
+  setOpenTitleAndMessage,
+}) => {
   const { searchParams, setQuery } = useSearch();
-  const { request, Dialog, setError } = useApi("get", "lendings/search", {
+  const { request } = useApi("get", "lendings/search", {
     query: searchParams.query,
     type: "bookId",
   });
@@ -15,15 +19,17 @@ const useGetLendingsSearchId = ({ setLendingId, openModal }) => {
       setLendingId(result[0].id);
       openModal();
     } else
-      setError("책을 다시 한번 확인해주세요.", "해당책의 대출기록이 없습니다.");
+      setOpenTitleAndMessage(
+        "책을 다시 한번 확인해주세요.",
+        "해당책의 대출기록이 없습니다.",
+      );
   };
 
   useEffect(() => {
     if (searchParams.query) request(refineResponse);
   }, [searchParams]);
   return {
-    setQuery,
-    Dialog,
+    setQueryId: setQuery,
   };
 };
 
