@@ -28,7 +28,9 @@
 }
 
 .search-bar__wrapper.banner {
-  width: 70rem;
+  width: 70%;
+  max-width: 70rem;
+  min-width: 28rem;
   border-radius: 3rem;
   padding: 0 3.6rem 0 2.6rem;
   border: solid 0.2rem rgba(255, 255, 255, 0.8);
