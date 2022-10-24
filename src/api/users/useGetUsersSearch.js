@@ -3,7 +3,7 @@ import useApi from "../../hook/useApi";
 import useSearch from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetUsersSearch = () => {
+const useGetUsersSearch = ({ limit }) => {
   const {
     searchResult,
     setSearchResult,
@@ -16,7 +16,7 @@ const useGetUsersSearch = () => {
   const { request, Dialog } = useApi("get", "users/search", {
     nicknameOrEmail: searchParams.query,
     page: searchParams.page - 1,
-    limit: 10,
+    limit,
   });
 
   const expectedItem = [
@@ -44,11 +44,7 @@ const useGetUsersSearch = () => {
       ],
       isNullable: false,
     },
-    {
-      key: "reservations",
-      type: [{ key: "author", type: "string", isNullable: true }],
-      isNullable: false,
-    },
+    { key: "reservations", type: "*", isNullable: false },
   ];
 
   const refineResponse = response => {

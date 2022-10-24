@@ -20,7 +20,7 @@ const UserManagement = () => {
   const [modal, setModal] = useState(0);
   const [selectedUser, setSelectedUser] = useState(0);
   const { userList, lastPage, setQuery, page, setPage, Dialog } =
-    useGetUsersSearch();
+    useGetUsersSearch({ limit: 10 });
 
   const closeModal = () => setModal(0);
 
@@ -68,7 +68,7 @@ const UserManagement = () => {
           {modal === USAGE ? (
             <UserUsageInfo key={selectedUser.id} user={selectedUser} />
           ) : (
-            <UserDetailInfo user={selectedUser} />
+            <UserDetailInfo user={selectedUser} closeModal={closeModal} />
           )}
         </Modal>
       )}

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "../../css/SearchBar.css";
 import { useNavigate } from "react-router-dom";
+import "../../css/SearchBar.css";
 
 const SearchBar = ({
   setQuery, // 검색 호출을 위한 세터
   wrapperClassName,
   placeHolder,
+  isWithBarcodeButton,
+  onClickBarcodeButton,
   width,
   isNavigate,
 }) => {
@@ -40,7 +42,20 @@ const SearchBar = ({
         value={searchWord}
         onChange={onChange}
       />
-      <button className="search-bar__button" type="submit" onSubmit={onSubmit}>
+      {isWithBarcodeButton ? (
+        <button
+          type="button"
+          className="search-bar__button barcode"
+          onClick={onClickBarcodeButton}
+        >
+          바코드
+        </button>
+      ) : null}
+      <button
+        className="search-bar__button submit"
+        type="submit"
+        onSubmit={onSubmit}
+      >
         검색
       </button>
     </form>
@@ -52,6 +67,8 @@ SearchBar.propTypes = {
   placeHolder: PropTypes.string,
   wrapperClassName: PropTypes.string,
   width: PropTypes.string.isRequired,
+  isWithBarcodeButton: PropTypes.bool,
+  onClickBarcodeButton: PropTypes.func,
   isNavigate: PropTypes.bool,
 };
 
@@ -59,6 +76,8 @@ SearchBar.defaultProps = {
   setQuery: undefined,
   wrapperClassName: "",
   placeHolder: "",
+  isWithBarcodeButton: false,
+  onClickBarcodeButton: () => {},
   isNavigate: false,
 };
 export default SearchBar;

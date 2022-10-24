@@ -22,10 +22,6 @@ const ReturnModalContents = ({
     setError,
   });
 
-  const onChangeCondition = e => {
-    const { value } = e.currentTarget;
-    setCondition(value);
-  };
   return (
     <BookInformationWithCover
       wrapperClassName="return-modal__wrapper"
@@ -56,9 +52,9 @@ const ReturnModalContents = ({
         wrapperClassName="return-modal__remark"
         topLabelText="비고"
         textareaValue={condition}
-        onChangeTextarea={onChangeCondition}
+        setTextareaValue={setCondition}
         textareaPlaceHolder={`대출당시 : ${lendingData.lendingCondition}`}
-        isVisibleBottomMessage={condition.length === 0}
+        isVisibleBottomMessage={!condition.length}
         bottomMessageText="비고를 입력해주세요"
         bottomMessageColor="red"
       />
@@ -66,7 +62,7 @@ const ReturnModalContents = ({
         <Button
           value="반납 완료하기"
           color={`${condition.length && "red"}`}
-          disabled={condition.length === 0}
+          disabled={!condition.length}
           onClick={requestReturn}
         />
         <Button

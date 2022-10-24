@@ -26,7 +26,7 @@ const useGetReservationsSearch = () => {
 
   const { request, Dialog } = useApi("get", "reservations/search", {
     query: searchParams.query,
-    page: searchParams.page,
+    page: searchParams.page - 1,
     limit: 5,
     filter: filterState(),
   });

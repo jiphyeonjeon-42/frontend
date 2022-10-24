@@ -71,6 +71,7 @@ const useDialog = () => {
               align={config.buttonAlign}
               numberOfButtons={config.numberOfButtons}
               firstButtonOnClick={config.firstButton.onClick}
+              isFirstButtonFocusedOnMount
               secondButtonOnClick={config.secondButton.onClick}
             />
           </Modal>

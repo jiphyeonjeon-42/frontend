@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../../css/SelectWithLabel.css";
 
@@ -11,9 +11,10 @@ const SelectWithLabel = ({
   defaultText,
   disabled,
   align,
+  selectRef,
+  resetDependency,
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
-  const isSelected = index => index === selectedIndex;
 
   const alignType = () => {
     const candidate = ["horizontal", "vertical"];
@@ -24,6 +25,9 @@ const SelectWithLabel = ({
   const onChangeSelect = e => {
     setSelectedIndex(e.currentTarget.value);
   };
+  useEffect(() => {
+    setSelectedIndex(initialSelectedIndex);
+  }, [resetDependency]);
 
   return (
     <div className={`select__wrapper ${alignType()} ${wrapperClassName}`}>
@@ -36,22 +40,20 @@ const SelectWithLabel = ({
         className="select__select"
         onChange={onChangeSelect}
         name={selectName}
+        defaultValue={selectedIndex}
         disabled={disabled}
+        ref={selectRef}
       >
         {defaultText && <option>{defaultText}</option>}
         {optionList.map((optionString, index) => {
-          return (
-            <option value={index} selected={isSelected}>
-              {optionString}
-            </option>
-          );
+          return <option value={index}>{optionString}</option>;
         })}
       </select>
     </div>
   );
 };
 
-export default forwardRef(SelectWithLabel);
+export default SelectWithLabel;
 
 SelectWithLabel.propTypes = {
   wrapperClassName: PropTypes.string,
@@ -62,6 +64,11 @@ SelectWithLabel.propTypes = {
   defaultText: PropTypes.string,
   disabled: PropTypes.bool,
   align: PropTypes.string,
+  selectRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.instanceOf(PropTypes.element),
+  ]),
+  resetDependency: PropTypes.bool,
 };
 
 SelectWithLabel.defaultProps = {
@@ -72,4 +79,6 @@ SelectWithLabel.defaultProps = {
   defaultText: undefined,
   disabled: false,
   align: "horizontal",
+  selectRef: { current: null },
+  resetDependency: undefined,
 };

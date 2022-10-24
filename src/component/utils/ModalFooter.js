@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../../css/ModalFooter.css";
 
@@ -11,7 +11,9 @@ const ModalFooter = ({
   secondButtonOnClick,
   secondButtonText,
   secondButtonColor,
+  isFirstButtonFocusedOnMount,
 }) => {
+  const firstRef = useRef(null);
   const buttonAlign = () => {
     if (align === "center") return align;
     return "right";
@@ -34,15 +36,21 @@ const ModalFooter = ({
     },
   ];
 
+  useEffect(() => {
+    if (isFirstButtonFocusedOnMount) firstRef.current.focus();
+  }, []);
+
   return (
     <div className={`modal__footer ${buttonAlign()}`}>
       {buttonConfig.map((button, index) => {
         if (index > numberOfButtons - 1) return null;
         return (
           <button
+            key={!index ? "first" : "second"}
             type="button"
             className={buttonColor(button.color)}
             onClick={button.onClick}
+            ref={firstRef}
           >
             {button.text}
           </button>
@@ -61,6 +69,7 @@ ModalFooter.propTypes = {
   secondButtonColor: PropTypes.string,
   secondButtonOnClick: PropTypes.func,
   secondButtonText: PropTypes.string,
+  isFirstButtonFocusedOnMount: PropTypes.bool,
 };
 
 ModalFooter.defaultProps = {
@@ -72,6 +81,7 @@ ModalFooter.defaultProps = {
   secondButtonColor: "grey",
   secondButtonOnClick: undefined,
   secondButtonText: "취소하기",
+  isFirstButtonFocusedOnMount: false,
 };
 
 export default ModalFooter;

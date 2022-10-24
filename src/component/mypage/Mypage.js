@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import "../../css/Mypage.css";
+import { Link, useSearchParams } from "react-router-dom";
+import useDialog from "../../hook/useDialog";
+import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
+import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
+import getErrorMessage from "../../data/error";
 import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 import Reserve from "../../img/list-check-solid.svg";
-import RentedOrReservedBooks from "./RentedOrReservedBooks";
-import useDialog from "../../hook/useDialog";
-import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
+import "../../css/Mypage.css";
 
 const Mypage = () => {
+  const [urlQuery, setUrlQuery] = useSearchParams();
   const {
     setOpen: openDialog,
     config: dialogConfig,
@@ -40,6 +42,16 @@ const Mypage = () => {
   };
 
   useEffect(() => {
+    const error = urlQuery.get("errorCode");
+    if (error) {
+      const errorCode = parseInt(error, 10);
+      const [title, message] = getErrorMessage(errorCode).split("\r\n");
+      setDialogTitleAndMessage(title, message, () => {
+        urlQuery.delete("errorCode");
+        setUrlQuery(urlQuery);
+      });
+    }
+
     const getWindowWidth = () => {
       if (window.innerWidth >= 1200) setDeviceMode("desktop");
       if (window.innerWidth < 1200 && window.innerWidth > 767)

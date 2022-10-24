@@ -1,49 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import SearchBar from "../utils/SearchBar";
-import Pagination from "../utils/Pagination";
 import BookList from "./RentModalBookList";
-import RentBookWithBarcodeReader from "./RentBookWithBarcodeReader";
-import "../../css/RentModalBook.css";
+import SearchModal from "../utils/SearchModal";
+import BarcodeReader from "../utils/BarcodeReader";
 import useGetBooksSearch from "../../api/books/useGetBooksSearch";
+import useGetBooksId from "../../api/books/useGetBooksId";
 
 const RentModalBook = ({ selectedBooks, setSelectedBooks, closeModal }) => {
+  const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
+
+  const { setBookId } = useGetBooksId({ setSelectedBooks, closeModal });
+
+  const toDoAfterRead = text => {
+    const bookId = text.split(" ")[0];
+    setUsingBarcodeReader(false);
+    setBookId(bookId);
+  };
+
   const { bookList, lastPage, page, setPage, setQuery, Dialog } =
     useGetBooksSearch();
 
   return (
-    <section className="rent__modal-book">
-      <div className="rent__modal-book__title">
-        <div className="rent__modal-book__title-text font-28-bold color-54">
-          도서 정보
-        </div>
-        <Dialog />
-        <SearchBar
-          setQuery={setQuery}
-          width="long"
-          placeHolder="도서의 이름을 입력해주세요."
+    <SearchModal
+      titleText="도서 정보"
+      searchBarPlaceholder="도서의 이름을 입력해주세요."
+      page={page}
+      setPage={setPage}
+      setQuery={setQuery}
+      lastPage={lastPage}
+      isWithBarcodeButton
+      onClickBarcodeButton={() => setUsingBarcodeReader(!isUsingBarcodeReader)}
+    >
+      {isUsingBarcodeReader && <BarcodeReader toDoAfterRead={toDoAfterRead} />}
+      {bookList.map(book => (
+        <BookList
+          key={book.id}
+          book={book}
+          setSelectedBooks={setSelectedBooks}
+          selectedBooks={selectedBooks}
+          closeModal={closeModal}
         />
-      </div>
-      <RentBookWithBarcodeReader
-        setSelectedBooks={setSelectedBooks}
-        selectedBooks={selectedBooks}
-        closeModal={closeModal}
-      />
-      <div className="rent__modal-book__total-list">
-        {bookList.map(book => (
-          <BookList
-            key={book.id}
-            book={book}
-            setSelectedBooks={setSelectedBooks}
-            selectedBooks={selectedBooks}
-            closeModal={closeModal}
-          />
-        ))}
-      </div>
-      <div className="rent__modal-user__pagination">
-        <Pagination page={page} setPage={setPage} lastPage={lastPage} />
-      </div>
-    </section>
+      ))}
+      <Dialog />
+    </SearchModal>
   );
 };
 

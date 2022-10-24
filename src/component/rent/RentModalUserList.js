@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React from "react";
 import PropTypes from "prop-types";
-import Arrow from "../../img/arrow_right_black.svg";
 import "../../css/RentModalUserList.css";
 
 const UserList = ({ user, setSelectedUser, closeModal }) => {
@@ -56,7 +55,6 @@ const UserList = ({ user, setSelectedUser, closeModal }) => {
           ? `대출 중인 도서 : ${user.lendings.length}권`
           : displayErrorPermission() || displayPenalty()}
       </div>
-      <img className="rent__user-list__arrow" src={Arrow} alt="arrow" />
     </button>
   );
 };

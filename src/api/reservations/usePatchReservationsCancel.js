@@ -19,6 +19,7 @@ const usePatchReservationsCancel = ({
   const confirmCancelReservation = () => {
     setConfig({
       ...defaultConfig,
+      afterClose: () => setReservationId(undefined),
       title: "예약을 취소하시겠습니까?",
       message: "주의 : 예약취소는 대기순위를 잃고 되돌릴 수 없습니다.",
       firstButton: {

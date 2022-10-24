@@ -11,6 +11,8 @@ const InquireBoxTitle = ({
   ENsize,
   placeHolder,
   setQuery,
+  isWithBarcodeButton,
+  onClickBarcodeButton,
 }) => {
   return (
     <div className="inquire-box-title">
@@ -42,6 +44,8 @@ const InquireBoxTitle = ({
           placeHolder={placeHolder}
           width="short"
           setQuery={setQuery}
+          isWithBarcodeButton={isWithBarcodeButton}
+          onClickBarcodeButton={onClickBarcodeButton}
         />
       ) : null}
     </div>
@@ -53,6 +57,8 @@ InquireBoxTitle.defaultProps = {
   ENsize: "font-16",
   placeHolder: "",
   setQuery: undefined,
+  isWithBarcodeButton: false,
+  onClickBarcodeButton: () => {},
 };
 
 InquireBoxTitle.propTypes = {
@@ -63,6 +69,8 @@ InquireBoxTitle.propTypes = {
   ENsize: PropTypes.string,
   placeHolder: PropTypes.string,
   setQuery: PropTypes.func,
+  isWithBarcodeButton: PropTypes.bool,
+  onClickBarcodeButton: PropTypes.func,
 };
 
 export default InquireBoxTitle;

@@ -36,12 +36,6 @@
   margin-left: 2rem;
 }
 
-.second-book {
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 0.1rem solid #d4d4d4;
-}
-
 .rent-modal__detail {
   width: 100%;
   overflow: hidden;
@@ -82,13 +76,6 @@
   margin: 3rem 0;
 }
 
-.rent-modal__remark__input {
-  width: 100%;
-  box-sizing: border-box;
-  height: 100px;
-  display: block;
-}
-
 .rent-modal__buttons {
   display: flex;
   justify-content: flex-end;
@@ -102,21 +89,6 @@
 }
 
 @media screen and (max-width: 767px) {
-  .rent-modal {
-    padding: 0 4rem;
-  }
-  .rent__modal__container {
-    width: 100%;
-    max-width: 30rem;
-  }
-
-  .rent-modal__cover {
-    margin-right: 2rem;
-  }
-  .rent-modal__cover-img {
-    width: 10rem;
-    height: 15rem;
-  }
   .rent-modal__cancel {
     margin-right: 1.5rem;
   }

@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
-import { replaceNull } from "../../util/typeCheck";
 
-const usePatchUsersUpdate = ({ userId, setEditMode }) => {
+const usePatchUsersUpdate = ({ userId, exitEditMode }) => {
   const [patchData, setPatchData] = useState(null);
   const { request, Dialog } = useApi(
     "patch",
     `users/update/${userId}`,
     patchData,
   );
-
   const expectedItem = {
     nickname: "string",
     intraId: "number",
@@ -19,14 +17,17 @@ const usePatchUsersUpdate = ({ userId, setEditMode }) => {
   };
 
   const requestUpdate = data => {
-    const refinedData = data.keys().map(key => {
-      return replaceNull(data[key], expectedItem[key]);
+    const refinedData = {};
+    Object.keys(data).forEach(key => {
+      const value =
+        expectedItem[key] === "number" ? parseInt(data[key], 10) : data[key];
+      if (value || (key === "role" && value === 0)) refinedData[key] = value;
     });
-    setPatchData(refinedData);
+    if (Object.keys(refinedData).length > 0) setPatchData(refinedData);
   };
 
   const onSuccess = () => {
-    setEditMode(false);
+    exitEditMode();
   };
 
   useEffect(() => {
