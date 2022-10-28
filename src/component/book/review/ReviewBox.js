@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../../css/Review.css";
 
-const text =
-  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
-
 const ReviewBox = () => {
+  const [fixReview, setFixReview] = useState(false);
+  const [text, setText] = useState("입력해주십쇼");
+  const [temp, setTemp] = useState("");
+
+  const saveTemp = () => {
+    if (fixReview) {
+      setText(temp);
+    } else {
+      setTemp(text);
+    }
+    return setFixReview(!fixReview);
+  };
+
+  const handleFixBtn = () => {
+    return setFixReview(!fixReview);
+  };
+
+  const fixReviewBtn = e => {
+    setText(e.target.value);
+  };
+
   return (
     <div className="review-box">
       <div className="review-info">
@@ -12,11 +30,40 @@ const ReviewBox = () => {
         <span className="review-day">리뷰 날짜</span>
       </div>
       <div className="review-content">
-        <span>{text}</span>
+        {fixReview ? (
+          <div>
+            <textarea
+              className="review-content-fix-area"
+              value={text}
+              type="text-area"
+              onChange={fixReviewBtn}
+            />
+          </div>
+        ) : (
+          <div>
+            {/* 텍스트 DB 에서 불러와야 함. */}
+            <span className="reviews-content-area">{text}</span>
+          </div>
+        )}
       </div>
       <div className="review-manage">
-        <p>수정</p>
-        <p>삭제</p>
+        {fixReview ? (
+          <div>
+            <button type="button" onClick={handleFixBtn}>
+              수정 완료
+            </button>
+            <button type="button" onClick={saveTemp}>
+              취소
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button type="button" onClick={saveTemp}>
+              수정
+            </button>
+            <button type="button">삭제</button>
+          </div>
+        )}
       </div>
     </div>
   );
