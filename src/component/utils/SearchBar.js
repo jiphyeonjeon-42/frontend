@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "../../css/SearchBar.css";
 
 const SearchBar = ({
@@ -12,8 +12,10 @@ const SearchBar = ({
   width,
   isNavigate,
 }) => {
-  const [searchWord, setSearchWord] = useState("");
+  const [urlParams] = useSearchParams();
+  const [searchWord, setSearchWord] = useState(urlParams.get("search") || "");
   const navigate = useNavigate();
+  const searchRef = useRef();
 
   const onChange = event => {
     const { value } = event.currentTarget;
@@ -28,6 +30,10 @@ const SearchBar = ({
     if (isNavigate) navigate(`/search?search=${searchWord}`);
   };
 
+  useEffect(() => {
+    searchRef.current.focus();
+  }, []);
+
   return (
     <form
       className={`search-bar__wrapper ${width} ${wrapperClassName}`}
@@ -41,6 +47,7 @@ const SearchBar = ({
         placeholder={placeHolder}
         value={searchWord}
         onChange={onChange}
+        ref={searchRef}
       />
       {isWithBarcodeButton ? (
         <button
