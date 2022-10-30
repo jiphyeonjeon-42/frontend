@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
+import getErrorMessage from "../../data/error";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetBooksInfoNew = () => {
+const useGetBooksInfoNew = ({ setOpenTitleAndMessage }) => {
   const [bookList, setBookList] = useState([]);
 
-  const { request, Dialog } = useApi("get", "books/info/", {
+  const { request } = useApi("get", "books/info/", {
     sort: "new",
     limit: 20,
   });
@@ -25,9 +26,15 @@ const useGetBooksInfoNew = () => {
     setBookList(books);
   };
 
-  useEffect(() => request(refineResponse), []);
+  const onError = error => {
+    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+    const [title, message] = getErrorMessage(errorCode).split("\r\n");
+    setOpenTitleAndMessage(title, message || error.message);
+  };
 
-  return { bookList, Dialog };
+  useEffect(() => request(refineResponse, onError), []);
+
+  return { bookList };
 };
 
 export default useGetBooksInfoNew;

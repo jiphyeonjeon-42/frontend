@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import SubTitle from "../utils/SubTitle";
 import MainPopularCenter from "./MainPopularCenter";
 import MainPopularSide from "./MainPopularSide";
 import useGetBooksInfoPopular from "../../api/books/useGetBooksInfoPopular";
 import "../../css/MainPopular.css";
 
-const MainPopular = () => {
+const MainPopular = ({ setOpenTitleAndMessage }) => {
   const [centerTop, setCenterTop] = useState(0);
-  const { docs, Dialog } = useGetBooksInfoPopular();
+  const { docs } = useGetBooksInfoPopular({ setOpenTitleAndMessage });
 
   const left = docs.slice(centerTop - 3, centerTop);
   const center = () => {
@@ -31,7 +32,6 @@ const MainPopular = () => {
   return (
     <section className="main__popular">
       <div className="main__popular__wrapper">
-        <Dialog />
         <SubTitle
           subTitle="42일 인기 도서를 소개합니다"
           description="42서울 카뎃들이 42일 동안 가장 많이 본 책들은 무엇일까요?"
@@ -57,3 +57,7 @@ const MainPopular = () => {
 };
 
 export default MainPopular;
+
+MainPopular.propTypes = {
+  setOpenTitleAndMessage: PropTypes.func.isRequired,
+};

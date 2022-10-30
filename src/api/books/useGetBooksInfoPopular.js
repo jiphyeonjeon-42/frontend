@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
+import getErrorMessage from "../../data/error";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetBooksInfoPopular = () => {
+const useGetBooksInfoPopular = ({ setOpenTitleAndMessage }) => {
   const [docs, setDocs] = useState([]);
 
-  const { request, Dialog } = useApi("get", "books/info", {
+  const { request } = useApi("get", "books/info", {
     sort: "popular",
     limit: 30,
   });
@@ -29,9 +30,15 @@ const useGetBooksInfoPopular = () => {
     setDocs(books.map((book, index) => ({ ...book, rank: index + 1 })));
   };
 
-  useEffect(() => request(refineResponse), []);
+  const onError = error => {
+    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+    const [title, message] = getErrorMessage(errorCode).split("\r\n");
+    setOpenTitleAndMessage(title, message || error.message);
+  };
 
-  return { docs, Dialog };
+  useEffect(() => request(refineResponse, onError), []);
+
+  return { docs };
 };
 
 export default useGetBooksInfoPopular;
