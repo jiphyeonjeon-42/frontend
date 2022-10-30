@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import getErrorMessage from "../../data/error";
 import useApi from "../../hook/useApi";
 
 const usePostAuthLogin = () => {
@@ -27,10 +28,11 @@ const usePostAuthLogin = () => {
   };
 
   const onError = error => {
-    const { errorCode } = error.response.data;
+    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
     if (errorCode === 103) setMessage("입력된 값이 없습니다.");
     else if (errorCode === 104) setMessage("잘못된 패스워드입니다.");
     else if (errorCode === 107) setMessage("존재하지 않는 ID 입니다.");
+    else setMessage(getErrorMessage(errorCode));
   };
 
   const requestLogin = () => {
