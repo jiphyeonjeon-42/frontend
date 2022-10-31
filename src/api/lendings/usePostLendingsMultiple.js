@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import { addDay } from "../../util/date";
 import getErrorMessage from "../../data/error";
 import useApiMultiple from "../../hook/useApiMultiple";
 
@@ -36,9 +35,10 @@ const usePostLendingsMultiple = ({
     results.forEach((result, index) => {
       const title = selectedBooks[index]?.title;
       if (result.status === "fulfilled") {
+        const { dueDate } = result.value.data;
         const newLending = {
           title,
-          dueDate: addDay(14),
+          dueDate,
         };
         resultMessage += `${selectedBooks[index].title} - 대출완료\n`;
         lendingSuccess.push(newLending);
@@ -50,7 +50,7 @@ const usePostLendingsMultiple = ({
     });
     setSelectedBooks([]);
     setSelectedUser({ ...selectedUser, lendingSuccess });
-    setError("대출결과", resultMessage);
+    setError("대출결과", resultMessage, () => window.location.reload());
     closeModal();
   };
 

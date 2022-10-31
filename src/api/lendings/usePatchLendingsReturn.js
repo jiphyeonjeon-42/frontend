@@ -18,6 +18,7 @@ const usePatchLendingsReturn = ({ lendingId, title, closeModal, setError }) => {
           : "반납되었습니다."
       }`,
       title,
+      () => window.location.reload(),
     );
   };
 
