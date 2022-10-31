@@ -4,7 +4,7 @@ import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../data/error";
 
-const useGetBooksInfoId = ({ id, setError }) => {
+const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
   const [bookDetailInfo, setBookDetailInfo] = useState({ books: [] });
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const useGetBooksInfoId = ({ id, setError }) => {
         window.scrollTo(0, 0);
       }
     };
-    setError(
+    setOpenTitleAndMessage(
       title,
       errorCode ? message : `${message}\r\n${error?.message}`,
       afterClose,

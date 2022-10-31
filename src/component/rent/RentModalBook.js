@@ -9,7 +9,10 @@ import useGetBooksId from "../../api/books/useGetBooksId";
 const RentModalBook = ({ selectedBooks, setSelectedBooks, closeModal }) => {
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
 
-  const { setBookId } = useGetBooksId({ setSelectedBooks, closeModal });
+  const { setBookId, Dialog: ErrorDialog } = useGetBooksId({
+    setSelectedBooks,
+    closeModal,
+  });
 
   const toDoAfterRead = text => {
     const bookId = text.split(" ")[0];
@@ -42,6 +45,7 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeModal }) => {
         />
       ))}
       <Dialog />
+      <ErrorDialog />
     </SearchModal>
   );
 };

@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetBooksId = ({ setSelctedBooks, closeModal }) => {
+const useGetBooksId = ({ setSelectedBooks, closeModal }) => {
   const [bookId, setBookId] = useState(null);
-  const { request } = useApi("get", `books/${bookId}`);
+  const { request, Dialog } = useApi("get", `books/${bookId}`);
 
   const expectedItem = [
     { key: "id", type: "number", isNullable: false },
@@ -16,17 +16,15 @@ const useGetBooksId = ({ setSelctedBooks, closeModal }) => {
 
   const refineResponse = response => {
     const book = compareExpect("books/:bookid", [response.data], expectedItem);
-    setSelctedBooks(prev => [...prev, ...book]);
+    setSelectedBooks(prev => [...prev, ...book]);
     closeModal(false);
   };
 
-  const displayError = error => console.log(error.message);
-
   useEffect(() => {
-    if (bookId) request(refineResponse, displayError);
+    if (bookId) request(refineResponse);
   }, [bookId]);
 
-  return { setBookId };
+  return { setBookId, Dialog };
 };
 
 export default useGetBooksId;
