@@ -55,8 +55,8 @@ function EditEmailOrPassword() {
       setOpenTitleAndMessage("비밀번호 재입력이 다릅니다.");
       return;
     }
-    if (!registerRule[mode].validator(revision.text)) {
-      setOpenTitleAndMessage(registerRule[mode].invalidMessage);
+    if (!registerRule[modeString(mode)]?.validator(revision.text)) {
+      setOpenTitleAndMessage(registerRule[modeString(mode)].invalidMessage);
       return;
     }
     if (!revision.text) {
