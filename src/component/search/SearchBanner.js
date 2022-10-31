@@ -16,7 +16,11 @@ const SearchBanner = ({ setQuery }) => {
             SEARCH
           </span>
         </div>
-        <SearchBar setQuery={setQuery} width="banner" />
+        <SearchBar
+          setQuery={setQuery}
+          width="banner"
+          isFocusedOnMount={false}
+        />
       </section>
     </section>
   );

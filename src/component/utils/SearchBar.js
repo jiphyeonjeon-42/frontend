@@ -11,6 +11,7 @@ const SearchBar = ({
   onClickBarcodeButton,
   width,
   isNavigate,
+  isFocusedOnMount,
 }) => {
   const [urlParams] = useSearchParams();
   const [searchWord, setSearchWord] = useState(urlParams.get("search") || "");
@@ -31,7 +32,7 @@ const SearchBar = ({
   };
 
   useEffect(() => {
-    searchRef.current.focus();
+    if (isFocusedOnMount) searchRef.current.focus();
   }, []);
 
   return (
@@ -77,6 +78,7 @@ SearchBar.propTypes = {
   isWithBarcodeButton: PropTypes.bool,
   onClickBarcodeButton: PropTypes.func,
   isNavigate: PropTypes.bool,
+  isFocusedOnMount: PropTypes.bool,
 };
 
 SearchBar.defaultProps = {
@@ -86,5 +88,6 @@ SearchBar.defaultProps = {
   isWithBarcodeButton: false,
   onClickBarcodeButton: () => {},
   isNavigate: false,
+  isFocusedOnMount: true,
 };
 export default SearchBar;
