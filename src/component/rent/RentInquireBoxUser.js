@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DeleteButton from "../../img/x_button.svg";
-import "../../css/RentInquireBoxUser.css";
 import useModal from "../../hook/useModal";
 import RentModalUser from "./RentModalUser";
+import Image from "../utils/Image";
+import DeleteButton from "../../img/x_button.svg";
+import "../../css/RentInquireBoxUser.css";
 
 const InquireBoxUser = ({ selectedUser, setSelectedUser }) => {
   const { setOpen, setClose, Modal } = useModal();
@@ -53,7 +54,7 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }) => {
               type="button"
               onClick={deleteUser}
             >
-              <img src={DeleteButton} alt="delete" />
+              <Image src={DeleteButton} alt="delete" />
             </button>
           </div>
           <div className="rent__inquire-box-user__lendings">

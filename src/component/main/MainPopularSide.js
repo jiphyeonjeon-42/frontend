@@ -1,11 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import IMGERR from "../../img/image_onerror.svg";
+import Image from "../utils/Image";
 
 const MainPopularSide = ({ books, onClick, side }) => {
-  function subtituteImg(e) {
-    e.target.src = IMGERR;
-  }
   return (
     <button
       className={`main__popular__${
@@ -16,11 +13,10 @@ const MainPopularSide = ({ books, onClick, side }) => {
     >
       {books.map(book => (
         <div className="main__popular__basic-book" key={book.id}>
-          <img
+          <Image
             src={book.image}
             alt={book.title}
             className="main__popular__basic-img"
-            onError={subtituteImg}
           />
         </div>
       ))}

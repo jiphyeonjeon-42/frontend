@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Image from "./Image";
 import "../../css/BookInformationWithCover.css";
-import IMGERR from "../../img/image_onerror.svg";
 
 const BookInformationWithCover = ({
   wrapperClassName,
@@ -9,17 +9,13 @@ const BookInformationWithCover = ({
   bookCoverAlt,
   children,
 }) => {
-  function subtituteImg(e) {
-    e.target.src = IMGERR;
-  }
   return (
     <div className={`book-info__wrapper ${wrapperClassName}`}>
       <div className="book-info__cover">
-        <img
+        <Image
           className="book-info__cover-img"
           src={bookCoverImg}
           alt={bookCoverAlt}
-          onError={subtituteImg}
         />
       </div>
       <div className="book-info__detail">{children}</div>

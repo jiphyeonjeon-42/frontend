@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Image from "../utils/Image";
 import useGetReservationsCount from "../../api/reservations/useGetReservationsCount";
 import usePostReservations from "../../api/reservations/usePostReservations";
 import Available from "../../img/arrow_right_res.svg";
@@ -18,7 +19,7 @@ const BookReservation = ({
     return (
       <div className="reservation__rentable">
         대출 가능
-        <img src={Unavailable} alt="대출" />
+        <Image src={Unavailable} alt="대출" />
       </div>
     );
 
@@ -49,7 +50,7 @@ const BookReservation = ({
         onClick={tryReservation}
       >
         예약 하기
-        <img src={Available} alt="예약" />
+        <Image src={Available} alt="예약" />
       </button>
     </>
   );

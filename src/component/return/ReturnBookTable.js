@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import PropTypes from "prop-types";
+import Image from "../utils/Image";
 import Arr from "../../img/arrow_right_black.svg";
 import "../../css/ReturnbookTable.css";
 
@@ -24,7 +25,11 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
           <span className="return-book__table-list__text color-54">
             {factor.title}
           </span>
-          <img className="return-book__table-list__arr" src={Arr} alt="arrow" />
+          <Image
+            className="return-book__table-list__arr"
+            src={Arr}
+            alt="arrow"
+          />
         </div>
         <div className="return-book__table-list__info">
           <span className="re-callSign font-16 color-54">

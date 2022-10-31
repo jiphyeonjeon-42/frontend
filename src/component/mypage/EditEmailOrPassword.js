@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import arrowLeft from "../../img/arrow_left_black.svg";
-import "../../css/EditEmailOrPassword.css";
 import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 import useDialog from "../../hook/useDialog";
 import usePatchUsersMyupdate from "../../api/users/usePatchUsersMyupdate";
+import Image from "../utils/Image";
 import { registerRule } from "../../data/validate";
+import arrowLeft from "../../img/arrow_left_black.svg";
+import "../../css/EditEmailOrPassword.css";
 
 const modeStringKorean = mode => (mode === "email" ? "이메일" : "비밀번호");
 const modeString = mode => (mode === "email" ? "email" : "password");
@@ -72,7 +73,7 @@ function EditEmailOrPassword() {
       <div className="mypage-edit-box">
         <div className="mypage-edit-leftArrow">
           <button type="button" onClick={() => navigate(-1)}>
-            <img src={arrowLeft} alt={arrowLeft} />
+            <Image src={arrowLeft} alt={arrowLeft} />
           </button>
         </div>
         <div className="mypage-edit-title color-2d">

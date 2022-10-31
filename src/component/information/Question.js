@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import Image from "../utils/Image";
 import Plus from "../../img/plus_icon_off.svg";
 import Minus from "../../img/plus_icon_on.svg";
 import "../../css/Question.css";
@@ -28,7 +29,7 @@ const QnA = ({ isOpen, question, answer, linkText, link }) => {
   return (
     <div className="qna">
       <button className="qna__question" type="button" onClick={clickQNA}>
-        <img
+        <Image
           src={onOff ? Minus : Plus}
           className="question__icon"
           alt="question"

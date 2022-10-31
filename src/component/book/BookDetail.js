@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import "../../css/BookDetail.css";
+import useDialog from "../../hook/useDialog";
+import useGetBooksInfoId from "../../api/books/useGetBooksInfoId";
+import Image from "../utils/Image";
 import Banner from "../utils/Banner";
 import BookStatus from "./BookStatus";
-import IMGERR from "../../img/image_onerror.svg";
 import BookReservation from "./BookReservation";
-import useGetBooksInfoId from "../../api/books/useGetBooksInfoId";
-import useDialog from "../../hook/useDialog";
+import "../../css/BookDetail.css";
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -24,9 +24,6 @@ const BookDetail = () => {
   } = useDialog();
   const { bookDetailInfo } = useGetBooksInfoId({ id, setOpenTitleAndMessage });
 
-  function subtituteImg(e) {
-    e.target.src = IMGERR;
-  }
   const isAvailableReservation = () => {
     const { books } = bookDetailInfo;
     return (
@@ -49,11 +46,7 @@ const BookDetail = () => {
         </div>
         <div className="book-content">
           <div className="book-detail__photo">
-            <img
-              src={bookDetailInfo.image}
-              alt={bookDetailInfo.title}
-              onError={subtituteImg}
-            />
+            <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
           </div>
           <div className="book-detail">
             <span className="color-red">도서정보</span>

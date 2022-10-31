@@ -1,6 +1,7 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import Image from "./Image";
 import ArrRight from "../../img/arrow_right_black.svg";
 import ArrRightDouble from "../../img/arrow_right_black_double.svg";
 import "../../css/Pagination.css";
@@ -55,7 +56,7 @@ const Pagination = ({
               value="previousStart"
               onClick={onClickPageRange}
             >
-              <img
+              <Image
                 className="reverse double"
                 src={ArrRightDouble}
                 alt="go to first page range"
@@ -67,7 +68,7 @@ const Pagination = ({
               value="previous"
               onClick={onClickPageRange}
             >
-              <img
+              <Image
                 className="reverse"
                 src={ArrRight}
                 alt="go to previous page range"
@@ -103,7 +104,7 @@ const Pagination = ({
               value="next"
               onClick={onClickPageRange}
             >
-              <img src={ArrRight} alt="go to next page range" />
+              <Image src={ArrRight} alt="go to next page range" />
             </button>
             <button
               className="pagination__page-range-button double"
@@ -111,7 +112,7 @@ const Pagination = ({
               value="nextLast"
               onClick={onClickPageRange}
             >
-              <img
+              <Image
                 className="double"
                 src={ArrRightDouble}
                 alt="go to last page range"

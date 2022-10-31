@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Image from "./Image";
+import HiddenModal from "./HiddenModal";
 import Youtube from "../../img/youtube.svg";
 import Github from "../../img/github.svg";
 import Information from "../../img/information_icon.svg";
 import "../../css/Footer.css";
-import HiddenModal from "./HiddenModal";
 
 const Footer = () => {
   return (
@@ -20,7 +21,7 @@ const Footer = () => {
               className="footer__icon"
               href="https://www.youtube.com/c/%EC%9D%B4%EB%85%B8%EB%B2%A0%EC%9D%B4%EC%85%98%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/featured"
             >
-              <img className="footer__icon" src={Youtube} alt="youtube" />
+              <Image className="footer__icon" src={Youtube} alt="youtube" />
             </a>
             <a
               target="_blank"
@@ -28,10 +29,10 @@ const Footer = () => {
               className="footer__icon footer__icon-margin"
               href="https://github.com/jiphyeonjeon-42"
             >
-              <img className="icon-github" src={Github} alt="github" />
+              <Image className="icon-github" src={Github} alt="github" />
             </a>
             <Link className="footer__icon" to={{ pathname: `/information` }}>
-              <img
+              <Image
                 className="icon-information"
                 src={Information}
                 alt="information"

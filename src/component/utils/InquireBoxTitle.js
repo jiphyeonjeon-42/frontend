@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../../css/InquireBoxTitle.css";
+import Image from "./Image";
 import SearchBar from "./SearchBar";
+import "../../css/InquireBoxTitle.css";
 
 const InquireBoxTitle = ({
   Icon,
@@ -16,7 +17,7 @@ const InquireBoxTitle = ({
 }) => {
   return (
     <div className="inquire-box-title">
-      <img
+      <Image
         className={`inquire-box-title__icon ${placeHolder && "short"}`}
         src={Icon}
         alt="icon"

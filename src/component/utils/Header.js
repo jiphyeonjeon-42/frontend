@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { Link, useLocation } from "react-router-dom";
+import userState from "../../atom/userState";
+import Image from "./Image";
+import {
+  basicGnbMenu,
+  adminLnbMenu,
+  loginLnbMenu,
+} from "../../data/headerMenu";
 import Logo from "../../img/jiphyeonjeon_logo.svg";
 import User from "../../img/Uniconlabs.png";
 import ToggleUser from "../../img/UniconlabsFill.png";
 import ToggleDownArrow from "../../img/caret-down_DaveGandy.png";
 import DownArrow from "../../img/drop-down_Freepik.png";
 import "../../css/Header.css";
-import userState from "../../atom/userState";
-import {
-  basicGnbMenu,
-  adminLnbMenu,
-  loginLnbMenu,
-} from "../../data/headerMenu";
 
 const Header = () => {
   const user = useRecoilValue(userState);
@@ -36,7 +37,7 @@ const Header = () => {
         <section className="header-wrapper">
           <div className="header__logo">
             <Link to="/">
-              <img src={Logo} className="logo_img" alt="logo" />
+              <Image src={Logo} className="logo_img" alt="logo" />
             </Link>
           </div>
           <nav className="header__gnb">
@@ -45,7 +46,7 @@ const Header = () => {
                 return (
                   <li>
                     <Link className="gnb__button" to={menu.linkTo}>
-                      <img
+                      <Image
                         src={menu.img}
                         className="gnb__icon gnb__info__icon"
                         alt={menu.imgAlt}
@@ -65,7 +66,7 @@ const Header = () => {
       <section className="header-wrapper">
         <div className="header__logo">
           <Link to="/">
-            <img src={Logo} className="logo_img" alt="logo" />
+            <Image src={Logo} className="logo_img" alt="logo" />
           </Link>
         </div>
         <nav className="header__gnb">
@@ -75,7 +76,7 @@ const Header = () => {
               return (
                 <li>
                   <Link className="gnb__button" to={menu.linkTo}>
-                    <img
+                    <Image
                       src={menu.img}
                       className="gnb__icon gnb__info__icon"
                       alt={menu.imgAlt}
@@ -95,7 +96,7 @@ const Header = () => {
                   onFocus={() => setHoverLNB(true)}
                   onMouseLeave={() => setHoverLNB(false)}
                 >
-                  <img
+                  <Image
                     src={toggleLNB ? ToggleUser : User}
                     className="gnb__icon gnb__user__icon"
                     alt="user"
@@ -103,7 +104,7 @@ const Header = () => {
                   <span className="gnb__text font-18 gnb__user__text">
                     {user.userName}
                   </span>
-                  <img
+                  <Image
                     src={toggleLNB || hoverLNB ? ToggleDownArrow : DownArrow}
                     className="gnb__icon gnb__dropdown__icon"
                     alt="dropdown"

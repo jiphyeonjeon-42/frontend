@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../../css/ReservedFilter.css";
+import Image from "../utils/Image";
 import CheckIcon from "../../img/check_icon.svg";
 import RedCheckIcon from "../../img/check_icon_red.svg";
+import "../../css/ReservedFilter.css";
 
 const ReservedFilter = ({ filter, setFilter }) => {
   const toggleFilter = type => {
@@ -22,7 +23,7 @@ const ReservedFilter = ({ filter, setFilter }) => {
           onClick={() => toggleFilter("isPending")}
           className="proceeding filter-button"
         >
-          <img
+          <Image
             className="filter__icon"
             src={`${filter.isPending ? RedCheckIcon : CheckIcon}`}
             alt="check"
@@ -40,7 +41,7 @@ const ReservedFilter = ({ filter, setFilter }) => {
           onClick={() => toggleFilter("isWaiting")}
           className="finish filter-button"
         >
-          <img
+          <Image
             className="filter__icon"
             src={`${filter.isWaiting ? RedCheckIcon : CheckIcon}`}
             alt="check"
@@ -58,7 +59,7 @@ const ReservedFilter = ({ filter, setFilter }) => {
           onClick={() => toggleFilter("isExpired")}
           className=" finish filter-button "
         >
-          <img
+          <Image
             className="filter__icon"
             src={`${filter.isExpired ? RedCheckIcon : CheckIcon}`}
             alt="check"

@@ -4,13 +4,13 @@ import useGetBooksCreate from "../../api/books/useGetBooksCreate";
 import RegisterBookWithUsersExtraInput from "./AddBookRegisterBookWithUsersExtraInput";
 import DisplayBasicBookInfo from "./AddBookDisplayBasicBookInfo";
 import Tabs from "../utils/Tabs";
+import Image from "../utils/Image";
 import Banner from "../utils/Banner";
 import BarcodeReader from "../utils/BarcodeReader";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 
 import { managementTabList } from "../../data/tablist";
 import Book from "../../img/admin_icon.svg";
-import IMGERR from "../../img/image_onerror.svg";
 import "../../css/AddBook.css";
 
 const AddBook = () => {
@@ -27,10 +27,6 @@ const AddBook = () => {
 
   const { bookInfo, errorMessage, fetchData, setBookInfo } =
     useGetBooksCreate(defaultBook);
-
-  function subtituteImg(e) {
-    e.target.src = IMGERR;
-  }
 
   const toggleBarcodeReader = () => {
     setUsingBarcodeReader(!isUsingBarcodeReader);
@@ -62,11 +58,7 @@ const AddBook = () => {
           <p>{errorMessage}</p>
           <div className="add-book__basic-info">
             <div className="add-book__basic-info__cover">
-              <img
-                src={bookInfo.image}
-                alt={bookInfo.title}
-                onError={subtituteImg}
-              />
+              <Image src={bookInfo.image} alt={bookInfo.title} />
             </div>
             <div className="add-book__basic-info__detail">
               <DisplayBasicBookInfo

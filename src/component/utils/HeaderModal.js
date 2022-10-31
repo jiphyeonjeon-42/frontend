@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import userState from "../../atom/userState";
+import Image from "./Image";
 import {
   basicGnbMenu,
   adminLnbMenu,
@@ -35,14 +36,14 @@ const HeaderModal = ({ setHeaderModal }) => {
                 type="button"
                 onClick={closeHeaderModal}
               >
-                <img
+                <Image
                   className="header-modal__icon-close"
                   src={CloseButton}
                   alt="close"
                 />
               </button>
               <div className="header-modal__user">
-                <img
+                <Image
                   src={User}
                   className="header-modal__anonymous__icon"
                   alt="user"
@@ -60,7 +61,7 @@ const HeaderModal = ({ setHeaderModal }) => {
                   <>
                     {isLogin && <div className="header-modal__line" />}
                     <Link className="header-modal__button" to={menu.linkTo}>
-                      <img
+                      <Image
                         src={menu.mobileImg}
                         className={`header-modal__icon${isLogin ? "-in" : ""}`}
                         alt={menu.imgAlt}
@@ -93,7 +94,7 @@ const HeaderModal = ({ setHeaderModal }) => {
               type="button"
               onClick={closeHeaderModal}
             >
-              <img
+              <Image
                 className="header-modal__icon-close"
                 src={CloseButton}
                 alt="close"
@@ -119,7 +120,7 @@ const HeaderModal = ({ setHeaderModal }) => {
                 return (
                   <>
                     <Link className="header-modal__button" to={menu.linkTo}>
-                      <img
+                      <Image
                         src={menu.mobileImg}
                         className={`header-modal__icon-${menu.idClassName}`}
                         alt={menu.imgAlt}
@@ -137,7 +138,7 @@ const HeaderModal = ({ setHeaderModal }) => {
               if (!menu.isForMobile || isLogin) return null;
               return (
                 <Link className="header-modal__button" to={menu.linkTo}>
-                  <img
+                  <Image
                     src={menu.mobileImg}
                     className="header-modal__icon"
                     alt={menu.imgAlt}
@@ -154,7 +155,7 @@ const HeaderModal = ({ setHeaderModal }) => {
                 <>
                   {isLogout && <div className="header-modal__line" />}
                   <Link className="header-modal__button" to={menu.linkTo}>
-                    <img
+                    <Image
                       src={menu.mobileImg}
                       className={`header-modal__icon${isLogout ? "-out" : ""}`}
                       alt={menu.imgAlt}

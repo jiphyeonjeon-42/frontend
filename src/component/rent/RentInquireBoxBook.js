@@ -1,10 +1,11 @@
 /* eslint-disable react/forbid-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
-import DeleteButton from "../../img/x_button.svg";
-import "../../css/RentInquireBoxBook.css";
 import useModal from "../../hook/useModal";
 import RentModalBook from "./RentModalBook";
+import Image from "../utils/Image";
+import DeleteButton from "../../img/x_button.svg";
+import "../../css/RentInquireBoxBook.css";
 
 const InquireBoxBook = ({ shape, book, selectedBooks, setSelectedBooks }) => {
   const { setOpen, setClose, Modal } = useModal();
@@ -30,7 +31,7 @@ const InquireBoxBook = ({ shape, book, selectedBooks, setSelectedBooks }) => {
               type="button"
               onClick={deleteBook}
             >
-              <img src={DeleteButton} alt="delete" />
+              <Image src={DeleteButton} alt="delete" />
             </button>
           </div>
           <div className="rent__inquire-box-book__info color-54">
