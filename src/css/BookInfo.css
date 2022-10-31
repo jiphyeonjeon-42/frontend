@@ -29,7 +29,7 @@
 }
 
 .book-info__info {
-  margin-left: 2.4rem;
+  margin: 0 2.4rem;
 }
 
 .book-info__title {
@@ -65,16 +65,25 @@
   margin: 3.2rem 0 3.2rem 0;
 }
 
-@media screen and (min-width:768px) and (max-width: 1200px) {
-
-  .book-info-wraper {
-    flex-basis: 100%;
+@media screen and (min-width: 1200px) {
+  .book-info__others {
+    height: 5.2rem;
+  }
+  .book-info__others > span {
+    line-height: 1.2;
+    max-width: 20rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
   }
 
+  .book-info__published-at {
+    margin-top: 0rem;
+  }
 }
 
-@media screen and (max-width:767px) {
-
+@media screen and (max-width: 767px) {
   .book-info-wraper {
     width: 100%;
     flex-basis: 100%;
@@ -105,6 +114,4 @@
   .book-info__line {
     margin: 0.8rem 0 3.2rem 0;
   }
-
 }
-
