@@ -27,6 +27,7 @@ const BookReservation = ({
     dialogDefaultConfig,
     setDialogConfig,
     openDialog,
+    setOpenTitleAndMessage,
   });
 
   const { getCountReservation } = useGetReservationsCount({

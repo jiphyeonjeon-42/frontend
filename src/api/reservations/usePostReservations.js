@@ -1,3 +1,4 @@
+import { setErrorDialog } from "../../data/error";
 import useApi from "../../hook/useApi";
 
 const usePostReservations = ({
@@ -5,6 +6,7 @@ const usePostReservations = ({
   dialogDefaultConfig,
   setDialogConfig,
   openDialog,
+  setOpenTitleAndMessage,
 }) => {
   const { request } = useApi("post", "reservations", {
     bookInfoId,
@@ -26,8 +28,13 @@ const usePostReservations = ({
     });
     openDialog();
   };
+
+  const onError = error => {
+    setErrorDialog(error, setOpenTitleAndMessage);
+  };
+
   const postReservation = () => {
-    request(onSuccess);
+    request(onSuccess, onError);
   };
   return { postReservation };
 };
