@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import Image from "../utils/Image";
 import ArrLeftGray from "../../img/arrow_left_gray.svg";
 import ArrLeftBlack from "../../img/arrow_left_black.svg";
 import ArrRightGray from "../../img/arrow_right_gray.svg";
@@ -37,13 +38,13 @@ const PreCategory = ({ startOfScroll }) => {
   return (
     <button className="pre-category" type="button" onClick={scrollToPre}>
       {startOfScroll ? (
-        <img
+        <Image
           className="category-button-icon"
           src={ArrLeftGray}
           alt="preCategory"
         />
       ) : (
-        <img
+        <Image
           className="category-button-icon"
           src={ArrLeftBlack}
           alt="preCategory"
@@ -86,13 +87,13 @@ const NextCategory = ({ endOfScroll }) => {
   return (
     <button className="next-category" type="button" onClick={scrollToNext}>
       {endOfScroll ? (
-        <img
+        <Image
           className="category-button-icon"
           src={ArrRightGray}
           alt="preCategory"
         />
       ) : (
-        <img
+        <Image
           className="category-button-icon"
           src={ArrRightBlack}
           alt="nextCategory"
@@ -114,7 +115,7 @@ const Category = ({
 
   const changeFilter = () => {
     navigate(
-      `?string=${userWord}&page=${1}&category=${categoryIndex}&sort=${userSort}`,
+      `?search=${userWord}&page=${1}&category=${categoryName}&sort=${userSort}`,
     );
   };
 

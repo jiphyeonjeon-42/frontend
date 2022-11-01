@@ -1,0 +1,36 @@
+
+.input__wrapper.horizontal {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.input__label {
+  width: 15rem;
+  flex-shrink: 0;
+}
+
+.input__input {
+  font-weight: normal;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  width: 28rem;
+}
+
+.input__input:enabled {
+  padding: 0.1rem 1rem;
+  font-size: 1.6rem;
+  border: 1px solid #a4a4a4;
+  border-radius: 6px;
+}
+
+.input__input:disabled {
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 767px) {
+  .input__wrapper.horizontal {
+    flex-wrap: wrap;
+  }
+}

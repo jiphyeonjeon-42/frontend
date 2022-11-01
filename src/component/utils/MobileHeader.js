@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Image from "./Image";
 import HeaderModal from "./HeaderModal";
 import Logo from "../../img/jiphyeonjeon_logo.svg";
 import Hamburger from "../../img/Hamburger_OwlDsgnr.png";
@@ -42,14 +43,14 @@ const MobileHeader = () => {
       >
         <div className="m-header__logo">
           <Link to={{ pathname: `/` }}>
-            <img src={Logo} className="m-header__logo-icon" alt="logo" />
+            <Image src={Logo} className="m-header__logo-icon" alt="logo" />
           </Link>
         </div>
         <nav className="m-header__gnb">
           <ul className="m-header__ul">
             <li>
               <Link className="m-header__button" to={{ pathname: `/search` }}>
-                <img
+                <Image
                   src={SearchBook}
                   className="m-header__gnb__search-icon"
                   alt="search"
@@ -62,7 +63,7 @@ const MobileHeader = () => {
                 type="button"
                 onClick={openHeaderModal}
               >
-                <img
+                <Image
                   src={Hamburger}
                   className="gnb__hamburger__icon"
                   alt="dropdown"

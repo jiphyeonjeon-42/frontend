@@ -1,19 +1,14 @@
 /* eslint-disable react/forbid-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
+import useModal from "../../hook/useModal";
+import RentModalBook from "./RentModalBook";
+import Image from "../utils/Image";
 import DeleteButton from "../../img/x_button.svg";
 import "../../css/RentInquireBoxBook.css";
 
-const InquireBoxBook = ({
-  shape,
-  book,
-  selectedBooks,
-  setSelectedBooks,
-  setMidModalContents,
-}) => {
-  const openModal = () => {
-    setMidModalContents("inquire book");
-  };
+const InquireBoxBook = ({ shape, book, selectedBooks, setSelectedBooks }) => {
+  const { setOpen, setClose, Modal } = useModal();
 
   const deleteBook = () => {
     if (setSelectedBooks && book) {
@@ -29,24 +24,24 @@ const InquireBoxBook = ({
         <div className="rent__inquire-box-book-active">
           <div className="rent__inquire-box-book__id-undo">
             <div className="rent__inquire-box-book__id color-54">
-              {book.title}
+              {book?.title}
             </div>
             <button
               className="rent__inquire-box-book__undo-button color-a4"
               type="button"
               onClick={deleteBook}
             >
-              <img src={DeleteButton} alt="delete" />
+              <Image src={DeleteButton} alt="delete" />
             </button>
           </div>
           <div className="rent__inquire-box-book__info color-54">
             <div className="book__info__factor">
               <span className="book__info__factor-key">ISBN</span>
-              <span className="book__info__factor-value">{book.isbn}</span>
+              <span className="book__info__factor-value">{book?.isbn}</span>
             </div>
             <div className="book__info__factor">
               <span className="book__info__factor-key">청구기호</span>
-              <span className="book__info__factor-value">{book.callSign}</span>
+              <span className="book__info__factor-value">{book?.callSign}</span>
             </div>
           </div>
         </div>
@@ -54,11 +49,18 @@ const InquireBoxBook = ({
         <button
           className="rent__inquire-box-book__add-button color-a4"
           type="button"
-          onClick={openModal}
+          onClick={setOpen}
         >
           +
         </button>
       )}
+      <Modal>
+        <RentModalBook
+          selectedBooks={selectedBooks}
+          setSelectedBooks={setSelectedBooks}
+          closeModal={setClose}
+        />
+      </Modal>
     </div>
   );
 };
@@ -70,6 +72,9 @@ InquireBoxBook.propTypes = {
   selectedBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
   shape: PropTypes.string.isRequired,
   // eslint-disable-next-line react/require-default-props
-  book: PropTypes.object,
-  setMidModalContents: PropTypes.func.isRequired,
+  book: PropTypes.objectOf({
+    title: PropTypes.string,
+    isbn: PropTypes.string,
+    callSign: PropTypes.string,
+  }),
 };

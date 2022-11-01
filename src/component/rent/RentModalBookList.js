@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from "react";
 import PropTypes from "prop-types";
+import Image from "../utils/Image";
 import Arrow from "../../img/arrow_right_black.svg";
 import "../../css/RentModalBookList.css";
 
@@ -8,19 +9,15 @@ const RentModalBookList = ({
   book,
   setSelectedBooks,
   selectedBooks,
-  closeMidModal,
+  closeModal,
 }) => {
   const seletOneOfBook = () => {
-    if (setSelectedBooks) {
-      selectedBooks.push(book);
-      setSelectedBooks(selectedBooks);
-      closeMidModal(0);
-    }
+    setSelectedBooks([...selectedBooks, book]);
+    closeModal();
   };
 
   const isAlreadySelected = (userBook, alreadySelect) => {
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < alreadySelect.length; i++) {
+    for (let i = 0; i < alreadySelect.length; i += 1) {
       if (userBook.id === alreadySelect[i].id) {
         return true;
       }
@@ -71,7 +68,7 @@ const RentModalBookList = ({
       <span className="rent__modal-book-list__callsign font-16 color-54">
         {book.callSign ? book.callSign : ""}
       </span>
-      <img className="rent__modal-book-list__arrow" src={Arrow} alt="arrow" />
+      <Image className="rent__modal-book-list__arrow" src={Arrow} alt="arrow" />
     </button>
   );
 };
@@ -80,7 +77,7 @@ export default RentModalBookList;
 
 RentModalBookList.propTypes = {
   setSelectedBooks: PropTypes.func.isRequired,
-  closeMidModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
   selectedBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   book: PropTypes.object.isRequired,

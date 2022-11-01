@@ -1,0 +1,92 @@
+.mypage-books_box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 30rem;
+}
+
+.mypage-books_box-wrapper {
+  display: flex;
+}
+
+.mypage-books_box-image {
+  height: 28rem;
+  max-width: 20rem;
+}
+
+.mypage-books_box-all_info {
+  position: relative;
+  width: 17.5rem;
+  margin-left: 3rem;
+}
+
+.mypage-books_box-all_info-book_info {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid;
+  padding-bottom: 1rem;
+  white-space: normal;
+}
+
+.mypage-books_box-all_info-book_info-title {
+  margin-bottom: 1rem;
+}
+
+.mypage-books_box-all_info-rent_info {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  white-space: normal;
+  padding-bottom: 1rem;
+  row-gap: 1rem;
+}
+
+.mypage-books_box-all_info-reserve_count {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding-top: 1rem;
+  border-top: 1px solid;
+}
+
+.mypage-books_box-cancel_reserve {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.mypage-books_box-cancel_reserve:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 950px) {
+  .mypage-books_box {
+    justify-content: space-evenly;
+  }
+  .mypage-books_box-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .mypage-books_box-all_info {
+    width: 28rem;
+    margin-left: 0rem;
+    margin-top: 3rem;
+  }
+  .mypage-books_box-cancel_reserve {
+    bottom: -15px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mypage-books_box {
+    flex-direction: column;
+    row-gap: 5rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .mypage-books_box-all_info {
+    width: 100%;
+  }
+}

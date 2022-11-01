@@ -1,127 +1,77 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import PropTypes from "prop-types";
-import getErrorMessage from "../../data/error";
+import BookInformationWithCover from "../utils/BookInformationWithCover";
+import TextWithLabel from "../utils/TextWithLabel";
+import TextareaWithLabel from "../utils/TextareaWithLabel";
+import Button from "../utils/Button";
+import "../../css/ReturnModalContents.css";
+import usePatchLendingsReturn from "../../api/lendings/usePatchLendingsReturn";
+import useGetLendingsId from "../../api/lendings/useGetLendingsId";
 
 const ReturnModalContents = ({
   lendingId,
   closeModal,
-  setMiniModalContents,
-  setReturnResult,
+  setOpenTitleAndMessage: setError,
 }) => {
-  const defaultData = {
-    id: null,
-    condition: "",
-    createdAt: "",
-    login: "",
-    penaltyDays: null,
-    callSign: "",
-    title: "",
-    image: "",
-    dueDate: "",
-  };
-  const [data, setData] = useState(defaultData);
-  const [remark, setRemark] = useState("");
+  const { lendingData } = useGetLendingsId({ lendingId, closeModal, setError });
 
-  const handleRemark = e => {
-    e.preventDefault();
-    setRemark(e.target.value);
-  };
-  useEffect(async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/lendings/${lendingId}`)
-      .then(response => {
-        setData(response.data);
-      });
-  }, []);
-  const postReturn = async () => {
-    if (!remark) return;
-    const condition = remark;
-    setRemark("");
-    await axios
-      .patch(`${process.env.REACT_APP_API}/lendings/return`, {
-        lendingId,
-        condition,
-      })
-      .then(res => {
-        setMiniModalContents(
-          `${data.title} \n ${
-            res.data?.reservedBook
-              ? "예약된 책입니다. 예약자를 위해 따로 보관해주세요."
-              : ""
-          }`,
-        );
-        setReturnResult(true);
-      })
-      .catch(error => {
-        setReturnResult(false);
-        const { status } = error.response;
-
-        setMiniModalContents(
-          status === 400
-            ? getErrorMessage(error.response.data.errorCode)
-            : error.message,
-        );
-      });
-  };
+  const { condition, setCondition, requestReturn } = usePatchLendingsReturn({
+    lendingId,
+    title: lendingData.title,
+    closeModal,
+    setError,
+  });
 
   return (
-    <div className="modal__wrapper mid">
-      <div className="mid-modal__cover">
-        <img src={data.image} alt="cover" className="mid-modal__cover-img" />
+    <BookInformationWithCover
+      wrapperClassName="return-modal__wrapper"
+      bookCoverImg={lendingData.image}
+      bookCoverAlt={lendingData.title}
+    >
+      <TextWithLabel
+        wrapperClassName="return-modal__book"
+        topLabelText="도서정보"
+        mainText={lendingData.title}
+        bottomLabelText={`청구기호 : ${lendingData.callSign}`}
+      />
+      <TextWithLabel
+        wrapperClassName="return-modal__lend"
+        topLabelText="대출정보"
+        mainText={lendingData.createdAt.replaceAll(".", "-")}
+        bottomLabelText={`반납예정일 : ${lendingData.dueDate.replaceAll(
+          ".",
+          "-",
+        )}`}
+      />
+      <TextWithLabel
+        topLabelText="유저정보"
+        mainText={lendingData.login}
+        bottomLabelText={`연체일수 : ${lendingData.penaltyDays}일`}
+      />
+      <TextareaWithLabel
+        wrapperClassName="return-modal__remark"
+        topLabelText="비고"
+        textareaValue={condition}
+        setTextareaValue={setCondition}
+        textareaPlaceHolder={`대출당시 : ${lendingData.lendingCondition}`}
+        isVisibleBottomMessage={!condition.length}
+        bottomMessageText="비고를 입력해주세요"
+        bottomMessageColor="red"
+      />
+      <div className="return-modal__buttons">
+        <Button
+          value="반납 완료하기"
+          color={`${condition.length && "red"}`}
+          disabled={!condition.length}
+          onClick={requestReturn}
+        />
+        <Button
+          value="취소하기"
+          className="return-modal__cancel"
+          onClick={closeModal}
+        />
       </div>
-      <div className="mid-modal__detail">
-        <div className="mid-modal__book">
-          <p className="font-16 color-red">도서정보</p>
-          <p className="mid-modal__book-title font-28-bold color-54  margin-8">
-            {data.title}
-          </p>
-          <p className="font-16 color-54">{`청구기호 : ${data.callSign}`}</p>
-        </div>
-        <div className="mid-modal__lend">
-          <p className="font-16 color-red">대출정보</p>
-          <p className="font-28-bold color-54  margin-8">
-            {data.createdAt.replaceAll(".", "-")}
-          </p>
-          <p className="font-16 color-54">{`반납예정일 : ${data.dueDate.replaceAll(
-            ".",
-            "-",
-          )}`}</p>
-        </div>
-        <div className="mid-modal__user">
-          <p className="font-16 color-red">유저정보</p>
-          <p className="font-28-bold color-54  margin-8">{data.login}</p>
-          <p className="font-16 color-54">{`연체일수 : ${data.penaltyDays}일`}</p>
-        </div>
-        <div className="mid-modal__remark">
-          <p className="font-16 color-red">비고</p>
-          <textarea
-            className="mid-modal__remark__input margin-8 font-16"
-            placeholder={`대출당시 : ${data.lendingCondition}`}
-            value={remark}
-            onChange={handleRemark}
-          />
-          <div className="modal__buttons">
-            <button
-              className={`modal__button mid font-20 color-ff ${
-                remark && `confirm`
-              }`}
-              type="button"
-              onClick={postReturn}
-            >
-              반납 완료하기
-            </button>
-            <button
-              className="modal__button mid font-20 color-ff"
-              type="button"
-              onClick={closeModal}
-            >
-              취소하기
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    </BookInformationWithCover>
   );
 };
 
@@ -130,6 +80,5 @@ export default ReturnModalContents;
 ReturnModalContents.propTypes = {
   lendingId: PropTypes.number.isRequired,
   closeModal: PropTypes.func.isRequired,
-  setMiniModalContents: PropTypes.func.isRequired,
-  setReturnResult: PropTypes.func.isRequired,
+  setOpenTitleAndMessage: PropTypes.func.isRequired,
 };

@@ -1,0 +1,28 @@
+.barcode-reader__wrapper > * {
+  display: block;
+  margin: auto;
+}
+
+.barcode-reader__wrapper > video {
+  height: 30rem;
+}
+
+.barcode-reader__wrapper > select {
+  width: 40rem;
+  height: 4rem;
+  font-size: 1.8rem;
+  padding: 0 1rem;
+  margin: 2rem auto;
+}
+
+@media screen and (max-width: 767px) {
+  .barcode-reader__wrapper > video {
+    width: 90%;
+    max-height: 30rem;
+    height: 90%;
+  }
+
+  .barcode-reader__wrapper > select {
+    width: 80%;
+  }
+}

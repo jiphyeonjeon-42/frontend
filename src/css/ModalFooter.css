@@ -1,0 +1,39 @@
+.modal__footer {
+  padding: 0 4rem 4rem;
+  display: flex;
+}
+.modal__footer.center {
+  justify-content: center;
+}
+.modal__footer.right {
+  flex-direction: row-reverse;
+}
+
+.modal__footer > button {
+  margin: 0 0 0 2rem;
+  border: 0;
+  padding: 1rem 3.4rem 1.1rem 3.4rem;
+  border-radius: 2rem;
+  font-size: 1.6rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.modal__footer > button.grey {
+  background-color: #a4a4a4;
+}
+
+.modal__footer > button:hover {
+  opacity: 0.6;
+}
+
+.modal__footer > button.red {
+  background-color: #e63737;
+}
+
+@media screen and (max-width: 767px) {
+  .modal__footer > button {
+    font-size: 1.4rem;
+    padding: 1rem 2rem 1rem 2rem;
+  }
+}

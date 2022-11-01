@@ -3,10 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../../css/RentConfirm.css";
 
-const RentConfirm = ({ selectedUser, selectedBooks, setMidModalContents }) => {
-  const openRentModal = () => {
-    setMidModalContents("last confirm");
-  };
+const RentConfirm = ({ selectedUser, selectedBooks, openModal }) => {
   return (
     <section className="rent__confirm-button">
       <div className="rent__confirm-button__text font-16 color-a4">
@@ -36,7 +33,7 @@ const RentConfirm = ({ selectedUser, selectedBooks, setMidModalContents }) => {
             ? ""
             : "disabled"
         }
-        onClick={openRentModal}
+        onClick={openModal}
       >
         도서 대출하기
       </button>
@@ -48,7 +45,7 @@ RentConfirm.propTypes = {
   // eslint-disable-next-line react/require-default-props
   selectedUser: PropTypes.object,
   selectedBooks: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  setMidModalContents: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
 };
 
 export default RentConfirm;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import Image from "./Image";
 import Button from "../../img/arrow_right_circle.svg";
 import "../../css/ScrollTopButton.css";
 
@@ -63,7 +64,7 @@ const ScrollTopButton = ({ rightRem, bottomRem }) => {
         type="button"
         onClick={onClickBtn}
       >
-        <img
+        <Image
           className={`scroll-top-button__image ${active && "active"}`}
           src={Button}
           alt="scroll-top-button"
