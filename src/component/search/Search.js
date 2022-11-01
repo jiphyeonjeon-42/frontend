@@ -22,24 +22,33 @@ const Search = () => {
   const [query, page, sort] = useParseUrlQueryString(searchUrlQueryKeys);
 
   const debounce = useDebounce();
-  const setQuery = useCallback(newQuery => {
-    debounce(() => {
-      urlSearchParams.set("search", newQuery);
+  const setQuery = useCallback(
+    newQuery => {
+      debounce(() => {
+        urlSearchParams.set("search", newQuery);
+        urlSearchParams.set("page", 1);
+        setUrlSearchParams(urlSearchParams);
+      }, 500);
+    },
+    [urlSearchParams],
+  );
+
+  const setPage = useCallback(
+    newPage => {
+      urlSearchParams.set("page", newPage);
+      setUrlSearchParams(urlSearchParams);
+    },
+    [urlSearchParams],
+  );
+
+  const setSort = useCallback(
+    newSort => {
+      urlSearchParams.set("sort", newSort);
       urlSearchParams.set("page", 1);
       setUrlSearchParams(urlSearchParams);
-    }, 500);
-  }, []);
-
-  const setPage = useCallback(newPage => {
-    urlSearchParams.set("page", newPage);
-    setUrlSearchParams(urlSearchParams);
-  }, []);
-
-  const setSort = useCallback(newSort => {
-    urlSearchParams.set("sort", newSort);
-    urlSearchParams.set("page", 1);
-    setUrlSearchParams(urlSearchParams);
-  }, []);
+    },
+    [urlSearchParams],
+  );
 
   return (
     <main>

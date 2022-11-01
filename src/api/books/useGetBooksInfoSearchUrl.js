@@ -31,7 +31,7 @@ const useGetBooksInfoSearchUrl = () => {
     { key: "isbn", type: "string", isNullable: true },
     { key: "lendingCnt", type: "number", isNullable: false },
     { key: "title", type: "string", isNullable: false },
-    { key: "publishedAt", type: "string", isNullable: false },
+    { key: "publishedAt", type: "string", isNullable: true },
     { key: "publisher", type: "string", isNullable: false },
     { key: "updatedAt", type: "string", isNullable: false },
   ];
