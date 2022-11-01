@@ -38,7 +38,7 @@ const usePostLendingsMultiple = ({
         const { dueDate } = result.value.data;
         const newLending = {
           title,
-          dueDate,
+          duedate: dueDate,
         };
         resultMessage += `${selectedBooks[index].title} - 대출완료\n`;
         lendingSuccess.push(newLending);
@@ -50,7 +50,7 @@ const usePostLendingsMultiple = ({
     });
     setSelectedBooks([]);
     setSelectedUser({ ...selectedUser, lendingSuccess });
-    setError("대출결과", resultMessage, () => window.location.reload());
+    setError("대출결과", resultMessage);
     closeModal();
   };
 

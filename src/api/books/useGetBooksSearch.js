@@ -18,6 +18,7 @@ const useGetBooksSearch = () => {
     { key: "title", type: "string", isNullable: false },
     { key: "author", type: "string", isNullable: false },
     { key: "category", type: "string", isNullable: false },
+    { key: "isbn", type: "string", isNullable: true },
     { key: "publisher", type: "string", isNullable: false },
     { key: "callSign", type: "string", isNullable: false },
     { key: "image", type: "string", isNullable: true },
