@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import LinkToDetail from "../../img/link_to_detail.svg";
 import "../../css/BookInfo.css";
-import IMGERR from "../../img/image_onerror.svg";
+import Image from "../utils/Image";
 
 const BookInfo = ({
   id,
@@ -25,10 +25,6 @@ const BookInfo = ({
 
   const { year, month } = parseDate(publishedAt) ?? { year: 0, month: 0 };
 
-  function subtituteImg(e) {
-    e.target.src = IMGERR;
-  }
-
   return (
     <div className="book-info-wraper">
       <Link
@@ -44,12 +40,11 @@ const BookInfo = ({
           bread,
         }}
       >
-        <img
+        <Image
           className="book-info__image"
           src={image}
           alt={title}
           title={title}
-          onError={subtituteImg}
         />
         <div className="book-info__info">
           <div className="book-info__title font-18-bold--letterspacing color-54">
@@ -74,7 +69,7 @@ const BookInfo = ({
             <span className="book-info__separator-half" />
             <span>{isbn}</span>
           </div>
-          <img
+          <Image
             className="book-info__link-icon"
             src={LinkToDetail}
             alt={title}

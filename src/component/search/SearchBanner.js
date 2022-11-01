@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SearchBar from "./SearchBar";
+import SearchBar from "../utils/SearchBar";
 import "../../css/Banner.css";
 import "../../css/SearchBanner.css";
 
-const SearchBanner = ({ setPageRange }) => {
+const SearchBanner = ({ setQuery }) => {
   return (
     <section className="banner search-img">
       <section className="search-banner">
@@ -16,14 +16,18 @@ const SearchBanner = ({ setPageRange }) => {
             SEARCH
           </span>
         </div>
-        <SearchBar setPageRange={setPageRange} />
+        <SearchBar
+          setQuery={setQuery}
+          width="banner"
+          isFocusedOnMount={false}
+        />
       </section>
     </section>
   );
 };
 
 SearchBanner.propTypes = {
-  setPageRange: PropTypes.func.isRequired,
+  setQuery: PropTypes.func.isRequired,
 };
 
 export default SearchBanner;

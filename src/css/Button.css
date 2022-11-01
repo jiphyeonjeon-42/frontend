@@ -1,0 +1,50 @@
+.button-default {
+  margin: 0;
+  border: 0;
+  font-size: 2rem;
+  padding: 1rem 3rem;
+  text-align: center;
+  border-radius: 2.4rem;
+  background-color: #a4a4a4;
+  color: #ffffff;
+}
+
+.button-default:enabled {
+  cursor: pointer;
+}
+
+.button-default:focus-visible {
+  outline: 0.2rem solid blue;
+}
+
+.bg-color-red {
+  background-color: #e63737;
+}
+.bg-color-2d {
+  background-color: #2d2d2d;
+}
+.bg-color-54 {
+  background-color: #545454;
+}
+.bg-color-81 {
+  background-color: #818181;
+}
+.bg-color-a4 {
+  background-color: #a4a4a4;
+}
+.bg-color-d5 {
+  background-color: #d5d5d5;
+}
+.bg-color-e8 {
+  background-color: #e8e8e8;
+}
+.bg-color-ff {
+  background-color: #ffffff;
+}
+
+@media screen and (max-width: 767px) {
+  .button-default {
+    padding: 0.7rem 2rem;
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,36 @@
+.book-info__wrapper {
+  display: flex;
+  min-width: 3rem;
+}
+
+.book-info__cover {
+  width: 40%;
+  margin-right: 5%;
+}
+
+.book-info__cover-img {
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+}
+
+.book-info__detail {
+  display: inline-block;
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .book-info__wrapper {
+    display: block;
+  }
+
+  .book-info__cover {
+    float: none;
+    margin: 0 auto 2rem;
+  }
+
+  .book-info__cover-img {
+    width: 100%;
+    height: auto;
+  }
+}

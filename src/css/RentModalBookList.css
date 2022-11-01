@@ -1,7 +1,6 @@
 .rent__modal-book-list {
   border: 0;
   margin: 0;
-  padding: 0;
   display: block;
   width: 100%;
   padding: 2.1rem 0 2.1rem 0;
@@ -95,7 +94,6 @@
 
 @media screen and (max-width: 767px) {
   .rent__modal-book-list {
-    /* padding: 1.4rem 0 1.4rem 0; */
     height: 13rem;
   }
   .rent__modal-book-list__name {

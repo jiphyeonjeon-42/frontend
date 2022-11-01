@@ -14,7 +14,7 @@ const getErrorMessage = errorCode => {
     case 101:
       return `연결된 계정이 없습니다.\r\n회원가입 후 마이페이지에서 연결해주세요.`;
     case 102:
-      return `로그인 후 이용할 수 있는 기능입니다.`;
+      return `로그인 정보를 확인할 수 없습니다. 다시 로그인 해주세요.`;
     case 103:
       return `이메일과 비밀번호를 모두 입력해주세요.`;
     case 104:
@@ -107,3 +107,14 @@ const getErrorMessage = errorCode => {
 };
 
 export default getErrorMessage;
+
+export const setErrorDialog = (error, setErrorMessage, afterCloseDialog) => {
+  const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+  const [title, message] = getErrorMessage(errorCode).split("\r\n");
+  if (typeof setErrorMessage === "function")
+    setErrorMessage(
+      title,
+      errorCode ? message : error.message,
+      afterCloseDialog,
+    );
+};

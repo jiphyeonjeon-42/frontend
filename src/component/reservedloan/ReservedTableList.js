@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../../css/ReservedTableList.css";
+import Image from "../utils/Image";
 import Arr from "../../img/arrow_right_black.svg";
+import "../../css/ReservedTableList.css";
 
 const ReservedTableList = ({
   isPending,
@@ -37,7 +38,7 @@ const ReservedTableList = ({
           <span className="reserved-loan__table-list__text color-54">
             {factor && factor.title}
           </span>
-          <img
+          <Image
             className="reserved-loan__table-list__arr"
             src={Arr}
             alt="arrow"

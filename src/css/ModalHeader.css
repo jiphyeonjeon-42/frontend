@@ -1,0 +1,49 @@
+.modal__header {
+  display: flex;
+  padding: 2rem;
+}
+
+.modal__header__title {
+  display: block;
+  padding: 10rem 4rem 0;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: #2d2d2d;
+  position: relative;
+}
+
+.modal__header__title:before {
+  content: " ";
+  background-color: #a4a4a4;
+  position: absolute;
+  top: 6rem;
+  width: 4rem;
+  height: 0.4rem;
+}
+
+.modal__header__button {
+  margin: 2rem 2rem 0 0;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  margin-left: auto;
+  cursor: pointer;
+  color: transparent;
+  background-color: transparent;
+  background-image: url(../img/x_button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.modal__header__button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 767px) {
+  .modal__header__title {
+    font-size: 2.8rem;
+    padding: 9rem 4rem 0;
+  }
+}

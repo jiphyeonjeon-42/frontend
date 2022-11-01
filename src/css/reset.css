@@ -180,6 +180,31 @@ body {
   color: #e63737;
 }
 
+.bg-color-red {
+  background-color: #e63737;
+}
+.bg-color-2d {
+  background-color: #2d2d2d;
+}
+.bg-color-54 {
+  background-color: #545454;
+}
+.bg-color-81 {
+  background-color: #818181;
+}
+.bg-color-a4 {
+  background-color: #a4a4a4;
+}
+.bg-color-d5 {
+  background-color: #d5d5d5;
+}
+.bg-color-e8 {
+  background-color: #e8e8e8;
+}
+.bg-color-ff {
+  background-color: #ffffff;
+}
+
 .font-48-bold {
   font-size: 4.8rem;
   font-weight: bold;

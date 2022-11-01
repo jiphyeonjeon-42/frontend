@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../../css/UserBriefInfo.css";
+import Image from "../utils/Image";
 import UserUsage from "../../img/book-arrow-right.svg";
 import UserEdit from "../../img/edit.svg";
+import "../../css/UserBriefInfo.css";
 
 const roles = ["미인증", "일반", "사서", "운영진"];
 const USAGE = 1;
@@ -74,7 +75,7 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
           type="button"
           onClick={openUsageModal}
         >
-          <img className="user-info__button-img" src={UserUsage} alt="" />
+          <Image className="user-info__button-img" src={UserUsage} alt="" />
         </button>
       ) : (
         <div className="user-info__usage font-18 color-54">-</div>
@@ -84,7 +85,7 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }) => {
         type="button"
         onClick={openEditModal}
       >
-        <img className="user-info__button-img" src={UserEdit} alt="" />
+        <Image className="user-info__button-img" src={UserEdit} alt="" />
       </button>
     </div>
   );

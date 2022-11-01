@@ -1,4 +1,4 @@
-.modal__background {
+.modal__backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -6,60 +6,37 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 6;
-}
 
-.modal__container {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 67.6rem;
-  width: 120rem;
-  min-width: 36rem;
-  background: #ffffff;
-  z-index: 7;
-  overflow: auto;
-}
-
-.modal__close-button {
-  background: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  width: 2rem;
-  height: 2rem;
-  margin: 4rem 4rem 0 auto;
   display: flex;
-  cursor: pointer;
-}
-
-.modal__wrapper {
-  padding: 8rem 6rem;
-  min-width: 36rem;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
+  justify-content: center;
   align-items: center;
 }
 
-.modal__button {
-  margin-right: 2.4rem;
-  border: 0;
-  padding: 1rem 3rem;
-  text-align: center;
-  border-radius: 2.4rem;
-  background-color: #a4a4a4;
-  cursor: pointer;
+.modal__container {
+  min-width: 30rem;
+  position: absolute;
+  align-self: center;
+  background-color: #ffffff;
+  max-height: 100%;
+  overflow: scroll;
 }
 
-.modal__button.confirm {
-  background-color: #e63737;
+.modal__container.full {
+  width: 120rem;
+}
+.modal__container.basic {
+  width: 70rem;
 }
 
 @media screen and (max-width: 1200px) {
-  .modal__container {
+  .modal__container.full {
     width: 100%;
-    height: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modal__container {
+    width: 100% !important;
     overflow-y: scroll;
   }
 }

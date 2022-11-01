@@ -1,39 +1,15 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useSetRecoilState } from "recoil";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import SubTitle from "../utils/SubTitle";
-import globalModal from "../../atom/globalModal";
 import MainPopularCenter from "./MainPopularCenter";
 import MainPopularSide from "./MainPopularSide";
+import useGetBooksInfoPopular from "../../api/books/useGetBooksInfoPopular";
 import "../../css/MainPopular.css";
 
-const MainPopular = () => {
+const MainPopular = ({ setOpenTitleAndMessage }) => {
   const [centerTop, setCenterTop] = useState(0);
-  const [docs, setDocs] = useState([]);
-  const setGlobalError = useSetRecoilState(globalModal);
+  const { docs } = useGetBooksInfoPopular({ setOpenTitleAndMessage });
 
-  useEffect(async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/books/info/`, {
-        params: {
-          sort: "popular",
-          limit: 30,
-        },
-      })
-      .then(response => {
-        const { items } = response.data;
-        setDocs(items.map((item, index) => ({ ...item, rank: index + 1 })));
-      })
-      .catch(error => {
-        const message = error.response
-          ? error.response.data.message
-          : error.message;
-        setGlobalError({
-          view: true,
-          error: `예상치 못한 오류가 발생했습니다.\nbooks/info/search=popular Error ${message}`,
-        });
-      });
-  }, []);
   const left = docs.slice(centerTop - 3, centerTop);
   const center = () => {
     if (centerTop) return docs.slice(centerTop - 3, centerTop + 6);
@@ -81,3 +57,7 @@ const MainPopular = () => {
 };
 
 export default MainPopular;
+
+MainPopular.propTypes = {
+  setOpenTitleAndMessage: PropTypes.func.isRequired,
+};

@@ -2,28 +2,82 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import CloseButton from "../../img/x_button_grey.svg";
 import userState from "../../atom/userState";
-import Book from "../../img/admin_icon_black.svg";
-import Information from "../../img/information_icon_black.svg";
-import Mypage from "../../img/login_icon.svg";
+import Image from "./Image";
+import {
+  basicGnbMenu,
+  adminLnbMenu,
+  loginLnbMenu,
+} from "../../data/headerMenu";
+import CloseButton from "../../img/x_button_grey.svg";
 import User from "../../img/Freepik_user.png";
-import Login from "../../img/login_feen.png";
-import Logout from "../../img/logout_IconsBox.png";
-import DB from "../../img/database.svg";
 import "../../css/HeaderModal.css";
 
 const HeaderModal = ({ setHeaderModal }) => {
   const user = useRecoilValue(userState);
-
   const closeHeaderModal = () => {
     setHeaderModal(false);
   };
 
-  const nowDate = new Date();
-  const expireDate = new Date(user.expire);
-  if (nowDate > expireDate) window.location = `/login`;
-
+  if (!user.isLogin)
+    return (
+      <div>
+        <button
+          className="header-modal__background"
+          type="button"
+          onClick={closeHeaderModal}
+          label="header-modal-background"
+        />
+        <div className="header-modal">
+          <div className="header-modal__container">
+            <div className="header-modal__user-container">
+              <button
+                className="header-modal__close-button"
+                type="button"
+                onClick={closeHeaderModal}
+              >
+                <Image
+                  className="header-modal__icon-close"
+                  src={CloseButton}
+                  alt="close"
+                />
+              </button>
+              <div className="header-modal__user">
+                <Image
+                  src={User}
+                  className="header-modal__anonymous__icon"
+                  alt="user"
+                />
+                <span className="profile__text font-20-bold color-ff">
+                  익명
+                </span>
+              </div>
+            </div>
+            <div className="header-modal__button-container">
+              {basicGnbMenu.map(menu => {
+                const isLogin = menu.text === "로그인";
+                if (!menu.isForMobile) return null;
+                return (
+                  <>
+                    {isLogin && <div className="header-modal__line" />}
+                    <Link className="header-modal__button" to={menu.linkTo}>
+                      <Image
+                        src={menu.mobileImg}
+                        className={`header-modal__icon${isLogin ? "-in" : ""}`}
+                        alt={menu.imgAlt}
+                      />
+                      <span className="header-modal__text font-16 color-2d">
+                        {menu.text}
+                      </span>
+                    </Link>
+                  </>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   return (
     <div>
       <button
@@ -40,117 +94,79 @@ const HeaderModal = ({ setHeaderModal }) => {
               type="button"
               onClick={closeHeaderModal}
             >
-              <img
+              <Image
                 className="header-modal__icon-close"
                 src={CloseButton}
                 alt="close"
               />
             </button>
-            {user.id ? (
-              <div className="header-modal__user">
-                <span
-                  className={`header-modal__${
-                    user.isAdmin ? "admin" : "user"
-                  }__icon font-18 color-ff`}
-                >
-                  {user.isAdmin ? "사서" : "유저"}
-                </span>
-                <span className="profile__text font-20-bold color-ff">
-                  {user.userId}
-                </span>
-              </div>
-            ) : (
-              <div className="header-modal__user">
-                <img
-                  src={User}
-                  className="header-modal__anonymous__icon"
-                  alt="user"
-                />
-                <span className="profile__text font-20-bold color-ff">
-                  익명
-                </span>
-              </div>
-            )}
+            <div className="header-modal__user">
+              <span
+                className={`header-modal__${
+                  user.isAdmin ? "admin" : "user"
+                }__icon font-18 color-ff`}
+              >
+                {user.isAdmin ? "사서" : "유저"}
+              </span>
+              <span className="profile__text font-20-bold color-ff">
+                {user.userName}
+              </span>
+            </div>
           </div>
           <div className="header-modal__button-container">
-            {user.id && user.isAdmin ? (
-              <Link className="header-modal__button" to={{ pathname: `/rent` }}>
-                <img
-                  src={Book}
-                  className="header-modal__icon-book"
-                  alt="book"
-                />
-                <span className="header-modal__text font-16 color-2d">
-                  대출/반납
-                </span>
-              </Link>
-            ) : (
-              ``
-            )}
-            {user.id && user.isAdmin ? (
-              <Link className="header-modal__button" to={{ pathname: `/user` }}>
-                <img src={DB} className="header-modal__icon-db" alt="db" />
-                <span className="header-modal__text font-16 color-2d">
-                  DB 관리
-                </span>
-              </Link>
-            ) : (
-              ``
-            )}
-            {user.id && user.isAdmin ? (
-              <div className="header-modal__line" />
-            ) : (
-              ``
-            )}
-            <Link
-              className="header-modal__button"
-              to={{ pathname: `/information` }}
-            >
-              <img
-                src={Information}
-                className="header-modal__icon"
-                alt="information"
-              />
-              <span className="header-modal__text font-16 color-2d">
-                이용안내
-              </span>
-            </Link>
-            {user.id ? (
-              <Link
-                className="header-modal__button"
-                to={{ pathname: `/mypage` }}
-              >
-                <img src={Mypage} className="header-modal__icon" alt="user" />
-                <span className="header-modal__text font-16 color-2d">
-                  마이페이지
-                </span>
-              </Link>
-            ) : (
-              ``
-            )}
-            <div className="header-modal__line" />
-            {user.id ? (
-              <Link
-                className="header-modal__button"
-                to={{ pathname: `/logout` }}
-              >
-                <img
-                  src={Logout}
-                  className="header-modal__icon-out"
-                  alt="user"
-                />
-                <span className="header-modal__text font-16 color-2d">
-                  로그아웃
-                </span>
-              </Link>
-            ) : (
-              <a className="header-modal__button" href="/login">
-                <img src={Login} className="header-modal__icon-in" alt="user" />
-                <span className="header-modal__text font-16 color-2d">
-                  로그인
-                </span>
-              </a>
-            )}
+            {user.isAdmin &&
+              adminLnbMenu.map((menu, index, allMenu) => {
+                const isLastMenu = index === allMenu.length - 1;
+                return (
+                  <>
+                    <Link className="header-modal__button" to={menu.linkTo}>
+                      <Image
+                        src={menu.mobileImg}
+                        className={`header-modal__icon-${menu.idClassName}`}
+                        alt={menu.imgAlt}
+                      />
+                      <span className="header-modal__text font-16 color-2d">
+                        {menu.text}
+                      </span>
+                    </Link>
+                    {isLastMenu && <div className="header-modal__line" />}
+                  </>
+                );
+              })}
+            {basicGnbMenu.map(menu => {
+              const isLogin = menu.text === "로그인";
+              if (!menu.isForMobile || isLogin) return null;
+              return (
+                <Link className="header-modal__button" to={menu.linkTo}>
+                  <Image
+                    src={menu.mobileImg}
+                    className="header-modal__icon"
+                    alt={menu.imgAlt}
+                  />
+                  <span className="header-modal__text font-16 color-2d">
+                    {menu.text}
+                  </span>
+                </Link>
+              );
+            })}
+            {loginLnbMenu.map(menu => {
+              const isLogout = menu.text === "로그아웃";
+              return (
+                <>
+                  {isLogout && <div className="header-modal__line" />}
+                  <Link className="header-modal__button" to={menu.linkTo}>
+                    <Image
+                      src={menu.mobileImg}
+                      className={`header-modal__icon${isLogout ? "-out" : ""}`}
+                      alt={menu.imgAlt}
+                    />
+                    <span className="header-modal__text font-16 color-2d">
+                      {menu.text}
+                    </span>
+                  </Link>
+                </>
+              );
+            })}
           </div>
         </div>
       </div>

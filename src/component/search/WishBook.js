@@ -1,11 +1,12 @@
 import React from "react";
+import Image from "../utils/Image";
 import AlretIcon from "../../img/alret_icon.svg";
 import "../../css/WishBook.css";
 
 const WishBook = () => {
   return (
     <div className="wish-book">
-      <img className="wish-book__icon" src={AlretIcon} alt="alret_icon" />
+      <Image className="wish-book__icon" src={AlretIcon} alt="alret_icon" />
       <div className="wish-book__title font-40-bold color-2d">
         원하는 도서를 찾을 수 없나요?
       </div>

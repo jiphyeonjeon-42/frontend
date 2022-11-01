@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import MainNewBook from "./MainNewBook";
 import MainNewBookPagination from "./MainNewBookPagination";
+import Image from "../utils/Image";
 import ArrLeft from "../../img/arrow_left.svg";
 import ArrRight from "../../img/arrow_right.svg";
 
@@ -76,10 +77,11 @@ const MainNewBookList = ({ docs }) => {
         onMouseEnter={pauseInterval}
         onMouseLeave={startInterval}
       >
-        <img
+        <Image
           src={ArrLeft}
           alt=""
-          style={{ width: bookWidth / 4, height: bookWidth * 1.5 + 20 }}
+          width={bookWidth / 4}
+          height={bookWidth * 1.5 + 20}
         />
       </button>
       <button
@@ -89,10 +91,11 @@ const MainNewBookList = ({ docs }) => {
         onMouseEnter={pauseInterval}
         onMouseLeave={startInterval}
       >
-        <img
+        <Image
           src={ArrRight}
           alt=""
-          style={{ width: bookWidth / 4, height: bookWidth * 1.5 + 20 }}
+          width={bookWidth / 4}
+          height={bookWidth * 1.5 + 20}
         />
       </button>
       <div className="main-new__booklist">

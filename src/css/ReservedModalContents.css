@@ -1,0 +1,46 @@
+.reserved-modal__wrapper {
+  padding: 2rem 6rem 8rem;
+}
+
+.reserved-modal__detail {
+  display: inline-block;
+  width: 100%;
+}
+
+.reserved-modal__book {
+  margin-bottom: 4rem;
+}
+
+.reserved-modal__lend {
+  float: right;
+  width: 50%;
+}
+
+.reserved-modal__remark {
+  margin-top: 3rem;
+}
+
+.reserved-modal__button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4rem;
+}
+
+.reserved-modal__button.cancel {
+  margin-top: 5rem;
+}
+
+@media screen and (max-width: 767px) {
+  .reserved-modal__wrapper {
+    padding: 6rem 4rem;
+  }
+  .reserved-modal__book {
+    margin-bottom: 1.8rem;
+  }
+  .reserved-modal__lend {
+    width: 30%;
+  }
+  .reserved-modal__button.cancel {
+    margin-top: 2rem;
+  }
+}

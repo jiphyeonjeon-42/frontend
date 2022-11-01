@@ -1,85 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
-import axios from "axios";
-import Banner from "../utils/Banner";
-import "../../css/ReturnBook.css";
-import AdminPagination from "../utils/AdminPagination";
-import InquireBoxTitle from "../utils/InquireBoxTitle";
+import React, { useState } from "react";
 import ReturnBookTable from "./ReturnBookTable";
 import ReturnBookFilter from "./ReturnBookFilter";
-import ReturnBookWithBarcodeReader from "./ReturnBookWithBarcodeReader";
+import ReturnModalContents from "./ReturnModalContents";
+import Tabs from "../utils/Tabs";
+import Banner from "../utils/Banner";
+import Pagination from "../utils/Pagination";
+import BarcodeReader from "../utils/BarcodeReader";
+import InquireBoxTitle from "../utils/InquireBoxTitle";
+import useDialog from "../../hook/useDialog";
+import useModal from "../../hook/useModal";
+import useGetLendingsSearch from "../../api/lendings/useGetLendingsSearch";
+import useGetLendingsSearchId from "../../api/lendings/useGetLendingsSearchId";
+
+import { rentTabList } from "../../data/tablist";
 import Book from "../../img/book-arrow-up-free-icon-font.svg";
-import { useAdminSearchInput } from "../../atom/useSearchInput";
-import ReturnModal from "./ReturnModal";
-import AdminTabs from "../utils/AdminTabs";
+import "../../css/ReturnBook.css";
 
 const ReturnBook = () => {
-  const [modal, setModal] = useState(false);
-  const [userSearchWord, setUserSearchWord] =
-    useRecoilState(useAdminSearchInput);
-  const [returnBookPage, setReturnBookPage] = useState(1);
-  const [returnBookPageRange, setReturnBookPageRange] = useState(0);
-  const [lastreturnBookPage, setLastreturnBookPage] = useState(1);
-  const [returnBookList, setReturnBookList] = useState([]);
-  const [lendingSort, setLendingSort] = useState(false);
-  const [lendingId, setLendingId] = useState(0);
+  const [lendingId, setLendingId] = useState(undefined);
+  const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
 
-  const openModal = () => {
-    setModal(true);
+  const toggleBarcode = () => setUsingBarcodeReader(!isUsingBarcodeReader);
+
+  const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
+  const { setOpenTitleAndMessage, Dialog } = useDialog();
+
+  const {
+    returnBookList,
+    lastPage,
+    page,
+    setPage,
+    setQuery,
+    isSortNew,
+    setIsSortNew,
+  } = useGetLendingsSearch({ setOpenTitleAndMessage });
+  // 위의 search api로는 특정 ID검색이 안됨
+  const { setQueryId } = useGetLendingsSearchId({
+    openModal,
+    setOpenTitleAndMessage,
+    setLendingId,
+  });
+
+  const toDoAfterRead = text => {
+    const bookId = text.split(" ")[0];
+    setQueryId(bookId);
   };
-  const closeModal = () => {
-    setModal(false);
-  };
-
-  const handlereturnBookSumbit = event => {
-    event.preventDefault();
-    const searchForm = document.querySelector(".modal-search-form");
-    const searchInputValue = searchForm.querySelector(
-      ".modal-search__input",
-    ).value;
-    setUserSearchWord(searchInputValue);
-    setReturnBookPage(1);
-    setReturnBookPageRange(0);
-  };
-
-  const fetchreturnBookData = async () => {
-    const {
-      data: { items, meta },
-    } = await axios.get(`${process.env.REACT_APP_API}/lendings/search`, {
-      params: {
-        query: userSearchWord,
-        page: returnBookPage - 1,
-        limit: 5,
-        sort: lendingSort ? "old" : "new",
-      },
-    });
-    setReturnBookList(items);
-    setLastreturnBookPage(meta.totalPages);
-  };
-
-  useEffect(() => {
-    setUserSearchWord("");
-  }, []);
-
-  useEffect(async () => {
-    setReturnBookPage(1);
-    await fetchreturnBookData();
-  }, [userSearchWord]);
-
-  useEffect(fetchreturnBookData, [returnBookPage, lendingSort]);
-
-  useEffect(() => {
-    const searchForm = document.querySelector(".modal-search-form");
-    searchForm.addEventListener("submit", handlereturnBookSumbit);
-    return () =>
-      searchForm.removeEventListener("submit", handlereturnBookSumbit);
-  }, [handlereturnBookSumbit]);
-
-  const tabList = [
-    { name: "대출", link: "/rent" },
-    { name: "예약대출", link: "/reservation" },
-    { name: "반납", link: "/return" },
-  ];
 
   return (
     <main>
@@ -88,23 +53,23 @@ const ReturnBook = () => {
         titleKo="조회 및 반납"
         titleEn="INQUIRE & RETURN BOOK"
       />
-      <AdminTabs tabList={tabList} />
-      <ReturnBookWithBarcodeReader
-        openModal={openModal}
-        setLendingId={setLendingId}
-      />
+      <Tabs tabList={rentTabList} />
+      {isUsingBarcodeReader && <BarcodeReader toDoAfterRead={toDoAfterRead} />}
       <section className="inquire-box-wrapper">
         <InquireBoxTitle
           Icon={Book}
           titleKO="현재 대출정보"
           titleEN="Rent info"
           placeHolder="대출자의 성명 또는 대출중인 도서명을 입력해주세요."
+          setQuery={setQuery}
+          isWithBarcodeButton
+          onClickBarcodeButton={toggleBarcode}
         />
         <div className="return-book-table__inquire-box">
           <div className="return-book-filter">
             <ReturnBookFilter
-              lendingSort={lendingSort}
-              setLendingSort={setLendingSort}
+              lendingSort={isSortNew}
+              setLendingSort={setIsSortNew}
             />
           </div>
           {returnBookList.map(factor => (
@@ -116,17 +81,18 @@ const ReturnBook = () => {
             />
           ))}
           <div className="return-book-table__pagination">
-            <AdminPagination
-              userPage={returnBookPage}
-              setUserPage={setReturnBookPage}
-              pageRange={returnBookPageRange}
-              setPageRange={setReturnBookPageRange}
-              lastPage={lastreturnBookPage}
-            />
+            <Pagination page={page} setPage={setPage} lastPage={lastPage} />
           </div>
         </div>
       </section>
-      {modal && <ReturnModal lendingId={lendingId} closeModal={closeModal} />}
+      <Dialog />
+      <Modal>
+        <ReturnModalContents
+          lendingId={lendingId}
+          closeModal={closeModal}
+          setOpenTitleAndMessage={setOpenTitleAndMessage}
+        />
+      </Modal>
     </main>
   );
 };
