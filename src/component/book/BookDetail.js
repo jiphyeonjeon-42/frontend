@@ -166,15 +166,6 @@ const BookDetail = () => {
             </div>
           </div>
         </div>
-        {/* 테스트용 prop 만들기
-        ex)
-        const info = () = {
-            test1: test11,
-            test2: test22
-        }
-
-        <Review info={info} />
-        */}
         {/* delete 함수 만들어서 Review 에 prop 으로 넘겨서 삭제 시 이용하기 */}
         <Review />
       </section>

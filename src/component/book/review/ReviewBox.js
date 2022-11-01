@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "../../../css/Review.css";
 
-const ReviewBox = () => {
+const ReviewBox = info => {
   const [fixReview, setFixReview] = useState(false);
-  const [text, setText] = useState("입력해주십쇼");
+  const [text, setText] = useState(info);
   const [temp, setTemp] = useState("");
 
   const saveTemp = () => {
+// 리뷰하기부터 진행하고 만들기
     if (fixReview) {
       setText(temp);
     } else {
