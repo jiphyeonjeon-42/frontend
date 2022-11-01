@@ -1,39 +1,18 @@
-import React, { useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import React from "react";
 import MainBanner from "./MainBanner";
 import MainNew from "./MainNew";
 import MainPopular from "./MainPopular";
-import { useSearchInput } from "../../atom/useSearchInput";
-import globalModal from "../../atom/globalModal";
-import MiniModal from "../utils/MiniModal";
 import "../../css/Main.css";
-import ModalContentsOnlyTitle from "../utils/ModalContentsTitleWithMessage";
+import useDialog from "../../hook/useDialog";
 
 const Main = () => {
-  const setInputValue = useSetRecoilState(useSearchInput);
-  const [miniModal, setMiniModal] = useRecoilState(globalModal);
-  const closeModal = () => {
-    setMiniModal({
-      view: false,
-      error: "",
-    });
-  };
-  useEffect(() => {
-    setInputValue("");
-  }, []);
+  const { Dialog, setOpenTitleAndMessage } = useDialog();
   return (
     <main className="main-wrapper">
-      {miniModal.view && (
-        <MiniModal closeModal={closeModal}>
-          <ModalContentsOnlyTitle
-            closeModal={closeModal}
-            title={miniModal.error}
-          />
-        </MiniModal>
-      )}
+      <Dialog />
       <MainBanner />
-      <MainNew />
-      <MainPopular />
+      <MainNew setOpenTitleAndMessage={setOpenTitleAndMessage} />
+      <MainPopular setOpenTitleAndMessage={setOpenTitleAndMessage} />
     </main>
   );
 };

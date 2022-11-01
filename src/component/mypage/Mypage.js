@@ -1,56 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../../css/Mypage.css";
-import qs from "qs";
+import { Link, useSearchParams } from "react-router-dom";
+import useDialog from "../../hook/useDialog";
+import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
+import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
+import getErrorMessage from "../../data/error";
 import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 import Reserve from "../../img/list-check-solid.svg";
-import MypageRentedBook from "./MypageRentedBook";
-import MypageReservedBook from "./MypageReservedBook";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsOnlyTitle from "../utils/ModalContentsOnlyTitle";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
-import getErrorMessage from "../../data/error";
+import "../../css/Mypage.css";
 
 const Mypage = () => {
-  const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState(null);
-  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
-  const [miniModalContent, setMiniModalContent] = useState("");
-  const [deviceMode, setDeviceMode] = useState(window.innerWidth);
-  const location = useLocation();
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
+  const [urlQuery, setUrlQuery] = useSearchParams();
+  const {
+    setOpen: openDialog,
+    config: dialogConfig,
+    setConfig: setDialogConfig,
+    setOpenTitleAndMessage: setDialogTitleAndMessage,
+    Dialog,
+  } = useDialog();
+
+  const userId = JSON.parse(window.localStorage.getItem("user")).id;
+  const { userInfo } = useGetUsersSearchId({
+    setDialogTitleAndMessage,
+    userId,
   });
-  const [queryErrorCode, setQueryErrorCode] = useState(query.errorCode);
-
-  const getUserInfo = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API}/users/search`, {
-        params: {
-          id: JSON.parse(window.localStorage.getItem("user")).id,
-        },
-      })
-      .then(res => setUserInfo(res.data.items[0]))
-      .catch(err => {
-        const { errorCode } = err.response.data;
-        setMiniModalContent(getErrorMessage(errorCode));
-        setIsMiniModalOpen(true);
-      });
-  };
-
-  const closeModal = async () => {
-    if (isMiniModalOpen) {
-      await getUserInfo();
-      setIsMiniModalOpen(false);
-    } else if (queryErrorCode) {
-      setQueryErrorCode(null);
-      navigate("/mypage");
-    }
-  };
+  const [deviceMode, setDeviceMode] = useState(window.innerWidth);
 
   const convertRoleToStr = roleInt => {
     switch (roleInt) {
@@ -65,13 +41,17 @@ const Mypage = () => {
     }
   };
 
-  useEffect(async () => {
-    if (JSON.parse(window.localStorage.getItem("user")).isLogin)
-      await getUserInfo();
-    else navigate("/login");
-  }, []);
-
   useEffect(() => {
+    const error = urlQuery.get("errorCode");
+    if (error) {
+      const errorCode = parseInt(error, 10);
+      const [title, message] = getErrorMessage(errorCode).split("\r\n");
+      setDialogTitleAndMessage(title, message, () => {
+        urlQuery.delete("errorCode");
+        setUrlQuery(urlQuery);
+      });
+    }
+
     const getWindowWidth = () => {
       if (window.innerWidth >= 1200) setDeviceMode("desktop");
       if (window.innerWidth < 1200 && window.innerWidth > 767)
@@ -83,10 +63,6 @@ const Mypage = () => {
       window.removeEventListener("resize", getWindowWidth);
     };
   }, []);
-
-  const [title, content] = getErrorMessage(parseInt(queryErrorCode, 10)).split(
-    "\r\n",
-  );
 
   const concatDate = day => {
     let overDueDate = "";
@@ -215,7 +191,10 @@ const Mypage = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          <MypageRentedBook rentInfo={userInfo ? userInfo.lendings : null} />
+          <RentedOrReservedBooks
+            componentMode="rent"
+            bookInfoArr={userInfo ? userInfo.lendings : null}
+          />
         </div>
       </div>
       <div className="mypage-inquire-box-long-wrapper">
@@ -227,30 +206,16 @@ const Mypage = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          <MypageReservedBook
-            reserveInfo={userInfo ? userInfo.reservations : null}
-            setIsMiniModalOpen={setIsMiniModalOpen}
-            setMiniModalContent={setMiniModalContent}
+          <RentedOrReservedBooks
+            componentMode="reserve"
+            bookInfoArr={userInfo ? userInfo.reservations : null}
+            openDialog={openDialog}
+            dialogConfig={dialogConfig}
+            setDialogConfig={setDialogConfig}
           />
         </div>
       </div>
-      {isMiniModalOpen ? (
-        <MiniModal closeModal={closeModal}>
-          <ModalContentsOnlyTitle
-            closeModal={closeModal}
-            title={miniModalContent}
-          />
-        </MiniModal>
-      ) : null}
-      {queryErrorCode && (
-        <MiniModal closeModal={closeModal}>
-          <ModalContentsTitleWithMessage
-            closeModal={closeModal}
-            title={title}
-            message={content}
-          />
-        </MiniModal>
-      )}
+      <Dialog />
     </>
   );
 };

@@ -1,0 +1,43 @@
+.return-modal__wrapper {
+  min-width: 3rem;
+  padding: 2rem 6rem 8rem;
+}
+
+.return-modal__book {
+  margin-bottom: 4rem;
+}
+
+.return-modal__lend {
+  float: right;
+  width: 50%;
+}
+
+.return-modal__remark {
+  margin: 4rem 0;
+}
+
+.return-modal__buttons {
+  min-width: 24rem;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.return-modal__cancel {
+  margin-left: 2.4rem;
+}
+
+@media screen and (max-width: 767px) {
+  .return-modal__wrapper {
+    padding: 2rem 4rem 4rem;
+  }
+  .return-modal__book {
+    margin-bottom: 2rem;
+  }
+  .return-modal__remark {
+    margin: 2rem 0;
+  }
+  .return-modal__cancel {
+    margin-left: 1.2rem;
+  }
+}

@@ -1,0 +1,44 @@
+.text__wrapper {
+  white-space: normal;
+  word-break: break-all;
+}
+
+.text__label {
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+.text__main-text {
+  font-weight: bold;
+  margin: 0.8rem 0;
+  white-space: normal;
+  word-break: break-all;
+  overflow: hidden;
+  max-height: 8rem;
+}
+
+.text__main-text.normal {
+  font-size: 2.8rem;
+}
+
+.text__main-text.ellipsis {
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 1200px) {
+  .text__main-text.normal {
+    font-size: 2.4rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .text__main-text {
+    margin: 0.4rem 0 0;
+  }
+  .text__main-text.normal {
+    font-size: 2rem;
+  }
+  .text__label {
+    font-size: 1.4rem;
+  }
+}

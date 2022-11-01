@@ -1,25 +1,23 @@
-import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useResetRecoilState } from "recoil";
+import usePostAuthLogout from "../../api/auth/usePostAuthLogout";
 import userState from "../../atom/userState";
 
 const Logout = () => {
-  const setUser = useSetRecoilState(userState);
-  const defaultUser = {
-    isLogin: false,
-    id: 0,
-    userId: "",
-    isAdmin: false,
-    imgUrl: "",
-  };
-  setUser(defaultUser);
-  window.localStorage.setItem("user", JSON.stringify(defaultUser));
-  axios.post(`${process.env.REACT_APP_API}/auth/logout`);
+  const resetState = useResetRecoilState(userState);
+  const requestLogout = usePostAuthLogout();
+
+  useEffect(() => {
+    resetState();
+    requestLogout();
+    window.localStorage.removeItem("user");
+  }, []);
+
   return (
-    <div>
+    <>
       <Navigate to="/" />
-    </div>
+    </>
   );
 };
 

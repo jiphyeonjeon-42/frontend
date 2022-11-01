@@ -27,26 +27,9 @@ const DisplayBasicBookInfo = ({ bookInfo, setBookInfo }) => {
     });
   };
 
-  const useInput = key => {
-    return (
-      <label htmlFor={key} className="add-book__book-info__text">
-        <span className="font-16-bold add-book__book-info__text-key">
-          {labelText[key]}
-        </span>
-        <input
-          className="add-book__basic-info__input "
-          type="text"
-          id={key}
-          value={bookInfo[key]}
-          onChange={onChangeInput}
-          required
-        />
-      </label>
-    );
-  };
   return (
     <>
-      <p className="color-red add-book__overlined ">ISBN 도서정보</p>
+      <p className="color-red ">ISBN 도서정보</p>
       <label htmlFor="title" className=" add-book__underlined">
         <textarea
           className="add-book__basic-info__input font-28-bold"
@@ -55,9 +38,23 @@ const DisplayBasicBookInfo = ({ bookInfo, setBookInfo }) => {
           onChange={onChangeInput}
         />
       </label>
-      {useInput("author")}
-      {useInput("publisher")}
-      {useInput("pubdate")}
+      {Object.keys(labelText).map(key => {
+        return (
+          <label htmlFor={key} className="add-book__book-info__text">
+            <span className="font-16-bold add-book__book-info__text-key">
+              {labelText[key]}
+            </span>
+            <input
+              className="add-book__basic-info__input "
+              type="text"
+              id={key}
+              value={bookInfo[key]}
+              onChange={onChangeInput}
+              required
+            />
+          </label>
+        );
+      })}
       {message && <p>{message}</p>}
     </>
   );

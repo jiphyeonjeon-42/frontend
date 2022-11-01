@@ -1,0 +1,66 @@
+.tabs-wrapper {
+  max-width: 90rem;
+  margin: 12rem auto 10rem auto;
+}
+
+.tabs {
+  max-width: 75rem;
+  margin: 0 auto 0 auto;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  z-index: 1;
+  padding: 0 2rem 0 2rem;
+}
+
+.tabs-line {
+  height: 1px;
+  background-color: #d5d5d5;
+  position: relative;
+  top: -2px;
+  z-index: 0;
+}
+
+.tab {
+  font-size: 3.2rem;
+  padding: 0 0 2rem 0;
+}
+
+.tab-not-focus {
+  color: #a4a4a4;
+}
+
+.tab-on-focus {
+  color: #2d2d2d;
+  border-bottom: solid 3px #2d2d2d;
+}
+
+@media screen and (max-width: 1199px) {
+  .tabs-wrapper {
+    max-width: 76.8rem;
+    margin: 8rem auto 6rem auto;
+  }
+  .tabs {
+    max-width: 64rem;
+  }
+  .tab {
+    font-size: 2.8rem;
+    padding: 0 0 1.5rem 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tabs-wrapper {
+    max-width: 50rem;
+    min-width: 36rem;
+    margin: 6rem auto 4.5rem auto;
+  }
+  .tabs {
+    max-width: 42rem;
+    min-width: 32rem;
+  }
+  .tab {
+    font-size: 2rem;
+    padding: 0 0 1.5rem 0;
+  }
+}

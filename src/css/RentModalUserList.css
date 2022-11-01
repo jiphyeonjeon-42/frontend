@@ -1,10 +1,9 @@
 .rent__user-list {
   border: 0;
   margin: 0;
-  padding: 0;
   display: flex;
   width: 100%;
-  padding: 2.1rem 0 2.1rem 0;
+  padding: 2rem 2rem 2rem 0;
   margin: 0 auto 0 auto;
   border-bottom: 0.1rem solid #a4a4a4;
   cursor: pointer;
@@ -21,6 +20,19 @@
   transition: 0.3s;
 }
 
+.rent__user-list::after {
+  content: " ";
+  background-image: url("../img/arrow_right_black.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  right: 0;
+  width: 1rem;
+  height: 1.6rem;
+  margin-top: 0.4rem;
+}
+
 .rent__user-list.disabled {
   cursor: unset;
 }
@@ -34,8 +46,9 @@
 }
 
 .rent__user-list__name {
-  width: 30rem;
-  display: flex;
+  width: 30%;
+  text-align: left;
+  /* display: flex; */
 }
 
 .rent__user-list__lent-cnt {
@@ -43,6 +56,10 @@
 }
 
 .rent__user-list__penalty {
+  width: 60%;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
   margin-left: 1rem;
   line-height: 2.4rem;
 }
@@ -67,6 +84,11 @@
 
 @media screen and (max-width: 767px) {
   .rent__user-list__name {
-    width: 16.1rem;
+    width: 40%;
+    font-size: 1.6rem;
+  }
+  .rent__user-list__penalty.font-16 {
+    margin-left: 0;
+    font-size: 1.4rem;
   }
 }

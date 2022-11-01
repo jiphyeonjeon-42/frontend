@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
-import Banner from "../utils/Banner";
 import Question from "./Question";
-import "../../css/Information.css";
-import Toggle from "../../img/caret-right.svg";
+import Image from "../utils/Image";
+import Banner from "../utils/Banner";
 import ScrollTopButton from "../utils/ScrollTopButton";
+import Toggle from "../../img/caret-right.svg";
+import "../../css/Information.css";
 
 const Information = () => {
   const [allOpen, setAllOpen] = useState(false);
@@ -31,7 +32,7 @@ const Information = () => {
                 onClick={onClickAllOpen}
               >
                 {!allOpen ? "전체열기" : "전체닫기"}
-                <img
+                <Image
                   src={Toggle}
                   className={`toggle_img ${
                     !allOpen ? `rotate-right` : `rotate-left`

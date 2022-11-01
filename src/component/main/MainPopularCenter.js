@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import IMGERR from "../../img/image_onerror.svg";
+import Image from "../utils/Image";
 
 const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
   const [selected, setSelected] = useState(0);
@@ -15,10 +15,6 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
   function changeSelected(e) {
     if (posX) return;
     setSelected(parseInt(e.currentTarget.value, 10));
-  }
-
-  function subtituteImg(e) {
-    e.target.src = IMGERR;
   }
 
   function touchStart(e) {
@@ -84,14 +80,13 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }) => {
                 key={book.id}
                 id={book.id}
               >
-                <img
-                  draggable="false"
+                <Image
+                  draggable={false}
                   src={book.image}
                   alt={book.title}
                   className={`${
                     selected === index && "selected"
                   } main__popular__basic-img`}
-                  onError={subtituteImg}
                   value={index}
                 />
                 <div className="main__popular__summary">

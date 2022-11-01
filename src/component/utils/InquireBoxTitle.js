@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Image from "./Image";
+import SearchBar from "./SearchBar";
 import "../../css/InquireBoxTitle.css";
-import AdminSearchBar from "./AdminSearchBar";
 
 const InquireBoxTitle = ({
   Icon,
@@ -10,10 +11,13 @@ const InquireBoxTitle = ({
   KOsize,
   ENsize,
   placeHolder,
+  setQuery,
+  isWithBarcodeButton,
+  onClickBarcodeButton,
 }) => {
   return (
     <div className="inquire-box-title">
-      <img
+      <Image
         className={`inquire-box-title__icon ${placeHolder && "short"}`}
         src={Icon}
         alt="icon"
@@ -37,7 +41,13 @@ const InquireBoxTitle = ({
         </span>
       </span>
       {placeHolder ? (
-        <AdminSearchBar placeHolder={placeHolder} width="short" />
+        <SearchBar
+          placeHolder={placeHolder}
+          width="short"
+          setQuery={setQuery}
+          isWithBarcodeButton={isWithBarcodeButton}
+          onClickBarcodeButton={onClickBarcodeButton}
+        />
       ) : null}
     </div>
   );
@@ -47,6 +57,9 @@ InquireBoxTitle.defaultProps = {
   KOsize: "font-28-bold",
   ENsize: "font-16",
   placeHolder: "",
+  setQuery: undefined,
+  isWithBarcodeButton: false,
+  onClickBarcodeButton: () => {},
 };
 
 InquireBoxTitle.propTypes = {
@@ -56,6 +69,9 @@ InquireBoxTitle.propTypes = {
   KOsize: PropTypes.string,
   ENsize: PropTypes.string,
   placeHolder: PropTypes.string,
+  setQuery: PropTypes.func,
+  isWithBarcodeButton: PropTypes.bool,
+  onClickBarcodeButton: PropTypes.func,
 };
 
 export default InquireBoxTitle;

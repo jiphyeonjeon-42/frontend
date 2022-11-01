@@ -1,44 +1,33 @@
 import React, { useState } from "react";
 
 import Banner from "../utils/Banner";
-import AdminTabs from "../utils/AdminTabs";
+import Tabs from "../utils/Tabs";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import RentInquireBoxUser from "./RentInquireBoxUser";
 import RentInquireBoxBook from "./RentInquireBoxBook";
-import RentModal from "./RentModal";
 import RentConfirm from "./RentConfirm";
+import RentModalConfirm from "./RentModalConfirm";
+
+import useDialog from "../../hook/useDialog";
+import useModal from "../../hook/useModal";
 
 import Login from "../../img/login_icon_white.svg";
 import Book from "../../img/admin_icon.svg";
 
+import { rentTabList } from "../../data/tablist";
 import "../../css/Rent.css";
-import MiniModal from "../utils/MiniModal";
-import ModalContentsTitleWithMessage from "../utils/ModalContentsTitleWithMessage";
 
 const Rent = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedBooks, setSelectedBooks] = useState([]);
-  const [midModalContents, setMidModalContents] = useState("");
-  const [miniModalContents, setMiniModalContents] = useState("");
-  const [firstBookContents, setFirstBookContests] = useState("");
-  const [secondBookContents, setSecondBookContests] = useState("");
 
-  const tabList = [
-    { name: "대출", link: "/rent" },
-    { name: "예약대출", link: "/reservation" },
-    { name: "반납", link: "/return" },
-  ];
-
-  const closeMiniModal = () => {
-    setMiniModalContents(null);
-    setFirstBookContests(null);
-    setSecondBookContests(null);
-  };
+  const { Dialog, setOpenTitleAndMessage } = useDialog();
+  const { Modal, setOpen: openModal, setClose: closeModal } = useModal();
 
   return (
     <main>
       <Banner img="admin" titleKo="대출" titleEn="RENT BOOK" />
-      <AdminTabs tabList={tabList} />
+      <Tabs tabList={rentTabList} />
       <section className="inquire-box__wrapper">
         <InquireBoxTitle
           Icon={Login}
@@ -48,7 +37,6 @@ const Rent = () => {
         <RentInquireBoxUser
           selectedUser={selectedUser}
           setSelectedUser={setSelectedUser}
-          setMidModalContents={setMidModalContents}
         />
       </section>
       <section className="inquire-box__wrapper">
@@ -63,7 +51,6 @@ const Rent = () => {
                 }
                 selectedBooks={selectedBooks}
                 setSelectedBooks={setSelectedBooks}
-                setMidModalContents={setMidModalContents}
               />
             ))
           : null}
@@ -73,37 +60,25 @@ const Rent = () => {
             shape={selectedBooks.length === 0 ? "two" : "four"}
             selectedBooks={selectedBooks}
             setSelectedBooks={setSelectedBooks}
-            setMidModalContents={setMidModalContents}
           />
         ) : null}
       </section>
       <RentConfirm
         selectedUser={selectedUser}
         selectedBooks={selectedBooks}
-        setMidModalContents={setMidModalContents}
+        openModal={openModal}
       />
-      {midModalContents && (
-        <RentModal
+      <Modal>
+        <RentModalConfirm
           selectedUser={selectedUser}
           selectedBooks={selectedBooks}
-          midModalContents={midModalContents}
-          setSelectedUser={setSelectedUser}
           setSelectedBooks={setSelectedBooks}
-          setMidModalContents={setMidModalContents}
-          setMiniModalContents={setMiniModalContents}
-          setFirstBookContests={setFirstBookContests}
-          setSecondBookContests={setSecondBookContests}
+          setSelectedUser={setSelectedUser}
+          closeModal={closeModal}
+          setError={setOpenTitleAndMessage}
         />
-      )}
-      {miniModalContents && (
-        <MiniModal closeModal={closeMiniModal}>
-          <ModalContentsTitleWithMessage
-            closeModal={closeMiniModal}
-            title="대출 결과"
-            message={`${firstBookContents} ${secondBookContents || ""}`}
-          />
-        </MiniModal>
-      )}
+      </Modal>
+      <Dialog />
     </main>
   );
 };
