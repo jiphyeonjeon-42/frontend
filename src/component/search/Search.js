@@ -16,11 +16,10 @@ import "../../css/Search.css";
 
 const Search = () => {
   const myRef = useRef(null);
-  const { Dialog, bookList, categoryList, lastPage } =
+  const { Dialog, bookList, categoryList, lastPage, categoryIndex } =
     useGetBooksInfoSearchUrl();
   const [urlSearchParams, setUrlSearchParams] = useSearchParams();
-  const [query, page, sort, categoryIndex] =
-    useParseUrlQueryString(searchUrlQueryKeys);
+  const [query, page, sort] = useParseUrlQueryString(searchUrlQueryKeys);
 
   const debounce = useDebounce();
   const setQuery = useCallback(newQuery => {
