@@ -1,47 +1,42 @@
 import React, { useState } from "react";
 import ReviewBox from "./ReviewBox";
+import { reviewTabList } from "../../../data/tablist";
 import "../../../css/Tabs.css";
 import "../../../css/Review.css";
 
-// const info = () => ({
-//   bookInfoId: 42,
-//   commentText: "책이 좋네요.",
-// });
-const content = [
-  { name: "리뷰", sort: "showReviews" },
-  { name: "리뷰하기", sort: "doReview" },
-];
-
-const useFocus = (init, allTabs) => {
-  const [currentIndex, setCurretIndex] = useState(init);
+const useFocus = (initialTab, tabList) => {
+  const [currentIndex, setCurretIndex] = useState(initialTab);
   return {
-    currentItem: allTabs[currentIndex].sort,
-    changeItem: setCurretIndex,
+    currentTab: tabList[currentIndex].sort,
+    changeTab: setCurretIndex,
   };
 };
 
 const Review = () => {
-  const { currentItem, changeItem } = useFocus(0, content);
-  console.log(currentItem);
+  const { currentTab, changeTab } = useFocus(0, reviewTabList);
   return (
     <>
       <div className="tabs">
-        {content.map((section, index) => (
+        {reviewTabList.map((tab, index) => (
           <div
             className={`tab tab-${
-              section.sort === currentItem ? "on" : "not"
+              tab.sort === currentTab ? "on" : "not"
             }-focus`}
             role="button"
             tabIndex={index}
             onKeyDown=""
-            onClick={() => changeItem(index)}
+            onClick={() => changeTab(index)}
           >
-            {section?.name}
+            {tab?.name}
           </div>
         ))}
       </div>
       <div className="tabs-line" />
-      <ReviewBox sort={currentItem} />
+      {currentTab === "showReviews" ? (
+        <ReviewBox sort="showReviews" />
+      ) : (
+        <ReviewBox sort="doReview" />
+      )}
     </>
   );
 };

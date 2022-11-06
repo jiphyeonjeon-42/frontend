@@ -9,7 +9,6 @@ const ReviewBox = ({ sort }) => {
   const [text, setText] = useState(null);
   const [temp, setTemp] = useState("");
   console.log(sort, "리뷰 박스");
-  // sort === "showReview"
   const saveTemp = () => {
     // 리뷰하기부터 진행하고 만들기
     if (fixReview) {
@@ -28,7 +27,6 @@ const ReviewBox = ({ sort }) => {
     setText(e.target.value);
   };
 
-  // sort === "doReview"
   const onSubmitHandler = async e => {
     e.preventDefault();
     const bookInfoId = 1;
@@ -61,7 +59,7 @@ const ReviewBox = ({ sort }) => {
     //       }),
     //     });
   };
-
+  // sort === "doReview"
   if (sort === "doReview") {
     return (
       <div className="doReview__review-box">
@@ -79,6 +77,7 @@ const ReviewBox = ({ sort }) => {
       </div>
     );
   }
+  // sort === "showReview"
   if (sort === "showReviews") {
     return (
       <div className="showReview__review-box">

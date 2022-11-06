@@ -8,3 +8,8 @@ export const rentTabList = [
   { name: "예약대출", link: "/reservation" },
   { name: "반납", link: "/return" },
 ];
+
+export const reviewTabList = [
+  { name: "리뷰", sort: "showReviews" },
+  { name: "리뷰하기", sort: "doReview" },
+];
