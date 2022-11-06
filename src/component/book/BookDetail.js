@@ -117,7 +117,9 @@ const BookDetail = () => {
           </div>
         </div>
         {/* delete 함수 만들어서 Review 에 prop 으로 넘겨서 삭제 시 이용하기 */}
-        <Review />
+        <div className="book-review">
+          <Review />
+        </div>
       </section>
       <Dialog />
     </main>

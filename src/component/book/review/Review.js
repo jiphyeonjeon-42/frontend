@@ -9,13 +9,10 @@ import "../../../css/Review.css";
 // });
 const content = [
   { name: "리뷰", sort: "showReviews" },
-  { name: "리뷰하기", sort: "doReviews" },
+  { name: "리뷰하기", sort: "doReview" },
 ];
 
 const useFocus = (init, allTabs) => {
-  if (!allTabs || !Array.isArray(allTabs)) {
-    return null;
-  }
   const [currentIndex, setCurretIndex] = useState(init);
   return {
     currentItem: allTabs[currentIndex].sort,
@@ -25,8 +22,9 @@ const useFocus = (init, allTabs) => {
 
 const Review = () => {
   const { currentItem, changeItem } = useFocus(0, content);
+  console.log(currentItem);
   return (
-    <div>
+    <>
       <div className="tabs">
         {content.map((section, index) => (
           <div
@@ -43,7 +41,8 @@ const Review = () => {
         ))}
       </div>
       <div className="tabs-line" />
-    </div>
+      <ReviewBox sort={currentItem} />
+    </>
   );
 };
 

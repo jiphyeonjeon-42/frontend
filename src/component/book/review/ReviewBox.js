@@ -8,7 +8,7 @@ const ReviewBox = ({ sort }) => {
   const [fixReview, setFixReview] = useState(false);
   const [text, setText] = useState(null);
   const [temp, setTemp] = useState("");
-
+  console.log(sort, "리뷰 박스");
   // sort === "showReview"
   const saveTemp = () => {
     // 리뷰하기부터 진행하고 만들기
@@ -79,7 +79,7 @@ const ReviewBox = ({ sort }) => {
       </div>
     );
   }
-  if (sort === "showReview") {
+  if (sort === "showReviews") {
     return (
       <div className="showReview__review-box">
         <div className="review-info">
