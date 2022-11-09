@@ -3,12 +3,10 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "../../../css/Review.css";
 
-const ReviewBox = ({ sort }) => {
-  // sort === "showReview"
+const ReviewBox = ({ sort, data, bookId }) => {
   const [fixReview, setFixReview] = useState(false);
   const [text, setText] = useState(null);
   const [temp, setTemp] = useState("");
-  console.log(sort, "리뷰 박스");
   const saveTemp = () => {
     // 리뷰하기부터 진행하고 만들기
     if (fixReview) {
@@ -29,14 +27,12 @@ const ReviewBox = ({ sort }) => {
 
   const onSubmitHandler = async e => {
     e.preventDefault();
-    const bookInfoId = 1;
     const content = e.target.textContent;
-    console.log(content);
     await axios
       .post(
         `${process.env.REACT_APP_API}/reviews`,
         {
-          bookInfoId: `${bookInfoId}`,
+          bookInfoId: `${bookId}`,
           content: `${content}`,
         },
         {
@@ -49,15 +45,6 @@ const ReviewBox = ({ sort }) => {
       .catch(function fail(error) {
         console.log(error);
       });
-
-    //     fetch(`${process.env.REACT_APP_API}/reviews`, {
-    //       method: "POST",
-    //       withCredentials: true,
-    //       body: JSON.stringify({
-    //         bookInfoId,
-    //         content,
-    //       }),
-    //     });
   };
   // sort === "doReview"
   if (sort === "doReview") {
@@ -98,7 +85,7 @@ const ReviewBox = ({ sort }) => {
           ) : (
             <div>
               {/* 텍스트 DB 에서 불러와야 함. */}
-              <span className="reviews-content-area">{text}</span>
+              <span className="reviews-content-area">{data.content}</span>
             </div>
           )}
         </div>
@@ -130,5 +117,14 @@ const ReviewBox = ({ sort }) => {
 export default ReviewBox;
 
 ReviewBox.propTypes = {
+  data: PropTypes.shape({
+    bookInfoId: PropTypes.number,
+    content: PropTypes.string,
+  }),
   sort: PropTypes.string.isRequired,
+  bookId: PropTypes.number.isRequired,
+};
+
+ReviewBox.defaultProps = {
+  data: null,
 };
