@@ -39,7 +39,7 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
             {`반납예정일 : ${factor.dueDate.slice(0, 10)}`}
           </span>
           <span
-            className={`re-penaltyDays font-16 ${
+            className={`re-penaltyDays font-16-bold ${
               factor.penaltyDays ? "color-red" : "color-54"
             }`}
           >
