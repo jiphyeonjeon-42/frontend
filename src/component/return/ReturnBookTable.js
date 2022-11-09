@@ -43,7 +43,7 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
               factor.penaltyDays ? "color-red" : "color-54"
             }`}
           >
-            {`대출연체일 : ${factor.penaltyDays ? factor.penaltyDays : "0"}`}
+            {`${factor.penaltyDays ? "연체 중" : ""}`}
           </span>
         </div>
       </button>
