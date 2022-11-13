@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import ReviewBox from "./ReviewBox";
+import React, { useCallback, useState, useRef, useEffect } from "react";
+// import axios from "axios";
+// import { number, string } from "prop-types";
+// import useApi from "../../../hook/useApi";
 import { reviewTabList } from "../../../data/tablist";
+import ReviewBox from "./ReviewBox";
 import "../../../css/Tabs.css";
 import "../../../css/Review.css";
+import axiosPromise from "../../../util/axios";
 
 const useFocus = (initialTab, tabList) => {
   const [currentIndex, setCurretIndex] = useState(initialTab);
@@ -12,73 +16,42 @@ const useFocus = (initialTab, tabList) => {
   };
 };
 
-const Review = infoId => {
+const Review = () => {
   const { currentTab, changeTab } = useFocus(0, reviewTabList);
-  console.log(infoId);
-  const reviewData = [
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.2",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.3",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.4",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.5",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.6",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.7",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.8",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.9",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.10",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.11",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.12",
-    },
-    {
-      bookInfoId: infoId,
-      content: "책이 좋네요.13",
-    },
-  ];
-  // 데이터 가져오기
-  const getReviewBox = () => {
-    return <ReviewBox sort="showReviews" data={reviewData} infoId={infoId} />;
-  };
-  const getReviewData = () => {
-    for (let index = 0; index < 10; ) {
-      getReviewBox();
-      index += 1;
+  const [postReviews, setPostReviews] = useState([]);
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const page = useRef(0);
+  const observeReviewList = useRef(null);
+
+  const fetch = useCallback(async () => {
+    try {
+      const request = axiosPromise(
+        "get",
+        `reviews?bookInfoId=645&userId=11&page=${page.current}`,
+      ).then(res => {
+        console.log(res.data);
+        setPostReviews(prevPosts => [...prevPosts, ...res.data.items]);
+        setHasNextPage(res.data.meta.finalPage === false);
+      });
+      console.log(request);
+      if (hasNextPage) {
+        page.current += 1;
+      }
+    } catch (err) {
+      console.error(err);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!observeReviewList.current || !hasNextPage) return;
+
+    const io = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        fetch();
+      }
+    });
+    io.observe(observeReviewList.current);
+  }, [fetch, hasNextPage]);
 
   return (
     <>
@@ -98,28 +71,16 @@ const Review = infoId => {
         ))}
       </div>
       <div className="tabs-line" />
-      {/* 스크롤 관련 이벤트 실행 시 실행하게 코드 작성? 플래그로 useEffect 사용하자 */}
       <div className="review-list">
-        {/* for (let index = 0; index < 10; index++) {
-        } */}
         {currentTab === "showReviews" ? (
-          getReviewData()
+          postReviews.map(data => <ReviewBox sort="showReviews" data={data} />)
         ) : (
           <ReviewBox sort="doReview" />
         )}
       </div>
+      <div ref={observeReviewList} />
     </>
   );
 };
 
 export default Review;
-
-// for (let index = 0; index < categoryButtonWidth.length; index++) {
-//   sumOfCategory += categoryButtonWidth[index];
-//   if (sumOfCategory - EPSILON > categoriesScrollX) {
-//     break;
-//   }
-// }
-
-// for (let index = 0; index < categoryButtonWidth.length; index++) {
-// }

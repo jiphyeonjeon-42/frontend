@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import "../../../css/Review.css";
 
-const ReviewBox = ({ sort, data, bookId }) => {
+const ReviewBox = ({ sort, data }) => {
+  // console.log(data);
   const [fixReview, setFixReview] = useState(false);
   const [text, setText] = useState(null);
   const [temp, setTemp] = useState("");
@@ -32,7 +33,7 @@ const ReviewBox = ({ sort, data, bookId }) => {
       .post(
         `${process.env.REACT_APP_API}/reviews`,
         {
-          bookInfoId: `${bookId}`,
+          bookInfoId: `${data.bookInfoId}`,
           content: `${content}`,
         },
         {
@@ -122,7 +123,7 @@ ReviewBox.propTypes = {
     content: PropTypes.string,
   }),
   sort: PropTypes.string.isRequired,
-  bookId: PropTypes.number.isRequired,
+  // bookId: PropTypes.number.isRequired,
 };
 
 ReviewBox.defaultProps = {
