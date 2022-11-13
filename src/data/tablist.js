@@ -7,5 +7,5 @@ export const rentTabList = [
   { name: "대출", link: "/rent" },
   { name: "예약대출", link: "/reservation" },
   { name: "반납", link: "/return" },
-  { name: "전체 대출/반납 기록", link: "/history" },
+  { name: "전체 기록", link: "/history" },
 ];
