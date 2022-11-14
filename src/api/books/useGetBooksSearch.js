@@ -14,7 +14,9 @@ const useGetBooksSearch = () => {
   });
 
   const expectedItem = [
-    { key: "id", type: "number", isNullable: false },
+    { key: "bookId", type: "number", isNullable: false },
+    { key: "bookInfoId", type: "number", isNullable: false },
+    { key: "status", type: "number", isNullable: false },
     { key: "title", type: "string", isNullable: false },
     { key: "author", type: "string", isNullable: false },
     { key: "category", type: "string", isNullable: false },
