@@ -3,14 +3,14 @@ import useApi from "../../hook/useApi";
 import useSearch from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetBooksSearch = () => {
+const useGetBooksSearch = ({ limit }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
 
   const { request, Dialog } = useApi("get", "books/search", {
     query: searchParams.query,
     page: searchParams.page - 1,
-    limit: 3,
+    limit,
   });
 
   const expectedItem = [
