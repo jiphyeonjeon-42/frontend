@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 import useDialog from "../../hook/useDialog";
 import usePatchUsersMyupdate from "../../api/users/usePatchUsersMyupdate";
 import Image from "../utils/Image";
@@ -19,18 +18,10 @@ function EditEmailOrPassword() {
     check: "",
   });
 
-  const {
-    userList,
-    Dialog: Error,
-    setQueryNoDelay,
-  } = useGetUsersSearch({ limit: 1 });
-
-  useEffect(() => {
-    const userId = JSON.parse(window.localStorage.getItem("user")).userName;
-    setQueryNoDelay(userId);
-  }, []);
-
-  const userInfo = userList[0];
+  const userInfo = useMemo(
+    () => JSON.parse(window.localStorage.getItem("user")),
+    [],
+  );
 
   const onChangeInput = e => {
     const { value } = e.currentTarget;
@@ -69,7 +60,6 @@ function EditEmailOrPassword() {
   return (
     <div className="mypage-edit">
       <Dialog />
-      <Error />
       <div className="mypage-edit-box">
         <div className="mypage-edit-leftArrow">
           <button type="button" onClick={() => navigate(-1)}>
