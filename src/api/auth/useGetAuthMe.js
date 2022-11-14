@@ -14,6 +14,7 @@ const useGetAuthMe = () => {
       isLogin: true,
       id: data.id,
       userName: data.intra,
+      email: data.email,
       isAdmin: data.librarian,
       expire: addHourDateObject(new Date(), 8).toISOString(),
     };
