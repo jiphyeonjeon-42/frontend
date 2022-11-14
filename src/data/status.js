@@ -1,8 +1,8 @@
 export const bookStatus = [
   { code: 0, string: "대출 가능" },
-  { code: 2, string: "분실" },
-  { code: 3, string: "파손" },
-  { code: 4, string: "지정도서" },
+  { code: 1, string: "분실" },
+  { code: 2, string: "파손" },
+  { code: 3, string: "지정도서" },
 ];
 
 export const userRoleStatus = [
