@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import "../../../css/Review.css";
+import axiosPromise from "../../../util/axios";
+// import useApi from "../../../hook/useApi";
 
-const ReviewBox = ({ sort, data }) => {
-  // console.log(data);
+const ReviewBox = ({ sort, data, info, onClick }) => {
+  // console.log("console", data);
   const [fixReview, setFixReview] = useState(false);
   const [text, setText] = useState(null);
   const [temp, setTemp] = useState("");
@@ -22,31 +23,23 @@ const ReviewBox = ({ sort, data }) => {
     return setFixReview(!fixReview);
   };
 
+  const deleteBtn = () => {
+    // 버튼 누른 사용자가 본인 또는 사서인지 확인하는 부분이 백엔드에 있나?
+    onClick(data.reviewsId);
+  };
+
   const reviewTextArea = e => {
     setText(e.target.value);
   };
 
   const onSubmitHandler = async e => {
     e.preventDefault();
-    const content = e.target.textContent;
-    await axios
-      .post(
-        `${process.env.REACT_APP_API}/reviews`,
-        {
-          bookInfoId: `${data.bookInfoId}`,
-          content: `${content}`,
-        },
-        {
-          withCredentials: true,
-        },
-      )
-      .then(function print(res) {
-        console.log(res);
-      })
-      .catch(function fail(error) {
-        console.log(error);
-      });
+    axiosPromise("post", "/reviews", {
+      bookInfoId: info,
+      content: e.target.textContent,
+    });
   };
+
   // sort === "doReview"
   if (sort === "doReview") {
     return (
@@ -105,7 +98,9 @@ const ReviewBox = ({ sort, data }) => {
               <button type="button" onClick={saveTemp}>
                 수정
               </button>
-              <button type="button">삭제</button>
+              <button type="button" onClick={deleteBtn}>
+                삭제
+              </button>
             </div>
           )}
         </div>
@@ -121,11 +116,15 @@ ReviewBox.propTypes = {
   data: PropTypes.shape({
     bookInfoId: PropTypes.number,
     content: PropTypes.string,
+    reviewsId: PropTypes.number,
   }),
   sort: PropTypes.string.isRequired,
-  // bookId: PropTypes.number.isRequired,
+  info: PropTypes.number,
+  onClick: PropTypes.func,
 };
 
 ReviewBox.defaultProps = {
   data: null,
+  info: null,
+  onClick: null,
 };
