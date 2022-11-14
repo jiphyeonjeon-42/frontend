@@ -10,7 +10,8 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
     setLendingId(factor.id);
     openModal();
   };
-
+  const today = new Date();
+  const dueDate = new Date(factor.dueDate);
   return (
     <div className="return-book__table-list">
       <div className="return-book__table-list__name font-18-bold color-54">
@@ -39,11 +40,11 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
             {`반납예정일 : ${factor.dueDate.slice(0, 10)}`}
           </span>
           <span
-            className={`re-penaltyDays font-16 ${
-              factor.penaltyDays ? "color-red" : "color-54"
+            className={`re-penaltyDays font-16-bold ${
+              today - dueDate > 0 ? "color-red" : "color-54"
             }`}
           >
-            {`대출연체일 : ${factor.penaltyDays ? factor.penaltyDays : "0"}`}
+            {`${today - dueDate > 0 ? "연체 중" : ""}`}
           </span>
         </div>
       </button>
