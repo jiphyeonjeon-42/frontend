@@ -19,7 +19,7 @@ const usePostLendingsMultiple = ({
           url: "lendings",
           data: {
             userId: selectedUser.id,
-            bookId: book.id,
+            bookId: book.bookId,
             condition: conditions[index],
           },
         };
