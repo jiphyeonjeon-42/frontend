@@ -18,7 +18,7 @@ const RentModalBookList = ({
 
   const isAlreadySelected = (userBook, alreadySelect) => {
     for (let i = 0; i < alreadySelect.length; i += 1) {
-      if (userBook.id === alreadySelect[i].id) {
+      if (userBook.bookId === alreadySelect[i].bookId) {
         return true;
       }
     }
@@ -40,7 +40,7 @@ const RentModalBookList = ({
     >
       <div className="rent__modal-book-list__name">
         <span className="rent__modal-book-list__title color-54">
-          {book.title ? book.title : `Book${book.id}`}
+          {book.title ? book.title : `Book ${book.bookId}`}
         </span>
         <span
           className={`rent__modal-book-list__valid font-16 ${isDisabled()}`}
