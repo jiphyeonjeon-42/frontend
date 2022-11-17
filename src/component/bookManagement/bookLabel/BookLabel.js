@@ -1,6 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
-import QRGenerator from "../QRGenerator";
+import QRGenerator from "../../utils/QRGenerator";
 import logo from "../../../img/logo_img.png";
 import { category } from "../../../data/category";
 
