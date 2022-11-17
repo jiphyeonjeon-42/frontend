@@ -5,6 +5,7 @@ import BookLabelModalToPrint from "./bookLabel/BookLabelModalToPrint";
 import Image from "../utils/Image";
 import Plus from "../../img/plus_icon_off.svg";
 import Minus from "../../img/plus_icon_on.svg";
+import "../../css/BookManagementCart.css";
 
 const BookManagementCartToPrint = ({ printList, removeBookById }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -40,29 +41,28 @@ const BookManagementCartToPrint = ({ printList, removeBookById }) => {
         <button type="button" onClick={openModal}>
           라벨 출력하기
         </button>
-
-        {isOpen
-          ? printList?.map(item => {
-              return (
-                <div
-                  className="book-management__cart__item font-16"
-                  key={item.bookId}
-                >
-                  <button
-                    className="book-management__cart__remove-button "
-                    type="button"
-                    onClick={removePrintItem}
-                    value={item.bookId}
+        <div className="book-management__cart__items">
+          {isOpen
+            ? printList?.map(item => {
+                return (
+                  <div
+                    className="book-management__cart__item font-16"
+                    key={item.bookId}
                   >
-                    빼기
-                  </button>
-                  <span>{item.bookId}</span>
-                  <span>{item.callSign}</span>
-                  <span>{item.title}</span>
-                </div>
-              );
-            })
-          : null}
+                    <input
+                      type="checkbox"
+                      value={item.bookId}
+                      defaultChecked
+                      onChange={removePrintItem}
+                    />
+                    <span>{item.bookId}</span>
+                    <span>{item.callSign}</span>
+                    <span>{item.title}</span>
+                  </div>
+                );
+              })
+            : null}
+        </div>
       </div>
     </>
   );
