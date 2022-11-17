@@ -26,7 +26,6 @@ const BookLabelModalToPrint = ({ printList }) => {
     copyStyles(window.document, windowForPrint.document);
     windowForPrint.focus();
     windowForPrint.print();
-    windowForPrint.close();
   };
 
   const categoryList = () => {
