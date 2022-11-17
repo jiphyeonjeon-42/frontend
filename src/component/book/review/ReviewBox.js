@@ -4,32 +4,31 @@ import "../../../css/Review.css";
 import axiosPromise from "../../../util/axios";
 // import useApi from "../../../hook/useApi";
 
-const ReviewBox = ({ sort, data, info, onClick }) => {
+const ReviewBox = ({ sort, data, info, onClickDel, onClickPatch }) => {
   // console.log("console", data);
   const [fixReview, setFixReview] = useState(false);
-  const [text, setText] = useState(null);
+  const [content, setContent] = useState(data.content);
   const [temp, setTemp] = useState("");
   const saveTemp = () => {
-    // 리뷰하기부터 진행하고 만들기
     if (fixReview) {
-      setText(temp);
+      setContent(temp);
     } else {
-      setTemp(text);
+      setTemp(content);
     }
     return setFixReview(!fixReview);
   };
 
-  const handleFixBtn = () => {
+  const patchBtn = () => {
+    onClickPatch(data.reviewsId, content);
     return setFixReview(!fixReview);
   };
 
   const deleteBtn = () => {
-    // 버튼 누른 사용자가 본인 또는 사서인지 확인하는 부분이 백엔드에 있나?
-    onClick(data.reviewsId);
+    onClickDel(data.reviewsId);
   };
 
   const reviewTextArea = e => {
-    setText(e.target.value);
+    setContent(e.target.value);
   };
 
   const onSubmitHandler = async e => {
@@ -47,7 +46,7 @@ const ReviewBox = ({ sort, data, info, onClick }) => {
         <form onSubmit={onSubmitHandler}>
           <textarea
             className="review-area"
-            value={text}
+            value={content}
             type="text-area"
             onChange={reviewTextArea}
           />
@@ -71,14 +70,13 @@ const ReviewBox = ({ sort, data, info, onClick }) => {
             <div>
               <textarea
                 className="review-content-fix-area"
-                value={text}
+                value={content}
                 type="text-area"
                 onChange={reviewTextArea}
               />
             </div>
           ) : (
             <div>
-              {/* 텍스트 DB 에서 불러와야 함. */}
               <span className="reviews-content-area">{data.content}</span>
             </div>
           )}
@@ -86,7 +84,7 @@ const ReviewBox = ({ sort, data, info, onClick }) => {
         <div className="review-manage">
           {fixReview ? (
             <div>
-              <button type="button" onClick={handleFixBtn}>
+              <button type="button" onClick={patchBtn}>
                 수정 완료
               </button>
               <button type="button" onClick={saveTemp}>
@@ -120,11 +118,13 @@ ReviewBox.propTypes = {
   }),
   sort: PropTypes.string.isRequired,
   info: PropTypes.number,
-  onClick: PropTypes.func,
+  onClickDel: PropTypes.func,
+  onClickPatch: PropTypes.func,
 };
 
 ReviewBox.defaultProps = {
   data: null,
   info: null,
-  onClick: null,
+  onClickDel: null,
+  onClickPatch: null,
 };

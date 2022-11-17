@@ -15,6 +15,7 @@ const useFocus = (initialTab, tabList) => {
 
 const Review = bookInfoId => {
   const [delReview, setDelReview] = useState(null);
+  // const [patchReview, setPatchReview] = useState(false);
   const { currentTab, changeTab } = useFocus(0, reviewTabList);
   const [postReviews, setPostReviews] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -22,13 +23,23 @@ const Review = bookInfoId => {
   const observeReviewList = useRef(null);
 
   const deleteReview = reviewId => {
-    console.log(reviewId);
-    console.log("before postReviews", postReviews);
     if (reviewId !== null || delReview !== null) {
       setDelReview(reviewId);
       const temp = postReviews.filter(review => review.reviewsId !== reviewId);
       setPostReviews(temp);
       axiosPromise("delete", `/reviews/${reviewId}`);
+    }
+  };
+
+  const patchReview = (reviewId, content) => {
+    console.log(reviewId);
+    console.log(content);
+    if (reviewId !== null || delReview !== null) {
+      // setDelReview(reviewId);
+      // const temp = postReviews.filter(review => review.reviewsId !== reviewId);
+      // setPostReviews(temp);
+      axiosPromise("patch", `/reviews/${reviewId}`, content);
+      // setPatchReview(true);
     }
   };
 
@@ -87,7 +98,12 @@ const Review = bookInfoId => {
       <div className="review-list">
         {currentTab === "showReviews" ? (
           postReviews.map(data => (
-            <ReviewBox sort="showReviews" data={data} onClick={deleteReview} />
+            <ReviewBox
+              sort="showReviews"
+              data={data}
+              onClickDel={deleteReview}
+              onClickPatch={patchReview}
+            />
           ))
         ) : (
           <ReviewBox sort="doReview" info={bookInfoId} />
