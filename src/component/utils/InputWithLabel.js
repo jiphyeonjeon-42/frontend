@@ -7,6 +7,7 @@ const InputWithLabel = ({
   labelText,
   inputInitialValue,
   inputType,
+  onChangeCallBack,
   isAutoComplete,
   disabled,
   align,
@@ -24,6 +25,7 @@ const InputWithLabel = ({
   const onChange = event => {
     const { value } = event.currentTarget;
     setInput(value);
+    onChangeCallBack(value);
   };
 
   const replaceTextWhenInvalidType = () => {
@@ -66,6 +68,7 @@ InputWithLabel.propTypes = {
   align: PropTypes.string,
   disabled: PropTypes.bool,
   isAutoComplete: PropTypes.bool,
+  onChangeCallBack: PropTypes.func,
   inputRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.instanceOf(PropTypes.element),
@@ -81,6 +84,7 @@ InputWithLabel.defaultProps = {
   align: "horizontal",
   disabled: false,
   isAutoComplete: false,
+  onChangeCallBack: () => {},
   inputRef: { current: null },
   resetDependency: undefined,
 };

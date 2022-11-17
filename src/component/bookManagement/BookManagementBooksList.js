@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import BookManagementBooksListItem from "./BookManagementBooksListItem";
+import BookManagementModalDetail from "./BookManagementModalDetail";
+import useModal from "../../hook/useModal";
 
 const BookManagementBooksList = ({
   booksList,
@@ -9,6 +12,9 @@ const BookManagementBooksList = ({
   removeBookById,
   removeAllBooks,
 }) => {
+  const [selectedBook, setSelectedBook] = useState({});
+  const { Modal, setOpen, setClose } = useModal();
+
   const includesArrayById = (array, id) => {
     const found = array.findIndex(item => item.bookId === id);
     return found !== -1;
@@ -27,53 +33,44 @@ const BookManagementBooksList = ({
   };
 
   return (
-    <div className="book-management__list">
-      <div className="book-management__list__box-title">
-        <input
-          className="book-management__checkbox"
-          type="checkbox"
-          checked={allChecked}
-          onChange={changeAllBooks}
-        />
-        <span className="book-management__list__id">ID</span>
-        <span className="book-management__list__call-sign">청구기호</span>
-        <span className="book-management__list__category">카테고리</span>
-        <span className="book-management__list__title">제목</span>
-        <span className="book-management__list__status">도서상태</span>
-        <span className="book-management__">상세정보</span>
-      </div>
-      <div className="book-management__list__box">
-        {booksList.map(book => {
-          const checked = includesArrayById(printList, book.bookId);
-          const changeBook = () => {
-            if (checked) removeBookById(book.bookId);
-            else addBookById(book.bookId);
-          };
-          return (
-            <div className="book-management__list__item" key={book.bookId}>
-              <input
-                className="book-management__checkbox"
-                type="checkbox"
-                checked={checked}
-                onChange={changeBook}
+    <>
+      <Modal>
+        <BookManagementModalDetail book={selectedBook} closeModal={setClose} />
+      </Modal>
+      <div className="book-management__list">
+        <div className="book-management__list__box-title">
+          <input
+            className="book-management__checkbox"
+            type="checkbox"
+            checked={allChecked}
+            onChange={changeAllBooks}
+          />
+          <span className="book-management__list__id">ID</span>
+          <span className="book-management__list__call-sign">청구기호</span>
+          <span className="book-management__list__category">카테고리</span>
+          <span className="book-management__list__title">제목</span>
+          <span className="book-management__list__status">도서상태</span>
+          <span className="book-management__">상세정보</span>
+        </div>
+        <div className="book-management__list__box">
+          {booksList.map(book => {
+            const openModal = () => {
+              setSelectedBook(book);
+              setOpen();
+            };
+            return (
+              <BookManagementBooksListItem
+                book={book}
+                removeBookById={removeBookById}
+                addBookById={addBookById}
+                checked={includesArrayById(printList, book.bookId)}
+                openModal={openModal}
               />
-              <span className="book-management__list__id font-18">
-                {book.bookId}
-              </span>
-              <span className="book-management__list__call-sign font-18-bold">
-                {book.callSign}
-              </span>
-              <span className="book-management__list__category font-18">
-                {book.category}
-              </span>
-              <span className="book-management__list__title font-18-bold">
-                {book.title}
-              </span>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
