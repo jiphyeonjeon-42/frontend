@@ -15,8 +15,9 @@ const useGetBooksId = ({ setSelectedBooks, closeModal }) => {
   ];
 
   const refineResponse = response => {
-    const book = compareExpect("books/:bookid", [response.data], expectedItem);
-    setSelectedBooks(prev => [...prev, ...book]);
+    const [book] = compareExpect("books/:id", [response.data], expectedItem);
+    book.bookId = book.id;
+    setSelectedBooks(prev => [...prev, book]);
     closeModal(false);
   };
 
