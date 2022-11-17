@@ -63,6 +63,14 @@
   background-color: white;
 }
 
+.review-content-area {
+  width:90%;
+  min-height: 7rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+}
+
 .review-manage:before {
   content: " ";
   background-color: #a4a4a4;
