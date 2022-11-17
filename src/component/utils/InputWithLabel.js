@@ -71,7 +71,7 @@ InputWithLabel.propTypes = {
   onChangeCallBack: PropTypes.func,
   inputRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.instanceOf(PropTypes.element),
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
   resetDependency: PropTypes.bool,
 };

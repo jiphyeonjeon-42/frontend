@@ -60,6 +60,7 @@ const BookManagementBooksList = ({
             };
             return (
               <BookManagementBooksListItem
+                key={book.bookId}
                 book={book}
                 removeBookById={removeBookById}
                 addBookById={addBookById}
