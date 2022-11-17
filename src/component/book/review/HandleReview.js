@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import axiosPromise from "../../../util/axios";
 import "../../../css/Review.css";
 
-const HandleReview = ({ data, onClickDel, onClickPatch }) => {
+const HandleReview = ({ data, onClickDel }) => {
+  console.log(data);
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
-  // const [review, setReview] = useState(null);
-
   const doFixBtn = () => {
     return setFixReview(!fixReview);
   };
@@ -16,13 +16,22 @@ const HandleReview = ({ data, onClickDel, onClickPatch }) => {
     return setFixReview(!fixReview);
   };
 
-  const patchBtn = () => {
-    onClickPatch(data.reviewsId, content);
-    return setFixReview(!fixReview);
+  const deleteBtn = () => {
+    console.log(data.reviewsId);
+    onClickDel(data.reviewsId);
   };
 
-  const deleteBtn = () => {
-    onClickDel(data.reviewsId);
+  const patchReview = () => {
+    console.log(content);
+    const text = {
+      content,
+    };
+    axiosPromise("patch", `/reviews/${data.reviewsId}`, text);
+  };
+
+  const patchBtn = () => {
+    patchReview(data.reviewsId, content);
+    return setFixReview(!fixReview);
   };
 
   const reviewFixArea = e => {
@@ -89,7 +98,6 @@ HandleReview.propTypes = {
     reviewsId: PropTypes.number,
   }),
   onClickDel: PropTypes.func.isRequired,
-  onClickPatch: PropTypes.func.isRequired,
 };
 
 HandleReview.defaultProps = {
