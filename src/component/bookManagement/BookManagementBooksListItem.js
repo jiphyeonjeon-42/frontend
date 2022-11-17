@@ -24,23 +24,31 @@ const BookManagementBooksListItem = ({
         onChange={changeBook}
       />
       <span className="book-management__list__id font-18">{book.bookId}</span>
-      <span className="book-management__list__call-sign font-18-bold">
-        {book.callSign}
-      </span>
-      <span className="book-management__list__category font-18">
-        {book.category}
-      </span>
+      <p className="book-management__list__classification">
+        <span className="book-management__list__category font-18">
+          {book.category}
+        </span>
+        <span className="book-management__list__call-sign font-18-bold">
+          {book.callSign}
+        </span>
+      </p>
       <span className="book-management__list__title font-18-bold">
         {book.title}
       </span>
-
       <span
-        className={`book-management__list__status font-18 
-          ${(book.status === 1 || book.status === 2) && "red"}`}
+        className={`book-management__list__status 
+        font-18${book.status ? "-bold" : ""}
+        ${book.status === 1 || book.status === 2 ? " color-red" : ""}`}
       >
-        {bookStatus.find(item => item.code === book.status)?.string}
+        {book.status === 0
+          ? "-"
+          : bookStatus.find(item => item.code === book.status)?.string}
       </span>
-      <button type="button" onClick={openModal}>
+      <button
+        className="book-management__list__information"
+        type="button"
+        onClick={openModal}
+      >
         <Image src={Edit} alt="도서 상세정보 및 수정" />
       </button>
     </div>

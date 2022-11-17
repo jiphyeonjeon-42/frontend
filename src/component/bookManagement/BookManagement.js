@@ -5,7 +5,6 @@ import BookManagementBooksList from "./BookManagementBooksList";
 import Tabs from "../utils/Tabs";
 import Banner from "../utils/Banner";
 import SearchBar from "../utils/SearchBar";
-import Pagination from "../utils/Pagination";
 import { managementTabList } from "../../data/tablist";
 import "../../css/BookManagement.css";
 
@@ -41,9 +40,13 @@ const BookManagement = () => {
         <SearchBar
           placeHolder="도서 관련 정보를 입력하세요"
           width="center"
+          wrapperClassName="book-management__search-bar"
           setQuery={setQuery}
         />
         <BookManagementBooksList
+          page={page}
+          setPage={setPage}
+          lastPage={lastPage}
           booksList={bookList}
           printList={printList}
           addBookById={addBookById}
@@ -51,7 +54,6 @@ const BookManagement = () => {
           removeBookById={removeBookById}
           removeAllBooks={removeAllBooks}
         />
-        <Pagination page={page} setPage={setPage} lastPage={lastPage} />
       </section>
       <BookManagementCartToPrint
         printList={printList}

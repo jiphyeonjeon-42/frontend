@@ -25,45 +25,63 @@ const BookManagementCartToPrint = ({ printList, removeBookById }) => {
       <Modal>
         <BookLabelModalToPrint printList={printList} />
       </Modal>
-      <div className="book-management__cart">
-        <button
-          className="book-management__cart__summary"
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+      <button
+        className="book-management__cart"
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="book-management__cart__summary">
           <Image
-            className="book-management__cart__icon"
+            className="book-management__cart__summary-icon"
             src={isOpen ? Minus : Plus}
             alt={isOpen ? "카트 생략" : "카트 자세히 보기"}
           />
-          <span className="font-20-bold color-54">{`선택된 도서 (${printList.length})`}</span>
-        </button>
-        <button type="button" onClick={openModal}>
-          라벨 출력하기
-        </button>
-        <div className="book-management__cart__items">
-          {isOpen
-            ? printList?.map(item => {
-                return (
-                  <div
-                    className="book-management__cart__item font-16"
-                    key={item.bookId}
-                  >
-                    <input
-                      type="checkbox"
-                      value={item.bookId}
-                      defaultChecked
-                      onChange={removePrintItem}
-                    />
-                    <span>{item.bookId}</span>
-                    <span>{item.callSign}</span>
-                    <span>{item.title}</span>
-                  </div>
-                );
-              })
-            : null}
+          <span className="book-management__cart__summary-text font-20-bold color-54">{`선택된 도서 (${printList.length})`}</span>
+          <button
+            className={`book-management__cart__print ${
+              printList.length > 0 ? "color-red" : "color-a4"
+            }`}
+            type="button"
+            disabled={!printList.length}
+            onClick={openModal}
+          >
+            {printList.length > 0
+              ? "라벨 출력하기"
+              : "라벨 출력할 도서를 선택하세요"}
+          </button>
         </div>
-      </div>
+        {isOpen ? (
+          <div className="book-management__cart__items">
+            {printList?.map(item => {
+              return (
+                <div
+                  className="book-management__cart__item font-16"
+                  key={item.bookId}
+                >
+                  <input
+                    type="checkbox"
+                    value={item.bookId}
+                    defaultChecked
+                    onChange={removePrintItem}
+                  />
+                  <span className="book-management__cart-item__id font-16">
+                    {item.bookId}
+                  </span>
+                  <span className="book-management__cart-item__category font-16">
+                    {item.category}
+                  </span>
+                  <span className="book-management__cart-item__call-sign font-16">
+                    {item.callSign}
+                  </span>
+                  <span className="book-management__cart-item__title font-16">
+                    {item.title}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        ) : null}
+      </button>
     </>
   );
 };
