@@ -12,8 +12,8 @@ import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Reserve from "../../img/list-check-solid.svg";
 // import "../../css/Mypage.css";
 
-const MyRent = () => {
-  console.log("Success myRent");
+const MyReservation = () => {
+  console.log("Success MyReservation");
   // const [urlQuery, setUrlQuery] = useSearchParams();
   const {
     setOpen: openDialog,
@@ -118,4 +118,4 @@ const MyRent = () => {
   );
 };
 
-export default MyRent;
+export default MyReservation;
