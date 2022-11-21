@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import useModal from "../../hook/useModal";
-import BookLabelModalToPrint from "./bookLabel/BookLabelModalToPrint";
+import BookLabelModalToPrint from "./BookManagementModalToPrint";
 import Image from "../utils/Image";
 import Plus from "../../img/plus_icon_off.svg";
 import Minus from "../../img/plus_icon_on.svg";

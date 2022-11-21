@@ -1,0 +1,38 @@
+.book-management__print__preview {
+  width: 148rem;
+  border: solid black 1rem;
+  transform: scale(0.5) translate(4rem, -20rem);
+  transform-origin: left;
+}
+
+.book-management__print__preview::before {
+  content: "미리보기";
+  font-size: 5rem;
+}
+
+.book-management__print__preview > p {
+  margin-left: 4rem;
+}
+
+.book-management__print__category-button-description {
+  font-size: 1.8rem;
+}
+
+.pring-label__cateogory-button-section {
+  width: 90%;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  white-space: normal;
+}
+.book-management__print__category-button {
+  font-size: 1.4rem;
+  margin-right: 2rem;
+  margin-bottom: 3rem;
+}
+
+
+.book-management__print__print-button {
+  font-size: 2rem;
+  display: block;
+  margin: auto;
+}

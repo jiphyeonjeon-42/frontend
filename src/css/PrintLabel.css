@@ -8,48 +8,6 @@
   src: url("../font//AppleSDGothicNeoM.ttf") format("truetype");
 }
 
-.modal__container.print {
-  width: 148rem;
-  height: 100rem;
-  z-index: 3;
-}
-
-.print-label__preview {
-  border: solid black 1rem;
-  transform: scale(0.5);
-  transform-origin: top;
-}
-
-.print-label__preview::before {
-  content: "미리보기";
-  font-size: 5rem;
-}
-
-.print-label__preview > p {
-  margin-left: 4rem;
-}
-
-.print-label__print-button {
-  font-size: 2rem;
-  display: block;
-  margin: auto;
-}
-.print-label__category-button-description {
-  font-size: 1.8rem;
-}
-
-.pring-label__cateogory-button-section {
-  width: 90%;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  white-space: normal;
-}
-.print-label__category-button {
-  font-size: 1.4rem;
-  margin-right: 2rem;
-  margin-bottom: 3rem;
-}
-
 .print-label__print-area {
   margin: auto;
   width: 148rem;
@@ -140,19 +98,11 @@
   left: 2rem;
   width: 3rem;
 }
-/* 
-  .print-label__print-area > * {
-    visibility: hidden;
-  }
-  .print-label__category-label__logo,
-  .print-label__label__logo {
-    visibility: visible;
-  } */
+
 @media print {
   .header,
   .mobile-header,
-  .footer,
-  .print-label__not-print-area {
+  .footer {
     display: none;
   }
 }

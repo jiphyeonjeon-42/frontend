@@ -4,7 +4,7 @@ import QRGenerator from "../../utils/QRGenerator";
 import logo from "../../../img/logo_img.png";
 import { category } from "../../../data/category";
 
-const BookLabel = ({ book }) => {
+const BookLabelPrintItem = ({ book }) => {
   const categoryColor = item => {
     const color = category.find(i => i.code === item.callSign[0])?.color;
     return (color && [color, "#FFFFFF"]) || ["#FFFFFF", "#000000"];
@@ -70,8 +70,8 @@ const BookLabel = ({ book }) => {
   );
 };
 
-export default BookLabel;
+export default BookLabelPrintItem;
 
-BookLabel.propTypes = {
-  book: propTypes.objectOf().isRequired,
+BookLabelPrintItem.propTypes = {
+  book: propTypes.shape().isRequired,
 };
