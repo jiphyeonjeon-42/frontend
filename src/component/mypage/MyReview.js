@@ -7,36 +7,40 @@ import HandleReview from "../book/review/HandleReview";
 import Pagination from "../utils/Pagination";
 
 const useGetReviewInfo = page => {
-  console.log(page);
   const [lastPage, setLastPage] = useState(null);
-  const [reviewInfo, setReviewInfo] = useState(null);
+  const [reviewInfo, setreviewInfo] = useState(null);
+  const [reviewList, setReviewList] = useState([]);
   const userId = JSON.parse(window.localStorage.getItem("user")).id;
   const { request, Dialog } = useApi(
     "get",
     `reviews?userId=${userId}&page=${page - 1}`,
   );
+
   const refineResponse = response => {
+    setreviewInfo(response.data.meta);
     setLastPage(response.data.meta.totalPages);
-    setReviewInfo(response.data.items);
+    setReviewList(response.data.items);
   };
 
-  useEffect(() => {
-    request(refineResponse);
-  }, [page]);
-
-  // console.log("reviewInfo");
   return {
-    lastPage, // totalPage
+    request,
+    lastPage,
+    reviewList,
     reviewInfo,
+    refineResponse,
     Dialog,
   };
 };
 
 const MyReview = () => {
   const [page, setPage] = useState(1);
-  const { lastPage, reviewInfo, Dialog } = useGetReviewInfo(page);
-  // const [postReviews, setPostReviews] = useState([]);
-
+  const { request, lastPage, reviewList, refineResponse, Dialog } =
+    useGetReviewInfo(page);
+  console.log(page);
+  console.log(reviewList);
+  useEffect(() => {
+    request(refineResponse);
+  }, [page]);
   // const deleteReview = reviewId => {
   //   const temp = postReviews.filter(review => review.reviewsId !== reviewId);
   //   setPostReviews(temp);
@@ -54,17 +58,20 @@ const MyReview = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          {reviewInfo &&
-            reviewInfo.map(data => (
-              <HandleReview
-                // key={}
-                data={data}
-                // onClickDel={deleteReview}
-                setPostReviews={reviewInfo}
-              />
-            ))}
+          {reviewList.map(data => (
+            <HandleReview
+              // key={}
+              data={data}
+              // onClickDel={deleteReview}
+            />
+          ))}
           <div className="return-book-table__pagination">
-            <Pagination page={page} setPage={setPage} lastPage={lastPage} />
+            <Pagination
+              page={page}
+              setPage={setPage}
+              lastPage={lastPage}
+              count="10"
+            />
           </div>
         </div>
       </div>

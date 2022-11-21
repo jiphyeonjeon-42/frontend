@@ -16,6 +16,7 @@ const useFocus = (initialTab, tabList) => {
 };
 
 const Review = ({ bookInfoId }) => {
+  console.log(bookInfoId);
   const { currentTab, changeTab } = useFocus(0, reviewTabList);
   const [postReviews, setPostReviews] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -40,6 +41,21 @@ const Review = ({ bookInfoId }) => {
           setPostReviews(prevPosts => [...prevPosts, ...res.data.items]);
           setHasNextPage(res.data.meta.finalPage === false);
         }
+
+        // axiosPromise(
+        //   "get",
+        //   "reviews",
+        //   {
+        //     bookInfoId,
+        //     userId : "",
+        //     page : page.current,
+        //   },
+        // )
+        // axiosPromise(
+        //   "get",
+        //   `reviews?bookInfoId=${bookInfoId}&userId=&page=${page.current}`,
+        //   // 유저 아이디와 내림, 오름차순 옵션 넣기
+        // )
       });
       if (hasNextPage) {
         page.current += 1;
@@ -93,19 +109,20 @@ const Review = ({ bookInfoId }) => {
       </div>
       <div className="tabs-line" />
       <div className="review-list">
+        {/* 추출하기 */}
         {currentTab === "showReviews" ? (
           postReviews.map(data => (
             <HandleReview
               // key={}
               data={data}
               onClickDel={deleteReview}
-              setPostReviews={setPostReviews}
             />
           ))
         ) : (
           <PostReview onClickPost={postReview} />
         )}
       </div>
+      {/* 떨어뜨려놓기 */}
       <div ref={observeReviewList} />
     </>
   );
