@@ -17,7 +17,7 @@ import "../../css/Mypage.css";
 const useFocus = (initialTab, tabList) => {
   const [currentIndex, setCurretIndex] = useState(initialTab);
   return {
-    currentTab: tabList[currentIndex].sort,
+    currentTab: tabList[currentIndex].type,
     changeTab: setCurretIndex,
   };
 };
@@ -206,9 +206,9 @@ const Mypage = () => {
           {myPageTabList.map((tab, index) => (
             <div
               className={`tab tab-${
-                tab.sort === currentTab ? "on" : "not"
+                tab.type === currentTab ? "on" : "not"
               }-focus`}
-              key={tab.sort}
+              key={tab.type}
               role="button"
               tabIndex={index}
               onKeyDown=""
