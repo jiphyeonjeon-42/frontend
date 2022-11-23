@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import "../../css/ReturnBookFilter.css";
+import "../../css/HistoriesFilter.css";
 
 const FilterButton = ({ type, typeName, setType }) => {
   return (
@@ -24,8 +24,8 @@ const FilterButton = ({ type, typeName, setType }) => {
 
 const HistoryFilter = ({ type, setType }) => {
   return (
-    <div className="return-filter">
-      <div className="return-filter-wrapper">
+    <div className="histories-filter">
+      <div className="histories-filter-wrapper">
         <FilterButton type={type} typeName="user" setType={setType} />
         <FilterButton type={type} typeName="title" setType={setType} />
         <FilterButton type={type} typeName="callsign" setType={setType} />

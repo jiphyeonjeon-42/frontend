@@ -1,0 +1,37 @@
+.histories-filter {
+	padding-right: 6.8rem;
+  }
+  
+  .histories-filter-wrapper {
+	margin-left: 10%;
+	margin-top: 3rem;
+	margin-bottom: 2rem;
+  }
+  
+  .filter-button {
+	cursor: pointer;
+  }
+  
+  .histories-filter-wrapper >.proceeding {
+	background: none;
+	padding: 0;
+	border: 0;
+  }
+  
+  .histories-filter-wrapper > .finish {
+	background: none;
+	padding: 0;
+	border: 0;
+	margin-left: 2.4rem !important;
+  }
+  
+  .filter__icon {
+	margin-right: 1.2rem;
+  }
+  
+  @media screen and (max-width:600px) {
+	.histories-filter-wrapper {
+	  margin-bottom: 0;
+	}
+  }
+  
