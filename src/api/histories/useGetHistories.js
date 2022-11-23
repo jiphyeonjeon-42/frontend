@@ -8,11 +8,6 @@ const useGetHistories = ({ setOpenTitleAndMessage }) => {
     useSearch();
   const [who, setWho] = useState("all");
   const [type, setType] = useState("");
-  const setFilter = (newWho, newType) => {
-    setWho(newWho);
-    setType(newType);
-    setPage(1);
-  };
 
   const { request, Dialog } = useApi("get", "histories", {
     query: searchParams.query,
@@ -44,9 +39,11 @@ const useGetHistories = ({ setOpenTitleAndMessage }) => {
     historiesList: searchResult.list,
     lastPage: searchResult.lastPage,
     page: searchParams.page,
+    type,
     setPage,
     setQuery,
-    setFilter,
+    setWho,
+    setType,
     Dialog,
   };
 };
