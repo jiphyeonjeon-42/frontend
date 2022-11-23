@@ -45,40 +45,52 @@ const BookLabelModalToPrint = ({ printList }) => {
 
   return (
     <div className="book-management__print__wrapper">
+      <h2 className="book-management__print__title">라벨지 출력</h2>
+      <p className="book-management__print__title-sub">
+        주의 : 여백이 특정 라벨지에 맞춰있지만 인쇄설정에 따라 제대로 출력되지
+        않을 수 있습니다.
+      </p>
       <section className="book-management__print__setting">
-        <p className="book-management__print__description">빈 라벨 추가하기</p>
-        <input
-          type="text"
-          value={blankLabelNumber}
-          onChange={e => {
-            setBlankLabelNumber(e.currentTarget.value);
-          }}
-        />
+        <h3 className="book-management__print__setting-title">인쇄 설정</h3>
+        <div className="book-management__print__setting-detail">
+          <p className="book-management__print__description">
+            빈 라벨 추가하기
+          </p>
+          <input
+            type="text"
+            value={blankLabelNumber}
+            onChange={e => {
+              setBlankLabelNumber(e.currentTarget.value);
+            }}
+          />
 
-        <p className="book-management__print__description">
-          특정 카테고리만 출력하도록 설정
-        </p>
-        <div className="book-management__print__cateogories">
-          <button
-            type="button"
-            className="print-label__category-button"
-            onClick={resetFilter}
-          >
-            전체
-          </button>
-          {categoryList()?.map(item => {
-            return (
-              <button
-                type="button"
-                className="print-label__category-button"
-                onClick={filterCategory}
-                value={item}
-                key={item}
-              >
-                {category.find(i => i.code === item)?.name}
-              </button>
-            );
-          })}
+          <p className="book-management__print__description">카테고리별 출력</p>
+          <div className="book-management__print__cateogories">
+            <button
+              type="button"
+              className={`book-management__print__category-button 
+                 ${sortedList.length === printList.length && "red"}`}
+              onClick={resetFilter}
+            >
+              전체
+            </button>
+            {categoryList()?.map(item => {
+              return (
+                <button
+                  type="button"
+                  className={`book-management__print__category-button ${
+                    sortedList.every(sorted => sorted.callSign[0] === item) &&
+                    "red"
+                  }`}
+                  onClick={filterCategory}
+                  value={item}
+                  key={item}
+                >
+                  {category.find(i => i.code === item)?.name}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </section>
 

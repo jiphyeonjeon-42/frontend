@@ -1,38 +1,118 @@
+.book-management__print__wrapper {
+  min-width: 30rem;
+  padding: 0 6rem;
+}
+
+.book-management__print__title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d2d2d;
+}
+
+.book-management__print__title-sub {
+  font-size: 1.4rem;
+  color: #545454;
+  white-space: normal;
+  margin: 0.5rem 0 2rem;
+}
+.book-management__print__setting {
+  display: flex;
+  justify-items: center;
+}
+
+.book-management__print__setting-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2d2d2d;
+  margin: 2rem;
+  width: 15rem;
+}
+.book-management__print__setting-detail {
+  margin: 0 2rem;
+}
+
+.book-management__print__description {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #545454;
+  margin: 2rem 0;
+}
 .book-management__print__preview {
+  width: calc(297rem * 0.25);
+  height: calc(210rem * 0.25);
+  overflow: hidden;
+  border: solid black 0.1rem;
+  margin: 4rem auto;
+}
+
+.book-management__print__scaled-page {
   width: 148rem;
-  border: solid black 1rem;
-  transform: scale(0.5) translate(4rem, -20rem);
-  transform-origin: left;
+  transform: scale(0.5) translate(-50%, -50%);
 }
 
 .book-management__print__preview::before {
   content: "미리보기";
-  font-size: 5rem;
+  font-size: 1.6rem;
+  margin: 1rem;
 }
 
 .book-management__print__preview > p {
   margin-left: 4rem;
 }
 
-.book-management__print__category-button-description {
-  font-size: 1.8rem;
-}
-
-.pring-label__cateogory-button-section {
+.book-management__print__cateogories {
   width: 90%;
-  padding-left: 3rem;
-  padding-right: 3rem;
   white-space: normal;
 }
+
 .book-management__print__category-button {
+  color: #a4a4a4;
+  border: solid #a4a4a4 0.1rem;
+  border-radius: 2rem;
+  background-color: transparent;
+  padding: 0 2rem;
+
   font-size: 1.4rem;
   margin-right: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
-
+.book-management__print__category-button.red {
+  border: solid #e63737 0.2rem;
+  color: #e63737;
+  font-size: bold;
+}
 .book-management__print__print-button {
   font-size: 2rem;
   display: block;
-  margin: auto;
+  margin: 3rem auto;
+}
+@media screen and (max-width: 767px) {
+  .book-management__print__wrapper {
+    padding: 0 2rem;
+  }
+  .book-management__print__preview {
+    width: calc(297rem * 0.1);
+    height: calc(210rem * 0.1);
+  }
+  .book-management__print__setting {
+    display: block;
+  }
+  .book-management__print__setting-title {
+    margin: 2rem 0 0 0;
+  }
+  .book-management__print__setting-detail {
+    margin: 2rem;
+  }
+  .book-management__print__description {
+    margin: 0.8rem 0;
+  }
+  .book-management__print__category-button {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .book-management__print__scaled-page {
+    transform: scale(0.2) translate(-200%, -200%);
+  }
 }
