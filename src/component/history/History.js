@@ -28,7 +28,7 @@ const History = () => {
       <section className="inquire-box-wrapper">
         <InquireBoxTitle
           Icon={Book}
-          titleKO="전체 기록"
+          titleKO="전체기록"
           titleEN="history"
           placeHolder="찾고자하는 대출/반납 기록의 책, 사서명을 입력해주세요."
           setQuery={setQuery}
