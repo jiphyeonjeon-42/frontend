@@ -1,0 +1,46 @@
+.book-management__detail__wrarpper {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #545454;
+
+  padding: 0 8rem 5rem;
+}
+.book-management__detail__wrarpper > p {
+  font-size: 2.8rem;
+}
+
+.book-management__detail__book-info {
+  margin-top: 3rem;
+}
+.book-management__detail__book-info,
+.book-management__detail__book {
+  display: flex;
+  padding: 2rem 0;
+  border-top: solid #a4a4a4 0.1rem;
+}
+
+.book-management__detail__book-info > img,
+.book-management__detail__book > p {
+  width: 20%;
+  text-align: center;
+}
+
+.book-management__detail__details {
+  width: 70%;
+  margin: auto;
+}
+.book-management__detail__details > * {
+  margin-bottom: 1.1rem;
+}
+.book-management__detail__book {
+  display: flex;
+}
+
+.book-management__detail__buttons {
+  display: flex;
+  justify-content: right;
+}
+
+.book-management__detail__button {
+  margin-left: 2rem;
+}

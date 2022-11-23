@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import Button from "../utils/Button";
 import InputWithLabel from "../utils/InputWithLabel";
 import SelectWithLabel from "../utils/SelectWithLabel";
-import BookInformationWithCover from "../utils/BookInformationWithCover";
 import { bookStatus } from "../../data/status";
 import usePatchBooksUpdate from "../../api/books/usePatchBooksUpdate";
 import { category } from "../../data/category";
+import "../../css/BookManagementDetail.css";
+import Image from "../utils/Image";
 
 const BookManagementModalDetail = ({ book, closeModal }) => {
   const [editMode, setEditMode] = useState(false);
@@ -65,107 +66,114 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
   return (
     <div className="book-management__detail__wrarpper">
       <Dialog />
+      <p>도서정보</p>
       <div className="book-management__detail__book-info">
-        <BookInformationWithCover
-          bookCoverImg={image}
-          bookCoverAlt={book.title}
-        >
-          <div>
-            <InputWithLabel
-              labelText="INFO ID"
-              disabled
-              inputInitialValue={book.bookInfoId}
-            />
-            <InputWithLabel
-              labelText="제목"
-              disabled={!editMode}
-              resetDependency={reset}
-              inputRef={titleRef}
-              inputInitialValue={book.title}
-            />
-            <InputWithLabel
-              labelText="저자"
-              disabled={!editMode}
-              inputRef={authorRef}
-              resetDependency={reset}
-              inputInitialValue={book.author}
-            />
-            <InputWithLabel
-              labelText="출판사"
-              disabled={!editMode}
-              inputRef={publisherRef}
-              resetDependency={reset}
-              inputInitialValue={book.publisher}
-            />
-            <InputWithLabel
-              labelText="출판연월"
-              disabled={!editMode}
-              inputRef={publishedAtRef}
-              resetDependency={reset}
-              inputInitialValue={book.publishedAt}
-            />
-            <InputWithLabel
-              labelText="ISBN"
-              disabled={!editMode}
-              inputRef={isbnRef}
-              resetDependency={reset}
-              inputInitialValue={book.isbn}
-            />
-            <InputWithLabel
-              labelText="표지이미지"
-              disabled={!editMode}
-              inputRef={imageRef}
-              resetDependency={reset}
-              onChangeCallBack={setImage}
-              inputInitialValue={book.image}
-            />
-            <SelectWithLabel
-              labelText="카테고리"
-              disabled={!editMode}
-              selectRef={categoryRef}
-              resetDependency={reset}
-              optionList={category.map(i => i.name)}
-              initialSelectedIndex={book.categoryId - 1}
-            />
-          </div>
-        </BookInformationWithCover>
+        <Image
+          className="book-management__detail__book-cover"
+          src={image}
+          alt={book.title}
+        />
+        <div className="book-management__detail__details">
+          <InputWithLabel
+            labelText="INFO ID"
+            disabled
+            inputInitialValue={book.bookInfoId}
+          />
+          <InputWithLabel
+            labelText="제목"
+            disabled={!editMode}
+            resetDependency={reset}
+            inputRef={titleRef}
+            inputInitialValue={book.title}
+          />
+          <InputWithLabel
+            labelText="저자"
+            disabled={!editMode}
+            inputRef={authorRef}
+            resetDependency={reset}
+            inputInitialValue={book.author}
+          />
+          <InputWithLabel
+            labelText="출판사"
+            disabled={!editMode}
+            inputRef={publisherRef}
+            resetDependency={reset}
+            inputInitialValue={book.publisher}
+          />
+          <InputWithLabel
+            labelText="출판연월"
+            disabled={!editMode}
+            inputRef={publishedAtRef}
+            resetDependency={reset}
+            inputInitialValue={book.publishedAt}
+          />
+          <InputWithLabel
+            labelText="ISBN"
+            disabled={!editMode}
+            inputRef={isbnRef}
+            resetDependency={reset}
+            inputInitialValue={book.isbn}
+          />
+          <InputWithLabel
+            labelText="표지이미지"
+            disabled={!editMode}
+            inputRef={imageRef}
+            resetDependency={reset}
+            onChangeCallBack={setImage}
+            inputInitialValue={book.image}
+          />
+          <SelectWithLabel
+            labelText="카테고리"
+            disabled={!editMode}
+            selectRef={categoryRef}
+            resetDependency={reset}
+            optionList={category.map(i => i.name)}
+            initialSelectedIndex={book.categoryId - 1}
+          />
+        </div>
       </div>
-      <p>도서관리정보</p>
-      <div>
-        <InputWithLabel
-          labelText="BOOK ID"
-          disabled
-          inputInitialValue={book.bookId}
-        />
-        <InputWithLabel
-          labelText="청구기호"
-          disabled={!editMode}
-          inputRef={callSignRef}
-          resetDependency={reset}
-          inputInitialValue={book.callSign}
-        />
-        <SelectWithLabel
-          labelText="도서 상태"
-          disabled={!editMode}
-          selectRef={statusRef}
-          resetDependency={reset}
-          optionList={bookStatus.map(status => status.string)}
-          initialSelectedIndex={book.status}
-        />
+      <div className="book-management__detail__book">
+        <p>도서관리정보</p>
+        <div className="book-management__detail__details">
+          <InputWithLabel
+            labelText="BOOK ID"
+            disabled
+            inputInitialValue={book.bookId}
+          />
+          <InputWithLabel
+            labelText="청구기호"
+            disabled={!editMode}
+            inputRef={callSignRef}
+            resetDependency={reset}
+            inputInitialValue={book.callSign}
+          />
+          <SelectWithLabel
+            labelText="도서 상태"
+            disabled={!editMode}
+            selectRef={statusRef}
+            resetDependency={reset}
+            optionList={bookStatus.map(status => status.string)}
+            initialSelectedIndex={book.status}
+          />
+        </div>
       </div>
-      {editMode ? (
+      <div className="book-management__detail__buttons">
+        {editMode ? (
+          <Button
+            value="취소하기"
+            onClick={() => {
+              setReset(!reset);
+              setEditMode(false);
+            }}
+          />
+        ) : null}
         <Button
-          value="취소하기"
-          onClick={() => {
-            setReset(!reset);
-            setEditMode(false);
-          }}
+          className="book-management__detail__button"
+          value={editMode ? "저장하기" : "수정하기"}
+          color={editMode ? "red" : ""}
+          onClick={handleConfirm}
         />
-      ) : null}
-      <Button
-        value={editMode ? "저장하기" : "수정하기"}
-        onClick={handleConfirm}
-      />
+      </div>
     </div>
   );
 };
