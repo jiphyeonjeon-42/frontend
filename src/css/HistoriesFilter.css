@@ -10,6 +10,7 @@
   
   .filter-button {
 	cursor: pointer;
+	margin-left: 1rem;
   }
   
   .histories-filter-wrapper >.proceeding {
