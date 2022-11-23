@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "../utils/Image";
 import Arr from "../../img/arrow_right_black.svg";
-import "../../css/ReturnbookTable.css";
+import "../../css/HistoryTable.css";
 
 const HistoryTable = ({ factor }) => {
   return (
