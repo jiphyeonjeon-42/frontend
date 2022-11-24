@@ -33,7 +33,6 @@ const useGetHistories = ({ setOpenTitleAndMessage }) => {
   ];
 
   const refineResponse = response => {
-    // TODO: expectedItems 만들기
     const info = compareExpect("histories", response.data.items, expectedItem);
     const { totalPages } = response.data.meta;
     setSearchResult({
