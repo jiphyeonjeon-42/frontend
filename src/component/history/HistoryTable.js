@@ -18,15 +18,16 @@ const HistoryTable = ({ factor }) => {
           <Image className="histories__table-list__arr" src={Arr} alt="arrow" />
         </div>
         <div className="histories__table-list__info">
-          대출자 : {factor?.login} 대출일 : {factor?.createdAt} 대출사서 :
-          {factor?.lendingLibrarianNickName} 대출당시상태 :
-          {factor?.lendingCondition}
+          <span> 대출일 : {factor?.createdAt} </span>
+          <span> 대출사서 : {factor?.lendingLibrarianNickName} </span>
+          <span> 대출당시상태 : {factor?.lendingCondition} </span>
+          <span> 대출자 : {factor?.login} </span>
         </div>
         {factor?.returnedAt && (
           <div className="histories__table-list__info">
-            반납일 : {factor?.returnedAt} 반납사서 :
-            {factor?.returningLibrarianNickname} 반납당시상태 :
-            {factor?.returningCondition}
+            <span> 반납일 : {factor?.returnedAt} </span>
+            <span> 반납사서 : {factor?.returningLibrarianNickname} </span>
+            <span> 반납당시상태 : {factor?.returningCondition} </span>
           </div>
         )}
       </button>
