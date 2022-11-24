@@ -4,7 +4,6 @@ import axiosPromise from "../../../util/axios";
 import "../../../css/Review.css";
 
 const HandleReview = ({ data, onClickDel }) => {
-  // console.log(data);
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const doFixBtn = () => {

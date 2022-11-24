@@ -6,10 +6,18 @@ import "../../../css/Review.css";
 import axiosPromise from "../../../util/axios";
 
 const ShowReviews = ({ bookInfoId }) => {
+  // const [delReview, setDelReview] = useState(null);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [postReviews, setPostReviews] = useState([]);
   const observeReviewList = useRef(null);
   const page = useRef(0);
+
+  const deleteReview = reviewsId => {
+    const temp = postReviews.filter(review => review.reviewsId !== reviewsId);
+    setPostReviews(temp);
+    axiosPromise("delete", `/reviews/${reviewsId}`);
+    // setDelReview(reviewsId);
+  };
 
   const fetch = useCallback(async () => {
     try {
@@ -47,11 +55,21 @@ const ShowReviews = ({ bookInfoId }) => {
     io.observe(observeReviewList.current);
   }, [fetch, hasNextPage]);
 
+  // useEffect(() => {
+  //   if (delReview !== null) {
+  //     page.current = 0;
+  //     fetch();
+  //   }
+  // }, [delReview]);
+
   return (
     <>
       {postReviews.map(data => (
-        // <HandleReview key={data.id} data={data} onClickDel={deleteReview} />
-        <HandleReview key={data.id} data={data} />
+        <HandleReview
+          key={data.reviewsId}
+          data={data}
+          onClickDel={deleteReview}
+        />
       ))}
       <div ref={observeReviewList} />
     </>
@@ -62,6 +80,4 @@ export default ShowReviews;
 
 ShowReviews.propTypes = {
   bookInfoId: PropTypes.number.isRequired,
-  // postReviews: PropTypes.arrayOf.isRequired,
-  // setPostReviews: PropTypes.func.isRequired,
 };
