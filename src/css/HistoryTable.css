@@ -18,13 +18,14 @@
   }
   
   .histories__table-list__title {
-	display: flex;
+	display: grid;
 	align-items: center;
 	margin-bottom: 2rem;
 	word-break: keep-all;
 	white-space: normal;
 	font-size: 1.8rem;
 	font-weight: bold;
+	grid-template-columns: 1fr 0.3fr 0.1fr;
   }
   
   .histories__table-list__arr {
@@ -42,10 +43,11 @@
   
   .histories__table-list__info {
 	margin-right: 6rem;
+	font-size: medium;
   }
   
-  .re-callSign {
-	margin-right: 2.8rem;
+  .histories-callSign {
+	margin-right: 1.2rem;
   }
   
   .re-dueDate {
@@ -72,10 +74,11 @@
 	}
   
 	.histories__table-list__text {
-	  padding-right: 2rem;
+	  padding: 2rem;
 	  width: 100%;
 	  overflow: hidden;
 	  text-overflow: ellipsis;
+	  display: grid;
 	}
   }
   

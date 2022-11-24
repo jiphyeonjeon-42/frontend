@@ -10,18 +10,25 @@ const HistoryTable = ({ factor }) => {
       <button className="histories__table-list__button" type="button">
         <div className="histories__table-list__title">
           <span className="histories__table-list__text color-54">
-            {factor.title}
+            {factor?.title}
+          </span>
+          <span className="histories-callSign font-16 color-54">
+            도서등록번호 : {factor?.callSign}
           </span>
           <Image className="histories__table-list__arr" src={Arr} alt="arrow" />
         </div>
         <div className="histories__table-list__info">
-          <span className="re-callSign font-16 color-54">
-            도서등록번호 : {factor.callSign}
-          </span>
-          <span className="re-dueDate font-16 color-54">
-            {`반납예정일 : ${factor.dueDate.slice(0, 10)}`}
-          </span>
+          대출자 : {factor?.login} 대출일 : {factor?.createdAt} 대출사서 :
+          {factor?.lendingLibrarianNickName} 대출당시상태 :
+          {factor?.lendingCondition}
         </div>
+        {factor?.returnedAt && (
+          <div className="histories__table-list__info">
+            반납일 : {factor?.returnedAt} 반납사서 :
+            {factor?.returningLibrarianNickname} 반납당시상태 :
+            {factor?.returningCondition}
+          </div>
+        )}
       </button>
     </div>
   );
