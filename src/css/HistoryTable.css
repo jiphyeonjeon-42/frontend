@@ -25,7 +25,7 @@
 	white-space: normal;
 	font-size: 1.8rem;
 	font-weight: bold;
-	grid-template-columns: 1fr 0.3fr 0.1fr;
+	grid-template-columns: 1fr 0.2fr 0.1fr;
   }
   
   .histories__table-list__arr {
@@ -47,7 +47,11 @@
   }
   
   .histories-callSign {
-	margin-right: 1.2rem;
+	margin-right: 1rem;
+  }
+
+  .histories-login {
+	margin-left: 1rem;
   }
   
   .re-dueDate {

@@ -12,16 +12,18 @@ const HistoryTable = ({ factor }) => {
           <span className="histories__table-list__text color-54">
             {factor?.title}
           </span>
+          <span className="histories-login font-16 color-54">
+            대출자 : {factor?.login}
+          </span>
+          <Image className="histories__table-list__arr" src={Arr} alt="arrow" />
           <span className="histories-callSign font-16 color-54">
             도서등록번호 : {factor?.callSign}
           </span>
-          <Image className="histories__table-list__arr" src={Arr} alt="arrow" />
         </div>
         <div className="histories__table-list__info">
           <span> 대출일 : {factor?.createdAt} </span>
           <span> 대출사서 : {factor?.lendingLibrarianNickName} </span>
           <span> 대출당시상태 : {factor?.lendingCondition} </span>
-          <span> 대출자 : {factor?.login} </span>
         </div>
         {factor?.returnedAt && (
           <div className="histories__table-list__info">
