@@ -9,6 +9,8 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const uploadDate = splitDate(createdAt)[0];
+  const user = JSON.parse(window.localStorage.getItem("user")).userName;
+  const permisson = user === nickname ? "true" : "false";
 
   const doFixBtn = () => {
     return setFixReview(!fixReview);
@@ -66,23 +68,25 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
           </div>
         )}
       </div>
-      <div className="review-manage">
-        {fixReview ? (
-          <div className="review-manage__fix-buttons">
-            <Button value="수정하기" color="red" onClick={patchBtn} />
-            <Button value="취소하기" onClick={cancelFixBtn} />
-          </div>
-        ) : (
-          <div>
-            <button type="button" onClick={doFixBtn}>
-              수정
-            </button>
-            <button type="button" onClick={deleteBtn}>
-              삭제
-            </button>
-          </div>
-        )}
-      </div>
+      {permisson === "true" ? (
+        <div className="review-manage">
+          {fixReview ? (
+            <div className="review-manage__fix-buttons">
+              <Button value="수정하기" color="red" onClick={patchBtn} />
+              <Button value="취소하기" onClick={cancelFixBtn} />
+            </div>
+          ) : (
+            <div>
+              <button type="button" onClick={doFixBtn}>
+                수정
+              </button>
+              <button type="button" onClick={deleteBtn}>
+                삭제
+              </button>
+            </div>
+          )}
+        </div>
+      ) : null}
     </div>
   );
 };
