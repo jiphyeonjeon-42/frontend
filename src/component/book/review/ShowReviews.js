@@ -6,7 +6,6 @@ import "../../../css/Review.css";
 import axiosPromise from "../../../util/axios";
 
 const ShowReviews = ({ bookInfoId }) => {
-  // const [delReview, setDelReview] = useState(null);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [postReviews, setPostReviews] = useState([]);
   const observeReviewList = useRef(null);
@@ -16,7 +15,6 @@ const ShowReviews = ({ bookInfoId }) => {
     const temp = postReviews.filter(review => review.reviewsId !== reviewsId);
     setPostReviews(temp);
     axiosPromise("delete", `/reviews/${reviewsId}`);
-    // setDelReview(reviewsId);
   };
 
   const fetch = useCallback(async () => {
@@ -55,19 +53,13 @@ const ShowReviews = ({ bookInfoId }) => {
     io.observe(observeReviewList.current);
   }, [fetch, hasNextPage]);
 
-  // useEffect(() => {
-  //   if (delReview !== null) {
-  //     page.current = 0;
-  //     fetch();
-  //   }
-  // }, [delReview]);
-
   return (
     <>
       {postReviews.map(data => (
         <HandleReview
           key={data.reviewsId}
           data={data}
+          createdAt={data.createdAt}
           onClickDel={deleteReview}
         />
       ))}

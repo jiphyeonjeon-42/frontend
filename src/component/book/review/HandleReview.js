@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axiosPromise from "../../../util/axios";
 import "../../../css/Review.css";
+import Button from "../../utils/Button";
+import { splitDate } from "../../../util/date";
 
-const HandleReview = ({ data, onClickDel }) => {
+const HandleReview = ({ data, createdAt, onClickDel }) => {
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
+  const user = JSON.parse(window.localStorage.getItem("user"));
+  const uploadDate = splitDate(createdAt)[0];
+
   const doFixBtn = () => {
     return setFixReview(!fixReview);
   };
@@ -16,7 +21,6 @@ const HandleReview = ({ data, onClickDel }) => {
   };
 
   const deleteBtn = () => {
-    console.log(data.reviewsId);
     onClickDel(data.reviewsId);
   };
 
@@ -40,14 +44,14 @@ const HandleReview = ({ data, onClickDel }) => {
   return (
     <div className="showReview__review-box">
       <div className="review-info">
-        <span className="reviewer-name">리뷰어 이름</span>
-        <span className="review-day">리뷰 날짜</span>
+        <span className="reviewer-name font-12-bold">{user.userName}</span>
+        <span className="review-day font-12">{uploadDate}</span>
       </div>
       <div className="review-content">
         {fixReview ? (
           <div>
             <textarea
-              className="review-content-fix-area"
+              className="review-content-fix-area font-12"
               value={content}
               type="text-area"
               onChange={reviewFixArea}
@@ -56,7 +60,7 @@ const HandleReview = ({ data, onClickDel }) => {
         ) : (
           <div>
             <textarea
-              className="review-content-area"
+              className="review-content-area font-12"
               value={content}
               disabled
             />
@@ -65,13 +69,9 @@ const HandleReview = ({ data, onClickDel }) => {
       </div>
       <div className="review-manage">
         {fixReview ? (
-          <div>
-            <button type="button" onClick={patchBtn}>
-              수정 완료
-            </button>
-            <button type="button" onClick={cancelFixBtn}>
-              취소
-            </button>
+          <div className="review-manage__fix-buttons">
+            <Button value="수정하기" color="red" onClick={patchBtn} />
+            <Button value="취소하기" onClick={cancelFixBtn} />
           </div>
         ) : (
           <div>
@@ -96,6 +96,7 @@ HandleReview.propTypes = {
     content: PropTypes.string,
     reviewsId: PropTypes.number,
   }),
+  createdAt: PropTypes.string.isRequired,
   onClickDel: PropTypes.func.isRequired,
 };
 

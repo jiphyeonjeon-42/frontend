@@ -71,9 +71,10 @@
 
 .review-content-fix-area {
   width:90%;
-  min-height: 7rem;
+  min-height: 15rem;
   padding: 1rem;
   border: none;
+  resize: none;
   border-radius: 0.5rem;
   background-color: white;
 }
@@ -81,7 +82,7 @@
 .review-content-area {
   width:90%;
   min-height: 7rem;
-  padding: 1rem;
+  /* padding: 1rem; */
   border: none;
   border-radius: 0.5rem;
 }
@@ -99,4 +100,9 @@
 	width: 15%;
   padding-left: 4rem;
   position: relative;
+}
+
+.review-manage__fix-buttons > button{
+  display: block;
+  margin-bottom: 1rem;
 }
