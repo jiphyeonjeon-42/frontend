@@ -30,6 +30,8 @@ const MyReview = () => {
             <HandleReview
               key={data.reviewsId}
               data={data}
+              nickname={data.nickname}
+              createdAt={data.createdAt}
               onClickDel={deleteReview}
             />
           ))}
