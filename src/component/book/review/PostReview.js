@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../../../css/Review.css";
+import Button from "../../utils/Button";
 
 const PostReview = ({ onClickPost }) => {
   const [content, setContent] = useState(null);
@@ -11,20 +12,21 @@ const PostReview = ({ onClickPost }) => {
 
   const onSubmitHandler = e => {
     e.preventDefault();
-    onClickPost(e.target.textContent);
+    onClickPost(content);
   };
 
   return (
-    <div className="doReview__review-box">
-      <form onSubmit={onSubmitHandler}>
+    <div className="do-review__review-box">
+      <form className="do-review__review-form" onSubmit={onSubmitHandler}>
         <textarea
-          className="review-area"
+          className="review-area font-16"
           value={content}
           type="text-area"
           onChange={onChange}
         />
-        <br />
-        <input type="submit" />
+        <div className="do-review__review-buttons">
+          <Button type="submit" value="게시하기" color="red" />
+        </div>
       </form>
     </div>
   );
