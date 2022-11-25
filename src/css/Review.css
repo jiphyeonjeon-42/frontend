@@ -82,9 +82,9 @@
 .review-content-area {
   width:90%;
   min-height: 7rem;
-  /* padding: 1rem; */
   border: none;
   border-radius: 0.5rem;
+  resize: none;
 }
 
 .review-manage:before {
