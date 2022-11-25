@@ -4,7 +4,6 @@ import useApi from "../../hook/useApi";
 const useGetReviewInfo = () => {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(null);
-  // const [reviewInfo, setreviewInfo] = useState(null);
   const [reviewList, setReviewList] = useState([]);
   const userId = JSON.parse(window.localStorage.getItem("user")).id;
   const { request, Dialog } = useApi("get", `reviews`, {

@@ -17,16 +17,12 @@ const useFocus = (initialTab, tabList) => {
 };
 const Review = ({ bookInfoId }) => {
   const { currentTab, changeTab } = useFocus(0, reviewTabList);
-  // const [postReviews, setPostReviews] = useState([]);
-
-  // 맨 위로 안올라감...
   const postReview = reviewContent => {
     if (reviewContent !== null) {
       axiosPromise("post", "/reviews", {
         bookInfoId,
         content: reviewContent,
       }).then(() => changeTab(0));
-      // 어싱크 어웨잇 특강 (목요일. 썬글)
     }
   };
 
@@ -50,19 +46,11 @@ const Review = ({ bookInfoId }) => {
       <div className="tabs-line" />
       <div className="review-list">
         {currentTab === "showReviews" ? (
-          <ShowReviews
-            // postReviews={postReviews}
-            // setPostReviews={setPostReviews}
-            bookInfoId={bookInfoId}
-          />
+          <ShowReviews bookInfoId={bookInfoId} />
         ) : (
-          <PostReview
-            onClickPost={postReview}
-            // setPostReviews={setPostReviews}
-          />
+          <PostReview onClickPost={postReview} />
         )}
       </div>
-      {/* 떨어뜨려놓기 */}
     </>
   );
 };
