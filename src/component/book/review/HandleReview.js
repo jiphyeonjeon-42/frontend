@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axiosPromise from "../../../util/axios";
-import "../../../css/Review.css";
 import Button from "../../utils/Button";
 import { splitDate } from "../../../util/date";
+import Image from "../../utils/Image";
+import UserEdit from "../../../img/edit.svg";
+import "../../../css/Review.css";
+import "../../../css/reset.css";
 
 const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
   const [fixReview, setFixReview] = useState(false);
@@ -79,12 +82,22 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
               <Button value="취소하기" onClick={cancelFixBtn} />
             </div>
           ) : (
-            <div>
+            <div className="review-manage__start-fix-buttons font-12">
               <button type="button" onClick={doFixBtn}>
                 수정
+                <Image
+                  className="review-manage__button-img"
+                  src={UserEdit}
+                  alt=""
+                />
               </button>
               <button type="button" onClick={deleteBtn}>
                 삭제
+                <Image
+                  className="review-manage__button-img"
+                  src={UserEdit}
+                  alt=""
+                />
               </button>
             </div>
           )}
