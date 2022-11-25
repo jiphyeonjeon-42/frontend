@@ -7,7 +7,7 @@ import { compareExpect } from "../../util/typeCheck";
 const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
-  const [who, setWho] = useState(initWho);
+  const [who, setWho] = useState(initWho ?? "all");
   const [type, setType] = useState("");
 
   const { request, Dialog } = useApi("get", "histories", {
