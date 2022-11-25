@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
-import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
+// import * as Sentry from "@sentry/react";
+// import { BrowserTracing } from "@sentry/tracing";
 import "./index.css";
 import App from "./App";
 
-Sentry.init({
-  dsn: "https://a03d63cfc79147d292b9b09630e70e4a@o4504156227567616.ingest.sentry.io/4504156228485120",
-  integrations: [new BrowserTracing()],
-  tracesSampleRate: 1.0,
-});
+// Sentry.init({
+//   dsn: "https://a03d63cfc79147d292b9b09630e70e4a@o4504156227567616.ingest.sentry.io/4504156228485120",
+//   integrations: [new BrowserTracing()],
+//   tracesSampleRate: 1.0,
+// });
 
 ReactDOM.render(
   <React.StrictMode>
