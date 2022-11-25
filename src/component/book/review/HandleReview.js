@@ -16,7 +16,7 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
   const user = JSON.parse(window.localStorage.getItem("user")).userName;
   const roleAdmin = JSON.parse(window.localStorage.getItem("user")).isAdmin;
   const checkReviewer = user === nickname;
-  const permisson = roleAdmin === checkReviewer;
+  const permisson = roleAdmin || checkReviewer;
 
   const doFixBtn = () => {
     return setFixReview(!fixReview);
