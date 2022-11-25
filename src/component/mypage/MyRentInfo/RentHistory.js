@@ -3,7 +3,7 @@ import Pagination from "../../utils/Pagination";
 import useGetHistories from "../../../api/histories/useGetHistories";
 import RentHistoryTable from "./RentHistoryTable";
 
-const History = () => {
+const RentHistory = () => {
   const { historiesList, lastPage, page, setPage } = useGetHistories({});
 
   return (
@@ -18,4 +18,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default RentHistory;

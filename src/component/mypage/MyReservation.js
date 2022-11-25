@@ -3,7 +3,7 @@ import React from "react";
 // import { Link, useSearchParams } from "react-router-dom";
 import useDialog from "../../hook/useDialog";
 import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
-import RentedOrReservedBooks from "./MyRentHistory/RentedOrReservedBooks";
+import RentedOrReservedBooks from "./MyRentInfo/RentedOrReservedBooks";
 // import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 // import getErrorMessage from "../../data/error";
