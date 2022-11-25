@@ -82,7 +82,7 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
               <Button value="취소하기" onClick={cancelFixBtn} />
             </div>
           ) : (
-            <div className="review-manage__start-fix-buttons font-14">
+            <div className="review-manage__start-fix-buttons font-12">
               <button type="button" onClick={doFixBtn}>
                 수정
                 <Image
