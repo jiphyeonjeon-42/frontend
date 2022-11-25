@@ -106,3 +106,18 @@
   display: block;
   margin-bottom: 1rem;
 }
+
+.review-manage__start-fix-buttons button{
+  all: unset;
+  cursor: pointer;
+  width: 7rem;
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: space-around;
+  flex-shrink: 0;
+}
+
+.review-manage__button-img {
+  width: 1.8rem;
+}
