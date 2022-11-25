@@ -1,9 +1,10 @@
 import React from "react";
-import useDialog from "../../hook/useDialog";
-import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
+import RentHistory from "./RentHistory";
+import useDialog from "../../../hook/useDialog";
+import useGetUsersSearchId from "../../../api/users/useGetUsersSearchId";
 import RentedOrReservedBooks from "./RentedOrReservedBooks";
-import InquireBoxTitle from "../utils/InquireBoxTitle";
-import Book from "../../img/admin_icon.svg";
+import InquireBoxTitle from "../../utils/InquireBoxTitle";
+import Book from "../../../img/admin_icon.svg";
 
 const MyRent = () => {
   console.log("Success myRent");
@@ -31,6 +32,16 @@ const MyRent = () => {
             componentMode="rent"
             bookInfoArr={userInfo ? userInfo.lendings : null}
           />
+        </div>
+        <InquireBoxTitle
+          Icon={Book}
+          titleKO="이전 대출기록"
+          titleEN="rent history"
+          KOsize="font-20-bold"
+          ENsize="font-14"
+        />
+        <div className="mypage-inquire-box-long">
+          <RentHistory />
         </div>
       </div>
       <Dialog />
