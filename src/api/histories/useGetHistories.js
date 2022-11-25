@@ -4,10 +4,10 @@ import useApi from "../../hook/useApi";
 import useSearch from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetHistories = ({ setOpenTitleAndMessage }) => {
+const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
-  const [who, setWho] = useState("all");
+  const [who, setWho] = useState(initWho);
   const [type, setType] = useState("");
 
   const { request, Dialog } = useApi("get", "histories", {
