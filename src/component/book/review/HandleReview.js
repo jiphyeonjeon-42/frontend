@@ -9,8 +9,11 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const uploadDate = splitDate(createdAt)[0];
+  // 작성자와 사용자 비교는 어떻게 하는지 알겠음. 근데 사서인지 아닌지 어떤걸로 구분하지?
   const user = JSON.parse(window.localStorage.getItem("user")).userName;
-  const permisson = user === nickname ? "true" : "false";
+  const roleAdmin = JSON.parse(window.localStorage.getItem("user")).isAdmin;
+  const checkReviewer = user === nickname;
+  const permisson = roleAdmin === checkReviewer;
 
   const doFixBtn = () => {
     return setFixReview(!fixReview);
@@ -68,7 +71,7 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
           </div>
         )}
       </div>
-      {permisson === "true" ? (
+      {permisson ? (
         <div className="review-manage">
           {fixReview ? (
             <div className="review-manage__fix-buttons">
