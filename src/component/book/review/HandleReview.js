@@ -5,10 +5,9 @@ import "../../../css/Review.css";
 import Button from "../../utils/Button";
 import { splitDate } from "../../../util/date";
 
-const HandleReview = ({ data, createdAt, onClickDel }) => {
+const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
-  const user = JSON.parse(window.localStorage.getItem("user"));
   const uploadDate = splitDate(createdAt)[0];
 
   const doFixBtn = () => {
@@ -44,7 +43,7 @@ const HandleReview = ({ data, createdAt, onClickDel }) => {
   return (
     <div className="showReview__review-box">
       <div className="review-info">
-        <span className="reviewer-name font-12-bold">{user.userName}</span>
+        <span className="reviewer-name font-12-bold">{nickname}</span>
         <span className="review-day font-12">{uploadDate}</span>
       </div>
       <div className="review-content">
@@ -96,6 +95,7 @@ HandleReview.propTypes = {
     content: PropTypes.string,
     reviewsId: PropTypes.number,
   }),
+  nickname: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   onClickDel: PropTypes.func.isRequired,
 };
