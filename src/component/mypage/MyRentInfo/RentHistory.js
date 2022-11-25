@@ -4,7 +4,9 @@ import useGetHistories from "../../../api/histories/useGetHistories";
 import RentHistoryTable from "./RentHistoryTable";
 
 const RentHistory = () => {
-  const { historiesList, lastPage, page, setPage } = useGetHistories({});
+  const { historiesList, lastPage, page, setPage } = useGetHistories({
+    initWho: "my",
+  });
 
   return (
     <div className="histories-table__inquire-box">
