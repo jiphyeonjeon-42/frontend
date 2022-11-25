@@ -8,6 +8,7 @@ import Banner from "../utils/Banner";
 import BookStatus from "./BookStatus";
 import BookReservation from "./BookReservation";
 import "../../css/BookDetail.css";
+import Review from "./review/Review";
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -102,6 +103,10 @@ const BookDetail = () => {
               </div>
             </div>
           </div>
+        </div>
+        {/* delete 함수 만들어서 Review 에 prop 으로 넘겨서 삭제 시 이용하기 */}
+        <div className="book-review">
+          <Review bookInfoId={id} />
         </div>
       </section>
       <Dialog />
