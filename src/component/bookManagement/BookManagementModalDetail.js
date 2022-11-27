@@ -11,6 +11,7 @@ import Image from "../utils/Image";
 
 const BookManagementModalDetail = ({ book, closeModal }) => {
   const [editMode, setEditMode] = useState(false);
+  const [message, setMessage] = useState("");
   const [image, setImage] = useState(book.image);
   const [reset, setReset] = useState(false);
 
@@ -30,25 +31,50 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
   });
 
   const collectChange = () => {
-    const change = book;
-    const checkChange = (key, ref) => {
+    const change = { ...book };
+    const modifyFromRef = (key, ref) => {
       change[key] = book[key];
       if (ref.current !== null && ref.current.value !== book[key]) {
-        console.log(ref.current.value);
         change[key] = ref.current.value;
       }
     };
-    checkChange("title", titleRef);
-    checkChange("author", authorRef);
-    checkChange("publisher", publisherRef);
-    checkChange("publishedAt", publishedAtRef);
-    checkChange("isbn", isbnRef);
-    checkChange("image", imageRef);
-    checkChange("callSign", callSignRef);
-    checkChange("categoryId", categoryRef);
-    checkChange("status", statusRef);
+    modifyFromRef("title", titleRef);
+    modifyFromRef("author", authorRef);
+    modifyFromRef("publisher", publisherRef);
+    modifyFromRef("publishedAt", publishedAtRef);
+    modifyFromRef("isbn", isbnRef);
+    modifyFromRef("image", imageRef);
+    modifyFromRef("callSign", callSignRef);
+    modifyFromRef("categoryId", categoryRef);
+    modifyFromRef("status", statusRef);
     change.categoryId = parseInt(change.categoryId, 10) + 1;
     return change;
+  };
+
+  const checkChange = change => {
+    const dateRegex = /^(19|20)(\d{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/;
+    const callSignRegex = /^[A-Za-z][0-9]{1,3}\.[0-9]{2}\.v[1-9]\.c[1-9]$/;
+    const isbnRegex = /^\d{13}$/;
+
+    const validateDate = dateRegex.test(change.publishedAt);
+    const validateCallSign = callSignRegex.test(change.callSign);
+    const validateCategory =
+      change.callSign[0] ===
+      category.find(item => parseInt(item.id, 10) === change.categoryId)?.code;
+    const validateISBN = isbnRegex.test(change.isbn);
+
+    let errorMessage = "";
+    if (validateDate && validateCallSign && validateCategory && validateISBN)
+      return errorMessage;
+
+    if (!validateDate)
+      errorMessage += "출판일자 날짜형식 yyyddmm에 맞지 않습니다.\n";
+    if (!validateCallSign) errorMessage += `청구기호 형식이 맞지 않습니다.\n`;
+    if (!validateCategory) {
+      errorMessage += "카테고리와 청구기호가 맞지 않습니다.\n";
+    }
+    if (!validateISBN) errorMessage += "13자리 ISBN를 입력해주세요";
+    return errorMessage;
   };
 
   const handleConfirm = () => {
@@ -57,16 +83,18 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
       return;
     }
     const change = collectChange();
-    if (Object.keys(change).length) {
+    const errorMessage = checkChange(change);
+    setMessage(errorMessage);
+    if (!errorMessage.length) {
       setChange(change);
+      setEditMode(false);
     }
-    setEditMode(false);
   };
 
   return (
     <div className="book-management__detail__wrarpper">
       <Dialog />
-      <p>도서정보</p>
+      <p className="book-management__detail__title">도서정보</p>
       <div className="book-management__detail__book-info">
         <Image
           className="book-management__detail__book-cover"
@@ -101,7 +129,7 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
             inputInitialValue={book.publisher}
           />
           <InputWithLabel
-            labelText="출판연월"
+            labelText="출판일"
             disabled={!editMode}
             inputRef={publishedAtRef}
             resetDependency={reset}
@@ -157,6 +185,9 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
           />
         </div>
       </div>
+      {message ? (
+        <p className="book-management__detail__message">{`${message}`}</p>
+      ) : null}
       <div className="book-management__detail__buttons">
         {editMode ? (
           <Button

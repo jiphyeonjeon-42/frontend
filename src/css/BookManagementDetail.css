@@ -1,11 +1,12 @@
 .book-management__detail__wrarpper {
+  min-width: 30rem;
   font-size: 1.8rem;
   font-weight: bold;
   color: #545454;
-
   padding: 0 8rem 5rem;
 }
-.book-management__detail__wrarpper > p {
+
+.book-management__detail__title {
   font-size: 2.8rem;
 }
 
@@ -22,6 +23,8 @@
 .book-management__detail__book-info > img,
 .book-management__detail__book > p {
   width: 20%;
+  /* height: auto; */
+  margin: auto;
   text-align: center;
 }
 
@@ -36,6 +39,14 @@
   display: flex;
 }
 
+.book-management__detail__message {
+  white-space: pre;
+  font-weight: normal;
+  color: #e63737;
+  word-break: break-all;
+  text-align: center;
+}
+
 .book-management__detail__buttons {
   display: flex;
   justify-content: right;
@@ -43,4 +54,23 @@
 
 .book-management__detail__button {
   margin-left: 2rem;
+}
+
+@media screen and (max-width: 767px) {
+  .book-management__detail__wrarpper {
+    padding: 0 2rem 4rem;
+  }
+  .book-management__detail__book-info,
+  .book-management__detail__book {
+    flex-direction: column;
+  }
+
+  .book-management__detail__book-info > img,
+  .book-management__detail__book > p {
+    width: 30%;
+  }
+  .book-management__detail__details {
+    margin: 0;
+    width: 100%;
+  }
 }
