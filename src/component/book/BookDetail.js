@@ -47,7 +47,7 @@ const BookDetail = () => {
           도서상세페이지 및 예약
         </div>
         <div className="book-content">
-          <div>
+          <div className="book-detail__photo-likes">
             <div className="book-detail__photo">
               <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
             </div>

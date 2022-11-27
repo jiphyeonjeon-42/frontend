@@ -30,8 +30,12 @@
   margin: 6rem 0;
 }
 
-.book-detail__photo {
+.book-detail__photo-likes {
   margin: 0 4.8rem 0 0;
+}
+
+.book-detail__photo {
+  margin: 0 0rem 1rem 0;
 }
 
 .book-detail__photo img {
@@ -102,6 +106,22 @@
   font-weight: bold;
 }
 
+.book-likes {
+  display: flex;
+  justify-content: center;
+}
+
+.like_button {
+  background: none;
+  padding: 0;
+  border: 0;
+  font-size: 16px;
+}
+
+.like__icon {
+  width: 1.5rem;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .book-detail {
     width: 55%;
@@ -110,11 +130,10 @@
   .book-detail__photo img {
     width: 32rem;
     height: 47rem;
-    margin: 0 2rem 0 0;
   }
 
   .book-detail__photo {
-    margin: 0;
+    margin: 0 0 1rem 0;
   }
 
   .book-detail__info-value {
@@ -161,8 +180,12 @@
     margin-top: 3rem;
   }
 
+  .book-detail__photo-likes {
+    margin: 0;
+  }
+
   .book-detail__photo {
-    margin: 0 auto 3rem auto !important;
+    margin: 0 auto 1rem auto !important;
     width: 80%;
     height: 25%;
   }
