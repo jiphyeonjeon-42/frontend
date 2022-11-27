@@ -9,6 +9,7 @@ import BookStatus from "./BookStatus";
 import BookReservation from "./BookReservation";
 import "../../css/BookDetail.css";
 import Review from "./review/Review";
+import Like from "./like/Like";
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -46,8 +47,13 @@ const BookDetail = () => {
           도서상세페이지 및 예약
         </div>
         <div className="book-content">
-          <div className="book-detail__photo">
-            <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
+          <div>
+            <div className="book-detail__photo">
+              <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
+            </div>
+            <div className="book-likes">
+              <Like />
+            </div>
           </div>
           <div className="book-detail">
             <span className="color-red">도서정보</span>
@@ -104,7 +110,6 @@ const BookDetail = () => {
             </div>
           </div>
         </div>
-        {/* delete 함수 만들어서 Review 에 prop 으로 넘겨서 삭제 시 이용하기 */}
         <div className="book-review">
           <Review bookInfoId={id} />
         </div>
