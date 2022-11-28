@@ -4,14 +4,13 @@ import usePostLike from "../../../api/like/usePostLike";
 import useGetLike from "../../../api/like/useGetLike";
 import useDeleteLike from "../../../api/like/useDeleteLike";
 import Image from "../../utils/Image";
-import UserEdit from "../../../img/edit.svg";
-import DeleteButton from "../../../img/x_button.svg";
+import FilledLike from "../../../img/like_filled.svg";
+import EmptyLike from "../../../img/like_empty.svg";
 import "../../../css/BookDetail.css";
 import "../../../css/reset.css";
 import useDialog from "../../../hook/useDialog";
 
 const Like = ({ initBookInfoId }) => {
-  console.log(initBookInfoId);
   const {
     // Dialog,
     // defaultConfig: dialogDefaultConfig,
@@ -20,19 +19,16 @@ const Like = ({ initBookInfoId }) => {
     setOpenTitleAndMessage,
   } = useDialog();
   const { likeData } = useGetLike({ setOpenTitleAndMessage, initBookInfoId });
+  console.log(likeData);
 
-  const postLike = data => {
-    if (!likeData.isLiked) {
-      const { setBookInfoId } = usePostLike(data);
-      setBookInfoId(data);
-    }
+  const postLike = () => {
+    const { setBookInfoId } = usePostLike(initBookInfoId);
+    setBookInfoId(initBookInfoId);
   };
 
-  const deleteLike = data => {
-    if (likeData.isLiked) {
-      const { setBookInfoId } = useDeleteLike(data);
-      setBookInfoId(data);
-    }
+  const deleteLike = () => {
+    const { setBookInfoId } = useDeleteLike(initBookInfoId);
+    setBookInfoId(initBookInfoId);
   };
 
   return (
@@ -40,15 +36,12 @@ const Like = ({ initBookInfoId }) => {
       <button
         className="like_button filter-button"
         type="button"
-        onClick={() => {
-          postLike(initBookInfoId);
-          deleteLike(initBookInfoId);
-        }}
+        onClick={likeData.isLiked ? deleteLike : postLike}
       >
         <div>
           <Image
             className="like__icon"
-            src={`${likeData.isLiked ? UserEdit : DeleteButton}`}
+            src={`${likeData.isLiked ? FilledLike : EmptyLike}`}
             alt=""
           />
           {`좋아요 ${likeData.likeNum}`}
