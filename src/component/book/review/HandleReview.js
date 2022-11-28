@@ -5,6 +5,7 @@ import Button from "../../utils/Button";
 import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
 import UserEdit from "../../../img/edit.svg";
+import DeleteButton from "../../../img/x_button.svg";
 import "../../../css/Review.css";
 import "../../../css/reset.css";
 
@@ -95,7 +96,7 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
                 삭제
                 <Image
                   className="review-manage__button-img"
-                  src={UserEdit}
+                  src={DeleteButton}
                   alt=""
                 />
               </button>
