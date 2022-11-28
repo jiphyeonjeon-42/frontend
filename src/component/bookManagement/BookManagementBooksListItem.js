@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Image from "../utils/Image";
 import Edit from "../../img/edit.svg";
 import { bookStatus } from "../../data/status";
+import "../../css/BookManagementBooksListItem.css";
 
 const BookManagementBooksListItem = ({
   checked,
