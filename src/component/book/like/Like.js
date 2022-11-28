@@ -1,43 +1,65 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
+import usePostLike from "../../../api/like/usePostLike";
+import useGetLike from "../../../api/like/useGetLike";
+import useDeleteLike from "../../../api/like/useDeleteLike";
 import Image from "../../utils/Image";
 import UserEdit from "../../../img/edit.svg";
+import DeleteButton from "../../../img/x_button.svg";
 import "../../../css/BookDetail.css";
 import "../../../css/reset.css";
+import useDialog from "../../../hook/useDialog";
 
-const Like = () => {
-  // const [like, setLike] = useState(false);
-  const [number, setNumber] = useState(0);
+const Like = ({ initBookInfoId }) => {
+  console.log(initBookInfoId);
+  const {
+    // Dialog,
+    // defaultConfig: dialogDefaultConfig,
+    // setConfig: setDialogConfig,
+    // setOpen: openDialog,
+    setOpenTitleAndMessage,
+  } = useDialog();
+  const { likeData } = useGetLike({ setOpenTitleAndMessage, initBookInfoId });
 
-  const handleLike = () => {
-    setNumber(() => number + 1);
+  const postLike = data => {
+    if (!likeData.isLiked) {
+      const { setBookInfoId } = usePostLike(data);
+      setBookInfoId(data);
+    }
   };
 
-  // useEffect(() => {
-  //   setLike(() => !like);
-  // }, [like]);
+  const deleteLike = data => {
+    if (likeData.isLiked) {
+      const { setBookInfoId } = useDeleteLike(data);
+      setBookInfoId(data);
+    }
+  };
+
   return (
     <div>
       <button
-        type="button"
-        onClick={() => handleLike()}
         className="like_button filter-button"
+        type="button"
+        onClick={() => {
+          postLike(initBookInfoId);
+          deleteLike(initBookInfoId);
+        }}
       >
-        <Image
-          className="like__icon"
-          src={UserEdit}
-          // src={`${filter.isWaiting ? RedCheckIcon : CheckIcon}`}
-          alt=""
-        />
-        <span
-        // className={`proceeding-finish__text ${
-        //   filter.isWaiting ? "color-red" : "color-a4"
-        // }`}
-        >
-          {`좋아요 ${number}`}
-        </span>
+        <div>
+          <Image
+            className="like__icon"
+            src={`${likeData.isLiked ? UserEdit : DeleteButton}`}
+            alt=""
+          />
+          {`좋아요 ${likeData.likeNum}`}
+        </div>
       </button>
     </div>
   );
 };
 
 export default Like;
+
+Like.propTypes = {
+  initBookInfoId: PropTypes.number.isRequired,
+};

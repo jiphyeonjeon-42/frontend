@@ -16,7 +16,6 @@ const BookDetail = () => {
   const myRef = useRef(null);
   const location = useLocation();
   useEffect(() => myRef.current.scrollIntoView(), []);
-
   const {
     Dialog,
     defaultConfig: dialogDefaultConfig,
@@ -52,7 +51,7 @@ const BookDetail = () => {
               <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
             </div>
             <div className="book-likes">
-              <Like />
+              <Like initBookInfoId={id} />
             </div>
           </div>
           <div className="book-detail">
