@@ -25,6 +25,7 @@ const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
     { key: "returningCondition", type: "string", isNullable: true },
     { key: "penaltyDays", type: "number", isNullable: true },
     { key: "title", type: "string", isNullable: false },
+    { key: "bookInfoId", type: "number", isNullable: false },
     { key: "createdAt", type: "string", isNullable: false },
     { key: "returnedAt", type: "string", isNullable: true },
     { key: "dueDate", type: "string", isNullable: true },
