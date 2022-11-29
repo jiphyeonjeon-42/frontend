@@ -4,6 +4,7 @@ import useDialog from "../../../hook/useDialog";
 import useGetLike from "../../../api/like/useGetLike";
 import usePostLike from "../../../api/like/usePostLike";
 import useDeleteLike from "../../../api/like/useDeleteLike";
+import "../../../css/RentHistory.css";
 
 const RentHistoryTable = ({ factor }) => {
   const { setOpenTitleAndMessage } = useDialog();
@@ -36,11 +37,12 @@ const RentHistoryTable = ({ factor }) => {
   };
 
   return (
-    <div className="histories__table-list">
+    <div className="rent_histories__table-list">
       <span> {factor?.createdAt} </span>
-      <span> {factor?.title} </span>
+      <span className="rent_histories__table_info__title">{factor?.title}</span>
       <span> {factor.returnedAt ? factor.returnedAt : "대출중"} </span>
       <button
+        className="rent_histories__table-list__button"
         type="button"
         onClick={() => {
           clickLikeHandler(factor.bookInfoId);
