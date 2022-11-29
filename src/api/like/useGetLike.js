@@ -29,7 +29,7 @@ const useGetLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
   };
 
   useEffect(() => {
-    request(refineResponse, displayError);
+    if (initBookInfoId) request(refineResponse, displayError);
   }, []);
 
   return { likeData };
