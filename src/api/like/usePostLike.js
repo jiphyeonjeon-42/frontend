@@ -31,6 +31,7 @@ const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
   // bookInfoId가 있을 경우만 api 요청
   useEffect(() => {
     if (bookInfoId) request(refineResponse, displayError);
+    setBookInfoId(null);
   }, [bookInfoId]);
 
   return { setBookInfoId, likeData };
