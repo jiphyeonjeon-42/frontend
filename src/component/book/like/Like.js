@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import usePostLike from "../../../api/like/usePostLike";
 import useGetLike from "../../../api/like/useGetLike";
@@ -19,16 +19,28 @@ const Like = ({ initBookInfoId }) => {
     setOpenTitleAndMessage,
   } = useDialog();
   const { likeData } = useGetLike({ setOpenTitleAndMessage, initBookInfoId });
-  console.log(likeData);
-
-  const postLike = () => {
-    const { setBookInfoId } = usePostLike(initBookInfoId);
-    setBookInfoId(initBookInfoId);
+  const [currentLike, setCurrentLike] = useState(likeData.isLiked);
+  const { setBookInfoId: setPostLike } = useDeleteLike({
+    setOpenTitleAndMessage,
+  });
+  const postLike = bookInfoId => {
+    setPostLike(bookInfoId);
+  };
+  const { setBookInfoId: setDeleteLike } = usePostLike({
+    setOpenTitleAndMessage,
+  });
+  const deleteLike = bookInfoId => {
+    setDeleteLike(bookInfoId);
   };
 
-  const deleteLike = () => {
-    const { setBookInfoId } = useDeleteLike(initBookInfoId);
-    setBookInfoId(initBookInfoId);
+  const clickLikeHandler = bookInfoId => {
+    if (currentLike) {
+      deleteLike(bookInfoId);
+      setCurrentLike(false);
+    } else {
+      postLike(bookInfoId);
+      setCurrentLike(true);
+    }
   };
 
   return (
@@ -36,14 +48,14 @@ const Like = ({ initBookInfoId }) => {
       <button
         className="like_button filter-button"
         type="button"
-        onClick={likeData.isLiked ? deleteLike : postLike}
+        onClick={() => clickLikeHandler(initBookInfoId)}
       >
         <div>
-          <Image
-            className="like__icon"
-            src={`${likeData.isLiked ? FilledLike : EmptyLike}`}
-            alt=""
-          />
+          {currentLike ? (
+            <Image className="like__icon" src={FilledLike} alt="like" />
+          ) : (
+            <Image className="like__icon" src={EmptyLike} alt="unlike" />
+          )}
           {`좋아요 ${likeData.likeNum}`}
         </div>
       </button>
@@ -54,5 +66,5 @@ const Like = ({ initBookInfoId }) => {
 export default Like;
 
 Like.propTypes = {
-  initBookInfoId: PropTypes.number.isRequired,
+  initBookInfoId: PropTypes.string.isRequired,
 };
