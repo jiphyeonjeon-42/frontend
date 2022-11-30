@@ -30,6 +30,7 @@ const Review = ({ bookInfoId }) => {
       <div className="tabs">
         {reviewTabList.map((tab, index) => (
           <div
+            key={tab.type}
             className={`tab tab-${
               tab.type === currentTab ? "on" : "not"
             }-focus`}
@@ -57,5 +58,5 @@ const Review = ({ bookInfoId }) => {
 export default Review;
 
 Review.propTypes = {
-  bookInfoId: PropTypes.number.isRequired,
+  bookInfoId: PropTypes.string.isRequired,
 };

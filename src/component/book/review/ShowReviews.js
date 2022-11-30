@@ -72,5 +72,5 @@ const ShowReviews = ({ bookInfoId }) => {
 export default ShowReviews;
 
 ShowReviews.propTypes = {
-  bookInfoId: PropTypes.number.isRequired,
+  bookInfoId: PropTypes.string.isRequired,
 };
