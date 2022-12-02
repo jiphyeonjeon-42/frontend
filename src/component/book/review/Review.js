@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { reviewTabList } from "../../../data/tablist";
 import PostReview from "./PostReview";
@@ -6,16 +6,10 @@ import "../../../css/Tabs.css";
 import "../../../css/Review.css";
 import axiosPromise from "../../../util/axios";
 import ShowReviews from "./ShowReviews";
+import useTabFocus from "./useTabFocus";
 
-const useFocus = (initialTab, tabList) => {
-  const [currentIndex, setCurretIndex] = useState(initialTab);
-  return {
-    currentTab: tabList[currentIndex].type,
-    changeTab: setCurretIndex,
-  };
-};
 const Review = ({ bookInfoId }) => {
-  const { currentTab, changeTab } = useFocus(0, reviewTabList);
+  const { currentTab, changeTab } = useTabFocus(0, reviewTabList);
   const postReview = reviewContent => {
     if (reviewContent !== null) {
       axiosPromise("post", "/reviews", {
