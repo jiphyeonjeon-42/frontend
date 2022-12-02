@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { myPageTabList } from "../../data/tablist";
-import MyRent from "./MyRent";
+import MyRent from "./MyRentInfo/MyRent";
 import MyReservation from "./MyReservation";
 import MyReview from "./MyReview";
 import useDialog from "../../hook/useDialog";
