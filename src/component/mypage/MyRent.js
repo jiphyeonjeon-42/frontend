@@ -13,7 +13,6 @@ import Book from "../../img/admin_icon.svg";
 // import "../../css/Mypage.css";
 
 const MyRent = () => {
-  console.log("Success myRent");
   // const [urlQuery, setUrlQuery] = useSearchParams();
   const {
     // setOpen: openDialog,

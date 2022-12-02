@@ -13,7 +13,6 @@ import Reserve from "../../img/list-check-solid.svg";
 // import "../../css/Mypage.css";
 
 const MyReservation = () => {
-  console.log("Success MyReservation");
   // const [urlQuery, setUrlQuery] = useSearchParams();
   const {
     setOpen: openDialog,
