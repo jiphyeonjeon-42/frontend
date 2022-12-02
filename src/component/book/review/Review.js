@@ -13,6 +13,7 @@ const Review = ({ bookInfoId }) => {
   const { currentTab, changeTab } = useTabFocus(0, reviewTabList);
   const {
     Dialog,
+    config,
     setConfig: setDialogConfig,
     setOpen: openDialog,
     setClose: closeDialog,
@@ -55,6 +56,7 @@ const Review = ({ bookInfoId }) => {
             openDialog={openDialog}
             closeDialog={closeDialog}
             changeTab={changeTab}
+            config={config}
           />
         )}
       </div>

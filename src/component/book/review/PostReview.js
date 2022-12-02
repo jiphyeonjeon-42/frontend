@@ -9,6 +9,7 @@ const PostReview = ({
   Dialog,
   openDialog,
   closeDialog,
+  config,
 }) => {
   const [content, setContent] = useState(null);
 
@@ -18,12 +19,13 @@ const PostReview = ({
 
   const submitReview = () => {
     onClickPost(content);
-    closeDialog();
   };
 
   const onSubmitHandler = e => {
     e.preventDefault();
     setDialogConfig({
+      // ...defaultConfig,
+      ...config,
       title: "리뷰를 등록하시겠습니까?",
       buttonAlign: "basic",
       numberOfButtons: 2,
@@ -67,4 +69,5 @@ PostReview.propTypes = {
   Dialog: PropTypes.element.isRequired,
   openDialog: PropTypes.func.isRequired,
   closeDialog: PropTypes.func.isRequired,
+  config: PropTypes.objectOf.isRequired,
 };

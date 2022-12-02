@@ -2,22 +2,12 @@ import { useEffect, useState } from "react";
 import useApi from "../../../hook/useApi";
 // import getErrorMessage from "../../../data/error";
 
-const usePostReview = ({
-  setOpenTitleAndMessage,
-  // closeDialog,
-  bookInfoId,
-  changeTab,
-}) => {
+const usePostReview = ({ setOpenTitleAndMessage, bookInfoId, changeTab }) => {
   const [content, setContent] = useState(null);
   const { request } = useApi("post", "/reviews", {
     bookInfoId,
     content,
   });
-
-  // const expectedItem = [
-  //   { key: "bookInfoId", type: "number", isNullable: false },
-  //   { key: "content", type: "string", isNullable: false },
-  // ];
 
   const refineResponse = () => {
     changeTab(0);
