@@ -7,10 +7,12 @@ import useDeleteLike from "../../../api/like/useDeleteLike";
 import "../../../css/RentHistory.css";
 
 const RentHistoryTable = ({ factor }) => {
+  const [currentLike, setCurrentLike] = useState();
   const { setOpenTitleAndMessage } = useDialog();
-  const { likeData } = useGetLike({
+  useGetLike({
     setOpenTitleAndMessage,
     initBookInfoId: factor.bookInfoId,
+    setCurrentLike,
   });
   const { setBookInfoId: setBookInfoIdPost } = usePostLike({
     setOpenTitleAndMessage,
@@ -24,7 +26,6 @@ const RentHistoryTable = ({ factor }) => {
   const deleteLike = bookInfoId => {
     setBookInfoIdDelete(bookInfoId);
   };
-  const [currentLike, setCurrentLike] = useState(likeData.isLiked);
 
   const clickLikeHandler = bookInfoId => {
     if (currentLike) {
