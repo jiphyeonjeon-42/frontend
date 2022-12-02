@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import useApi from "../../../hook/useApi";
-import { compareExpect } from "../../../util/typeCheck";
 // import getErrorMessage from "../../../data/error";
 
 const usePostReview = ({
   setOpenTitleAndMessage,
-  setClose,
+  // closeDialog,
   bookInfoId,
   changeTab,
 }) => {
@@ -15,35 +14,23 @@ const usePostReview = ({
     content,
   });
 
-  const expectedItem = [
-    { key: "bookInfoId", type: "number", isNullable: false },
-    { key: "content", type: "string", isNullable: false },
-  ];
+  // const expectedItem = [
+  //   { key: "bookInfoId", type: "number", isNullable: false },
+  //   { key: "content", type: "string", isNullable: false },
+  // ];
 
-  const refineResponse = response => {
-    compareExpect(`reviews`, [response.data], expectedItem);
+  const refineResponse = () => {
+    changeTab(0);
   };
 
-  const displayError = error => {
-    console.log(error);
-    setOpenTitleAndMessage(
-      "10자 이상 100자 이하로 입력해주세요.",
-      "",
-      setClose,
-    );
-    //   setOpenTitleAndMessage("예약 취소가 완료되었습니다.", "", () =>
-    //   window.location.reload(),
-    // );
-    // const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    // const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    // setOpenTitleAndMessage(title, errorCode ? message : error.message);
+  const displayError = async () => {
+    setOpenTitleAndMessage("10자 이상 100자 이하로 입력해주세요.", "");
   };
 
   useEffect(() => {
-    const req = async () => {
+    const req = () => {
       if (content !== null) {
         request(refineResponse, displayError);
-        await changeTab(0);
       }
     };
     req();

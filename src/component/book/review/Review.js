@@ -54,6 +54,7 @@ const Review = ({ bookInfoId }) => {
             Dialog={Dialog}
             openDialog={openDialog}
             closeDialog={closeDialog}
+            changeTab={changeTab}
           />
         )}
       </div>

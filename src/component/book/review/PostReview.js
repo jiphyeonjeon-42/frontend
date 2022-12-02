@@ -18,6 +18,7 @@ const PostReview = ({
 
   const submitReview = () => {
     onClickPost(content);
+    closeDialog();
   };
 
   const onSubmitHandler = e => {
