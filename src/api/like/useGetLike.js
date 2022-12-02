@@ -24,7 +24,6 @@ const useGetLike = ({
       expectedItem,
     );
     setLikeData(...refinelikeData);
-    console.log(refinelikeData[0].isLiked);
     setCurrentLike(refinelikeData[0].isLiked);
   };
 
