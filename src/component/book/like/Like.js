@@ -3,12 +3,10 @@ import PropTypes from "prop-types";
 import usePostLike from "../../../api/like/usePostLike";
 import useGetLike from "../../../api/like/useGetLike";
 import useDeleteLike from "../../../api/like/useDeleteLike";
-import Image from "../../utils/Image";
-import FilledLike from "../../../img/like_filled.svg";
-import EmptyLike from "../../../img/like_empty.svg";
 import "../../../css/BookDetail.css";
 import "../../../css/reset.css";
 import useDialog from "../../../hook/useDialog";
+import ShowLike from "./ShowLike";
 
 const Like = ({ initBookInfoId }) => {
   const {
@@ -50,14 +48,7 @@ const Like = ({ initBookInfoId }) => {
         type="button"
         onClick={() => clickLikeHandler(initBookInfoId)}
       >
-        <div>
-          {currentLike ? (
-            <Image className="like__icon" src={FilledLike} alt="like" />
-          ) : (
-            <Image className="like__icon" src={EmptyLike} alt="unlike" />
-          )}
-          {`좋아요 ${likeData.likeNum}`}
-        </div>
+        <ShowLike likeData={likeData} currentLike={currentLike} />
       </button>
     </div>
   );
