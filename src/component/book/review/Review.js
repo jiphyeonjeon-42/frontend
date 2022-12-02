@@ -4,20 +4,19 @@ import { reviewTabList } from "../../../data/tablist";
 import PostReview from "./PostReview";
 import "../../../css/Tabs.css";
 import "../../../css/Review.css";
-import axiosPromise from "../../../util/axios";
 import ShowReviews from "./ShowReviews";
 import useTabFocus from "./useTabFocus";
+import usePostReview from "./usePostReview";
+import useDialog from "../../../hook/useDialog";
 
 const Review = ({ bookInfoId }) => {
+  const { setOpenTitleAndMessage } = useDialog();
   const { currentTab, changeTab } = useTabFocus(0, reviewTabList);
-  const postReview = reviewContent => {
-    if (reviewContent !== null) {
-      axiosPromise("post", "/reviews", {
-        bookInfoId,
-        content: reviewContent,
-      }).then(() => changeTab(0));
-    }
-  };
+  const { setContent } = usePostReview({
+    setOpenTitleAndMessage,
+    bookInfoId,
+    changeTab,
+  });
 
   return (
     <>
@@ -41,7 +40,7 @@ const Review = ({ bookInfoId }) => {
         {currentTab === "showReviews" ? (
           <ShowReviews bookInfoId={bookInfoId} />
         ) : (
-          <PostReview onClickPost={postReview} />
+          <PostReview onClickPost={setContent} />
         )}
       </div>
     </>
@@ -51,5 +50,5 @@ const Review = ({ bookInfoId }) => {
 export default Review;
 
 Review.propTypes = {
-  bookInfoId: PropTypes.number.isRequired,
+  bookInfoId: PropTypes.string.isRequired,
 };
