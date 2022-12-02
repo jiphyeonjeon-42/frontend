@@ -3,7 +3,11 @@ import getErrorMessage from "../../data/error";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
+const useGetLike = ({
+  setOpenTitleAndMessage,
+  initBookInfoId,
+  setCurrentLike,
+}) => {
   const { request } = useApi("get", `books/info/${initBookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
 
@@ -20,6 +24,8 @@ const useGetLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
       expectedItem,
     );
     setLikeData(...refinelikeData);
+    console.log(refinelikeData[0].isLiked);
+    setCurrentLike(refinelikeData[0].isLiked);
   };
 
   const displayError = error => {
