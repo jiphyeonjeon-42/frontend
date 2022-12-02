@@ -21,7 +21,7 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeModal }) => {
   };
 
   const { bookList, lastPage, page, setPage, setQuery, Dialog } =
-    useGetBooksSearch();
+    useGetBooksSearch({ limit: 3 });
 
   return (
     <SearchModal
