@@ -6,10 +6,18 @@ import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
 import UserEdit from "../../../img/edit.svg";
 import DeleteButton from "../../../img/x_button.svg";
+import useDialog from "../../../hook/useDialog";
 import "../../../css/Review.css";
 import "../../../css/reset.css";
 
 const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
+  const {
+    Dialog,
+    config,
+    setConfig: setDialogConfig,
+    setOpen: openDialog,
+    setClose: closeDialog,
+  } = useDialog();
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const uploadDate = splitDate(createdAt)[0];
@@ -27,8 +35,28 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
     return setFixReview(!fixReview);
   };
 
-  const deleteBtn = () => {
+  const deleteReview = () => {
     onClickDel(data.reviewsId);
+  };
+
+  const deleteBtn = () => {
+    setDialogConfig({
+      ...config,
+      title: "리뷰를 삭제하시겠습니까?",
+      buttonAlign: "basic",
+      numberOfButtons: 2,
+      firstButton: {
+        text: "확인하기",
+        color: "red",
+        onClick: deleteReview,
+      },
+      secondButton: {
+        text: "취소하기",
+        color: "grey",
+        onClick: closeDialog,
+      },
+    });
+    openDialog();
   };
 
   const patchReview = () => {
@@ -103,6 +131,7 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
           )}
         </div>
       ) : null}
+      <Dialog />
     </div>
   );
 };
