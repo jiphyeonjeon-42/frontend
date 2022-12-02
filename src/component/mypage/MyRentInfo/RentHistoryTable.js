@@ -39,9 +39,13 @@ const RentHistoryTable = ({ factor }) => {
 
   return (
     <div className="rent_histories__table-list">
-      <span> {factor?.createdAt} </span>
+      <span className="rent_histories__table_info__date">
+        {factor?.createdAt}
+      </span>
       <span className="rent_histories__table_info__title">{factor?.title}</span>
-      <span> {factor.returnedAt ? factor.returnedAt : "대출중"} </span>
+      <span className="rent_histories__table_info__date">
+        {factor.returnedAt ? factor.returnedAt : "대출중"}
+      </span>
       <button
         className="rent_histories__table-list__button"
         type="button"

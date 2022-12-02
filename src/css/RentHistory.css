@@ -1,7 +1,7 @@
 .rent_histories__table-list {
 	display: grid;
 	margin: 0.1rem;
-	padding-top: 3rem;
+	padding-bottom: 2.5rem;
 	grid-template-columns: 0.2fr 1fr 0.2fr 0.1fr 0.1fr;
 	align-items: center;
 	font-size: small;
@@ -12,7 +12,11 @@
 	border: 0;
 	cursor: pointer;
   }
-  
+
+  .rent_histories__table_info__date {
+	font-size: small;
+  }
+
   .rent_histories__table_info__title {
 	font-weight: bolder;
   }
@@ -23,17 +27,14 @@
 	}
   }
   
-  @media screen and (max-width: 767px) {
-	.rent_histories__table-list {
-	  display: block;
-	}
-  
+  @media screen and (max-width: 767px) { 
 	.rent_histories__table-list__name {
 	  margin-bottom: 1.1rem;
 	}
   
 	.rent_histories__table-list__title {
 	  font-size: 1.6rem;
+	  text-overflow: ellipsis;
 	}
   
 	.rent_histories__table-list__text {
@@ -42,6 +43,21 @@
 	  overflow: hidden;
 	  text-overflow: ellipsis;
 	  display: grid;
+	}
+	.rent_histories__table_info__date {
+		display: none;
+	}
+	.rent_histories__table_info__title {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.rent_histories__table-list {
+		display: grid;
+		margin: 0.1rem;
+		padding-bottom: 2.5rem;
+		grid-template-columns: 1fr 0.1fr 0.2fr;
+		align-items: center;
+		font-size: small;
 	}
   }
   
