@@ -24,7 +24,6 @@ const PostReview = ({
   const onSubmitHandler = e => {
     e.preventDefault();
     setDialogConfig({
-      // ...defaultConfig,
       ...config,
       title: "리뷰를 등록하시겠습니까?",
       buttonAlign: "basic",

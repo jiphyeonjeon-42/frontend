@@ -7,7 +7,7 @@ import Pagination from "../utils/Pagination";
 import useGetReviewInfo from "../../api/review/useGetReviewInfo";
 
 const MyReview = () => {
-  const { page, setPage, lastPage, reviewList, setReviewList, Dialog } =
+  const { page, setPage, lastPage, reviewList, setReviewList } =
     useGetReviewInfo();
 
   const deleteReview = reviewId => {
@@ -15,6 +15,7 @@ const MyReview = () => {
     setReviewList(temp);
     axiosPromise("delete", `/reviews/${reviewId}`);
   };
+
   return (
     <>
       <div className="mypage-inquire-box-long-wrapper">
@@ -40,7 +41,6 @@ const MyReview = () => {
           </div>
         </div>
       </div>
-      <Dialog />
     </>
   );
 };
