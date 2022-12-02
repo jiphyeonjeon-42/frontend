@@ -3,16 +3,41 @@ import PropTypes from "prop-types";
 import "../../../css/Review.css";
 import Button from "../../utils/Button";
 
-const PostReview = ({ onClickPost }) => {
+const PostReview = ({
+  onClickPost,
+  setDialogConfig,
+  Dialog,
+  openDialog,
+  closeDialog,
+}) => {
   const [content, setContent] = useState(null);
 
   const onChange = e => {
     setContent(e.target.value);
   };
 
+  const submitReview = () => {
+    onClickPost(content);
+  };
+
   const onSubmitHandler = e => {
     e.preventDefault();
-    onClickPost(content);
+    setDialogConfig({
+      title: "리뷰를 등록하시겠습니까?",
+      buttonAlign: "basic",
+      numberOfButtons: 2,
+      firstButton: {
+        text: "확인하기",
+        color: "red",
+        onClick: submitReview,
+      },
+      secondButton: {
+        text: "취소하기",
+        color: "grey",
+        onClick: closeDialog,
+      },
+    });
+    openDialog();
   };
 
   return (
@@ -28,6 +53,7 @@ const PostReview = ({ onClickPost }) => {
           <Button type="submit" value="게시하기" color="red" />
         </div>
       </form>
+      <Dialog />
     </div>
   );
 };
@@ -36,4 +62,8 @@ export default PostReview;
 
 PostReview.propTypes = {
   onClickPost: PropTypes.func.isRequired,
+  setDialogConfig: PropTypes.func.isRequired,
+  Dialog: PropTypes.element.isRequired,
+  openDialog: PropTypes.func.isRequired,
+  closeDialog: PropTypes.func.isRequired,
 };

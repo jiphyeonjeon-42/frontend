@@ -10,10 +10,17 @@ import usePostReview from "./usePostReview";
 import useDialog from "../../../hook/useDialog";
 
 const Review = ({ bookInfoId }) => {
-  const { setOpenTitleAndMessage } = useDialog();
   const { currentTab, changeTab } = useTabFocus(0, reviewTabList);
+  const {
+    Dialog,
+    setConfig: setDialogConfig,
+    setOpen: openDialog,
+    setClose: closeDialog,
+    setOpenTitleAndMessage,
+  } = useDialog();
   const { setContent } = usePostReview({
     setOpenTitleAndMessage,
+    setClose: closeDialog,
     bookInfoId,
     changeTab,
   });
@@ -23,6 +30,7 @@ const Review = ({ bookInfoId }) => {
       <div className="tabs">
         {reviewTabList.map((tab, index) => (
           <div
+            key={tab.type}
             className={`tab tab-${
               tab.type === currentTab ? "on" : "not"
             }-focus`}
@@ -40,7 +48,13 @@ const Review = ({ bookInfoId }) => {
         {currentTab === "showReviews" ? (
           <ShowReviews bookInfoId={bookInfoId} />
         ) : (
-          <PostReview onClickPost={setContent} />
+          <PostReview
+            onClickPost={setContent}
+            setDialogConfig={setDialogConfig}
+            Dialog={Dialog}
+            openDialog={openDialog}
+            closeDialog={closeDialog}
+          />
         )}
       </div>
     </>
