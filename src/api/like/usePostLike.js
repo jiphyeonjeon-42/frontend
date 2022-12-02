@@ -28,7 +28,6 @@ const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
     setOpenTitleAndMessage(title, errorCode ? message : error.message);
   };
 
-  // bookInfoId가 있을 경우만 api 요청
   useEffect(() => {
     if (bookInfoId) request(refineResponse, displayError);
   }, [bookInfoId]);
