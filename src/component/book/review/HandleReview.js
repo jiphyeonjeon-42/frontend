@@ -106,8 +106,17 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
         <div className="review-manage">
           {fixReview ? (
             <div className="review-manage__fix-buttons">
-              <Button value="수정하기" color="red" onClick={patchBtn} />
-              <Button value="취소하기" onClick={cancelFixBtn} />
+              <Button
+                value="수정하기"
+                className="button-small-size"
+                color="red"
+                onClick={patchBtn}
+              />
+              <Button
+                value="취소하기"
+                className="button-small-size"
+                onClick={cancelFixBtn}
+              />
             </div>
           ) : (
             <div className="review-manage__start-fix-buttons font-12">

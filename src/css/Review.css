@@ -121,3 +121,9 @@
 .review-manage__button-img {
   width: 1.8rem;
 }
+
+@media screen and (max-width: 767px) {
+  .review-manage {
+    padding-right: 3rem;
+  }
+}
