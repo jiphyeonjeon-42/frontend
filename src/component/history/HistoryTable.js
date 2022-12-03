@@ -7,31 +7,45 @@ import "../../css/HistoryTable.css";
 const HistoryTable = ({ factor }) => {
   return (
     <div className="histories__table-list">
+      <span className="histories__table-list__name font-16-bold color-54">
+        {factor?.login}
+      </span>
       <button className="histories__table-list__button" type="button">
-        <div className="histories__table-list__title">
-          <span className="histories__table-list__text color-54">
-            {factor?.title}
-          </span>
-          <span className="histories-login font-16 color-54">
-            대출자 : {factor?.login}
+        <div className="histories__table-list__title color-54">
+          {factor?.title}
+          <span className="histories-callSign font-16 color-54">
+            {factor?.callSign}
           </span>
           <Image className="histories__table-list__arr" src={Arr} alt="arrow" />
-          <span className="histories-callSign font-16 color-54">
-            도서등록번호 : {factor?.callSign}
-          </span>
         </div>
-        <div className="histories__table-list__info">
-          <span> 대출일 : {factor?.createdAt} </span>
-          <span> 대출사서 : {factor?.lendingLibrarianNickName} </span>
-          <span> 대출당시상태 : {factor?.lendingCondition} </span>
-        </div>
-        {factor?.returnedAt && (
-          <div className="histories__table-list__info">
-            <span> 반납일 : {factor?.returnedAt} </span>
-            <span> 반납사서 : {factor?.returningLibrarianNickname} </span>
-            <span> 반납당시상태 : {factor?.returningCondition} </span>
+        <div className="histories__table-list_date_wrapper">
+          <div className="histories__table-list__info color-54">
+            대출정보 :
+            <span className="histories__table-list__text">
+              {factor?.createdAt}
+            </span>
+            <span className="histories__table-list__text">
+              {factor?.lendingLibrarianNickName}
+            </span>
+            <span className="histories__table-list__text">
+              {factor?.lendingCondition}
+            </span>
           </div>
-        )}
+          {factor?.returnedAt && (
+            <div className="histories__table-list__info color-54">
+              반납정보 :
+              <span className="histoies__table-list__text">
+                {factor?.returnedAt}
+              </span>
+              <span className="histoies__table-list__text">
+                {factor?.returningLibrarianNickname}
+              </span>
+              <span className="histoies__table-list__text">
+                {factor?.returningCondition}
+              </span>
+            </div>
+          )}
+        </div>
       </button>
     </div>
   );

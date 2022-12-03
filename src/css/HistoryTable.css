@@ -1,7 +1,7 @@
 .histories__table-list {
 	display: flex;
 	width: 108rem;
-	margin: auto;
+	margin-left: auto;
 	padding-top: 4rem;
   }
   
@@ -25,25 +25,31 @@
 	white-space: normal;
 	font-size: 1.8rem;
 	font-weight: bold;
-	grid-template-columns: 1fr 0.2fr 0.1fr;
+	grid-template-columns: 0.8fr 0.2fr 0.1fr;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
   }
   
   .histories__table-list__arr {
 	width: 0.8rem;
 	height: 1.6rem;
 	margin-right: 4rem;
-	margin-left: auto;
+	margin-left: 0;
   }
   
   .histories__table-list__name {
-	width: 16.1rem;
+	width: 12.1rem;
+	padding-right: 4rem;
 	overflow-x: hidden;
 	text-overflow: ellipsis;
   }
   
   .histories__table-list__info {
+	display: grid;
+	grid-template-columns: 0.1fr 0.1fr 0.58fr 0.18fr;
 	margin-right: 6rem;
 	font-size: medium;
+	text-align: left;
   }
   
   .histories-callSign {
@@ -65,10 +71,27 @@
   }
   
   @media screen and (max-width: 767px) {
-	.histories__table-list {
-	  display: block;
+	.histories__table-list_date_wrapper {
+	  display: none;
 	}
-  
+
+	.histories__table-list__title {
+		display: grid;
+		align-items: center;
+		margin-bottom: 2rem;
+		word-break: keep-all;
+		white-space: normal;
+		font-size: 1.8rem;
+		font-weight: bold;
+		grid-template-columns: 0.9fr 0.1fr;
+		overflow-x: hidden;
+		text-overflow: ellipsis;
+	  }
+
+	.histories-callSign {
+		display: none;
+	}
+
 	.histories__table-list__name {
 	  margin-bottom: 1.1rem;
 	}
@@ -78,11 +101,12 @@
 	}
   
 	.histories__table-list__text {
+	  margin: 2rem;
 	  padding: 2rem;
 	  width: 100%;
 	  overflow: hidden;
 	  text-overflow: ellipsis;
-	  display: grid;
+	  white-space: normal;
 	}
   }
   
