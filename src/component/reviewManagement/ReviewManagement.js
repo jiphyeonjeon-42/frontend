@@ -11,7 +11,7 @@ const ReviewManagement = () => {
   return (
     <main>
       <Dialog />
-      <Banner img="admin" titleKo="유저 관리" titleEn="USER MANAGEMENT" />
+      <Banner img="admin" titleKo="리뷰 관리" titleEn="REVIEW MANAGEMENT" />
       <Tabs tabList={managementTabList} />
       <Management
         searchBarPlaceHolder="도서명이나 닉네임을 검색하세요"
