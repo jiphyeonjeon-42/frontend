@@ -1,11 +1,13 @@
 .histories-filter {
 	padding-right: 6.8rem;
+	display: flex;
+	justify-content: flex-end;
   }
   
   .histories-filter-wrapper {
 	margin-left: 10%;
 	margin-top: 3rem;
-	margin-bottom: 2rem;
+	margin-bottom: rem;
   }
   
   .filter-button {
