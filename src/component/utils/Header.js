@@ -44,7 +44,7 @@ const Header = () => {
             <ul className="gnb__menu">
               {basicGnbMenu.map(menu => {
                 return (
-                  <li>
+                  <li key={menu.linkTo}>
                     <Link className="gnb__button" to={menu.linkTo}>
                       <Image
                         src={menu.img}
@@ -74,7 +74,7 @@ const Header = () => {
             {basicGnbMenu.map(menu => {
               if (menu.text === "로그인") return null; // 로그인되어 있으면 로그인 메뉴는 숨기기
               return (
-                <li>
+                <li key={menu.linkTo}>
                   <Link className="gnb__button" to={menu.linkTo}>
                     <Image
                       src={menu.img}
@@ -118,7 +118,7 @@ const Header = () => {
                       {user.isAdmin &&
                         adminLnbMenu.map(menu => {
                           return (
-                            <li className="lnb__menu_button">
+                            <li className="lnb__menu_button" key={menu.linkTo}>
                               <Link
                                 className="lnb__text font-16 color-ff"
                                 to={menu.linkTo}
@@ -131,7 +131,7 @@ const Header = () => {
                         })}
                       {loginLnbMenu.map(menu => {
                         return (
-                          <li className="lnb__menu_button">
+                          <li className="lnb__menu_button" key={menu.linkTo}>
                             <Link
                               className="lnb__text font-16 color-ff"
                               to={menu.linkTo}

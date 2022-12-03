@@ -16,6 +16,7 @@ const Tabs = ({ tabList }) => {
       <div className="tabs">
         {tabList.map(tab => (
           <Link
+            key={tab.link}
             className={`tab tab-${tab?.link === onFocus ? "on" : "not"}-focus`}
             to={{ pathname: `${tab?.link}` }}
           >
