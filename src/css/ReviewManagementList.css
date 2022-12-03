@@ -1,0 +1,100 @@
+.review-management__list__item {
+  display: flex;
+  overflow: hidden;
+  padding: 2rem 5rem;
+}
+
+.review-management__list__item:not(:first-of-type) {
+  border-top: solid 0.1rem #a4a4a4;
+}
+
+.review-management__list__item > * {
+  display: inline-block;
+  margin: auto 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-management__list__id {
+  flex: 0 0 3rem;
+}
+.review-management__list__created-at {
+  flex: 0 0 10rem;
+}
+
+.review-management__list__nickname {
+  flex: 0 0 12rem;
+}
+
+.review-management__list__item > .review-management__list__nickname {
+  font-weight: bold;
+}
+.review-management__list__contents {
+  padding: 0 2rem;
+  flex: 1 1 20rem;
+}
+.review-management__list__contents > * {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+}
+
+.review-management__list__title {
+  font-size: 1.6rem;
+  color: #a4a4a4;
+  font-weight: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.review-management__list__content {
+  white-space: normal;
+  word-break: break-all;
+}
+
+.review-management__list__scope {
+  flex: 0 0 5rem;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: normal;
+}
+
+.management__list__box-title > .review-management__list__scope {
+  line-height: 1;
+  cursor: none;
+}
+.review-management__list__scope-text.color-red {
+  font-weight: bold;
+}
+@media screen and (max-width: 767px) {
+  .review-management__list__item {
+    padding: 2rem 1rem;
+  }
+
+  .review-management__list__item > * {
+    margin: auto 0.2rem;
+  }
+
+  .review-management__list__id {
+    flex-basis: 2rem;
+  }
+  .review-management__list__created-at {
+    flex-basis: 4rem;
+  }
+  .review-management__list__year {
+    display: none;
+  }
+
+  .review-management__list__nickname {
+    flex-basis: 7rem;
+  }
+  .review-management__list__contents {
+    padding: 0;
+  }
+  .review-management__list__title {
+    font-size: 1.2rem;
+  }
+}

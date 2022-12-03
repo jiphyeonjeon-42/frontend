@@ -12,6 +12,7 @@
   max-width: 120rem;
   min-width: 35rem;
   text-align: center;
+  font-size: 1.8rem;
   vertical-align: middle;
 }
 
@@ -22,7 +23,13 @@
   border-top-left-radius: 6.1rem;
   border-top-right-radius: 6.1rem;
   padding: 5rem 5rem 3.4rem;
-  font-size: 1.8rem;
+}
+
+.management__list__box-title > * {
+  display: inline-block;
+  margin: auto 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .management__list__box {
@@ -43,6 +50,7 @@
 
 @media screen and (max-width: 767px) {
   .management__list {
+    font-size: 1.4rem;
     margin: 5.5rem auto 4rem;
   }
   .management__list__box-title {
@@ -50,6 +58,10 @@
     border-top-right-radius: 3.5rem;
     padding: 1.7rem 1rem 1.5rem;
     box-sizing: border-box;
+  }
+
+  .management__list__box-title > * {
+    margin: auto 0.2rem;
   }
 
   .management__list__box {
