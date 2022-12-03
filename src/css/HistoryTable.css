@@ -1,7 +1,7 @@
 .histories__table-list {
 	display: flex;
 	width: 108rem;
-	margin-left: auto;
+	margin: auto;
 	padding-top: 4rem;
   }
   
