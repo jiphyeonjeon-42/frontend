@@ -7,36 +7,35 @@ import "../../../css/BookDetail.css";
 import "../../../css/reset.css";
 import useDialog from "../../../hook/useDialog";
 import ShowLike from "./ShowLike";
-
+// bookInfoId
+// isLiked
+// likeNum
 const Like = ({ initBookInfoId }) => {
-  const {
-    // Dialog,
-    // defaultConfig: dialogDefaultConfig,
-    // setConfig: setDialogConfig,
-    // setOpen: openDialog,
+  const [currentLike, setCurrentLike] = useState();
+  const { setOpenTitleAndMessage } = useDialog();
+  const { likeData } = useGetLike({
     setOpenTitleAndMessage,
-  } = useDialog();
-  const { likeData } = useGetLike({ setOpenTitleAndMessage, initBookInfoId });
-  const [currentLike, setCurrentLike] = useState(likeData.isLiked);
-  const { setBookInfoId: setPostLike } = useDeleteLike({
+    initBookInfoId,
+    setCurrentLike,
+  });
+  const { setBookInfoId: setDeleteLike } = useDeleteLike({
     setOpenTitleAndMessage,
   });
-  const postLike = bookInfoId => {
-    setPostLike(bookInfoId);
+  const deleteLike = () => {
+    setDeleteLike(initBookInfoId);
   };
-  const { setBookInfoId: setDeleteLike } = usePostLike({
+  const { setBookInfoId: setPostLike } = usePostLike({
     setOpenTitleAndMessage,
   });
-  const deleteLike = bookInfoId => {
-    setDeleteLike(bookInfoId);
+  const postLike = () => {
+    setPostLike(initBookInfoId);
   };
-
-  const clickLikeHandler = bookInfoId => {
+  const clickLikeHandler = () => {
     if (currentLike) {
-      deleteLike(bookInfoId);
+      deleteLike(initBookInfoId);
       setCurrentLike(false);
     } else {
-      postLike(bookInfoId);
+      postLike(initBookInfoId);
       setCurrentLike(true);
     }
   };
@@ -46,7 +45,7 @@ const Like = ({ initBookInfoId }) => {
       <button
         className="like_button filter-button"
         type="button"
-        onClick={() => clickLikeHandler(initBookInfoId)}
+        onClick={clickLikeHandler}
       >
         <ShowLike likeData={likeData} currentLike={currentLike} />
       </button>

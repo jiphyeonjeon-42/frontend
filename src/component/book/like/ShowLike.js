@@ -7,6 +7,7 @@ import "../../../css/BookDetail.css";
 import "../../../css/reset.css";
 
 const ShowLike = ({ likeData, currentLike }) => {
+  console.log(currentLike);
   return (
     <div>
       {currentLike ? (
@@ -22,12 +23,12 @@ const ShowLike = ({ likeData, currentLike }) => {
 export default ShowLike;
 
 ShowLike.propTypes = {
+  currentLike: PropTypes.number.isRequired,
   likeData: PropTypes.shape({
     bookInfoId: PropTypes.number.isRequired,
     isLiked: PropTypes.bool,
     likeNum: PropTypes.number,
   }),
-  currentLike: PropTypes.bool.isRequired,
 };
 
 ShowLike.defaultProps = {
