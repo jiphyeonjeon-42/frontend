@@ -28,8 +28,6 @@ const HistoryFilter = ({ type, setType }) => {
       <div className="histories-filter-wrapper">
         <FilterButton type={type} typeName="user" setType={setType} />
         <FilterButton type={type} typeName="title" setType={setType} />
-        <FilterButton type={type} typeName="callsign" setType={setType} />
-        <FilterButton type={type} typeName="bookId" setType={setType} />
       </div>
     </div>
   );
