@@ -30,7 +30,7 @@ const History = () => {
           Icon={Book}
           titleKO="전체기록"
           titleEN="history"
-          placeHolder="찾고자하는 대출/반납 기록의 책, 사서명을 입력해주세요."
+          placeHolder="찾고자하는 대출/반납 기록의 책, 유저명을 입력해주세요."
           setQuery={setQuery}
         />
         <div className="histories-table__inquire-box">
