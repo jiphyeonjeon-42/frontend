@@ -32,6 +32,9 @@ const BookStatus = ({ book, index }) => {
       <div className="book-status__dueDate">
         {book.dueDate === "-" ? "-" : book.dueDate.slice(0, 10)}
       </div>
+      {book.donator ? (
+        <div className="book-status__donator">{`${book.donator} 기부`}</div>
+      ) : null}
     </div>
   );
 };

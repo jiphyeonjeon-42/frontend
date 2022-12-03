@@ -5,6 +5,7 @@ import RentModalUser from "./RentModalUser";
 import Image from "../utils/Image";
 import DeleteButton from "../../img/x_button.svg";
 import "../../css/RentInquireBoxUser.css";
+import { dateFormat } from "../../util/date";
 
 const InquireBoxUser = ({ selectedUser, setSelectedUser }) => {
   const { setOpen, setClose, Modal } = useModal();
@@ -13,13 +14,6 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }) => {
     if (setSelectedUser) {
       setSelectedUser(null);
     }
-  };
-
-  const displayDate = strDate => {
-    const date = new Date(strDate);
-    return `${date.getFullYear()}-${
-      date.getMonth() < 9 ? `0${date.getMonth() + 1}` : date.getMonth()
-    }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
   };
 
   const displayPenalty = () => {
@@ -68,7 +62,7 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }) => {
                     {`${index + 1}. ${item.title}`}
                   </div>
                   <div className="user__book-info__description color-54">
-                    {`반납 예정일 : ${displayDate(item.duedate)}`}
+                    {`반납 예정일 : ${dateFormat(item.duedate)}`}
                   </div>
                 </div>
               ))}

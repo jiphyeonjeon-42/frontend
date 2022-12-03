@@ -5,9 +5,9 @@ const userState = atom({
   default: {
     isLogin: false,
     id: 0,
-    userId: "",
+    userName: "",
+    email: "",
     isAdmin: false,
-    imgUrl: "",
     expire: "",
   },
 });

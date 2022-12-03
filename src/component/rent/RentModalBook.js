@@ -21,7 +21,7 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeModal }) => {
   };
 
   const { bookList, lastPage, page, setPage, setQuery, Dialog } =
-    useGetBooksSearch();
+    useGetBooksSearch({ limit: 3 });
 
   return (
     <SearchModal
@@ -37,7 +37,7 @@ const RentModalBook = ({ selectedBooks, setSelectedBooks, closeModal }) => {
       {isUsingBarcodeReader && <BarcodeReader toDoAfterRead={toDoAfterRead} />}
       {bookList.map(book => (
         <BookList
-          key={book.id}
+          key={book.bookId}
           book={book}
           setSelectedBooks={setSelectedBooks}
           selectedBooks={selectedBooks}

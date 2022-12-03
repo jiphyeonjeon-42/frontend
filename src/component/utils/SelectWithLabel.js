@@ -46,7 +46,11 @@ const SelectWithLabel = ({
       >
         {defaultText && <option>{defaultText}</option>}
         {optionList.map((optionString, index) => {
-          return <option value={index}>{optionString}</option>;
+          return (
+            <option key={optionString} value={index}>
+              {optionString}
+            </option>
+          );
         })}
       </select>
     </div>
@@ -66,7 +70,7 @@ SelectWithLabel.propTypes = {
   align: PropTypes.string,
   selectRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.instanceOf(PropTypes.element),
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
   resetDependency: PropTypes.bool,
 };

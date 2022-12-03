@@ -53,7 +53,7 @@ const RentModalConfirm = ({
 
           return (
             <div
-              key={selectBook.id}
+              key={selectBook.bookId}
               className={`rent-modal__book-info ${isFirst && "second-book"}`}
             >
               <BookInformationWithCover

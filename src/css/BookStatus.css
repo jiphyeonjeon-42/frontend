@@ -5,26 +5,30 @@
 }
 
 .book-status__id {
-  width: 2rem;
   margin-right: 3%;
 }
 
 .book-status__callSign {
-  margin-right: 4%;
-  width: 10rem;
+  margin-right: 3%;
   text-align: center;
 }
 
 .book-status__status {
-  margin-right: 5%;
-  width: 6rem;
+  margin-right: 2%;
   text-align: center;
 }
 
 .book-status__dueDate {
-  width: 5rem;
-  margin-right: 5%;
+  font-size: 1.6rem;
+  line-height: 1.8;
+  margin-right: 3%;
+  width: 9rem;
   text-align: center;
+}
+
+.book-status__donator {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .reservation-btn,
@@ -51,9 +55,15 @@
   margin-top: 0.3rem;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1200px) {
+@media screen and (max-width: 767px) {
   .book-status {
     margin-bottom: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+  }
+  .book-status > * {
+    margin-right: 5%;
+  }
+  .book-status__dueDate {
+    display: none;
   }
 }

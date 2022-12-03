@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "ChosunCentennial";
+  src: url("../font/ChosunCentennial.ttf");
+}
+
+@font-face {
+  font-family: "AppleSDGothicNeoM";
+  src: url("../font//AppleSDGothicNeoM.ttf") format("truetype");
+}
+
+.print-label__print-area {
+  margin: auto;
+  width: 148rem;
+  padding: 2rem 7rem 2rem 7rem;
+  box-sizing: border-box;
+  white-space: normal;
+}
+
+.print-label__labels {
+  box-sizing: border-box;
+  display: inline-block;
+  overflow: hidden;
+}
+.print-label__label,
+.print-label__category-label {
+  width: 13.4rem;
+  height: 23.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: white;
+  margin-bottom: 1rem;
+}
+
+.print-label__category-label__text {
+  padding: 0 0.4rem;
+  font-family: "ChosunCentennial";
+  font-size: 2rem;
+  word-break: break-all;
+  white-space: normal;
+  height: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.print-label__category-label__text > p {
+  text-align: center;
+  word-break: keep-all;
+}
+
+.print-label__category-label__call-sign {
+  font-size: 2rem;
+  margin: 3rem 0 2rem;
+}
+
+.print-label__category-label__call-sign > p {
+  text-align: center;
+}
+
+.print-label__category-label__logo {
+  width: 25%;
+  display: block;
+  margin: auto;
+}
+.print-label__label__qrcode {
+  transform: rotate(90deg);
+  display: block;
+  width: 13rem;
+  height: 13rem;
+}
+
+.print-label__label__call-sign {
+  transform: rotate(90deg);
+  margin: 1.5rem 2.5rem 1rem 5.5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.print-label__label__call-sign > p {
+  font-family: "AppleSDGothicNeoM";
+  text-align: center;
+}
+.print-label__label__logo-text {
+  transform: rotate(90deg);
+  font-family: "ChosunCentennial";
+  font-size: 1.2rem;
+  position: relative;
+  top: -1.6rem;
+  left: -3.5rem;
+  display: block;
+}
+
+.print-label__label__logo {
+  transform: rotate(90deg);
+  position: relative;
+  top: -3rem;
+  left: 2rem;
+  width: 3rem;
+}
+
+@media print {
+  .header,
+  .mobile-header,
+  .footer {
+    display: none;
+  }
+}
