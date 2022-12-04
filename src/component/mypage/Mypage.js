@@ -27,7 +27,7 @@ const Mypage = () => {
   const selectComponent = {
     myRent: <MyRent />,
     myReservation: <MyReservation />,
-    myReview: <MyReview />,
+    myReview: <MyReview type="myReviews" />,
   };
 
   const userId = JSON.parse(window.localStorage.getItem("user")).id;

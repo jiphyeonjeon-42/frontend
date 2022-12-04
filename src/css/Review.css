@@ -69,6 +69,10 @@
   padding: 0rem 3.5rem 0rem 3.5rem;
 }
 
+.review-content-book-title {
+  margin-bottom: 1rem;
+}
+
 .review-content-fix-area {
   width: 90%;
   min-height: 15rem;

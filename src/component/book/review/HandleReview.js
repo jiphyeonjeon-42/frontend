@@ -10,7 +10,7 @@ import useDialog from "../../../hook/useDialog";
 import "../../../css/Review.css";
 import "../../../css/reset.css";
 
-const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
+const HandleReview = ({ data, nickname, createdAt, type, onClickDel }) => {
   const {
     Dialog,
     config,
@@ -78,10 +78,17 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
   return (
     <div className="showReview__review-box">
       <div className="review-info">
-        <span className="reviewer-name font-12-bold">{nickname}</span>
+        {type === "bookReviews" ? (
+          <span className="reviewer-name font-12-bold">{nickname}</span>
+        ) : null}
         <span className="review-day font-12">{uploadDate}</span>
       </div>
       <div className="review-content">
+        {type === "bookReviews" ? null : (
+          <div className="review-content-book-title font-14-bold">
+            {data.title}
+          </div>
+        )}
         {fixReview ? (
           <div>
             <textarea
@@ -151,9 +158,11 @@ HandleReview.propTypes = {
     bookInfoId: PropTypes.number,
     content: PropTypes.string,
     reviewsId: PropTypes.number,
+    title: PropTypes.string,
   }),
   nickname: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   onClickDel: PropTypes.func.isRequired,
 };
 
@@ -162,5 +171,6 @@ HandleReview.defaultProps = {
     bookInfoId: null,
     content: null,
     reviewsId: null,
+    title: null,
   },
 };

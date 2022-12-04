@@ -47,7 +47,7 @@ const Review = ({ bookInfoId }) => {
       <div className="tabs-line" />
       <div className="review-list">
         {currentTab === "showReviews" ? (
-          <ShowReviews bookInfoId={bookInfoId} />
+          <ShowReviews bookInfoId={bookInfoId} type="bookReviews" />
         ) : (
           <PostReview
             onClickPost={setContent}
