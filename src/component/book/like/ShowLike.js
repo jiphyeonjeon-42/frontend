@@ -1,40 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Image from "../../utils/Image";
 import FilledLike from "../../../img/like_filled.svg";
 import EmptyLike from "../../../img/like_empty.svg";
-import useGetLike from "../../../api/like/useGetLike";
+// import useGetLike from "../../../api/like/useGetLike";
 import "../../../css/BookDetail.css";
 import "../../../css/reset.css";
 
-const ShowLike = ({
-  setOpenTitleAndMessage,
-  deleteLike,
-  postLike,
-  initBookInfoId,
-}) => {
-  const [currentLike, setCurrentLike] = useState();
-  const { likeData } = useGetLike({
-    setOpenTitleAndMessage,
-    initBookInfoId,
-    setCurrentLike,
-  });
-
+const ShowLike = ({ deleteLike, postLike, currentLike, likeData }) => {
   const clickLikeHandler = () => {
-    if (likeData.isLiked) {
+    if (currentLike) {
       deleteLike();
-      setCurrentLike(false);
     } else {
       postLike();
-      setCurrentLike(true);
     }
   };
-
-  useEffect(() => {
-    setCurrentLike(likeData.isLiked);
-  }, []);
-
-  console.log(currentLike);
 
   return (
     <div>
@@ -43,7 +23,7 @@ const ShowLike = ({
         type="button"
         onClick={clickLikeHandler}
       >
-        {likeData.isLiked ? (
+        {currentLike ? (
           <Image className="like__icon" src={FilledLike} alt="like" />
         ) : (
           <Image className="like__icon" src={EmptyLike} alt="unlike" />
@@ -57,21 +37,20 @@ const ShowLike = ({
 export default ShowLike;
 
 ShowLike.propTypes = {
-  setOpenTitleAndMessage: PropTypes.func.isRequired,
   deleteLike: PropTypes.func.isRequired,
   postLike: PropTypes.func.isRequired,
-  initBookInfoId: PropTypes.number.isRequired,
-  // currentLike: PropTypes.number.isRequired,
-  // likeData: PropTypes.shape({
-  //   bookInfoId: PropTypes.number.isRequired,
-  //   isLiked: PropTypes.bool,
-  //   likeNum: PropTypes.number,
-  // }),
+  // initBookInfoId: PropTypes.number.isRequired,
+  currentLike: PropTypes.bool.isRequired,
+  likeData: PropTypes.shape({
+    bookInfoId: PropTypes.number.isRequired,
+    isLiked: PropTypes.bool,
+    likeNum: PropTypes.number,
+  }),
 };
 
-// ShowLike.defaultProps = {
-//   likeData: {
-//     isLiked: false,
-//     likeNum: 0,
-//   },
-// };
+ShowLike.defaultProps = {
+  likeData: {
+    isLiked: false,
+    likeNum: 0,
+  },
+};

@@ -120,6 +120,7 @@
 
 .like__icon {
   width: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1200px) {
