@@ -60,11 +60,10 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
   };
 
   const patchReview = () => {
-    console.log(content);
     const text = {
       content,
     };
-    axiosPromise("patch", `/reviews/${data.reviewsId}`, text);
+    axiosPromise("put", `/reviews/${data.reviewsId}`, text);
   };
 
   const patchBtn = () => {
