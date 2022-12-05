@@ -1,35 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { reviewTabList } from "../../../data/tablist";
 import PostReview from "./PostReview";
 import "../../../css/Tabs.css";
 import "../../../css/Review.css";
-import axiosPromise from "../../../util/axios";
 import ShowReviews from "./ShowReviews";
+import useTabFocus from "./useTabFocus";
+import usePostReview from "./usePostReview";
+import useDialog from "../../../hook/useDialog";
 
-const useFocus = (initialTab, tabList) => {
-  const [currentIndex, setCurretIndex] = useState(initialTab);
-  return {
-    currentTab: tabList[currentIndex].type,
-    changeTab: setCurretIndex,
-  };
-};
 const Review = ({ bookInfoId }) => {
-  const { currentTab, changeTab } = useFocus(0, reviewTabList);
-  const postReview = reviewContent => {
-    if (reviewContent !== null) {
-      axiosPromise("post", "/reviews", {
-        bookInfoId,
-        content: reviewContent,
-      }).then(() => changeTab(0));
-    }
-  };
+  const { currentTab, changeTab } = useTabFocus(0, reviewTabList);
+  const {
+    Dialog,
+    config,
+    setConfig: setDialogConfig,
+    setOpen: openDialog,
+    setClose: closeDialog,
+    setOpenTitleAndMessage,
+  } = useDialog();
+  const { setContent } = usePostReview({
+    setOpenTitleAndMessage,
+    setClose: closeDialog,
+    bookInfoId,
+    changeTab,
+  });
 
   return (
     <>
       <div className="tabs">
         {reviewTabList.map((tab, index) => (
           <div
+            key={tab.type}
             className={`tab tab-${
               tab.type === currentTab ? "on" : "not"
             }-focus`}
@@ -45,9 +47,17 @@ const Review = ({ bookInfoId }) => {
       <div className="tabs-line" />
       <div className="review-list">
         {currentTab === "showReviews" ? (
-          <ShowReviews bookInfoId={bookInfoId} />
+          <ShowReviews bookInfoId={bookInfoId} type="bookReviews" />
         ) : (
-          <PostReview onClickPost={postReview} />
+          <PostReview
+            onClickPost={setContent}
+            setDialogConfig={setDialogConfig}
+            Dialog={Dialog}
+            openDialog={openDialog}
+            closeDialog={closeDialog}
+            changeTab={changeTab}
+            config={config}
+          />
         )}
       </div>
     </>
@@ -57,5 +67,5 @@ const Review = ({ bookInfoId }) => {
 export default Review;
 
 Review.propTypes = {
-  bookInfoId: PropTypes.number.isRequired,
+  bookInfoId: PropTypes.string.isRequired,
 };

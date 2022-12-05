@@ -45,8 +45,8 @@ const useDialog = () => {
       firstButton: {
         ...config.firstButton,
         onClick: () => {
-          afterClose();
           setClose();
+          afterClose();
         },
       },
     });

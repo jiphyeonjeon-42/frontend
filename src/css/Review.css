@@ -1,7 +1,7 @@
 .showReview__review-box {
-	display: flex;
+  display: flex;
   min-height: 10rem;
-	position: relative;
+  position: relative;
   margin: 2rem 0;
   border-radius: 2rem;
   background-color: #e8e8e8;
@@ -11,7 +11,7 @@
 .do-review__review-box {
   display: block;
   height: 25rem;
-	position: relative;
+  position: relative;
   margin: 2rem 0;
   border-radius: 2rem;
   background-color: #e8e8e8;
@@ -69,8 +69,12 @@
   padding: 0rem 3.5rem 0rem 3.5rem;
 }
 
+.review-content-book-title {
+  margin-bottom: 1rem;
+}
+
 .review-content-fix-area {
-  width:90%;
+  width: 90%;
   min-height: 15rem;
   padding: 1rem;
   border: none;
@@ -80,7 +84,7 @@
 }
 
 .review-content-area {
-  width:90%;
+  width: 90%;
   min-height: 7rem;
   border: none;
   border-radius: 0.5rem;
@@ -97,17 +101,17 @@
 }
 
 .review-manage {
-	width: 15%;
-  padding-left: 4rem;
+  width: 15%;
+  padding-left: 5rem;
   position: relative;
 }
 
-.review-manage__fix-buttons > button{
+.review-manage__fix-buttons > button {
   display: block;
   margin-bottom: 1rem;
 }
 
-.review-manage__start-fix-buttons button{
+.review-manage__start-fix-buttons button {
   all: unset;
   cursor: pointer;
   width: 7rem;
@@ -119,5 +123,37 @@
 }
 
 .review-manage__button-img {
-  width: 1.8rem;
+  width: 1.2rem;
+}
+
+@media screen and (max-width: 767px) {
+  .showReview__review-box {
+    padding: 4rem 2rem;
+  }
+
+  .review-info:after {
+    display: none;
+  }
+
+  .review-manage:before {
+    display: none;
+  }
+
+  .review-info {
+    width: 0;
+    padding-left: 0;
+    position: relative;
+  }
+
+  .review-content {
+    width: 70%;
+    padding: 0rem 1.5rem 0rem 6rem;
+    position: relative;
+  }
+
+  .review-manage {
+    width: 0;
+    padding: 0 7rem 0 0rem;
+    position: relative;
+  }
 }

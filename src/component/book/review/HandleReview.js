@@ -6,14 +6,21 @@ import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
 import UserEdit from "../../../img/edit.svg";
 import DeleteButton from "../../../img/x_button.svg";
+import useDialog from "../../../hook/useDialog";
 import "../../../css/Review.css";
 import "../../../css/reset.css";
 
-const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
+const HandleReview = ({ data, nickname, createdAt, type, onClickDel }) => {
+  const {
+    Dialog,
+    config,
+    setConfig: setDialogConfig,
+    setOpen: openDialog,
+    setClose: closeDialog,
+  } = useDialog();
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const uploadDate = splitDate(createdAt)[0];
-  // 작성자와 사용자 비교는 어떻게 하는지 알겠음. 근데 사서인지 아닌지 어떤걸로 구분하지?
   const user = JSON.parse(window.localStorage.getItem("user")).userName;
   const roleAdmin = JSON.parse(window.localStorage.getItem("user")).isAdmin;
   const checkReviewer = user === nickname;
@@ -28,16 +35,35 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
     return setFixReview(!fixReview);
   };
 
-  const deleteBtn = () => {
+  const deleteReview = () => {
     onClickDel(data.reviewsId);
   };
 
+  const deleteBtn = () => {
+    setDialogConfig({
+      ...config,
+      title: "리뷰를 삭제하시겠습니까?",
+      buttonAlign: "basic",
+      numberOfButtons: 2,
+      firstButton: {
+        text: "확인하기",
+        color: "red",
+        onClick: deleteReview,
+      },
+      secondButton: {
+        text: "취소하기",
+        color: "grey",
+        onClick: closeDialog,
+      },
+    });
+    openDialog();
+  };
+
   const patchReview = () => {
-    console.log(content);
     const text = {
       content,
     };
-    axiosPromise("patch", `/reviews/${data.reviewsId}`, text);
+    axiosPromise("put", `/reviews/${data.reviewsId}`, text);
   };
 
   const patchBtn = () => {
@@ -52,10 +78,17 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
   return (
     <div className="showReview__review-box">
       <div className="review-info">
-        <span className="reviewer-name font-12-bold">{nickname}</span>
+        {type === "bookReviews" ? (
+          <span className="reviewer-name font-12-bold">{nickname}</span>
+        ) : null}
         <span className="review-day font-12">{uploadDate}</span>
       </div>
       <div className="review-content">
+        {type === "bookReviews" ? null : (
+          <div className="review-content-book-title font-14-bold">
+            {data.title}
+          </div>
+        )}
         {fixReview ? (
           <div>
             <textarea
@@ -79,8 +112,17 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
         <div className="review-manage">
           {fixReview ? (
             <div className="review-manage__fix-buttons">
-              <Button value="수정하기" color="red" onClick={patchBtn} />
-              <Button value="취소하기" onClick={cancelFixBtn} />
+              <Button
+                value="수정하기"
+                className="button-small-size"
+                color="red"
+                onClick={patchBtn}
+              />
+              <Button
+                value="취소하기"
+                className="button-small-size"
+                onClick={cancelFixBtn}
+              />
             </div>
           ) : (
             <div className="review-manage__start-fix-buttons font-12">
@@ -104,6 +146,7 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
           )}
         </div>
       ) : null}
+      <Dialog />
     </div>
   );
 };
@@ -115,9 +158,11 @@ HandleReview.propTypes = {
     bookInfoId: PropTypes.number,
     content: PropTypes.string,
     reviewsId: PropTypes.number,
+    title: PropTypes.string,
   }),
   nickname: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   onClickDel: PropTypes.func.isRequired,
 };
 
@@ -126,5 +171,6 @@ HandleReview.defaultProps = {
     bookInfoId: null,
     content: null,
     reviewsId: null,
+    title: null,
   },
 };

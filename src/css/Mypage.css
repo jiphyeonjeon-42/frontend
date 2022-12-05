@@ -161,6 +161,9 @@
   .mypage-subtitle__titlebox__guide__2 {
     white-space: break-spaces;
   }
+  .mypage-inquire-box-long {
+    padding: 5rem 0rem 0rem 0rem;
+  }
 }
 
 @media screen and (max-width: 350px) {

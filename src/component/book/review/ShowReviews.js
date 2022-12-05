@@ -5,7 +5,7 @@ import "../../../css/Tabs.css";
 import "../../../css/Review.css";
 import axiosPromise from "../../../util/axios";
 
-const ShowReviews = ({ bookInfoId }) => {
+const ShowReviews = ({ bookInfoId, type }) => {
   const [hasNextPage, setHasNextPage] = useState(true);
   const [postReviews, setPostReviews] = useState([]);
   const observeReviewList = useRef(null);
@@ -16,21 +16,18 @@ const ShowReviews = ({ bookInfoId }) => {
     setPostReviews(temp);
     axiosPromise("delete", `/reviews/${reviewsId}`);
   };
-
+  // const last = postReviews[postReviews.length - 1];
+  // console.log("last", last);
+  // console.log(postReviews);
   const fetch = useCallback(async () => {
     try {
       axiosPromise(
         "get",
-        "reviews",
-        {
-          bookInfoId,
-          userId: "",
-          page: page.current,
-        },
-        // 유저 아이디와 내림, 오름차순 옵션 넣기
+        `/book-info/${bookInfoId}/reviews?reviewsId=${page.current}`,
       ).then(res => {
         if (res.data.items.length !== 0) {
           setPostReviews(prevPosts => [...prevPosts, ...res.data.items]);
+          // const lastElement = postReviews[postReviews.length - 1];
           setHasNextPage(res.data.meta.finalPage === false);
         }
       });
@@ -61,6 +58,7 @@ const ShowReviews = ({ bookInfoId }) => {
           data={data}
           nickname={data.nickname}
           createdAt={data.createdAt}
+          type={type}
           onClickDel={deleteReview}
         />
       ))}
@@ -73,4 +71,5 @@ export default ShowReviews;
 
 ShowReviews.propTypes = {
   bookInfoId: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
 };
