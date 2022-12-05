@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axiosPromise from "../../../util/axios";
-import Button from "../../utils/Button";
 import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
 import UserEdit from "../../../img/edit.svg";
@@ -111,18 +110,17 @@ const HandleReview = ({ data, nickname, createdAt, type, onClickDel }) => {
       {permisson ? (
         <div className="review-manage">
           {fixReview ? (
-            <div className="review-manage__fix-buttons">
-              <Button
-                value="수정하기"
-                className="button-small-size"
-                color="red"
-                onClick={patchBtn}
-              />
-              <Button
-                value="취소하기"
-                className="button-small-size"
+            <div className="review-manage__fix-buttons font-12">
+              <button type="button" onClick={patchBtn}>
+                <span className="fix-text">수 정 하 기</span>
+              </button>
+              <button
+                className="review-manage__fix-cancle"
+                type="button"
                 onClick={cancelFixBtn}
-              />
+              >
+                취 소 하 기
+              </button>
             </div>
           ) : (
             <div className="review-manage__start-fix-buttons font-12">

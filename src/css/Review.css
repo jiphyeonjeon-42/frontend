@@ -2,10 +2,9 @@
   display: flex;
   min-height: 10rem;
   position: relative;
-  margin: 2rem 0;
   border-radius: 2rem;
   background-color: #e8e8e8;
-  padding: 4rem 6rem;
+  padding: 2rem 4rem;
 }
 
 .do-review__review-box {
@@ -75,7 +74,7 @@
 
 .review-content-fix-area {
   width: 90%;
-  min-height: 15rem;
+  min-height: 10rem;
   padding: 1rem;
   border: none;
   resize: none;
@@ -107,8 +106,22 @@
 }
 
 .review-manage__fix-buttons > button {
-  display: block;
+  /* display: block;
+  margin-bottom: 1rem; */
+  color: red;
+  all: unset;
+  cursor: pointer;
+  width: 7rem;
+  display: flex;
   margin-bottom: 1rem;
+  align-items: center;
+  justify-content: space-around;
+  flex-shrink: 0;
+}
+
+.fix-text {
+  color: red;
+  font-weight: bold;
 }
 
 .review-manage__start-fix-buttons button {
@@ -128,7 +141,7 @@
 
 @media screen and (max-width: 767px) {
   .showReview__review-box {
-    padding: 4rem 2rem;
+    padding: 2rem 0rem;
   }
 
   .review-info:after {
@@ -153,7 +166,7 @@
 
   .review-manage {
     width: 0;
-    padding: 0 7rem 0 0rem;
+    padding: 0 6rem 0 0rem;
     position: relative;
   }
 }
