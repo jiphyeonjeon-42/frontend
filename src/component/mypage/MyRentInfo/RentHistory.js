@@ -9,7 +9,7 @@ const RentHistory = () => {
   });
 
   return (
-    <div className="histories-table__inquire-box">
+    <div>
       {historiesList.map(factor => (
         <RentHistoryTable key={factor.id} factor={factor} />
       ))}
