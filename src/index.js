@@ -10,6 +10,10 @@ Sentry.init({
   dsn: "https://a03d63cfc79147d292b9b09630e70e4a@o4504156227567616.ingest.sentry.io/4504156228485120",
   integrations: [new BrowserTracing()],
   tracesSampleRate: 1.0,
+  environment:
+    process.env.REACT_APP_API === "http://localhost:3000/api"
+      ? "development"
+      : "production",
 });
 
 ReactDOM.render(
