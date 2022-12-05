@@ -30,6 +30,7 @@ const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
 
   useEffect(() => {
     if (bookInfoId) request(refineResponse, displayError);
+    setBookInfoId(null);
   }, [bookInfoId]);
 
   return { setBookInfoId, likeData };
