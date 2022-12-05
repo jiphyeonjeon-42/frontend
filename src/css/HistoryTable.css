@@ -1,0 +1,118 @@
+.histories__table-list {
+  display: flex;
+  width: 108rem;
+  margin-left: auto;
+  padding-top: 4rem;
+}
+
+.histories__table-list__button {
+  width: 100%;
+  background: none;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  border-bottom: 0.1rem solid #a4a4a4;
+  padding-bottom: 4rem;
+  cursor: pointer;
+}
+
+.histories__table-list__title {
+  display: grid;
+  align-items: center;
+  margin-bottom: 2rem;
+  word-break: keep-all;
+  white-space: normal;
+  font-size: 1.8rem;
+  font-weight: bold;
+  grid-template-columns: 0.8fr 0.2fr 0.1fr;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.histories__table-list__arr {
+  width: 0.8rem;
+  height: 1.6rem;
+  margin-right: 4rem;
+  margin-left: 0;
+}
+
+.histories__table-list__name {
+  width: 12.1rem;
+  padding-right: 4rem;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.histories__table-list__info {
+  display: grid;
+  grid-template-columns: 0.1fr 0.1fr 0.58fr 0.18fr;
+  margin-right: 6rem;
+  font-size: medium;
+  text-align: left;
+}
+
+.histories-callSign {
+  margin-right: 1rem;
+}
+
+.histories-login {
+  margin-left: 1rem;
+}
+
+.re-dueDate {
+  margin-right: 2.8rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .histories__table-list {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .histories__table-list_date_wrapper {
+    display: none;
+  }
+
+  .histories__table-list__title {
+    display: grid;
+    align-items: center;
+    margin-bottom: 2rem;
+    word-break: keep-all;
+    white-space: normal;
+    font-size: 1.8rem;
+    font-weight: bold;
+    grid-template-columns: 0.9fr 0.1fr;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .histories-callSign {
+    display: none;
+  }
+
+  .histories__table-list__name {
+    margin-bottom: 1.1rem;
+  }
+
+  .histories__table-list__title {
+    font-size: 1.6rem;
+  }
+
+  .histories__table-list__text {
+    margin: 2rem;
+    padding: 2rem;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .histories__table-list__info > span {
+    font-size: 1.4rem;
+    display: block;
+  }
+}
