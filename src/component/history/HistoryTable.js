@@ -4,17 +4,17 @@ import Image from "../utils/Image";
 import Arr from "../../img/arrow_right_black.svg";
 import "../../css/HistoryTable.css";
 
-const HistoryTable = ({ factor }) => {
+const HistoryTable = ({ history }) => {
   return (
     <div className="histories__table-list">
       <span className="histories__table-list__name font-16-bold color-54">
-        {factor?.login}
+        {history?.login}
       </span>
       <button className="histories__table-list__button" type="button">
         <div className="histories__table-list__title color-54">
-          {factor?.title}
+          {history?.title}
           <span className="histories-callSign font-16 color-54">
-            {factor?.callSign}
+            {history?.callSign}
           </span>
           <Image className="histories__table-list__arr" src={Arr} alt="arrow" />
         </div>
@@ -22,26 +22,26 @@ const HistoryTable = ({ factor }) => {
           <div className="histories__table-list__info color-54">
             대출정보 :
             <span className="histories__table-list__text">
-              {factor?.createdAt}
+              {history?.createdAt}
             </span>
             <span className="histories__table-list__text">
-              {factor?.lendingLibrarianNickName}
+              {history?.lendingLibrarianNickName}
             </span>
             <span className="histories__table-list__text">
-              {factor?.lendingCondition}
+              {history?.lendingCondition}
             </span>
           </div>
-          {factor?.returnedAt && (
+          {history?.returnedAt && (
             <div className="histories__table-list__info color-54">
               반납정보 :
               <span className="histoies__table-list__text">
-                {factor?.returnedAt}
+                {history?.returnedAt}
               </span>
               <span className="histoies__table-list__text">
-                {factor?.returningLibrarianNickname}
+                {history?.returningLibrarianNickname}
               </span>
               <span className="histoies__table-list__text">
-                {factor?.returningCondition}
+                {history?.returningCondition}
               </span>
             </div>
           )}

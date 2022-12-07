@@ -37,8 +37,8 @@ const History = () => {
           <div className="histories-filter">
             <HistoryFilter type={type} setType={setType} />
           </div>
-          {historiesList.map(factor => (
-            <HistoryTable key={factor.id} factor={factor} />
+          {historiesList.map(history => (
+            <HistoryTable key={history.id} history={history} />
           ))}
           <div className="histories-table__pagination">
             <Pagination page={page} setPage={setPage} lastPage={lastPage} />
