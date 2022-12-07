@@ -7,7 +7,7 @@ import EmptyLike from "../../../img/like_empty.svg";
 import "../../../css/BookDetail.css";
 import "../../../css/reset.css";
 
-const ShowLike = ({ deleteLike, postLike, currentLike, likeData }) => {
+const ShowLike = ({ deleteLike, postLike, currentLike, currentLikeNum }) => {
   const clickLikeHandler = () => {
     if (currentLike) {
       deleteLike();
@@ -28,7 +28,7 @@ const ShowLike = ({ deleteLike, postLike, currentLike, likeData }) => {
         ) : (
           <Image className="like__icon" src={EmptyLike} alt="unlike" />
         )}
-        {`좋아요 ${likeData.likeNum}`}
+        {`좋아요 ${currentLikeNum}`}
       </button>
     </div>
   );
@@ -39,18 +39,6 @@ export default ShowLike;
 ShowLike.propTypes = {
   deleteLike: PropTypes.func.isRequired,
   postLike: PropTypes.func.isRequired,
-  // initBookInfoId: PropTypes.number.isRequired,
   currentLike: PropTypes.bool.isRequired,
-  likeData: PropTypes.shape({
-    bookInfoId: PropTypes.number.isRequired,
-    isLiked: PropTypes.bool,
-    likeNum: PropTypes.number,
-  }),
-};
-
-ShowLike.defaultProps = {
-  likeData: {
-    isLiked: false,
-    likeNum: 0,
-  },
+  currentLikeNum: PropTypes.number.isRequired,
 };

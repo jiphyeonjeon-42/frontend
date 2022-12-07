@@ -11,11 +11,12 @@ import ShowLike from "./ShowLike";
 const Like = ({ initBookInfoId }) => {
   const { setOpenTitleAndMessage } = useDialog();
   const [currentLike, setCurrentLike] = useState();
-  const { likeData } = useGetLike({
+  const [currentLikeNum, setCurrentLikeNum] = useState(0);
+  useGetLike({
     setOpenTitleAndMessage,
     initBookInfoId,
     setCurrentLike,
-    currentLike,
+    setCurrentLikeNum,
   });
   const { setBookInfoId: setDeleteLike } = useDeleteLike({
     setOpenTitleAndMessage,
@@ -26,10 +27,12 @@ const Like = ({ initBookInfoId }) => {
   const deleteLike = () => {
     setCurrentLike(false);
     setDeleteLike(initBookInfoId);
+    setCurrentLikeNum(currentLikeNum - 1);
   };
   const postLike = () => {
     setCurrentLike(true);
     setPostLike(initBookInfoId);
+    setCurrentLikeNum(currentLikeNum + 1);
   };
   return (
     <>
@@ -39,7 +42,7 @@ const Like = ({ initBookInfoId }) => {
         postLike={postLike}
         initBookInfoId={initBookInfoId}
         currentLike={currentLike}
-        likeData={likeData}
+        currentLikeNum={currentLikeNum}
       />
     </>
   );
