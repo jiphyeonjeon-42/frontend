@@ -68,6 +68,9 @@
   .histories__table-list {
     width: 90%;
   }
+  .histories__table-list_date_wrapper {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 767px) {
