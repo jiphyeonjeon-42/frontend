@@ -4,13 +4,22 @@ import Image from "../utils/Image";
 import Arr from "../../img/arrow_right_black.svg";
 import "../../css/HistoryTable.css";
 
-const HistoryTable = ({ history }) => {
+const HistoryTable = ({ history, openModal, setInfo }) => {
+  const openSetModal = () => {
+    setInfo(history);
+    openModal();
+  };
+
   return (
     <div className="histories__table-list">
       <span className="histories__table-list__name font-16-bold color-54">
         {history?.login}
       </span>
-      <button className="histories__table-list__button" type="button">
+      <button
+        className="histories__table-list__button"
+        type="button"
+        onClick={openSetModal}
+      >
         <div className="histories__table-list__title color-54">
           {history?.title}
           <span className="histories-callSign font-16 color-54">
