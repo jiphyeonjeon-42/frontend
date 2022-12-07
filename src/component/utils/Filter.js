@@ -45,10 +45,12 @@ const Filter = ({ filterList, selectedType, setSelectedType }) => {
 export default Filter;
 
 Filter.propTypes = {
-  filterList: PropTypes.arrayOf({
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
+  filterList: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   selectedType: PropTypes.string.isRequired,
   setSelectedType: PropTypes.func.isRequired,
 };
