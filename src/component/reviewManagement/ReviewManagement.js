@@ -5,10 +5,25 @@ import Tabs from "../utils/Tabs";
 import Management from "../utils/Management";
 import { managementTabList } from "../../data/tablist";
 import ReviewManagementList from "./ReviewManagementList";
+import Filter from "../utils/Filter";
+
+const reviewFilterList = [
+  { name: "공개만 보기", type: "0" },
+  { name: "비공개만 보기", type: "1" },
+];
 
 const ReviewManagement = () => {
-  const { page, setPage, setQuery, reviewList, lastPage, Dialog } =
-    useGetReviews();
+  const {
+    page,
+    setPage,
+    setQuery,
+    selectedType,
+    setSelecetedType,
+    reviewList,
+    lastPage,
+    Dialog,
+  } = useGetReviews();
+
   return (
     <main>
       <Dialog />
@@ -26,7 +41,16 @@ const ReviewManagement = () => {
             <span className="review-management__list__scope">비공개 여부</span>
           </>
         }
-        BoxFragement={<ReviewManagementList reviewList={reviewList} />}
+        BoxFragement={
+          <>
+            <Filter
+              filterList={reviewFilterList}
+              selectedType={selectedType}
+              setSelecetedType={setSelecetedType}
+            />
+            <ReviewManagementList reviewList={reviewList} />
+          </>
+        }
         page={page}
         setPage={setPage}
         lastPage={lastPage}

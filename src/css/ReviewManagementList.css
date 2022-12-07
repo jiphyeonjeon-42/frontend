@@ -7,6 +7,9 @@
 .review-management__list__item:not(:first-of-type) {
   border-top: solid 0.1rem #a4a4a4;
 }
+.review-management__list__item:nth-child(2) {
+  border: none;
+}
 
 .review-management__list__item > * {
   display: inline-block;

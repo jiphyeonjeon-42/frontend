@@ -5,7 +5,7 @@ const useGetReviews = () => {
   const [params, setParams] = useState({
     titleOrNickname: "",
     page: 1,
-    diabled: undefined,
+    disabled: "-1",
   });
 
   const [result, setResult] = useState({
@@ -19,9 +19,14 @@ const useGetReviews = () => {
   const setQuery = query => {
     setParams({ ...params, titleOrNickname: query });
   };
-  const setDisabled = diabled => {
-    setParams({ ...params, diabled });
+  const setSelecetedType = type => {
+    setParams({ ...params, disabled: type });
   };
+
+  const { request, Dialog } = useApi("get", "reviews", {
+    ...params,
+    page: params.page - 1,
+  });
 
   const refineResponse = response => {
     const { items } = response.data;
@@ -29,11 +34,6 @@ const useGetReviews = () => {
 
     setResult({ reviewList: items, lastPage: totalPages });
   };
-
-  const { request, Dialog } = useApi("get", "reviews", {
-    ...params,
-    page: params.page - 1,
-  });
 
   useEffect(() => {
     request(refineResponse);
@@ -43,8 +43,8 @@ const useGetReviews = () => {
     page: params.page,
     setPage,
     setQuery,
-    disabled: params.diabled,
-    setDisabled,
+    selectedType: params.disabled,
+    setSelecetedType,
     reviewList: result.reviewList,
     lastPage: result.lastPage,
     Dialog,
