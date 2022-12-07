@@ -29,26 +29,26 @@ const HistoryTable = ({ history, openModal, setInfo }) => {
         </div>
         <div className="histories__table-list_date_wrapper">
           <div className="histories__table-list__info color-54">
-            대출정보 :
             <span className="histories__table-list__text">
               {history?.createdAt}
             </span>
             <span className="histories__table-list__text">
               {history?.lendingLibrarianNickName}
             </span>
+            <span />
             <span className="histories__table-list__text">
               {history?.lendingCondition}
             </span>
           </div>
           {history?.returnedAt && (
             <div className="histories__table-list__info color-54">
-              반납정보 :
               <span className="histoies__table-list__text">
                 {history?.returnedAt}
               </span>
               <span className="histoies__table-list__text">
                 {history?.returningLibrarianNickname}
               </span>
+              <span />
               <span className="histoies__table-list__text">
                 {history?.returningCondition}
               </span>
