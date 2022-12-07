@@ -1,0 +1,36 @@
+.filter__wrapper {
+  padding-right: 6.8rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter__filter-list {
+  margin: 2rem 0;
+}
+
+.filter__button {
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  border: 0;
+}
+
+.filter__button:not(:first-child) {
+  margin-left: 2.4rem;
+}
+
+.filter__button__icon {
+  margin-right: 1.2rem;
+}
+
+@media screen and (max-width: 767px) {
+  .filter__wrapper {
+    padding-right: 3rem;
+  }
+  .filter__filter-list {
+    margin: 1rem 0;
+  }
+  .filter__button__text {
+    font-size: 1.4rem;
+  }
+}
