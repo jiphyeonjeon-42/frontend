@@ -3,20 +3,24 @@ import useApi from "../../hook/useApi";
 
 const useGetReviews = () => {
   const [params, setParams] = useState({
-    bookInfoid: "",
-    userId: "",
-    title: "",
-    intraId: "",
+    titleOrNickname: "",
     page: 1,
-    sort: "DESC",
+    diabled: undefined,
   });
 
   const [result, setResult] = useState({
     reviewList: [],
     lastPage: 5,
   });
+
   const setPage = page => {
     setParams({ ...params, page });
+  };
+  const setQuery = query => {
+    setParams({ ...params, titleOrNickname: query });
+  };
+  const setDisabled = diabled => {
+    setParams({ ...params, diabled });
   };
 
   const refineResponse = response => {
@@ -38,6 +42,9 @@ const useGetReviews = () => {
   return {
     page: params.page,
     setPage,
+    setQuery,
+    disabled: params.diabled,
+    setDisabled,
     reviewList: result.reviewList,
     lastPage: result.lastPage,
     Dialog,

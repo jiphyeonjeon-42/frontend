@@ -7,7 +7,8 @@ import { managementTabList } from "../../data/tablist";
 import ReviewManagementList from "./ReviewManagementList";
 
 const ReviewManagement = () => {
-  const { page, setPage, reviewList, lastPage, Dialog } = useGetReviews();
+  const { page, setPage, setQuery, reviewList, lastPage, Dialog } =
+    useGetReviews();
   return (
     <main>
       <Dialog />
@@ -15,8 +16,7 @@ const ReviewManagement = () => {
       <Tabs tabList={managementTabList} />
       <Management
         searchBarPlaceHolder="도서명이나 닉네임을 검색하세요"
-        // TODO: 검색창 처리 필요
-        setQuery={() => {}}
+        setQuery={setQuery}
         TitleFragement={
           <>
             <span className="review-management__list__id">ID</span>
