@@ -19,7 +19,7 @@ const useGetReviews = () => {
   const setQuery = query => {
     setParams({ ...params, titleOrNickname: query });
   };
-  const setSelecetedType = type => {
+  const setSelectedType = type => {
     setParams({ ...params, disabled: type });
   };
 
@@ -44,7 +44,7 @@ const useGetReviews = () => {
     setPage,
     setQuery,
     selectedType: params.disabled,
-    setSelecetedType,
+    setSelectedType,
     reviewList: result.reviewList,
     lastPage: result.lastPage,
     Dialog,

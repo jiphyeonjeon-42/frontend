@@ -5,11 +5,9 @@ import CheckIcon from "../../img/check_icon.svg";
 import RedCheckIcon from "../../img/check_icon_red.svg";
 import "../../css/Filter.css";
 
-const Filter = ({ filterList, selectedType, setSelecetedType }) => {
+const Filter = ({ filterList, selectedType, setSelectedType }) => {
   const onClickFilter = e => {
-    const clickedType = e.currentTarget.value;
-    const isSelected = selectedType === clickedType;
-    setSelecetedType(isSelected ? undefined : clickedType);
+    setSelectedType(e.currentTarget.value);
   };
 
   return (
@@ -52,5 +50,5 @@ Filter.propTypes = {
     type: PropTypes.string.isRequired,
   }).isRequired,
   selectedType: PropTypes.string.isRequired,
-  setSelecetedType: PropTypes.func.isRequired,
+  setSelectedType: PropTypes.func.isRequired,
 };

@@ -18,7 +18,7 @@ const ReviewManagement = () => {
     setPage,
     setQuery,
     selectedType,
-    setSelecetedType,
+    setSelectedType,
     reviewList,
     lastPage,
     Dialog,
@@ -46,7 +46,7 @@ const ReviewManagement = () => {
             <Filter
               filterList={reviewFilterList}
               selectedType={selectedType}
-              setSelecetedType={setSelecetedType}
+              setSelectedType={setSelectedType}
             />
             <ReviewManagementList reviewList={reviewList} />
           </>
