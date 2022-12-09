@@ -6,49 +6,43 @@ import "../../../css/Review.css";
 import axiosPromise from "../../../util/axios";
 
 const ShowReviews = ({ bookInfoId, type }) => {
-  const [hasNextPage, setHasNextPage] = useState(true);
   const [postReviews, setPostReviews] = useState([]);
   const observeReviewList = useRef(null);
-  const page = useRef(0);
+  const totalLeftPages = useRef();
+  const lastReviewId = useRef();
 
   const deleteReview = reviewsId => {
     const temp = postReviews.filter(review => review.reviewsId !== reviewsId);
     setPostReviews(temp);
     axiosPromise("delete", `/reviews/${reviewsId}`);
   };
-  // const last = postReviews[postReviews.length - 1];
-  // console.log("last", last);
-  // console.log(postReviews);
+
   const fetch = useCallback(async () => {
     try {
       axiosPromise(
         "get",
-        `/book-info/${bookInfoId}/reviews?reviewsId=${page.current}`,
+        `/book-info/${bookInfoId}/reviews?reviewsId=${lastReviewId.current}&limit=5`,
       ).then(res => {
         if (res.data.items.length !== 0) {
           setPostReviews(prevPosts => [...prevPosts, ...res.data.items]);
-          // const lastElement = postReviews[postReviews.length - 1];
-          setHasNextPage(res.data.meta.finalPage === false);
+          lastReviewId.current = res.data.meta.finalReviewsId;
+          totalLeftPages.current = res.data.meta.totalLeftPages;
         }
       });
-      if (hasNextPage) {
-        page.current += 1;
-      }
     } catch (err) {
       console.error(err);
     }
   }, []);
 
   useEffect(() => {
-    if (!observeReviewList.current || !hasNextPage) return;
-
+    if (totalLeftPages === 0) return;
     const io = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
         fetch();
       }
     });
     io.observe(observeReviewList.current);
-  }, [fetch, hasNextPage]);
+  }, []);
 
   return (
     <>
