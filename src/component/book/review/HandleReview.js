@@ -17,10 +17,10 @@ const HandleReview = ({
   type,
   onClickDel,
 }) => {
-  console.log(checkLogin);
   const {
     Dialog,
     config,
+    setOpenTitleAndMessage,
     setConfig: setDialogConfig,
     setOpen: openDialog,
     setClose: closeDialog,
@@ -40,7 +40,6 @@ const HandleReview = ({
     return permission;
   };
   const permission = getPermission();
-  console.log(permission, "??");
   const doFixBtn = () => {
     return setFixReview(!fixReview);
   };
@@ -78,12 +77,17 @@ const HandleReview = ({
     const text = {
       content,
     };
-    axiosPromise("put", `/reviews/${data.reviewsId}`, text);
+    axiosPromise("put", `/reviews/${data.reviewsId}`, text)
+      .then(() => {
+        setFixReview(!fixReview);
+      })
+      .catch(() => {
+        setOpenTitleAndMessage("10자 이상 420자 이하로 입력해주세요.", "");
+      });
   };
 
-  const patchBtn = () => {
+  const putBtn = () => {
     patchReview(data.reviewsId, content);
-    return setFixReview(!fixReview);
   };
 
   const reviewFixArea = e => {
@@ -127,7 +131,7 @@ const HandleReview = ({
         <div className="review-manage">
           {fixReview ? (
             <div className="review-manage__fix-buttons font-12">
-              <button type="button" onClick={patchBtn}>
+              <button type="button" onClick={putBtn}>
                 <span className="fix-text">수정하기</span>
               </button>
               <button
