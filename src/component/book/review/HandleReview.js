@@ -9,7 +9,15 @@ import useDialog from "../../../hook/useDialog";
 import "../../../css/Review.css";
 import "../../../css/reset.css";
 
-const HandleReview = ({ data, nickname, createdAt, type, onClickDel }) => {
+const HandleReview = ({
+  data,
+  nickname,
+  createdAt,
+  checkLogin,
+  type,
+  onClickDel,
+}) => {
+  console.log(checkLogin);
   const {
     Dialog,
     config,
@@ -20,11 +28,19 @@ const HandleReview = ({ data, nickname, createdAt, type, onClickDel }) => {
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const uploadDate = splitDate(createdAt)[0];
-  const user = JSON.parse(window.localStorage.getItem("user")).userName;
-  const roleAdmin = JSON.parse(window.localStorage.getItem("user")).isAdmin;
-  const checkReviewer = user === nickname;
-  const permisson = roleAdmin || checkReviewer;
-
+  // 이메일로 체크하는 것 필요한가??
+  const getPermission = () => {
+    if (checkLogin === null) {
+      return false;
+    }
+    const user = checkLogin.userName;
+    const roleAdmin = checkLogin.isAdmin;
+    const checkReviewerNickname = user === nickname;
+    const permission = roleAdmin || checkReviewerNickname;
+    return permission;
+  };
+  const permission = getPermission();
+  console.log(permission, "??");
   const doFixBtn = () => {
     return setFixReview(!fixReview);
   };
@@ -107,7 +123,7 @@ const HandleReview = ({ data, nickname, createdAt, type, onClickDel }) => {
           </div>
         )}
       </div>
-      {permisson ? (
+      {permission ? (
         <div className="review-manage">
           {fixReview ? (
             <div className="review-manage__fix-buttons font-12">
@@ -158,8 +174,16 @@ HandleReview.propTypes = {
     reviewsId: PropTypes.number,
     title: PropTypes.string,
   }),
-  nickname: PropTypes.string.isRequired,
+  nickname: PropTypes.string,
   createdAt: PropTypes.string.isRequired,
+  checkLogin: PropTypes.shape({
+    email: PropTypes.string,
+    expire: PropTypes.string,
+    id: PropTypes.number,
+    isAdmin: PropTypes.bool,
+    isLogin: PropTypes.bool,
+    userName: PropTypes.string,
+  }),
   type: PropTypes.string.isRequired,
   onClickDel: PropTypes.func.isRequired,
 };
@@ -171,4 +195,6 @@ HandleReview.defaultProps = {
     reviewsId: null,
     title: null,
   },
+  nickname: null,
+  checkLogin: null,
 };

@@ -10,6 +10,7 @@ const ShowReviews = ({ bookInfoId, type }) => {
   const observeReviewList = useRef(null);
   const totalLeftPages = useRef();
   const lastReviewId = useRef();
+  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
 
   const deleteReview = reviewsId => {
     const temp = postReviews.filter(review => review.reviewsId !== reviewsId);
@@ -52,6 +53,7 @@ const ShowReviews = ({ bookInfoId, type }) => {
           data={data}
           nickname={data.nickname}
           createdAt={data.createdAt}
+          checkLogin={checkLogin}
           type={type}
           onClickDel={deleteReview}
         />
