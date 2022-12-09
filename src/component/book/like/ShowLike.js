@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import Image from "../../utils/Image";
 import FilledLike from "../../../img/like_filled.svg";
 import EmptyLike from "../../../img/like_empty.svg";
-// import useGetLike from "../../../api/like/useGetLike";
 import "../../../css/BookDetail.css";
 import "../../../css/reset.css";
 
 const ShowLike = ({ deleteLike, postLike, currentLike, currentLikeNum }) => {
+  const permission = JSON.parse(window.localStorage.getItem("user"));
   const clickLikeHandler = () => {
     if (currentLike) {
       deleteLike();
@@ -17,20 +17,24 @@ const ShowLike = ({ deleteLike, postLike, currentLike, currentLikeNum }) => {
   };
 
   return (
-    <div>
-      <button
-        className="like_button filter-button"
-        type="button"
-        onClick={clickLikeHandler}
-      >
-        {currentLike ? (
-          <Image className="like__icon" src={FilledLike} alt="like" />
-        ) : (
-          <Image className="like__icon" src={EmptyLike} alt="unlike" />
-        )}
+    <>
+      <div className="like_button_box">
+        {permission !== null ? (
+          <button
+            className="like_button"
+            type="button"
+            onClick={clickLikeHandler}
+          >
+            {currentLike ? (
+              <Image className="like__icon" src={FilledLike} alt="like" />
+            ) : (
+              <Image className="like__icon" src={EmptyLike} alt="unlike" />
+            )}
+          </button>
+        ) : null}
         {`좋아요 ${currentLikeNum}`}
-      </button>
-    </div>
+      </div>
+    </>
   );
 };
 

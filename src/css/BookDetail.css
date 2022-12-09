@@ -111,11 +111,15 @@
   justify-content: center;
 }
 
+.like_button_box {
+  font-size: 16px;
+}
+
 .like_button {
   background: none;
   padding: 0;
   border: 0;
-  font-size: 16px;
+  cursor: pointer;
 }
 
 .like__icon {
