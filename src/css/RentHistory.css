@@ -7,6 +7,10 @@
 	font-size: small;
   }
 
+
+.mypage__like_icon{
+	width: 1.1rem;
+}
 .rent_histories-table__pagination > .pagination {
 	padding : 0 0 2rem 0
 }
