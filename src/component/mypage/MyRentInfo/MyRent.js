@@ -7,7 +7,6 @@ import InquireBoxTitle from "../../utils/InquireBoxTitle";
 import Book from "../../../img/admin_icon.svg";
 
 const MyRent = () => {
-  console.log("Success myRent");
   const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =
     useDialog();
 
