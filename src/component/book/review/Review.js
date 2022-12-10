@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { reviewTabList } from "../../../data/tablist";
 import PostReview from "./PostReview";
-import "../../../css/Tabs.css";
-import "../../../css/Review.css";
 import ShowReviews from "./ShowReviews";
 import useTabFocus from "./useTabFocus";
 import usePostReview from "./usePostReview";
 import useDialog from "../../../hook/useDialog";
+import "../../../css/Tabs.css";
+import "../../../css/Review.css";
 
 const Review = ({ bookInfoId }) => {
   const { currentTab, changeTab } = useTabFocus(0, reviewTabList);

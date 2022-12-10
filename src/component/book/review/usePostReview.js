@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useApi from "../../../hook/useApi";
-// import getErrorMessage from "../../../data/error";
 
 const usePostReview = ({ setOpenTitleAndMessage, bookInfoId, changeTab }) => {
   const [content, setContent] = useState(null);
