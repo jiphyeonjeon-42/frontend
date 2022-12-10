@@ -1,4 +1,14 @@
-.showReview__review-box {
+.showReview__book-review-box {
+  display: flex;
+  min-height: 10rem;
+  position: relative;
+  border-radius: 2rem;
+  background-color: #e8e8e8;
+  padding: 4rem 6rem;
+  margin: 3rem 0 0 0;
+}
+
+.showReview__my-review-box {
   display: flex;
   min-height: 10rem;
   position: relative;
@@ -73,7 +83,7 @@
 }
 
 .review-content-fix-area {
-  width: 90%;
+  width: 95%;
   min-height: 7rem;
   padding: 1rem;
   border: none;
@@ -106,8 +116,6 @@
 }
 
 .review-manage__fix-buttons > button {
-  /* display: block;
-  margin-bottom: 1rem; */
   color: red;
   all: unset;
   cursor: pointer;
@@ -141,7 +149,12 @@
 }
 
 @media screen and (max-width: 767px) {
-  .showReview__review-box {
+  .showReview__book-review-box {
+    display: block;
+    padding: 3rem;
+  }
+
+  .showReview__my-review-box {
     display: block;
     padding: 2rem 0rem;
   }
@@ -175,6 +188,14 @@
   .review-content-area {
     width: 100%;
     min-height: 0rem;
+  }
+
+  .review-area {
+    margin-bottom: 2rem;
+  }
+
+  .do-review__review-buttons button {
+    font-size: 1.5rem;
   }
 
   .review-manage__button-img {

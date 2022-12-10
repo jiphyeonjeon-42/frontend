@@ -95,7 +95,11 @@ const HandleReview = ({
   };
 
   return (
-    <div className="showReview__review-box">
+    <div
+      className={`showReview__${
+        type === "bookReviews" ? "book" : "my"
+      }-review-box`}
+    >
       <div className="review-info">
         {type === "bookReviews" ? (
           <span className="reviewer-name font-12-bold">{nickname}</span>
