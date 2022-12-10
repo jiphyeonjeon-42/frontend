@@ -22,7 +22,7 @@ const ReturnBookFilter = ({ lendingSort, setLendingSort }) => {
               lendingSort ? "font-16-bold color-54" : "font-16 color-a4"
             }`}
           >
-            연체순
+            최신순
           </span>
         </button>
         <button
@@ -35,7 +35,7 @@ const ReturnBookFilter = ({ lendingSort, setLendingSort }) => {
               lendingSort ? "font-16 color-a4" : "font-16-bold color-54"
             }`}
           >
-            최신순
+            연체순
           </span>
         </button>
       </div>
