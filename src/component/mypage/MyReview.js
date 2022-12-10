@@ -30,12 +30,12 @@ const MyReview = ({ type }) => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          {reviewList.map(data => (
+          {reviewList.map(review => (
             <HandleReview
-              key={data.reviewsId}
-              data={data}
-              nickname={data.nickname}
-              createdAt={data.createdAt}
+              key={review.reviewsId}
+              data={review}
+              nickname={review.nickname}
+              createdAt={review.createdAt}
               checkLogin={checkLogin}
               type={type}
               onClickDel={deleteReview}
