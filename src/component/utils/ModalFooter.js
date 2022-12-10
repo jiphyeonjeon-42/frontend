@@ -50,7 +50,7 @@ const ModalFooter = ({
             type="button"
             className={buttonColor(button.color)}
             onClick={button.onClick}
-            ref={firstRef}
+            ref={!index ? firstRef : null}
           >
             {button.text}
           </button>
