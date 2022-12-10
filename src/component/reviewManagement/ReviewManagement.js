@@ -24,6 +24,10 @@ const ReviewManagement = () => {
     Dialog,
   } = useGetReviews();
 
+  const setUndefinedReSelected = newType => {
+    setSelectedType(newType === selectedType ? undefined : newType);
+  };
+
   return (
     <main>
       <Dialog />
@@ -46,7 +50,7 @@ const ReviewManagement = () => {
             <Filter
               filterList={reviewFilterList}
               selectedType={selectedType}
-              setSelectedType={setSelectedType}
+              setSelectedType={setUndefinedReSelected}
             />
             <ReviewManagementList reviewList={reviewList} />
           </>
