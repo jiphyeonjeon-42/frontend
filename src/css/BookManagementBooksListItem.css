@@ -8,7 +8,6 @@
   border-top: solid 0.1rem #a4a4a4;
 }
 
-.management__list__box-title > *,
 .book-management__list__item > *,
 .book-management__list__classification > * {
   display: inline-block;
@@ -30,7 +29,7 @@
 }
 
 .book-management__list__classification {
-  display: flex;
+  display: flex !important;
   flex-wrap: wrap;
   flex: 1 0 14rem;
 }
@@ -64,7 +63,6 @@
     padding: 2rem 1rem;
   }
 
-  .management__list__box-title > *,
   .book-management__list__item > *,
   .book-management__list__classification > * {
     font-size: 1.4rem;

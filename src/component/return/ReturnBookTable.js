@@ -34,7 +34,7 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }) => {
         </div>
         <div className="return-book__table-list__info">
           <span className="re-callSign font-16 color-54">
-            도서등록번호 : {factor.callSign}
+            청구기호 : {factor.callSign}
           </span>
           <span className="re-dueDate font-16 color-54">
             {`반납예정일 : ${factor.dueDate.slice(0, 10)}`}

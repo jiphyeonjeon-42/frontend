@@ -7,6 +7,7 @@ const useGetLike = ({
   setOpenTitleAndMessage,
   initBookInfoId,
   setCurrentLike,
+  setCurrentLikeNum,
 }) => {
   const { request } = useApi("get", `books/info/${initBookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
@@ -25,6 +26,7 @@ const useGetLike = ({
     );
     setLikeData(...refinelikeData);
     setCurrentLike(refinelikeData[0].isLiked);
+    setCurrentLikeNum(refinelikeData[0].likeNum);
   };
 
   const displayError = error => {
