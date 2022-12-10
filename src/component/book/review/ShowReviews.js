@@ -47,12 +47,12 @@ const ShowReviews = ({ bookInfoId, type }) => {
 
   return (
     <>
-      {postReviews.map(data => (
+      {postReviews.map(review => (
         <HandleReview
-          key={data.reviewsId}
-          data={data}
-          nickname={data.nickname}
-          createdAt={data.createdAt}
+          key={review.reviewsId}
+          data={review}
+          nickname={review.nickname}
+          createdAt={review.createdAt}
           checkLogin={checkLogin}
           type={type}
           onClickDel={deleteReview}
