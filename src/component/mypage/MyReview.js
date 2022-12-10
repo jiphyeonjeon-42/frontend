@@ -6,8 +6,10 @@ import HandleReview from "../book/review/HandleReview";
 import axiosPromise from "../../util/axios";
 import Pagination from "../utils/Pagination";
 import useGetMyReviewInfo from "../../api/review/useGetMyReviewInfo";
+import "../../css/MyReview.css";
 
 const MyReview = ({ type }) => {
+  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
   const { page, setPage, lastPage, reviewList, setReviewList } =
     useGetMyReviewInfo();
 
@@ -35,12 +37,13 @@ const MyReview = ({ type }) => {
                 data={data}
                 nickname={data.nickname}
                 createdAt={data.createdAt}
+                checkLogin={checkLogin}
                 type={type}
                 onClickDel={deleteReview}
               />
             ) : null,
           )}
-          <div className="return-book-table__pagination">
+          <div className="mypage_review_pagination">
             <Pagination page={page} setPage={setPage} lastPage={lastPage} />
           </div>
         </div>
