@@ -12,6 +12,7 @@ const PostReview = ({
   config,
 }) => {
   const [content, setContent] = useState(null);
+  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
 
   const onChange = e => {
     setContent(e.target.value);
@@ -51,6 +52,11 @@ const PostReview = ({
           value={content}
           type="text-area"
           onChange={onChange}
+          placeholder={
+            checkLogin
+              ? "10자 이상 420자 이내로 입력해주세요."
+              : "로그인 후 리뷰 등록이 가능합니다."
+          }
         />
         <div className="do-review__review-buttons">
           <Button type="submit" value="게시하기" color="red" />
