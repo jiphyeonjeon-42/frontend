@@ -46,7 +46,7 @@
 
 .histories__table-list__info {
   display: grid;
-  grid-template-columns: 0.1fr 0.1fr 0.58fr 0.18fr;
+  grid-template-columns: 0.2fr 0.2fr 0.67fr 0.3fr;;
   margin-right: 6rem;
   font-size: medium;
   text-align: left;
@@ -67,6 +67,9 @@
 @media screen and (max-width: 1200px) {
   .histories__table-list {
     width: 90%;
+  }
+  .histories__table-list_date_wrapper {
+    display: none;
   }
 }
 

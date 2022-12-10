@@ -1,0 +1,53 @@
+.history-modal__wrapper {
+  min-width: 3rem;
+  padding: 2rem 6rem 8rem;
+}
+
+.history-modal__book {
+  margin-bottom: 4rem;
+}
+
+.history-modal__lend {
+  float: left;
+  width: 50%;
+}
+
+.history-modal__return {
+  float: right;
+  width: 50%;
+}
+
+.history-modal__remark {
+  margin: 4rem 0;
+}
+
+.history-modal__buttons {
+  min-width: 24rem;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.history-modal__cancel {
+  margin-left: 2.4rem;
+}
+
+.history-modal__book > *
+{
+  white-space: break-spaces;
+}
+
+@media screen and (max-width: 767px) {
+  .history-modal__wrapper {
+    padding: 2rem 4rem 4rem;
+  }
+  .history-modal__book {
+    margin-bottom: 2rem;
+  }
+  .history-modal__remark {
+    margin: 2rem 0;
+  }
+  .history-modal__cancel {
+    margin-left: 1.2rem;
+  }
+}

@@ -32,6 +32,7 @@ const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
     { key: "lendingLibrarianNickName", type: "string", isNullable: false },
     { key: "returningLibrarianNickname", type: "string", isNullable: true },
     { key: "callSign", type: "string", isNullable: true },
+    { key: "image", type: "string", isNullable: true },
   ];
 
   const refineResponse = response => {
