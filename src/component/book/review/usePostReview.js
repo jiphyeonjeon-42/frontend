@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useApi from "../../../hook/useApi";
 
 const usePostReview = ({ setOpenTitleAndMessage, bookInfoId, changeTab }) => {
+  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
   const [content, setContent] = useState(null);
   const { request } = useApi("post", "/reviews", {
     bookInfoId,
@@ -13,7 +14,11 @@ const usePostReview = ({ setOpenTitleAndMessage, bookInfoId, changeTab }) => {
   };
 
   const displayError = async () => {
-    setOpenTitleAndMessage("10자 이상 420자 이하로 입력해주세요.", "");
+    if (checkLogin === null) {
+      setOpenTitleAndMessage("로그인 후 입력해주세요.", "");
+    } else {
+      setOpenTitleAndMessage("10자 이상 420자 이하로 입력해주세요.", "");
+    }
   };
 
   useEffect(() => {
