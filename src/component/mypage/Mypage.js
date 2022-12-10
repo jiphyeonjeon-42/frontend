@@ -10,19 +10,14 @@ import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import getErrorMessage from "../../data/error";
 import Login from "../../img/login_icon_white.svg";
-import "../../css/Mypage.css";
 import useTabFocus from "../book/review/useTabFocus";
+import "../../css/Mypage.css";
 
 const Mypage = () => {
   const { currentTab, changeTab } = useTabFocus(0, myPageTabList);
   const [urlQuery, setUrlQuery] = useSearchParams();
-  const {
-    // setOpen: openDialog,
-    // config: dialogConfig,
-    // setConfig: setDialogConfig,
-    setOpenTitleAndMessage: setDialogTitleAndMessage,
-    Dialog,
-  } = useDialog();
+  const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =
+    useDialog();
 
   const selectComponent = {
     myRent: <MyRent />,
@@ -191,7 +186,6 @@ const Mypage = () => {
           </div>
         </div>
       </div>
-      {/* 탭 시작 */}
       <section className="tabs-wrapper">
         <div className="tabs">
           {myPageTabList.map((tab, index) => (
