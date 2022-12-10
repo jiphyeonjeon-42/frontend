@@ -205,8 +205,8 @@ const Mypage = () => {
             </div>
           ))}
         </div>
-        <div>{selectComponent[currentTab]}</div>
       </section>
+      <div>{selectComponent[currentTab]}</div>
       <Dialog />
     </>
   );
