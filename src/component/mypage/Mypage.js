@@ -1,42 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { myPageTabList } from "../../data/tablist";
-import MyRent from "./MyRent";
+import MyRent from "./MyRentInfo/MyRent";
 import MyReservation from "./MyReservation";
 import MyReview from "./MyReview";
 import useDialog from "../../hook/useDialog";
 import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
-// import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import getErrorMessage from "../../data/error";
 import Login from "../../img/login_icon_white.svg";
-// import Reserve from "../../img/list-check-solid.svg";
+import useTabFocus from "../../hook/useTabFocus";
 import "../../css/Mypage.css";
 
-const useFocus = (initialTab, tabList) => {
-  const [currentIndex, setCurretIndex] = useState(initialTab);
-  return {
-    currentTab: tabList[currentIndex].type,
-    changeTab: setCurretIndex,
-  };
-};
-
 const Mypage = () => {
-  const { currentTab, changeTab } = useFocus(0, myPageTabList);
+  const { currentTab, changeTab } = useTabFocus(0, myPageTabList);
   const [urlQuery, setUrlQuery] = useSearchParams();
-  const {
-    // setOpen: openDialog,
-    // config: dialogConfig,
-    // setConfig: setDialogConfig,
-    setOpenTitleAndMessage: setDialogTitleAndMessage,
-    Dialog,
-  } = useDialog();
+  const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =
+    useDialog();
 
   const selectComponent = {
     myRent: <MyRent />,
     myReservation: <MyReservation />,
-    myReview: <MyReview />,
+    myReview: <MyReview type="myReviews" />,
   };
 
   const userId = JSON.parse(window.localStorage.getItem("user")).id;
@@ -200,7 +186,6 @@ const Mypage = () => {
           </div>
         </div>
       </div>
-      {/* 탭 시작 */}
       <section className="tabs-wrapper">
         <div className="tabs">
           {myPageTabList.map((tab, index) => (
@@ -220,8 +205,8 @@ const Mypage = () => {
             </div>
           ))}
         </div>
-        <div>{selectComponent[currentTab]}</div>
       </section>
+      <div>{selectComponent[currentTab]}</div>
       <Dialog />
     </>
   );

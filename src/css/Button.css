@@ -9,6 +9,10 @@
   color: #ffffff;
 }
 
+.button-small-size {
+  font-size: 1.5rem;
+}
+
 .button-default:enabled {
   cursor: pointer;
 }
@@ -46,5 +50,8 @@
   .button-default {
     padding: 0.7rem 2rem;
     font-size: 1.8rem;
+  }
+  .button-small-size {
+    font-size: 1.2rem;
   }
 }

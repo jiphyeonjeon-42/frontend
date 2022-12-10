@@ -106,19 +106,19 @@
 
 .mypage-inquire-box-long-wrapper .inquire-box-title {
   height: 8rem;
+  margin-top: 1rem;
 }
 
 .mypage-inquire-box-long {
   box-sizing: border-box;
   max-width: 95rem;
-  min-height: 40rem;
   background-color: #e8e8e8;
   display: flex;
   flex-direction: column;
   margin: auto;
   position: relative;
   z-index: 0;
-  top: -5rem;
+  top: -4rem;
   border-bottom-left-radius: 6.1rem;
   border-bottom-right-radius: 6.1rem;
   padding: 8.5rem 4.5rem 2.1rem 4.5rem;
@@ -161,6 +161,9 @@
   .mypage-subtitle__titlebox__guide__2 {
     white-space: break-spaces;
   }
+  /* .mypage-inquire-box-long {
+    padding: 5rem 0rem 0rem 0rem;
+  } */
 }
 
 @media screen and (max-width: 350px) {

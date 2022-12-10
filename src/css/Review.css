@@ -1,17 +1,26 @@
-.showReview__review-box {
-	display: flex;
+.showReview__book-review-box {
+  display: flex;
   min-height: 10rem;
-	position: relative;
-  margin: 2rem 0;
+  position: relative;
   border-radius: 2rem;
   background-color: #e8e8e8;
   padding: 4rem 6rem;
+  margin: 3rem 0 0 0;
+}
+
+.showReview__my-review-box {
+  display: flex;
+  min-height: 10rem;
+  position: relative;
+  border-radius: 2rem;
+  background-color: #e8e8e8;
+  padding: 2rem 4rem;
 }
 
 .do-review__review-box {
   display: block;
   height: 25rem;
-	position: relative;
+  position: relative;
   margin: 2rem 0;
   border-radius: 2rem;
   background-color: #e8e8e8;
@@ -69,9 +78,13 @@
   padding: 0rem 3.5rem 0rem 3.5rem;
 }
 
+.review-content-book-title {
+  margin-bottom: 1rem;
+}
+
 .review-content-fix-area {
-  width:90%;
-  min-height: 15rem;
+  width: 95%;
+  min-height: 7rem;
   padding: 1rem;
   border: none;
   resize: none;
@@ -80,7 +93,7 @@
 }
 
 .review-content-area {
-  width:90%;
+  width: 90%;
   min-height: 7rem;
   border: none;
   border-radius: 0.5rem;
@@ -97,17 +110,29 @@
 }
 
 .review-manage {
-	width: 15%;
-  padding-left: 4rem;
+  width: 15%;
+  padding-left: 5rem;
   position: relative;
 }
 
-.review-manage__fix-buttons > button{
-  display: block;
+.review-manage__fix-buttons > button {
+  color: red;
+  all: unset;
+  cursor: pointer;
+  width: 7rem;
+  display: flex;
   margin-bottom: 1rem;
+  align-items: center;
+  justify-content: space-around;
+  flex-shrink: 0;
 }
 
-.review-manage__start-fix-buttons button{
+.fix-text {
+  color: red;
+  font-weight: bold;
+}
+
+.review-manage__start-fix-buttons button {
   all: unset;
   cursor: pointer;
   width: 7rem;
@@ -119,5 +144,73 @@
 }
 
 .review-manage__button-img {
-  width: 1.8rem;
+    margin: 0 0 -0.15rem -3rem;
+    width: 1.1rem;
+}
+
+@media screen and (max-width: 767px) {
+  .showReview__book-review-box {
+    display: block;
+    padding: 3rem;
+  }
+
+  .showReview__my-review-box {
+    display: block;
+    padding: 2rem 0rem;
+  }
+
+  .review-info:after {
+    display: none;
+  }
+
+  .review-manage:before {
+    display: none;
+  }
+
+  .review-info {
+    width: 100%;
+    padding: 0;
+    position: relative;
+  }
+
+  .review-content {
+    width: 100%;
+    padding: 0;
+    margin: 1rem 0;
+    position: relative;
+  }
+
+  .review-manage {
+    float: right;
+    width: 100%;
+  }
+
+  .review-content-area {
+    width: 100%;
+    min-height: 0rem;
+  }
+
+  .review-area {
+    margin-bottom: 2rem;
+  }
+
+  .do-review__review-buttons button {
+    font-size: 1.5rem;
+  }
+
+  .review-manage__button-img {
+    margin: 0 0 -0.15rem -3rem;
+  }
+
+  .review-manage__start-fix-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .review-manage__fix-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 }

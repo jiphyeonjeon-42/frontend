@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import useDialog from "../../hook/useDialog";
-import usePatchReservationsCancel from "../../api/reservations/usePatchReservationsCancel";
-import Image from "../utils/Image";
-import { isNumber } from "../../util/typeCheck";
-import "../../css/RentedOrReservedBooks.css";
+import useDialog from "../../../hook/useDialog";
+import usePatchReservationsCancel from "../../../api/reservations/usePatchReservationsCancel";
+import Image from "../../utils/Image";
+import { isNumber } from "../../../util/typeCheck";
+import "../../../css/RentedOrReservedBooks.css";
 
 const RentedOrReservedBooks = ({ componentMode, bookInfoArr }) => {
   if (!bookInfoArr) return null;

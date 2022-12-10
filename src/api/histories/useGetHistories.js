@@ -4,10 +4,10 @@ import useApi from "../../hook/useApi";
 import useSearch from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetHistories = ({ setOpenTitleAndMessage }) => {
+const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
-  const [who, setWho] = useState("all");
+  const [who, setWho] = useState(initWho ?? "all");
   const [type, setType] = useState("");
 
   const { request, Dialog } = useApi("get", "histories", {
@@ -25,6 +25,7 @@ const useGetHistories = ({ setOpenTitleAndMessage }) => {
     { key: "returningCondition", type: "string", isNullable: true },
     { key: "penaltyDays", type: "number", isNullable: true },
     { key: "title", type: "string", isNullable: false },
+    { key: "bookInfoId", type: "number", isNullable: false },
     { key: "createdAt", type: "string", isNullable: false },
     { key: "returnedAt", type: "string", isNullable: true },
     { key: "dueDate", type: "string", isNullable: true },

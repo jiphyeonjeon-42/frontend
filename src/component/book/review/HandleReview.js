@@ -1,22 +1,44 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axiosPromise from "../../../util/axios";
-import Button from "../../utils/Button";
 import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
 import UserEdit from "../../../img/edit.svg";
+import DeleteButton from "../../../img/x_button.svg";
+import useDialog from "../../../hook/useDialog";
 import "../../../css/Review.css";
 import "../../../css/reset.css";
 
-const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
+const HandleReview = ({
+  data,
+  nickname,
+  createdAt,
+  checkLogin,
+  type,
+  onClickDel,
+}) => {
+  const {
+    Dialog,
+    config,
+    setOpenTitleAndMessage,
+    setConfig: setDialogConfig,
+    setOpen: openDialog,
+    setClose: closeDialog,
+  } = useDialog();
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const uploadDate = splitDate(createdAt)[0];
-  const user = JSON.parse(window.localStorage.getItem("user")).userName;
-  const roleAdmin = JSON.parse(window.localStorage.getItem("user")).isAdmin;
-  const checkReviewer = user === nickname;
-  const permisson = roleAdmin || checkReviewer;
-
+  const getPermission = () => {
+    if (checkLogin === null) {
+      return false;
+    }
+    const user = checkLogin.userName;
+    const roleAdmin = checkLogin.isAdmin;
+    const checkReviewerNickname = user === nickname;
+    const permission = roleAdmin || checkReviewerNickname;
+    return permission;
+  };
+  const permission = getPermission();
   const doFixBtn = () => {
     return setFixReview(!fixReview);
   };
@@ -26,21 +48,45 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
     return setFixReview(!fixReview);
   };
 
-  const deleteBtn = () => {
+  const deleteReview = () => {
     onClickDel(data.reviewsId);
   };
 
+  const deleteBtn = () => {
+    setDialogConfig({
+      ...config,
+      title: "리뷰를 삭제하시겠습니까?",
+      buttonAlign: "basic",
+      numberOfButtons: 2,
+      firstButton: {
+        text: "확인하기",
+        color: "red",
+        onClick: deleteReview,
+      },
+      secondButton: {
+        text: "취소하기",
+        color: "grey",
+        onClick: closeDialog,
+      },
+    });
+    openDialog();
+  };
+
   const patchReview = () => {
-    console.log(content);
     const text = {
       content,
     };
-    axiosPromise("patch", `/reviews/${data.reviewsId}`, text);
+    axiosPromise("put", `/reviews/${data.reviewsId}`, text)
+      .then(() => {
+        setFixReview(!fixReview);
+      })
+      .catch(() => {
+        setOpenTitleAndMessage("10자 이상 420자 이하로 입력해주세요.", "");
+      });
   };
 
-  const patchBtn = () => {
+  const putBtn = () => {
     patchReview(data.reviewsId, content);
-    return setFixReview(!fixReview);
   };
 
   const reviewFixArea = e => {
@@ -48,12 +94,25 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
   };
 
   return (
-    <div className="showReview__review-box">
+    <div
+      className={`showReview__${
+        type === "bookReviews" ? "book" : "my"
+      }-review-box`}
+    >
       <div className="review-info">
-        <span className="reviewer-name font-12-bold">{nickname}</span>
+        {type === "bookReviews" ? (
+          <span className="reviewer-name font-12-bold">
+            {nickname ?? "미인증 유저"}
+          </span>
+        ) : null}
         <span className="review-day font-12">{uploadDate}</span>
       </div>
       <div className="review-content">
+        {type === "bookReviews" ? null : (
+          <div className="review-content-book-title font-14-bold">
+            {data.title}
+          </div>
+        )}
         {fixReview ? (
           <div>
             <textarea
@@ -73,12 +132,20 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
           </div>
         )}
       </div>
-      {permisson ? (
+      {permission ? (
         <div className="review-manage">
           {fixReview ? (
-            <div className="review-manage__fix-buttons">
-              <Button value="수정하기" color="red" onClick={patchBtn} />
-              <Button value="취소하기" onClick={cancelFixBtn} />
+            <div className="review-manage__fix-buttons font-12">
+              <button type="button" onClick={putBtn}>
+                <span className="fix-text">수정하기</span>
+              </button>
+              <button
+                className="review-manage__fix-cancle"
+                type="button"
+                onClick={cancelFixBtn}
+              >
+                취소하기
+              </button>
             </div>
           ) : (
             <div className="review-manage__start-fix-buttons font-12">
@@ -94,7 +161,7 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
                 삭제
                 <Image
                   className="review-manage__button-img"
-                  src={UserEdit}
+                  src={DeleteButton}
                   alt=""
                 />
               </button>
@@ -102,6 +169,7 @@ const HandleReview = ({ data, nickname, createdAt, onClickDel }) => {
           )}
         </div>
       ) : null}
+      <Dialog />
     </div>
   );
 };
@@ -113,9 +181,19 @@ HandleReview.propTypes = {
     bookInfoId: PropTypes.number,
     content: PropTypes.string,
     reviewsId: PropTypes.number,
+    title: PropTypes.string,
   }),
-  nickname: PropTypes.string.isRequired,
+  nickname: PropTypes.string,
   createdAt: PropTypes.string.isRequired,
+  checkLogin: PropTypes.shape({
+    email: PropTypes.string,
+    expire: PropTypes.string,
+    id: PropTypes.number,
+    isAdmin: PropTypes.bool,
+    isLogin: PropTypes.bool,
+    userName: PropTypes.string,
+  }),
+  type: PropTypes.string.isRequired,
   onClickDel: PropTypes.func.isRequired,
 };
 
@@ -124,5 +202,8 @@ HandleReview.defaultProps = {
     bookInfoId: null,
     content: null,
     reviewsId: null,
+    title: null,
   },
+  nickname: null,
+  checkLogin: null,
 };

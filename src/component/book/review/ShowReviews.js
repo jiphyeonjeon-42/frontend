@@ -5,11 +5,12 @@ import "../../../css/Tabs.css";
 import "../../../css/Review.css";
 import axiosPromise from "../../../util/axios";
 
-const ShowReviews = ({ bookInfoId }) => {
-  const [hasNextPage, setHasNextPage] = useState(true);
+const ShowReviews = ({ bookInfoId, type }) => {
   const [postReviews, setPostReviews] = useState([]);
   const observeReviewList = useRef(null);
-  const page = useRef(0);
+  const totalLeftPages = useRef();
+  const lastReviewId = useRef();
+  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
 
   const deleteReview = reviewsId => {
     const temp = postReviews.filter(review => review.reviewsId !== reviewsId);
@@ -21,46 +22,39 @@ const ShowReviews = ({ bookInfoId }) => {
     try {
       axiosPromise(
         "get",
-        "reviews",
-        {
-          bookInfoId,
-          userId: "",
-          page: page.current,
-        },
-        // 유저 아이디와 내림, 오름차순 옵션 넣기
+        `/book-info/${bookInfoId}/reviews?reviewsId=${lastReviewId.current}&limit=5`,
       ).then(res => {
         if (res.data.items.length !== 0) {
           setPostReviews(prevPosts => [...prevPosts, ...res.data.items]);
-          setHasNextPage(res.data.meta.finalPage === false);
+          lastReviewId.current = res.data.meta.finalReviewsId;
+          totalLeftPages.current = res.data.meta.totalLeftPages;
         }
       });
-      if (hasNextPage) {
-        page.current += 1;
-      }
     } catch (err) {
       console.error(err);
     }
   }, []);
 
   useEffect(() => {
-    if (!observeReviewList.current || !hasNextPage) return;
-
+    if (totalLeftPages === 0) return;
     const io = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
         fetch();
       }
     });
     io.observe(observeReviewList.current);
-  }, [fetch, hasNextPage]);
+  }, []);
 
   return (
     <>
-      {postReviews.map(data => (
+      {postReviews.map(review => (
         <HandleReview
-          key={data.reviewsId}
-          data={data}
-          nickname={data.nickname}
-          createdAt={data.createdAt}
+          key={review.reviewsId}
+          data={review}
+          nickname={review.nickname}
+          createdAt={review.createdAt}
+          checkLogin={checkLogin}
+          type={type}
           onClickDel={deleteReview}
         />
       ))}
@@ -72,5 +66,6 @@ const ShowReviews = ({ bookInfoId }) => {
 export default ShowReviews;
 
 ShowReviews.propTypes = {
-  bookInfoId: PropTypes.string.isRequired,
+  bookInfoId: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
 };

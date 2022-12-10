@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import useDialog from "../../hook/useDialog";
 import useGetBooksInfoId from "../../api/books/useGetBooksInfoId";
-import Image from "../utils/Image";
-import Banner from "../utils/Banner";
-import BookStatus from "./BookStatus";
 import BookReservation from "./BookReservation";
-import "../../css/BookDetail.css";
+import BookStatus from "./BookStatus";
+import useDialog from "../../hook/useDialog";
 import Review from "./review/Review";
+import Banner from "../utils/Banner";
+import Image from "../utils/Image";
 import Like from "./like/Like";
+import "../../css/BookDetail.css";
 
 const BookDetail = () => {
   const { id } = useParams();
