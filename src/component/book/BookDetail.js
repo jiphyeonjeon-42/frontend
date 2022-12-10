@@ -8,13 +8,14 @@ import Banner from "../utils/Banner";
 import BookStatus from "./BookStatus";
 import BookReservation from "./BookReservation";
 import "../../css/BookDetail.css";
+import Review from "./review/Review";
+import Like from "./like/Like";
 
 const BookDetail = () => {
   const { id } = useParams();
   const myRef = useRef(null);
   const location = useLocation();
   useEffect(() => myRef.current.scrollIntoView(), []);
-
   const {
     Dialog,
     defaultConfig: dialogDefaultConfig,
@@ -45,8 +46,13 @@ const BookDetail = () => {
           도서상세페이지 및 예약
         </div>
         <div className="book-content">
-          <div className="book-detail__photo">
-            <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
+          <div className="book-detail__photo-likes">
+            <div className="book-detail__photo">
+              <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
+            </div>
+            <div className="book-likes">
+              <Like initBookInfoId={id} />
+            </div>
           </div>
           <div className="book-detail">
             <span className="color-red">도서정보</span>
@@ -102,6 +108,9 @@ const BookDetail = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="book-review">
+          <Review bookInfoId={id} />
         </div>
       </section>
       <Dialog />
