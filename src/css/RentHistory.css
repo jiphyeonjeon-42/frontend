@@ -6,7 +6,11 @@
 	align-items: center;
 	font-size: small;
   }
-  
+
+.rent_histories-table__pagination > .pagination {
+	padding : 0 0 2rem 0
+}
+
   .rent_histories__table-list__button {
 	background: none;
 	border: 0;
