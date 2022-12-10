@@ -30,19 +30,17 @@ const MyReview = ({ type }) => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          {reviewList.map(data =>
-            data.disabled === 0 ? (
-              <HandleReview
-                key={data.reviewsId}
-                data={data}
-                nickname={data.nickname}
-                createdAt={data.createdAt}
-                checkLogin={checkLogin}
-                type={type}
-                onClickDel={deleteReview}
-              />
-            ) : null,
-          )}
+          {reviewList.map(data => (
+            <HandleReview
+              key={data.reviewsId}
+              data={data}
+              nickname={data.nickname}
+              createdAt={data.createdAt}
+              checkLogin={checkLogin}
+              type={type}
+              onClickDel={deleteReview}
+            />
+          ))}
           <div className="mypage_review_pagination">
             <Pagination page={page} setPage={setPage} lastPage={lastPage} />
           </div>
