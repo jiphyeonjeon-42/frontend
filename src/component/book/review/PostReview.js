@@ -5,22 +5,41 @@ import Button from "../../utils/Button";
 
 const PostReview = ({
   onClickPost,
-  setDialogConfig,
   Dialog,
+  config,
   openDialog,
   closeDialog,
-  config,
+  setDialogConfig,
+  setOpenTitleAndMessage,
 }) => {
   const [content, setContent] = useState(null);
   const checkLogin = JSON.parse(window.localStorage.getItem("user"));
+  const checkValidUser = () => {
+    const user = JSON.parse(window.localStorage.getItem("user"));
+    if (user) {
+      if (user.userName === user.email) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   const onChange = e => {
     setContent(e.target.value);
   };
 
   const submitReview = () => {
+    const validUser = checkValidUser();
+    console.log("????", validUser);
+    if (validUser === false) {
+      setOpenTitleAndMessage(
+        "42 인증 후 리뷰 등록이 가능합니다.",
+        "",
+        closeDialog,
+      );
+      return;
+    }
     onClickPost(content);
-    closeDialog();
   };
 
   const onSubmitHandler = e => {
@@ -76,4 +95,5 @@ PostReview.propTypes = {
   openDialog: PropTypes.func.isRequired,
   closeDialog: PropTypes.func.isRequired,
   config: PropTypes.objectOf.isRequired,
+  setOpenTitleAndMessage: PropTypes.func.isRequired,
 };

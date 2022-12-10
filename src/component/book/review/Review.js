@@ -50,13 +50,14 @@ const Review = ({ bookInfoId }) => {
           <ShowReviews bookInfoId={bookInfoId} type="bookReviews" />
         ) : (
           <PostReview
+            changeTab={changeTab}
             onClickPost={setContent}
-            setDialogConfig={setDialogConfig}
             Dialog={Dialog}
+            config={config}
             openDialog={openDialog}
             closeDialog={closeDialog}
-            changeTab={changeTab}
-            config={config}
+            setDialogConfig={setDialogConfig}
+            setOpenTitleAndMessage={setOpenTitleAndMessage}
           />
         )}
       </div>
