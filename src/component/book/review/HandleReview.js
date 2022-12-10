@@ -102,7 +102,9 @@ const HandleReview = ({
     >
       <div className="review-info">
         {type === "bookReviews" ? (
-          <span className="reviewer-name font-12-bold">{nickname}</span>
+          <span className="reviewer-name font-12-bold">
+            {nickname ?? "미인증 유저"}
+          </span>
         ) : null}
         <span className="review-day font-12">{uploadDate}</span>
       </div>
