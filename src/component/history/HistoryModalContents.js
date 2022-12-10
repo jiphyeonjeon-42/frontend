@@ -5,7 +5,6 @@ import BookInformationWithCover from "../utils/BookInformationWithCover";
 import "../../css/HistoryModalContents.css";
 
 const historyModalContents = ({ historyInfo }) => {
-  console.log(historyInfo);
   return (
     <BookInformationWithCover
       wrapperClassName="history-modal__wrapper"
