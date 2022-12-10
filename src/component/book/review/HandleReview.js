@@ -28,7 +28,6 @@ const HandleReview = ({
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const uploadDate = splitDate(createdAt)[0];
-  // 이메일로 체크하는 것 필요한가??
   const getPermission = () => {
     if (checkLogin === null) {
       return false;
