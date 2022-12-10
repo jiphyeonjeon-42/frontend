@@ -10,7 +10,7 @@ import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import getErrorMessage from "../../data/error";
 import Login from "../../img/login_icon_white.svg";
-import useTabFocus from "../book/review/useTabFocus";
+import useTabFocus from "../../hook/useTabFocus";
 import "../../css/Mypage.css";
 
 const Mypage = () => {
