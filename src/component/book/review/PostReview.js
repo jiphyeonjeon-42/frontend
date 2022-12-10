@@ -30,7 +30,6 @@ const PostReview = ({
 
   const submitReview = () => {
     const validUser = checkValidUser();
-    console.log("????", validUser);
     if (validUser === false) {
       setOpenTitleAndMessage(
         "42 인증 후 리뷰 등록이 가능합니다.",
