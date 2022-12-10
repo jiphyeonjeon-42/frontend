@@ -32,6 +32,11 @@
   margin-left: 2.4rem;
 }
 
+.history-modal__book > *
+{
+  white-space: break-spaces;
+}
+
 @media screen and (max-width: 767px) {
   .history-modal__wrapper {
     padding: 2rem 4rem 4rem;

@@ -15,7 +15,7 @@ const historyModalContents = ({ historyInfo }) => {
         wrapperClassName="history-modal__book"
         topLabelText="도서정보"
         mainText={historyInfo.title}
-        bottomLabelText={`청구기호 : ${historyInfo?.callSign} 대출자 : ${historyInfo?.login}`}
+        bottomLabelText={`청구기호 : ${historyInfo?.callSign}\t\t대출자 : ${historyInfo?.login}`}
       />
       <TextWithLabel
         wrapperClassName="history-modal__lend"
