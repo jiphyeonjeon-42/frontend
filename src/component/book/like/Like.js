@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import usePostLike from "../../../api/like/usePostLike";
 import useDeleteLike from "../../../api/like/useDeleteLike";
 import useGetLike from "../../../api/like/useGetLike";
-import "../../../css/BookDetail.css";
-import "../../../css/reset.css";
 import useDialog from "../../../hook/useDialog";
 import ShowLike from "./ShowLike";
+import "../../../css/BookDetail.css";
 
 const Like = ({ initBookInfoId }) => {
   const { setOpenTitleAndMessage } = useDialog();

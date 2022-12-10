@@ -4,7 +4,6 @@ import Image from "../../utils/Image";
 import FilledLike from "../../../img/like_filled.svg";
 import EmptyLike from "../../../img/like_empty.svg";
 import "../../../css/BookDetail.css";
-import "../../../css/reset.css";
 
 const ShowLike = ({ deleteLike, postLike, currentLike, currentLikeNum }) => {
   const permission = JSON.parse(window.localStorage.getItem("user"));
