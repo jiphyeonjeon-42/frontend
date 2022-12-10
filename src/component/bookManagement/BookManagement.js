@@ -32,7 +32,7 @@ const BookManagement = () => {
   return (
     <main>
       <Dialog />
-      <Banner img="admin" titleKo="유저 관리" titleEn="USER MANAGEMENT" />
+      <Banner img="admin" titleKo="도서 관리" titleEn="BOOK MANAGEMENT" />
       <Tabs tabList={managementTabList} />
       <BookManagementBooksList
         page={page}
