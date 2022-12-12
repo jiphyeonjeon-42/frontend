@@ -55,6 +55,9 @@
   display: inline-block;
   background-color: unset;
   border: unset;
+}
+
+.management__list__item > .book-management__list__information {
   cursor: pointer;
 }
 

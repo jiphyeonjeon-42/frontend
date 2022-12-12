@@ -61,14 +61,17 @@
   padding: 0;
   background-color: transparent;
   border: none;
-  cursor: pointer;
   white-space: normal;
 }
 
 .management__list__box-title > .review-management__list__scope {
   line-height: 1;
-  cursor: none;
 }
+
+.review-management__list__item > .review-management__list__scope {
+  cursor: pointer;
+}
+
 .review-management__list__scope-text.color-red {
   font-weight: bold;
 }
