@@ -30,20 +30,24 @@ const MyReview = ({ type }) => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          {reviewList.map(review => (
-            <HandleReview
-              key={review.reviewsId}
-              data={review}
-              nickname={review.nickname}
-              createdAt={review.createdAt}
-              checkLogin={checkLogin}
-              type={type}
-              onClickDel={deleteReview}
-            />
-          ))}
-          <div className="mypage_review_pagination">
-            <Pagination page={page} setPage={setPage} lastPage={lastPage} />
+          <div className="mypage-review_box-wrapper">
+            {reviewList.map(review => (
+              <HandleReview
+                key={review.reviewsId}
+                data={review}
+                nickname={review.nickname}
+                createdAt={review.createdAt}
+                checkLogin={checkLogin}
+                type={type}
+                onClickDel={deleteReview}
+              />
+            ))}
           </div>
+          {reviewList.length !== 0 && (
+            <div className="mypage_review_pagination">
+              <Pagination page={page} setPage={setPage} lastPage={lastPage} />
+            </div>
+          )}
         </div>
       </div>
     </>
