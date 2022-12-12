@@ -23,7 +23,7 @@ const useGetBooksSearch = ({ limit }) => {
     { key: "categoryId", type: "number", isNullable: false },
     { key: "isbn", type: "string", isNullable: true },
     { key: "publisher", type: "string", isNullable: false },
-    { key: "publishedAt", type: "string", isNullable: false },
+    { key: "publishedAt", type: "string", isNullable: true },
     { key: "callSign", type: "string", isNullable: false },
     { key: "image", type: "string", isNullable: true },
     { key: "isLendable", type: "number", isNullable: false },
