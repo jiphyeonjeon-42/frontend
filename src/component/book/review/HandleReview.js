@@ -32,10 +32,8 @@ const HandleReview = ({
       return false;
     }
     const user = checkLogin.userName;
-    const roleAdmin = checkLogin.isAdmin;
     const checkReviewerNickname = user === nickname;
-    const permission = roleAdmin || checkReviewerNickname;
-    return permission;
+    return checkReviewerNickname;
   };
   const permission = getPermission();
   const doFixBtn = () => {
