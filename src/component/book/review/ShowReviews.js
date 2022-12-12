@@ -1,9 +1,9 @@
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import HandleReview from "./HandleReview";
+import axiosPromise from "../../../util/axios";
 import "../../../css/Tabs.css";
 import "../../../css/Review.css";
-import axiosPromise from "../../../util/axios";
 
 const ShowReviews = ({ bookInfoId, type }) => {
   const [postReviews, setPostReviews] = useState([]);
@@ -47,17 +47,23 @@ const ShowReviews = ({ bookInfoId, type }) => {
 
   return (
     <>
-      {postReviews.map(review => (
-        <HandleReview
-          key={review.reviewsId}
-          data={review}
-          nickname={review.nickname}
-          createdAt={review.createdAt}
-          checkLogin={checkLogin}
-          type={type}
-          onClickDel={deleteReview}
-        />
-      ))}
+      {postReviews.length ? (
+        postReviews.map(review => (
+          <HandleReview
+            key={review.reviewsId}
+            data={review}
+            nickname={review.nickname}
+            createdAt={review.createdAt}
+            checkLogin={checkLogin}
+            type={type}
+            onClickDel={deleteReview}
+          />
+        ))
+      ) : (
+        <div className="no-review color-54">
+          <span className="font-18">첫 번째 리뷰를 남겨주세요!</span>
+        </div>
+      )}
       <div ref={observeReviewList} />
     </>
   );

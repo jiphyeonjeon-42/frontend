@@ -148,6 +148,12 @@
     width: 1.1rem;
 }
 
+.no-review {
+  display: flex;
+  margin-top: 5rem;
+  justify-content: center;
+}
+
 @media screen and (max-width: 767px) {
   .showReview__book-review-box {
     display: block;
