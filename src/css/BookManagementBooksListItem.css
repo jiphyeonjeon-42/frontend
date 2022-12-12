@@ -1,0 +1,83 @@
+.book-management__list__item {
+  display: flex;
+  height: 4rem;
+  padding: 2rem 5rem;
+}
+
+.book-management__list__item:not(:first-of-type) {
+  border-top: solid 0.1rem #a4a4a4;
+}
+
+.book-management__list__item > *,
+.book-management__list__classification > * {
+  display: inline-block;
+  margin: auto 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.book-management__checkbox {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  margin: auto;
+}
+
+.book-management__list__id {
+  flex: 0 0 3rem;
+  margin-left: 3rem;
+  overflow: unset;
+}
+
+.book-management__list__classification {
+  display: flex !important;
+  flex-wrap: wrap;
+  flex: 1 0 14rem;
+}
+
+.book-management__list__classification > * {
+  flex: 1 1 12rem;
+}
+
+.book-management__list__title {
+  flex: 1 2 20rem;
+}
+
+.book-management__list__status {
+  flex: 0 1 4rem;
+  white-space: initial;
+  word-break: keep-all;
+  line-height: 1;
+}
+
+.book-management__list__information {
+  flex: 0 1 4rem;
+  display: inline-block;
+  background-color: unset;
+  border: unset;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .book-management__list__item {
+    height: 4rem;
+    padding: 2rem 1rem;
+  }
+
+  .book-management__list__item > *,
+  .book-management__list__classification > * {
+    font-size: 1.4rem;
+    margin: auto 0.2rem;
+  }
+
+  .book-management__list__call-sign {
+    font-weight: normal;
+  }
+
+  .book-management__list__classification {
+    flex-basis: 10rem;
+  }
+  .book-management__list__classification > * {
+    flex-basis: 8rem;
+  }
+}

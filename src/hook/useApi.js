@@ -21,9 +21,6 @@ const useApi = (method, url, data) => {
         ?.catch(error => {
           reject(error);
         });
-      // .finally(() => {
-      //   console.log(`called ${url} ${JSON.stringify(data)}`);
-      // });
     },
     [method, url, data],
   );

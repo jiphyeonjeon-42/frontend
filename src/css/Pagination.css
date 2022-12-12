@@ -6,7 +6,7 @@
 }
 
 .pagination__pages {
-  margin: 0 1rem;
+  margin: auto 1rem 0;
 }
 .pagination__page-ranges {
   width: 7.8rem;
@@ -20,7 +20,8 @@
   border: 0;
   background: none;
   cursor: pointer;
-  vertical-align: center;
+  vertical-align: baseline;
+  line-height: 1;
 }
 
 .pagination__page-range-button {

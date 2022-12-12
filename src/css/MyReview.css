@@ -1,0 +1,10 @@
+.mypage-review_box-wrapper {
+  min-height: 30rem;
+}
+
+.mypage_review_pagination {
+  margin-top: 3.6rem;
+  display: flex;
+  justify-content: center;
+}
+

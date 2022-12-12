@@ -21,14 +21,6 @@
   font-size: 1.6rem;
 }
 
-.add-book__wrapper > label,
-input,
-button,
-select {
-  font-size: inherit;
-  font-family: inherit;
-}
-
 .add-book > p {
   margin: 2rem 5rem 0;
 }

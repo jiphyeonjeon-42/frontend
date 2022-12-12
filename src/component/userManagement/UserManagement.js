@@ -14,7 +14,6 @@ import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 import "../../css/UserManagement.css";
 
 const USAGE = 1;
-// const EDIT = 2;
 
 const UserManagement = () => {
   const [modal, setModal] = useState(0);
@@ -62,7 +61,7 @@ const UserManagement = () => {
           </div>
         </div>
       </section>
-      {modal && (
+      {modal ? (
         <Modal isOpen={modal} onCloseModal={closeModal} size="full">
           <ModalHeader onCloseModal={closeModal} isWithCloseButton />
           {modal === USAGE ? (
@@ -71,7 +70,7 @@ const UserManagement = () => {
             <UserDetailInfo user={selectedUser} closeModal={closeModal} />
           )}
         </Modal>
-      )}
+      ) : null}
       <Dialog />
     </main>
   );

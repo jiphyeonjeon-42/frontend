@@ -43,10 +43,10 @@ const useDialog = () => {
       message,
       afterClose,
       firstButton: {
-        ...config.firstButton,
+        ...defaultConfig.firstButton,
         onClick: () => {
-          afterClose();
           setClose();
+          afterClose();
         },
       },
     });
@@ -70,8 +70,12 @@ const useDialog = () => {
             <ModalFooter
               align={config.buttonAlign}
               numberOfButtons={config.numberOfButtons}
+              firstButtonText={config.firstButton.text}
+              firstButtonColor={config.firstButton.color}
               firstButtonOnClick={config.firstButton.onClick}
               isFirstButtonFocusedOnMount
+              secondButtonText={config.secondButton.text}
+              secondButtonColor={config.secondButton.color}
               secondButtonOnClick={config.secondButton.onClick}
             />
           </Modal>

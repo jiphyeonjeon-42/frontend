@@ -52,7 +52,7 @@ const ReservedModalContents = ({ reservedInfo, closeModal }) => {
         topLabelText="도서정보"
         mainText={reservedInfo.title}
         bottomLabelText={
-          reservedInfo.callSign && `도서코드 : ${reservedInfo.callSign}`
+          reservedInfo.callSign && `청구기호 : ${reservedInfo.callSign}`
         }
       />
       <TextWithLabel

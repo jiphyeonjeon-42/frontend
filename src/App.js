@@ -15,6 +15,7 @@ import Logout from "./component/login/Logout";
 import Login from "./component/login/Login";
 import Register from "./component/login/Register";
 import Rent from "./component/rent/Rent";
+import History from "./component/history/History";
 import ReservedLoan from "./component/reservedloan/ReservedLoan";
 import ReturnBook from "./component/return/ReturnBook";
 import UserManagement from "./component/userManagement/UserManagement";
@@ -26,6 +27,8 @@ import EditEmailOrPassword from "./component/mypage/EditEmailOrPassword";
 import "./css/reset.css";
 import LimitedRoute from "./LimitedRoute";
 import { isExpiredDate } from "./util/date";
+import BookManagement from "./component/bookManagement/BookManagement";
+import ReviewManagement from "./component/reviewManagement/ReviewManagement";
 
 function App() {
   const setUser = useSetRecoilState(userState);
@@ -61,6 +64,9 @@ function App() {
           <Route path="/reservation" element={<ReservedLoan />} />
           <Route path="/addbook" element={<AddBook />} />
           <Route path="/user" element={<UserManagement />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/book" element={<BookManagement />} />
+          <Route path="/review" element={<ReviewManagement />} />
         </Route>
         <Route element={<LimitedRoute isLoginOnly />}>
           <Route path="/mypage" element={<MyPageRoutes />}>

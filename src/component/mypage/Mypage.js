@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { myPageTabList } from "../../data/tablist";
+import MyRent from "./MyRentInfo/MyRent";
+import MyReservation from "./MyReservation";
+import MyReview from "./MyReview";
 import useDialog from "../../hook/useDialog";
 import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
-import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import getErrorMessage from "../../data/error";
 import Login from "../../img/login_icon_white.svg";
-import Book from "../../img/admin_icon.svg";
-import Reserve from "../../img/list-check-solid.svg";
+import useTabFocus from "../../hook/useTabFocus";
 import "../../css/Mypage.css";
 
 const Mypage = () => {
+  const { currentTab, changeTab } = useTabFocus(0, myPageTabList);
   const [urlQuery, setUrlQuery] = useSearchParams();
-  const {
-    setOpen: openDialog,
-    config: dialogConfig,
-    setConfig: setDialogConfig,
-    setOpenTitleAndMessage: setDialogTitleAndMessage,
-    Dialog,
-  } = useDialog();
+  const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =
+    useDialog();
+
+  const selectComponent = {
+    myRent: <MyRent />,
+    myReservation: <MyReservation />,
+    myReview: <MyReview type="myReviews" />,
+  };
 
   const userId = JSON.parse(window.localStorage.getItem("user")).id;
   const { userInfo } = useGetUsersSearchId({
@@ -182,39 +186,27 @@ const Mypage = () => {
           </div>
         </div>
       </div>
-      <div className="mypage-inquire-box-long-wrapper">
-        <InquireBoxTitle
-          Icon={Book}
-          titleKO="대출 정보"
-          titleEN="rent data"
-          KOsize="font-20-bold"
-          ENsize="font-14"
-        />
-        <div className="mypage-inquire-box-long">
-          <RentedOrReservedBooks
-            componentMode="rent"
-            bookInfoArr={userInfo ? userInfo.lendings : null}
-          />
+      <section className="tabs-wrapper">
+        <div className="tabs">
+          {myPageTabList.map((tab, index) => (
+            <div
+              className={`tab tab-${
+                tab.type === currentTab ? "on" : "not"
+              }-focus`}
+              key={tab.type}
+              role="button"
+              tabIndex={index}
+              onKeyDown=""
+              onClick={() => {
+                changeTab(index);
+              }}
+            >
+              {tab?.name}
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="mypage-inquire-box-long-wrapper">
-        <InquireBoxTitle
-          Icon={Reserve}
-          titleKO="예약 정보"
-          titleEN="reservation data"
-          KOsize="font-20-bold"
-          ENsize="font-14"
-        />
-        <div className="mypage-inquire-box-long">
-          <RentedOrReservedBooks
-            componentMode="reserve"
-            bookInfoArr={userInfo ? userInfo.reservations : null}
-            openDialog={openDialog}
-            dialogConfig={dialogConfig}
-            setDialogConfig={setDialogConfig}
-          />
-        </div>
-      </div>
+      </section>
+      <div>{selectComponent[currentTab]}</div>
       <Dialog />
     </>
   );
