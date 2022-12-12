@@ -30,6 +30,11 @@
   text-overflow: ellipsis;
 }
 
+.histories__table-list__text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .histories__table-list__arr {
   width: 0.8rem;
   height: 1.6rem;
@@ -107,8 +112,8 @@
     margin: 2rem;
     padding: 2rem;
     width: 100%;
-    overflow: hidden;
     text-overflow: ellipsis;
+    overflow: hidden;
     white-space: normal;
   }
 }

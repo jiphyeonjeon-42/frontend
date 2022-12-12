@@ -15,7 +15,7 @@ const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
     { key: "title", type: "string", isNullable: false },
     { key: "author", type: "string", isNullable: false },
     { key: "publisher", type: "string", isNullable: false },
-    { key: "publishedAt", type: "string", isNullable: false },
+    { key: "publishedAt", type: "string", isNullable: true },
     { key: "category", type: "string", isNullable: false },
     { key: "image", type: "string", isNullable: true },
     {

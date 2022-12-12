@@ -7,7 +7,6 @@ import UserEdit from "../../../img/edit.svg";
 import DeleteButton from "../../../img/x_button.svg";
 import useDialog from "../../../hook/useDialog";
 import "../../../css/Review.css";
-import "../../../css/reset.css";
 
 const HandleReview = ({
   data,
