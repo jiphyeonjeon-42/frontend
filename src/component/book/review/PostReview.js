@@ -39,10 +39,12 @@ const PostReview = ({
       return;
     }
     onClickPost(content);
+    closeDialog();
   };
 
   const onSubmitHandler = e => {
     e.preventDefault();
+    console.log(content);
     setDialogConfig({
       ...config,
       title: "리뷰를 등록하시겠습니까?",
@@ -70,6 +72,8 @@ const PostReview = ({
           value={content}
           type="text-area"
           onChange={onChange}
+          maxLength={420}
+          required
           placeholder={
             checkLogin
               ? "10자 이상 420자 이내로 입력해주세요."
