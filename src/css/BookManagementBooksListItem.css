@@ -57,7 +57,7 @@
   border: unset;
 }
 
-.management__list__box > .book-management__list__information {
+.management__list__item > .book-management__list__information {
   cursor: pointer;
 }
 
