@@ -8,6 +8,7 @@ const useGetMyReviewInfo = () => {
   const { request, Dialog } = useApi("get", `reviews/my-reviews`, {
     limit: 5,
     page: page - 1,
+    isMyReview: true,
   });
 
   const refineResponse = response => {
