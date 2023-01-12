@@ -27,6 +27,8 @@ const Search = () => {
       debounce(() => {
         urlSearchParams.set("search", newQuery);
         urlSearchParams.set("page", 1);
+        urlSearchParams.delete("category");
+        urlSearchParams.delete("sort");
         setUrlSearchParams(urlSearchParams);
       }, 500);
     },
