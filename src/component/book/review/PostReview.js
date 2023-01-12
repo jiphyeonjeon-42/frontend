@@ -68,7 +68,7 @@ const PostReview = ({
     <div className="do-review__review-box">
       <form className="do-review__review-form" onSubmit={onSubmitHandler}>
         <textarea
-          className="review-area font-12"
+          className="review-area font-15"
           value={content}
           type="text-area"
           onChange={onChange}

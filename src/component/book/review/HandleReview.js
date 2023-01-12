@@ -1,3 +1,4 @@
+// import React, { useState, useRef } from "react";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axiosPromise from "../../../util/axios";
@@ -6,6 +7,7 @@ import Image from "../../utils/Image";
 import UserEdit from "../../../img/edit.svg";
 import DeleteButton from "../../../img/x_button.svg";
 import useDialog from "../../../hook/useDialog";
+// import useAutosizeTextArea from "./useAutosizeTextArea";
 import "../../../css/Review.css";
 
 const HandleReview = ({
@@ -27,6 +29,9 @@ const HandleReview = ({
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const uploadDate = splitDate(createdAt)[0];
+  // const textAreaRef = useRef < HTMLTextAreaElement > null;
+  // useAutosizeTextArea(textAreaRef, content);
+
   const getPermission = () => {
     if (checkLogin === null) {
       return false;
@@ -113,7 +118,7 @@ const HandleReview = ({
         {fixReview ? (
           <div>
             <textarea
-              className="review-content-fix-area font-12"
+              className="review-content-fix-area font-15"
               value={content}
               type="text-area"
               onChange={reviewFixArea}
@@ -122,8 +127,9 @@ const HandleReview = ({
         ) : (
           <div>
             <textarea
-              className="review-content-area font-12"
+              className="review-content-area font-15"
               value={content}
+              // ref={textAreaRef}
               disabled
             />
           </div>
