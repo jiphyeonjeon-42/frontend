@@ -28,8 +28,7 @@ const BookDetail = () => {
   const isAvailableReservation = () => {
     const { books } = bookDetailInfo;
     return (
-      books.length > 0 &&
-      books.reduce((sum, i) => sum + (i.isLendable + i.status), 0) === 0
+      books.length > 0 && books.reduce((sum, i) => sum + i.isLendable, 0) === 0
     );
   };
 
