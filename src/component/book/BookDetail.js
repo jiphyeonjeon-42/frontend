@@ -27,8 +27,11 @@ const BookDetail = () => {
 
   const isAvailableReservation = () => {
     const { books } = bookDetailInfo;
+    const noProblemBooksCnt = books.filter(book => book.status === 0).length;
+    console.log("np", noProblemBooksCnt);
     return (
-      books.length > 0 && books.reduce((sum, i) => sum + i.isLendable, 0) === 0
+      noProblemBooksCnt > 0 &&
+      books.reduce((sum, i) => sum + i.isLendable, 0) === 0
     );
   };
 
