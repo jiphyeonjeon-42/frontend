@@ -34,7 +34,7 @@ import BookStock from "./component/bookStock/BookStock";
 function App() {
   const setUser = useSetRecoilState(userState);
   useEffect(() => {
-    install(process.env.REACT_APP_GA_ID);
+    install(import.meta.env.REACT_APP_GA_ID);
     const localUser = JSON.parse(window.localStorage.getItem("user"));
 
     if (localUser?.isLogin) {
