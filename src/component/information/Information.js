@@ -109,14 +109,14 @@ const Information = () => {
               question="보고 싶은 책이 있는데 집현전에 없어요. 도서 신청을 할 수 있을까요?"
               answer="희망도서 신청폼에서 신청해주세요."
               linkText="희망도서 신청폼"
-              link={process.env.REACT_APP_WISH}
+              link={import.meta.env.REACT_APP_WISH}
             />
             <Question
               isOpen={allOpen}
               question="사이트에 다른 기능도 추가해주실 수 있나요?"
               answer="건의사항 시트에 의견을 남겨주세요! 더 개선해나가는 집현전 웹서비스 개발팀이 되겠습니다."
               linkText="건의사항 시트"
-              link={process.env.REACT_APP_SUGGESTION}
+              link={import.meta.env.REACT_APP_SUGGESTION}
             />
           </div>
         </section>
