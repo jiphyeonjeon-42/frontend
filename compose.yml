@@ -1,0 +1,14 @@
+# 참고: 개발용이며 배포용이 아닙니다
+# 사용 방법: docker 설치 후 docker compose up 실행
+services:
+  frontend-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4242:4242
+    volumes:
+      - ${PWD}/src:/app/src
+      - ${PWD}/public:/app/public
+    env_file:
+      - .env  # .env 파일이 루트 프로젝트 경로에 있는지 확인해주세요
