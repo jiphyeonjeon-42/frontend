@@ -1,0 +1,5 @@
+.check_stock_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
