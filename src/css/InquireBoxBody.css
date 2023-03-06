@@ -1,0 +1,18 @@
+.inquire-body__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 120rem;
+  min-width: 36rem;
+  background-color: #e8e8e8;
+  color: #545454;
+  margin: -5rem auto 14rem auto;
+  border-bottom-left-radius: 6.5rem;
+  border-bottom-right-radius: 6.5rem;
+  padding: 7rem 0 0;
+}
+
+@media screen and(max-width: 767px) {
+  .inquire-body__wrapper {
+    padding: 5rem 0 0;
+  }
+}

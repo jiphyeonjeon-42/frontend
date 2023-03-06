@@ -1,0 +1,23 @@
+.inquire-line__wrapper {
+  display: flex;
+  height: 4rem;
+  padding: 2rem 2rem;
+}
+
+.inquire-line__wrapper:not(:first-of-type) {
+  border-top: solid 0.1rem #a4a4a4;
+}
+
+.inquire-line__wrapper > * {
+  font-size: 1.4rem;
+  margin: 1rem 0.5rem;
+}
+@media screen and (max-width: 767px) {
+  .inquire-line__wrapper {
+    height: 3rem;
+    padding: 1rem 1rem;
+  }
+  .inquire-line__wrapper > * {
+    margin: 0 0.3rem;
+  }
+}

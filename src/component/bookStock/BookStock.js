@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
 import { managementTabList } from "../../data/tablist";
+import BookStockCheckedList from "./BookStockCheckedList";
+import BookStockNeedToCheckList from "./BookStockNeedToCheckList";
 import "../../css/BookStock.css";
+import BookStockCheckByReadingQR from "./BookStockCheckByReadingQR";
 
 const BookStock = () => {
+  const [checkedList, setCheckedList] = useState([]);
+
+  const addChecked = checked => {
+    setCheckedList([...checkedList, checked]);
+  };
+
   return (
     <>
       <Banner img="admin" titleKo="도서 관리" titleEn="BOOK MANAGEMENT" />
       <Tabs tabList={managementTabList} />
-      <div className="check_stock_box">
-        <button type="button">재고 확인</button>
-      </div>
+      <BookStockCheckByReadingQR addChecked={addChecked} />
+      <BookStockCheckedList checkedList={checkedList} />
+      <BookStockNeedToCheckList />
     </>
   );
 };

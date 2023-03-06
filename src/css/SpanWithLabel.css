@@ -1,0 +1,16 @@
+.span__wrapper.horizontal {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.span__label {
+  width: 15rem;
+  flex-shrink: 0;
+}
+.span__text {
+  font-size: 1.8rem;
+  font-weight: normal;
+  padding: 0;
+  flex-grow: 1;
+}
