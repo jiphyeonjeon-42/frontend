@@ -4,7 +4,6 @@ import Tabs from "../utils/Tabs";
 import { managementTabList } from "../../data/tablist";
 import BookStockCheckedList from "./BookStockCheckedList";
 import BookStockNeedToCheckList from "./BookStockNeedToCheckList";
-import "../../css/BookStock.css";
 import BookStockCheckByReadingQR from "./BookStockCheckByReadingQR";
 
 const BookStock = () => {

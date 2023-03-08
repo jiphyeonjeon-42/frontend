@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import Button from "../utils/Button";
 import useGetBooksIdForStock from "../../api/books/useGetBooksIdForStock";
 import BookDetailView from "../utils/BookDetailView";
 import SpanWithLabel from "../utils/SpanWithLabel";
@@ -8,6 +7,7 @@ import Button from "../utils/Button";
 import useDialog from "../../hook/useDialog";
 import { bookStatus } from "../../data/status";
 import usePatchStockUpdate from "../../api/stock/usePatchStockUpdate";
+import "../../css/BookStockDetailModal.css";
 
 const BookStockDetailModal = ({ bookId, closeModal, addChecked }) => {
   const { setOpenTitleAndMessage, Dialog } = useDialog();
@@ -52,7 +52,12 @@ const BookStockDetailModal = ({ bookId, closeModal, addChecked }) => {
               />
             </>
           }
-          bottomUI={<Button onClick={callUpdate} value="업데이트" />}
+          bottomUI={
+            <div className="book-stock__detail-modal__buttons">
+              <Button onClick={callUpdate} value="업데이트" color="red" />
+              <Button onClick={closeModal} value="닫기" />
+            </div>
+          }
         />
       ) : null}
 
