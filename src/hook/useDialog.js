@@ -36,6 +36,22 @@ const useDialog = () => {
     config.afterClose();
   };
 
+  const setOpenConfirm = (title, message, confirmCallback = () => {}) => {
+    setConfig({
+      ...defaultConfig,
+      title,
+      message,
+      firstButton: {
+        ...defaultConfig.firstButton,
+        onClick: () => {
+          confirmCallback();
+          setClose();
+        },
+      },
+    });
+    setOpen();
+  };
+
   const setOpenTitleAndMessage = (title, message, afterClose = () => {}) => {
     setConfig({
       ...defaultConfig,
@@ -91,6 +107,7 @@ const useDialog = () => {
     defaultConfig, // for reset
     setConfig,
     setOpenTitleAndMessage,
+    setOpenConfirm,
     Dialog,
   };
 };

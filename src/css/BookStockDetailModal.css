@@ -1,0 +1,8 @@
+.book-stock__detail-modal__buttons {
+  display: flex;
+  justify-content: end;
+}
+
+.book-stock__detail-modal__buttons > button {
+  margin-left: 2rem;
+}

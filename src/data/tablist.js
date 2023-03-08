@@ -3,6 +3,7 @@ export const managementTabList = [
   { name: "도서등록", link: "/addbook" },
   { name: "도서관리", link: "/book" },
   { name: "리뷰관리", link: "/review" },
+  { name: "재고관리", link: "/stock" },
 ];
 
 export const rentTabList = [

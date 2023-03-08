@@ -1,0 +1,39 @@
+.inquire-line__wrapper > span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+}
+
+.inquire-item__bookId {
+  font-weight: bold;
+  flex: 0 0 4rem;
+}
+
+.inquire-item__callSign {
+  flex: 0 0 10rem;
+  font-weight: bold;
+}
+.inquire-item__category {
+  flex: 0 0 12rem;
+}
+
+.inquire-item__title {
+  flex: 1 0 6rem;
+}
+
+.book-stock__need-to__pagination {
+  padding: 2rem 0 4rem;
+}
+.book-stock__lost-button {
+  font-size: 1.4rem;
+  color: #a4a4a4;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .inquire-item__category {
+    display: none;
+  }
+}
