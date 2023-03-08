@@ -3,6 +3,8 @@ import { defineConfig, loadEnv } from "vite";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import react from "@vitejs/plugin-react-swc";
 // eslint-disable-next-line import/no-unresolved, import/extensions
+import browserlistToEsbuild from "browserslist-to-esbuild";
+// eslint-disable-next-line import/extensions, import/no-unresolved
 import { validateEnv } from "./validateEnv";
 
 /**
@@ -31,6 +33,10 @@ export default defineConfig(({ mode }) => {
     server: { port, strictPort: true, host: true },
 
     /** @see https://vitejs.dev/config/build-options.html#build-outdir */
-    build: { outDir: "build" },
+    build: {
+      outDir: "build",
+      target: browserlistToEsbuild(),
+    },
+    base: mode === "production" ? "/42library.kr/" : "/",
   };
 });
