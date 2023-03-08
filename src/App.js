@@ -29,6 +29,7 @@ import LimitedRoute from "./LimitedRoute";
 import { isExpiredDate } from "./util/date";
 import BookManagement from "./component/bookManagement/BookManagement";
 import ReviewManagement from "./component/reviewManagement/ReviewManagement";
+import BookStock from "./component/bookStock/BookStock";
 
 function App() {
   const setUser = useSetRecoilState(userState);
@@ -67,6 +68,7 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/book" element={<BookManagement />} />
           <Route path="/review" element={<ReviewManagement />} />
+          <Route path="/stock" element={<BookStock />} />
         </Route>
         <Route element={<LimitedRoute isLoginOnly />}>
           <Route path="/mypage" element={<MyPageRoutes />}>

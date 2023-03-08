@@ -7,6 +7,7 @@ import ArrRightDouble from "../../img/arrow_right_black_double.svg";
 import "../../css/Pagination.css";
 
 const Pagination = ({
+  className,
   page,
   setPage,
   lastPage,
@@ -45,7 +46,7 @@ const Pagination = ({
   };
 
   return (
-    <div className="pagination">
+    <div className={`pagination ${className}`}>
       {/* 왼쪽으로 넘기기 버튼 */}
       <div className="pagination__page-ranges">
         {isPrevAvailable && (
@@ -128,6 +129,7 @@ const Pagination = ({
 export default Pagination;
 
 Pagination.propTypes = {
+  className: PropTypes.string,
   page: PropTypes.number.isRequired,
   setPage: PropTypes.func.isRequired,
   lastPage: PropTypes.number.isRequired,
@@ -140,6 +142,7 @@ Pagination.propTypes = {
 };
 
 Pagination.defaultProps = {
+  className: "",
   isReplaceUrl: false,
   scrollRef: undefined,
   count: 5,
