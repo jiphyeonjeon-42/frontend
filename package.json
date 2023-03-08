@@ -23,7 +23,7 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "eslint src"
+    "lint": "eslint --cache './src/**/*.{js,jsx,ts,tsx}'"
   },
   "eslintConfig": {
     "extends": [
