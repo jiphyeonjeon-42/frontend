@@ -1,12 +1,29 @@
+/* eslint-disable react/no-unused-prop-types */
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import PropTypes from "prop-types";
 import NotFound from "./component/utils/NotFound";
 
-const LimitedRoute = ({ isLoginOnly, isAdminOnly, isLogoutOnly }) => {
+// TODO: 유니언 타입으로 변경
+type Props = {
+  isLoginOnly: boolean;
+  isAdminOnly: boolean;
+  isLogoutOnly: boolean;
+};
+
+const defaultProps = {
+  isLoginOnly: false,
+  isAdminOnly: false,
+  isLogoutOnly: false,
+};
+
+const LimitedRoute = (props: Partial<Props>) => {
+  const { isLoginOnly, isAdminOnly, isLogoutOnly } = {
+    ...defaultProps,
+    ...props,
+  };
   // 로그인 정보를 확인
   // recoil 전역상태는 새로고침시 초기화되기 때문에 로컬스토리지 참고
-  const user = JSON.parse(window.localStorage.getItem("user"));
+  const user = JSON.parse(window.localStorage.getItem("user") ?? "{}");
 
   if (isAdminOnly && !user?.isAdmin) {
     return <NotFound />;
@@ -21,15 +38,3 @@ const LimitedRoute = ({ isLoginOnly, isAdminOnly, isLogoutOnly }) => {
 };
 
 export default LimitedRoute;
-
-LimitedRoute.propTypes = {
-  isLoginOnly: PropTypes.bool,
-  isAdminOnly: PropTypes.bool,
-  isLogoutOnly: PropTypes.bool,
-};
-
-LimitedRoute.defaultProps = {
-  isLoginOnly: false,
-  isAdminOnly: false,
-  isLogoutOnly: false,
-};

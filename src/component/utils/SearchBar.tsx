@@ -1,18 +1,40 @@
 import React, { useRef, useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import "../../css/SearchBar.css";
 
-const SearchBar = ({
-  setQuery, // 검색 호출을 위한 세터
-  wrapperClassName,
-  placeHolder,
-  isWithBarcodeButton,
-  onClickBarcodeButton,
-  width,
-  isNavigate,
-  isFocusedOnMount,
-}) => {
+type Props = {
+  /** 검색 호출을 위한 세터 */
+  setQuery: (query: string) => void;
+  placeHolder: string;
+  wrapperClassName: string;
+  width: string;
+  isWithBarcodeButton: boolean;
+  onClickBarcodeButton: () => void;
+  isNavigate: boolean;
+  isFocusedOnMount: boolean;
+};
+
+const defaultProps = {
+  setQuery: undefined,
+  wrapperClassName: "",
+  placeHolder: "",
+  isWithBarcodeButton: false,
+  onClickBarcodeButton: () => {},
+  isNavigate: false,
+  isFocusedOnMount: true,
+};
+
+const SearchBar = (props: Props) => {
+  const {
+    setQuery,
+    wrapperClassName,
+    placeHolder,
+    isWithBarcodeButton,
+    onClickBarcodeButton,
+    width,
+    isNavigate,
+    isFocusedOnMount,
+  } = { ...defaultProps, ...props };
   const [urlParams] = useSearchParams();
   const [searchWord, setSearchWord] = useState(urlParams.get("search") || "");
   const navigate = useNavigate();
@@ -70,24 +92,4 @@ const SearchBar = ({
   );
 };
 
-SearchBar.propTypes = {
-  setQuery: PropTypes.func,
-  placeHolder: PropTypes.string,
-  wrapperClassName: PropTypes.string,
-  width: PropTypes.string.isRequired,
-  isWithBarcodeButton: PropTypes.bool,
-  onClickBarcodeButton: PropTypes.func,
-  isNavigate: PropTypes.bool,
-  isFocusedOnMount: PropTypes.bool,
-};
-
-SearchBar.defaultProps = {
-  setQuery: undefined,
-  wrapperClassName: "",
-  placeHolder: "",
-  isWithBarcodeButton: false,
-  onClickBarcodeButton: () => {},
-  isNavigate: false,
-  isFocusedOnMount: true,
-};
 export default SearchBar;

@@ -1,8 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "../../css/SubTitle.css";
 
-const SubTitle = ({ subTitle, description, alignItems }) => {
+type Props = {
+  subTitle: string;
+  description: string;
+  alignItems: string;
+};
+
+const SubTitle = ({ subTitle, description, alignItems }: Props) => {
   return (
     <div className={`subtitle-${alignItems}`}>
       <div className="subtitle__line" />
@@ -10,12 +15,6 @@ const SubTitle = ({ subTitle, description, alignItems }) => {
       <span className="subtitle__description">{description}</span>
     </div>
   );
-};
-
-SubTitle.propTypes = {
-  subTitle: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  alignItems: PropTypes.string.isRequired,
 };
 
 export default SubTitle;

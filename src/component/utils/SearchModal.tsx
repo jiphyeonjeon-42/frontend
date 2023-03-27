@@ -1,21 +1,41 @@
+/* eslint-disable react/no-unused-prop-types */
 import React, { useRef } from "react";
-import PropTypes from "prop-types";
 import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
 import TextWithLabel from "./TextWithLabel";
 import "../../css/SearchModal.css";
 
-const SearchModal = ({
-  titleText,
-  isWithBarcodeButton,
-  onClickBarcodeButton,
-  searchBarPlaceholder,
-  page,
-  setPage,
-  setQuery,
-  lastPage,
-  children,
-}) => {
+type Props = {
+  titleText: string;
+  isWithBarcodeButton: boolean;
+  onClickBarcodeButton: () => void;
+  searchBarPlaceholder: string;
+  page: number;
+  setPage: (page: number) => void;
+  setQuery: (query: string) => void;
+  lastPage: number;
+  children: React.ReactNode;
+};
+
+const defaultProps = {
+  isWithBarcodeButton: false,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onClickBarcodeButton: () => {},
+  searchBarPlaceholder: "",
+};
+
+const SearchModal = (props: Props) => {
+  const {
+    titleText,
+    isWithBarcodeButton,
+    onClickBarcodeButton,
+    searchBarPlaceholder,
+    page,
+    setPage,
+    setQuery,
+    lastPage,
+    children,
+  } = { ...defaultProps, ...props };
   const headerRef = useRef(null);
   return (
     <div className="search-modal" ref={headerRef}>
@@ -41,21 +61,3 @@ const SearchModal = ({
 };
 
 export default SearchModal;
-
-SearchModal.propTypes = {
-  titleText: PropTypes.string.isRequired,
-  isWithBarcodeButton: PropTypes.bool,
-  onClickBarcodeButton: PropTypes.func,
-  searchBarPlaceholder: PropTypes.string,
-  page: PropTypes.number.isRequired,
-  setPage: PropTypes.func.isRequired,
-  setQuery: PropTypes.func.isRequired,
-  lastPage: PropTypes.number.isRequired,
-  children: PropTypes.element.isRequired,
-};
-
-SearchModal.defaultProps = {
-  isWithBarcodeButton: false,
-  onClickBarcodeButton: () => {},
-  searchBarPlaceholder: "",
-};

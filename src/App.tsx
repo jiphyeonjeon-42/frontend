@@ -35,7 +35,7 @@ function App() {
   const setUser = useSetRecoilState(userState);
   useEffect(() => {
     install(import.meta.env.REACT_APP_GA_ID);
-    const localUser = JSON.parse(window.localStorage.getItem("user"));
+    const localUser = JSON.parse(window.localStorage.getItem("user") ?? "{}");
 
     if (localUser?.isLogin) {
       if (!isExpiredDate(localUser?.expire)) setUser(localUser);

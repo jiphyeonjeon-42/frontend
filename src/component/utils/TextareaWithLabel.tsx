@@ -1,22 +1,54 @@
+/* eslint-disable react/no-unused-prop-types */
 import React, { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
 import colorPalette from "../../data/color";
 import "../../css/TextareaWithLabel.css";
 
-const TextareaWithLabel = ({
-  wrapperClassName,
-  topLabelText,
-  topLabelColor,
-  textareaPlaceHolder,
-  textareaName,
-  textareaDisabled,
-  textareaValue,
-  setTextareaValue,
-  isVisibleBottomMessage,
-  bottomMessageText,
-  bottomMessageColor,
-  isTextareaFocusedOnMount,
-}) => {
+type Prop = {
+  wrapperClassName: string;
+  topLabelText: string;
+  topLabelColor: string;
+  textareaPlaceHolder: string;
+  textareaName: string;
+  textareaValue: string;
+  textareaDisabled: boolean;
+  setTextareaValue: (x: string) => void;
+  isVisibleBottomMessage: boolean;
+  bottomMessageText: string;
+  bottomMessageColor: string;
+  isTextareaFocusedOnMount: boolean;
+};
+
+const defaultProps = {
+  wrapperClassName: "",
+  topLabelText: "",
+  topLabelColor: "red",
+  textareaPlaceHolder: "",
+  setTextareaValue: undefined,
+  textareaName: "",
+  textareaValue: undefined,
+  textareaDisabled: false,
+  isVisibleBottomMessage: true,
+  bottomMessageText: "",
+  bottomMessageColor: "red",
+  isTextareaFocusedOnMount: true,
+};
+
+const TextareaWithLabel = (props: Prop) => {
+  const {
+    wrapperClassName,
+    topLabelText,
+    topLabelColor,
+    textareaPlaceHolder,
+    setTextareaValue,
+    textareaName,
+    textareaValue,
+    textareaDisabled,
+    isVisibleBottomMessage,
+    bottomMessageText,
+    bottomMessageColor,
+    isTextareaFocusedOnMount,
+  } = { ...defaultProps, ...props };
+
   const [text, setText] = useState("");
   const textareaRef = useRef(null);
 
@@ -26,7 +58,7 @@ const TextareaWithLabel = ({
       ? [textareaValue, setTextareaValue]
       : [text, setText];
 
-  const color = string => {
+  const color = (string: string) => {
     const colorClassName = colorPalette.find(i => i.string === string)?.class;
     return `color-${colorClassName}` || "color-54";
   };
@@ -65,33 +97,3 @@ const TextareaWithLabel = ({
   );
 };
 export default TextareaWithLabel;
-
-TextareaWithLabel.propTypes = {
-  wrapperClassName: PropTypes.string,
-  topLabelText: PropTypes.string,
-  topLabelColor: PropTypes.string,
-  textareaPlaceHolder: PropTypes.string,
-  textareaName: PropTypes.string,
-  textareaValue: PropTypes.string,
-  textareaDisabled: PropTypes.bool,
-  setTextareaValue: PropTypes.func,
-  isVisibleBottomMessage: PropTypes.bool,
-  bottomMessageText: PropTypes.string,
-  bottomMessageColor: PropTypes.string,
-  isTextareaFocusedOnMount: PropTypes.bool,
-};
-
-TextareaWithLabel.defaultProps = {
-  wrapperClassName: "",
-  topLabelText: "",
-  topLabelColor: "red",
-  textareaPlaceHolder: "",
-  setTextareaValue: undefined,
-  textareaName: "",
-  textareaValue: undefined,
-  textareaDisabled: false,
-  isVisibleBottomMessage: true,
-  bottomMessageText: "",
-  bottomMessageColor: "red",
-  isTextareaFocusedOnMount: true,
-};

@@ -1,8 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "../../css/Banner.css";
 
-const Banner = ({ img, titleKo, titleEn }) => {
+type Props = {
+  img: string;
+  titleKo: string;
+  titleEn: string;
+};
+
+const Banner = ({ img, titleKo, titleEn }: Props) => {
   return (
     <section className={`banner ${img}-img`}>
       <div className="banner-wrapper">
@@ -15,12 +20,6 @@ const Banner = ({ img, titleKo, titleEn }) => {
       </div>
     </section>
   );
-};
-
-Banner.propTypes = {
-  img: PropTypes.string.isRequired,
-  titleKo: PropTypes.string.isRequired,
-  titleEn: PropTypes.string.isRequired,
 };
 
 export default Banner;

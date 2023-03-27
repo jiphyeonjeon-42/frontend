@@ -1,8 +1,27 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-unused-prop-types */
 import React from "react";
-import PropTypes from "prop-types";
 import "../../css/SpanWithLabel.css";
 
-const SpanWithLabel = ({ wrapperClassName, labelText, value, align }) => {
+type Props = {
+  wrapperClassName?: string;
+  labelText?: string;
+  value: string | number;
+  align?: string;
+};
+
+const defaultProps = {
+  wrapperClassName: "",
+  labelText: "",
+  align: "",
+  value: "",
+};
+
+const SpanWithLabel = (props: Props) => {
+  const { wrapperClassName, labelText, value, align } = {
+    ...defaultProps,
+    ...props,
+  };
   const alignType = () => {
     const candidate = ["horizontal", "vertical"];
     if (candidate.includes(align)) return align;
@@ -23,17 +42,3 @@ const SpanWithLabel = ({ wrapperClassName, labelText, value, align }) => {
 };
 
 export default SpanWithLabel;
-
-SpanWithLabel.propTypes = {
-  wrapperClassName: PropTypes.string,
-  labelText: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  align: PropTypes.string,
-};
-
-SpanWithLabel.defaultProps = {
-  wrapperClassName: "",
-  labelText: "",
-  align: "",
-  value: "",
-};

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import Image from "./Image";
 import Button from "../../img/arrow_right_circle.svg";
 import "../../css/ScrollTopButton.css";
 
-const ScrollTopButton = ({ rightRem, bottomRem }) => {
+type Props = {
+  rightRem: number;
+  bottomRem: number;
+};
+
+const ScrollTopButton = ({ rightRem, bottomRem }: Props) => {
   const [active, setActive] = useState(false);
   const [activeScrollY, setActiveScrollY] = useState(0);
   const [inActiveScrollY, setInActiveScrollY] = useState(0);
@@ -72,11 +76,6 @@ const ScrollTopButton = ({ rightRem, bottomRem }) => {
       </button>
     </div>
   );
-};
-
-ScrollTopButton.propTypes = {
-  rightRem: PropTypes.number.isRequired,
-  bottomRem: PropTypes.number.isRequired,
 };
 
 export default ScrollTopButton;

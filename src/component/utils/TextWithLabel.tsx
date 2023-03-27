@@ -1,20 +1,46 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-unused-prop-types */
 import React from "react";
-import PropTypes from "prop-types";
 import colorPalette from "../../data/color";
 import "../../css/TextWithLabel.css";
 
-const TextWithLabel = ({
-  wrapperClassName,
-  topLabelText,
-  mainText,
-  bottomLabelText,
-  topLabelColor,
-  mainTextColor,
-  bottomLabelColor,
-  size,
-  isMainTextEllipsis,
-}) => {
-  const color = string => {
+type Props = {
+  wrapperClassName?: string;
+  topLabelText?: string;
+  mainText: string;
+  bottomLabelText?: string;
+  topLabelColor?: string;
+  mainTextColor?: string;
+  bottomLabelColor?: string;
+  size?: string;
+  isMainTextEllipsis?: boolean;
+};
+
+const defaultProps = {
+  wrapperClassName: null,
+  topLabelText: null,
+  bottomLabelText: null,
+  topLabelColor: "red",
+  mainTextColor: "darkgrey2",
+  bottomLabelColor: "darkgrey2",
+  size: "normal",
+  isMainTextEllipsis: false,
+};
+
+const TextWithLabel = (props: Props) => {
+  const {
+    wrapperClassName,
+    topLabelText,
+    mainText,
+    bottomLabelText,
+    topLabelColor,
+    mainTextColor,
+    bottomLabelColor,
+    size,
+    isMainTextEllipsis,
+  } = { ...defaultProps, ...props };
+
+  const color = (string: string) => {
     const colorClassName = colorPalette.find(i => i.string === string)?.class;
     return `color-${colorClassName}` || "color-54";
   };
@@ -29,7 +55,7 @@ const TextWithLabel = ({
         <p className={`text__label ${color(topLabelColor)}`}>{topLabelText}</p>
       )}
       <p
-        className={`text__main-text 
+        className={`text__main-text
           ${color(mainTextColor)} ${textSize} ${ellipsis}`}
       >
         {mainText}
@@ -44,26 +70,3 @@ const TextWithLabel = ({
 };
 
 export default TextWithLabel;
-
-TextWithLabel.propTypes = {
-  wrapperClassName: PropTypes.string,
-  topLabelText: PropTypes.string,
-  mainText: PropTypes.string.isRequired,
-  bottomLabelText: PropTypes.string,
-  topLabelColor: PropTypes.string,
-  mainTextColor: PropTypes.string,
-  bottomLabelColor: PropTypes.string,
-  size: PropTypes.string,
-  isMainTextEllipsis: PropTypes.bool,
-};
-
-TextWithLabel.defaultProps = {
-  wrapperClassName: null,
-  topLabelText: null,
-  bottomLabelText: null,
-  topLabelColor: "red",
-  mainTextColor: "darkgrey2",
-  bottomLabelColor: "darkgrey2",
-  size: "normal",
-  isMainTextEllipsis: false,
-};

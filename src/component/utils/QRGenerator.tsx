@@ -1,8 +1,19 @@
 import React, { useRef, useEffect } from "react";
 import { BrowserQRCodeSvgWriter } from "@zxing/library";
-import PropTypes from "prop-types";
 
-const QRGenerator = ({ string, qrWidth, qrHeight, svgClassName }) => {
+type Props = {
+  string: string;
+  qrWidth: number;
+  qrHeight: number;
+  svgClassName?: string;
+};
+
+const QRGenerator = ({
+  string,
+  qrWidth = 100,
+  qrHeight = 100,
+  svgClassName,
+}: Props) => {
   const imgRef = useRef(null);
   useEffect(() => {
     const writer = new BrowserQRCodeSvgWriter();
@@ -13,16 +24,3 @@ const QRGenerator = ({ string, qrWidth, qrHeight, svgClassName }) => {
 };
 
 export default QRGenerator;
-
-QRGenerator.defaultProps = {
-  qrWidth: 100,
-  qrHeight: 100,
-  svgClassName: "",
-};
-
-QRGenerator.propTypes = {
-  string: PropTypes.string.isRequired,
-  qrWidth: PropTypes.number,
-  qrHeight: PropTypes.number,
-  svgClassName: PropTypes.string,
-};
