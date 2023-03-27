@@ -3,18 +3,18 @@ export const bookStatus = [
   { code: 1, string: "분실" },
   { code: 2, string: "파손" },
   { code: 3, string: "지정 도서" },
-];
+] as const;
 
 export const userRoleStatus = [
   { code: 0, string: "미인증" },
   { code: 1, string: "카뎃" },
   { code: 2, string: "사서" },
   { code: 3, string: "기타 운영진" },
-];
+] as const;
 
 export const reservationStatus = [
   { code: 0, string: "예약 중" },
   { code: 1, string: "대출 완료" },
   { code: 2, string: "예약 취소" },
   { code: 3, string: "예약 기한 만료" },
-];
+] as const;

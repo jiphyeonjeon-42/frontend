@@ -33,7 +33,7 @@ export const basicGnbMenu = [
     text: "로그인",
     isForMobile: true,
   },
-];
+] as const;
 
 export const loginLnbMenu = [
   {
@@ -48,7 +48,7 @@ export const loginLnbMenu = [
     linkTo: "/logout",
     text: "로그아웃",
   },
-];
+] as const;
 
 export const adminLnbMenu = [
   {
@@ -65,4 +65,4 @@ export const adminLnbMenu = [
     text: "DB관리",
     idClassName: "db",
   },
-];
+] as const;

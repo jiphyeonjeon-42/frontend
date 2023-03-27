@@ -1,4 +1,4 @@
-const getErrorMessage = errorCode => {
+const getErrorMessage = (errorCode: number) => {
   switch (errorCode) {
     // 사서 및 사용자
     case 0:
@@ -108,13 +108,31 @@ const getErrorMessage = errorCode => {
 
 export default getErrorMessage;
 
-export const setErrorDialog = (error, setErrorMessage, afterCloseDialog) => {
-  const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+type SetErrorMessage = (
+  title: string,
+  message: string,
+  afterCloseDialog?: () => void,
+) => void;
+
+type ErrorResponse = {
+  message: string;
+  response?: { data?: { errorCode?: string } };
+};
+
+type AfterCloseDialog = () => void;
+
+export const setErrorDialog = (
+  error: ErrorResponse,
+  setErrorMessage: SetErrorMessage,
+  afterCloseDialog: AfterCloseDialog,
+) => {
+  const errorCode = parseInt(error?.response?.data?.errorCode ?? "-1", 10);
   const [title, message] = getErrorMessage(errorCode).split("\r\n");
-  if (typeof setErrorMessage === "function")
+  if (typeof setErrorMessage === "function") {
     setErrorMessage(
       title,
       errorCode ? message : error.message,
       afterCloseDialog,
     );
+  }
 };
