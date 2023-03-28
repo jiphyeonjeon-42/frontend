@@ -11,7 +11,7 @@ Sentry.init({
   integrations: [new BrowserTracing()],
   tracesSampleRate: 1.0,
   environment:
-    process.env.REACT_APP_API === "http://localhost:3000/api"
+    import.meta.env.REACT_APP_API === "http://localhost:3000/api"
       ? "development"
       : "production",
 });
