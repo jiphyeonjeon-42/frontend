@@ -38,9 +38,7 @@ const History = () => {
           setQuery={setQuery}
         />
         <div className="histories-table__inquire-box">
-          <div className="histories-filter">
-            <HistoryFilter type={type} setType={setType} />
-          </div>
+          <HistoryFilter type={type} setType={setType} />
           {historiesList.map(history => (
             <HistoryTable
               key={history.id}

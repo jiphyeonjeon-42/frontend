@@ -6,12 +6,15 @@ import RedCheckIcon from "../../img/check_icon_red.svg";
 import "../../css/HistoriesFilter.css";
 
 const FilterButton = ({ type, typeName, setType }) => {
+  const onClickFilter = () => {
+    const isSelected = type === typeName;
+    setType(isSelected ? "" : typeName);
+  };
+
   return (
     <button
       type="button"
-      onClick={() => {
-        setType(typeName);
-      }}
+      onClick={onClickFilter}
       className="proceeding filter-button"
     >
       <Image
