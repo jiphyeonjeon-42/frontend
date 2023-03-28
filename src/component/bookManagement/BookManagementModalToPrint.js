@@ -22,7 +22,7 @@ const BookLabelModalToPrint = ({ printList }) => {
     windowForPrint.document.writeln(printAreaRef.current.outerHTML);
     copyStyles(window.document, windowForPrint.document);
     windowForPrint.focus();
-    windowForPrint.print();
+    setTimeout(() => windowForPrint.print(), 500);
   };
 
   const categoryList = () => {
