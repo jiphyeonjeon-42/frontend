@@ -30,6 +30,7 @@ import { isExpiredDate } from "./util/date";
 import BookManagement from "./component/bookManagement/BookManagement";
 import ReviewManagement from "./component/reviewManagement/ReviewManagement";
 import BookStock from "./component/bookStock/BookStock";
+import ELibraryIn42Box from "./component/eLibraryIn42Box/EventPage";
 
 function App() {
   const setUser = useSetRecoilState(userState);
@@ -50,6 +51,7 @@ function App() {
       <MobileHeader />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/41" element={<ELibraryIn42Box />} />
         <Route path="/information" element={<Information />} />
         <Route path="/search" element={<Search />} />
         <Route path="/info/:id" element={<BookDetail />} />
