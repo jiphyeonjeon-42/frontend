@@ -23,7 +23,8 @@
   width: 100%;
 }
 
-.box42__wrapper button {
+.box42__wrapper button,
+.box42__wrapper a {
   border: none;
   display: block;
   text-align: center;
@@ -51,11 +52,11 @@
 .box42__footer {
   position: relative;
 }
-.box42__footer button {
+.box42__footer a {
   margin: 20px auto;
 }
 
-.box42__footer > button:first-child:after {
+.box42__footer > a:first-child:after {
   content: "";
   position: absolute;
   left: 10px;
