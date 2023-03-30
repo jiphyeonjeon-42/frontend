@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../../css/Box42CopyCat.css";
 
 const Box42CopyCat = ({ setView }) => {
+  const location = useLocation();
+  
   return (
     <div className="box42__wrapper">
       <Link to="/" className="box42__logo">
@@ -23,20 +25,8 @@ const Box42CopyCat = ({ setView }) => {
       </div>
 
       <div className="box42__footer">
-        <button
-          onClick={() => {
-            window.alert("웹에서는 구현할 수 없는 Box 기능입니다.");
-          }}
-        >
-          Pin Box
-        </button>
-        <button
-          onClick={() => {
-            window.alert("웹에서는 구현할 수 없는 Box 기능입니다.");
-          }}
-        >
-          Quit Box
-        </button>
+        <a href="https://github.com/42Box/">Pin Box</a>
+        <a href="https://github.com/jiphyeonjeon-42/frontend/">Quit Box</a>
       </div>
     </div>
   );
