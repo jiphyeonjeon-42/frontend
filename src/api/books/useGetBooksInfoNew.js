@@ -15,6 +15,7 @@ const useGetBooksInfoNew = ({ setOpenTitleAndMessage }) => {
     { key: "id", type: "number", isNullable: false },
     { key: "title", type: "string", isNullable: false },
     { key: "image", type: "string", isNullable: true },
+    { key: "author", type: "string", isNullable: false },
   ];
 
   const refineResponse = response => {

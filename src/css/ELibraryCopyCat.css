@@ -1,0 +1,513 @@
+/* elibrary header 시작 */
+.elibrary__header {
+  width: calc(100vw - 140px);
+  min-width: 220px;
+
+  height: 49px;
+  border-bottom: 3px solid #b824d6;
+  box-sizing: border-box;
+  clear: both;
+}
+.elibrary__header__logo-img {
+  height: 30px;
+  margin: 8px 0 0 7px;
+}
+.elibrary__header__login {
+  margin: 6px 13px 0 0;
+  box-sizing: border-box;
+  float: right;
+  height: 34px;
+  font-size: 12px;
+}
+
+.elibrary__header__login::before {
+  width: 27px;
+  height: 19px;
+  background: url("https://42seoul.dkyobobook.co.kr/resources/common/images/front/mobile/icon_my.png")
+    no-repeat 0 0;
+  margin: 0 auto 0px auto;
+  background-size: cover;
+  content: "";
+  display: block;
+}
+
+.elibrary__header__login.logout::before {
+  background: url("https://42seoul.dkyobobook.co.kr/resources/common/images/front/mobile/icon_logout.png");
+  background-size: cover;
+}
+
+/* elibrary header 끝*/
+/* elibrary fixed-header 시작*/
+.elibrary__fixed-header {
+  position: fixed;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #5e5e5e;
+  box-shadow: 0px 0px 5px 2px #d2d2d2;
+  box-sizing: border-box;
+  z-index: 12;
+  height: 45px;
+  top: 0px;
+  transition: all ease 0.4s;
+}
+
+.elibrary__fixed-header.hidden {
+  top: -50px;
+}
+.elibrary__fixed-title {
+  position: fixed;
+  top: 10px;
+  left: 12px;
+  font-size: 17px;
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: all ease 0.4s;
+}
+
+.elibrary__fixed-title.hidden {
+  top: -40px;
+}
+.elibrary__fixed-header .elibrary__search-icon {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  color: white;
+  background: url("https://42seoul.dkyobobook.co.kr/resources/common/images/front/mobile/btn_sch.png")
+    no-repeat 0 0;
+  background-size: contain;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+/* elibrary fixed-header 끝*/
+
+/* elibrary searchBar 시작 */
+
+.elibrary__search-bar__wrapper {
+  width: calc(100vw - 140px);
+  min-width: 220px;
+  margin-top: 12px;
+  padding: 0 0 0 10px;
+  box-sizing: border-box;
+  display: flex;
+}
+.elibrary__search-bar__select {
+  border: 1px solid #b824d6;
+  border-right-color: #4c5d9d;
+  width: 84px;
+  height: 34px;
+  padding: 0 25px 0 5px;
+  vertical-align: middle;
+  appearance: none;
+  background: #fff
+    url("https://42seoul.dkyobobook.co.kr/resources/common/images/front/mobile/bul_sel.png")
+    no-repeat right center;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.elibrary__search-bar__select > option {
+  font-weight: 500;
+}
+
+.elibrary__search-bar__search-bar {
+  border: 1px solid #b824d6;
+  border-left: none;
+  height: 34px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+.elibrary__search-bar__search-bar > input[type="text"] {
+  width: 90%;
+  line-height: 32px;
+  height: 32px;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  padding: 0 10px 0 14px;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+/* TODO 뭔가다름 340px 기준 작아지는 거 해결하기로~ */
+/*
+@media screen and (max-width: 340px) {
+  .elibrary__search-bar__search-bar > input[type="text"] {
+    font-size: 13px;
+    word-spacing: -4px;
+    font-weight: 500;
+  }
+} */
+
+.elibrary__search-bar__search-bar > input[type="submit"] {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0;
+  border: 0;
+  background: url("https://42seoul.dkyobobook.co.kr/resources/common/images/front/mobile/btn_sch.png")
+    no-repeat 0 0;
+  background-size: contain;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.elibrary__search-bar__hamburger {
+  width: 40px;
+  height: 34px;
+  background: url("https://42seoul.dkyobobook.co.kr/resources/common/images/front/mobile/icon_all.png")
+    no-repeat -224px 0;
+  box-sizing: border-box;
+  border: 0;
+  margin: 0 4px 0 2px;
+  cursor: pointer;
+}
+
+/* elibrary search-bar 끝 */
+
+/* elibrary banner 시작 */
+
+.elibrary__banner__menu {
+  width: calc(100vw - 140px);
+  min-width: 220px;
+  padding: 0 10px;
+  height: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.elibrary__banner__menu > .search {
+  padding-top: 15px;
+  font-size: 17px;
+  font-weight: 500;
+  height: 100%;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.elibrary__banner__menu > .search:hover {
+  border-bottom: solid 3px black;
+}
+.elibrary__banner__menu > .wish {
+  font-size: 12px;
+  margin-right: 3px;
+  margin-top: 3px;
+}
+.elibrary__banner__menu > .wish::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 19px;
+  background: url("https://42seoul.dkyobobook.co.kr/resources/common/images/front/mobile/icon_hope_s.png")
+    no-repeat 0px 0;
+  margin: 0 auto 1px auto;
+  background-size: cover;
+}
+
+.elibrary__banner__banner {
+  display: flex;
+  justify-content: center;
+  width: calc(100vw - 140px);
+  min-width: 220px;
+  background-color: rgb(242, 249, 252);
+  border-top: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+/* elibrary banner 끝 */
+/* elibrary title 시작 */
+
+.elibrary__title {
+  width: calc(100vw - 140px);
+  min-width: 220px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+.elibrary__title > span {
+  font-size: 17px;
+  font-weight: 500;
+  height: 100%;
+  line-height: 100%;
+  box-sizing: border-box;
+  margin: 5px 10px 0;
+}
+
+.elibrary__title > a {
+  display: inline-block;
+  padding: 3px 5.5px 0 6px;
+  height: 22px;
+  font-size: 12px;
+  color: #666;
+  border: 1px solid #aaa;
+  background-color: white;
+  box-sizing: border-box;
+  margin-right: 12px;
+  line-height: 1;
+}
+.elibrary__title > a::after {
+  content: "+";
+  display: inline-block;
+  margin-left: 3px;
+  font-size: 12px;
+  line-height: 1;
+  vertical-align: top;
+}
+
+/* elibrary title 끝 */
+/* elibrary new 시작 */
+
+.elibrary__new-books {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25%, auto));
+  padding: 0 10px;
+  margin: 15px 0;
+  width: calc(100vw - 140px);
+  min-width: 220px;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 640px) {
+  .elibrary__new-books {
+    grid-template-columns: repeat(auto-fill, minmax(33%, auto));
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .elibrary__new-books {
+    grid-template-columns: repeat(auto-fill, minmax(40%, auto));
+  }
+}
+
+/* elibrary new 끝 */
+/* elibrary book 시작 */
+
+.elibrary__book__wrapper {
+  width: 120px;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+}
+
+.elibrary__book__rank {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #dbdbdb;
+  background: rgba(0, 0, 0, 0.6);
+}
+.elibrary__book__image {
+  width: 118px;
+  height: 177px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  margin-bottom: 6px;
+}
+.elibrary__book__author {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-size: 13px;
+}
+.elibrary__book__title {
+  margin-bottom: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.elibrary__book__icon {
+  display: inline-block;
+  padding: 4px 10px 0 10px;
+  height: 24px;
+  font-size: 13px;
+  font-weight: 400;
+  color: black;
+  border: 1px solid #366db8;
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin: 10px 0px;
+  line-height: 1;
+}
+
+.elibrary__book__icon::before {
+  width: 18px;
+  height: 14px;
+  background: url("https://42seoul.dkyobobook.co.kr/resources/common/images/front/mobile/icon_ebook.png")
+    no-repeat 0 0;
+  content: "";
+  display: inline-block;
+  margin-right: 2px;
+  vertical-align: -2px;
+  background-size: contain;
+}
+/* elibrary book 끝 */
+/* elibrary best 시작 */
+
+.elibrary__best {
+  width: calc(100vw - 140px);
+  min-width: 220px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+  font-size: 15px;
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 2px solid #000000;
+  margin: 16px 0;
+}
+
+.elibrary__best__rank1 {
+  width: calc(100vw - 140px);
+  min-width: 220px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+}
+.elibrary__best__rank1 > .elibrary__book__image {
+  width: 128px;
+  height: 192px;
+}
+@media screen and (max-width: 400px) {
+  .elibrary__best__rank1 > .elibrary__book__image {
+    width: 50%;
+  }
+}
+
+.elibrary__best__rank1 > .elibrary__book__rank {
+  left: 20px;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+}
+
+.elibrary__book__detail {
+  margin-left: 15px;
+}
+
+.elibrary__book__detail > p {
+  text-align: start;
+  font-size: 13px;
+}
+
+.elibrary__book__detail .elibrary__book__title {
+  font-size: 14px;
+}
+.elibrary__book__detail .elibrary__book__author {
+  margin: 8px 0 15px;
+}
+
+.elibrary__best__description {
+  white-space: pre-wrap;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 17px;
+}
+/* elibrary best 끝 */
+/* elibrary popular 시작 */
+
+.elibrary__book__popular-frame {
+  width: calc(100vw - 140px);
+  min-width: 220px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.elibrary__book__popular-books > .elibrary__book__wrapper {
+  display: inline-block;
+  width: 80px;
+  margin-right: 14px;
+}
+.elibrary__book__popular-books .elibrary__book__image {
+  width: 78px;
+  height: 115px;
+}
+/* elibrary popular 끝 */
+/* elibrary footer 시작 */
+
+.elibrary__footer .elibrary__title {
+  border-top: 1px solid #b6b6b6;
+  padding: 13px 20px;
+  width: calc(100vw - 140px);
+  box-sizing: border-box;
+}
+.elibrary__footer .elibrary__title > span {
+  font-size: 14px;
+  margin: 0;
+  margin-right: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex-shrink: 1;
+}
+.elibrary__footer .elibrary__title > span:after {
+  content: "(이벤트) 23년 만우절 특별 페이지 메인 대체 (23.03.31 ~ 23.04.01)";
+  margin-left: 15px;
+  font-size: 13px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.elibrary__footer__links,
+.elibrary__footer__copyright {
+  width: calc(100vw - 140px);
+  min-width: 220px;
+  background-color: #666;
+  display: flex;
+  justify-content: space-around;
+  font-size: 13px;
+  overflow: hidden;
+}
+.elibrary__footer__links > a {
+  color: #fff;
+  padding: 10px 0;
+  font-weight: 500;
+}
+.elibrary__footer__slack {
+  flex-shrink: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.elibrary__footer__github-logo {
+  display: flex;
+  align-items: center;
+}
+.elibrary__footer__github-logo > img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.elibrary__footer__copyright {
+  padding: 15px 0;
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
+  border-top: 1px solid #898989;
+}
+/* elibrary footer 끝 */
