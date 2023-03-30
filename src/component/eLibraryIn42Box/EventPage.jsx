@@ -8,7 +8,7 @@ import "../../css/ELibraryIn42Box.css";
 
 const linkList = {
   BOX: "https://42box.github.io/front-end/",
-  ELIBRARY: "https://42seoul.dkyobobook.co.kr/",
+  ELIBRARY: "https://42seoul.dkyobobook.co.kr/main.ink/",
   HANE24: "https://24hoursarenotenough.42seoul.kr/",
   CODE80000: "https://80000coding.oopy.io/",
   WHERE42: "https://www.where42.kr",
