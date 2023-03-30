@@ -73,7 +73,7 @@ const Login = () => {
                 로그인
               </button>
               <a
-                href={`${process.env.REACT_APP_API}/auth/oauth`}
+                href={`${import.meta.env.REACT_APP_API}/auth/oauth`}
                 className="login-btn login-oauth"
                 align="center"
               >

@@ -1,0 +1,68 @@
+.box42__wrapper {
+  width: 140px;
+  min-width: 140px;
+  background-color: #5f5f5f;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  height: 100vh;
+}
+
+.box42__logo {
+  text-align: center;
+}
+.box42__logo > img {
+  width: 80%;
+  margin-top: 30px;
+}
+
+.box42__links {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.box42__wrapper button {
+  border: none;
+  display: block;
+  text-align: center;
+  background-color: transparent;
+  appearance: none;
+  color: #dbdbdb;
+  cursor: pointer;
+  margin: 14px auto;
+  border: 1px solid #5f5f5f;
+  border-radius: 5px;
+  font-size: 12px;
+  width: 70%;
+  box-sizing: border-box;
+}
+
+.box42__wrapper button:hover {
+  border: 1px solid #dbdbdb;
+  color: white;
+}
+
+.box42__footer {
+  width: 100%;
+}
+
+.box42__footer {
+  position: relative;
+}
+.box42__footer button {
+  margin: 20px auto;
+}
+
+.box42__footer > button:first-child:after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 55%;
+  border-bottom: solid 1px rgb(150, 150, 150);
+}
+.box42__footer > button:last-child {
+  margin-bottom: 10px;
+}

@@ -126,7 +126,9 @@ const Mypage = () => {
             <div className="mypage-inquire-box-short-clickBox">
               <a
                 className="font-14-bold color-54"
-                href={`${process.env.REACT_APP_API}/auth/getIntraAuthentication`}
+                href={`${
+                  import.meta.env.REACT_APP_API
+                }/auth/getIntraAuthentication`}
               >
                 42 인증하기
               </a>
