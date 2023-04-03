@@ -1,4 +1,4 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
 import * as Sentry from "@sentry/react";
@@ -17,10 +17,10 @@ Sentry.init({
 });
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <RecoilRoot>
       <App />
     </RecoilRoot>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("root"),
 );

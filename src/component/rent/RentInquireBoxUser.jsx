@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import useModal from "../../hook/useModal";
 import RentModalUser from "./RentModalUser";

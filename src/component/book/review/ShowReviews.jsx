@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, useEffect } from "react";
+import { useCallback, useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import HandleReview from "./HandleReview";
 import axiosPromise from "../../../util/axios";

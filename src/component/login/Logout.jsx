@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useResetRecoilState } from "recoil";
 import usePostAuthLogout from "../../api/auth/usePostAuthLogout";

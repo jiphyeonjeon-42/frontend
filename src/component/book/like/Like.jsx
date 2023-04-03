@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import usePostLike from "../../../api/like/usePostLike";
 import useDeleteLike from "../../../api/like/useDeleteLike";

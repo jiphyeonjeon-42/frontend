@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from "react";
 import PropTypes from "prop-types";
 import Image from "../utils/Image";
 import Arr from "../../img/arrow_right_black.svg";

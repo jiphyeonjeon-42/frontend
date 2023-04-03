@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import "../../../css/Review.css";
 import Button from "../../utils/Button";

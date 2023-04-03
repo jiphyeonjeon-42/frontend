@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { Link, useLocation } from "react-router-dom";
 import userState from "../../atom/userState";

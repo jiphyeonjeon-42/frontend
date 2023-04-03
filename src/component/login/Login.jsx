@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import usePostAuthLogin from "../../api/auth/usePostAuthLogin";
 import "../../css/MainBanner.css";
 import "../../css/Banner.css";

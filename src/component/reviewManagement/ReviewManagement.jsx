@@ -1,4 +1,3 @@
-import React from "react";
 import useGetReviews from "../../api/reviews/useGetReviews";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";

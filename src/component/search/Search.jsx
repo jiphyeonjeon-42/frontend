@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import Sort from "./Sort";
 import BookInfo from "./BookInfo";

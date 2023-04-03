@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import useDialog from "../../hook/useDialog";
 import usePostLendings from "../../api/lendings/usePostLendings";

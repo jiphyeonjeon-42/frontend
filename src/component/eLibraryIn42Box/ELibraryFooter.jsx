@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import ELibraryTitleWithMore from "./ELibraryTitleWithMore";
 import GithubLogo from "../../img/github.svg";

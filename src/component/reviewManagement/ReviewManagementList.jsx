@@ -1,4 +1,3 @@
-import React from "react";
 import { PropTypes } from "prop-types";
 import useDialog from "../../hook/useDialog";
 import usePatchReviewsId from "../../api/reviews/usePatchReviewsId";

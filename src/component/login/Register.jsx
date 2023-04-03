@@ -1,4 +1,3 @@
-import React from "react";
 import usePostUsersCreate from "../../api/users/usePostUsersCreate";
 import { registerRule } from "../../data/validate";
 import "../../css/Register.css";

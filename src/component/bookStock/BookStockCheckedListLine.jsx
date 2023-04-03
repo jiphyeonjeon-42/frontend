@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import React from "react";
 import InquireBoxItem from "../utils/InquireBoxItem";
 import InquireBoxLine from "../utils/InquireBoxLine";
 

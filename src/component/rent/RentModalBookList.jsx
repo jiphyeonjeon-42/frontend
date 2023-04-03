@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-import React from "react";
 import PropTypes from "prop-types";
 import Image from "../utils/Image";
 import Arrow from "../../img/arrow_right_black.svg";

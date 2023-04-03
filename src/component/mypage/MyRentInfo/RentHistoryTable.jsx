@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import { useState } from "react";
 import useDialog from "../../../hook/useDialog";
 import useGetLike from "../../../api/like/useGetLike";
 import usePostLike from "../../../api/like/usePostLike";

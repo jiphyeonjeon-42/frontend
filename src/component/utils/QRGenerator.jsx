@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { BrowserQRCodeSvgWriter } from "@zxing/library";
 import PropTypes from "prop-types";
 

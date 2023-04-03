@@ -1,4 +1,3 @@
-import React from "react";
 import MainBanner from "./MainBanner";
 import MainNew from "./MainNew";
 import MainPopular from "./MainPopular";
