@@ -12,10 +12,10 @@ const LimitedRoute = ({ isLoginOnly, isAdminOnly, isLogoutOnly }) => {
     return <NotFound />;
   }
   if (isLoginOnly && !user?.isLogin) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace={true} />;
   }
   if (isLogoutOnly && user?.isLogin) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace={true} />;
   }
   return <Outlet />;
 };

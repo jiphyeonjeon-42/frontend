@@ -9,6 +9,6 @@ const Auth = () => {
     getMe();
   }, []);
 
-  return <Navigate to="/" />;
+  return <Navigate to="/" replace={true} />;
 };
 export default Auth;

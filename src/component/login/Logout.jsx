@@ -16,7 +16,7 @@ const Logout = () => {
 
   return (
     <>
-      <Navigate to="/" />
+      <Navigate to="/" replace={true} />
     </>
   );
 };

@@ -24,7 +24,7 @@ const usePostAuthLogin = () => {
 
   const navigate = useNavigate();
   const onSuccess = () => {
-    navigate("/auth");
+    navigate("/auth", { replace: true });
   };
 
   const onError = error => {
