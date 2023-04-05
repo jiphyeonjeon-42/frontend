@@ -4,7 +4,7 @@ import BookManagementCartToPrint from "./BookManagementCartToPrint";
 import BookManagementBooksList from "./BookManagementBooksList";
 import Tabs from "../utils/Tabs";
 import Banner from "../utils/Banner";
-import { managementTabList } from "../../data/tablist";
+import { bookManagementTabList } from "../../data/tablist";
 
 const BookManagement = () => {
   const [printList, setPrintList] = useState([]);
@@ -33,7 +33,7 @@ const BookManagement = () => {
     <main>
       <Dialog />
       <Banner img="admin" titleKo="도서 관리" titleEn="BOOK MANAGEMENT" />
-      <Tabs tabList={managementTabList} />
+      <Tabs tabList={bookManagementTabList} />
       <BookManagementBooksList
         page={page}
         setPage={setPage}

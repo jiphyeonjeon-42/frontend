@@ -3,7 +3,7 @@ import useGetReviews from "../../api/reviews/useGetReviews";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
 import Management from "../utils/Management";
-import { managementTabList } from "../../data/tablist";
+import { otherManagementTabList } from "../../data/tablist";
 import ReviewManagementList from "./ReviewManagementList";
 import Filter from "../utils/Filter";
 
@@ -32,7 +32,7 @@ const ReviewManagement = () => {
     <main>
       <Dialog />
       <Banner img="admin" titleKo="리뷰 관리" titleEn="REVIEW MANAGEMENT" />
-      <Tabs tabList={managementTabList} />
+      <Tabs tabList={otherManagementTabList} />
       <Management
         searchBarPlaceHolder="도서명이나 닉네임을 검색하세요"
         setQuery={setQuery}
