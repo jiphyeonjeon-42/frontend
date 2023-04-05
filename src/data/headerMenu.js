@@ -60,9 +60,23 @@ export const adminLnbMenu = [
   },
   {
     mobileImg: DB,
-    imgAlt: "db",
+    imgAlt: "user",
     linkTo: "/user",
-    text: "DB관리",
+    text: "유저관리",
+    idClassName: "db",
+  },
+  {
+    mobileImg: DB,
+    imgAlt: "book",
+    linkTo: "/book",
+    text: "도서관리",
+    idClassName: "db",
+  },
+  {
+    mobileImg: DB,
+    imgAlt: "other_db",
+    linkTo: "/review",
+    text: "추가기능관리",
     idClassName: "db",
   },
 ];
