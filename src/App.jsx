@@ -50,11 +50,8 @@ function App() {
       <Header />
       <MobileHeader />
       <Routes>
-        {/* 정상적인 라우팅
-         <Route path="/" element={<Main />} />
-        <Route path="/41" element={<ELibraryIn42Box />} /> */}
-        <Route path="/" element={<ELibraryIn42Box />} />
-        <Route path="/41" element={<Main />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/41" element={<ELibraryIn42Box />} />
         <Route path="/information" element={<Information />} />
         <Route path="/search" element={<Search />} />
         <Route path="/info/:id" element={<BookDetail />} />
