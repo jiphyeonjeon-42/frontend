@@ -8,13 +8,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Cache node modules  # node modules 캐싱
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.OS }}-master-build-${{ hashFiles('**/package-lock.json') }}
