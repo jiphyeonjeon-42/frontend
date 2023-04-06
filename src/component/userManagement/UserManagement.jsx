@@ -9,7 +9,7 @@ import Modal from "../utils/Modal";
 import ModalHeader from "../utils/ModalHeader";
 import UserDetailInfo from "./UserDetailInfo";
 
-import { managementTabList } from "../../data/tablist";
+import { userManagementTabList } from "../../data/tablist";
 import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 import "../../css/UserManagement.css";
 
@@ -26,7 +26,7 @@ const UserManagement = () => {
   return (
     <main>
       <Banner img="admin" titleKo="유저 관리" titleEn="USER MANAGEMENT" />
-      <Tabs tabList={managementTabList} />
+      <Tabs tabList={userManagementTabList} />
       <section className="user-management-body">
         <div className="user-management-search">
           <SearchBar

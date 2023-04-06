@@ -1,10 +1,16 @@
-export const managementTabList = [
+export const userManagementTabList = [
   { name: "유저관리", link: "/user" },
+]
+
+export const bookManagementTabList = [
   { name: "도서등록", link: "/addbook" },
   { name: "도서관리", link: "/book" },
-  { name: "리뷰관리", link: "/review" },
   { name: "재고관리", link: "/stock" },
-];
+]
+
+export const otherManagementTabList =[
+  { name: "리뷰관리", link: "/review" },
+]
 
 export const rentTabList = [
   { name: "대출", link: "/rent" },

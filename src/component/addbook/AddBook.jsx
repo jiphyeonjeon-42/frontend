@@ -9,7 +9,7 @@ import Banner from "../utils/Banner";
 import BarcodeReader from "../utils/BarcodeReader";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 
-import { managementTabList } from "../../data/tablist";
+import { bookManagementTabList } from "../../data/tablist";
 import Book from "../../img/admin_icon.svg";
 import "../../css/AddBook.css";
 
@@ -40,7 +40,7 @@ const AddBook = () => {
   return (
     <main>
       <Banner img="admin" titleKo="도서 신규 등록" titleEn="ADD BOOK" />
-      <Tabs tabList={managementTabList} />
+      <Tabs tabList={bookManagementTabList} />
       <section className="add-book__wrapper">
         {isUsingBarcodeReader && (
           <BarcodeReader toDoAfterRead={toDoAfterRead} />
