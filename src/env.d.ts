@@ -12,6 +12,7 @@ interface ImportMetaEnv {
 
   /** 건의사항 시트 URL */
   readonly REACT_APP_SUGGESTION: string;
+  readonly REACT_APP_SENTRY:string;
 }
 
 interface ImportMeta {
