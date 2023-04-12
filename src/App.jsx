@@ -31,6 +31,8 @@ import BookManagement from "./component/bookManagement/BookManagement";
 import ReviewManagement from "./component/reviewManagement/ReviewManagement";
 import BookStock from "./component/bookStock/BookStock";
 import ELibraryIn42Box from "./component/eLibraryIn42Box/EventPage";
+import SuperTagManagement from "./component/superTag/SuperTagManagement";
+import SubTagManagement from "./component/subTag/SubTagManagement";
 
 function App() {
   const setUser = useSetRecoilState(userState);
@@ -71,6 +73,8 @@ function App() {
           <Route path="/book" element={<BookManagement />} />
           <Route path="/review" element={<ReviewManagement />} />
           <Route path="/stock" element={<BookStock />} />
+          <Route path="/tag/super" element={<SuperTagManagement />} />
+          <Route path="/tag/sub" element={<SubTagManagement />} />
         </Route>
         <Route element={<LimitedRoute isLoginOnly />}>
           <Route path="/mypage" element={<MyPageRoutes />}>
