@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { category, koreanDemicalClassification } from "../../data/category";
 import usePostBooksCreate from "../../api/books/usePostBooksCreate";

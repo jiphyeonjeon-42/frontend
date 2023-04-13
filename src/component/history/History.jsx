@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import HistoryTable from "./HistoryTable";
 import HistoryFilter from "./HistoryFilter";
 import HistoryModalContents from "./HistoryModalContents";

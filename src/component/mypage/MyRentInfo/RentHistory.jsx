@@ -1,4 +1,3 @@
-import React from "react";
 import Pagination from "../../utils/Pagination";
 import useGetHistories from "../../../api/histories/useGetHistories";
 import RentHistoryTable from "./RentHistoryTable";

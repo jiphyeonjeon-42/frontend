@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import Question from "./Question";
 import Image from "../utils/Image";
 import Banner from "../utils/Banner";

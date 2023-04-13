@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import BookList from "./RentModalBookList";
 import SearchModal from "../utils/SearchModal";

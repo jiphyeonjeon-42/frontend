@@ -1,4 +1,3 @@
-import React from "react";
 import propTypes from "prop-types";
 import QRGenerator from "../../utils/QRGenerator";
 import logo from "../../../img/logo_img.png";

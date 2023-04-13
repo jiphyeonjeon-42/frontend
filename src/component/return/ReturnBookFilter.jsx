@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from "react";
 import "../../css/ReturnBookFilter.css";
 
 const ReturnBookFilter = ({ lendingSort, setLendingSort }) => {

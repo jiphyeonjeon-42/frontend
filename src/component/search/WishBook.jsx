@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "../utils/Image";
 import AlretIcon from "../../img/alret_icon.svg";
 import "../../css/WishBook.css";

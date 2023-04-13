@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Reserve from "../../img/list-check-solid.svg";

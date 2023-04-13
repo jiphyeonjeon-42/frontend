@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Book from "../../img/admin_icon.svg";

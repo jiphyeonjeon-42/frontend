@@ -1,4 +1,3 @@
-import React from "react";
 import BookStockNeedToCheckListLine from "./BookStockNeedToCheckListLine";
 import useGetStockSearch from "../../api/stock/useGetStockSearch";
 import InquireBoxTitle from "../utils/InquireBoxTitle";

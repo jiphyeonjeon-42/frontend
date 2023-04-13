@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";

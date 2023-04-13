@@ -1,4 +1,3 @@
-import React from "react";
 import RentHistory from "./RentHistory";
 import useDialog from "../../../hook/useDialog";
 import useGetUsersSearchId from "../../../api/users/useGetUsersSearchId";

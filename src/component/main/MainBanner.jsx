@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "../utils/Image";
 import SearchBar from "../utils/SearchBar";
 import ScrollIcon from "../../img/scroll-icon.svg";

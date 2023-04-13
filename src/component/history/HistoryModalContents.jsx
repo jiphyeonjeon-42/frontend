@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import TextWithLabel from "../utils/TextWithLabel";
 import BookInformationWithCover from "../utils/BookInformationWithCover";

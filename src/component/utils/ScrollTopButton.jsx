@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Image from "./Image";
 import Button from "../../img/arrow_right_circle.svg";

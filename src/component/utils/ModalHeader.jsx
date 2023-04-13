@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import EmphasisInString from "./EmphasisInString";
 import "../../css/ModalHeader.css";

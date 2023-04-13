@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "../component/utils/Modal";
 import ModalHeader from "../component/utils/ModalHeader";
 
