@@ -14,7 +14,6 @@
     <img src="https://img.shields.io/badge/Eslint-^7.32.0-4B32C3?logo=eslint" />
 		<img src="https://img.shields.io/badge/Slack-alert-4A154B?logo=Slack" />
 		<img src="https://img.shields.io/badge/zxing/library-QR code-2496ED" />
-		<img src="https://img.shields.io/badge/QS-v6.11.0-000000" />
     <img src="https://img.shields.io/badge/42Oauth-^2.0-EB5424?logo=Auth0" />
 	</p>
 </p>
