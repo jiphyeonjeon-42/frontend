@@ -18,7 +18,6 @@
     "eslint-plugin-react": "^7.24.0",
     "ga-gtag": "^1.1.1",
     "prop-types": "^15.7.2",
-    "qs": "^6.10.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.3.0",
@@ -51,6 +50,9 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-router-dom": "^5.3.3",
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-prettier": "^3.4.0",
     "prettier": "2.3.2"
