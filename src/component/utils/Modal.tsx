@@ -53,7 +53,7 @@ const Modal = ({
     e.stopPropagation();
   };
 
-  const modalPosition = document.getElementById("modal");
+  const modalPosition = document.getElementById("portal");
 
   return (
     modalPosition &&

@@ -46,7 +46,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div id="modal" />
+      <div id="portal" />
       <Header />
       <MobileHeader />
       <Routes>
