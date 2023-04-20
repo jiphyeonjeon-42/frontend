@@ -32,6 +32,7 @@ const Tooltip = ({ children, description }: TooltipProps) => {
                 left: boundInfo.left,
                 backgroundColor: "rgba(00,00,00,0.6)",
                 padding: "4px",
+                zIndex: 100,
               }}
             >
               <span style={{ color: "white" }}>{description}</span>
