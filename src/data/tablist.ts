@@ -12,6 +12,8 @@ export const bookManagementTabList: TabType[] = [
 
 export const otherManagementTabList: TabType[] = [
   { name: "리뷰관리", link: "/review" },
+  { name: "도서별태그", link: "/tag/sub" },
+  { name: "태그관리", link: "/tag/super" },
 ];
 
 export const rentTabList: TabType[] = [
