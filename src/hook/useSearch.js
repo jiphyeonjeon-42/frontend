@@ -1,5 +1,4 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import useDebounce from "./useDebounce";
 
 const useSearch = () => {
@@ -51,7 +50,3 @@ const useSearch = () => {
 };
 
 export default useSearch;
-
-useSearch.propTypes = {
-  searchFuction: PropTypes.func.isRequired,
-};
