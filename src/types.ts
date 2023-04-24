@@ -14,16 +14,30 @@ export type Book = {
   isLendable: number;
 };
 
-type Lending = {
-  dueDate: string;
+export type Lending = {
+  id: number;
   title: string;
+  callSign: string;
+  dueDate: string;
+  createdAt: string;
+  lendingCondition: string;
+  login?: string;
+  penaltyDays: number;
+  image?: string;
 };
 
-type Reservation = {
-  ranking: number;
+export type Reservation = {
+  bookId: number;
+  callSign: string;
+  createdAt: string;
   endAt: string;
-  lenderableDate: string;
+  image?: string;
+  login?: string;
+  penaltyDays: number;
+  reservationsId: number;
+  status: number;
   title: string;
+  userId: number;
 };
 
 export type User = {
