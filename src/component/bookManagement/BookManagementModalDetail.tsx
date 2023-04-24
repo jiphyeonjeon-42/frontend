@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import PropTypes from "prop-types";
 import Button from "../utils/Button";
 import InputWithLabel from "../utils/InputWithLabel";
 import SelectWithLabel from "../utils/SelectWithLabel";
@@ -8,8 +7,14 @@ import usePatchBooksUpdate from "../../api/books/usePatchBooksUpdate";
 import { category } from "../../data/category";
 import "../../css/BookManagementDetail.css";
 import Image from "../utils/Image";
+import { Book } from "../../types";
 
-const BookManagementModalDetail = ({ book, closeModal }) => {
+type Props = {
+  book: Book;
+  closeModal: () => void;
+};
+
+const BookManagementModalDetail = ({ book, closeModal }: Props) => {
   const [editMode, setEditMode] = useState(false);
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(book.image);
@@ -26,13 +31,13 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
   const categoryRef = useRef(null);
 
   const { setChange, Dialog } = usePatchBooksUpdate({
-    title: book.title,
+    bookTitle: book.title,
     closeModal,
   });
 
   const collectChange = () => {
     const change = { ...book };
-    const modifyFromRef = (key, ref) => {
+    const modifyFromRef = (key: string, ref: any) => {
       change[key] = book[key];
       if (ref.current !== null && ref.current.value !== book[key]) {
         change[key] = ref.current.value;
@@ -69,7 +74,7 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
 
     if (!validateDate)
       errorMessage += "출판일자 날짜형식 yyyddmm에 맞지 않습니다.\n";
-    if (!validateCallSign) errorMessage += `청구기호 형식이 맞지 않습니다.\n`;
+    if (!validateCallSign) errorMessage += "청구기호 형식이 맞지 않습니다.\n";
     if (!validateCategory) {
       errorMessage += "카테고리와 청구기호가 맞지 않습니다.\n";
     }
@@ -210,8 +215,3 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
 };
 
 export default BookManagementModalDetail;
-
-BookManagementModalDetail.propTypes = {
-  book: PropTypes.shape().isRequired,
-  closeModal: PropTypes.func.isRequired,
-};
