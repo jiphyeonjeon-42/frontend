@@ -111,41 +111,41 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
             labelText="제목"
             disabled={!editMode}
             resetDependency={reset}
-            inputRef={titleRef}
+            ref={titleRef}
             inputInitialValue={book.title}
           />
           <InputWithLabel
             labelText="저자"
             disabled={!editMode}
-            inputRef={authorRef}
+            ref={authorRef}
             resetDependency={reset}
             inputInitialValue={book.author}
           />
           <InputWithLabel
             labelText="출판사"
             disabled={!editMode}
-            inputRef={publisherRef}
+            ref={publisherRef}
             resetDependency={reset}
             inputInitialValue={book.publisher}
           />
           <InputWithLabel
             labelText="출판일"
             disabled={!editMode}
-            inputRef={publishedAtRef}
+            ref={publishedAtRef}
             resetDependency={reset}
             inputInitialValue={book.publishedAt}
           />
           <InputWithLabel
             labelText="ISBN"
             disabled={!editMode}
-            inputRef={isbnRef}
+            ref={isbnRef}
             resetDependency={reset}
             inputInitialValue={book.isbn}
           />
           <InputWithLabel
             labelText="표지이미지"
             disabled={!editMode}
-            inputRef={imageRef}
+            ref={imageRef}
             resetDependency={reset}
             onChangeCallBack={setImage}
             inputInitialValue={book.image}
@@ -171,7 +171,7 @@ const BookManagementModalDetail = ({ book, closeModal }) => {
           <InputWithLabel
             labelText="청구기호"
             disabled={!editMode}
-            inputRef={callSignRef}
+            ref={callSignRef}
             resetDependency={reset}
             inputInitialValue={book.callSign}
           />

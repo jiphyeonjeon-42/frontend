@@ -16,7 +16,7 @@ type UserDetailInfoProps = {
     intraId?: number;
     slack?: string;
     penaltyEndDate?: string;
-    overDueDay?: string;
+    overDueDay?: number;
     role?: number;
     reservations?: {
       ranking?: number;
@@ -80,21 +80,21 @@ const UserDetailInfo = ({ user }: UserDetailInfoProps) => {
           labelText="인트라ID"
           inputInitialValue={user.intraId}
           resetDependency={reset}
-          inputRef={intraIdRef}
+          ref={intraIdRef}
           disabled={!editMode}
         />
         <InputWithLabel
           labelText="닉네임"
           inputInitialValue={user.nickname}
           resetDependency={reset}
-          inputRef={nickNameRef}
+          ref={nickNameRef}
           disabled={!editMode}
         />
         <InputWithLabel
           labelText="슬랙ID"
           inputInitialValue={user.slack}
           resetDependency={reset}
-          inputRef={slackRef}
+          ref={slackRef}
           disabled={!editMode}
         />
         <SelectWithLabel
@@ -115,7 +115,7 @@ const UserDetailInfo = ({ user }: UserDetailInfoProps) => {
               : user.penaltyEndDate
           }
           resetDependency={reset}
-          inputRef={penaltyRef}
+          ref={penaltyRef}
           disabled={!editMode}
         />
         <InputWithLabel
