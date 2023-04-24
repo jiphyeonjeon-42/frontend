@@ -16,7 +16,7 @@ type DialogConfig = {
   titleEmphasis: string;
   message: string;
   buttonAlign: string;
-  numberOfButtons: 1;
+  numberOfButtons: number;
   firstButton: DialogButton;
   secondButton: DialogButton;
 };
