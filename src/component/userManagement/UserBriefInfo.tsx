@@ -2,32 +2,14 @@ import Image from "../utils/Image";
 import UserUsage from "../../img/book-arrow-right.svg";
 import UserEdit from "../../img/edit.svg";
 import "../../css/UserBriefInfo.css";
+import { User } from "../../types";
 
 const roles = ["미인증", "일반", "사서", "운영진"];
 const USAGE = 1;
 const EDIT = 2;
 
 type UserBriefInfoProps = {
-  user: {
-    id?: number;
-    email?: string;
-    nickname?: string;
-    intraId?: number;
-    slack?: string;
-    penaltyEndDate?: string;
-    overDueDay?: string;
-    role?: number;
-    reservations?: {
-      ranking?: number;
-      endAt?: unknown;
-      lenderableDate?: unknown;
-      title?: string;
-    }[];
-    lendings?: {
-      dueDate?: string;
-      title?: string;
-    }[];
-  };
+  user: User;
   line: boolean;
   setModal(...args: unknown[]): unknown;
   setSelectedUser(...args: unknown[]): unknown;
@@ -49,7 +31,7 @@ const UserBriefInfo = ({
     setModal(EDIT);
   };
 
-  const concatDate = day => {
+  const concatDate = (day: Date) => {
     let overDueDate = "";
 
     day.setDate(day.getDate() + user.overDueDay);

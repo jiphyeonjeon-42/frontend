@@ -3,7 +3,7 @@ import "../../css/BookInformationWithCover.css";
 
 type BookInformationWithCoverProps = {
   wrapperClassName?: string;
-  bookCoverImg: string;
+  bookCoverImg?: string;
   bookCoverAlt: string;
   children: React.ReactNode;
 };

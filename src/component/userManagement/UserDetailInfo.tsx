@@ -5,26 +5,12 @@ import SelectWithLabel from "../utils/SelectWithLabel";
 import Button from "../utils/Button";
 import { dateFormat, dateLessThan, nowDate } from "../../util/date";
 import "../../css/UserDetailInfo.css";
+import { User } from "../../types";
 
 const roles = ["미인증", "카뎃", "사서", "운영진"];
 
 type UserDetailInfoProps = {
-  user: {
-    id?: number;
-    email?: string;
-    nickname?: string;
-    intraId?: number;
-    slack?: string;
-    penaltyEndDate?: string;
-    overDueDay?: number;
-    role?: number;
-    reservations?: {
-      ranking?: number;
-      endAt?: unknown;
-      lenderableDate?: unknown;
-      title?: string;
-    }[];
-  };
+  user: User;
 };
 
 const UserDetailInfo = ({ user }: UserDetailInfoProps) => {

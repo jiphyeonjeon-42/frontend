@@ -1,10 +1,11 @@
 import "../../css/RentModalUserList.css";
+import { User } from "../../types";
 
 type UserListProps = {
   setSelectedUser(...args: unknown[]): unknown;
   closeModal(...args: unknown[]): unknown;
   // eslint-disable-next-line react/forbid-prop-types
-  user: object;
+  user: User;
 };
 
 const UserList = ({ user, setSelectedUser, closeModal }: UserListProps) => {
@@ -43,7 +44,7 @@ const UserList = ({ user, setSelectedUser, closeModal }: UserListProps) => {
       }`}
       type="button"
       onClick={seletUser}
-      disabled={isLendable ? "" : "disabled"}
+      disabled={isLendable}
     >
       <div className="rent__user-list__name">
         <div className="font-18-bold rent__text-ellipsis">
