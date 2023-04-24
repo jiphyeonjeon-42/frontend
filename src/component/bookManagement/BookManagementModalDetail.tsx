@@ -158,7 +158,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
           <SelectWithLabel
             labelText="카테고리"
             disabled={!editMode}
-            selectRef={categoryRef}
+            ref={categoryRef}
             resetDependency={reset}
             optionList={category.map(i => i.name)}
             initialSelectedIndex={book.categoryId - 1}
@@ -183,7 +183,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
           <SelectWithLabel
             labelText="도서 상태"
             disabled={!editMode}
-            selectRef={statusRef}
+            ref={statusRef}
             resetDependency={reset}
             optionList={bookStatus.map(status => status.string)}
             initialSelectedIndex={book.status}

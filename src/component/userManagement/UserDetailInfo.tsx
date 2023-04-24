@@ -102,7 +102,7 @@ const UserDetailInfo = ({ user }: UserDetailInfoProps) => {
           optionList={roles}
           resetDependency={reset}
           disabled={!editMode}
-          selectRef={roleRef}
+          ref={roleRef}
           initialSelectedIndex={user.role}
         />
         <div className="user-detail-info__line" />
