@@ -1,10 +1,14 @@
-import PropTypes from "prop-types";
 import InquireBoxItem from "../utils/InquireBoxItem";
 import InquireBoxLine from "../utils/InquireBoxLine";
 import usePatchBooksUpdate from "../../api/books/usePatchBooksUpdate";
 import useDialog from "../../hook/useDialog";
+import { Book } from "../../types";
 
-const BookStockNeedToCheckListLine = ({ book }) => {
+type Props = {
+  book: Book;
+};
+
+const BookStockNeedToCheckListLine = ({ book }: Props) => {
   const {
     setClose: closeConfirm,
     Dialog: ConfirmDialog,
@@ -32,7 +36,7 @@ const BookStockNeedToCheckListLine = ({ book }) => {
       <button
         className="book-stock__lost-button"
         type="button"
-        id={book.bookId}
+        id={book.bookId.toString()}
         value={book.title}
         onClick={setLostBook}
       >
@@ -43,7 +47,3 @@ const BookStockNeedToCheckListLine = ({ book }) => {
 };
 
 export default BookStockNeedToCheckListLine;
-
-BookStockNeedToCheckListLine.propTypes = {
-  book: PropTypes.shape().isRequired,
-};
