@@ -3,6 +3,7 @@ import { setErrorDialog } from "../../data/error";
 import useApi from "../../hook/useApi";
 import useSearch from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
+import { History } from "../../types";
 
 const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
@@ -53,7 +54,7 @@ const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
   }, [searchParams, who, type]);
 
   return {
-    historiesList: searchResult.list,
+    historiesList: searchResult.list as History[],
     lastPage: searchResult.lastPage,
     page: searchParams.page,
     type,
