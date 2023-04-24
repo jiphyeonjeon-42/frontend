@@ -1,7 +1,17 @@
-import PropTypes from "prop-types";
 import Image from "../utils/Image";
 import Arr from "../../img/arrow_right_black.svg";
 import "../../css/ReservedTableList.css";
+import { Book, Lending, Reservation } from "../../types";
+
+type Props = {
+  isPending: boolean;
+  isWaiting: boolean;
+  isExpired: boolean;
+  isAll: boolean;
+  openModal: () => void;
+  factor: Reservation;
+  setInfo: (book: Reservation) => void;
+};
 
 const ReservedTableList = ({
   isPending,
@@ -11,13 +21,13 @@ const ReservedTableList = ({
   factor,
   openModal,
   setInfo,
-}) => {
+}: Props) => {
   const openSetModal = () => {
     setInfo(factor);
     openModal();
   };
 
-  const printEndReason = status => {
+  const printEndReason = (status: number) => {
     if (status === 1) return "대출 완료";
     if (status === 2) return "예약 취소";
     return "예약 기한 만료";
@@ -26,7 +36,7 @@ const ReservedTableList = ({
   return (
     <div className="reserved-loan__table-list">
       <div className="reserved-loan__table-list__name font-18-bold color-54">
-        {factor && factor.login}
+        {factor?.login}
       </div>
       <button
         className="reserved-loan__table-list__button"
@@ -35,7 +45,7 @@ const ReservedTableList = ({
       >
         <div className="reserved-loan__table-list__title">
           <span className="reserved-loan__table-list__text color-54">
-            {factor && factor.title}
+            {factor?.title}
           </span>
           <Image
             className="reserved-loan__table-list__arr"
@@ -44,12 +54,12 @@ const ReservedTableList = ({
           />
         </div>
         <div className="reserved-loan__table-list__info">
-          {factor && factor.callSign && (isPending || isAll) ? (
+          {factor?.callSign && (isPending || isAll) ? (
             <span className="reserved-loan__table-list__call-sign font-16 color-54">
               {`청구기호 : ${factor.callSign}`}
             </span>
           ) : (
-            ``
+            ""
           )}
           <span className="font-16 color-54">
             {factor && !factor.status && factor.endAt && (isPending || isAll)
@@ -58,7 +68,7 @@ const ReservedTableList = ({
             {factor && !factor.status && !factor.endAt && (isWaiting || isAll)
               ? `예약 시작일 : ${factor.createdAt.slice(0, 10)}`
               : null}
-            {factor && factor.status && (isExpired || isAll)
+            {factor?.status && (isExpired || isAll)
               ? `예약 만료 이유 : ${printEndReason(factor.status)}`
               : null}
           </span>
@@ -66,16 +76,6 @@ const ReservedTableList = ({
       </button>
     </div>
   );
-};
-
-ReservedTableList.propTypes = {
-  isPending: PropTypes.bool.isRequired,
-  isWaiting: PropTypes.bool.isRequired,
-  isExpired: PropTypes.bool.isRequired,
-  isAll: PropTypes.bool.isRequired,
-  factor: PropTypes.shape.isRequired,
-  openModal: PropTypes.func.isRequired,
-  setInfo: PropTypes.func.isRequired,
 };
 
 export default ReservedTableList;
