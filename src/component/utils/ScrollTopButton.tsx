@@ -3,12 +3,12 @@ import Image from "./Image";
 import Button from "../../img/arrow_right_circle.svg";
 import "../../css/ScrollTopButton.css";
 
-type ScrollTopButtonProps = {
+type Props = {
   rightRem: number;
   bottomRem: number;
 };
 
-const ScrollTopButton = ({ rightRem, bottomRem }: ScrollTopButtonProps) => {
+const ScrollTopButton = ({ rightRem, bottomRem }: Props) => {
   const [active, setActive] = useState(false);
   const [activeScrollY, setActiveScrollY] = useState(0);
   const [inActiveScrollY, setInActiveScrollY] = useState(0);

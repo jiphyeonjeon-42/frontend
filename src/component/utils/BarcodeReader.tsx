@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import "../../css/BarcodeReader.css";
 
-type BarcodeReaderProps = {
+type Props = {
   wrapperClassName?: string;
   toDoAfterRead(...args: unknown[]): unknown;
 };
@@ -10,7 +10,7 @@ type BarcodeReaderProps = {
 const BarcodeReader = ({
   toDoAfterRead,
   wrapperClassName,
-}: BarcodeReaderProps) => {
+}: Props) => {
   const [deviceList, setDeviceList] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(deviceList[0]?.deviceId);
   const videoRef = useRef(null);

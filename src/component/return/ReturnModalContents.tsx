@@ -6,7 +6,7 @@ import "../../css/ReturnModalContents.css";
 import usePatchLendingsReturn from "../../api/lendings/usePatchLendingsReturn";
 import useGetLendingsId from "../../api/lendings/useGetLendingsId";
 
-type ReturnModalContentsProps = {
+type Props = {
   lendingId: number;
   closeModal(...args: unknown[]): unknown;
   setOpenTitleAndMessage(...args: unknown[]): unknown;
@@ -16,7 +16,7 @@ const ReturnModalContents = ({
   lendingId,
   closeModal,
   setOpenTitleAndMessage: setError,
-}: ReturnModalContentsProps) => {
+}: Props) => {
   const { lendingData } = useGetLendingsId({ lendingId, closeModal, setError });
 
   const { condition, setCondition, requestReturn } = usePatchLendingsReturn({

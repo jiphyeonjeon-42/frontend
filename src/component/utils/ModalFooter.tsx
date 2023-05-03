@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import "../../css/ModalFooter.css";
 
-type ModalFooterProps = {
+type Props = {
   align?: string;
   numberOfButtons?: number;
   firstButtonColor?: string;
@@ -23,7 +23,7 @@ const ModalFooter = ({
   secondButtonText,
   secondButtonColor,
   isFirstButtonFocusedOnMount,
-}: ModalFooterProps) => {
+}: Props) => {
   const firstRef = useRef(null);
   const buttonAlign = () => {
     if (align === "center") return align;

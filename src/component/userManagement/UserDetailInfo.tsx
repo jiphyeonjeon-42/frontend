@@ -9,11 +9,11 @@ import { User } from "../../types";
 
 const roles = ["미인증", "카뎃", "사서", "운영진"];
 
-type UserDetailInfoProps = {
+type Props = {
   user: User;
 };
 
-const UserDetailInfo = ({ user }: UserDetailInfoProps) => {
+const UserDetailInfo = ({ user }: Props) => {
   const [editMode, setEditMode] = useState(false);
   const [reset, setReset] = useState(false);
   const intraIdRef = useRef(null);

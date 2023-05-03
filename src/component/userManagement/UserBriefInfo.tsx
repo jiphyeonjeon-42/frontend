@@ -8,7 +8,7 @@ const roles = ["미인증", "일반", "사서", "운영진"];
 const USAGE = 1;
 const EDIT = 2;
 
-type UserBriefInfoProps = {
+type Props = {
   user: User;
   line: boolean;
   setModal(...args: unknown[]): unknown;
@@ -20,7 +20,7 @@ const UserBriefInfo = ({
   line,
   setModal,
   setSelectedUser,
-}: UserBriefInfoProps) => {
+}: Props) => {
   const nowDay = new Date();
   const openUsageModal = () => {
     setSelectedUser(user);

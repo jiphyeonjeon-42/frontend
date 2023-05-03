@@ -2,7 +2,7 @@ import Image from "./Image";
 import SearchBar from "./SearchBar";
 import "../../css/InquireBoxTitle.css";
 
-type InquireBoxTitleProps = {
+type Props = {
   Icon: string;
   titleKO: string;
   titleEN: string;
@@ -24,7 +24,7 @@ const InquireBoxTitle = ({
   setQuery,
   isWithBarcodeButton,
   onClickBarcodeButton,
-}: InquireBoxTitleProps) => {
+}: Props) => {
   return (
     <div className="inquire-box-title">
       <Image

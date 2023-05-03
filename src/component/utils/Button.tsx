@@ -1,7 +1,7 @@
 import colorPalette from "../../data/color";
 import "../../css/Button.css";
 
-type ButtonProps = {
+type Props = {
   type?: string;
   value: string;
   className?: string;
@@ -17,7 +17,7 @@ const Button = ({
   onClick,
   disabled,
   color,
-}: ButtonProps) => {
+}: Props) => {
   const colorInPalette = string => {
     const colorString = colorPalette.find(i => i.string === string)?.class;
     return `bg-color-${colorString}` || color("darkgrey2");

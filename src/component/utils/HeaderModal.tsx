@@ -11,11 +11,11 @@ import CloseButton from "../../img/x_button_grey.svg";
 import User from "../../img/Freepik_user.png";
 import "../../css/HeaderModal.css";
 
-type HeaderModalProps = {
+type Props = {
   setHeaderModal(...args: unknown[]): unknown;
 };
 
-const HeaderModal = ({ setHeaderModal }: HeaderModalProps) => {
+const HeaderModal = ({ setHeaderModal }: Props) => {
   const user = useRecoilValue(userState);
   const closeHeaderModal = () => {
     setHeaderModal(false);

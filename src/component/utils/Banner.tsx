@@ -1,12 +1,12 @@
 import "../../css/Banner.css";
 
-type BannerProps = {
+type Props = {
   img: string;
   titleKo: string;
   titleEn: string;
 };
 
-const Banner = ({ img, titleKo, titleEn }: BannerProps) => {
+const Banner = ({ img, titleKo, titleEn }: Props) => {
   return (
     <section className={`banner ${img}-img`}>
       <div className="banner-wrapper">

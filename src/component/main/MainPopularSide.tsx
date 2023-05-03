@@ -1,12 +1,12 @@
 import Image from "../utils/Image";
 
-type MainPopularSideProps = {
+type Props = {
   books: object[];
   onClick(...args: unknown[]): unknown;
   side: string;
 };
 
-const MainPopularSide = ({ books, onClick, side }: MainPopularSideProps) => {
+const MainPopularSide = ({ books, onClick, side }: Props) => {
   return (
     <button
       className={`main__popular__${

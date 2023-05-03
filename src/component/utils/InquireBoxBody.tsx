@@ -1,6 +1,6 @@
 import "../../css/InquireBoxBody.css";
 
-type InquireBoxBodyProps = {
+type Props = {
   children: React.ReactNode
   className: string
 }
@@ -8,7 +8,7 @@ type InquireBoxBodyProps = {
 const InquireBoxBody = ({
   children,
   className
-}: InquireBoxBodyProps) => {
+}: Props) => {
   return <div className={`inquire-body__wrapper ${className}`}>{children}</div>;
 };
 

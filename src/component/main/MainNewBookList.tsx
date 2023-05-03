@@ -8,11 +8,11 @@ import ArrRight from "../../img/arrow_right.svg";
 const mobileWidth = 100;
 const pcWidth = 200;
 
-type MainNewBookListProps = {
+type Props = {
   docs: object[];
 };
 
-const MainNewBookList = ({ docs }: MainNewBookListProps) => {
+const MainNewBookList = ({ docs }: Props) => {
   const [page, setPage] = useState(1);
   const [bookWidth, setBookWidth] = useState(pcWidth);
   const [transition, setTransition] = useState(true);

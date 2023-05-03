@@ -1,14 +1,14 @@
 import "../../css/RentModalUserList.css";
 import { User } from "../../types";
 
-type UserListProps = {
+type Props = {
   setSelectedUser(...args: unknown[]): unknown;
   closeModal(...args: unknown[]): unknown;
   // eslint-disable-next-line react/forbid-prop-types
   user: User;
 };
 
-const UserList = ({ user, setSelectedUser, closeModal }: UserListProps) => {
+const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
   const seletUser = () => {
     setSelectedUser(user);
     closeModal();

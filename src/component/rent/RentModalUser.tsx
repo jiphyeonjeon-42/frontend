@@ -2,12 +2,12 @@ import RentUserList from "./RentModalUserList";
 import SearchModal from "../utils/SearchModal";
 import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 
-type RentModalUserProps = {
+type Props = {
   setSelectedUser(...args: unknown[]): unknown;
   closeModal(...args: unknown[]): unknown;
 };
 
-const RentModalUser = ({ setSelectedUser, closeModal }: RentModalUserProps) => {
+const RentModalUser = ({ setSelectedUser, closeModal }: Props) => {
   const { userList, lastPage, page, setPage, setQuery, Dialog } =
     useGetUsersSearch({ limit: 5 });
 

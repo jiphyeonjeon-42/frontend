@@ -2,7 +2,7 @@ import Image from "../utils/Image";
 import Arr from "../../img/arrow_right_black.svg";
 import "../../css/ReturnbookTable.css";
 
-type ReturnbookTableProps = {
+type Props = {
   setLendingId(...args: unknown[]): unknown;
 };
 
@@ -10,7 +10,7 @@ const ReturnbookTable = ({
   factor,
   openModal,
   setLendingId,
-}: ReturnbookTableProps) => {
+}: Props) => {
   const openSetModal = () => {
     setLendingId(factor.id);
     openModal();

@@ -4,7 +4,7 @@ import Image from "../utils/Image";
 import DeleteButton from "../../img/x_button.svg";
 import "../../css/RentInquireBoxBook.css";
 
-type InquireBoxBookProps = {
+type Props = {
   setSelectedBooks(...args: unknown[]): unknown;
   selectedBooks: object[];
   shape: string;
@@ -17,7 +17,7 @@ const InquireBoxBook = ({
   book,
   selectedBooks,
   setSelectedBooks,
-}: InquireBoxBookProps) => {
+}: Props) => {
   const { setOpen, setClose, Modal } = useModal();
 
   const deleteBook = () => {

@@ -5,7 +5,7 @@ import BookManagementModalDetail from "./BookManagementModalDetail";
 import Management from "../utils/Management";
 import { Book } from "../../types";
 
-type BookManagementBooksListProps = {
+type Props = {
   page: number;
   setPage(...args: unknown[]): unknown;
   lastPage: number;
@@ -29,7 +29,7 @@ const BookManagementBooksList = ({
   addAllBooks,
   removeBookById,
   removeAllBooks,
-}: BookManagementBooksListProps) => {
+}: Props) => {
   const [selectedBook, setSelectedBook] = useState({});
   const { Modal, setOpen, setClose } = useModal();
 

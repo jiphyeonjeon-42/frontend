@@ -4,13 +4,13 @@ import useModal from "../../hook/useModal";
 import { parseBookIdFromQRLabel } from "../../util/parseBookIdFromQRLabel";
 import BookStockDetailModal from "./BookStockDetailModal";
 
-type BookStockCheckByReadingQRProps = {
+type Props = {
   addChecked(...args: unknown[]): unknown;
 };
 
 const BookStockCheckByReadingQR = ({
   addChecked,
-}: BookStockCheckByReadingQRProps) => {
+}: Props) => {
   const [bookId, setBookId] = useState(0);
   const {
     isOpen: isModalOpen,

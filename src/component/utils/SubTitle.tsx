@@ -1,12 +1,12 @@
 import "../../css/SubTitle.css";
 
-type SubTitleProps = {
+type Props = {
   subTitle: string;
   description: string;
   alignItems: string;
 };
 
-const SubTitle = ({ subTitle, description, alignItems }: SubTitleProps) => {
+const SubTitle = ({ subTitle, description, alignItems }: Props) => {
   return (
     <div className={`subtitle-${alignItems}`}>
       <div className="subtitle__line" />
