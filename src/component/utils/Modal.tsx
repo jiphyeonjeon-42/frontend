@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect } from "react";
+import { MouseEvent, ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
 import "../../css/Modal.css";
 
@@ -9,9 +9,9 @@ modal__container 모달의 기본 뼈대
 
 type ModalProps = {
   isOpen: boolean;
-  size: string;
-  onCloseModal(): void;
-  children: React.ReactNode;
+  size: "full" | "basic";
+  onCloseModal: () => void;
+  children: ReactNode;
 };
 
 const Modal = ({
