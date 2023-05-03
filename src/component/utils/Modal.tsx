@@ -47,8 +47,6 @@ const Modal = ({
     onCloseModal();
   };
 
-  useEffect(() => {}, []);
-
   const preventEventBubbling = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
   };
@@ -67,6 +65,8 @@ const Modal = ({
           <div
             className={`modal__container ${modalSize()}`}
             onClick={preventEventBubbling}
+            aria-modal="true"
+            role="dialog"
           >
             {children}
           </div>
