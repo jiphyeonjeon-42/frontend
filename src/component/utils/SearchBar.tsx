@@ -40,7 +40,8 @@ const SearchBar = ({
 
   const onSubmit = event => {
     event.preventDefault();
-    if (isNavigate) navigate(`/search?search=${searchWord}`);
+    const encodedSearchWord = encodeURIComponent(searchWord);
+    if (isNavigate) navigate(`/search?search=${encodedSearchWord}`);
   };
 
   useEffect(() => {
