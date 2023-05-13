@@ -1,25 +1,32 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useEffect } from "react";
+import { MouseEvent, ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
 import "../../css/Modal.css";
 
+/* chidren 컴포넌트를 조립해서 사용하는 모달, 최소 기능만 포함된 기본형
+modal__backdrop 어두워지는 뒷배경, 클릭시 모달 종료
+modal__container 모달의 기본 뼈대
+*/
+
 type ModalProps = {
-  isOpen?: boolean;
-  size?: string;
-  onCloseModal?(...args: unknown[]): unknown;
-  children?: React.ReactNode;
+  isOpen: boolean;
+  size: "full" | "basic";
+  onCloseModal: () => void;
+  children: ReactNode;
 };
 
-/* chidren 컴포넌트를 조립해서 사용하는 모달, 최소 기능만 포함된 기본형
-    modal__backdrop 어두워지는 뒷배경, 클릭시 모달 종료
-    modal__container 모달의 기본 뼈대
- */
-
-const Modal = ({ isOpen, onCloseModal, children, size }: ModalProps) => {
+const Modal = ({
+  isOpen = false,
+  onCloseModal,
+  children,
+  size = "basic",
+}: ModalProps) => {
   useEffect(() => {
-    const closeModalWithESC = e => e.keyCode === 27 && onCloseModal();
+    const closeModalWithESC: EventListener = event => {
+      if (event instanceof KeyboardEvent && event.key === "Escape")
+        onCloseModal();
+    };
+
     window.addEventListener("keydown", closeModalWithESC);
-    // 모달 활성화시 기본화면의 스크롤 제한
     document.body.style.cssText = `overflow: hidden`;
 
     return () => {
@@ -35,44 +42,39 @@ const Modal = ({ isOpen, onCloseModal, children, size }: ModalProps) => {
     return candidate.includes(size) ? size : "basic";
   };
 
-  const onClickBackdrop = e => {
+  const closeModal = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     onCloseModal();
   };
 
-  useEffect(() => {}, []);
-
-  const onClickContainer = e => {
-    // 이벤트 버블링 방지
+  const preventEventBubbling = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
   };
-  // 선언된 위치가 아닌 지정된 위치에 생성
-  const modalPosition = document.getElementById("modal");
 
-  return createPortal(
-    <>
-      <div
-        className="modal__backdrop"
-        onClick={onClickBackdrop}
-        aria-hidden="true"
-      >
+  const modalPosition = document.getElementById("portal");
+
+  return (
+    modalPosition &&
+    createPortal(
+      <>
         <div
-          className={`modal__container ${modalSize()}`}
-          onClick={onClickContainer}
-          onKeyPress={onClickContainer}
+          className="modal__backdrop"
+          onClick={closeModal}
+          aria-hidden="true"
         >
-          {children}
+          <div
+            className={`modal__container ${modalSize()}`}
+            onClick={preventEventBubbling}
+            aria-modal="true"
+            role="dialog"
+          >
+            {children}
+          </div>
         </div>
-      </div>
-    </>,
-    modalPosition,
+      </>,
+      modalPosition,
+    )
   );
-};
-
-Modal.defaultProps = {
-  isOpen: false,
-  size: "basic",
-  onCloseModal: undefined,
 };
 
 export default Modal;
