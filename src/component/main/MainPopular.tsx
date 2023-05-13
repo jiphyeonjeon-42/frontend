@@ -5,11 +5,11 @@ import MainPopularSide from "./MainPopularSide";
 import useGetBooksInfoPopular from "../../api/books/useGetBooksInfoPopular";
 import "../../css/MainPopular.css";
 
-type MainPopularProps = {
+type Props = {
   setOpenTitleAndMessage(...args: unknown[]): unknown;
 };
 
-const MainPopular = ({ setOpenTitleAndMessage }: MainPopularProps) => {
+const MainPopular = ({ setOpenTitleAndMessage }: Props) => {
   const [centerTop, setCenterTop] = useState(0);
   const { docs } = useGetBooksInfoPopular({ setOpenTitleAndMessage });
 

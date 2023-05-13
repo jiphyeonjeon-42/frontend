@@ -7,7 +7,7 @@ import { bookStatus } from "../../data/status";
 import usePatchStockUpdate from "../../api/stock/usePatchStockUpdate";
 import "../../css/BookStockDetailModal.css";
 
-type BookStockDetailModalProps = {
+type Props = {
   bookId: number;
   addChecked(...args: unknown[]): unknown;
   closeModal(...args: unknown[]): unknown;
@@ -17,7 +17,7 @@ const BookStockDetailModal = ({
   bookId,
   closeModal,
   addChecked,
-}: BookStockDetailModalProps) => {
+}: Props) => {
   const { setOpenTitleAndMessage, Dialog } = useDialog();
   const { bookDetail: book } = useGetBooksIdForStock({
     id: bookId,

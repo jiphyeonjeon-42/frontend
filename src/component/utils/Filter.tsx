@@ -3,7 +3,7 @@ import CheckIcon from "../../img/check_icon.svg";
 import RedCheckIcon from "../../img/check_icon_red.svg";
 import "../../css/Filter.css";
 
-type FilterProps = {
+type Props = {
   filterList: {
     name: string;
     type: string;
@@ -12,7 +12,7 @@ type FilterProps = {
   setSelectedType(...args: unknown[]): unknown;
 };
 
-const Filter = ({ filterList, selectedType, setSelectedType }: FilterProps) => {
+const Filter = ({ filterList, selectedType, setSelectedType }: Props) => {
   const onClickFilter = e => {
     setSelectedType(e.currentTarget.value);
   };

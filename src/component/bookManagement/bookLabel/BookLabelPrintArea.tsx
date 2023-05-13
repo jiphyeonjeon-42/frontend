@@ -1,8 +1,19 @@
-import PropTypes from "prop-types";
 import BookLabelPrintItem from "./BookLabelPrintItem";
 import "../../../css/PrintLabel.css";
+import { RefObject } from "react";
+import { Book } from "../../../types";
 
-const BookLabelPrintArea = ({ sortedList, blankLabelNumber, printAreaRef }) => {
+type Props = {
+  sortedList: Book[];
+  blankLabelNumber: number;
+  printAreaRef: RefObject<HTMLDivElement>;
+};
+
+const BookLabelPrintArea = ({
+  sortedList,
+  blankLabelNumber,
+  printAreaRef,
+}: Props) => {
   const makeBlankLabel = () => {
     const result = [];
     for (let i = 0; i < blankLabelNumber; i += 1) {
@@ -27,12 +38,3 @@ const BookLabelPrintArea = ({ sortedList, blankLabelNumber, printAreaRef }) => {
 };
 
 export default BookLabelPrintArea;
-
-BookLabelPrintArea.propTypes = {
-  sortedList: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  blankLabelNumber: PropTypes.number.isRequired,
-  printAreaRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
-};

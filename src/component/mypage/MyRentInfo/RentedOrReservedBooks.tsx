@@ -4,7 +4,7 @@ import Image from "../../utils/Image";
 import { isNumber } from "../../../util/typeCheck";
 import "../../../css/RentedOrReservedBooks.css";
 
-type RentedOrReservedBooksProps = {
+type Props = {
   componentMode: string;
   bookInfoArr?: object[];
 };
@@ -12,7 +12,7 @@ type RentedOrReservedBooksProps = {
 const RentedOrReservedBooks = ({
   componentMode,
   bookInfoArr,
-}: RentedOrReservedBooksProps) => {
+}: Props) => {
   if (!bookInfoArr) return null;
   const { setOpen, defaultConfig, setConfig, Dialog, setOpenTitleAndMessage } =
     useDialog();

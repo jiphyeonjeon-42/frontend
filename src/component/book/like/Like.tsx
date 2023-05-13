@@ -6,11 +6,11 @@ import useDialog from "../../../hook/useDialog";
 import ShowLike from "./ShowLike";
 import "../../../css/BookDetail.css";
 
-type LikeProps = {
+type Props = {
   initBookInfoId: string;
 };
 
-const Like = ({ initBookInfoId }: LikeProps) => {
+const Like = ({ initBookInfoId }: Props) => {
   const { setOpenTitleAndMessage } = useDialog();
   const [currentLike, setCurrentLike] = useState();
   const [currentLikeNum, setCurrentLikeNum] = useState(0);

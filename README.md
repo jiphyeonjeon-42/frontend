@@ -6,7 +6,6 @@
 <p>
     <p align='center'>
 		<img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
-		<img src="https://img.shields.io/badge/PropTypes-v15.7.2-18A497?logo=Photopea" />
 		<img src="https://img.shields.io/badge/Recoil-^0.4.0-A6A9AA?logo=Coil" />
 		<img src="https://img.shields.io/badge/Vite-react-646CFF?logo=vite&logoColor=fff" />
 	</p>

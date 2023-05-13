@@ -3,7 +3,7 @@ import CheckIcon from "../../img/check_icon.svg";
 import RedCheckIcon from "../../img/check_icon_red.svg";
 import "../../css/ReservedFilter.css";
 
-type ReservedFilterProps = {
+type Props = {
   filter: {
     isPending?: boolean;
     isWaiting?: boolean;
@@ -12,7 +12,7 @@ type ReservedFilterProps = {
   setFilter(...args: unknown[]): unknown;
 };
 
-const ReservedFilter = ({ filter, setFilter }: ReservedFilterProps) => {
+const ReservedFilter = ({ filter, setFilter }: Props) => {
   const toggleFilter = type => {
     const newFilter = {};
     Object.keys(filter).forEach(key => {

@@ -1,6 +1,6 @@
 import "../../css/RentConfirm.css";
 
-type RentConfirmProps = {
+type Props = {
   // eslint-disable-next-line react/require-default-props
   selectedUser?: object;
   selectedBooks: object[];
@@ -11,7 +11,7 @@ const RentConfirm = ({
   selectedUser,
   selectedBooks,
   openModal,
-}: RentConfirmProps) => {
+}: Props) => {
   return (
     <section className="rent__confirm-button">
       <div className="rent__confirm-button__text font-16 color-a4">

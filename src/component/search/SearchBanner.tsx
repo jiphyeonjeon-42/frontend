@@ -2,11 +2,11 @@ import SearchBar from "../utils/SearchBar";
 import "../../css/Banner.css";
 import "../../css/SearchBanner.css";
 
-type SearchBannerProps = {
+type Props = {
   setQuery(...args: unknown[]): unknown;
 };
 
-const SearchBanner = ({ setQuery }: SearchBannerProps) => {
+const SearchBanner = ({ setQuery }: Props) => {
   return (
     <section className="banner search-img">
       <section className="search-banner">

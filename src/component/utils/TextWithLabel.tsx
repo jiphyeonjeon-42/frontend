@@ -1,7 +1,7 @@
 import colorPalette from "../../data/color";
 import "../../css/TextWithLabel.css";
 
-type TextWithLabelProps = {
+type Props = {
   wrapperClassName?: string;
   topLabelText?: string;
   mainText: string;
@@ -23,7 +23,7 @@ const TextWithLabel = ({
   bottomLabelColor,
   size,
   isMainTextEllipsis,
-}: TextWithLabelProps) => {
+}: Props) => {
   const color = string => {
     const colorClassName = colorPalette.find(i => i.string === string)?.class;
     return `color-${colorClassName}` || "color-54";

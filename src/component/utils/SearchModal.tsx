@@ -4,7 +4,7 @@ import Pagination from "./Pagination";
 import TextWithLabel from "./TextWithLabel";
 import "../../css/SearchModal.css";
 
-type SearchModalProps = {
+type Props = {
   titleText: string;
   isWithBarcodeButton?: boolean;
   onClickBarcodeButton?(...args: unknown[]): unknown;
@@ -26,7 +26,7 @@ const SearchModal = ({
   setQuery,
   lastPage,
   children,
-}: SearchModalProps) => {
+}: Props) => {
   const headerRef = useRef(null);
   return (
     <div className="search-modal" ref={headerRef}>

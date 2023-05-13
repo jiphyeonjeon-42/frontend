@@ -1,11 +1,11 @@
 import "../../css/Sort.css";
 
-type SortProps = {
+type Props = {
   sort: string;
   setSort(...args: unknown[]): unknown;
 };
 
-const Sort = ({ sort, setSort }: SortProps) => {
+const Sort = ({ sort, setSort }: Props) => {
   const sortInfo = [
     { key: "title", name: "이름순" },
     { key: "new", name: "최신순" },

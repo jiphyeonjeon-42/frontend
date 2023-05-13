@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Image from "../utils/Image";
 
-type MainNewBookProps = {
+type Props = {
   book: {
     id?: number;
     image?: string;
@@ -10,7 +10,7 @@ type MainNewBookProps = {
   bookWidth: number;
 };
 
-const MainNewBook = ({ book, bookWidth }: MainNewBookProps) => {
+const MainNewBook = ({ book, bookWidth }: Props) => {
   return (
     <div
       className="main-new__book"

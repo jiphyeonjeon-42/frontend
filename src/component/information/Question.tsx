@@ -4,7 +4,7 @@ import Plus from "../../img/plus_icon_off.svg";
 import Minus from "../../img/plus_icon_on.svg";
 import "../../css/Question.css";
 
-type QnAProps = {
+type Props = {
   isOpen: boolean;
   question: string;
   answer: string;
@@ -12,7 +12,7 @@ type QnAProps = {
   link?: boolean;
 };
 
-const QnA = ({ isOpen, question, answer, linkText, link }: QnAProps) => {
+const QnA = ({ isOpen, question, answer, linkText, link }: Props) => {
   const [onOff, setOnOff] = useState(isOpen);
 
   useEffect(() => {

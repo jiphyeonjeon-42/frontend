@@ -3,7 +3,7 @@ import FilledLike from "../../../img/like_filled.svg";
 import EmptyLike from "../../../img/like_empty.svg";
 import "../../../css/BookDetail.css";
 
-type ShowLikeProps = {
+type Props = {
   deleteLike(...args: unknown[]): unknown;
   postLike(...args: unknown[]): unknown;
   currentLike: boolean;
@@ -15,7 +15,7 @@ const ShowLike = ({
   postLike,
   currentLike,
   currentLikeNum,
-}: ShowLikeProps) => {
+}: Props) => {
   const permission = JSON.parse(window.localStorage.getItem("user"));
   const clickLikeHandler = () => {
     if (currentLike) {

@@ -5,7 +5,7 @@ import DeleteButton from "../../img/x_button.svg";
 import "../../css/RentInquireBoxUser.css";
 import { dateFormat } from "../../util/date";
 
-type InquireBoxUserProps = {
+type Props = {
   selectedUser: {
     id?: number;
     email?: string;
@@ -24,7 +24,7 @@ type InquireBoxUserProps = {
 const InquireBoxUser = ({
   selectedUser,
   setSelectedUser,
-}: InquireBoxUserProps) => {
+}: Props) => {
   const { setOpen, setClose, Modal } = useModal();
 
   const deleteUser = () => {

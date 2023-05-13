@@ -4,11 +4,11 @@ import Button from "../utils/Button";
 import BookLabelPrintArea from "./bookLabel/BookLabelPrintArea";
 import "../../css/BookManagementToPrint.css";
 
-type BookLabelModalToPrintProps = {
+type Props = {
   printList?: object[];
 };
 
-const BookLabelModalToPrint = ({ printList }: BookLabelModalToPrintProps) => {
+const BookLabelModalToPrint = ({ printList }: Props) => {
   const [blankLabelNumber, setBlankLabelNumber] = useState(0);
   const [sortedList, setSortedList] = useState(printList);
   const printAreaRef = useRef(null);

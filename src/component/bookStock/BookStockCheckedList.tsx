@@ -1,13 +1,16 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import Book from "../../img/admin_icon.svg";
+import BookIcon from "../../img/admin_icon.svg";
 import InquireBoxBody from "../utils/InquireBoxBody";
 import BookStockCheckedListLine from "./BookStockCheckedListLine";
 import Pagination from "../utils/Pagination";
 import "../../css/BookStockCheckedList.css";
+import { Book } from "../../types";
 
-const BookStockCheckedList = ({ checkedList }) => {
+type Props = {
+  checkedList: Book[];
+};
+const BookStockCheckedList = ({ checkedList }: Props) => {
   const [page, setPage] = useState(1);
 
   const start = (page - 1) * 5;
@@ -18,7 +21,7 @@ const BookStockCheckedList = ({ checkedList }) => {
   return (
     <section className="book-stock__checked-list">
       <InquireBoxTitle
-        Icon={Book}
+        Icon={BookIcon}
         titleKO="확인 완료"
         titleEN="방금 재고확인한 도서 목록입니다. 새로고침시 유지되지 않으니 조심하세요!"
       />
@@ -39,7 +42,3 @@ const BookStockCheckedList = ({ checkedList }) => {
 };
 
 export default BookStockCheckedList;
-
-BookStockCheckedList.propTypes = {
-  checkedList: PropTypes.arrayOf(PropTypes.shape).isRequired,
-};

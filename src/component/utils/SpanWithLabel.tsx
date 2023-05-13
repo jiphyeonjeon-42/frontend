@@ -1,6 +1,6 @@
 import "../../css/SpanWithLabel.css";
 
-type SpanWithLabelProps = {
+type Props = {
   wrapperClassName?: string;
   labelText?: string;
   value?: string | number;
@@ -12,7 +12,7 @@ const SpanWithLabel = ({
   labelText,
   value,
   align,
-}: SpanWithLabelProps) => {
+}: Props) => {
   const alignType = () => {
     const candidate = ["horizontal", "vertical"];
     if (candidate.includes(align)) return align;

@@ -1,34 +1,27 @@
 import colorPalette from "../../data/color";
 import "../../css/Button.css";
+import { HTMLProps } from "react";
 
-type ButtonProps = {
-  type?: string;
+type Palette = typeof colorPalette[number]["string"];
+
+type Props = {
+  type?: "submit" | "button";
   value: string;
-  className?: string;
-  color?: string;
-  onClick?(...args: unknown[]): unknown;
-  disabled?: boolean;
-};
+  color?: Palette;
+} & HTMLProps<HTMLButtonElement>;
 
 const Button = ({
   type,
   value,
   className,
-  onClick,
-  disabled,
-  color,
-}: ButtonProps) => {
-  const colorInPalette = string => {
-    const colorString = colorPalette.find(i => i.string === string)?.class;
-    return `bg-color-${colorString}` || color("darkgrey2");
-  };
-
+  color = "grey2",
+  ...args
+}: Props) => {
   return (
     <button
-      type={type === "submit" ? "submit" : "button"}
-      className={`button-default ${className} ${colorInPalette(color)}`}
-      onClick={onClick}
-      disabled={disabled}
+      {...args}
+      type={type}
+      className={`button-default ${className} bg-color-${color}`}
     >
       {value}
     </button>
@@ -36,11 +29,3 @@ const Button = ({
 };
 
 export default Button;
-
-Button.defaultProps = {
-  type: undefined,
-  className: "",
-  color: "grey2",
-  onClick: () => {},
-  disabled: false,
-};

@@ -4,13 +4,30 @@ import ModalFooter from "../component/utils/ModalFooter";
 import ModalHeader from "../component/utils/ModalHeader";
 import "../css/Dialog.css";
 
+type DialogButton = {
+  text: string;
+  color: string;
+  onClick: () => void;
+};
+
+type DialogConfig = {
+  afterClose: () => void;
+  title: string;
+  titleEmphasis: string;
+  message: string;
+  buttonAlign: string;
+  numberOfButtons: number;
+  firstButton: DialogButton;
+  secondButton: DialogButton;
+};
+
 const useDialog = () => {
   // 모달의 기본 로직 + 미리 조립해둔 대화창 형태의 모달 제공
   const [isOpen, setIsOpen] = useState(false);
   const setOpen = () => setIsOpen(true);
   const close = () => setIsOpen(false);
 
-  const defaultConfig = {
+  const defaultConfig: DialogConfig = {
     afterClose: () => {},
     title: "",
     titleEmphasis: "",
@@ -36,7 +53,11 @@ const useDialog = () => {
     config.afterClose();
   };
 
-  const setOpenConfirm = (title, message, confirmCallback = () => {}) => {
+  const setOpenConfirm = (
+    title: string,
+    message: string,
+    confirmCallback = () => {},
+  ) => {
     setConfig({
       ...defaultConfig,
       title,
@@ -52,7 +73,11 @@ const useDialog = () => {
     setOpen();
   };
 
-  const setOpenTitleAndMessage = (title, message, afterClose = () => {}) => {
+  const setOpenTitleAndMessage = (
+    title: string,
+    message: string,
+    afterClose = () => {},
+  ) => {
     setConfig({
       ...defaultConfig,
       title,

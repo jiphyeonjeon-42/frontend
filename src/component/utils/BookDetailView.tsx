@@ -1,8 +1,21 @@
-import PropTypes from "prop-types";
 import Image from "./Image";
 import "../../css/BookDetailView.css";
+import { ReactNode } from "react";
+import { Book } from "../../types";
 
-const BookDetailView = ({ book, bookInfoDetailUI, bookDetailUI, bottomUI }) => {
+type Props = {
+  book: Book;
+  bookInfoDetailUI: ReactNode;
+  bookDetailUI?: ReactNode;
+  bottomUI: ReactNode;
+};
+
+const BookDetailView = ({
+  book,
+  bookInfoDetailUI,
+  bookDetailUI,
+  bottomUI,
+}: Props) => {
   return (
     <div className="book__detail__wrarpper">
       <p className="book__detail__title">도서정보</p>
@@ -26,14 +39,3 @@ const BookDetailView = ({ book, bookInfoDetailUI, bookDetailUI, bottomUI }) => {
 };
 
 export default BookDetailView;
-
-BookDetailView.propTypes = {
-  book: PropTypes.shape().isRequired,
-  bookInfoDetailUI: PropTypes.node.isRequired,
-  bookDetailUI: PropTypes.node,
-  bottomUI: PropTypes.node.isRequired,
-};
-
-BookDetailView.defaultProps = {
-  bookDetailUI: undefined,
-};

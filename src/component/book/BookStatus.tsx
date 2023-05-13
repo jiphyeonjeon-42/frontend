@@ -1,6 +1,6 @@
 import "../../css/BookStatus.css";
 
-type BookStatusProps = {
+type Props = {
   book: {
     id?: number;
     callSign?: string;
@@ -13,7 +13,7 @@ type BookStatusProps = {
   index: number;
 };
 
-const BookStatus = ({ book, index }: BookStatusProps) => {
+const BookStatus = ({ book, index }: Props) => {
   const doubleDigit = number => {
     return number < 10 ? `0${number}` : `${number}`;
   };

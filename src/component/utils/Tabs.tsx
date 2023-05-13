@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../../css/Tabs.css";
 
-type TabsProps = {
+type Props = {
   tabList: object[];
 };
 
-const Tabs = ({ tabList }: TabsProps) => {
+const Tabs = ({ tabList }: Props) => {
   const [onFocus, setFocus] = useState("");
   const location = useLocation();
 

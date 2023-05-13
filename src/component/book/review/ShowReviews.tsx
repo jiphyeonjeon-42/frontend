@@ -4,12 +4,12 @@ import axiosPromise from "../../../util/axios";
 import "../../../css/Tabs.css";
 import "../../../css/Review.css";
 
-type ShowReviewsProps = {
+type Props = {
   bookInfoId: number;
   type: string;
 };
 
-const ShowReviews = ({ bookInfoId, type }: ShowReviewsProps) => {
+const ShowReviews = ({ bookInfoId, type }: Props) => {
   const [postReviews, setPostReviews] = useState([]);
   const observeReviewList = useRef(null);
   const totalLeftPages = useRef();

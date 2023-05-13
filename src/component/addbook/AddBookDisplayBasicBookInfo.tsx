@@ -6,7 +6,7 @@ const labelText = {
   pubdate: "출판일",
 };
 
-type DisplayBasicBookInfoProps = {
+type Props = {
   bookInfo: {
     isbn: string;
     title: string;
@@ -21,7 +21,7 @@ type DisplayBasicBookInfoProps = {
 const DisplayBasicBookInfo = ({
   bookInfo,
   setBookInfo,
-}: DisplayBasicBookInfoProps) => {
+}: Props) => {
   const [message, setMessage] = useState("");
 
   const onChangeInput = e => {

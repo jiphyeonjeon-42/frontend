@@ -1,4 +1,4 @@
-type MainNewBookPaginationProps = {
+type Props = {
   page: number;
   setPage(...args: unknown[]): unknown;
 };
@@ -6,7 +6,7 @@ type MainNewBookPaginationProps = {
 const MainNewBookPagination = ({
   page,
   setPage,
-}: MainNewBookPaginationProps) => {
+}: Props) => {
   const onChapter = e => {
     setPage(e.target.innerText * 5);
   };

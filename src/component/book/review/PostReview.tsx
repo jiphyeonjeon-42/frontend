@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../../../css/Review.css";
 import Button from "../../utils/Button";
 
-type PostReviewProps = {
+type Props = {
   onClickPost(...args: unknown[]): unknown;
   setDialogConfig(...args: unknown[]): unknown;
   Dialog: React.ReactElement;
@@ -20,7 +20,7 @@ const PostReview = ({
   closeDialog,
   setDialogConfig,
   setOpenTitleAndMessage,
-}: PostReviewProps) => {
+}: Props) => {
   const [content, setContent] = useState(null);
   const checkLogin = JSON.parse(window.localStorage.getItem("user"));
   const checkValidUser = () => {

@@ -3,14 +3,15 @@ import useModal from "../../hook/useModal";
 import BookManagementBooksListItem from "./BookManagementBooksListItem";
 import BookManagementModalDetail from "./BookManagementModalDetail";
 import Management from "../utils/Management";
+import { Book } from "../../types";
 
-type BookManagementBooksListProps = {
+type Props = {
   page: number;
   setPage(...args: unknown[]): unknown;
   lastPage: number;
   setQuery(...args: unknown[]): unknown;
-  booksList: object[];
-  printList: object[];
+  booksList: Book[];
+  printList: Book[];
   addBookById(...args: unknown[]): unknown;
   removeBookById(...args: unknown[]): unknown;
   addAllBooks(...args: unknown[]): unknown;
@@ -28,11 +29,11 @@ const BookManagementBooksList = ({
   addAllBooks,
   removeBookById,
   removeAllBooks,
-}: BookManagementBooksListProps) => {
+}: Props) => {
   const [selectedBook, setSelectedBook] = useState({});
   const { Modal, setOpen, setClose } = useModal();
 
-  const includesArrayById = (array, id) => {
+  const includesArrayById = (array: Book[], id: number) => {
     const found = array.findIndex(item => item.bookId === id);
     return found !== -1;
   };

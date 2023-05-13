@@ -3,7 +3,7 @@ import LinkToDetail from "../../img/link_to_detail.svg";
 import "../../css/BookInfo.css";
 import Image from "../utils/Image";
 
-type BookInfoProps = {
+type Props = {
   id: number;
   isbn: string;
   title: string;
@@ -26,7 +26,7 @@ const BookInfo = ({
   publishedAt,
   category,
   bread,
-}: BookInfoProps) => {
+}: Props) => {
   const parseDate = publishedDate => {
     if (!publishedDate) return { year: null, month: null, day: null };
     const [year, month, day] = publishedDate.split("-");
