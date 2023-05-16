@@ -9,10 +9,16 @@ type Props = {
   question: string;
   answer: string;
   linkText?: string;
-  link?: boolean;
+  link?: string;
 };
 
-const QnA = ({ isOpen, question, answer, linkText, link }: Props) => {
+const QnA = ({
+  isOpen,
+  question,
+  answer,
+  linkText = "링크",
+  link,
+}: Props) => {
   const [onOff, setOnOff] = useState(isOpen);
 
   useEffect(() => {
@@ -56,11 +62,6 @@ const QnA = ({ isOpen, question, answer, linkText, link }: Props) => {
       )}
     </div>
   );
-};
-
-QnA.defaultProps = {
-  linkText: "링크",
-  link: false,
 };
 
 export default QnA;
