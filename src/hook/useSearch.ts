@@ -1,19 +1,22 @@
 import { useState } from "react";
 import useDebounce from "./useDebounce";
 
-const useSearch = () => {
+export const useSearch = () => {
   const [searchParams, setSearchParams] = useState({
     query: "",
     page: 1,
   });
-  const [searchResult, setSearchResult] = useState({
-    lastPage: 5,
+  const [searchResult, setSearchResult] = useState<{
+    list: unknown[];
+    lastPage: number;
+  }>({
     list: [],
+    lastPage: 5,
   });
 
   const debounce = useDebounce();
 
-  const setQuery = newQuery => {
+  const setQuery = (newQuery: string) => {
     debounce(() => {
       setSearchParams({
         ...searchParams,
@@ -23,7 +26,7 @@ const useSearch = () => {
     }, 400);
   };
 
-  const setQueryNoDelay = newQuery => {
+  const setQueryNoDelay = (newQuery: string) => {
     setSearchParams({
       ...searchParams,
       query: newQuery,
@@ -31,7 +34,7 @@ const useSearch = () => {
     });
   };
 
-  const setPage = newPage => {
+  const setPage = (newPage: number) => {
     if (newPage !== searchParams.page) {
       setSearchParams({
         ...searchParams,
@@ -48,5 +51,3 @@ const useSearch = () => {
     setQueryNoDelay,
   };
 };
-
-export default useSearch;
