@@ -1,0 +1,29 @@
+.management__list-item {
+  display: flex;
+  overflow: hidden;
+  padding: 2rem 5rem;
+}
+
+.management__list-item:not(:first-of-type) {
+  border-top: solid 0.1rem #a4a4a4;
+}
+.management__list-item:nth-child(2) {
+  border: none;
+}
+
+.management__list-item > * {
+  display: inline-block;
+  margin: auto 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 767px) {
+  .management__list-item {
+    padding: 2rem 1rem;
+  }
+
+  .management__list-item > * {
+    margin: auto 0.2rem;
+  }
+}
