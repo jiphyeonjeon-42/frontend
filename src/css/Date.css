@@ -1,0 +1,11 @@
+.date__wrapper {
+  flex: 0 0 11rem;
+}
+@media screen and (max-width: 767px) {
+  .date__wrapper {
+    flex-basis: 5rem;
+  }
+  .date__year {
+    display: none;
+  }
+}
