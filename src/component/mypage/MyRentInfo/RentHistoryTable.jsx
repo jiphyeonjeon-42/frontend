@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import useDialog from "../../../hook/useDialog";
 import useGetLike from "../../../api/like/useGetLike";

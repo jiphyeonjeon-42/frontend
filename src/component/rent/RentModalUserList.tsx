@@ -4,7 +4,6 @@ import { User } from "../../types";
 type Props = {
   setSelectedUser(...args: unknown[]): unknown;
   closeModal(...args: unknown[]): unknown;
-  // eslint-disable-next-line react/forbid-prop-types
   user: User;
 };
 
