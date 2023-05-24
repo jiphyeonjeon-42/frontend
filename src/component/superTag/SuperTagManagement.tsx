@@ -15,14 +15,11 @@ const SuperTagManagement = () => {
     <main>
       <Banner img="admin" titleKo="태그 관리" titleEn="TAG MANAGEMENT" />
       <Tabs tabList={otherManagementTabList} />
-      <SuperTagSelectedBook
-        book={book}
-        resetBook={resetBook}
-      />
+      <SuperTagSelectedBook book={book} resetBook={resetBook} />
       {book === null ? (
         <SuperTagSearchBookModal setBook={setBook} />
       ) : (
-        <SuperTagMerge />
+        <SuperTagMerge book={book} />
       )}
     </main>
   );

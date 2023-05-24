@@ -1,9 +1,39 @@
-import React from 'react'
+import { useGetTagsBookInfoId } from "../../api/tags/useGetTagsBookInfoId";
+import { Book } from "../../types";
+import SuperTagMergeDefaultTag from "./SuperTagMergeDefaultTag";
+import SuperTagMergeAccordion from "./SuperTagMergeAccordion";
+import SuperTagMergeCreate from "./SuperTagMergeCreate";
+import DragZone from "../utils/DragZone";
+import "../../css/SuperTagMerge.css";
 
-const SuperTagMerge = () => {
+type SuperTagMergeProps = {
+  book: Book;
+};
+const SuperTagMerge = ({ book }: SuperTagMergeProps) => {
+  const { tagList, addTag, removeTag, Dialog } = useGetTagsBookInfoId(book.id);
+
+  const defaultTagList = tagList.filter(i => Number(i.count) === 0);
+  const superTagList = tagList.filter(i => Number(i.count) !== 0);
+
   return (
-    <div>SuperTagMerge</div>
-  )
-}
+    <div className="super-tag__merge__wrapper">
+      <Dialog />
+      <DragZone>
+        <SuperTagMergeDefaultTag defaultTagList={defaultTagList} />
+        {superTagList.map(tag => (
+          <SuperTagMergeAccordion
+            tag={tag}
+            key={tag.id}
+            removeTag={removeTag}
+          />
+        ))}
+        <SuperTagMergeCreate
+          bookInfoId={book.id || book.bookInfoId}
+          addTag={addTag}
+        />
+      </DragZone>
+    </div>
+  );
+};
 
-export default SuperTagMerge
+export default SuperTagMerge;

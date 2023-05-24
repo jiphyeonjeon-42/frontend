@@ -1,0 +1,67 @@
+.super-tag__merge__wrapper {
+  width: 100%;
+  min-width: 30rem;
+  max-width: 120rem;
+  margin: 10rem auto 15rem;
+  padding: 4rem 0;
+  background-color: #d9d9d9;
+}
+
+.super-tag__accordion__wrapper {
+  width: 100%;
+  max-width: 100rem;
+  margin: auto;
+}
+
+.super-tag__accordion__summary {
+  height: 8rem;
+  width: 100%;
+  max-width: 100rem;
+  margin: auto;
+  appearance: none;
+  border: solid 0.1rem black;
+  align-items: center;
+  background-color: white;
+}
+.super-tag__accordion__summary > span {
+  flex-grow: 1;
+  font-size: 2rem;
+  text-align: left;
+}
+.super-tag__accordion__super-text::before {
+  content: "상위태그 : #";
+}
+.super-tag__accordion__delete {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+.super-tag__accordion__delete > img {
+  width: 2rem;
+}
+
+.super-tag__accordion__delete:hover:before {
+  content: "삭제";
+  position: absolute;
+  margin: 2.4rem 0 0 -0.2rem;
+}
+
+.super-tag__accordion__detail {
+  border: solid 0.1rem black;
+  margin-left: 30px;
+  background-color: white;
+  padding: 2rem;
+}
+
+.super-tag__default__search-bar {
+  width: 30% !important;
+  min-width: 20rem;
+  margin-left: auto;
+  margin-top: 1rem;
+}
+
+.super-tag__sub-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
