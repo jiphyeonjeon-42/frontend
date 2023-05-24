@@ -1,0 +1,9 @@
+.super-tag__selected-book__wrapper {
+  width: 90%;
+  max-width: 80rem;
+  min-width: 36rem;
+  margin: 1rem auto;
+  border: 0.1rem solid black;
+  border-radius: 2rem;
+  padding-top: 5rem;
+}
