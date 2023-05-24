@@ -1,36 +1,41 @@
-import { useRef, useState, useEffect } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  ChangeEventHandler,
+  FormEventHandler,
+  MouseEventHandler,
+} from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import "../../css/SearchBar.css";
 
 type Props = {
-  setQuery?(...args: unknown[]): unknown;
+  setQuery?: (query: string) => void;
   placeHolder?: string;
   wrapperClassName?: string;
-  width: string;
+  width: "banner" | "center" | "short" | "long";
   isWithBarcodeButton?: boolean;
-  onClickBarcodeButton?(...args: unknown[]): unknown;
+  onClickBarcodeButton?: MouseEventHandler<HTMLButtonElement>;
   isNavigate?: boolean;
   isFocusedOnMount?: boolean;
 };
 
 const SearchBar = ({
-  // 검색 호출을 위한 세터
   setQuery,
-
-  wrapperClassName,
-  placeHolder,
-  isWithBarcodeButton,
-  onClickBarcodeButton,
+  placeHolder = "",
+  wrapperClassName = "",
   width,
-  isNavigate,
-  isFocusedOnMount,
+  isWithBarcodeButton = false,
+  onClickBarcodeButton = () => {},
+  isNavigate = false,
+  isFocusedOnMount = true,
 }: Props) => {
   const [urlParams] = useSearchParams();
   const [searchWord, setSearchWord] = useState(urlParams.get("search") || "");
   const navigate = useNavigate();
-  const searchRef = useRef();
+  const searchRef = useRef<HTMLInputElement>(null);
 
-  const onChange = event => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = event => {
     const { value } = event.currentTarget;
     if (typeof setQuery === "function") {
       if (!isNavigate) setQuery(value);
@@ -38,14 +43,16 @@ const SearchBar = ({
     setSearchWord(value);
   };
 
-  const onSubmit = event => {
+  const onSubmit: FormEventHandler = event => {
     event.preventDefault();
     const encodedSearchWord = encodeURIComponent(searchWord);
     if (isNavigate) navigate(`/search?search=${encodedSearchWord}`);
   };
 
   useEffect(() => {
-    if (isFocusedOnMount) searchRef.current.focus();
+    if (isFocusedOnMount && searchRef.current) {
+      searchRef.current.focus();
+    }
   }, []);
 
   return (
@@ -72,24 +79,11 @@ const SearchBar = ({
           바코드
         </button>
       ) : null}
-      <button
-        className="search-bar__button submit"
-        type="submit"
-        onSubmit={onSubmit}
-      >
+      <button className="search-bar__button submit" type="submit">
         검색
       </button>
     </form>
   );
 };
 
-SearchBar.defaultProps = {
-  setQuery: undefined,
-  wrapperClassName: "",
-  placeHolder: "",
-  isWithBarcodeButton: false,
-  onClickBarcodeButton: () => {},
-  isNavigate: false,
-  isFocusedOnMount: true,
-};
 export default SearchBar;

@@ -8,8 +8,8 @@ modal__container 모달의 기본 뼈대
 */
 
 type ModalProps = {
-  isOpen: boolean;
-  size: "full" | "basic";
+  isOpen?: boolean;
+  size?: "full" | "basic";
   onCloseModal: () => void;
   children: ReactNode;
 };
