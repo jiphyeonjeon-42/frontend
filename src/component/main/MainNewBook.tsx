@@ -18,8 +18,8 @@ const MainNewBook = ({ book, bookWidth }: Props) => {
     >
       <Link to={`/info/${book.id}`} state={{ bread: "신간 도서" }}>
         <Image
-          width={`${bookWidth}`}
-          height={`${bookWidth * 1.5}`}
+          width={bookWidth}
+          height={bookWidth * 1.5}
           src={book.image}
           alt="new"
         />
