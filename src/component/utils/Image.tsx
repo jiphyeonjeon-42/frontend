@@ -1,7 +1,7 @@
 import { HTMLProps, useState } from "react";
 import fallback from "../../img/image_onerror.svg";
 
-type Size = number | `${number}px`;
+type Size = number;
 type Props = HTMLProps<HTMLImageElement> & { width?: Size; height?: Size };
 
 const Image = ({ src, alt, width, height, ...props }: Props) => {
