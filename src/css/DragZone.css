@@ -1,0 +1,7 @@
+.drag-zone.dragging * *:not(.droppable) {
+  opacity: 0.6;
+}
+
+.drag-zone:active {
+  cursor: grabbing;
+}
