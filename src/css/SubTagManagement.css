@@ -1,0 +1,52 @@
+.sub-tag-management__list-item {
+  white-space: normal;
+}
+
+.sub-tag-management__id,
+.sub-tag-management__bookInfoId {
+  flex-basis: 4rem;
+}
+
+.sub-tag-management__title {
+  flex: 1 0 7rem;
+}
+
+.sub-tag-management__createdAt {
+  flex: 0 0 11rem;
+}
+
+.sub-tag-management__nickname {
+  flex-basis: 12rem;
+}
+
+.sub-tag-management__content {
+  flex: 1 0 12rem;
+}
+
+.sub-tag-management__content.merged > span {
+  /* color: #818181; */
+  text-decoration: line-through;
+}
+.sub-tag-management__content.merged > div {
+  text-decoration: none;
+}
+
+.sub-tag-management__visibility {
+  flex-basis: 5rem;
+  white-space: normal;
+}
+
+@media screen and (max-width: 767px) {
+  .sub-tag-management__id,
+  .sub-tag-management__bookInfoId {
+    display: none;
+  }
+
+  .sub-tag-management__nickname {
+    flex-basis: 7rem;
+  }
+
+  .sub-tag-management__createdAt {
+    flex-basis: 5rem;
+  }
+}
