@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import useGetBooksInfoId from "../../api/books/useGetBooksInfoId";

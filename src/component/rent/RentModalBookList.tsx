@@ -6,7 +6,6 @@ type Props = {
   setSelectedBooks(...args: unknown[]): unknown;
   closeModal(...args: unknown[]): unknown;
   selectedBooks: object[];
-  // eslint-disable-next-line react/forbid-prop-types
   book: object;
 };
 
