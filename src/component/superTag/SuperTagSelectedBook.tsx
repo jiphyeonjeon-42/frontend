@@ -4,6 +4,7 @@ import SpanWithLabel from "../utils/SpanWithLabel";
 import "../../css/SuperTagSelectedBook.css";
 import Button from "../utils/Button";
 import { Book } from "../../types";
+import { dateFormat } from "../../util/date";
 
 type SuperTagSelectedBookProps = {
   book: Book | null;
@@ -14,7 +15,6 @@ const SuperTagSelectedBook = ({
   book,
   resetBook,
 }: SuperTagSelectedBookProps) => {
-  
   if (book === null)
     return (
       <div className="super-tag__selected-book__wrapper">
@@ -40,7 +40,10 @@ const SuperTagSelectedBook = ({
               <SpanWithLabel labelText="저자" value={book.author} />
               <SpanWithLabel labelText="출판사" value={book.publisher} />
               {book.publishedAt ? (
-                <SpanWithLabel labelText="출판연월" value={book.publishedAt} />
+                <SpanWithLabel
+                  labelText="출판일자"
+                  value={dateFormat(book.publishedAt)}
+                />
               ) : null}
               <SpanWithLabel labelText="카테고리" value={book.category} />
             </>
