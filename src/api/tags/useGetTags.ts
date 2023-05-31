@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
 import { useSearch } from "../../hook/useSearch";
 import useApi from "../../hook/useApi";
-import { AxiosResponse } from "axios";
 import { Tag } from "../../types/Tag";
 
 export const useGetTags = () => {
@@ -16,16 +16,17 @@ export const useGetTags = () => {
     ...searchParams,
     title: searchParams.query,
     page: searchParams.page - 1,
+    visibility: filter,
   });
 
   const refineResponse = (response: AxiosResponse) => {
     const tags = response.data.items as Tag[];
-    const lastPage: number = response.data.meta.totalPage || 10;
+    const lastPage: number = response.data.meta.totalPages || 10;
     setSearchResult({ list: tags, lastPage });
   };
   useEffect(() => {
     request(refineResponse);
-  }, [searchParams]);
+  }, [searchParams, filter]);
 
   return {
     list: searchResult.list as Tag[],

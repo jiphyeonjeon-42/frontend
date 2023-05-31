@@ -7,4 +7,5 @@ export type Tag = {
   title?: string;
   createdAt?: string;
   superContent?: string;
+  visibility?: "public" | "private";
 };

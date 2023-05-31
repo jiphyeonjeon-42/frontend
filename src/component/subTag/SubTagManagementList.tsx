@@ -6,14 +6,41 @@ import Date from "../utils/Date";
 import { Tag } from "../../types/Tag";
 import Tooltip from "../utils/Tooltip";
 import EllipsisedSpan from "../utils/EllipsisedSpan";
+import useDialog from "../../hook/useDialog";
+import { usePatchTagsSub } from "../../api/tags/usePatchTagsSub";
 
 type SubTagManagementListProps = {
   tagList: Tag[];
 };
 
 const SubTagManagementList = ({ tagList }: SubTagManagementListProps) => {
+  const { Dialog, setOpenTitleAndMessage, setConfig, defaultConfig, setOpen } =
+    useDialog();
+  const { setParams } = usePatchTagsSub({ setOpenTitleAndMessage });
+
+  const confirmChangeVisibility = (e: MouseEvent<HTMLButtonElement>) => {
+    const { id, name: content, value } = e.currentTarget;
+
+    const isHidden = value === "false";
+    const job = isHidden ? "공개" : "비공개";
+    setConfig({
+      ...defaultConfig,
+      title: `리뷰를 ${job}하시겠습니까?`,
+      message: `리뷰내용 : ${content}`,
+      numberOfButtons: 2,
+      firstButton: {
+        ...defaultConfig.firstButton,
+        text: `${job}하기`,
+        onClick: () => {
+          setParams({ id: +id, visibility: isHidden ? "public" : "private" });
+        },
+      },
+    });
+    setOpen();
+  };
   return (
     <>
+      <Dialog />
       {tagList.map(tag => {
         const isMerged = tag.superContent !== "default";
 
@@ -54,8 +81,8 @@ const SubTagManagementList = ({ tagList }: SubTagManagementListProps) => {
               className="sub-tag__management__visibility"
               id={`${tag.id}`}
               name={tag.content}
-              isVisible={true} //TODO: visibility api에서 받아서 보이도록 수정 예정 (백엔드 수정요청함)
-              onClick={(e: MouseEvent<HTMLButtonElement>) => {}} // TODO: visibility PATCH api 연결 필요
+              isVisible={tag.visibility === "public"}
+              onClick={confirmChangeVisibility}
             />
           </ManagementListItem>
         );
