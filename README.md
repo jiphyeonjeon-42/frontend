@@ -79,8 +79,8 @@
   - 실행
     ```jsx
     cd backend
-    yarn 
-    yarn dev
+    pnpm install
+    pnpm dev
     ```
 
 **3. 프론트엔드**
@@ -96,8 +96,14 @@
       ```
   - 실행
     ```jsx
-    npm install 
-    npm start
+    pnpm install
+    pnpm dev
+    ```
+
+  - 컴포넌트 스토리 [(ladle)](https://ladle.dev) 보기
+    ```sh
+    pnpm install
+    pnpm ladle serve
     ```
 
 ## 📌 팀원소개
