@@ -36,20 +36,24 @@ jobs:
           REACT_APP_SUGGESTION: ${{ secrets.REACT_APP_SUGGESTION }}
           REACT_APP_GA_ID: ${{ secrets.REACT_APP_GA_ID }}
           PORT: ${{ secrets.PORT }}
-      - name: Install Dependencies # node module install
-        run: npm install
 
-      - name: Build # project build
-        run: npm run build
+      - name: Install Pnpm
+        uses: pnpm/action-setup@v2
 
-      - name: Deploy 
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           aws s3 sync ./build s3://42library.kr --region ap-northeast-2
 
-      - name: invalidate CDN cache 
+      - name: invalidate CDN cache
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
