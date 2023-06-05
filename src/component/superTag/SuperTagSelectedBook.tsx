@@ -48,7 +48,7 @@ const SuperTagSelectedBook = ({
               <SpanWithLabel labelText="카테고리" value={book.category} />
             </>
           }
-          bottomUI={<Button value="다른 도서 선택하기" onClick={resetBook} />}
+          bottomUI={<Button className="super-tag__selected-book__reset-button" value="다른 도서 선택하기" onClick={resetBook} />}
         />
       </div>
     </>

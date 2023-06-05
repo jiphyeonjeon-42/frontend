@@ -7,3 +7,8 @@
   border-radius: 2rem;
   padding-top: 5rem;
 }
+
+.super-tag__selected-book__reset-button {
+  margin: auto;
+  display: block;
+}

@@ -10,7 +10,7 @@
 .super-tag__accordion__wrapper {
   width: 100%;
   max-width: 100rem;
-  margin: auto;
+  margin: -0.1rem auto 0;
 }
 
 .super-tag__accordion__summary {
@@ -22,14 +22,28 @@
   border: solid 0.1rem black;
   align-items: center;
   background-color: white;
+  box-sizing: border-box;
+  padding: 0 1rem;
 }
-.super-tag__accordion__summary > span {
+
+.super-tag__accordion__summary.create {
+  display: flex;
+}
+
+.super-tag__accordion__summary.create > img {
+  margin: 0 2rem 0 1rem;
+}
+
+.super-tag__accordion__summary > span,
+.super-tag__accordion__summary > input {
+  border: none;
   flex-grow: 1;
   font-size: 2rem;
   text-align: left;
 }
 .super-tag__accordion__super-text::before {
   content: "상위태그 : #";
+  opacity: 0.6;
 }
 .super-tag__accordion__delete {
   border: none;
@@ -48,9 +62,10 @@
 
 .super-tag__accordion__detail {
   border: solid 0.1rem black;
-  margin-left: 30px;
+  margin: -0.1rem 0 0 3rem;
   background-color: white;
   padding: 2rem;
+  min-height: 10rem;
 }
 
 .super-tag__default__search-bar {

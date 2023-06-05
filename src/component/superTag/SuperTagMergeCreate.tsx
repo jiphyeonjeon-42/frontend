@@ -1,6 +1,8 @@
 import { FormEventHandler, useState } from "react";
 import { usePostTagsSuper } from "../../api/tags/usePostTagsSuper";
 import { Tag } from "../../types";
+import Image from "../utils/Image";
+import Arrow from "../../img/arrow_right_black.svg";
 
 type Props = {
   bookInfoId: number;
@@ -22,15 +24,20 @@ const SuperTagMergeCreate = ({ bookInfoId, addTag }: Props) => {
   };
 
   return (
-    <form className="super-tag__accordion__wrapper" onSubmit={createTag}>
-      <input
-        className="super-tag__accordion__summary"
-        value={newTagName}
-        onChange={onChange}
-        placeholder="새로운 태그 생성하기"
-      />
-      <Dialog />
-    </form>
+    <div className="super-tag__accordion__wrapper">
+      <form
+        className="super-tag__accordion__summary create"
+        onSubmit={createTag}
+      >
+        <Image src={Arrow} />
+        <input
+          value={newTagName}
+          onChange={onChange}
+          placeholder="새로운 태그 생성하기"
+        />
+        <Dialog />
+      </form>
+    </div>
   );
 };
 
