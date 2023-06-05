@@ -18,6 +18,7 @@ const SuperTagMergeCreate = ({ bookInfoId, addTag }: Props) => {
   const createTag: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
     postSuperTag();
+    setNewTagName("");
   };
 
   return (

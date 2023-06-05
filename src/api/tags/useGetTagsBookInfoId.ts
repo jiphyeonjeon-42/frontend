@@ -18,7 +18,7 @@ export const useGetTagsBookInfoId = (id?: number) => {
   }, [id]);
 
   const addTag = (tag: Tag) => {
-    setTagList(prev => [...prev, tag]);
+    setTagList(prev => [tag, ...prev]);
   };
 
   const removeTag = (tagId: number) => {
