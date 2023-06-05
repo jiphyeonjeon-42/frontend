@@ -6,6 +6,8 @@ import Droppable from "../utils/Droppable";
 import Image from "../utils/Image";
 import TrashIcon from "../../img/trash.svg";
 import { useDeleteTagsSuper } from "../../api/tags/useDeleteTagsSuper";
+import { usePatchTagsMerge } from "../../api/tags/usePatchTagsMerge";
+import useDialog from "../../hook/useDialog";
 
 type Props = {
   tag: Tag;
@@ -13,13 +15,30 @@ type Props = {
 };
 
 const SuperTagMergeAccordion = ({ tag, removeTag }: Props) => {
-  const { subTagList, toggleOpened } = useGetTagsSuperTagIdSub({
-    tagId: tag.id,
+  const { Dialog, setOpenTitleAndMessage } = useDialog();
+  const { subTagList, toggleOpened, addSubTag, removeSubTag } =
+    useGetTagsSuperTagIdSub({
+      tagId: tag.id,
+      setOpenTitleAndMessage,
+    });
+  const { deleteTag } = useDeleteTagsSuper({
+    removeTag,
+    setOpenTitleAndMessage,
   });
-  const { deleteTag } = useDeleteTagsSuper({ removeTag });
+
+  const { setParams } = usePatchTagsMerge({
+    setOpenTitleAndMessage,
+    addSubTag,
+  });
+
+  const mergeSubTagsIntoSuperTag = (stringifiedTag: string) => {
+    const subTag = JSON.parse(stringifiedTag);
+    setParams({ superTag: tag, subTag: subTag });
+  };
 
   return (
     <div className="super-tag__accordion__wrapper">
+      <Dialog />
       <Accordion
         summaryButtonClassName="super-tag__accordion__summary"
         summaryUI={
@@ -42,13 +61,15 @@ const SuperTagMergeAccordion = ({ tag, removeTag }: Props) => {
         detailUI={
           <Droppable
             className="super-tag__accordion__detail"
-            onDropped={(data: string) => {
-              console.log(data); //TODO: 드래그앤드롭 merge api 호출작업
-            }}
+            onDropped={mergeSubTagsIntoSuperTag}
           >
             <div className="super-tag__sub-tags">
-              {subTagList.map(tag => (
-                <SuperTagMergeSubTag tag={tag} key={tag.id} />
+              {subTagList.map(subTag => (
+                <SuperTagMergeSubTag
+                  tag={subTag}
+                  key={subTag.id}
+                  removePreviousList={removeSubTag}
+                />
               ))}
             </div>
           </Droppable>

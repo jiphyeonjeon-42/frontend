@@ -1,25 +1,45 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../../types";
 import useApi from "../../hook/useApi";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
+import { setErrorDialog } from "../../data/error";
 
 type Props = {
   tagId: number;
+  setOpenTitleAndMessage: (
+    title: string,
+    message: string,
+    afterClose?: () => void,
+  ) => void;
 };
 
-export const useGetTagsSuperTagIdSub = ({ tagId }: Props) => {
+export const useGetTagsSuperTagIdSub = ({
+  tagId,
+  setOpenTitleAndMessage,
+}: Props) => {
   const [subTagList, setSubTagList] = useState<Tag[]>([]);
   const [isOpened, setOpened] = useState(false);
   const toggleOpened = () => setOpened(!isOpened);
 
-  const { request, Dialog } = useApi("get", `/tags/${tagId}/sub`);
+  const { request } = useApi("get", `/tags/${tagId}/sub`);
 
-  const onSuccess = (response: AxiosResponse) => {
+  const saveTagList = (response: AxiosResponse) => {
     setSubTagList(response.data);
   };
+
+  const displayError = (error: AxiosError) => {
+    setErrorDialog(error, setOpenTitleAndMessage);
+  };
+
   useEffect(() => {
-    if (isOpened) request(onSuccess);
+    if (isOpened) request(saveTagList, displayError);
   }, [isOpened]);
 
-  return { subTagList, toggleOpened, Dialog };
+  const addSubTag = (subTag: Tag) => {
+    setSubTagList(prev => [...prev, subTag]);
+  };
+  const removeSubTag = (subTagId: number) => {
+    setSubTagList(prev => prev.filter(tag => tag.id !== subTagId));
+  };
+  return { subTagList, toggleOpened, addSubTag, removeSubTag };
 };

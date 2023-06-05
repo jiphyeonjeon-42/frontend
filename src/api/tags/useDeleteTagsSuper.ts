@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
-import useDialog from "../../hook/useDialog";
 import { AxiosError } from "axios";
 import getErrorMessage from "../../data/error";
 
 type Props = {
   removeTag: (tagId: number) => void;
+  setOpenTitleAndMessage: (
+    title: string,
+    message: string,
+    afterClose?: () => void,
+  ) => void;
 };
 
-export const useDeleteTagsSuper = ({ removeTag }: Props) => {
+export const useDeleteTagsSuper = ({
+  removeTag,
+  setOpenTitleAndMessage,
+}: Props) => {
   const [tagId, setTagId] = useState<number | undefined>(undefined);
-  const { Dialog, setOpenTitleAndMessage } = useDialog();
 
   const { request } = useApi("delete", `/tags/super/${tagId}`);
 
@@ -37,6 +43,5 @@ export const useDeleteTagsSuper = ({ removeTag }: Props) => {
 
   return {
     deleteTag: (id: number) => setTagId(id),
-    Dialog,
   };
 };

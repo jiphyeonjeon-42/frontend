@@ -19,7 +19,11 @@ const SuperTagMerge = ({ book }: SuperTagMergeProps) => {
     <div className="super-tag__merge__wrapper">
       <Dialog />
       <DragZone>
-        <SuperTagMergeDefaultTag defaultTagList={defaultTagList} />
+        <SuperTagMergeDefaultTag
+          defaultTagList={defaultTagList}
+          addTag={addTag}
+          removeTag={removeTag}
+        />
         {superTagList.map(tag => (
           <SuperTagMergeAccordion
             tag={tag}

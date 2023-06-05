@@ -4,16 +4,37 @@ import Accordion from "../utils/Accordion";
 import SearchBar from "../utils/SearchBar";
 import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 import Droppable from "../utils/Droppable";
+import { usePatchTagsMerge } from "../../api/tags/usePatchTagsMerge";
+import useDialog from "../../hook/useDialog";
 
 type Props = {
   defaultTagList: Tag[];
+  removeTag: (id: number) => void;
+  addTag: (tag: Tag) => void;
 };
-const SuperTagMergeDefaultTag = ({ defaultTagList }: Props) => {
+
+const SuperTagMergeDefaultTag = ({
+  defaultTagList,
+  addTag,
+  removeTag,
+}: Props) => {
   const [searchInput, setSearchInput] = useState("");
   const defaultTagFiltered = defaultTagList.filter(tag =>
     tag.content.includes(searchInput),
   );
 
+  const { setOpenTitleAndMessage } = useDialog();
+
+  const { setParams } = usePatchTagsMerge({
+    setOpenTitleAndMessage,
+    addSubTag: addTag,
+  });
+
+  const mergeSubTagsIntoSuperTag = (stringifiedTag: string) => {
+    const tag = JSON.parse(stringifiedTag);
+    setParams({ superTag: null, subTag: tag });
+  };
+  
   return (
     <div className="super-tag__accordion__wrapper">
       <Accordion
@@ -24,9 +45,7 @@ const SuperTagMergeDefaultTag = ({ defaultTagList }: Props) => {
           <Droppable
             className="super-tag__accordion__detail"
             format="text/plain"
-            onDropped={() => {
-              console.log("dropped") //TODO: 드래그앤드롭 merge api 호출작업
-            }}
+            onDropped={mergeSubTagsIntoSuperTag}
           >
             <SearchBar
               wrapperClassName="super-tag__default__search-bar"
@@ -37,7 +56,11 @@ const SuperTagMergeDefaultTag = ({ defaultTagList }: Props) => {
             />
             <div className="super-tag__sub-tags">
               {defaultTagFiltered.map(tag => (
-                <SuperTagMergeSubTag tag={tag} key={tag.id} />
+                <SuperTagMergeSubTag
+                  tag={tag}
+                  key={tag.id}
+                  removePreviousList={removeTag}
+                />
               ))}
             </div>
           </Droppable>
