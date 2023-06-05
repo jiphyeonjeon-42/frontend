@@ -4,16 +4,18 @@ import Accordion from "../utils/Accordion";
 import SearchBar from "../utils/SearchBar";
 import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 import Droppable from "../utils/Droppable";
-import { usePatchTagsMerge } from "../../api/tags/usePatchTagsMerge";
+import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
 import useDialog from "../../hook/useDialog";
 
 type Props = {
+  bookInfoId: number;
   defaultTagList: Tag[];
   removeTag: (id: number) => void;
   addTag: (tag: Tag) => void;
 };
 
 const SuperTagMergeDefaultTag = ({
+  bookInfoId,
   defaultTagList,
   addTag,
   removeTag,
@@ -25,7 +27,8 @@ const SuperTagMergeDefaultTag = ({
 
   const { setOpenTitleAndMessage } = useDialog();
 
-  const { setParams } = usePatchTagsMerge({
+  const { setParams } = usePatchTagsBookInfoIdMerge({
+    bookInfoId,
     setOpenTitleAndMessage,
     addSubTag: addTag,
   });
@@ -34,7 +37,7 @@ const SuperTagMergeDefaultTag = ({
     const tag = JSON.parse(stringifiedTag);
     setParams({ superTag: null, subTag: tag });
   };
-  
+
   return (
     <div className="super-tag__accordion__wrapper">
       <Accordion

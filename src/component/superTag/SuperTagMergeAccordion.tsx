@@ -6,15 +6,16 @@ import Droppable from "../utils/Droppable";
 import Image from "../utils/Image";
 import TrashIcon from "../../img/trash.svg";
 import { useDeleteTagsSuper } from "../../api/tags/useDeleteTagsSuper";
-import { usePatchTagsMerge } from "../../api/tags/usePatchTagsMerge";
+import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
 import useDialog from "../../hook/useDialog";
 
 type Props = {
+  bookInfoId: number;
   tag: Tag;
   removeTag: (tagId: number) => void;
 };
 
-const SuperTagMergeAccordion = ({ tag, removeTag }: Props) => {
+const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
   const { Dialog, setOpenTitleAndMessage } = useDialog();
   const { subTagList, toggleOpened, addSubTag, removeSubTag } =
     useGetTagsSuperTagIdSub({
@@ -26,7 +27,8 @@ const SuperTagMergeAccordion = ({ tag, removeTag }: Props) => {
     setOpenTitleAndMessage,
   });
 
-  const { setParams } = usePatchTagsMerge({
+  const { setParams } = usePatchTagsBookInfoIdMerge({
+    bookInfoId,
     setOpenTitleAndMessage,
     addSubTag,
   });

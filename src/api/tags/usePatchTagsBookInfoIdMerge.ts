@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 import { Tag } from "../../types";
 
 type Props = {
+  bookInfoId: number;
   setOpenTitleAndMessage: (
     title: string,
     message: string,
@@ -12,7 +13,9 @@ type Props = {
   ) => void;
   addSubTag: (subTag: Tag) => void;
 };
-export const usePatchTagsMerge = ({
+
+export const usePatchTagsBookInfoIdMerge = ({
+  bookInfoId,
   setOpenTitleAndMessage,
   addSubTag,
 }: Props) => {
@@ -20,10 +23,12 @@ export const usePatchTagsMerge = ({
     subTag: Tag;
     superTag: Tag | null;
   } | null>(null);
-  const { request } = useApi("patch", "tags/merge", {
+
+  const { request } = useApi("patch", `tags/${bookInfoId}/merge`, {
     subTagIds: [params?.subTag.id],
     superTagId: params?.superTag?.id || null,
   });
+
   const displaySuccess = () => {
     setOpenTitleAndMessage("처리되었습니다", "", () => {
       if (params) addSubTag(params?.subTag);
