@@ -43,6 +43,7 @@ const CreateTagModal = ({
       postTag();
       setTagModalEnter(false);
       setCreateTagModalData(null);
+      contentReset();
     }
   }, [tagModalEnter, setTagModalEnter, setCreateTagModalData, postTag]);
 
