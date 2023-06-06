@@ -50,7 +50,7 @@ const TagList = ({ tagData }: TagListProps) => {
     } else if (isEnterPressed && createTagModalData) {
       event.preventDefault();
       setTagModalEnter(true);
-      console.log("TagModal");
+      console.log("enter in TagModal");
     }
   };
 
@@ -87,7 +87,7 @@ const TagList = ({ tagData }: TagListProps) => {
             value={createTag}
             placeholder="태그를 생성하세요."
             onChange={event => setCreateTag(event.target.value)}
-            onKeyDown={handleKeyPress}
+            onKeyUp={handleKeyPress}
           />
           <button
             className="button_tag-create-button"
