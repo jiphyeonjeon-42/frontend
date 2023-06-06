@@ -8,8 +8,7 @@ import userState from "../../../atom/userState";
 import "../../../css/Tags.css";
 import plusicon from "../../../img/tag_plus.svg";
 import minusicon from "../../../img/tag_minus.svg";
-import useApi from "../../../hook/useApi";
-import { AxiosResponse } from "axios";
+import RemoveTagModal from "./RemoveTagModal";
 
 type TagProps = TagType & {
   openModalFunc(id: number): void;
@@ -18,7 +17,6 @@ type TagProps = TagType & {
 const Tag = ({ id, content, count, login, type, openModalFunc }: TagProps) => {
   const navigate = useNavigate();
   const currentLogin = useRecoilValue(userState);
-  const { request, Dialog } = useApi("delete", `/tags/sub/${id}`);
   const [removeTagModalData, setRemoveTagModalData] = useState<boolean | null>(
     null,
   );
@@ -45,33 +43,35 @@ const Tag = ({ id, content, count, login, type, openModalFunc }: TagProps) => {
 
   const isMysub = count === 0 && login === currentLogin.userName;
 
-  const remove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    console.log("remove");
-    removeTag();
+  const closeRemoveModal = () => {
+    setRemoveTagModalData(null);
   };
 
-  const removeTag = () => {
-    request((res: AxiosResponse) => {
-      console.log("태그 삭제 >> ", res);
-    });
+  const openRemoveModal = () => {
+    setRemoveTagModalData(true);
   };
 
   return (
-    <button className={`button_tag-box-${isType()}`} onClick={tagClick}>
-      <Tooltip className="button_tag-tooltip" description={login}>
-        {content}
-      </Tooltip>
-      <Dialog />
-      {isMysub ? (
-        <img
-          className="button_tag-remove-button"
-          src={minusicon}
-          alt="minus"
-          onClick={remove}
-        />
+    <>
+      {removeTagModalData !== null ? (
+        <div className="button_tag-modal" onClick={closeRemoveModal}>
+          <RemoveTagModal id={id} content={content}></RemoveTagModal>
+        </div>
       ) : null}
-    </button>
+      <button className={`button_tag-box-${isType()}`} onClick={tagClick}>
+        <Tooltip className="button_tag-tooltip" description={login}>
+          {content}
+        </Tooltip>
+        {isMysub ? (
+          <img
+            className="button_tag-remove-button"
+            src={minusicon}
+            alt="minus"
+            onClick={openRemoveModal}
+          />
+        ) : null}
+      </button>
+    </>
   );
 };
 
