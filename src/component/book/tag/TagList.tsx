@@ -1,10 +1,8 @@
 import { useState } from "react";
+import { TagType } from "../../../type/TagType";
 import Tag from "./Tag";
 import TagModal from "./TagModal";
 import CreateTagModal from "./CreateTagModal";
-import Modal from "../../utils/Modal";
-import useModal from "../../../hook/useModal";
-import Tooltip from "../../utils/Tooltip";
 
 type TagListProps = {
   tagData: {
@@ -13,16 +11,16 @@ type TagListProps = {
     count: number;
     login: string;
   }[];
+  setTagData: React.Dispatch<React.SetStateAction<TagType[]>>;
 };
 
-const TagList = ({ tagData }: TagListProps) => {
+const TagList = ({ tagData, setTagData }: TagListProps) => {
   const [tagModalData, setTagModalData] = useState<number | null>(null);
   const [createTag, setCreateTag] = useState("");
   const [createTagModalData, setCreateTagModalData] = useState<boolean | null>(
     null,
   );
   const [tagModalEnter, setTagModalEnter] = useState<boolean>(false);
-
   const openModalFunc = (tagId: number) => {
     setTagModalData(tagId);
   };
@@ -43,15 +41,15 @@ const TagList = ({ tagData }: TagListProps) => {
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const isEnterPressed = event.key === "Enter";
 
-    if (isEnterPressed && !createTagModalData) {
+    event.preventDefault();
+    if (isEnterPressed && !createTagModalData && createTag !== "") {
       console.log("enterKey >> ", createTag);
-      event.preventDefault();
       setCreateTagModalData(true);
     } else if (isEnterPressed && createTagModalData) {
-      event.preventDefault();
       setTagModalEnter(true);
       console.log("enter in TagModal");
     }
+    event.preventDefault();
   };
 
   return (
@@ -74,7 +72,13 @@ const TagList = ({ tagData }: TagListProps) => {
           </div>
         ) : null}
         {tagData.map(item => (
-          <Tag key={item.id} {...item} openModalFunc={openModalFunc}>
+          <Tag
+            key={item.id}
+            {...item}
+            openModalFunc={openModalFunc}
+            tagData={tagData}
+            setTagData={setTagData}
+          >
             {/*{console.log(item)}*/}
           </Tag>
         ))}
