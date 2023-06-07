@@ -11,10 +11,21 @@ import minusicon from "../../../img/tag_minus.svg";
 import RemoveTagModal from "./RemoveTagModal";
 
 type TagProps = TagType & {
+  tagData: TagType[];
+  setTagData: React.Dispatch<React.SetStateAction<TagType[]>>;
   openModalFunc(id: number): void;
 };
 
-const Tag = ({ id, content, count, login, type, openModalFunc }: TagProps) => {
+const Tag = ({
+  id,
+  content,
+  count,
+  login,
+  type,
+  openModalFunc,
+  tagData,
+  setTagData,
+}: TagProps) => {
   const navigate = useNavigate();
   const currentLogin = useRecoilValue(userState);
   const [removeTagModalData, setRemoveTagModalData] = useState<boolean | null>(
@@ -47,7 +58,8 @@ const Tag = ({ id, content, count, login, type, openModalFunc }: TagProps) => {
     setRemoveTagModalData(null);
   };
 
-  const openRemoveModal = () => {
+  const openRemoveModal: MouseEventHandler<HTMLImageElement> = e => {
+    e.stopPropagation();
     setRemoveTagModalData(true);
   };
 
@@ -55,13 +67,15 @@ const Tag = ({ id, content, count, login, type, openModalFunc }: TagProps) => {
     <>
       {removeTagModalData !== null ? (
         <div className="button_tag-modal" onClick={closeRemoveModal}>
-          <RemoveTagModal id={id} content={content}></RemoveTagModal>
+          <RemoveTagModal
+            id={id}
+            content={content}
+            tagData={tagData}
+            setTagData={setTagData}
+          />
         </div>
       ) : null}
       <button className={`button_tag-box-${isType()}`} onClick={tagClick}>
-        <Tooltip className="button_tag-tooltip" description={login}>
-          {content}
-        </Tooltip>
         {isMysub ? (
           <img
             className="button_tag-remove-button"
@@ -70,6 +84,9 @@ const Tag = ({ id, content, count, login, type, openModalFunc }: TagProps) => {
             onClick={openRemoveModal}
           />
         ) : null}
+        <Tooltip className="button_tag-tooltip" description={login}>
+          {content}
+        </Tooltip>
       </button>
     </>
   );
