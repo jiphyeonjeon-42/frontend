@@ -6,9 +6,16 @@ import { AxiosResponse } from "axios";
 type RemoveTagModalProps = {
   id: number;
   content: string;
+  tagData: TagType[];
+  setTagData: React.Dispatch<React.SetStateAction<TagType[]>>;
 };
 
-const RemoveTagModal = ({ id, content }: RemoveTagModalProps) => {
+const RemoveTagModal = ({
+  id,
+  content,
+  tagData,
+  setTagData,
+}: RemoveTagModalProps) => {
   const { request, Dialog } = useApi("delete", `/tags/sub/${id}`);
 
   const remove = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -20,6 +27,8 @@ const RemoveTagModal = ({ id, content }: RemoveTagModalProps) => {
   const removeTag = () => {
     request((res: AxiosResponse) => {
       console.log("태그 삭제 >> ", res);
+      const updatedTagData = tagData.filter(tag => tag.id !== id);
+      setTagData(updatedTagData);
     });
   };
 
