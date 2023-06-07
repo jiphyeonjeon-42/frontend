@@ -32,7 +32,7 @@ const TagWrapper = ({ bookInfoId }: TagProps) => {
   return (
     <div className="none-drag">
       <Dialog />
-      <TagList tagData={tagData} />
+      <TagList tagData={tagData} setTagData={setTagData} />
     </div>
   );
 };
