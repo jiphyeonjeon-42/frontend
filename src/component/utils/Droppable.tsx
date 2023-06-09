@@ -3,23 +3,15 @@ import "../../css/Droppable.css";
 
 type Props = HTMLAttributes<HTMLDivElement> & {
   format?: string;
-  onDropped: (data: string) => void;
   children: ReactNode;
 };
 const Droppable = ({
   format = "text/plain",
-  onDropped,
   children,
   className,
   ...rest
 }: Props) => {
   const [isDragOver, setIsDragOver] = useState(false);
-  const setDropEffect: DragEventHandler = e => {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = "move";
-    const data = e.dataTransfer.getData(format);
-    onDropped(data);
-  };
 
   const setDragOverTrue: DragEventHandler = e => {
     e.preventDefault();
@@ -33,7 +25,6 @@ const Droppable = ({
     <div
       className={`droppable ${className} ${isDragOver ? "over" : ""}`}
       {...rest}
-      onDrop={setDropEffect}
       onDragOver={setDragOverTrue}
       onDragLeave={setDragOverFalse}
     >

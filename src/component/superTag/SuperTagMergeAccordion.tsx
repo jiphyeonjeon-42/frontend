@@ -1,13 +1,14 @@
-import { Tag } from "../../types";
+import { DragEventHandler } from "react";
 import { useGetTagsSuperTagIdSub } from "../../api/tags/useGetTagsSuperTagIdSub";
+import { useDeleteTagsSuper } from "../../api/tags/useDeleteTagsSuper";
+import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
+import { Tag } from "../../types";
+import useDialog from "../../hook/useDialog";
 import Accordion from "../utils/Accordion";
 import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 import Droppable from "../utils/Droppable";
 import Image from "../utils/Image";
 import TrashIcon from "../../img/trash.svg";
-import { useDeleteTagsSuper } from "../../api/tags/useDeleteTagsSuper";
-import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
-import useDialog from "../../hook/useDialog";
 
 type Props = {
   bookInfoId: number;
@@ -32,7 +33,8 @@ const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
     setOpenTitleAndMessage,
   });
 
-  const addNewListAndMergeIfMoved = (stringifiedTag: string) => {
+  const addNewListAndMergeIfMoved: DragEventHandler = e => {
+    const stringifiedTag = e.dataTransfer.getData("text/plain");
     const { superTag: previousSuperTag, subTag } = JSON.parse(stringifiedTag);
     addSubTag(subTag);
     if (previousSuperTag?.id !== tag.id) {
@@ -65,7 +67,7 @@ const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
         detailUI={
           <Droppable
             className="super-tag__accordion__detail"
-            onDropped={addNewListAndMergeIfMoved}
+            onDrop={addNewListAndMergeIfMoved}
           >
             <div className="super-tag__sub-tags">
               {subTagList.map(subTag => (

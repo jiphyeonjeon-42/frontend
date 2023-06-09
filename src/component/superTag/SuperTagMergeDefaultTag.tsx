@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { DragEventHandler, useState } from "react";
+import useDialog from "../../hook/useDialog";
+import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
 import { Tag } from "../../types";
 import Accordion from "../utils/Accordion";
 import SearchBar from "../utils/SearchBar";
-import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 import Droppable from "../utils/Droppable";
-import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
-import useDialog from "../../hook/useDialog";
+import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 
 type Props = {
   bookInfoId: number;
@@ -32,7 +32,8 @@ const SuperTagMergeDefaultTag = ({
     setOpenTitleAndMessage,
   });
 
-  const addNewListAndMergeIfMoved = (stringifiedData: string) => {
+  const addNewListAndMergeIfMoved: DragEventHandler = e => {
+    const stringifiedData = e.dataTransfer.getData("text/plain");
     const { superTag: previousSuperTag, subTag } = JSON.parse(stringifiedData);
     addTag({ ...subTag, type: "default" });
     if (previousSuperTag.id) {
@@ -50,7 +51,7 @@ const SuperTagMergeDefaultTag = ({
           <Droppable
             className="super-tag__accordion__detail"
             format="text/plain"
-            onDropped={addNewListAndMergeIfMoved}
+            onDrop={addNewListAndMergeIfMoved}
           >
             <SearchBar
               wrapperClassName="super-tag__default__search-bar"
