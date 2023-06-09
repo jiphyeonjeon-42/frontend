@@ -30,12 +30,14 @@ const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
   const { setParams } = usePatchTagsBookInfoIdMerge({
     bookInfoId,
     setOpenTitleAndMessage,
-    addSubTag,
   });
 
-  const mergeSubTagsIntoSuperTag = (stringifiedTag: string) => {
-    const subTag = JSON.parse(stringifiedTag);
-    setParams({ superTag: tag, subTag: subTag });
+  const addNewListAndMergeIfMoved = (stringifiedTag: string) => {
+    const { superTag: previousSuperTag, subTag } = JSON.parse(stringifiedTag);
+    addSubTag(subTag);
+    if (previousSuperTag?.id !== tag.id) {
+      setParams({ superTag: tag, subTag });
+    }
   };
 
   return (
@@ -63,12 +65,13 @@ const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
         detailUI={
           <Droppable
             className="super-tag__accordion__detail"
-            onDropped={mergeSubTagsIntoSuperTag}
+            onDropped={addNewListAndMergeIfMoved}
           >
             <div className="super-tag__sub-tags">
               {subTagList.map(subTag => (
                 <SuperTagMergeSubTag
-                  tag={subTag}
+                  superTag={tag}
+                  subTag={subTag}
                   key={subTag.id}
                   removePreviousList={removeSubTag}
                 />

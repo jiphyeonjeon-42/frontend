@@ -11,13 +11,11 @@ type Props = {
     message: string,
     afterClose?: () => void,
   ) => void;
-  addSubTag: (subTag: Tag) => void;
 };
 
 export const usePatchTagsBookInfoIdMerge = ({
   bookInfoId,
   setOpenTitleAndMessage,
-  addSubTag,
 }: Props) => {
   const [params, setParams] = useState<{
     subTag: Tag;
@@ -30,9 +28,7 @@ export const usePatchTagsBookInfoIdMerge = ({
   });
 
   const displaySuccess = () => {
-    setOpenTitleAndMessage("처리되었습니다", "", () => {
-      if (params) addSubTag(params?.subTag);
-    });
+    setOpenTitleAndMessage("처리되었습니다", "", () => {});
   };
 
   const displayError = (error: AxiosError) => {

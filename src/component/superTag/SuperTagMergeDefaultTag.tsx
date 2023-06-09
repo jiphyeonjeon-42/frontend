@@ -30,12 +30,14 @@ const SuperTagMergeDefaultTag = ({
   const { setParams } = usePatchTagsBookInfoIdMerge({
     bookInfoId,
     setOpenTitleAndMessage,
-    addSubTag: addTag,
   });
 
-  const mergeSubTagsIntoSuperTag = (stringifiedTag: string) => {
-    const tag = JSON.parse(stringifiedTag);
-    setParams({ superTag: null, subTag: tag });
+  const addNewListAndMergeIfMoved = (stringifiedData: string) => {
+    const { superTag: previousSuperTag, subTag } = JSON.parse(stringifiedData);
+    addTag(subTag);
+    if (previousSuperTag.id) {
+      setParams({ superTag: null, subTag });
+    }
   };
 
   return (
@@ -48,7 +50,7 @@ const SuperTagMergeDefaultTag = ({
           <Droppable
             className="super-tag__accordion__detail"
             format="text/plain"
-            onDropped={mergeSubTagsIntoSuperTag}
+            onDropped={addNewListAndMergeIfMoved}
           >
             <SearchBar
               wrapperClassName="super-tag__default__search-bar"
@@ -60,7 +62,8 @@ const SuperTagMergeDefaultTag = ({
             <div className="super-tag__sub-tags">
               {defaultTagFiltered.map(tag => (
                 <SuperTagMergeSubTag
-                  tag={tag}
+                  superTag={null}
+                  subTag={tag}
                   key={tag.id}
                   removePreviousList={removeTag}
                 />
