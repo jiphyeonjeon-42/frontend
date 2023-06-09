@@ -65,6 +65,8 @@ const SubTagManagementList = ({ tagList }: SubTagManagementListProps) => {
               className={`sub-tag-management__content ${isMerged && "merged"}`}
             >
               #{tag.content}
+            </EllipsisedSpan>
+            <span className="sub-tag-management__merged">
               {isMerged ? (
                 <Tooltip
                   description={`#${
@@ -76,7 +78,7 @@ const SubTagManagementList = ({ tagList }: SubTagManagementListProps) => {
               ) : (
                 ""
               )}
-            </EllipsisedSpan>
+            </span>
             <VisibilityToggleButton
               className="sub-tag__management__visibility"
               id={`${tag.id}`}

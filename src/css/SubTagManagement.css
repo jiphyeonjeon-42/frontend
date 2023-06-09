@@ -4,35 +4,32 @@
 
 .sub-tag-management__id,
 .sub-tag-management__bookInfoId {
-  flex-basis: 4rem;
+  flex-basis: 5rem;
 }
 
 .sub-tag-management__title {
   flex: 1 0 7rem;
 }
 
-.sub-tag-management__createdAt {
+.sub-tag-management__created-at {
   flex: 0 0 11rem;
 }
 
 .sub-tag-management__nickname {
-  flex-basis: 12rem;
+  flex: 0 0 12rem;
 }
 
 .sub-tag-management__content {
   flex: 1 0 12rem;
 }
 
-.sub-tag-management__content.merged > span {
-  /* color: #818181; */
-  text-decoration: line-through;
-}
-.sub-tag-management__content.merged > div {
-  text-decoration: none;
+.sub-tag-management__merged {
+  flex-basis: 7rem;
+  white-space: normal;
 }
 
 .sub-tag-management__visibility {
-  flex-basis: 5rem;
+  flex-basis: 7rem;
   white-space: normal;
 }
 
@@ -42,11 +39,25 @@
     display: none;
   }
 
+  .sub-tag-management__title {
+    flex-shrink: 1;
+  }
   .sub-tag-management__nickname {
-    flex-basis: 7rem;
+    flex-basis: 6rem;
   }
 
-  .sub-tag-management__createdAt {
+  .sub-tag-management__created-at {
     flex-basis: 5rem;
+  }
+
+  .sub-tag-management__content {
+    flex-shrink: 1;
+  }
+  .management__list__box .sub-tag-management__merged {
+    flex-basis: 7rem;
+    font-size: 1.2rem;
+  }
+  .sub-tag-management__visibility {
+    flex-basis: 7rem;
   }
 }

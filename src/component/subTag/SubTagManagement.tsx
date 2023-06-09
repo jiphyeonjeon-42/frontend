@@ -31,9 +31,10 @@ const SubTagManagement = () => {
           <>
             <span className="sub-tag-management__id">ID</span>
             <span className="sub-tag-management__title">도서명</span>
-            <span className="sub-tag-management__created-at">등록 날짜</span>
+            <span className="sub-tag-management__created-at">날짜</span>
             <span className="sub-tag-management__nickname">작성자</span>
             <span className="sub-tag-management__content">태그</span>
+            <span className="sub-tag-management__merged">병합 여부</span>
             <span className="sub-tag-management__visibility">비공개 여부</span>
           </>
         }
