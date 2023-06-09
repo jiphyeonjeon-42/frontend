@@ -13,7 +13,7 @@ export const usePostTagsSuper = ({ bookInfoId, addTag }: Props) => {
 
   const { request, Dialog } = useApi("post", "/tags/super", {
     bookInfoId,
-    content: newTagName,
+    content: newTagName.replace(/ /g, "_"),
   });
 
   const onSuccess = (res: AxiosResponse) => {
