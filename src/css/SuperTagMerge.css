@@ -1,6 +1,6 @@
 .super-tag__merge__wrapper {
   width: 100%;
-  min-width: 30rem;
+  min-width: 36rem;
   max-width: 120rem;
   margin: 10rem auto 15rem;
   padding: 4rem 0;
@@ -24,6 +24,7 @@
   background-color: white;
   box-sizing: border-box;
   padding: 0 1rem;
+  white-space: normal;
 }
 
 .super-tag__accordion__summary.create {
