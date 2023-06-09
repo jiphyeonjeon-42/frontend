@@ -1,17 +1,20 @@
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler } from "react";
 import { usePostTagsSuper } from "../../api/tags/usePostTagsSuper";
 import { Tag } from "../../types";
 import Image from "../utils/Image";
 import Arrow from "../../img/arrow_right_black.svg";
+import useDialog from "../../hook/useDialog";
 
 type Props = {
   bookInfoId: number;
   addTag: (tag: Tag) => void;
 };
 const SuperTagMergeCreate = ({ bookInfoId, addTag }: Props) => {
-  const { postSuperTag, newTagName, setNewTagName, Dialog } = usePostTagsSuper({
+  const { Dialog, setOpenTitleAndMessage } = useDialog();
+  const { postSuperTag, newTagName, setNewTagName } = usePostTagsSuper({
     bookInfoId,
     addTag,
+    setOpenTitleAndMessage,
   });
   const onChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     setNewTagName(e.currentTarget.value);

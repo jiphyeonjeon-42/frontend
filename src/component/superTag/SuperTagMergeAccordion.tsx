@@ -1,4 +1,4 @@
-import { DragEventHandler } from "react";
+import { DragEventHandler, MouseEventHandler } from "react";
 import { useGetTagsSuperTagIdSub } from "../../api/tags/useGetTagsSuperTagIdSub";
 import { useDeleteTagsSuper } from "../../api/tags/useDeleteTagsSuper";
 import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
@@ -17,7 +17,8 @@ type Props = {
 };
 
 const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
-  const { Dialog, setOpenTitleAndMessage } = useDialog();
+  const { Dialog, setOpenTitleAndMessage, setConfig, setOpen, defaultConfig } =
+    useDialog();
   const { subTagList, toggleOpened, addSubTag, removeSubTag } =
     useGetTagsSuperTagIdSub({
       tagId: tag.id,
@@ -42,6 +43,23 @@ const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
     }
   };
 
+  const getConfirmThenRemove: MouseEventHandler = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    setConfig({
+      ...defaultConfig,
+      title: `태그를 삭제하겠습니까?`,
+      message: `태그 내용 : ${tag.content}`,
+      numberOfButtons: 2,
+      firstButton: {
+        ...defaultConfig.firstButton,
+        onClick: () => {
+          deleteTag(tag.id);
+        },
+      },
+    });
+    setOpen();
+  };
   return (
     <div className="super-tag__accordion__wrapper">
       <Dialog />
@@ -54,11 +72,7 @@ const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
             </span>
             <button
               className="super-tag__accordion__delete"
-              onClick={e => {
-                e.preventDefault();
-                e.stopPropagation();
-                deleteTag(tag.id);
-              }}
+              onClick={getConfirmThenRemove}
             >
               <Image src={TrashIcon} alt={`delete ${tag.content}`} />
             </button>
