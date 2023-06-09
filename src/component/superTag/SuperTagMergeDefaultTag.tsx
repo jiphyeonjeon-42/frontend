@@ -34,7 +34,7 @@ const SuperTagMergeDefaultTag = ({
 
   const addNewListAndMergeIfMoved = (stringifiedData: string) => {
     const { superTag: previousSuperTag, subTag } = JSON.parse(stringifiedData);
-    addTag(subTag);
+    addTag({ ...subTag, type: "default" });
     if (previousSuperTag.id) {
       setParams({ superTag: null, subTag });
     }
