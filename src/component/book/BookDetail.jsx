@@ -8,6 +8,7 @@ import Review from "./review/Review";
 import Banner from "../utils/Banner";
 import Image from "../utils/Image";
 import Like from "./like/Like";
+import TagWrapper from "./tag/TagWrapper"
 import "../../css/BookDetail.css";
 
 const BookDetail = () => {
@@ -108,6 +109,9 @@ const BookDetail = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="book-tag">
+          <TagWrapper bookInfoId={id} />
         </div>
         <div className="book-review">
           <Review bookInfoId={id} />
