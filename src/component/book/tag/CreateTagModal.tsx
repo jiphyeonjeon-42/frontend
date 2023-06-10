@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TagType } from "../../../type/TagType";
-import Tag from "./Tag";
 import useApi from "../../../hook/useApi";
 import { AxiosResponse } from "axios";
-import Plus from "../../../img/plus_icon_off.svg";
-import Image from "../../utils/Image";
-import TagList from "./TagList";
 
 type CreateTagModalProps = {
   content: string;
@@ -14,6 +10,8 @@ type CreateTagModalProps = {
   tagModalEnter: boolean;
   setTagModalEnter: React.Dispatch<React.SetStateAction<boolean>>;
   setCreateTagModalData: React.Dispatch<React.SetStateAction<boolean | null>>;
+  tagData: TagType[];
+  setTagData: React.Dispatch<React.SetStateAction<TagType[]>>;
 };
 
 const CreateTagModal = ({
@@ -22,13 +20,14 @@ const CreateTagModal = ({
   tagModalEnter,
   setTagModalEnter,
   setCreateTagModalData,
+  setTagData,
 }: CreateTagModalProps) => {
   const location = useLocation();
   const bookId = location.pathname.split("/")[2];
-
+  const createContent = content;
   const { request, Dialog } = useApi("post", `/tags/default`, {
     bookInfoId: +bookId,
-    content,
+    createContent,
   });
 
   const postTag = () => {
@@ -36,6 +35,7 @@ const CreateTagModal = ({
       console.log("태그 생성 >> ", res);
       /* 
       // TODO:
+      setTagData(tagData.append())
       res로 들어온 data를 맞춰서 tagtype[]에 append하기.
       */
     });
@@ -54,7 +54,7 @@ const CreateTagModal = ({
     <div>
       <Dialog />
       <ul>
-        <button className="button_tag-box-sub">{content}</button>
+        <button className="button_tag-box-sub">{createContent}</button>
       </ul>
       <button>취소</button>
       <button onClick={postTag}>등록</button>
