@@ -1,10 +1,10 @@
 import "../../css/InquireBoxLine.css";
 
-type InquireBoxLineProps = {
+type Props = {
   children: React.ReactNode;
 };
 
-const InquireBoxLine = ({ children }: InquireBoxLineProps) => {
+const InquireBoxLine = ({ children }: Props) => {
   return <div className="inquire-line__wrapper">{children}</div>;
 };
 

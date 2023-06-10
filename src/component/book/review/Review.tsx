@@ -7,11 +7,11 @@ import useDialog from "../../../hook/useDialog";
 import "../../../css/Tabs.css";
 import "../../../css/Review.css";
 
-type ReviewProps = {
+type Props = {
   bookInfoId: string;
 };
 
-const Review = ({ bookInfoId }: ReviewProps) => {
+const Review = ({ bookInfoId }: Props) => {
   const { currentTab, changeTab } = useTabFocus(0, reviewTabList);
   const {
     Dialog,

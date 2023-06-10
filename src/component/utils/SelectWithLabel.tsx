@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent, HTMLProps } from "react";
 import "../../css/SelectWithLabel.css";
 
-type SelectWithLabelProps = {
+type Props = {
   wrapperClassName?: string;
   labelText?: string;
   selectName?: string;
@@ -9,56 +9,44 @@ type SelectWithLabelProps = {
   initialSelectedIndex?: number;
   defaultText?: string;
   disabled?: boolean;
-  align?: string;
-  selectRef?: (...args: unknown[]) =>
-    | unknown
-    | {
-        current?: Element;
-      };
+  align?: "horizontal" | "vertical";
   resetDependency?: boolean;
-};
+} & HTMLProps<HTMLSelectElement>;
 
 const SelectWithLabel = ({
   wrapperClassName,
   labelText,
-  selectName,
+  selectName = "select",
   optionList,
   initialSelectedIndex,
   defaultText,
-  disabled,
-  align,
-  selectRef,
+  align = "horizontal",
   resetDependency,
-}: SelectWithLabelProps) => {
+  ...props
+}: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
-
-  const alignType = () => {
-    const candidate = ["horizontal", "vertical"];
-    if (candidate.includes(align)) return align;
-    return "horizontal";
-  };
-
-  const onChangeSelect = e => {
-    setSelectedIndex(e.currentTarget.value);
-  };
   useEffect(() => {
     setSelectedIndex(initialSelectedIndex);
   }, [resetDependency]);
+  const onChangeSelect = ({
+    currentTarget: { value },
+  }: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedIndex(parseInt(value, 10));
+  };
 
   return (
-    <div className={`select__wrapper ${alignType()} ${wrapperClassName}`}>
+    <div className={`select__wrapper ${align} ${wrapperClassName}`}>
       {labelText && (
         <label htmlFor={selectName} className="select__label">
           {labelText}
         </label>
       )}
       <select
+        {...props}
         className="select__select"
-        onChange={onChangeSelect}
+        onChange={e => onChangeSelect(e)}
         name={selectName}
         defaultValue={selectedIndex}
-        disabled={disabled}
-        ref={selectRef}
       >
         {defaultText && <option>{defaultText}</option>}
         {optionList.map((optionString, index) => {
@@ -74,15 +62,3 @@ const SelectWithLabel = ({
 };
 
 export default SelectWithLabel;
-
-SelectWithLabel.defaultProps = {
-  wrapperClassName: "",
-  selectName: "select",
-  labelText: "",
-  initialSelectedIndex: undefined,
-  defaultText: undefined,
-  disabled: false,
-  align: "horizontal",
-  selectRef: { current: null },
-  resetDependency: undefined,
-};

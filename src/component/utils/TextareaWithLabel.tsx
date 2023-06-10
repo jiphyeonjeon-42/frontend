@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import colorPalette from "../../data/color";
 import "../../css/TextareaWithLabel.css";
 
-type TextareaWithLabelProps = {
+type Props = {
   wrapperClassName?: string;
   topLabelText?: string;
   topLabelColor?: string;
@@ -30,7 +30,7 @@ const TextareaWithLabel = ({
   bottomMessageText,
   bottomMessageColor,
   isTextareaFocusedOnMount,
-}: TextareaWithLabelProps) => {
+}: Props) => {
   const [text, setText] = useState("");
   const textareaRef = useRef(null);
 

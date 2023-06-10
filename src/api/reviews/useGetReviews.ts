@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
+import { Review } from "../../types";
 
 const useGetReviews = () => {
   const [params, setParams] = useState({
@@ -45,7 +46,7 @@ const useGetReviews = () => {
     setQuery,
     selectedType: params.disabled,
     setSelectedType,
-    reviewList: result.reviewList,
+    reviewList: result.reviewList as Review[],
     lastPage: result.lastPage,
     Dialog,
   };

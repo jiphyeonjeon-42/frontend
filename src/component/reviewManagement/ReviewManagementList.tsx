@@ -1,11 +1,15 @@
-import { PropTypes } from "prop-types";
 import useDialog from "../../hook/useDialog";
 import usePatchReviewsId from "../../api/reviews/usePatchReviewsId";
 import Edit from "../../img/edit.svg";
 import Image from "../utils/Image";
 import "../../css/ReviewManagementList.css";
+import { Review } from "../../types";
 
-const ReviewManagementList = ({ reviewList }) => {
+type Props = {
+  reviewList: Review[];
+};
+
+const ReviewManagementList = ({ reviewList }: Props) => {
   const { Dialog, setOpenTitleAndMessage, setConfig, defaultConfig, setOpen } =
     useDialog();
   const { setReviewId } = usePatchReviewsId({
@@ -84,7 +88,3 @@ const ReviewManagementList = ({ reviewList }) => {
 };
 
 export default ReviewManagementList;
-
-ReviewManagementList.propTypes = {
-  reviewList: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-};

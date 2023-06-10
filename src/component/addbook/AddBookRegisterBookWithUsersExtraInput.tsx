@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { category, koreanDemicalClassification } from "../../data/category";
 import usePostBooksCreate from "../../api/books/usePostBooksCreate";
 
-type RegisterBookWithUsersExtraInputProps = {
+type Props = {
   bookInfo: {
     title: string;
     isbn: string;
@@ -16,7 +16,7 @@ type RegisterBookWithUsersExtraInputProps = {
 
 const RegisterBookWithUsersExtraInput = ({
   bookInfo,
-}: RegisterBookWithUsersExtraInputProps) => {
+}: Props) => {
   const [isDevBook, setIsDevBook] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const donator = useRef(null);

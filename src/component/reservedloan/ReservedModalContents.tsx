@@ -1,5 +1,4 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import useDialog from "../../hook/useDialog";
 import usePostLendings from "../../api/lendings/usePostLendings";
 import usePatchReservationsCancel from "../../api/reservations/usePatchReservationsCancel";
@@ -10,8 +9,14 @@ import BookInformationWithCover from "../utils/BookInformationWithCover";
 import { isValidString } from "../../util/typeCheck";
 import { dateFormat } from "../../util/date";
 import "../../css/ReservedModalContents.css";
+import { Reservation } from "../../types";
 
-const ReservedModalContents = ({ reservedInfo, closeModal }) => {
+type Props = {
+  reservedInfo: Reservation
+  closeModal: () => void
+}
+
+const ReservedModalContents = ({ reservedInfo, closeModal }: Props) => {
   const [remark, setRemark] = useState("");
   const { Dialog, setOpen, defaultConfig, setConfig, setOpenTitleAndMessage } =
     useDialog();
@@ -99,11 +104,6 @@ const ReservedModalContents = ({ reservedInfo, closeModal }) => {
       )}
     </BookInformationWithCover>
   );
-};
-
-ReservedModalContents.propTypes = {
-  reservedInfo: PropTypes.shape.isRequired,
-  closeModal: PropTypes.func.isRequired,
 };
 
 export default ReservedModalContents;

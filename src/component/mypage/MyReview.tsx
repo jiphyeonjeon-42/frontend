@@ -6,11 +6,11 @@ import Pagination from "../utils/Pagination";
 import useGetMyReviewInfo from "../../api/reviews/useGetMyReviewInfo";
 import "../../css/MyReview.css";
 
-type MyReviewProps = {
+type Props = {
   type: string;
 };
 
-const MyReview = ({ type }: MyReviewProps) => {
+const MyReview = ({ type }: Props) => {
   const checkLogin = JSON.parse(window.localStorage.getItem("user"));
   const { page, setPage, lastPage, reviewList, setReviewList } =
     useGetMyReviewInfo();

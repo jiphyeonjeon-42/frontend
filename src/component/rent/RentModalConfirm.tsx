@@ -5,10 +5,11 @@ import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";
 import "../../css/RentModalConfirm.css";
 import usePostLendingsMultiple from "../../api/lendings/usePostLendingsMultiple";
+import { Book, User } from "../../types";
 
-type RentModalConfirmProps = {
-  selectedUser: Record<string, unknown>;
-  selectedBooks: object[];
+type Props = {
+  selectedUser: User;
+  selectedBooks: Book[];
   setSelectedUser(...args: unknown[]): unknown;
   setSelectedBooks(...args: unknown[]): unknown;
   setError(...args: unknown[]): unknown;
@@ -22,7 +23,7 @@ const RentModalConfirm = ({
   setSelectedBooks,
   setError,
   closeModal,
-}: RentModalConfirmProps) => {
+}: Props) => {
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
 

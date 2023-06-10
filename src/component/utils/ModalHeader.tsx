@@ -1,7 +1,7 @@
 import EmphasisInString from "./EmphasisInString";
 import "../../css/ModalHeader.css";
 
-type ModalHeaderProps = {
+type Props = {
   title?: string;
   isWithCloseButton?: boolean;
   onCloseModal?(...args: unknown[]): unknown;
@@ -15,7 +15,7 @@ const ModalHeader = ({
   onCloseModal,
   emphasis,
   emphasisColor,
-}: ModalHeaderProps) => {
+}: Props) => {
   return (
     <div className="modal__header">
       {title && (

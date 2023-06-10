@@ -6,7 +6,7 @@ import Plus from "../../img/plus_icon_off.svg";
 import Minus from "../../img/plus_icon_on.svg";
 import "../../css/BookManagementCart.css";
 
-type BookManagementCartToPrintProps = {
+type Props = {
   printList: object[];
   removeBookById(...args: unknown[]): unknown;
 };
@@ -14,7 +14,7 @@ type BookManagementCartToPrintProps = {
 const BookManagementCartToPrint = ({
   printList,
   removeBookById,
-}: BookManagementCartToPrintProps) => {
+}: Props) => {
   const [isOpen, setIsOpen] = useState(true);
   const { Modal, setOpen } = useModal();
 

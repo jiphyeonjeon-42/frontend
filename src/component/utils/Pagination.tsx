@@ -4,7 +4,7 @@ import ArrRight from "../../img/arrow_right_black.svg";
 import ArrRightDouble from "../../img/arrow_right_black_double.svg";
 import "../../css/Pagination.css";
 
-type PaginationProps = {
+type Props = {
   className?: string;
   page: number;
   setPage(...args: unknown[]): unknown;
@@ -26,7 +26,7 @@ const Pagination = ({
   isReplaceUrl,
   scrollRef,
   count,
-}: PaginationProps) => {
+}: Props) => {
   const startNum = Math.floor((page - 1) / count) * count + 1;
   const pageRange = [];
   for (let i = 0; i < count; i += 1) {

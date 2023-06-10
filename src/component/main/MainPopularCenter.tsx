@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "../utils/Image";
 
-type MainPopularCenterProps = {
+type Props = {
   docs: object[];
   centerTop: number;
   onLeft(...args: unknown[]): unknown;
@@ -13,7 +13,7 @@ const MainPopularCenter = ({
   centerTop,
   onLeft,
   onRight,
-}: MainPopularCenterProps) => {
+}: Props) => {
   const [selected, setSelected] = useState(0);
   const [posX, setPosX] = useState(0);
   const [moveX, setMoveX] = useState(0);

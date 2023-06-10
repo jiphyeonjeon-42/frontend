@@ -2,11 +2,10 @@ import Image from "../utils/Image";
 import Arrow from "../../img/arrow_right_black.svg";
 import "../../css/RentModalBookList.css";
 
-type RentModalBookListProps = {
+type Props = {
   setSelectedBooks(...args: unknown[]): unknown;
   closeModal(...args: unknown[]): unknown;
   selectedBooks: object[];
-  // eslint-disable-next-line react/forbid-prop-types
   book: object;
 };
 
@@ -15,7 +14,7 @@ const RentModalBookList = ({
   setSelectedBooks,
   selectedBooks,
   closeModal,
-}: RentModalBookListProps) => {
+}: Props) => {
   const seletOneOfBook = () => {
     setSelectedBooks([...selectedBooks, book]);
     closeModal();

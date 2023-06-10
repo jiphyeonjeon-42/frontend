@@ -7,7 +7,7 @@ import DeleteButton from "../../../img/x_button.svg";
 import useDialog from "../../../hook/useDialog";
 import "../../../css/Review.css";
 
-type HandleReviewProps = {
+type Props = {
   data?: {
     bookInfoId?: number;
     content?: string;
@@ -35,7 +35,7 @@ const HandleReview = ({
   checkLogin,
   type,
   onClickDel,
-}: HandleReviewProps) => {
+}: Props) => {
   const {
     Dialog,
     config,

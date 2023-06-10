@@ -1,9 +1,9 @@
 import Image from "./Image";
 import "../../css/BookInformationWithCover.css";
 
-type BookInformationWithCoverProps = {
+type Props = {
   wrapperClassName?: string;
-  bookCoverImg: string;
+  bookCoverImg?: string;
   bookCoverAlt: string;
   children: React.ReactNode;
 };
@@ -13,7 +13,7 @@ const BookInformationWithCover = ({
   bookCoverImg,
   bookCoverAlt,
   children,
-}: BookInformationWithCoverProps) => {
+}: Props) => {
   return (
     <div className={`book-info__wrapper ${wrapperClassName}`}>
       <div className="book-info__cover">

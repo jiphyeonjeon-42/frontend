@@ -1,6 +1,6 @@
 import "../../css/UserUsageInfo.css";
 
-type UserUsageInfoProps = {
+type Props = {
   user: {
     id?: number;
     email?: string;
@@ -23,7 +23,7 @@ type UserUsageInfoProps = {
   };
 };
 
-const UserUsageInfo = ({ user }: UserUsageInfoProps) => {
+const UserUsageInfo = ({ user }: Props) => {
   const today = new Date();
 
   const convertDatetoString = date => {

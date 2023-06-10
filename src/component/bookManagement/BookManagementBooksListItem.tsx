@@ -1,8 +1,16 @@
-import PropTypes from "prop-types";
 import Image from "../utils/Image";
 import Edit from "../../img/edit.svg";
 import { bookStatus } from "../../data/status";
 import "../../css/BookManagementBooksListItem.css";
+import { Book } from "../../types";
+
+type Props = {
+  book: Book;
+  checked: boolean;
+  removeBookById: (id: number) => void;
+  addBookById: (id: number) => void;
+  openModal: () => void;
+};
 
 const BookManagementBooksListItem = ({
   checked,
@@ -10,7 +18,7 @@ const BookManagementBooksListItem = ({
   removeBookById,
   addBookById,
   openModal,
-}) => {
+}: Props) => {
   const changeBook = () => {
     if (checked) removeBookById(book.bookId);
     else addBookById(book.bookId);
@@ -36,7 +44,7 @@ const BookManagementBooksListItem = ({
         {book.title}
       </span>
       <span
-        className={`book-management__list__status 
+        className={`book-management__list__status
         font-18${book.status ? "-bold" : ""}
         ${book.status === 1 || book.status === 2 ? " color-red" : ""}`}
       >
@@ -56,11 +64,3 @@ const BookManagementBooksListItem = ({
 };
 
 export default BookManagementBooksListItem;
-
-BookManagementBooksListItem.propTypes = {
-  book: PropTypes.shape().isRequired,
-  checked: PropTypes.bool.isRequired,
-  removeBookById: PropTypes.func.isRequired,
-  addBookById: PropTypes.func.isRequired,
-  openModal: PropTypes.func.isRequired,
-};

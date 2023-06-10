@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
 import useSearch from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
+import { Reservation } from "../../types";
 
 const useGetReservationsSearch = () => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
@@ -62,7 +63,7 @@ const useGetReservationsSearch = () => {
     request(refineResponse);
   }, [searchParams, filter]);
   return {
-    reservedLoanList: searchResult.list,
+    reservedLoanList: searchResult.list as Reservation[],
     lastPage: searchResult.lastPage,
     page: searchParams.page,
     setPage,

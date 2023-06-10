@@ -6,7 +6,6 @@
 <p>
     <p align='center'>
 		<img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
-		<img src="https://img.shields.io/badge/PropTypes-v15.7.2-18A497?logo=Photopea" />
 		<img src="https://img.shields.io/badge/Recoil-^0.4.0-A6A9AA?logo=Coil" />
 		<img src="https://img.shields.io/badge/Vite-react-646CFF?logo=vite&logoColor=fff" />
 	</p>
@@ -80,8 +79,8 @@
   - 실행
     ```jsx
     cd backend
-    yarn 
-    yarn dev
+    pnpm install
+    pnpm dev
     ```
 
 **3. 프론트엔드**
@@ -97,8 +96,14 @@
       ```
   - 실행
     ```jsx
-    npm install 
-    npm start
+    pnpm install
+    pnpm dev
+    ```
+
+  - 컴포넌트 스토리 [(ladle)](https://ladle.dev) 보기
+    ```sh
+    pnpm install
+    pnpm ladle serve
     ```
 
 ## 📌 팀원소개

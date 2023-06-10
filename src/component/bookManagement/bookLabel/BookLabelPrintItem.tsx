@@ -1,22 +1,26 @@
-import propTypes from "prop-types";
 import QRGenerator from "../../utils/QRGenerator";
 import logo from "../../../img/logo_img.png";
 import { category } from "../../../data/category";
+import { Book } from "../../../types";
 
-const BookLabelPrintItem = ({ book }) => {
-  const categoryColor = item => {
+type Props = {
+  book: Book;
+};
+
+const BookLabelPrintItem = ({ book }: Props) => {
+  const categoryColor = (item: Book) => {
     const color = category.find(i => i.code === item.callSign[0])?.color;
     return (color && [color, "#FFFFFF"]) || ["#FFFFFF", "#000000"];
   };
 
-  const categoryName = item => {
+  const categoryName = (item: Book) => {
     const name = category.find(i => i.code === item.callSign[0])?.name;
-    const slash = name.indexOf("/");
-    if (slash === -1) return [name, ""];
-    return [name.slice(0, slash), name.slice(slash)];
+    const slash = name?.indexOf("/");
+    if (slash === undefined || slash === -1) return [name, ""];
+    return [name?.slice(0, slash), name?.slice(slash)];
   };
 
-  const callSignInLabel = callSign => {
+  const callSignInLabel = (callSign: Book["callSign"]) => {
     const splitedCallSign = callSign.split(".");
     const first = `${splitedCallSign[0]}.${splitedCallSign[1]}`;
     const second = `${splitedCallSign[2]} ${splitedCallSign[3]}`;
@@ -70,7 +74,3 @@ const BookLabelPrintItem = ({ book }) => {
 };
 
 export default BookLabelPrintItem;
-
-BookLabelPrintItem.propTypes = {
-  book: propTypes.shape().isRequired,
-};

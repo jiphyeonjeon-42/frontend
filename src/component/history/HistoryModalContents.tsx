@@ -1,9 +1,13 @@
-import PropTypes from "prop-types";
 import TextWithLabel from "../utils/TextWithLabel";
 import BookInformationWithCover from "../utils/BookInformationWithCover";
 import "../../css/HistoryModalContents.css";
+import { History } from "../../types";
 
-const historyModalContents = ({ historyInfo }) => {
+type Props = {
+  historyInfo: History;
+};
+
+const HistoryModalContents = ({ historyInfo }: Props) => {
   return (
     <BookInformationWithCover
       wrapperClassName="history-modal__wrapper"
@@ -60,9 +64,4 @@ const historyModalContents = ({ historyInfo }) => {
   );
 };
 
-historyModalContents.propTypes = {
-  historyInfo: PropTypes.shape.isRequired,
-  closeModal: PropTypes.func.isRequired,
-};
-
-export default historyModalContents;
+export default HistoryModalContents;

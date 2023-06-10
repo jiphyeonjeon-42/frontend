@@ -2,7 +2,7 @@ import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
 import "../../css/Management.css";
 
-type ManagementProps = {
+type Props = {
   searchBarPlaceHolder: string;
   setQuery(...args: unknown[]): unknown;
   TitleFragement: React.ReactNode[] | React.ReactNode;
@@ -20,7 +20,7 @@ const Management = ({
   page,
   setPage,
   lastPage,
-}: ManagementProps) => {
+}: Props) => {
   return (
     <section className="management__wrapper">
       <SearchBar

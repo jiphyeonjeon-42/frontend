@@ -7,6 +7,6 @@ const colorPalette = [
   { string: "lightgrey1", code: "#d5d5d5", class: "d5" },
   { string: "lightgrey2", code: "#e8e8e8", class: "e8" },
   { string: "white", code: "#ffffff", class: "ff" },
-];
+] as const;
 
 export default colorPalette;

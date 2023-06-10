@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import "../../css/SearchBar.css";
 
-type SearchBarProps = {
+type Props = {
   setQuery?(...args: unknown[]): unknown;
   placeHolder?: string;
   wrapperClassName?: string;
@@ -24,7 +24,7 @@ const SearchBar = ({
   width,
   isNavigate,
   isFocusedOnMount,
-}: SearchBarProps) => {
+}: Props) => {
   const [urlParams] = useSearchParams();
   const [searchWord, setSearchWord] = useState(urlParams.get("search") || "");
   const navigate = useNavigate();
@@ -40,7 +40,8 @@ const SearchBar = ({
 
   const onSubmit = event => {
     event.preventDefault();
-    if (isNavigate) navigate(`/search?search=${searchWord}`);
+    const encodedSearchWord = encodeURIComponent(searchWord);
+    if (isNavigate) navigate(`/search?search=${encodedSearchWord}`);
   };
 
   useEffect(() => {

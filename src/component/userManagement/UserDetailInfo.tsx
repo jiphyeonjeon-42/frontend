@@ -5,29 +5,15 @@ import SelectWithLabel from "../utils/SelectWithLabel";
 import Button from "../utils/Button";
 import { dateFormat, dateLessThan, nowDate } from "../../util/date";
 import "../../css/UserDetailInfo.css";
+import { User } from "../../types";
 
 const roles = ["미인증", "카뎃", "사서", "운영진"];
 
-type UserDetailInfoProps = {
-  user: {
-    id?: number;
-    email?: string;
-    nickname?: string;
-    intraId?: number;
-    slack?: string;
-    penaltyEndDate?: string;
-    overDueDay?: string;
-    role?: number;
-    reservations?: {
-      ranking?: number;
-      endAt?: unknown;
-      lenderableDate?: unknown;
-      title?: string;
-    }[];
-  };
+type Props = {
+  user: User;
 };
 
-const UserDetailInfo = ({ user }: UserDetailInfoProps) => {
+const UserDetailInfo = ({ user }: Props) => {
   const [editMode, setEditMode] = useState(false);
   const [reset, setReset] = useState(false);
   const intraIdRef = useRef(null);
@@ -80,21 +66,21 @@ const UserDetailInfo = ({ user }: UserDetailInfoProps) => {
           labelText="인트라ID"
           inputInitialValue={user.intraId}
           resetDependency={reset}
-          inputRef={intraIdRef}
+          ref={intraIdRef}
           disabled={!editMode}
         />
         <InputWithLabel
           labelText="닉네임"
           inputInitialValue={user.nickname}
           resetDependency={reset}
-          inputRef={nickNameRef}
+          ref={nickNameRef}
           disabled={!editMode}
         />
         <InputWithLabel
           labelText="슬랙ID"
           inputInitialValue={user.slack}
           resetDependency={reset}
-          inputRef={slackRef}
+          ref={slackRef}
           disabled={!editMode}
         />
         <SelectWithLabel
@@ -102,7 +88,7 @@ const UserDetailInfo = ({ user }: UserDetailInfoProps) => {
           optionList={roles}
           resetDependency={reset}
           disabled={!editMode}
-          selectRef={roleRef}
+          ref={roleRef}
           initialSelectedIndex={user.role}
         />
         <div className="user-detail-info__line" />
@@ -115,7 +101,7 @@ const UserDetailInfo = ({ user }: UserDetailInfoProps) => {
               : user.penaltyEndDate
           }
           resetDependency={reset}
-          inputRef={penaltyRef}
+          ref={penaltyRef}
           disabled={!editMode}
         />
         <InputWithLabel

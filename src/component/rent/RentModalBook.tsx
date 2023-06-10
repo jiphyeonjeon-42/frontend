@@ -5,7 +5,7 @@ import BarcodeReader from "../utils/BarcodeReader";
 import useGetBooksSearch from "../../api/books/useGetBooksSearch";
 import useGetBooksId from "../../api/books/useGetBooksId";
 
-type RentModalBookProps = {
+type Props = {
   setSelectedBooks(...args: unknown[]): unknown;
   closeModal(...args: unknown[]): unknown;
   selectedBooks: object[];
@@ -15,7 +15,7 @@ const RentModalBook = ({
   selectedBooks,
   setSelectedBooks,
   closeModal,
-}: RentModalBookProps) => {
+}: Props) => {
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
 
   const { setBookId, Dialog: ErrorDialog } = useGetBooksId({

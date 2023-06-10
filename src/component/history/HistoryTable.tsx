@@ -1,11 +1,10 @@
-/* eslint-disable react/prop-types */
 import Image from "../utils/Image";
 import Arr from "../../img/arrow_right_black.svg";
 import "../../css/HistoryTable.css";
 
-type HistoryTableProps = {};
+type Props = {};
 
-const HistoryTable = ({ history, openModal, setInfo }: HistoryTableProps) => {
+const HistoryTable = ({ history, openModal, setInfo }: Props) => {
   const openSetModal = () => {
     setInfo(history);
     openModal();

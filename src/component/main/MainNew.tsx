@@ -3,11 +3,11 @@ import MainNewBookList from "./MainNewBookList";
 import useGetBooksInfoNew from "../../api/books/useGetBooksInfoNew";
 import "../../css/MainNew.css";
 
-type MainNewProps = {
+type Props = {
   setOpenTitleAndMessage(...args: unknown[]): unknown;
 };
 
-const MainNew = ({ setOpenTitleAndMessage }: MainNewProps) => {
+const MainNew = ({ setOpenTitleAndMessage }: Props) => {
   const { bookList } = useGetBooksInfoNew({ setOpenTitleAndMessage });
 
   return (

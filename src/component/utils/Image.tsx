@@ -1,58 +1,21 @@
-import { useRef, useEffect } from "react";
-import IMGERR from "../../img/image_onerror.svg";
+import { HTMLProps, useState } from "react";
+import fallback from "../../img/image_onerror.svg";
 
-type ImageProps = {
-  className?: string;
-  alt: string;
-  src: string;
-  width?: string;
-  height?: string;
-  draggable?: boolean;
-  value?: string | number;
-};
+type Size = number;
+type Props = HTMLProps<HTMLImageElement> & { width?: Size; height?: Size };
 
-const Image = ({
-  className,
-  alt,
-  src,
-  width,
-  height,
-  draggable,
-  value,
-}: ImageProps) => {
-  const ref = useRef(null);
-  function subtituteImg(e) {
-    e.target.src = IMGERR;
-  }
-  useEffect(() => {
-    if (width || height) {
-      let styleText = "";
-      if (width) styleText += `width: ${width}px; `;
-      if (height) styleText += `height: ${height}px; `;
-      ref.current.style = styleText;
-    }
-  }, [width, height]);
-
+const Image = ({ src, alt, width, height, ...props }: Props) => {
+  const [error, setError] = useState(false);
   return (
     <img
+      {...props}
+      src={error ? fallback : src}
       alt={alt}
-      src={src || IMGERR}
-      className={className || ""}
-      onError={subtituteImg}
+      style={{ width, height }}
+      onError={() => setError(true)}
       loading="lazy"
-      ref={ref}
-      draggable={draggable}
-      value={value}
     />
   );
 };
 
 export default Image;
-
-Image.defaultProps = {
-  className: "",
-  width: undefined,
-  height: undefined,
-  draggable: true,
-  value: "",
-};

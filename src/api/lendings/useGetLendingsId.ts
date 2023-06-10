@@ -2,20 +2,21 @@ import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
 import getErrorMessage from "../../data/error";
 import { compareExpect } from "../../util/typeCheck";
+import { Lending } from "../../types";
 
 const useGetLendingsId = ({ lendingId, closeModal, setError }) => {
-  const defaultData = {
+  const defaultData: Lending = {
     id: lendingId,
-    condition: "",
+    lendingCondition: "",
     createdAt: "",
     login: "",
-    penaltyDays: null,
+    penaltyDays: 0,
     callSign: "",
     title: "",
     image: "",
     dueDate: "",
   };
-  const [lendingData, setLendingData] = useState(defaultData);
+  const [lendingData, setLendingData] = useState<Lending>(defaultData);
 
   const { request } = useApi("get", `lendings/${lendingId}`, {});
 

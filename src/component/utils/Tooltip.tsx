@@ -3,11 +3,12 @@ import { createPortal } from "react-dom";
 import useBound from "../../hook/useBound";
 
 type TooltipProps = {
+  className?: string;
   children: ReactNode;
   description: string;
 };
 
-const Tooltip = ({ children, description }: TooltipProps) => {
+const Tooltip = ({ children, description, className }: TooltipProps) => {
   const [isDisplayed, setDisplayed] = useState(false);
   const { boundInfo, targetRef } = useBound<HTMLDivElement>();
 
@@ -21,6 +22,7 @@ const Tooltip = ({ children, description }: TooltipProps) => {
       onMouseOver={displayTooltip}
       onMouseOut={hiddenTooltip}
       style={{ cursor: "help" }}
+      className={className}
     >
       {children}
       {isDisplayed && portal
@@ -32,6 +34,7 @@ const Tooltip = ({ children, description }: TooltipProps) => {
                 left: boundInfo.left,
                 backgroundColor: "rgba(00,00,00,0.6)",
                 padding: "4px",
+                zIndex: 100,
               }}
             >
               <span style={{ color: "white" }}>{description}</span>
