@@ -3,6 +3,7 @@ import { TagType } from "../../../type/TagType";
 import Tag from "./Tag";
 import TagModal from "./TagModal";
 import CreateTagModal from "./CreateTagModal";
+import plusicon from "../../../img/tag_plus.svg";
 
 type TagListProps = {
   tagData: {
@@ -21,6 +22,8 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
     null,
   );
   const [tagModalEnter, setTagModalEnter] = useState<boolean>(false);
+  const [lastPress, setLastPress] = useState(Date.now());
+
   const openModalFunc = (tagId: number) => {
     setTagModalData(tagId);
   };
@@ -35,21 +38,27 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
 
   const resetCreateContent = () => {
     setCreateTag("");
-    console.log("등록");
+  };
+
+  const openCreateModal = () => {
+    if (createTag !== "") setCreateTagModalData(true);
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const isEnterPressed = event.key === "Enter";
+    event.preventDefault();
 
-    event.preventDefault();
-    if (isEnterPressed && !createTagModalData && createTag !== "") {
-      console.log("enterKey >> ", createTag);
-      setCreateTagModalData(true);
-    } else if (isEnterPressed && createTagModalData) {
-      setTagModalEnter(true);
-      console.log("enter in TagModal");
+    if (isEnterPressed) {
+      const now = Date.now();
+      if (now - lastPress < 300) return;
+      setLastPress(now);
+
+      if (!createTagModalData) {
+        openCreateModal();
+      } else if (createTagModalData) {
+        setTagModalEnter(true);
+      }
     }
-    event.preventDefault();
   };
 
   return (
@@ -78,9 +87,7 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             openModalFunc={openModalFunc}
             tagData={tagData}
             setTagData={setTagData}
-          >
-            {/*{console.log(item)}*/}
-          </Tag>
+          ></Tag>
         ))}
 
         <button className="button_tag-create-box">
@@ -93,10 +100,12 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             onChange={event => setCreateTag(event.target.value)}
             onKeyUp={handleKeyPress}
           />
-          <button
+          <img
             className="button_tag-create-button"
+            src={plusicon}
+            alt="plus"
             onClick={() => {
-              setCreateTagModalData(true);
+              openCreateModal();
             }}
           />
         </button>
