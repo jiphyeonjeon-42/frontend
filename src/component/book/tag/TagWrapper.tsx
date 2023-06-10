@@ -22,7 +22,6 @@ const TagWrapper = ({ bookInfoId }: TagProps) => {
   useEffect(() => {
     const getTagRequest = (res: AxiosResponse) => {
       setTagData(res.data);
-      console.log("태그 데이터 >> ", res.data);
     };
     request(getTagRequest);
   }, []);
