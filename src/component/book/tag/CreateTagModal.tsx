@@ -22,9 +22,10 @@ const CreateTagModal = ({
   setCreateTagModalData,
   setTagData,
 }: CreateTagModalProps) => {
+  const [createContent, setCreateContent] = useState(content);
+
   const location = useLocation();
   const bookId = location.pathname.split("/")[2];
-  const createContent = content;
   const { request, Dialog } = useApi("post", `/tags/default`, {
     bookInfoId: +bookId,
     createContent,
