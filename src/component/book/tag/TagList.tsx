@@ -64,6 +64,15 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
   return (
     <>
       <div className="button_tag-background">
+        {tagData.map(item => (
+          <Tag
+            key={item.id}
+            {...item}
+            openModalFunc={openModalFunc}
+            tagData={tagData}
+            setTagData={setTagData}
+          ></Tag>
+        ))}
         {tagModalData !== null ? (
           <div className="button_tag-modal" onClick={closeModal}>
             <TagModal id={tagModalData}></TagModal>
@@ -80,16 +89,6 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             ></CreateTagModal>
           </div>
         ) : null}
-        {tagData.map(item => (
-          <Tag
-            key={item.id}
-            {...item}
-            openModalFunc={openModalFunc}
-            tagData={tagData}
-            setTagData={setTagData}
-          ></Tag>
-        ))}
-
         <button className="button_tag-create-box">
           <input
             className="button_tag-create-box"
