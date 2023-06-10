@@ -25,7 +25,6 @@ const CreateTagModal = ({
 }: CreateTagModalProps) => {
   const location = useLocation();
   const bookId = location.pathname.split("/")[2];
-  console.log("loaction🚀", location, bookId);
 
   const { request, Dialog } = useApi("post", `/tags/default`, {
     bookInfoId: +bookId,
@@ -35,6 +34,10 @@ const CreateTagModal = ({
   const postTag = () => {
     request((res: AxiosResponse) => {
       console.log("태그 생성 >> ", res);
+      /* 
+      // TODO:
+      res로 들어온 data를 맞춰서 tagtype[]에 append하기.
+      */
     });
   };
 
@@ -47,8 +50,6 @@ const CreateTagModal = ({
     }
   }, [tagModalEnter, setTagModalEnter, setCreateTagModalData, postTag]);
 
-  console.log("🚀", content);
-
   return (
     <div>
       <Dialog />
@@ -56,10 +57,7 @@ const CreateTagModal = ({
         <button className="button_tag-box-sub">{content}</button>
       </ul>
       <button>취소</button>
-      <button onClick={postTag}>
-        {/* <Image src={Plus} alt="등록" /> */}
-        등록
-      </button>
+      <button onClick={postTag}>등록</button>
     </div>
   );
 };
