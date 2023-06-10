@@ -129,7 +129,7 @@
 .button_tag-create-button {
   position: absolute;
   right: 10px;
-  background-color: rgba(00, 00, 00, 0.7);
+  background-color: rgba(00, 00, 00, 0);
 }
 
 .button_tag-remove-button {
