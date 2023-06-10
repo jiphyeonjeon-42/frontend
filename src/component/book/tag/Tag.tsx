@@ -6,7 +6,6 @@ import { useRecoilValue } from "recoil";
 import Tooltip from "../../utils/Tooltip";
 import userState from "../../../atom/userState";
 import "../../../css/Tags.css";
-import plusicon from "../../../img/tag_plus.svg";
 import minusicon from "../../../img/tag_minus.svg";
 import RemoveTagModal from "./RemoveTagModal";
 
@@ -34,7 +33,6 @@ const Tag = ({
 
   const tagClick: MouseEventHandler<HTMLButtonElement> = e => {
     e.stopPropagation();
-    console.log("count: ", count);
     const encodedURIContent = encodeURIComponent(content);
     if (!count) {
       try {
@@ -52,7 +50,7 @@ const Tag = ({
     return "sub";
   };
 
-  const isMysub = count === 0 && login === currentLogin.userName;
+  const isMysub = login === currentLogin.userName;
 
   const closeRemoveModal = () => {
     setRemoveTagModalData(null);
