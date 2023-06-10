@@ -16,7 +16,6 @@ const TagModal = ({ id }: TagType) => {
   useEffect(() => {
     const getSubTagRequest = (res: AxiosResponse) => {
       setSubTagData(res.data);
-      console.log("태그 데이터 >> ", res.data);
     };
     request(getSubTagRequest);
   }, []);
@@ -25,9 +24,13 @@ const TagModal = ({ id }: TagType) => {
     <div className="button_tag-modal-background">
       <Dialog />
       {subTagData.map((item: TagType) => (
-        <Tag key={item.id} {...item} openModalFunc={() => {}}>
-          {/*{console.log(item)}*/}
-        </Tag>
+        <Tag
+          key={item.id}
+          {...item}
+          openModalFunc={() => {}}
+          tagData={subTagData}
+          setTagData={setSubTagData}
+        ></Tag>
       ))}
     </div>
   );
