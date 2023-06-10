@@ -19,8 +19,6 @@ const TagWrapper = ({ bookInfoId }: TagProps) => {
   const [tagData, setTagData] = useState<TagData[]>([]);
   const { request, Dialog } = useApi("get", `/tags/${bookInfoId}`);
 
-  console.log("tag wrapper");
-
   useEffect(() => {
     const getTagRequest = (res: AxiosResponse) => {
       setTagData(res.data);
