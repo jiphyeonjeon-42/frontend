@@ -86,6 +86,8 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
               tagModalEnter={tagModalEnter}
               setTagModalEnter={setTagModalEnter}
               setCreateTagModalData={setCreateTagModalData}
+              tagData={tagData}
+              setTagData={setTagData}
             ></CreateTagModal>
           </div>
         ) : null}
