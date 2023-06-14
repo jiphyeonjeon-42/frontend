@@ -1,0 +1,8 @@
+FROM mcr.microsoft.com/playwright:v1.35.0-jammy
+
+WORKDIR /app
+
+# Corepack으로 pnpm 설치
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+RUN pnpm dlx playwright install-deps

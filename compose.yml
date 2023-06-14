@@ -1,11 +1,12 @@
 services:
-  app:
+  playwright:
     build:
       context: .
-      dockerfile: ./app.dockerfile
-    ports:
-      - 4242:4242
+      dockerfile: ./Dockerfile.playwright
+    command: pnpm e2e --ui
+    environment:
+      DISPLAY: ${DISPLAY}
+    env_file: .env
     volumes:
-      - ./:/app
-    env_file:
-      - .env
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${PWD}:/app
