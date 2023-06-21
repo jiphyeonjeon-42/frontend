@@ -1,11 +1,11 @@
 import "../../css/Title.css";
 
-type Props = {
+export type Props = {
   titleKorean: string;
   titleEng: string;
 };
 
-const Title = ({ titleKorean, titleEng }: Props) => {
+export const Title = ({ titleKorean, titleEng }: Props) => {
   return (
     <div className="title">
       <span className="title__korean">{titleKorean}</span>

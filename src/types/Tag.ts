@@ -8,4 +8,5 @@ export type Tag = {
   createdAt?: string;
   superContent?: string;
   type?: "super" | "default";
+  visibility?: "public" | "private";
 };

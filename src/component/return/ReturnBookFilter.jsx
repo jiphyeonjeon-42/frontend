@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import "../../css/ReturnBookFilter.css";
 
 const ReturnBookFilter = ({ lendingSort, setLendingSort }) => {

@@ -1,13 +1,10 @@
-import { useRef, useEffect, HTMLProps, useState } from "react";
+import { HTMLProps, useState } from "react";
 import fallback from "../../img/image_onerror.svg";
 
-const Image = ({
-  src,
-  alt,
-  width,
-  height,
-  ...props
-}: HTMLProps<HTMLImageElement>) => {
+type Size = number;
+type Props = HTMLProps<HTMLImageElement> & { width?: Size; height?: Size };
+
+const Image = ({ src, alt, width, height, ...props }: Props) => {
   const [error, setError] = useState(false);
   return (
     <img

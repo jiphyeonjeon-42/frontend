@@ -4,13 +4,13 @@ import { HTMLProps } from "react";
 
 type Palette = typeof colorPalette[number]["string"];
 
-type Props = {
+export type Props = {
   type?: "submit" | "button";
   value: string;
   color?: Palette;
 } & HTMLProps<HTMLButtonElement>;
 
-const Button = ({
+export const Button = ({
   type,
   value,
   className,

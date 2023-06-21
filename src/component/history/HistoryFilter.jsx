@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import Image from "../utils/Image";
 import CheckIcon from "../../img/check_icon.svg";
 import RedCheckIcon from "../../img/check_icon_red.svg";
