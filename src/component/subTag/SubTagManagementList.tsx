@@ -25,8 +25,8 @@ const SubTagManagementList = ({ tagList }: SubTagManagementListProps) => {
     const job = isHidden ? "공개" : "비공개";
     setConfig({
       ...defaultConfig,
-      title: `리뷰를 ${job}하시겠습니까?`,
-      message: `리뷰내용 : ${content}`,
+      title: `태그를 ${job}하시겠습니까?`,
+      message: `태그내용 : ${content}`,
       numberOfButtons: 2,
       firstButton: {
         ...defaultConfig.firstButton,
