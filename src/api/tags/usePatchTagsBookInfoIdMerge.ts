@@ -27,16 +27,12 @@ export const usePatchTagsBookInfoIdMerge = ({
     superTagId: params?.superTag?.id || null,
   });
 
-  const displaySuccess = () => {
-    setOpenTitleAndMessage("처리되었습니다", "", () => {});
-  };
-
   const displayError = (error: AxiosError) => {
     setErrorDialog(error, setOpenTitleAndMessage);
   };
 
   useEffect(() => {
-    if (params) request(displaySuccess, displayError);
+    if (params) request(() => {}, displayError);
   }, [params]);
 
   return { setParams };
