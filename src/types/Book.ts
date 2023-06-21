@@ -1,4 +1,5 @@
 export type Book = {
+  id?: number;
   bookId: number;
   bookInfoId: number;
   status: number;

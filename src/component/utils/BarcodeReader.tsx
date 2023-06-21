@@ -1,18 +1,15 @@
-import { useState, useRef, useEffect } from "react";
-import { BrowserMultiFormatReader } from "@zxing/library";
+import { useState, useRef, useEffect, ChangeEventHandler } from "react";
+import { BrowserMultiFormatReader, Result } from "@zxing/library";
 import "../../css/BarcodeReader.css";
 
 type Props = {
   wrapperClassName?: string;
-  toDoAfterRead(...args: unknown[]): unknown;
+  toDoAfterRead: (text: string) => void;
 };
 
-const BarcodeReader = ({
-  toDoAfterRead,
-  wrapperClassName,
-}: Props) => {
-  const [deviceList, setDeviceList] = useState([]);
-  const [selectedDevice, setSelectedDevice] = useState(deviceList[0]?.deviceId);
+const BarcodeReader = ({ toDoAfterRead, wrapperClassName = "" }: Props) => {
+  const [deviceList, setDeviceList] = useState<MediaDeviceInfo[]>([]);
+  const [selectedDevice, setSelectedDevice] = useState(deviceList[0].deviceId);
   const videoRef = useRef(null);
   const codeReader = new BrowserMultiFormatReader();
 
@@ -35,15 +32,13 @@ const BarcodeReader = ({
     codeReader.decodeFromVideoDevice(
       selectedDevice,
       videoRef.current,
-      result => {
-        if (result) {
-          toDoAfterRead(result.text);
-        }
+      (result: Result) => {
+        toDoAfterRead(result.getText());
       },
     );
   }, [selectedDevice]);
 
-  const onChangeSelect = e => {
+  const onChangeSelect: ChangeEventHandler<HTMLSelectElement> = e => {
     setSelectedDevice(e.currentTarget.value);
   };
 
@@ -68,7 +63,3 @@ const BarcodeReader = ({
 };
 
 export default BarcodeReader;
-
-BarcodeReader.defaultProps = {
-  wrapperClassName: "",
-};

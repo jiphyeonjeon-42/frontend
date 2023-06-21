@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import { Book } from "../../types";
 
 type Props = {
-  book: Book;
+  book: Partial<Book>;
   bookInfoDetailUI: ReactNode;
   bookDetailUI?: ReactNode;
   bottomUI: ReactNode;

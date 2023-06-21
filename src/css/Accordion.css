@@ -1,0 +1,16 @@
+.accordion__wrapper {
+    display: flex;
+  }
+  .accordion__wrapper.end {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+  .accordion__arrow {
+    transform: rotate(90deg);
+    margin: 0 2rem 0 1rem;
+  }
+  
+  .accordion__arrow.false {
+    transform: rotate(270deg);
+  }
+  

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { MouseEventHandler, ReactNode, useRef } from "react";
 import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
 import TextWithLabel from "./TextWithLabel";
@@ -6,21 +6,23 @@ import "../../css/SearchModal.css";
 
 type Props = {
   titleText: string;
+  className?: string;
   isWithBarcodeButton?: boolean;
-  onClickBarcodeButton?(...args: unknown[]): unknown;
+  onClickBarcodeButton?: MouseEventHandler<HTMLButtonElement>;
   searchBarPlaceholder?: string;
   page: number;
-  setPage(...args: unknown[]): unknown;
-  setQuery(...args: unknown[]): unknown;
+  setPage: (page: number) => void;
+  setQuery: (query: string) => void;
   lastPage: number;
-  children: React.ReactElement;
+  children: ReactNode;
 };
 
 const SearchModal = ({
   titleText,
-  isWithBarcodeButton,
-  onClickBarcodeButton,
-  searchBarPlaceholder,
+  className = "",
+  isWithBarcodeButton = false,
+  onClickBarcodeButton = () => {},
+  searchBarPlaceholder = "",
   page,
   setPage,
   setQuery,
@@ -29,7 +31,7 @@ const SearchModal = ({
 }: Props) => {
   const headerRef = useRef(null);
   return (
-    <div className="search-modal" ref={headerRef}>
+    <div className={`search-modal ${className}`} ref={headerRef}>
       <div className="search-modal__header padding">
         <TextWithLabel
           mainText={titleText}
@@ -52,9 +54,3 @@ const SearchModal = ({
 };
 
 export default SearchModal;
-
-SearchModal.defaultProps = {
-  isWithBarcodeButton: false,
-  onClickBarcodeButton: () => {},
-  searchBarPlaceholder: "",
-};
