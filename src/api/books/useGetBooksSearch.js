@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useApi from "../../hook/useApi";
-import useSearch from "../../hook/useSearch";
+import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 
 const useGetBooksSearch = ({ limit }) => {

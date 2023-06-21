@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { setErrorDialog } from "../../data/error";
 import useApi from "../../hook/useApi";
-import useSearch from "../../hook/useSearch";
+import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 
 const useGetLendingsSearch = ({ setOpenTitleAndMessage }) => {
