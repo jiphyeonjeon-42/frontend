@@ -26,8 +26,8 @@ export const usePostTagsSuper = ({
     content: newTagName.replace(/ /g, "_"),
   });
 
-  const onSuccess = (res: AxiosResponse) => {
-    const newTag = res.data as Tag;
+  const onSuccess = (res: AxiosResponse<Tag>) => {
+    const newTag = res.data;
     addTag(newTag);
     setOpenTitleAndMessage("태그가 추가되었습니다.", newTag.content);
   };
