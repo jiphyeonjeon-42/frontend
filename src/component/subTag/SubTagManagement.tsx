@@ -20,8 +20,8 @@ const SubTagManagement = () => {
     <main>
       <Banner
         img="admin"
-        titleKo="도서별 태그 관리"
-        titleEn="BOOK TAG MANAGEMENT"
+        titleKo="태그 기록"
+        titleEn="TAG HISTORY"
       />
       <Tabs tabList={otherManagementTabList} />
       <Management
