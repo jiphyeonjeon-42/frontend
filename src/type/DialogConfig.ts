@@ -1,6 +1,5 @@
 export type DialogConfig = {
   id: number;
-  key: string;
   title: string;
   message: string;
   titleEmphasis?: string;
