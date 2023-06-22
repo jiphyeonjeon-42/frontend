@@ -2,9 +2,14 @@ import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
+import { Book } from "../../type";
 
-const useGetBooksInfoPopular = ({ setOpenTitleAndMessage }) => {
-  const [docs, setDocs] = useState([]);
+type Props = {
+  setOpenTitleAndMessage: (title: string, message: string) => void;
+};
+
+const useGetBooksInfoPopular = ({ setOpenTitleAndMessage }: Props) => {
+  const [docs, setDocs] = useState<Book[]>([]);
 
   const { request } = useApi("get", "books/info", {
     sort: "popular",
@@ -21,16 +26,16 @@ const useGetBooksInfoPopular = ({ setOpenTitleAndMessage }) => {
     { key: "publishedAt", type: "string", isNullable: true },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: any) => {
     const books = compareExpect(
       "books/info",
       response.data.items,
       expectedItem,
     );
-    setDocs(books.map((book, index) => ({ ...book, rank: index + 1 })));
+    setDocs(books);
   };
 
-  const onError = error => {
+  const onError = (error: any) => {
     const errorCode = parseInt(error?.response?.data?.errorCode, 10);
     const [title, message] = getErrorMessage(errorCode).split("\r\n");
     setOpenTitleAndMessage(title, message || error.message);

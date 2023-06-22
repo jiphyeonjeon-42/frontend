@@ -17,7 +17,7 @@ const MainNewBookList = ({ docs }: Props) => {
   const [bookWidth, setBookWidth] = useState(pcWidth);
   const [transition, setTransition] = useState(true);
   const [displayCount, setDisplayCount] = useState(0);
-  const intervalId = useRef(0);
+  const intervalId = useRef<NodeJS.Timer>();
 
   useEffect(() => {
     function handleSize() {
