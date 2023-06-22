@@ -1,13 +1,14 @@
 import { useRecoilValue } from "recoil";
 import { dialogConfigs } from "../../atom/dialogConfigs";
 import Dialog from "./Dialog";
+import { filterDuplicateKeys } from "../../util/filterDuplicateKeys";
 
 const Portals = () => {
   const dialogs = useRecoilValue(dialogConfigs);
 
   return (
     <>
-      {dialogs.map(config => (
+      {filterDuplicateKeys(dialogs).map(config => (
         <Dialog {...config} />
       ))}
     </>
