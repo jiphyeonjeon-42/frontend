@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import getErrorMessage from "../../constant/error";
-import useApiMultiple from "../../hook/useApiMultiple";
+import { useApiMultiple } from "../../hook/useApiMultiple";
 
 const usePostLendingsMultiple = ({
   selectedBooks,

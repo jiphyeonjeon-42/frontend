@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TagList from "./TagList";
 import Button from "../../utils/Button";
-import useApi from "../../../hook/useApi";
+import { useApi } from "../../../hook/useApi";
 import { AxiosResponse } from "axios";
 
 type TagProps = {

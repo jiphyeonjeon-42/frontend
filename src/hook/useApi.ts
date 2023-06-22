@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 import { AxiosError, AxiosResponse } from "axios";
-import axiosPromise from "../util/axios";
+import { axiosPromise } from "../util/axios";
 import getErrorMessage from "../constant/error";
 import useDialog from "./useDialog";
 
 type Method = "get" | "post" | "put" | "patch" | "delete";
 
-const useApi = (method: Method, url: string, data?: unknown) => {
+export const useApi = (method: Method, url: string, data?: unknown) => {
   const { setOpenTitleAndMessage: setError, Dialog } = useDialog();
 
   const errorDialog = (error: AxiosError<{ errorCode: number }>) => {
@@ -34,5 +34,3 @@ const useApi = (method: Method, url: string, data?: unknown) => {
 
   return { request, setError, Dialog };
 };
-
-export default useApi;

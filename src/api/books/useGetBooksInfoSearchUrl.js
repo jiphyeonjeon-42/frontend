@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import useParseUrlQueryString from "../../hook/useParseUrlQueryString";
 import { compareExpect } from "../../util/typeCheck";
 import { searchUrlQueryKeys } from "../../constant/key";

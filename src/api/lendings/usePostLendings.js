@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { setErrorDialog } from "../../constant/error";
 
 const usePostLendings = ({

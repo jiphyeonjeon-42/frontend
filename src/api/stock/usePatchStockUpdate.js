@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import getErrorMessage from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 const usePatchStockUpdate = ({ setOpenTitleAndMessage, addList }) => {
   const [bookId, setBookId] = useState(undefined);

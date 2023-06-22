@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 // import useDebounce from "../../hook/useDebounce";
 import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";

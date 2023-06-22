@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import getErrorMessage from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 const usePatchReviewsId = ({ setOpenTitleAndMessage }) => {
   const [reviewId, setReviewId] = useState(undefined);

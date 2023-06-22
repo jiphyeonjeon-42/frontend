@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../../type";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { AxiosError, AxiosResponse } from "axios";
 import { setErrorDialog } from "../../constant/error";
 

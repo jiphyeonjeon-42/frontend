@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 const usePatchLendingsReturn = ({ lendingId, title, closeModal, setError }) => {
   const [condition, setCondition] = useState("");

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../../type";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { AxiosResponse } from "axios";
 
 export const useGetTagsBookInfoId = (id?: number) => {

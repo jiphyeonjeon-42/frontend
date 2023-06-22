@@ -1,6 +1,6 @@
 import { useCallback, useState, useRef, useEffect } from "react";
 import HandleReview from "./HandleReview";
-import axiosPromise from "../../../util/axios";
+import { axiosPromise }  from "../../../util/axios";
 import "../../../asset/css/Tabs.css";
 import "../../../asset/css/Review.css";
 

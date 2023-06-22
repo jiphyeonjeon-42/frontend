@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 const usePatchUsersUpdate = ({ userId, exitEditMode }) => {
   const [patchData, setPatchData] = useState(null);

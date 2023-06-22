@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 import { useSearch } from "../../hook/useSearch";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { Tag } from "../../type/Tag";
 
 export const useGetTags = () => {

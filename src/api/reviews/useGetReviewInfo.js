@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 const useGetReviewInfo = () => {
   const [page, setPage] = useState(1);

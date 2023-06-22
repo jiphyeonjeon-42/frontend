@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosPromise from "../../../util/axios";
+import { axiosPromise } from "../../../util/axios";
 import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
 import UserEdit from "../../../asset/img/edit.svg";

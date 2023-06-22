@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import getErrorMessage from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
 const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {

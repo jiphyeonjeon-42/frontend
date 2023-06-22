@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
 import { Lending } from "../../type";

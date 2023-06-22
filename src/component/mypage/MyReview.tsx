@@ -1,7 +1,7 @@
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Reserve from "../../asset/img/list-check-solid.svg";
 import HandleReview from "../book/review/HandleReview";
-import axiosPromise from "../../util/axios";
+import { axiosPromise } from "../../util/axios";
 import Pagination from "../utils/Pagination";
 import useGetMyReviewInfo from "../../api/reviews/useGetMyReviewInfo";
 import "../../asset/css/MyReview.css";

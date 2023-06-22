@@ -1,4 +1,4 @@
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 const usePostAuthLogout = () => {
   return useApi("post", "auth/logout").request;

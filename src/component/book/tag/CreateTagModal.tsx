@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TagType } from "../../../type/TagType";
-import useApi from "../../../hook/useApi";
+import { useApi } from "../../../hook/useApi";
 import { AxiosResponse } from "axios";
 
 type CreateTagModalProps = {

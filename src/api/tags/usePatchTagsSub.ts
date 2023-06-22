@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { setErrorDialog } from "../../constant/error";
 
 type PatchTagsSubParamType = {

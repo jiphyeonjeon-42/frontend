@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { setErrorDialog } from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
 const useGetBooksIdForStock = ({ id, setOpenTitleAndMessage, closeModal }) => {

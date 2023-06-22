@@ -6,7 +6,7 @@ import { string } from "prop-type";
 import TagList from "./TagList";
 import Tag from "./Tag";
 
-import useApi from "../../../hook/useApi";
+import { useApi } from "../../../hook/useApi";
 import { AxiosResponse } from "axios";
 
 const TagModal = ({ id }: TagType) => {

@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { addHourDateObject } from "../../util/date";
 import userState from "../../atom/userState";
 import getErrorMessage from "../../constant/error";

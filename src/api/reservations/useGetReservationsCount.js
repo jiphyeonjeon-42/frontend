@@ -1,5 +1,5 @@
 import { setErrorDialog } from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 const useGetReservationsCount = ({
   bookInfoId,
