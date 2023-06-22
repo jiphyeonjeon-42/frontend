@@ -1,44 +1,52 @@
 import { useState, useEffect, useMemo } from "react";
 import getErrorMessage from "../../constant/error";
 import { useApiMultiple } from "../../hook/useApiMultiple";
+import { useNewDialog } from "../../hook/useNewDialog";
+import { Book, User } from "../../type";
+import { AxiosResponse } from "axios";
+
+type Props = {
+  selectedBooks: Book[];
+  setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
+  selectedUser: User;
+  setSelectedUser: (user: User) => void;
+  closeModal: () => void;
+};
 
 const usePostLendingsMultiple = ({
   selectedBooks,
   setSelectedBooks,
   selectedUser,
   setSelectedUser,
-  setError,
   closeModal,
-}) => {
-  const [conditions, setConditions] = useState([]);
-  const apiArray = useMemo(
-    () =>
-      selectedBooks.map((book, index) => {
-        return {
-          method: "post",
-          url: "lendings",
-          data: {
-            userId: selectedUser.id,
-            bookId: book.bookId,
-            condition: conditions[index],
-          },
-        };
-      }),
-    [conditions],
+}: Props) => {
+  const [conditions, setConditions] = useState<string[]>([]);
+  const { requestIndividual } = useApiMultiple(
+    selectedBooks.map((book, index) => {
+      return {
+        method: "post",
+        url: "lendings",
+        data: {
+          userId: selectedUser.id,
+          bookId: book.bookId,
+          condition: conditions[index],
+        },
+      };
+    }),
   );
-  const { requestIndividual } = useApiMultiple(apiArray);
 
   let resultMessage = "";
   const lendingSuccess = selectedUser.lendings;
 
-  const handleResult = results => {
+  const { addDialogWithTitleAndMessage } = useNewDialog();
+  const handleResult = (results: PromiseSettledResult<AxiosResponse>[]) => {
     results.forEach((result, index) => {
       const title = selectedBooks[index]?.title;
       if (result.status === "fulfilled") {
         const { dueDate } = result.value.data;
         const newLending = {
           title,
-          duedate: dueDate,
+          dueDate,
         };
         resultMessage += `${selectedBooks[index].title} - 대출완료\n`;
         lendingSuccess.push(newLending);
@@ -48,13 +56,13 @@ const usePostLendingsMultiple = ({
 (사유 : ${getErrorMessage(errorCode)})\n\n`;
       }
     });
+    addDialogWithTitleAndMessage("lendingResult", "대출결과", resultMessage);
     setSelectedBooks([]);
-    setSelectedUser({ ...selectedUser, lendingSuccess });
-    setError("대출결과", resultMessage);
+    setSelectedUser({ ...selectedUser, lendings: lendingSuccess });
     closeModal();
   };
 
-  const requestLending = remarks => {
+  const requestLending = (remarks: string[]) => {
     setConditions([...remarks.filter(remark => remark !== undefined)]);
   };
 

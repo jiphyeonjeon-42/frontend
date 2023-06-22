@@ -1,15 +1,17 @@
 import RentUserList from "./RentModalUserList";
 import SearchModal from "../utils/SearchModal";
 import useGetUsersSearch from "../../api/users/useGetUsersSearch";
+import { User } from "../../type";
 
 type Props = {
-  setSelectedUser(...args: unknown[]): unknown;
-  closeModal(...args: unknown[]): unknown;
+  setSelectedUser: (user: User) => void;
+  closeModal: () => void;
 };
 
 const RentModalUser = ({ setSelectedUser, closeModal }: Props) => {
-  const { userList, lastPage, page, setPage, setQuery, Dialog } =
-    useGetUsersSearch({ limit: 5 });
+  const { userList, lastPage, page, setPage, setQuery } = useGetUsersSearch({
+    limit: 5,
+  });
 
   return (
     <SearchModal
@@ -20,7 +22,6 @@ const RentModalUser = ({ setSelectedUser, closeModal }: Props) => {
       setQuery={setQuery}
       lastPage={lastPage}
     >
-      <Dialog />
       {userList.map(user => (
         <RentUserList
           key={user.id}

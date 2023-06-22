@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
+import { Book } from "../../type";
+import { AxiosResponse } from "axios";
 
-const useGetBooksSearch = ({ limit }) => {
+const useGetBooksSearch = ({ limit }: { limit: number }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
 
-  const { request, Dialog } = useApi("get", "books/search", {
+  const { request } = useApi("get", "books/search", {
     query: searchParams.query,
     page: searchParams.page - 1,
     limit,
@@ -29,7 +31,7 @@ const useGetBooksSearch = ({ limit }) => {
     { key: "isLendable", type: "number", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const book = compareExpect(
       "books/search",
       response.data.items,
@@ -47,12 +49,11 @@ const useGetBooksSearch = ({ limit }) => {
   }, [searchParams]);
 
   return {
-    bookList: searchResult.list,
+    bookList: searchResult.list as Book[],
     lastPage: searchResult.lastPage,
     page: searchParams.page,
     setPage,
     setQuery,
-    Dialog,
   };
 };
 

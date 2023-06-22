@@ -1,16 +1,16 @@
-import "../../asset/css/RentModalUserList.css";
 import { User } from "../../type";
+import "../../asset/css/RentModalUserList.css";
 
 type Props = {
-  setSelectedUser(...args: unknown[]): unknown;
-  closeModal(...args: unknown[]): unknown;
+  setSelectedUser: (user: User) => void;
+  closeModal: () => void;
   user: User;
 };
 
 const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
   const seletUser = () => {
-    setSelectedUser(user);
     closeModal();
+    setSelectedUser(user);
   };
 
   const displayPenalty = () => {
@@ -43,7 +43,7 @@ const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
       }`}
       type="button"
       onClick={seletUser}
-      disabled={isLendable}
+      disabled={!isLendable}
     >
       <div className="rent__user-list__name">
         <div className="font-18-bold rent__text-ellipsis">
