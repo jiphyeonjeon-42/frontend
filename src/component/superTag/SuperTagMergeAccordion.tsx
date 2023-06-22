@@ -2,8 +2,8 @@ import { DragEventHandler, MouseEventHandler } from "react";
 import { useGetTagsSuperTagIdSub } from "../../api/tags/useGetTagsSuperTagIdSub";
 import { useDeleteTagsSuper } from "../../api/tags/useDeleteTagsSuper";
 import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
+import { useNewDialog } from "../../hook/useNewDialog";
 import { Tag } from "../../type";
-import useDialog from "../../hook/useDialog";
 import Accordion from "../utils/Accordion";
 import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 import Droppable from "../utils/Droppable";
@@ -17,21 +17,16 @@ type Props = {
 };
 
 const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
-  const { Dialog, setOpenTitleAndMessage, setConfig, setOpen, defaultConfig } =
-    useDialog();
   const { subTagList, toggleOpened, addSubTag, removeSubTag } =
     useGetTagsSuperTagIdSub({
       tagId: tag.id,
-      setOpenTitleAndMessage,
     });
   const { deleteTag } = useDeleteTagsSuper({
     removeTag,
-    setOpenTitleAndMessage,
   });
 
   const { setParams } = usePatchTagsBookInfoIdMerge({
     bookInfoId,
-    setOpenTitleAndMessage,
   });
 
   const addNewListAndMergeIfMoved: DragEventHandler = e => {
@@ -43,26 +38,21 @@ const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
     }
   };
 
+  const { addConfirmDialog } = useNewDialog();
   const getConfirmThenRemove: MouseEventHandler = e => {
     e.preventDefault();
     e.stopPropagation();
-    setConfig({
-      ...defaultConfig,
-      title: `태그를 삭제하겠습니까?`,
-      message: `태그 내용 : ${tag.content}`,
-      numberOfButtons: 2,
-      firstButton: {
-        ...defaultConfig.firstButton,
-        onClick: () => {
-          deleteTag(tag.id);
-        },
+    addConfirmDialog(
+      "confirmRemoveTag",
+      `태그를 삭제하겠습니까?`,
+      `태그 내용 : ${tag.content}`,
+      () => {
+        deleteTag(tag.id);
       },
-    });
-    setOpen();
+    );
   };
   return (
     <div className="super-tag__accordion__wrapper">
-      <Dialog />
       <Accordion
         summaryButtonClassName="super-tag__accordion__summary"
         summaryUI={

@@ -6,17 +6,9 @@ import { setErrorDialog } from "../../constant/error";
 
 type Props = {
   tagId: number;
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose?: () => void,
-  ) => void;
 };
 
-export const useGetTagsSuperTagIdSub = ({
-  tagId,
-  setOpenTitleAndMessage,
-}: Props) => {
+export const useGetTagsSuperTagIdSub = ({ tagId }: Props) => {
   const [subTagList, setSubTagList] = useState<Tag[]>([]);
   const [isOpened, setOpened] = useState(false);
   const toggleOpened = () => setOpened(!isOpened);
@@ -27,12 +19,8 @@ export const useGetTagsSuperTagIdSub = ({
     setSubTagList(response.data);
   };
 
-  const displayError = (error: AxiosError) => {
-    setErrorDialog(error, setOpenTitleAndMessage);
-  };
-
   useEffect(() => {
-    if (isOpened) request(saveTagList, displayError);
+    if (isOpened) request(saveTagList);
   }, [isOpened]);
 
   const addSubTag = (subTag: Tag) => {

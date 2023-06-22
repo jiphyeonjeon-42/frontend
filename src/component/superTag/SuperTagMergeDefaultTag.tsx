@@ -1,5 +1,4 @@
 import { DragEventHandler, useState } from "react";
-import useDialog from "../../hook/useDialog";
 import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
 import { Tag } from "../../type";
 import Accordion from "../utils/Accordion";
@@ -25,12 +24,7 @@ const SuperTagMergeDefaultTag = ({
     tag.content.includes(searchInput),
   );
 
-  const { setOpenTitleAndMessage } = useDialog();
-
-  const { setParams } = usePatchTagsBookInfoIdMerge({
-    bookInfoId,
-    setOpenTitleAndMessage,
-  });
+  const { setParams } = usePatchTagsBookInfoIdMerge({ bookInfoId });
 
   const addNewListAndMergeIfMoved: DragEventHandler = e => {
     const stringifiedData = e.dataTransfer.getData("text/plain");

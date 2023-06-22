@@ -8,7 +8,7 @@ const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
 
-  const { request, Dialog } = useApi("get", "books/info/search", {
+  const { request } = useApi("get", "books/info/search", {
     query: searchParams.query,
     page: searchParams.page - 1,
     limit,
@@ -33,7 +33,6 @@ const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
     page: searchParams.page,
     setPage,
     setQuery,
-    Dialog,
   };
 };
 

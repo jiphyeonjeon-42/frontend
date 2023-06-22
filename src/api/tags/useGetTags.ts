@@ -12,7 +12,7 @@ export const useGetTags = () => {
     setFilter(filter === newFilter ? null : newFilter);
   };
 
-  const { request, Dialog } = useApi("get", "tags", {
+  const { request } = useApi("get", "tags", {
     ...searchParams,
     title: searchParams.query,
     page: searchParams.page - 1,
@@ -37,6 +37,5 @@ export const useGetTags = () => {
     setQuery,
     filter,
     setFilter: changeFilter,
-    Dialog,
   };
 };

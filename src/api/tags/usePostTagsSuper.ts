@@ -1,24 +1,15 @@
 import { useState } from "react";
 import { useApi } from "../../hook/useApi";
-import { AxiosError, AxiosResponse } from "axios";
+import { useNewDialog } from "../../hook/useNewDialog";
+import { AxiosResponse } from "axios";
 import { Tag } from "../../type";
-import { setErrorDialog } from "../../constant/error";
 
 type Props = {
   bookInfoId: number;
   addTag: (tag: Tag) => void;
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose?: () => void,
-  ) => void;
 };
 
-export const usePostTagsSuper = ({
-  bookInfoId,
-  addTag,
-  setOpenTitleAndMessage,
-}: Props) => {
+export const usePostTagsSuper = ({ bookInfoId, addTag }: Props) => {
   const [newTagName, setNewTagName] = useState("");
 
   const { request } = useApi("post", "/tags/super", {
@@ -26,18 +17,20 @@ export const usePostTagsSuper = ({
     content: newTagName.replace(/ /g, "_"),
   });
 
+  const { addDialogWithTitleAndMessage } = useNewDialog();
+
   const onSuccess = (res: AxiosResponse<Tag>) => {
     const newTag = res.data;
     addTag(newTag);
-    setOpenTitleAndMessage("태그가 추가되었습니다.", newTag.content);
-  };
-
-  const displayError = (error: AxiosError) => {
-    setErrorDialog(error, setOpenTitleAndMessage);
+    addDialogWithTitleAndMessage(
+      "postTag",
+      "태그가 추가되었습니다.",
+      newTag.content,
+    );
   };
 
   return {
-    postSuperTag: () => request(onSuccess, displayError),
+    postSuperTag: () => request(onSuccess),
     newTagName,
     setNewTagName,
   };

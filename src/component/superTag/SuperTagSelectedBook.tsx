@@ -1,4 +1,3 @@
-import React from "react";
 import BookDetailView from "../utils/BookDetailView";
 import SpanWithLabel from "../utils/SpanWithLabel";
 import "../../asset/css/SuperTagSelectedBook.css";
