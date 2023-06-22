@@ -1,4 +1,5 @@
 export type Reservation = {
+  id: number;
   bookId: number;
   callSign: string;
   createdAt: string;
@@ -10,4 +11,5 @@ export type Reservation = {
   status: number;
   title: string;
   userId: number;
+  ranking?: number;
 };

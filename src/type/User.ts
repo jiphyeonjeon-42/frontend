@@ -11,5 +11,6 @@ export type User = {
   overDueDay: number;
   role: number;
   reservations: Reservation[];
-  lendings: Lending[];
+  lendings: Partial<Lending>[];
+  isPenalty?: boolean;
 };

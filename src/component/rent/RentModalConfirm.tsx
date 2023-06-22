@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import Button from "../utils/Button";
 import BookInformationWithCover from "../utils/BookInformationWithCover";
 import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";
-import "../../asset/css/RentModalConfirm.css";
 import usePostLendingsMultiple from "../../api/lendings/usePostLendingsMultiple";
 import { Book, User } from "../../type";
+import "../../asset/css/RentModalConfirm.css";
 
 type Props = {
   selectedUser: User;
   selectedBooks: Book[];
-  setSelectedUser(...args: unknown[]): unknown;
-  setSelectedBooks(...args: unknown[]): unknown;
-  setError(...args: unknown[]): unknown;
-  closeModal(...args: unknown[]): unknown;
+  setSelectedUser: (user: User) => void;
+  setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
+  setError: (title: string, message: string) => void;
+  closeModal: () => void;
 };
 
 const RentModalConfirm = ({
@@ -36,7 +36,7 @@ const RentModalConfirm = ({
     closeModal,
   });
 
-  const postData = e => {
+  const postData: FormEventHandler = e => {
     e.preventDefault();
     requestLending([first, second]);
   };
@@ -49,12 +49,16 @@ const RentModalConfirm = ({
     <form className="rent-modal">
       <div className="rent-modal__user">
         <p className="font-16 color-red">유저정보</p>
-        <div className="rent-modal__user__detail">
-          <p className="rent-modal__user__id font-28-bold color-54">
-            {selectedUser.nickname ? selectedUser.nickname : selectedUser.email}
-          </p>
-          <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</p>
-        </div>
+        {selectedUser && (
+          <div className="rent-modal__user__detail">
+            <p className="rent-modal__user__id font-28-bold color-54">
+              {selectedUser.nickname
+                ? selectedUser.nickname
+                : selectedUser.email}
+            </p>
+            <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</p>
+          </div>
+        )}
       </div>
       <div className="rent-modal__books">
         {selectedBooks.map((selectBook, index) => {

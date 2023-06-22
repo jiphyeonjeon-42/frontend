@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import useApi from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
+import { User } from "../../type";
+import { AxiosResponse } from "axios";
 
-const useGetUsersSearch = ({ limit }) => {
+const useGetUsersSearch = ({ limit }: { limit: number }) => {
   const {
     searchResult,
     setSearchResult,
@@ -47,7 +49,7 @@ const useGetUsersSearch = ({ limit }) => {
     { key: "reservations", type: "*", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const user = compareExpect(
       "users/search",
       response.data.items,
@@ -65,7 +67,7 @@ const useGetUsersSearch = ({ limit }) => {
   }, [searchParams]);
 
   return {
-    userList: searchResult.list,
+    userList: searchResult.list as User[],
     lastPage: searchResult.lastPage,
     page: searchParams.page,
     setPage,

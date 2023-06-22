@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
+import { AxiosResponse } from "axios";
+import { Book } from "../../type";
 
-const useGetBooksId = ({ setSelectedBooks, closeModal }) => {
-  const [bookId, setBookId] = useState(null);
+type Props = {
+  setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
+  closeModal: () => void;
+};
+const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
+  const [bookId, setBookId] = useState<string>();
   const { request, Dialog } = useApi("get", `books/${bookId}`);
 
   const expectedItem = [
@@ -14,11 +20,11 @@ const useGetBooksId = ({ setSelectedBooks, closeModal }) => {
     { key: "callSign", type: "string", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const [book] = compareExpect("books/:id", [response.data], expectedItem);
     book.bookId = book.id;
     setSelectedBooks(prev => [...prev, book]);
-    closeModal(false);
+    closeModal();
   };
 
   useEffect(() => {

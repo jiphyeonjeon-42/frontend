@@ -1,6 +1,17 @@
 import { useState, useEffect, useMemo } from "react";
 import getErrorMessage from "../../constant/error";
 import useApiMultiple from "../../hook/useApiMultiple";
+import { Book, User } from "../../type";
+import { AxiosResponse } from "axios";
+
+type Props = {
+  selectedBooks: Book[];
+  setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
+  selectedUser: User;
+  setSelectedUser: (user: User) => void;
+  setError: (title: string, message: string) => void;
+  closeModal: () => void;
+};
 
 const usePostLendingsMultiple = ({
   selectedBooks,
@@ -9,36 +20,33 @@ const usePostLendingsMultiple = ({
   setSelectedUser,
   setError,
   closeModal,
-}) => {
-  const [conditions, setConditions] = useState([]);
-  const apiArray = useMemo(
-    () =>
-      selectedBooks.map((book, index) => {
-        return {
-          method: "post",
-          url: "lendings",
-          data: {
-            userId: selectedUser.id,
-            bookId: book.bookId,
-            condition: conditions[index],
-          },
-        };
-      }),
-    [conditions],
+}: Props) => {
+  const [conditions, setConditions] = useState<string[]>([]);
+  const { requestIndividual } = useApiMultiple(
+    selectedBooks.map((book, index) => {
+      return {
+        method: "post",
+        url: "lendings",
+        data: {
+          userId: selectedUser.id,
+          bookId: book.bookId,
+          condition: conditions[index],
+        },
+      };
+    }),
   );
-  const { requestIndividual } = useApiMultiple(apiArray);
 
   let resultMessage = "";
   const lendingSuccess = selectedUser.lendings;
 
-  const handleResult = results => {
+  const handleResult = (results: PromiseSettledResult<AxiosResponse>[]) => {
     results.forEach((result, index) => {
       const title = selectedBooks[index]?.title;
       if (result.status === "fulfilled") {
         const { dueDate } = result.value.data;
         const newLending = {
           title,
-          duedate: dueDate,
+          dueDate,
         };
         resultMessage += `${selectedBooks[index].title} - 대출완료\n`;
         lendingSuccess.push(newLending);
@@ -49,12 +57,12 @@ const usePostLendingsMultiple = ({
       }
     });
     setSelectedBooks([]);
-    setSelectedUser({ ...selectedUser, lendingSuccess });
+    setSelectedUser({ ...selectedUser, lendings: lendingSuccess });
     setError("대출결과", resultMessage);
     closeModal();
   };
 
-  const requestLending = remarks => {
+  const requestLending = (remarks: string[]) => {
     setConditions([...remarks.filter(remark => remark !== undefined)]);
   };
 
