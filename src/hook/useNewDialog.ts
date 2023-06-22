@@ -1,6 +1,8 @@
 import { useSetRecoilState } from "recoil";
+import { AxiosError } from "axios";
 import { dialogConfigs } from "../atom/dialogConfigs";
 import { DialogConfig } from "../type/DialogConfig";
+import getErrorMessage from "../constant/error";
 
 export const useNewDialog = () => {
   const setDialogSettings = useSetRecoilState(dialogConfigs);
@@ -9,7 +11,7 @@ export const useNewDialog = () => {
     setDialogSettings(prev => prev.filter(dialog => dialog.id !== id));
   };
 
-  const addDialog = (
+  const addDialogWithConfig = (
     key: string,
     dialogConfig: Omit<DialogConfig, "id" | "key">,
   ) => {
@@ -28,5 +30,54 @@ export const useNewDialog = () => {
     ]);
   };
 
-  return { addDialog };
+  const addDialogWithTitleAndMessage = (
+    key: string,
+    title: string,
+    message: string,
+    afterClose?: () => void,
+  ) => {
+    addDialogWithConfig(key, {
+      title,
+      message,
+      afterClose,
+    });
+  };
+
+  const addConfirmDialog = (
+    key: string,
+    title: string,
+    message: string,
+    onConfirm: () => void,
+  ) => {
+    addDialogWithConfig(key, {
+      title,
+      message,
+      firstButton: {
+        onClick: onConfirm,
+      },
+    });
+  };
+
+  const displayErrorDialog = (
+    error: AxiosError<{ errorCode: number }>,
+    afterClose?: (errorCode: number) => void,
+  ) => {
+    const errorCode = error?.response?.data?.errorCode;
+    const [title, message] = getErrorMessage(errorCode).split("\r\n");
+    addDialogWithTitleAndMessage(
+      title,
+      title,
+      errorCode ? message : message + "\n" + error.message,
+      () => {
+        if (afterClose && errorCode) afterClose(errorCode);
+      },
+    );
+  };
+
+  return {
+    addDialogWithConfig,
+    addDialogWithTitleAndMessage,
+    addConfirmDialog,
+    displayErrorDialog,
+  };
 };
