@@ -1,25 +1,32 @@
 import { useCallback } from "react";
+import { AxiosError, AxiosResponse } from "axios";
 import axiosPromise from "../util/axios";
 import getErrorMessage from "../constant/error";
 import useDialog from "./useDialog";
 
-const useApi = (method, url, data) => {
+type Method = "get" | "post" | "put" | "patch" | "delete";
+
+const useApi = (method: Method, url: string, data?: unknown) => {
   const { setOpenTitleAndMessage: setError, Dialog } = useDialog();
 
-  const errorDialog = error => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+  const errorDialog = (error: AxiosError<{ errorCode: number }>) => {
+    const errorCode = error?.response?.data?.errorCode;
     const [title, message] = getErrorMessage(errorCode).split("\r\n");
     setError(title, errorCode ? message : `${message}\r\n${error?.message}`);
   };
 
   const request = useCallback(
-    (resolve, reject = errorDialog) => {
+    (
+      resolve: (response: AxiosResponse<any>) => void,
+      reject?: (error: AxiosError<any>) => void,
+    ) => {
       axiosPromise(method, url, data)
         ?.then(response => {
           resolve(response);
         })
         ?.catch(error => {
-          reject(error);
+          if (reject) reject(error);
+          else errorDialog(error);
         });
     },
     [method, url, data],
