@@ -1,13 +1,18 @@
 import { useCallback } from "react";
+import { AxiosResponse } from "axios";
 import axiosPromise from "../util/axios";
 
-const useApiMultiple = apiArray => {
+type Method = "get" | "post" | "put" | "patch" | "delete";
+
+const useApiMultiple = (
+  apiArray: { method: Method; url: string; data?: unknown }[],
+) => {
   const axiosArray = () =>
     apiArray.map(api => axiosPromise(api.method, api.url, api.data));
 
   /* All or Nothing, 하나라도 실패하면 전부 취소 */
   const requestTransaction = useCallback(
-    handleResults => {
+    (handleResults: (results: AxiosResponse[]) => void) => {
       Promise.all(axiosArray())?.then(results => {
         handleResults(results);
       });
@@ -18,7 +23,7 @@ const useApiMultiple = apiArray => {
   /* 독립적인 개별 시도가 모두 끝날때까지 대기 
      각 결과는 status 값 "fulfilled" or "rejected" */
   const requestIndividual = useCallback(
-    handleResults => {
+    (handleResults: (results: PromiseSettledResult<AxiosResponse>[]) => void) => {
       Promise.allSettled(axiosArray())?.then(results => {
         handleResults(results);
       });
