@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
-import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
+import { AxiosResponse } from "axios";
+import { Book } from "../../type";
 
-const useGetBooksInfoNew = ({ setOpenTitleAndMessage }) => {
-  const [bookList, setBookList] = useState([]);
+const useGetBooksInfoNew = () => {
+  const [bookList, setBookList] = useState<Book[]>([]);
 
   const { request } = useApi("get", "books/info/", {
     sort: "new",
@@ -18,7 +19,7 @@ const useGetBooksInfoNew = ({ setOpenTitleAndMessage }) => {
     { key: "author", type: "string", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse<{ items: Book[] }>) => {
     const books = compareExpect(
       "books/info",
       response.data.items,
@@ -27,13 +28,7 @@ const useGetBooksInfoNew = ({ setOpenTitleAndMessage }) => {
     setBookList(books);
   };
 
-  const onError = error => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setOpenTitleAndMessage(title, message || error.message);
-  };
-
-  useEffect(() => request(refineResponse, onError), []);
+  useEffect(() => request(refineResponse), []);
 
   return { bookList };
 };
