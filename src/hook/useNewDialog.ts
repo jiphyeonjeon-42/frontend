@@ -76,7 +76,7 @@ export const useNewDialog = () => {
     });
   };
 
-  /** 에러 상황 알림용 다이얼로그 호출
+  /** 에러 상황 알림용 다이얼로그 호출, useApi 훅에서 기본으로 활용됨
    * @param error 에러 정보를 담은 객체
    * @param afterClose 다이얼로그가 닫힌 후 실행할 함수 (optional)
    */
