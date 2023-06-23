@@ -9,7 +9,7 @@ type Props = {
 };
 
 const usePatchBooksUpdate = ({ bookTitle, closeModal }: Props) => {
-  const [change, setChange] = useState<Book>();
+  const [change, setChange] = useState<Partial<Book>>();
 
   const { request, setError, Dialog } = useApi("patch", "books/update", change);
 

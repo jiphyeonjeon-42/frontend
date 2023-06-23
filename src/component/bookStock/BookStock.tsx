@@ -5,11 +5,12 @@ import { bookManagementTabList } from "../../constant/tablist";
 import BookStockCheckedList from "./BookStockCheckedList";
 import BookStockNeedToCheckList from "./BookStockNeedToCheckList";
 import BookStockCheckByReadingQR from "./BookStockCheckByReadingQR";
+import { Book } from "../../type";
 
 const BookStock = () => {
-  const [checkedList, setCheckedList] = useState([]);
+  const [checkedList, setCheckedList] = useState<Book[]>([]);
 
-  const addChecked = checked => {
+  const addChecked = (checked: Book) => {
     setCheckedList([...checkedList, checked]);
   };
 

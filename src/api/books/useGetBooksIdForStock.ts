@@ -2,9 +2,21 @@ import { useState, useEffect } from "react";
 import { setErrorDialog } from "../../constant/error";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
+import { Book } from "../../type";
+import { AxiosResponse } from "axios";
 
-const useGetBooksIdForStock = ({ id, setOpenTitleAndMessage, closeModal }) => {
-  const [bookDetail, setBookDetail] = useState({});
+type Props = {
+  id: number;
+  closeModal: () => void;
+  setOpenTitleAndMessage: (title: string, message: string) => void;
+};
+
+const useGetBooksIdForStock = ({
+  id,
+  closeModal,
+  setOpenTitleAndMessage,
+}: Props) => {
+  const [bookDetail, setBookDetail] = useState<Book>();
   const { request } = useApi("get", `books/${id}`);
 
   const expectedItem = [
@@ -21,13 +33,13 @@ const useGetBooksIdForStock = ({ id, setOpenTitleAndMessage, closeModal }) => {
     { key: "callSign", type: "string", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     console.log(response);
     const [book] = compareExpect("books/:id", [response.data], expectedItem);
     setBookDetail(book);
   };
 
-  const displayError = error => {
+  const displayError = (error: any) => {
     closeModal();
     setErrorDialog(error, setOpenTitleAndMessage);
   };

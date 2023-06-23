@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react";
 import InquireBoxItem from "../utils/InquireBoxItem";
 import InquireBoxLine from "../utils/InquireBoxLine";
 import usePatchBooksUpdate from "../../api/books/usePatchBooksUpdate";
@@ -18,11 +19,11 @@ const BookStockNeedToCheckListLine = ({ book }: Props) => {
     bookTitle: book.title,
     closeModal: closeConfirm,
   });
-  const setLostBook = e => {
+
+  const setLostBook: MouseEventHandler<HTMLButtonElement> = e => {
     const unFound = e.currentTarget;
-    console.log(unFound, unFound?.id, unFound?.value);
     setOpenConfirm("분실처리하시겠습니까?", unFound.value, () => {
-      setChange({ bookId: unFound.id, status: 1 });
+      setChange({ bookId: +unFound.id, status: 1 });
     });
   };
   return (

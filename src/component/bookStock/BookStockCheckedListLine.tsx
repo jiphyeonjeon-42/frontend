@@ -6,15 +6,13 @@ type Props = {
   book: Book;
 };
 
-const BookStockCheckedListLine = ({
-  book: { bookId, callSign, category, title },
-}: Props) => {
+const BookStockCheckedListLine = ({ book }: Props) => {
   return (
     <InquireBoxLine>
-      <InquireBoxItem keyString="bookId" value={bookId} />
-      <InquireBoxItem keyString="callSign" value={callSign} />
-      <InquireBoxItem keyString="category" value={category} />
-      <InquireBoxItem keyString="title" value={title} />
+      <InquireBoxItem keyString="bookId" value={book.bookId} />
+      <InquireBoxItem keyString="callSign" value={book.callSign} />
+      <InquireBoxItem keyString="category" value={book.category} />
+      <InquireBoxItem keyString="title" value={book.title} />
     </InquireBoxLine>
   );
 };

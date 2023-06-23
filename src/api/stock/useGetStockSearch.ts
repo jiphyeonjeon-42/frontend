@@ -3,12 +3,17 @@ import { setErrorDialog } from "../../constant/error";
 import useApi from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
+import { AxiosResponse } from "axios";
+import { Book } from "../../type";
 
-const useGetStockSearch = ({ setOpenTitleAndMessage }) => {
+type Props = {
+  setOpenTitleAndMessage: (title: string, message: string) => void;
+};
+
+const useGetStockSearch = ({ setOpenTitleAndMessage }: Props) => {
   const { searchParams, setSearchResult, searchResult, setPage } = useSearch();
   const { request } = useApi("get", "stock/search", {
     page: searchParams.page - 1,
-    limit: searchParams.limit,
   });
 
   const expectedItem = [
@@ -18,7 +23,7 @@ const useGetStockSearch = ({ setOpenTitleAndMessage }) => {
     { key: "title", type: "string", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const items = compareExpect(
       "stock/search",
       response.data.items,
@@ -32,7 +37,7 @@ const useGetStockSearch = ({ setOpenTitleAndMessage }) => {
     });
   };
 
-  const displayError = error => {
+  const displayError = (error: any) => {
     setErrorDialog(error, setOpenTitleAndMessage);
   };
 
@@ -40,7 +45,12 @@ const useGetStockSearch = ({ setOpenTitleAndMessage }) => {
     request(refineResponse, displayError);
   }, [searchParams]);
 
-  return { ...searchResult, page: searchParams.page, setPage };
+  return {
+    list: searchResult.list as Book[],
+    lastPage: searchResult.lastPage,
+    page: searchParams.page,
+    setPage,
+  };
 };
 
 export default useGetStockSearch;
