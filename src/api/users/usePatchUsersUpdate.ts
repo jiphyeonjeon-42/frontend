@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
+import { User } from "../../type";
 
-const usePatchUsersUpdate = ({ userId, exitEditMode }) => {
-  const [patchData, setPatchData] = useState(null);
+type Props = {
+  userId: number;
+  exitEditMode: () => void;
+};
+
+const usePatchUsersUpdate = ({ userId, exitEditMode }: Props) => {
+  const [patchData, setPatchData] = useState<Partial<User>>();
   const { request, Dialog } = useApi(
     "patch",
     `users/update/${userId}`,
     patchData,
   );
-  const expectedItem = {
+  const expectedItem: { [key: string]: string } = {
     nickname: "string",
     intraId: "number",
     slack: "string",
@@ -16,14 +22,14 @@ const usePatchUsersUpdate = ({ userId, exitEditMode }) => {
     penaltyEndDate: "date",
   };
 
-  const requestUpdate = data => {
-    const refinedData = {};
+  const requestUpdate = (data: any) => {
+    const refinedData: { [key: string]: string } = {};
     Object.keys(data).forEach(key => {
       const value =
         expectedItem[key] === "number" ? parseInt(data[key], 10) : data[key];
       if (value || (key === "role" && value === 0)) refinedData[key] = value;
     });
-    if (Object.keys(refinedData).length > 0) setPatchData(refinedData);
+    if (Object.keys(refinedData).length > 0) setPatchData({ ...refinedData });
   };
 
   const onSuccess = () => {
@@ -31,8 +37,7 @@ const usePatchUsersUpdate = ({ userId, exitEditMode }) => {
   };
 
   useEffect(() => {
-    if (patchData === null) return;
-    request(onSuccess);
+    if (patchData !== null) request(onSuccess);
   }, [patchData]);
 
   return { requestUpdate, Dialog };

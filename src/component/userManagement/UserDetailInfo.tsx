@@ -1,11 +1,11 @@
-import { useState, useRef } from "react";
+import { useState, useRef, FormEventHandler } from "react";
 import usePatchUsersUpdate from "../../api/users/usePatchUsersUpdate";
 import InputWithLabel from "../utils/InputWithLabel";
 import SelectWithLabel from "../utils/SelectWithLabel";
 import Button from "../utils/Button";
 import { dateFormat, dateLessThan, nowDate } from "../../util/date";
-import "../../asset/css/UserDetailInfo.css";
 import { User } from "../../type";
+import "../../asset/css/UserDetailInfo.css";
 
 const roles = ["미인증", "카뎃", "사서", "운영진"];
 
@@ -16,40 +16,33 @@ type Props = {
 const UserDetailInfo = ({ user }: Props) => {
   const [editMode, setEditMode] = useState(false);
   const [reset, setReset] = useState(false);
-  const intraIdRef = useRef(null);
-  const nickNameRef = useRef(null);
-  const slackRef = useRef(null);
-  const roleRef = useRef(null);
-  const penaltyRef = useRef(null);
+  const intraIdRef = useRef<HTMLInputElement>(null);
+  const nickNameRef = useRef<HTMLInputElement>(null);
+  const slackRef = useRef<HTMLInputElement>(null);
+  const roleRef = useRef<HTMLSelectElement>(null);
+  const penaltyRef = useRef<HTMLInputElement>(null);
 
-  const onEditMode = () => {
-    setEditMode(true);
-  };
+  const exitEditMode = () => setEditMode(false);
 
-  const exitEditMode = () => {
-    setEditMode(false);
-  };
-
-  const { requestUpdate, Dialog } = usePatchUsersUpdate({
+  const { requestUpdate } = usePatchUsersUpdate({
     userId: user.id,
     exitEditMode,
   });
 
-  const submitEdit = event => {
+  const submitEdit: FormEventHandler = event => {
     event.preventDefault();
     const data = {
       nickname: nickNameRef.current?.value,
       intraId: intraIdRef.current?.value,
       slack: slackRef.current?.value,
       role: roleRef.current?.value,
-      penaltyEndDate: dateFormat(penaltyRef.current?.value),
+      penaltyEndDate: dateFormat(penaltyRef.current?.value || ""),
     };
     requestUpdate(data);
   };
 
   return (
     <div className="user-detail-info">
-      <Dialog />
       <div className="user-detail-info__title font-28-bold color-54">
         유저정보
       </div>
@@ -111,12 +104,12 @@ const UserDetailInfo = ({ user }: Props) => {
           }
           disabled
         />
-
         <div className="user-edit-button">
           {editMode && (
             <Button
               value="취소하기"
-              onClick={() => {
+              onClick={e => {
+                e.preventDefault();
                 setReset(!reset);
                 exitEditMode();
               }}
@@ -124,7 +117,14 @@ const UserDetailInfo = ({ user }: Props) => {
           )}
           <Button
             value={editMode ? "저장하기" : "수정하기"}
-            onClick={editMode ? submitEdit : onEditMode}
+            onClick={
+              editMode
+                ? submitEdit
+                : e => {
+                    e.preventDefault();
+                    setEditMode(true);
+                  }
+            }
             color="red"
           />
         </div>
