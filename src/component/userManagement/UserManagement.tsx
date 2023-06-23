@@ -12,15 +12,18 @@ import UserDetailInfo from "./UserDetailInfo";
 import { userManagementTabList } from "../../constant/tablist";
 import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 import "../../asset/css/UserManagement.css";
+import { User } from "../../type";
 
 const USAGE = 1;
 
 const UserManagement = () => {
   const [modal, setModal] = useState(0);
-  const [selectedUser, setSelectedUser] = useState(0);
-  const { userList, lastPage, setQuery, page, setPage, Dialog } =
-    useGetUsersSearch({ limit: 10 });
+  const [selectedUser, setSelectedUser] = useState<User>();
+  const { userList, lastPage, setQuery, page, setPage } = useGetUsersSearch({
+    limit: 10,
+  });
 
+  const isOpened = modal > 0;
   const closeModal = () => setModal(0);
 
   return (
@@ -61,17 +64,16 @@ const UserManagement = () => {
           </div>
         </div>
       </section>
-      {modal ? (
-        <Modal isOpen={modal} onCloseModal={closeModal} size="full">
+      {selectedUser && isOpened ? (
+        <Modal isOpen={isOpened} onCloseModal={closeModal} size="full">
           <ModalHeader onCloseModal={closeModal} isWithCloseButton />
           {modal === USAGE ? (
-            <UserUsageInfo key={selectedUser.id} user={selectedUser} />
+            <UserUsageInfo user={selectedUser} />
           ) : (
-            <UserDetailInfo user={selectedUser} closeModal={closeModal} />
+            <UserDetailInfo user={selectedUser} />
           )}
         </Modal>
       ) : null}
-      <Dialog />
     </main>
   );
 };

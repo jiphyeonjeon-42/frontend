@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 
-const usePatchUsersUpdate = ({ userId, exitEditMode }) => {
+type Props = {
+  userId: number;
+  exitEditMode: () => void;
+};
+
+export const usePatchUsersUpdate = ({ userId, exitEditMode }: Props) => {
   const [patchData, setPatchData] = useState(null);
-  const { request, Dialog } = useApi(
-    "patch",
-    `users/update/${userId}`,
-    patchData,
-  );
+  const { request } = useApi("patch", `users/update/${userId}`, patchData);
   const expectedItem = {
     nickname: "string",
     intraId: "number",
@@ -16,7 +17,7 @@ const usePatchUsersUpdate = ({ userId, exitEditMode }) => {
     penaltyEndDate: "date",
   };
 
-  const requestUpdate = data => {
+  const requestUpdate = (data: any) => {
     const refinedData = {};
     Object.keys(data).forEach(key => {
       const value =
@@ -31,11 +32,8 @@ const usePatchUsersUpdate = ({ userId, exitEditMode }) => {
   };
 
   useEffect(() => {
-    if (patchData === null) return;
-    request(onSuccess);
+    if (patchData !== null) request(onSuccess);
   }, [patchData]);
 
-  return { requestUpdate, Dialog };
+  return { requestUpdate };
 };
-
-export default usePatchUsersUpdate;

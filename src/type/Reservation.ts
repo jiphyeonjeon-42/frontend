@@ -12,4 +12,5 @@ export type Reservation = {
   title: string;
   userId: number;
   ranking?: number;
+  lenderableDate?: string;
 };
