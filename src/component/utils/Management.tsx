@@ -4,11 +4,11 @@ import "../../asset/css/Management.css";
 
 type Props = {
   searchBarPlaceHolder: string;
-  setQuery(...args: unknown[]): unknown;
+  setQuery: (query: string) => void;
   TitleFragement: React.ReactNode[] | React.ReactNode;
   BoxFragement: React.ReactNode[] | React.ReactNode;
   page: number;
-  setPage(...args: unknown[]): unknown;
+  setPage: (page: number) => void;
   lastPage: number;
 };
 

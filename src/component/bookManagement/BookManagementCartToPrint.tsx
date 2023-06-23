@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { ChangeEventHandler, MouseEventHandler, useState } from "react";
+import { Book } from "../../type";
 import useModal from "../../hook/useModal";
 import BookLabelModalToPrint from "./BookManagementModalToPrint";
 import Image from "../utils/Image";
@@ -7,21 +8,21 @@ import Minus from "../../asset/img/plus_icon_on.svg";
 import "../../asset/css/BookManagementCart.css";
 
 type Props = {
-  printList: object[];
-  removeBookById(...args: unknown[]): unknown;
+  printList: Book[];
+  removeBookById: (bookId: number) => void;
 };
 
 const BookManagementCartToPrint = ({ printList, removeBookById }: Props) => {
   const [isOpen, setIsOpen] = useState(true);
   const { Modal, setOpen } = useModal();
 
-  const openModal = e => {
+  const openModal: MouseEventHandler = e => {
     e.stopPropagation();
     if (printList.length) setOpen();
   };
 
-  const removePrintItem = e => {
-    const bookId = parseInt(e.currentTarget.value, 10);
+  const removePrintItem: ChangeEventHandler<HTMLInputElement> = e => {
+    const bookId = parseInt(e.target.value, 10);
     removeBookById(bookId);
   };
   return (

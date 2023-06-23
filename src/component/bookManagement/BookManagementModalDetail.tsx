@@ -36,10 +36,15 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
   });
 
   const collectChange = () => {
-    const change = { ...book };
+    // 기존 책을 복사한 original과 입력값 비교해서 change에 저장
+    const original: Book & { [key: string]: any } = { ...book };
+    const change: Book & { [key: string]: any } = { ...book };
+
     const modifyFromRef = (key: string, ref: any) => {
-      change[key] = book[key];
-      if (ref.current !== null && ref.current.value !== book[key]) {
+      change[key] = original[key];
+      if (ref.current !== null && ref.current.value !== original[key]) {
+        if (typeof change[key] === "number")
+          change[key] = parseInt(ref.current.value, 10);
         change[key] = ref.current.value;
       }
     };
@@ -52,21 +57,23 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
     modifyFromRef("callSign", callSignRef);
     modifyFromRef("categoryId", categoryRef);
     modifyFromRef("status", statusRef);
-    change.categoryId = parseInt(change.categoryId, 10) + 1;
+    change.categoryId += 1; // select option의 index는 0부터 시작하므로 +1
     return change;
   };
 
-  const checkChange = change => {
+  const checkChange = (change: Book) => {
+    // 도서 상세정보 수정 시 입력값 검사
     const dateRegex = /^(19|20)(\d{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/;
     const callSignRegex = /^[A-Za-z][0-9]{1,3}\.[0-9]{2}\.v[1-9]\.c[1-9]$/;
     const isbnRegex = /^\d{13}$/;
 
-    const validateDate = dateRegex.test(change.publishedAt);
+    const validateDate =
+      change.publishedAt && dateRegex.test(change.publishedAt);
     const validateCallSign = callSignRegex.test(change.callSign);
     const validateCategory =
       change.callSign[0] ===
       category.find(item => parseInt(item.id, 10) === change.categoryId)?.code;
-    const validateISBN = isbnRegex.test(change.isbn);
+    const validateISBN = change.isbn && isbnRegex.test(change.isbn);
 
     let errorMessage = "";
     if (validateDate && validateCallSign && validateCategory && validateISBN)
@@ -206,7 +213,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
         <Button
           className="book-management__detail__button"
           value={editMode ? "저장하기" : "수정하기"}
-          color={editMode ? "red" : ""}
+          color={editMode ? "red" : undefined}
           onClick={handleConfirm}
         />
       </div>

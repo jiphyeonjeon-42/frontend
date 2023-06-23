@@ -1,50 +1,52 @@
-import { useRef, useState } from "react";
+import { MouseEventHandler, useRef, useState } from "react";
 import { category } from "../../constant/category";
+import { Book } from "../../type";
 import Button from "../utils/Button";
 import BookLabelPrintArea from "./bookLabel/BookLabelPrintArea";
 import "../../asset/css/BookManagementToPrint.css";
 
 type Props = {
-  printList?: object[];
+  printList: Book[];
 };
 
 const BookLabelModalToPrint = ({ printList }: Props) => {
   const [blankLabelNumber, setBlankLabelNumber] = useState(0);
   const [sortedList, setSortedList] = useState(printList);
-  const printAreaRef = useRef(null);
+  const printAreaRef = useRef<HTMLDivElement>(null);
 
-  function copyStyles(src, dest) {
+  function copyStyles(src: Document, dest: Document) {
+    // 새창으로 라벨 출력 시 스타일 복사
     Array.from(src.styleSheets).forEach(styleSheet => {
-      dest.head.appendChild(styleSheet.ownerNode.cloneNode(true));
+      if (styleSheet.ownerNode)
+        dest.head.appendChild(styleSheet.ownerNode.cloneNode(true));
     });
     Array.from(src.fonts).forEach(font => dest.fonts.add(font));
   }
 
   const PrintLabel = () => {
     const windowForPrint = window.open();
-    windowForPrint.document.writeln(printAreaRef.current.outerHTML);
-    copyStyles(window.document, windowForPrint.document);
-    windowForPrint.focus();
-    setTimeout(() => windowForPrint.print(), 500);
+    if (windowForPrint && printAreaRef.current) {
+      windowForPrint.document.writeln(printAreaRef.current.outerHTML);
+      copyStyles(window.document, windowForPrint.document);
+      windowForPrint.focus();
+      // 스타일 복사 완료 기다린 후 인쇄 요청
+      setTimeout(() => windowForPrint.print(), 500);
+    }
   };
 
   const categoryList = () => {
-    const categories = new Set();
-    printList.forEach(item => {
-      categories.add(item.callSign[0]);
-    });
+    const categories = new Set<string>();
+    printList.forEach(item => categories.add(item.callSign[0]));
     return [...categories];
   };
 
-  const filterCategory = e => {
-    const listFiltered = printList.filter(
-      item => item.callSign[0] === e.currentTarget.value,
-    );
+  const filterCategory: MouseEventHandler<HTMLButtonElement> = e => {
+    const code = e.currentTarget.value;
+    const listFiltered = printList.filter(item => item.callSign[0] === code);
     setSortedList(listFiltered);
   };
-  const resetFilter = () => {
-    setSortedList(printList);
-  };
+
+  const resetFilter = () => setSortedList(printList);
 
   return (
     <div className="book-management__print__wrapper">
@@ -62,9 +64,7 @@ const BookLabelModalToPrint = ({ printList }: Props) => {
           <input
             type="text"
             value={blankLabelNumber}
-            onChange={e => {
-              setBlankLabelNumber(e.currentTarget.value);
-            }}
+            onChange={e => setBlankLabelNumber(+e.currentTarget.value)}
           />
 
           <p className="book-management__print__description">카테고리별 출력</p>
@@ -77,7 +77,7 @@ const BookLabelModalToPrint = ({ printList }: Props) => {
             >
               전체
             </button>
-            {categoryList()?.map(item => {
+            {categoryList().map(item => {
               return (
                 <button
                   type="button"
@@ -100,7 +100,7 @@ const BookLabelModalToPrint = ({ printList }: Props) => {
       <section className="book-management__print__preview">
         <div className="book-management__print__scaled-page">
           <BookLabelPrintArea
-            printAreaRef={printAreaRef}
+            ref={printAreaRef}
             blankLabelNumber={blankLabelNumber}
             sortedList={sortedList}
           />
