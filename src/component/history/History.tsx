@@ -1,28 +1,25 @@
 import { useState } from "react";
+import { useGetHistories } from "../../api/histories/useGetHistories";
+import { rentTabList } from "../../constant/tablist";
+import { History } from "../../type";
 import HistoryTable from "./HistoryTable";
-import HistoryFilter from "./HistoryFilter";
 import HistoryModalContents from "./HistoryModalContents";
 import Tabs from "../utils/Tabs";
 import Banner from "../utils/Banner";
 import Pagination from "../utils/Pagination";
 import useModal from "../../hook/useModal";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import useDialog from "../../hook/useDialog";
-import useGetHistories from "../../api/histories/useGetHistories";
-import { rentTabList } from "../../constant/tablist";
 import Book from "../../asset/img/book-arrow-up-free-icon-font.svg";
 import "../../asset/css/Histories.css";
 
 const History = () => {
-  const [historyInfo, setHistoryInfo] = useState(null);
+  const [historyInfo, setHistoryInfo] = useState<History>();
   const { setOpen: openModal, Modal } = useModal();
-  const { setOpenTitleAndMessage, Dialog } = useDialog();
-  const { historiesList, lastPage, page, type, setPage, setQuery, setType } =
-    useGetHistories({ setOpenTitleAndMessage });
+  const { historiesList, lastPage, page, setPage, setQuery } =
+    useGetHistories();
 
   return (
     <main>
-      <Dialog />
       <Banner
         img="admin"
         titleKo="전체 대출/반납 기록"
@@ -38,7 +35,6 @@ const History = () => {
           setQuery={setQuery}
         />
         <div className="histories-table__inquire-box">
-          <HistoryFilter type={type} setType={setType} />
           {historiesList.map(history => (
             <HistoryTable
               key={history.id}
@@ -47,9 +43,11 @@ const History = () => {
               setInfo={setHistoryInfo}
             />
           ))}
-          <Modal>
-            <HistoryModalContents historyInfo={historyInfo} />
-          </Modal>
+          {historyInfo && (
+            <Modal>
+              <HistoryModalContents historyInfo={historyInfo} />
+            </Modal>
+          )}
           <div className="histories-table__pagination">
             <Pagination page={page} setPage={setPage} lastPage={lastPage} />
           </div>
