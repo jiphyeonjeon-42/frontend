@@ -3,12 +3,13 @@ import { useApi } from "../../hook/useApi";
 import { addHourDateObject } from "../../util/date";
 import userState from "../../atom/userState";
 import getErrorMessage from "../../constant/error";
+import { AxiosError, AxiosResponse } from "axios";
 
-const useGetAuthMe = () => {
+export const useGetAuthMe = () => {
   const { request } = useApi("get", "auth/me");
   const setUser = useSetRecoilState(userState);
 
-  const onSuccess = response => {
+  const onSuccess = (response: AxiosResponse) => {
     const { data } = response;
     const newUser = {
       isLogin: true,
@@ -22,8 +23,8 @@ const useGetAuthMe = () => {
     window.localStorage.setItem("user", JSON.stringify(newUser));
   };
 
-  const onError = error => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+  const onError = (error: AxiosError<{ errorCode: number }>) => {
+    const errorCode = error?.response?.data?.errorCode;
     const [title, message] = getErrorMessage(errorCode).split("\r\n");
     window.localStorage.setItem(
       "error",
@@ -32,5 +33,3 @@ const useGetAuthMe = () => {
   };
   return () => request(onSuccess, onError);
 };
-
-export default useGetAuthMe;
