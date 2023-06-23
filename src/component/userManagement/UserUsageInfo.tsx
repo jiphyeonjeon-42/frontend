@@ -1,4 +1,5 @@
 import { User } from "../../type";
+import { dateFormat, dateLessThan } from "../../util/date";
 import "../../asset/css/UserUsageInfo.css";
 
 type Props = {
@@ -6,21 +7,6 @@ type Props = {
 };
 
 const UserUsageInfo = ({ user }: Props) => {
-  const today = new Date();
-
-  const convertDatetoString = (date:Date) => {
-    let stringDate = "";
-
-    stringDate += date.getFullYear();
-    stringDate += "-";
-    stringDate += date.getMonth() + 1 < 10 ? "0" : "";
-    stringDate += date.getMonth() + 1;
-    stringDate += "-";
-    stringDate += date.getDate() < 10 ? "0" : "";
-    stringDate += date.getDate();
-    return stringDate;
-  };
-
   return (
     <div className="user-usage-info">
       <div className="user-usage-info__nickname font-28-bold color-54">
@@ -32,7 +18,7 @@ const UserUsageInfo = ({ user }: Props) => {
         </div>
         <div className="user-usage-info__books">
           {user.lendings.map((lending, index) => (
-            <div className="user-usage-info__book">
+            <div className="user-usage-info__book" key={lending.id}>
               <div className="user-usage-info__book-number font-18-bold color-54">
                 {`${index + 1}.`}
               </div>
@@ -40,16 +26,18 @@ const UserUsageInfo = ({ user }: Props) => {
                 <div className="user-usage-info__book-title font-18-bold color-54">
                   {`${lending.title}`}
                 </div>
-                {lending.duedate.substring(0, 10) <
-                convertDatetoString(today) ? (
-                  <div className="font-16 color-red">
-                    {`반납 예정일 : ${lending.duedate.substring(0, 10)}`}
-                  </div>
-                ) : (
-                  <div className="font-16 color-54">
-                    {`반납 예정일 : ${lending.duedate.substring(0, 10)}`}
-                  </div>
-                )}
+                {
+                  // TODO Get /users/search 에서 받은 데이터 lending.duedate DTO 정리되면 수정 요청 필요 dueDate duedate 혼용중
+                  lending.duedate && (
+                    <div
+                      className={`font-16 color-${
+                        dateLessThan(lending.duedate) ? "54" : "red"
+                      }`}
+                    >
+                      {`반납 예정일 : ${dateFormat(lending.duedate)}`}
+                    </div>
+                  )
+                }
               </div>
             </div>
           ))}
@@ -61,7 +49,7 @@ const UserUsageInfo = ({ user }: Props) => {
         </div>
         <div className="user-usage-info__books">
           {user.reservations.map((reservation, index) => (
-            <div className="user-usage-info__book">
+            <div className="user-usage-info__book" key={reservation.id}>
               <div className="user-usage-info__book-number font-18-bold color-54">
                 {`${index + 1}.`}
               </div>
@@ -73,9 +61,9 @@ const UserUsageInfo = ({ user }: Props) => {
                   <div className="user-usage-info__reservation-info">{`예약순위 : ${reservation.ranking}순위`}</div>
                   {reservation.lenderableDate && (
                     <div className="user-usage-info__reservation-info font-16 color-54">
-                      대출 가능일 :{" "}
-                      {convertDatetoString(reservation.lenderableDate)} ~{" "}
-                      {convertDatetoString(reservation.endAt)}
+                      {`대출 가능일 : ${dateFormat(
+                        reservation.lenderableDate,
+                      )} ~ ${dateFormat(reservation.endAt)}`}
                     </div>
                   )}
                 </div>

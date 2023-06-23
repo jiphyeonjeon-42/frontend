@@ -3,6 +3,7 @@ import UserUsage from "../../asset/img/book-arrow-right.svg";
 import UserEdit from "../../asset/img/edit.svg";
 import "../../asset/css/UserBriefInfo.css";
 import { User } from "../../type";
+import { addDay, dateLessThan } from "../../util/date";
 
 const roles = ["미인증", "일반", "사서", "운영진"];
 const USAGE = 1;
@@ -26,30 +27,12 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }: Props) => {
     setModal(EDIT);
   };
 
-  const concatDate = (day: Date) => {
-    let overDueDate = "";
-
-    day.setDate(day.getDate() + user.overDueDay);
-    overDueDate += day.getFullYear();
-    overDueDate += "-";
-    overDueDate += day.getMonth() + 1 < 10 ? "0" : "";
-    overDueDate += day.getMonth() + 1;
-    overDueDate += "-";
-    overDueDate += day.getDate() < 10 ? "0" : "";
-    overDueDate += day.getDate();
-    return overDueDate;
-  };
-
-  const getOverDueDate = () => {
-    if (
-      !user.penaltyEndDate ||
-      new Date(user.penaltyEndDate).setHours(0, 0, 0, 0) <
-        new Date().setHours(0, 0, 0, 0)
-    ) {
-      return concatDate(nowDay);
-    }
-    return concatDate(new Date(user.penaltyEndDate));
-  };
+  const restrictionDate =
+    // penaltyEndDate : 이미 반납한 대출건의 연체제한
+    // overDueDay: 대출중인 도서의 연체일, 오늘 반납시 받게 될 penaltyEndDate 계산용
+    !user.penaltyEndDate || dateLessThan(user.penaltyEndDate)
+      ? addDay(user.overDueDay) // 오늘 날짜 + 반납시 받게 될 연체일
+      : addDay(user.overDueDay, user.penaltyEndDate); // 연체 제한일 + 반납시 받게 될 연체일
 
   return (
     <div className={`user-info ${line ? "user-info-line" : ""}`}>
@@ -57,23 +40,14 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }: Props) => {
       <div className="user-info__nickname font-18-bold color-54">
         {user.nickname ? user.nickname : "-"}
       </div>
-      {user.role ? (
-        <div className="user-info__role font-18 color-54">
-          {roles[user.role]}
-        </div>
-      ) : (
-        <div className="user-info__role font-18 color-red">
-          {roles[user.role]}
-        </div>
-      )}
+      <div
+        className={`user-info__role font-18 color-${user.role ? "54" : "red"}`}
+      >
+        {roles[user.role]}
+      </div>
       <div className="user-info__email font-18-bold color-54">{user.email}</div>
       <div className="user-info__overdue font-18 color-54">
-        {user.overDueDay ||
-        (user.penaltyEndDate &&
-          new Date(user.penaltyEndDate).setHours(0, 0, 0, 0) >=
-            new Date().setHours(0, 0, 0, 0))
-          ? getOverDueDate()
-          : "-"}
+        {!dateLessThan(restrictionDate) ? restrictionDate : "-"}
       </div>
       {user.nickname ? (
         <button
