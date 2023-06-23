@@ -1,26 +1,28 @@
 import { useState } from "react";
 import useGetBooksSearch from "../../api/books/useGetBooksSearch";
+import { bookManagementTabList } from "../../constant/tablist";
+import { Book } from "../../type";
 import BookManagementCartToPrint from "./BookManagementCartToPrint";
 import BookManagementBooksList from "./BookManagementBooksList";
 import Tabs from "../utils/Tabs";
 import Banner from "../utils/Banner";
-import { bookManagementTabList } from "../../constant/tablist";
 
 const BookManagement = () => {
-  const [printList, setPrintList] = useState([]);
-  const { bookList, lastPage, page, setPage, setQuery, Dialog } =
-    useGetBooksSearch({ limit: 10 });
+  const [printList, setPrintList] = useState<Book[]>([]);
+  const { bookList, lastPage, page, setPage, setQuery } = useGetBooksSearch({
+    limit: 10,
+  });
 
-  const addBookById = bookId => {
+  const addBookById = (bookId: number) => {
     const book = bookList.find(item => item.bookId === bookId);
-    setPrintList([...printList, book]);
+    if (book) setPrintList([...printList, book]);
   };
   const addAllBooks = () => {
     const newList = new Set([...printList, ...bookList]);
     setPrintList([...newList]);
   };
 
-  const removeBookById = bookId => {
+  const removeBookById = (bookId: number) => {
     const newList = printList.filter(item => item.bookId !== bookId);
     setPrintList(newList);
   };
@@ -31,7 +33,6 @@ const BookManagement = () => {
 
   return (
     <main>
-      <Dialog />
       <Banner img="admin" titleKo="도서 관리" titleEn="BOOK MANAGEMENT" />
       <Tabs tabList={bookManagementTabList} />
       <BookManagementBooksList

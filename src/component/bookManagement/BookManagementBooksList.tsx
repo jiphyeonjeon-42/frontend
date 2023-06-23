@@ -1,21 +1,21 @@
 import { useState } from "react";
 import useModal from "../../hook/useModal";
+import { Book } from "../../type";
 import BookManagementBooksListItem from "./BookManagementBooksListItem";
 import BookManagementModalDetail from "./BookManagementModalDetail";
 import Management from "../utils/Management";
-import { Book } from "../../type";
 
 type Props = {
   page: number;
-  setPage(...args: unknown[]): unknown;
+  setPage: (page: number) => void;
   lastPage: number;
-  setQuery(...args: unknown[]): unknown;
+  setQuery: (query: string) => void;
   booksList: Book[];
   printList: Book[];
-  addBookById(...args: unknown[]): unknown;
-  removeBookById(...args: unknown[]): unknown;
-  addAllBooks(...args: unknown[]): unknown;
-  removeAllBooks(...args: unknown[]): unknown;
+  addBookById: (bookId: number) => void;
+  removeBookById: (bookId: number) => void;
+  addAllBooks: () => void;
+  removeAllBooks: () => void;
 };
 
 const BookManagementBooksList = ({
@@ -30,7 +30,7 @@ const BookManagementBooksList = ({
   removeBookById,
   removeAllBooks,
 }: Props) => {
-  const [selectedBook, setSelectedBook] = useState({});
+  const [selectedBook, setSelectedBook] = useState<Book>();
   const { Modal, setOpen, setClose } = useModal();
 
   const includesArrayById = (array: Book[], id: number) => {
@@ -52,9 +52,14 @@ const BookManagementBooksList = ({
 
   return (
     <>
-      <Modal>
-        <BookManagementModalDetail book={selectedBook} closeModal={setClose} />
-      </Modal>
+      {selectedBook && (
+        <Modal>
+          <BookManagementModalDetail
+            book={selectedBook}
+            closeModal={setClose}
+          />
+        </Modal>
+      )}
       <Management
         searchBarPlaceHolder="도서 관련 정보를 입력하세요"
         setQuery={setQuery}
