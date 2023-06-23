@@ -1,14 +1,23 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../hook/useApi";
+import { AxiosError } from "axios";
 import getErrorMessage from "../../constant/error";
 
-const usePostUsersCreate = () => {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const confirmPasswordRef = useRef(null);
+type RegisterDataItem = {
+  value: string;
+  error: string;
+  ref: React.RefObject<HTMLInputElement>;
+};
 
-  const [registerData, setRegisterData] = useState({
+const usePostUsersCreate = () => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
+
+  const [registerData, setRegisterData] = useState<{
+    [key: string]: RegisterDataItem;
+  }>({
     email: { value: "", error: "", ref: emailRef },
     password: { value: "", error: "", ref: passwordRef },
     confirmPassword: { value: "", error: "", ref: confirmPasswordRef },
@@ -28,8 +37,8 @@ const usePostUsersCreate = () => {
     );
   };
 
-  const displayError = error => {
-    const { errorCode } = error.response.data;
+  const displayError = (error: AxiosError<{ errorCode: number }>) => {
+    const errorCode = error.response?.data.errorCode;
     if (errorCode === 203) {
       setRegisterData({
         ...registerData,
@@ -38,7 +47,7 @@ const usePostUsersCreate = () => {
           error: "중복된 이메일 입니다.",
         },
       });
-      registerData.email.ref.current.focus();
+      registerData.email.ref.current?.focus();
       return;
     }
     if (errorCode === 205) {
@@ -49,16 +58,17 @@ const usePostUsersCreate = () => {
           error: "잘못된 패스워드 형식입니다",
         },
       });
-      registerData.password.ref.current.focus();
+      registerData.password.ref.current?.focus();
       return;
     }
     const errorMessage = errorCode ? getErrorMessage(errorCode) : error.message;
-    setError(errorMessage);
+    setError(errorMessage, "");
   };
 
   const requestRegister = () => {
     request(displaySuccess, displayError);
   };
+
   return { registerData, requestRegister, Dialog, setRegisterData };
 };
 

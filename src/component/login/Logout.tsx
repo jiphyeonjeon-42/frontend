@@ -9,9 +9,10 @@ const Logout = () => {
   const requestLogout = usePostAuthLogout();
 
   useEffect(() => {
-    resetState();
-    requestLogout();
-    window.localStorage.removeItem("user");
+    requestLogout(() => {
+      resetState();
+      window.localStorage.removeItem("user");
+    });
   }, []);
 
   return (

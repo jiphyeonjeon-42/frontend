@@ -10,10 +10,10 @@ const usePostAuthLogin = () => {
     message: "",
   });
 
-  const setLogin = (key, value) => {
+  const setLogin = (key: string, value: string) => {
     setLoginData({ ...loginData, [key]: value });
   };
-  const setMessage = message => {
+  const setMessage = (message: string) => {
     setLoginData({ ...loginData, message });
   };
 
@@ -27,7 +27,7 @@ const usePostAuthLogin = () => {
     navigate("/auth", { replace: true });
   };
 
-  const onError = error => {
+  const onError = (error: any) => {
     const errorCode = parseInt(error?.response?.data?.errorCode, 10);
     if (errorCode === 103) setMessage("입력된 값이 없습니다.");
     else if (errorCode === 104) setMessage("잘못된 패스워드입니다.");

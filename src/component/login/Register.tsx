@@ -1,19 +1,20 @@
 import usePostUsersCreate from "../../api/users/usePostUsersCreate";
 import { registerRule } from "../../constant/validate";
 import "../../asset/css/Register.css";
+import { ChangeEventHandler, FormEventHandler } from "react";
 
 const Register = () => {
   const { registerData, setRegisterData, requestRegister, Dialog } =
     usePostUsersCreate();
 
-  const validateInput = (value, name) => {
+  const validateInput = (value: string, name: string) => {
     return (
       value.length > 0 &&
       registerRule[name].validator(value, registerData.password.value)
     );
   };
 
-  const checkValidation = (value, name) => {
+  const checkValidation = (value: string, name: string) => {
     const rule = registerRule[name];
 
     if (validateInput(value, name)) {
@@ -31,16 +32,16 @@ const Register = () => {
         error: value.length ? rule.invalidMessage : rule.emptyMessage,
       },
     });
-    registerData[name].ref.current.focus();
+    registerData[name].ref.current?.focus();
     return false;
   };
 
-  const onChange = e => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = e => {
     const { value, name } = e.currentTarget;
     checkValidation(value, name);
   };
 
-  const submitRegister = e => {
+  const submitRegister: FormEventHandler<HTMLButtonElement> = e => {
     e.preventDefault();
     const isAllValid = Object.keys(registerData).every(name =>
       checkValidation(registerData[name].value, name),
