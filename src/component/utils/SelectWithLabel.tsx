@@ -1,4 +1,10 @@
-import { useState, useEffect, ChangeEvent, HTMLProps, forwardRef } from "react";
+import {
+  useState,
+  useEffect,
+  HTMLProps,
+  forwardRef,
+  ChangeEventHandler,
+} from "react";
 import "../../asset/css/SelectWithLabel.css";
 
 type Props = {
@@ -29,13 +35,10 @@ const SelectWithLabel = forwardRef<HTMLSelectElement, Props>(
     ref,
   ) => {
     const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
-    useEffect(() => {
-      setSelectedIndex(initialSelectedIndex);
-    }, [resetDependency]);
-    const onChangeSelect = ({
-      currentTarget: { value },
-    }: ChangeEvent<HTMLSelectElement>) => {
-      setSelectedIndex(parseInt(value, 10));
+    useEffect(() => setSelectedIndex(initialSelectedIndex), [resetDependency]);
+
+    const onChangeSelect: ChangeEventHandler<HTMLSelectElement> = e => {
+      setSelectedIndex(parseInt(e.currentTarget.value, 10));
     };
 
     return (
@@ -48,8 +51,9 @@ const SelectWithLabel = forwardRef<HTMLSelectElement, Props>(
         <select
           {...props}
           className="select__select"
-          onChange={e => onChangeSelect(e)}
+          onChange={onChangeSelect}
           name={selectName}
+          value={selectedIndex}
           defaultValue={selectedIndex}
           ref={ref}
         >
