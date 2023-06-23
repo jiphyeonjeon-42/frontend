@@ -1,8 +1,13 @@
 import Image from "../utils/Image";
 import Arr from "../../asset/img/arrow_right_black.svg";
 import "../../asset/css/HistoryTable.css";
+import { History } from "../../type";
 
-type Props = {};
+type Props = {
+  history: History;
+  openModal: () => void;
+  setInfo: (history: History) => void;
+};
 
 const HistoryTable = ({ history, openModal, setInfo }: Props) => {
   const openSetModal = () => {

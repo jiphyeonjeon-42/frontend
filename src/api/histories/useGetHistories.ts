@@ -5,7 +5,12 @@ import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { History } from "../../type";
 
-const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
+type Props = {
+  setOpenTitleAndMessage: (title: string, message: string) => void;
+  initWho?: string;
+};
+
+const useGetHistories = ({ setOpenTitleAndMessage, initWho }: Props) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [who, setWho] = useState(initWho ?? "all");
@@ -36,7 +41,7 @@ const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
     { key: "image", type: "string", isNullable: true },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: any) => {
     const info = compareExpect("histories", response.data.items, expectedItem);
     const { totalPages } = response.data.meta;
     setSearchResult({
@@ -45,7 +50,7 @@ const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
     });
   };
 
-  const displayError = error => {
+  const displayError = (error: any) => {
     setErrorDialog(error, setOpenTitleAndMessage);
   };
 

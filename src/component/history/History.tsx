@@ -11,10 +11,11 @@ import useDialog from "../../hook/useDialog";
 import useGetHistories from "../../api/histories/useGetHistories";
 import { rentTabList } from "../../constant/tablist";
 import Book from "../../asset/img/book-arrow-up-free-icon-font.svg";
+import { History } from "../../type";
 import "../../asset/css/Histories.css";
 
 const History = () => {
-  const [historyInfo, setHistoryInfo] = useState(null);
+  const [historyInfo, setHistoryInfo] = useState<History>();
   const { setOpen: openModal, Modal } = useModal();
   const { setOpenTitleAndMessage, Dialog } = useDialog();
   const { historiesList, lastPage, page, type, setPage, setQuery, setType } =
@@ -47,9 +48,11 @@ const History = () => {
               setInfo={setHistoryInfo}
             />
           ))}
-          <Modal>
-            <HistoryModalContents historyInfo={historyInfo} />
-          </Modal>
+          {historyInfo && (
+            <Modal>
+              <HistoryModalContents historyInfo={historyInfo} />
+            </Modal>
+          )}
           <div className="histories-table__pagination">
             <Pagination page={page} setPage={setPage} lastPage={lastPage} />
           </div>
