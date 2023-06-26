@@ -1,44 +1,37 @@
-import { useDialog } from "../../hook/useDialog";
+import { MouseEventHandler } from "react";
+import { useNewDialog } from "../../hook/useNewDialog";
 import { usePatchReviewsId } from "../../api/reviews/usePatchReviewsId";
+import { Review } from "../../type";
 import Edit from "../../asset/img/edit.svg";
 import Image from "../utils/Image";
 import "../../asset/css/ReviewManagementList.css";
-import { Review } from "../../type";
 
 type Props = {
   reviewList: Review[];
 };
 
 const ReviewManagementList = ({ reviewList }: Props) => {
-  const { Dialog, setOpenTitleAndMessage, setConfig, defaultConfig, setOpen } =
-    useDialog();
-  const { setReviewId } = usePatchReviewsId({
-    Dialog,
-    setOpenTitleAndMessage,
-  });
+  const { setReviewId } = usePatchReviewsId();
 
-  const onClick = e => {
-    const { id, name: content, value } = e.currentTarget;
-    const isHidden = value === "1";
-    const job = isHidden ? "공개" : "비공개";
-    setConfig({
-      ...defaultConfig,
-      title: `리뷰를 ${job}하시겠습니까?`,
-      message: `리뷰내용 : ${content}`,
-      numberOfButtons: 2,
-      firstButton: {
-        ...defaultConfig.firstButton,
-        text: `${job}하기`,
-        onClick: () => {
-          setReviewId(id);
-        },
+  const { addConfirmDialog } = useNewDialog();
+
+  const onClick: MouseEventHandler<HTMLButtonElement> = e => {
+    const id = parseInt(e.currentTarget.id, 10);
+    const { name: content, value } = e.currentTarget;
+    const isHidden = value === "hidden";
+
+    addConfirmDialog(
+      "review_change",
+      `리뷰를 ${isHidden ? "공개" : "비공개"}하시겠습니까?`,
+      `리뷰내용 : ${content}`,
+      () => {
+        setReviewId(id);
       },
-    });
-    setOpen();
+    );
   };
+
   return (
     <>
-      <Dialog />
       {reviewList.map(review => (
         <div className="review-management__list__item" key={review.reviewsId}>
           <span className="review-management__list__id">
@@ -66,9 +59,9 @@ const ReviewManagementList = ({ reviewList }: Props) => {
           </div>
           <button
             className="review-management__list__scope"
-            id={review.reviewsId}
+            id={`${review.reviewsId}`}
             name={review.content}
-            value={review.disabled}
+            value={review.disabled ? "hidden" : "visible"}
             type="button"
             onClick={onClick}
           >

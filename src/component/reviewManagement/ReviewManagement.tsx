@@ -1,8 +1,8 @@
 import { useGetReviews } from "../../api/reviews/useGetReviews";
+import { otherManagementTabList } from "../../constant/tablist";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
 import Management from "../utils/Management";
-import { otherManagementTabList } from "../../constant/tablist";
 import ReviewManagementList from "./ReviewManagementList";
 import Filter from "../utils/Filter";
 
@@ -20,16 +20,14 @@ const ReviewManagement = () => {
     setSelectedType,
     reviewList,
     lastPage,
-    Dialog,
   } = useGetReviews();
 
-  const setUndefinedReSelected = newType => {
+  const setUndefinedReSelected = (newType: string) => {
     setSelectedType(newType === selectedType ? undefined : newType);
   };
 
   return (
     <main>
-      <Dialog />
       <Banner img="admin" titleKo="리뷰 관리" titleEn="REVIEW MANAGEMENT" />
       <Tabs tabList={otherManagementTabList} />
       <Management

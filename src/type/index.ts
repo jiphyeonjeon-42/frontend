@@ -5,3 +5,4 @@ export * from "./Book";
 export * from "./Tag";
 export * from "./History";
 export * from "./BookInfo";
+export * from "./Review";

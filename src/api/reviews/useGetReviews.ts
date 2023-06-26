@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
+import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { Review } from "../../type";
 
+type RequestParams = {
+  titleOrNickname: string;
+  page: number;
+  disabled?: string;
+};
 export const useGetReviews = () => {
-  const [params, setParams] = useState({
+  const [params, setParams] = useState<RequestParams>({
     titleOrNickname: "",
     page: 1,
-    disabled: "-1",
   });
 
   const [result, setResult] = useState({
@@ -14,22 +19,22 @@ export const useGetReviews = () => {
     lastPage: 5,
   });
 
-  const setPage = page => {
+  const setPage = (page: number) => {
     setParams({ ...params, page });
   };
-  const setQuery = query => {
+  const setQuery = (query: string) => {
     setParams({ ...params, titleOrNickname: query });
   };
-  const setSelectedType = type => {
+  const setSelectedType = (type: string | undefined) => {
     setParams({ ...params, disabled: type });
   };
 
-  const { request, Dialog } = useApi("get", "reviews", {
+  const { request } = useApi("get", "reviews", {
     ...params,
     page: params.page - 1,
   });
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const { items } = response.data;
     const { totalPages } = response.data.meta;
 
@@ -48,6 +53,5 @@ export const useGetReviews = () => {
     setSelectedType,
     reviewList: result.reviewList as Review[],
     lastPage: result.lastPage,
-    Dialog,
   };
 };

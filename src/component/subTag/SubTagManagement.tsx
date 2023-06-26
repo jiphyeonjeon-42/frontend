@@ -16,6 +16,9 @@ const SubTagManagement = () => {
   const { page, lastPage, setPage, setQuery, filter, setFilter, list } =
     useGetTags();
 
+  const changeFilter = (filter: string) => {
+    setFilter(filter === "private" ? "private" : "public");
+  };
   return (
     <main>
       <Banner img="admin" titleKo="태그 기록" titleEn="TAG HISTORY" />
@@ -39,7 +42,7 @@ const SubTagManagement = () => {
             <Filter
               filterList={visibiltyFilterList}
               selectedType={filter}
-              setSelectedType={setFilter}
+              setSelectedType={changeFilter}
             />
             <SubTagManagementList tagList={list} />
           </>
