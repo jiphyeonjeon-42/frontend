@@ -8,23 +8,18 @@ import "../../asset/css/ReturnModalContents.css";
 
 type Props = {
   lendingId: number;
-  closeModal(...args: unknown[]): unknown;
-  setOpenTitleAndMessage(...args: unknown[]): unknown;
+  closeModal: () => void;
 };
 
-const ReturnModalContents = ({
-  lendingId,
-  closeModal,
-  setOpenTitleAndMessage: setError,
-}: Props) => {
-  const { lendingData } = useGetLendingsId({ lendingId, closeModal, setError });
+const ReturnModalContents = ({ lendingId, closeModal }: Props) => {
+  const { lendingData } = useGetLendingsId({ lendingId });
 
   const { condition, setCondition, requestReturn } = usePatchLendingsReturn({
     lendingId,
-    title: lendingData.title,
+    title: lendingData?.title || "",
     closeModal,
-    setError,
   });
+  if (!lendingData) return null;
 
   return (
     <BookInformationWithCover
@@ -49,7 +44,7 @@ const ReturnModalContents = ({
       />
       <TextWithLabel
         topLabelText="유저정보"
-        mainText={lendingData.login}
+        mainText={lendingData.login || ""}
         bottomLabelText={`연체일수 : ${lendingData.penaltyDays}일`}
       />
       <TextareaWithLabel
@@ -65,7 +60,7 @@ const ReturnModalContents = ({
       <div className="return-modal__buttons">
         <Button
           value="반납 완료하기"
-          color={`${condition.length && "red"}`}
+          color={condition.length ? "red" : undefined}
           disabled={!condition.length}
           onClick={requestReturn}
         />

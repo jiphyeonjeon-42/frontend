@@ -1,18 +1,16 @@
 import "../../asset/css/ReturnBookFilter.css";
 
-const ReturnBookFilter = ({ lendingSort, setLendingSort }) => {
-  const toggleTrue = () => {
-    setLendingSort(true);
-  };
-  const toggleFalse = () => {
-    setLendingSort(false);
-  };
+type Props = {
+  lendingSort: boolean;
+  setLendingSort: (sort: boolean) => void;
+};
+const ReturnBookFilter = ({ lendingSort, setLendingSort }: Props) => {
   return (
     <div className="return-filter">
       <div className="return-filter-wrapper">
         <button
           type="button"
-          onClick={toggleTrue}
+          onClick={() => setLendingSort(true)}
           className="proceeding filter-button"
         >
           <span
@@ -25,7 +23,7 @@ const ReturnBookFilter = ({ lendingSort, setLendingSort }) => {
         </button>
         <button
           type="button"
-          onClick={toggleFalse}
+          onClick={() => setLendingSort(false)}
           className="finish filter-button"
         >
           <span

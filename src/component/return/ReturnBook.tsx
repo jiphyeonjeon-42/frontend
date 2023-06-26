@@ -7,41 +7,38 @@ import Banner from "../utils/Banner";
 import Pagination from "../utils/Pagination";
 import BarcodeReader from "../utils/BarcodeReader";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import { useDialog } from "../../hook/useDialog";
 import { useModal } from "../../hook/useModal";
 import { useGetLendingsSearch } from "../../api/lendings/useGetLendingsSearch";
-import { useGetLendingsSearchId } from "../../api/lendings/useGetLendingsSearchId";
+import { useGetLendingsSearchId } from "../../api/lendings/useGetLendingsSearchId.js";
 
 import { rentTabList } from "../../constant/tablist";
 import Book from "../../asset/img/book-arrow-up-free-icon-font.svg";
 import "../../asset/css/ReturnBook.css";
 
 const ReturnBook = () => {
-  const [lendingId, setLendingId] = useState(undefined);
+  const [lendingId, setLendingId] = useState<number>();
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
 
   const toggleBarcode = () => setUsingBarcodeReader(!isUsingBarcodeReader);
 
   const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
-  const { setOpenTitleAndMessage, Dialog } = useDialog();
 
   const {
-    returnBookList,
+    lendingList,
     lastPage,
     page,
     setPage,
     setQuery,
     isSortNew,
     setIsSortNew,
-  } = useGetLendingsSearch({ setOpenTitleAndMessage });
+  } = useGetLendingsSearch();
   // 위의 search api로는 특정 ID검색이 안됨
   const { setQueryId } = useGetLendingsSearchId({
     openModal,
-    setOpenTitleAndMessage,
     setLendingId,
   });
 
-  const toDoAfterRead = text => {
+  const toDoAfterRead = (text: string) => {
     const bookId = text.split(" ")[0];
     setQueryId(bookId);
   };
@@ -72,10 +69,10 @@ const ReturnBook = () => {
               setLendingSort={setIsSortNew}
             />
           </div>
-          {returnBookList.map(factor => (
+          {lendingList.map(lending => (
             <ReturnBookTable
-              key={factor.id}
-              factor={factor}
+              key={lending.id}
+              lending={lending}
               openModal={openModal}
               setLendingId={setLendingId}
             />
@@ -85,14 +82,11 @@ const ReturnBook = () => {
           </div>
         </div>
       </section>
-      <Dialog />
-      <Modal>
-        <ReturnModalContents
-          lendingId={lendingId}
-          closeModal={closeModal}
-          setOpenTitleAndMessage={setOpenTitleAndMessage}
-        />
-      </Modal>
+      {lendingId && (
+        <Modal>
+          <ReturnModalContents lendingId={lendingId} closeModal={closeModal} />
+        </Modal>
+      )}
     </main>
   );
 };

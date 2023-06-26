@@ -1,22 +1,25 @@
+import { Lending } from "../../type";
+import { dateFormat, dateLessThan } from "../../util/date";
 import Image from "../utils/Image";
 import Arr from "../../asset/img/arrow_right_black.svg";
 import "../../asset/css/ReturnbookTable.css";
 
 type Props = {
-  setLendingId(...args: unknown[]): unknown;
+  lending: Lending;
+  openModal: () => void;
+  setLendingId: (id: number) => void;
 };
 
-const ReturnbookTable = ({ factor, openModal, setLendingId }: Props) => {
+const ReturnbookTable = ({ lending, openModal, setLendingId }: Props) => {
   const openSetModal = () => {
-    setLendingId(factor.id);
+    setLendingId(lending.id);
     openModal();
   };
-  const today = new Date();
-  const dueDate = new Date(factor.dueDate);
+
   return (
     <div className="return-book__table-list">
       <div className="return-book__table-list__name font-18-bold color-54">
-        {factor.login}
+        {lending.login}
       </div>
       <button
         className="return-book__table-list__button"
@@ -25,7 +28,7 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }: Props) => {
       >
         <div className="return-book__table-list__title">
           <span className="return-book__table-list__text color-54">
-            {factor.title}
+            {lending.title}
           </span>
           <Image
             className="return-book__table-list__arr"
@@ -35,17 +38,17 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }: Props) => {
         </div>
         <div className="return-book__table-list__info">
           <span className="re-callSign font-16 color-54">
-            청구기호 : {factor.callSign}
+            청구기호 : {lending.callSign}
           </span>
           <span className="re-dueDate font-16 color-54">
-            {`반납예정일 : ${factor.dueDate.slice(0, 10)}`}
+            {`반납예정일 : ${dateFormat(lending.dueDate)}`}
           </span>
           <span
             className={`re-penaltyDays font-16-bold ${
-              today - dueDate > 0 ? "color-red" : "color-54"
+              dateLessThan(lending.dueDate) ? "color-red" : "color-54"
             }`}
           >
-            {`${today - dueDate > 0 ? "연체 중" : ""}`}
+            {`${dateLessThan(lending.dueDate) ? "연체 중" : ""}`}
           </span>
         </div>
       </button>

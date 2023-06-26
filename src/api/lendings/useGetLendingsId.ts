@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
-import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
 import { Lending } from "../../type";
 
-export const useGetLendingsId = ({ lendingId, closeModal, setError }) => {
-  const defaultData: Lending = {
-    id: lendingId,
-    lendingCondition: "",
-    createdAt: "",
-    login: "",
-    penaltyDays: 0,
-    callSign: "",
-    title: "",
-    image: "",
-    dueDate: "",
-  };
-  const [lendingData, setLendingData] = useState<Lending>(defaultData);
+type Props = {
+  lendingId: number;
+};
+
+export const useGetLendingsId = ({ lendingId }: Props) => {
+  const [lendingData, setLendingData] = useState<Lending>();
 
   const { request } = useApi("get", `lendings/${lendingId}`, {});
 
@@ -32,22 +25,18 @@ export const useGetLendingsId = ({ lendingId, closeModal, setError }) => {
     { key: "image", type: "string", isNullable: true },
   ];
 
-  const refineResponse = response => {
-    const book = compareExpect("lendings/id", [response.data], expectedItem);
-    setLendingData(...book);
-  };
-
-  const displayError = error => {
-    closeModal();
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setError(title, errorCode ? message : error.message);
+  const refineResponse = (response: AxiosResponse) => {
+    const [lending] = compareExpect(
+      "lendings/id",
+      [response.data],
+      expectedItem,
+    );
+    setLendingData(lending);
   };
 
   useEffect(() => {
-    request(refineResponse, displayError);
+    request(refineResponse);
   }, [lendingId]);
 
-  return { lendingData };
+  return { lendingData: lendingData };
 };
-

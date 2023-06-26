@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { setErrorDialog } from "../../constant/error";
+import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
+import { Lending } from "../../type";
 
-export const useGetLendingsSearch = ({ setOpenTitleAndMessage }) => {
+export const useGetLendingsSearch = () => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [isSortNew, setIsSearchSort] = useState(false);
 
-  const setIsSortNew = newSort => {
-    setIsSearchSort(newSort);
+  const setIsSortNew = (newIsSortNew: boolean) => {
+    setIsSearchSort(newIsSortNew);
     setPage(1);
   };
 
-  const { request, Dialog } = useApi("get", "lendings/search", {
+  const { request } = useApi("get", "lendings/search", {
     query: searchParams.query,
     page: searchParams.page - 1,
     limit: 5,
@@ -32,7 +33,7 @@ export const useGetLendingsSearch = ({ setOpenTitleAndMessage }) => {
     { key: "title", type: "string", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const info = compareExpect(
       "lendings/search",
       response.data.items,
@@ -45,21 +46,16 @@ export const useGetLendingsSearch = ({ setOpenTitleAndMessage }) => {
     });
   };
 
-  const displayError = error => {
-    setErrorDialog(error, setOpenTitleAndMessage);
-  };
-
   useEffect(() => {
-    request(refineResponse, displayError);
+    request(refineResponse);
   }, [searchParams, isSortNew]);
   return {
-    returnBookList: searchResult.list,
+    lendingList: searchResult.list as Lending[],
     lastPage: searchResult.lastPage,
     page: searchParams.page,
     setPage,
     setQuery,
     isSortNew,
     setIsSortNew,
-    Dialog,
   };
 };
