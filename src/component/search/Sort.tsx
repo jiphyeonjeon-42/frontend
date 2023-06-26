@@ -2,7 +2,7 @@ import "../../asset/css/Sort.css";
 
 type Props = {
   sort: string;
-  setSort(...args: unknown[]): unknown;
+  setSort: (sort: string) => void;
 };
 
 const Sort = ({ sort, setSort }: Props) => {

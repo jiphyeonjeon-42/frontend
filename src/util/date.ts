@@ -14,11 +14,12 @@ export const getYear = (string: string) => dateFormat(string).substring(0, 4);
 export const getMonth = (string: string) => dateFormat(string).substring(5, 7);
 export const getDay = (string: string) => dateFormat(string).substring(8, 10);
 
-/* [string, yyyy, mm, dd] 형식의 배열 */
+/* [yyyy, mm, dd] 형식의 배열 */
 export const splitDate = (string: string) =>
   dateFormat(string)
     .match(dateReg)
-    ?.map(v => parseInt(v));
+    ?.slice(1)
+    ?.map(v => parseInt(v)) || [];
 
 /* string 형식의 날짜 비교 */
 export const dateLessThan = (date: string, now = nowDate) => {
@@ -46,7 +47,7 @@ export const addDay = (num: number, date = nowDate) => {
   if (!isString(date) || !isNumber(num)) return date;
   const splited = splitDate(dateFormat(date));
   if (!splited) return date;
-  const [, year, month, day] = splited;
+  const [year, month, day] = splited;
   const dateObj = new Date(year, month - 1, day);
   return dateFormat(addDayDateObject(dateObj, num).toISOString());
 };

@@ -3,9 +3,16 @@ import { useApi } from "../../hook/useApi";
 import { useParseUrlQueryString } from "../../hook/useParseUrlQueryString";
 import { compareExpect } from "../../util/typeCheck";
 import { searchUrlQueryKeys } from "../../constant/key";
+import { BookInfo } from "../../type";
+import { AxiosResponse } from "axios";
 
 export const useGetBooksInfoSearchUrl = () => {
-  const [searchResult, setSearchResult] = useState({
+  const [searchResult, setSearchResult] = useState<{
+    bookList: BookInfo[];
+    categoryList: { name: string; count: number }[];
+    lastPage: number;
+    categoryIndex: number;
+  }>({
     bookList: [],
     categoryList: [],
     lastPage: 5,
@@ -14,7 +21,7 @@ export const useGetBooksInfoSearchUrl = () => {
   const [query, page, sort, category] =
     useParseUrlQueryString(searchUrlQueryKeys);
 
-  const { request, Dialog } = useApi("get", "books/info/search", {
+  const { request } = useApi("get", "books/info/search", {
     query,
     page: page ? page - 1 : 0,
     limit: 20,
@@ -40,7 +47,7 @@ export const useGetBooksInfoSearchUrl = () => {
     { key: "name", type: "string", isNullable: false },
     { key: "count", type: "number", isNullable: false },
   ];
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const book = compareExpect(
       "books/info/search",
       response.data.items,
@@ -67,6 +74,5 @@ export const useGetBooksInfoSearchUrl = () => {
 
   return {
     ...searchResult,
-    Dialog,
   };
 };
