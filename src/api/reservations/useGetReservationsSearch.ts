@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
 import useApi from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
@@ -13,7 +14,11 @@ const useGetReservationsSearch = () => {
     isExpired: false,
   });
 
-  const setFilter = newFilter => {
+  const setFilter = (newFilter: {
+    isPending: boolean;
+    isWaiting: boolean;
+    isExpired: boolean;
+  }) => {
     setSearchFilter(newFilter);
     setPage(1);
   };
@@ -46,7 +51,7 @@ const useGetReservationsSearch = () => {
     { key: "userId", type: "number", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const info = compareExpect(
       "reservations/search",
       response.data.items,

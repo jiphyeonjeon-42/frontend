@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
 import { setErrorDialog } from "../../constant/error";
+import { AxiosError } from "axios";
+
+type Props = {
+  title: string;
+  userId: number;
+  bookId: number;
+  closeModal: () => void;
+  setOpenTitleAndMessage: (title: string, message: string) => void;
+};
 
 const usePostLendings = ({
   title,
@@ -8,8 +17,8 @@ const usePostLendings = ({
   bookId,
   setOpenTitleAndMessage,
   closeModal,
-}) => {
-  const [condition, setCondition] = useState(undefined);
+}: Props) => {
+  const [condition, setCondition] = useState("");
   const { request } = useApi("post", "lendings", {
     userId,
     bookId,
@@ -20,7 +29,7 @@ const usePostLendings = ({
     setOpenTitleAndMessage("대출결과", `${title} - 대출완료`, closeModal);
   };
 
-  const onError = error => {
+  const onError = (error: any) => {
     setErrorDialog(error, setOpenTitleAndMessage, closeModal);
   };
 

@@ -11,9 +11,10 @@ import { rentTabList } from "../../constant/tablist";
 import Reserve from "../../asset/img/list-check-solid.svg";
 import "../../asset/css/ReservedLoan.css";
 import useGetReservationsSearch from "../../api/reservations/useGetReservationsSearch";
+import { Reservation } from "../../type";
 
 const ReservedLoan = () => {
-  const [reservedInfo, setReservedInfo] = useState(null);
+  const [reservedInfo, setReservedInfo] = useState<Reservation>();
   const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
 
   const {
@@ -60,12 +61,14 @@ const ReservedLoan = () => {
               setInfo={setReservedInfo}
             />
           ))}
-          <Modal>
-            <ReservedModalContents
-              reservedInfo={reservedInfo}
-              closeModal={closeModal}
-            />
-          </Modal>
+          {reservedInfo && (
+            <Modal>
+              <ReservedModalContents
+                reservedInfo={reservedInfo}
+                closeModal={closeModal}
+              />
+            </Modal>
+          )}
           <div className="reserved-loan-table__pagination">
             <Pagination page={page} setPage={setPage} lastPage={lastPage} />
           </div>

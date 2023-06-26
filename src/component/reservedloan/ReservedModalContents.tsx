@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import useDialog from "../../hook/useDialog";
 import usePostLendings from "../../api/lendings/usePostLendings";
 import usePatchReservationsCancel from "../../api/reservations/usePatchReservationsCancel";
@@ -36,7 +36,7 @@ const ReservedModalContents = ({ reservedInfo, closeModal }: Props) => {
     closeModal,
   });
 
-  const postRent = e => {
+  const postRent: FormEventHandler = e => {
     e.preventDefault();
     requestLending(remark);
   };

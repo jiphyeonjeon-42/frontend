@@ -1,13 +1,25 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
 
+type Props = {
+  defaultConfig: any;
+  setConfig: (config: any) => void;
+  setOpen: () => void;
+  setOpenTitleAndMessage: (
+    title: string,
+    message: string,
+    afterClose?: () => void,
+  ) => void;
+};
+
 const usePatchReservationsCancel = ({
   defaultConfig,
   setConfig,
   setOpen,
   setOpenTitleAndMessage,
-}) => {
-  const [reservationId, setReservationId] = useState(undefined);
+}: Props) => {
+  const [reservationId, setReservationId] = useState<number>();
+
   const { request } = useApi("patch", `reservations/cancel/${reservationId}`);
 
   const onSuccess = () => {
