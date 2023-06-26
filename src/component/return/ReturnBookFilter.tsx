@@ -1,6 +1,10 @@
 import "../../asset/css/ReturnBookFilter.css";
 
-const ReturnBookFilter = ({ lendingSort, setLendingSort }) => {
+type Props = {
+  lendingSort: boolean;
+  setLendingSort: (sort: boolean) => void;
+};
+const ReturnBookFilter = ({ lendingSort, setLendingSort }: Props) => {
   const toggleTrue = () => {
     setLendingSort(true);
   };

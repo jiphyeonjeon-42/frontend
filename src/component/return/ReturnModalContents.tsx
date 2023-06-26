@@ -8,8 +8,8 @@ import useGetLendingsId from "../../api/lendings/useGetLendingsId";
 
 type Props = {
   lendingId: number;
-  closeModal(...args: unknown[]): unknown;
-  setOpenTitleAndMessage(...args: unknown[]): unknown;
+  closeModal: () => void;
+  setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
 const ReturnModalContents = ({
@@ -21,10 +21,11 @@ const ReturnModalContents = ({
 
   const { condition, setCondition, requestReturn } = usePatchLendingsReturn({
     lendingId,
-    title: lendingData.title,
+    title: lendingData?.title || "",
     closeModal,
     setError,
   });
+  if (!lendingData) return null;
 
   return (
     <BookInformationWithCover
@@ -49,7 +50,7 @@ const ReturnModalContents = ({
       />
       <TextWithLabel
         topLabelText="유저정보"
-        mainText={lendingData.login}
+        mainText={lendingData.login || ""}
         bottomLabelText={`연체일수 : ${lendingData.penaltyDays}일`}
       />
       <TextareaWithLabel
@@ -65,7 +66,7 @@ const ReturnModalContents = ({
       <div className="return-modal__buttons">
         <Button
           value="반납 완료하기"
-          color={`${condition.length && "red"}`}
+          color={condition.length ? "red" : undefined}
           disabled={!condition.length}
           onClick={requestReturn}
         />

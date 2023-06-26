@@ -17,7 +17,7 @@ import Book from "../../asset/img/book-arrow-up-free-icon-font.svg";
 import "../../asset/css/ReturnBook.css";
 
 const ReturnBook = () => {
-  const [lendingId, setLendingId] = useState(undefined);
+  const [lendingId, setLendingId] = useState<number>();
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
 
   const toggleBarcode = () => setUsingBarcodeReader(!isUsingBarcodeReader);
@@ -41,7 +41,7 @@ const ReturnBook = () => {
     setLendingId,
   });
 
-  const toDoAfterRead = text => {
+  const toDoAfterRead = (text: string) => {
     const bookId = text.split(" ")[0];
     setQueryId(bookId);
   };
@@ -86,13 +86,15 @@ const ReturnBook = () => {
         </div>
       </section>
       <Dialog />
-      <Modal>
-        <ReturnModalContents
-          lendingId={lendingId}
-          closeModal={closeModal}
-          setOpenTitleAndMessage={setOpenTitleAndMessage}
-        />
-      </Modal>
+      {lendingId && (
+        <Modal>
+          <ReturnModalContents
+            lendingId={lendingId}
+            closeModal={closeModal}
+            setOpenTitleAndMessage={setOpenTitleAndMessage}
+          />
+        </Modal>
+      )}
     </main>
   );
 };

@@ -1,7 +1,19 @@
 import { useState } from "react";
 import useApi from "../../hook/useApi";
 
-const usePatchLendingsReturn = ({ lendingId, title, closeModal, setError }) => {
+type Props = {
+  lendingId: number;
+  title: string;
+  closeModal: () => void;
+  setError: (title: string, message: string, afterClose?: () => void) => void;
+};
+
+const usePatchLendingsReturn = ({
+  lendingId,
+  title,
+  closeModal,
+  setError,
+}: Props) => {
   const [condition, setCondition] = useState("");
 
   const { request } = useApi("patch", "lendings/return", {
@@ -9,7 +21,7 @@ const usePatchLendingsReturn = ({ lendingId, title, closeModal, setError }) => {
     condition,
   });
 
-  const onSuccess = response => {
+  const onSuccess = (response: any) => {
     closeModal();
     setError(
       `${
@@ -25,12 +37,7 @@ const usePatchLendingsReturn = ({ lendingId, title, closeModal, setError }) => {
   const requestReturn = () => {
     request(onSuccess);
   };
-
-  return {
-    condition,
-    setCondition,
-    requestReturn,
-  };
+  return { condition, setCondition, requestReturn };
 };
 
 export default usePatchLendingsReturn;
