@@ -1,9 +1,10 @@
+import { MouseEventHandler } from "react";
 import useDialog from "../../hook/useDialog";
 import usePatchReviewsId from "../../api/reviews/usePatchReviewsId";
+import { Review } from "../../type";
 import Edit from "../../asset/img/edit.svg";
 import Image from "../utils/Image";
 import "../../asset/css/ReviewManagementList.css";
-import { Review } from "../../type";
 
 type Props = {
   reviewList: Review[];
@@ -13,14 +14,15 @@ const ReviewManagementList = ({ reviewList }: Props) => {
   const { Dialog, setOpenTitleAndMessage, setConfig, defaultConfig, setOpen } =
     useDialog();
   const { setReviewId } = usePatchReviewsId({
-    Dialog,
     setOpenTitleAndMessage,
   });
 
-  const onClick = e => {
-    const { id, name: content, value } = e.currentTarget;
-    const isHidden = value === "1";
+  const onClick: MouseEventHandler<HTMLButtonElement> = e => {
+    const id = parseInt(e.currentTarget.id, 10);
+    const { name: content, value } = e.currentTarget;
+    const isHidden = value === "hidden";
     const job = isHidden ? "공개" : "비공개";
+
     setConfig({
       ...defaultConfig,
       title: `리뷰를 ${job}하시겠습니까?`,
@@ -36,6 +38,7 @@ const ReviewManagementList = ({ reviewList }: Props) => {
     });
     setOpen();
   };
+
   return (
     <>
       <Dialog />
@@ -66,9 +69,9 @@ const ReviewManagementList = ({ reviewList }: Props) => {
           </div>
           <button
             className="review-management__list__scope"
-            id={review.reviewsId}
+            id={`${review.reviewsId}`}
             name={review.content}
-            value={review.disabled}
+            value={review.disabled ? "hidden" : "visible"}
             type="button"
             onClick={onClick}
           >

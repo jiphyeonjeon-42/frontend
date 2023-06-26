@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AxiosResponse } from "axios";
 import useApi from "../../hook/useApi";
 import { Review } from "../../type";
 
@@ -14,14 +15,14 @@ const useGetReviews = () => {
     lastPage: 5,
   });
 
-  const setPage = page => {
+  const setPage = (page: number) => {
     setParams({ ...params, page });
   };
-  const setQuery = query => {
+  const setQuery = (query: string) => {
     setParams({ ...params, titleOrNickname: query });
   };
-  const setSelectedType = type => {
-    setParams({ ...params, disabled: type });
+  const setSelectedType = (type: string | undefined) => {
+    if (type) setParams({ ...params, disabled: type });
   };
 
   const { request, Dialog } = useApi("get", "reviews", {
@@ -29,7 +30,7 @@ const useGetReviews = () => {
     page: params.page - 1,
   });
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const { items } = response.data;
     const { totalPages } = response.data.meta;
 

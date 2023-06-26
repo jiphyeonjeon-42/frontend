@@ -2,8 +2,16 @@ import { useEffect, useState } from "react";
 import getErrorMessage from "../../constant/error";
 import useApi from "../../hook/useApi";
 
-const usePatchReviewsId = ({ setOpenTitleAndMessage }) => {
-  const [reviewId, setReviewId] = useState(undefined);
+type Props = {
+  setOpenTitleAndMessage: (
+    title: string,
+    message: string,
+    afterClose?: () => void,
+  ) => void;
+};
+
+const usePatchReviewsId = ({ setOpenTitleAndMessage }: Props) => {
+  const [reviewId, setReviewId] = useState<number>();
   const { request } = useApi("patch", `reviews/${reviewId}`);
 
   const onSuccess = () => {
@@ -12,7 +20,7 @@ const usePatchReviewsId = ({ setOpenTitleAndMessage }) => {
     );
   };
 
-  const onError = error => {
+  const onError = (error: any) => {
     const errorCode = parseInt(error?.response?.data?.errorCode, 10);
     const [title, message] = getErrorMessage(errorCode).split("\r\n");
     setOpenTitleAndMessage(
