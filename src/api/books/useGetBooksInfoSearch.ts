@@ -4,7 +4,7 @@ import { useSearch } from "../../hook/useSearch";
 import { Book } from "../../type";
 import { AxiosResponse } from "axios";
 
-const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
+export const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
 
@@ -35,5 +35,3 @@ const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
     setQuery,
   };
 };
-
-export default useGetBooksInfoSearch;

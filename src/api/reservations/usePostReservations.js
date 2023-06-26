@@ -1,7 +1,7 @@
 import { setErrorDialog } from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 
-const usePostReservations = ({
+export const usePostReservations = ({
   bookInfoId,
   dialogDefaultConfig,
   setDialogConfig,
@@ -38,5 +38,3 @@ const usePostReservations = ({
   };
   return { postReservation };
 };
-
-export default usePostReservations;

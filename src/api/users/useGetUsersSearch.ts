@@ -5,7 +5,7 @@ import { compareExpect } from "../../util/typeCheck";
 import { User } from "../../type";
 import { AxiosResponse } from "axios";
 
-const useGetUsersSearch = ({ limit }: { limit: number }) => {
+export const useGetUsersSearch = ({ limit }: { limit: number }) => {
   const {
     searchResult,
     setSearchResult,
@@ -75,5 +75,3 @@ const useGetUsersSearch = ({ limit }: { limit: number }) => {
     setQueryNoDelay,
   };
 };
-
-export default useGetUsersSearch;

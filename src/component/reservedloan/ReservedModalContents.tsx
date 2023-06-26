@@ -1,7 +1,7 @@
 import { useState } from "react";
-import useDialog from "../../hook/useDialog";
-import usePostLendings from "../../api/lendings/usePostLendings";
-import usePatchReservationsCancel from "../../api/reservations/usePatchReservationsCancel";
+import { useDialog } from "../../hook/useDialog";
+import { usePostLendings } from "../../api/lendings/usePostLendings";
+import { usePatchReservationsCancel } from "../../api/reservations/usePatchReservationsCancel";
 import Button from "../utils/Button";
 import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";

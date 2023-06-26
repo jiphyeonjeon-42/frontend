@@ -4,7 +4,7 @@ import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
 import { AxiosResponse } from "axios";
 
-const useGetBooksInfoPopular = () => {
+export const useGetBooksInfoPopular = () => {
   const [docs, setDocs] = useState<Book[]>([]);
 
   const { request } = useApi("get", "books/info", {
@@ -35,5 +35,3 @@ const useGetBooksInfoPopular = () => {
 
   return { docs };
 };
-
-export default useGetBooksInfoPopular;

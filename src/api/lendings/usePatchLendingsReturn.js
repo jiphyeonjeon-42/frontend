@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useApi } from "../../hook/useApi";
 
-const usePatchLendingsReturn = ({ lendingId, title, closeModal, setError }) => {
+export const usePatchLendingsReturn = ({ lendingId, title, closeModal, setError }) => {
   const [condition, setCondition] = useState("");
 
   const { request } = useApi("patch", "lendings/return", {
@@ -32,5 +32,3 @@ const usePatchLendingsReturn = ({ lendingId, title, closeModal, setError }) => {
     requestReturn,
   };
 };
-
-export default usePatchLendingsReturn;

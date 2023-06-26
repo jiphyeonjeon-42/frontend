@@ -4,7 +4,7 @@ import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { Reservation } from "../../type";
 
-const useGetReservationsSearch = () => {
+export const useGetReservationsSearch = () => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [filter, setSearchFilter] = useState({
@@ -73,5 +73,3 @@ const useGetReservationsSearch = () => {
     Dialog,
   };
 };
-
-export default useGetReservationsSearch;

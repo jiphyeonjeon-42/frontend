@@ -3,7 +3,7 @@ import getErrorMessage from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
-const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
+export const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
   const [bookInfoId, setBookInfoId] = useState(initBookInfoId);
   const { request } = useApi("post", `books/info/${bookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
@@ -35,5 +35,3 @@ const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
 
   return { setBookInfoId, likeData };
 };
-
-export default usePostLike;

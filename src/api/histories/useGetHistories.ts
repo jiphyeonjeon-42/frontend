@@ -55,5 +55,3 @@ export const useGetHistories = () => {
     setQuery,
   };
 };
-
-export default useGetHistories;

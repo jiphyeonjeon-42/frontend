@@ -1,8 +1,7 @@
 import SubTitle from "../utils/SubTitle";
 import MainNewBookList from "./MainNewBookList";
-import useGetBooksInfoNew from "../../api/books/useGetBooksInfoNew";
+import { useGetBooksInfoNew } from "../../api/books/useGetBooksInfoNew";
 import "../../asset/css/MainNew.css";
-
 
 const MainNew = () => {
   const { bookList } = useGetBooksInfoNew();

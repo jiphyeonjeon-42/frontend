@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useApi } from "../../hook/useApi";
 
-const usePostReview = ({ setOpenTitleAndMessage, bookInfoId, changeTab }) => {
+export const usePostReview = ({ setOpenTitleAndMessage, bookInfoId, changeTab }) => {
   const checkLogin = JSON.parse(window.localStorage.getItem("user"));
   const [content, setContent] = useState(null);
   const { request } = useApi("post", "/reviews", {
@@ -32,5 +32,3 @@ const usePostReview = ({ setOpenTitleAndMessage, bookInfoId, changeTab }) => {
 
   return { setContent };
 };
-
-export default usePostReview;

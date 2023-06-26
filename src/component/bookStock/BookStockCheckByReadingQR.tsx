@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import BarcodeReader from "../utils/BarcodeReader";
-import useModal from "../../hook/useModal";
+import { useModal } from "../../hook/useModal";
 import { parseBookIdFromQRLabel } from "../../util/parseBookIdFromQRLabel";
 import BookStockDetailModal from "./BookStockDetailModal";
 import { Book } from "../../type";

@@ -5,7 +5,7 @@ import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
 import { AxiosResponse } from "axios";
 
-const useGetBooksSearch = ({ limit }: { limit: number }) => {
+export const useGetBooksSearch = ({ limit }: { limit: number }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
 
@@ -56,5 +56,3 @@ const useGetBooksSearch = ({ limit }: { limit: number }) => {
     setQuery,
   };
 };
-
-export default useGetBooksSearch;

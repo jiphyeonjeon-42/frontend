@@ -1,8 +1,8 @@
 import { useState } from "react";
-import useDialog from "../../../hook/useDialog";
-import useGetLike from "../../../api/like/useGetLike";
-import usePostLike from "../../../api/like/usePostLike";
-import useDeleteLike from "../../../api/like/useDeleteLike";
+import { useDialog } from "../../../hook/useDialog";
+import { useGetLike } from "../../../api/like/useGetLike";
+import { usePostLike } from "../../../api/like/usePostLike";
+import { useDeleteLike } from "../../../api/like/useDeleteLike";
 import Image from "../../utils/Image";
 import FilledLike from "../../../asset/img/like_filled.svg";
 import EmptyLike from "../../../asset/img/like_empty.svg";

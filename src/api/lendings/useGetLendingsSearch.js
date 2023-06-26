@@ -4,7 +4,7 @@ import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetLendingsSearch = ({ setOpenTitleAndMessage }) => {
+export const useGetLendingsSearch = ({ setOpenTitleAndMessage }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [isSortNew, setIsSearchSort] = useState(false);
@@ -63,5 +63,3 @@ const useGetLendingsSearch = ({ setOpenTitleAndMessage }) => {
     Dialog,
   };
 };
-
-export default useGetLendingsSearch;

@@ -3,7 +3,7 @@ import getErrorMessage from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetLike = ({
+export const useGetLike = ({
   setOpenTitleAndMessage,
   initBookInfoId,
   setCurrentLike,
@@ -41,5 +41,3 @@ const useGetLike = ({
 
   return { likeData };
 };
-
-export default useGetLike;

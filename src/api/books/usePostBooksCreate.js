@@ -3,7 +3,7 @@ import { useApi } from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
 
-const usePostBooksCreate = () => {
+export const usePostBooksCreate = () => {
   const [newBookInfo, setNewBookInfo] = useState(null);
   const [message, setMessage] = useState("");
 
@@ -47,5 +47,3 @@ const usePostBooksCreate = () => {
     registerBook,
   };
 };
-
-export default usePostBooksCreate;

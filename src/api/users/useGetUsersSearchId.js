@@ -3,7 +3,7 @@ import { setErrorDialog } from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
-const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }) => {
+export const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }) => {
   const [userInfo, setUserInfo] = useState(null);
 
   const { request } = useApi("get", "users/search", {
@@ -56,5 +56,3 @@ const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }) => {
 
   return { userInfo };
 };
-
-export default useGetUsersSearchId;

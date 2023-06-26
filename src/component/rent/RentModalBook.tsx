@@ -2,8 +2,8 @@ import { useState } from "react";
 import BookList from "./RentModalBookList";
 import SearchModal from "../utils/SearchModal";
 import BarcodeReader from "../utils/BarcodeReader";
-import useGetBooksSearch from "../../api/books/useGetBooksSearch";
-import useGetBooksId from "../../api/books/useGetBooksId";
+import { useGetBooksSearch } from "../../api/books/useGetBooksSearch";
+import { useGetBooksId } from "../../api/books/useGetBooksId";
 import { Book } from "../../type";
 
 type Props = {

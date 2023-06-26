@@ -1,5 +1,5 @@
 import Pagination from "../../utils/Pagination";
-import useGetHistories from "../../../api/histories/useGetHistories";
+import { useGetHistories } from "../../../api/histories/useGetHistories";
 import RentHistoryTable from "./RentHistoryTable";
 import "../../../asset/css/RentHistory.css";
 

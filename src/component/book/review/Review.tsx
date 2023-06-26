@@ -1,9 +1,9 @@
 import { reviewTabList } from "../../../constant/tablist";
 import PostReview from "./PostReview";
 import ShowReviews from "./ShowReviews";
-import useTabFocus from "../../../hook/useTabFocus";
-import usePostReview from "../../../api/reviews/usePostReview";
-import useDialog from "../../../hook/useDialog";
+import { useTabFocus } from "../../../hook/useTabFocus";
+import { usePostReview } from "../../../api/reviews/usePostReview";
+import { useDialog } from "../../../hook/useDialog";
 import "../../../asset/css/Tabs.css";
 import "../../../asset/css/Review.css";
 

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
-// import useDebounce from "../../hook/useDebounce";
+// import { useDebounce } from "../../hook/useDebounce";
 import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";
 
-const useGetBooksCreate = defalutBook => {
+export const useGetBooksCreate = defalutBook => {
   const [isbnQuery, setIsbnQuery] = useState("");
   const [bookInfo, setBookInfo] = useState(defalutBook);
   const [errorMessage, setErrorMessage] = useState("");
@@ -58,5 +58,3 @@ const useGetBooksCreate = defalutBook => {
 
   return { bookInfo, errorMessage, fetchData, setBookInfo };
 };
-
-export default useGetBooksCreate;

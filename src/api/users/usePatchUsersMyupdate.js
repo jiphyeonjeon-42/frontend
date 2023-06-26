@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { setErrorDialog } from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 
-const usePatchUsersMyupdate = ({ modeString, setOpenTitleAndMessage }) => {
+export const usePatchUsersMyupdate = ({ modeString, setOpenTitleAndMessage }) => {
   const [patchData, setPatchData] = useState(undefined);
 
   const { request } = useApi("patch", "/users/myupdate", patchData);
@@ -24,5 +24,3 @@ const usePatchUsersMyupdate = ({ modeString, setOpenTitleAndMessage }) => {
 
   return { setPatchData };
 };
-
-export default usePatchUsersMyupdate;

@@ -4,13 +4,13 @@ import { myPageTabList } from "../../constant/tablist";
 import MyRent from "./MyRentInfo/MyRent";
 import MyReservation from "./MyReservation";
 import MyReview from "./MyReview";
-import useDialog from "../../hook/useDialog";
-import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
+import { useDialog } from "../../hook/useDialog";
+import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import getErrorMessage from "../../constant/error";
 import Login from "../../asset/img/login_icon_white.svg";
-import useTabFocus from "../../hook/useTabFocus";
+import { useTabFocus } from "../../hook/useTabFocus";
 import "../../asset/css/Mypage.css";
 
 const Mypage = () => {

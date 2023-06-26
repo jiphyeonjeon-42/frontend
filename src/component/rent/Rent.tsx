@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useModal from "../../hook/useModal";
+import { useModal } from "../../hook/useModal";
 import { rentTabList } from "../../constant/tablist";
 import { Book, User } from "../../type";
 import Banner from "../utils/Banner";

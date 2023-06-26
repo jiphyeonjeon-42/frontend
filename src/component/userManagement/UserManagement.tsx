@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { userManagementTabList } from "../../constant/tablist";
+import { useGetUsersSearch } from "../../api/users/useGetUsersSearch";
+import { User } from "../../type";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
 import UserBriefInfo from "./UserBriefInfo";
@@ -8,11 +11,7 @@ import Pagination from "../utils/Pagination";
 import Modal from "../utils/Modal";
 import ModalHeader from "../utils/ModalHeader";
 import UserDetailInfo from "./UserDetailInfo";
-
-import { userManagementTabList } from "../../constant/tablist";
-import useGetUsersSearch from "../../api/users/useGetUsersSearch";
 import "../../asset/css/UserManagement.css";
-import { User } from "../../type";
 
 const USAGE = 1;
 

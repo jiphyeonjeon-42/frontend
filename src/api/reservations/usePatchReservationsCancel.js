@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 
-const usePatchReservationsCancel = ({
+export const usePatchReservationsCancel = ({
   defaultConfig,
   setConfig,
   setOpen,
@@ -38,5 +38,3 @@ const usePatchReservationsCancel = ({
 
   return { setReservationId };
 };
-
-export default usePatchReservationsCancel;

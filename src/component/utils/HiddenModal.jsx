@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useDialog from "../../hook/useDialog";
+import { useDialog } from "../../hook/useDialog";
 
 const HiddenModal = () => {
   // 페이지 전환 후 띄워야 하는 모달일 경우(ex./auth) localstorage 이용

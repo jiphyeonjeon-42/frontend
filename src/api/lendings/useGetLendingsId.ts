@@ -4,7 +4,7 @@ import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
 import { Lending } from "../../type";
 
-const useGetLendingsId = ({ lendingId, closeModal, setError }) => {
+export const useGetLendingsId = ({ lendingId, closeModal, setError }) => {
   const defaultData: Lending = {
     id: lendingId,
     lendingCondition: "",
@@ -51,4 +51,3 @@ const useGetLendingsId = ({ lendingId, closeModal, setError }) => {
   return { lendingData };
 };
 
-export default useGetLendingsId;

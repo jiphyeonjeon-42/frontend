@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { category, koreanDemicalClassification } from "../../constant/category";
-import usePostBooksCreate from "../../api/books/usePostBooksCreate";
+import { usePostBooksCreate } from "../../api/books/usePostBooksCreate";
 
 type Props = {
   bookInfo: {

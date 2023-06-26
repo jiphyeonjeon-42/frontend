@@ -13,7 +13,7 @@ type Props = {
   closeModal: () => void;
 };
 
-const usePostLendingsMultiple = ({
+export const usePostLendingsMultiple = ({
   selectedBooks,
   setSelectedBooks,
   selectedUser,
@@ -74,5 +74,3 @@ const usePostLendingsMultiple = ({
 
   return { setConditions, requestLending };
 };
-
-export default usePostLendingsMultiple;

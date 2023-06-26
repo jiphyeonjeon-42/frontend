@@ -7,10 +7,10 @@ import Banner from "../utils/Banner";
 import Pagination from "../utils/Pagination";
 import BarcodeReader from "../utils/BarcodeReader";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import useDialog from "../../hook/useDialog";
-import useModal from "../../hook/useModal";
-import useGetLendingsSearch from "../../api/lendings/useGetLendingsSearch";
-import useGetLendingsSearchId from "../../api/lendings/useGetLendingsSearchId";
+import { useDialog } from "../../hook/useDialog";
+import { useModal } from "../../hook/useModal";
+import { useGetLendingsSearch } from "../../api/lendings/useGetLendingsSearch";
+import { useGetLendingsSearchId } from "../../api/lendings/useGetLendingsSearchId";
 
 import { rentTabList } from "../../constant/tablist";
 import Book from "../../asset/img/book-arrow-up-free-icon-font.svg";

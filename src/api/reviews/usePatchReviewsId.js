@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import getErrorMessage from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 
-const usePatchReviewsId = ({ setOpenTitleAndMessage }) => {
+export const usePatchReviewsId = ({ setOpenTitleAndMessage }) => {
   const [reviewId, setReviewId] = useState(undefined);
   const { request } = useApi("patch", `reviews/${reviewId}`);
 
@@ -28,5 +28,3 @@ const usePatchReviewsId = ({ setOpenTitleAndMessage }) => {
   }, [reviewId]);
   return { setReviewId };
 };
-
-export default usePatchReviewsId;

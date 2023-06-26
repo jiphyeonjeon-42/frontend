@@ -8,7 +8,8 @@ type Props = {
   setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
   closeModal: () => void;
 };
-const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
+
+export const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
   const [bookId, setBookId] = useState<string>();
   const { request } = useApi("get", `books/${bookId}`);
 
@@ -34,4 +35,3 @@ const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
   return { setBookId };
 };
 
-export default useGetBooksId;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import SubTitle from "../utils/SubTitle";
 import MainPopularCenter from "./MainPopularCenter";
 import MainPopularSide from "./MainPopularSide";
-import useGetBooksInfoPopular from "../../api/books/useGetBooksInfoPopular";
+import { useGetBooksInfoPopular } from "../../api/books/useGetBooksInfoPopular";
 import "../../asset/css/MainPopular.css";
 
 const MainPopular = () => {

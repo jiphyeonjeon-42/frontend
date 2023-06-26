@@ -4,7 +4,7 @@ import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";
 
-const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
+export const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
   const [bookDetailInfo, setBookDetailInfo] = useState({ books: [] });
   const navigate = useNavigate();
 
@@ -60,5 +60,3 @@ const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
 
   return { bookDetailInfo };
 };
-
-export default useGetBooksInfoId;

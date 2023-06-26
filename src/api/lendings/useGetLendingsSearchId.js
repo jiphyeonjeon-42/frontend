@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 
-const useGetLendingsSearchId = ({
+export const useGetLendingsSearchId = ({
   setLendingId,
   openModal,
   setOpenTitleAndMessage,
@@ -32,5 +32,3 @@ const useGetLendingsSearchId = ({
     setQueryId: setQuery,
   };
 };
-
-export default useGetLendingsSearchId;

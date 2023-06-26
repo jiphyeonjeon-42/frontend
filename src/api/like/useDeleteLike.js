@@ -3,7 +3,7 @@ import getErrorMessage from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
-const useDeleteLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
+export const useDeleteLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
   const [bookInfoId, setBookInfoId] = useState(initBookInfoId);
   const { request } = useApi("delete", `books/info/${bookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
@@ -36,5 +36,3 @@ const useDeleteLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
 
   return { setBookInfoId, likeData };
 };
-
-export default useDeleteLike;
