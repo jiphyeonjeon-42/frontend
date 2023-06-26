@@ -15,7 +15,7 @@ import "../../asset/css/Books.css";
 import "../../asset/css/Search.css";
 
 const Search = () => {
-  const myRef = useRef(null);
+  const myRef = useRef<HTMLDivElement>(null);
   const { Dialog, bookList, categoryList, lastPage, categoryIndex } =
     useGetBooksInfoSearchUrl();
   const [urlSearchParams, setUrlSearchParams] = useSearchParams();
@@ -23,10 +23,10 @@ const Search = () => {
 
   const debounce = useDebounce();
   const setQuery = useCallback(
-    newQuery => {
+    (newQuery: string) => {
       debounce(() => {
         urlSearchParams.set("search", newQuery);
-        urlSearchParams.set("page", 1);
+        urlSearchParams.set("page", "1");
         urlSearchParams.delete("category");
         urlSearchParams.delete("sort");
         setUrlSearchParams(urlSearchParams);
@@ -36,17 +36,17 @@ const Search = () => {
   );
 
   const setPage = useCallback(
-    newPage => {
-      urlSearchParams.set("page", newPage);
+    (newPage: number) => {
+      urlSearchParams.set("page", `${newPage}`);
       setUrlSearchParams(urlSearchParams);
     },
     [urlSearchParams],
   );
 
   const setSort = useCallback(
-    newSort => {
+    (newSort: string) => {
       urlSearchParams.set("sort", newSort);
-      urlSearchParams.set("page", 1);
+      urlSearchParams.set("page", "1");
       setUrlSearchParams(urlSearchParams);
     },
     [urlSearchParams],
@@ -70,7 +70,7 @@ const Search = () => {
         <CategoryFilter
           userWord={query || ""}
           userSort={sort || "title"}
-          userCate={parseInt(categoryIndex, 10) || 0}
+          userCate={categoryIndex || 0}
           entireCate={categoryList}
         />
         <div className="search-sort">
@@ -79,7 +79,6 @@ const Search = () => {
         <section className="books">
           {bookList.map(items => (
             <BookInfo
-              className="bookinfo"
               key={items.id}
               id={items.id}
               isbn={items.isbn}
