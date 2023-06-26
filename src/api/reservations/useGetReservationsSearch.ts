@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
@@ -13,7 +14,11 @@ export const useGetReservationsSearch = () => {
     isExpired: false,
   });
 
-  const setFilter = newFilter => {
+  const setFilter = (newFilter: {
+    isPending: boolean;
+    isWaiting: boolean;
+    isExpired: boolean;
+  }) => {
     setSearchFilter(newFilter);
     setPage(1);
   };
@@ -25,7 +30,7 @@ export const useGetReservationsSearch = () => {
     return "all";
   };
 
-  const { request, Dialog } = useApi("get", "reservations/search", {
+  const { request } = useApi("get", "reservations/search", {
     query: searchParams.query,
     page: searchParams.page - 1,
     limit: 5,
@@ -46,7 +51,7 @@ export const useGetReservationsSearch = () => {
     { key: "userId", type: "number", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const info = compareExpect(
       "reservations/search",
       response.data.items,
@@ -70,6 +75,5 @@ export const useGetReservationsSearch = () => {
     setQuery,
     filter,
     setFilter,
-    Dialog,
   };
 };

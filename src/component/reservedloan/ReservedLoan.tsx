@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { useModal } from "../../hook/useModal";
+import { useGetReservationsSearch } from "../../api/reservations/useGetReservationsSearch";
+import { rentTabList } from "../../constant/tablist";
+import { Reservation } from "../../type";
 import ReservedFilter from "./ReservedFilter";
 import ReservedTableList from "./ReservedTableList";
 import ReservedModalContents from "./ReservedModalContents";
@@ -6,14 +10,11 @@ import Tabs from "../utils/Tabs";
 import Banner from "../utils/Banner";
 import Pagination from "../utils/Pagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import { useModal } from "../../hook/useModal";
-import { rentTabList } from "../../constant/tablist";
 import Reserve from "../../asset/img/list-check-solid.svg";
 import "../../asset/css/ReservedLoan.css";
-import { useGetReservationsSearch } from "../../api/reservations/useGetReservationsSearch";
 
 const ReservedLoan = () => {
-  const [reservedInfo, setReservedInfo] = useState(null);
+  const [reservedInfo, setReservedInfo] = useState<Reservation>();
   const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
 
   const {
@@ -24,12 +25,10 @@ const ReservedLoan = () => {
     setQuery,
     filter,
     setFilter,
-    Dialog,
   } = useGetReservationsSearch();
 
   return (
     <main>
-      <Dialog />
       <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />
       <Tabs tabList={rentTabList} />
       <section className="reserved-loan-body">
@@ -60,12 +59,14 @@ const ReservedLoan = () => {
               setInfo={setReservedInfo}
             />
           ))}
-          <Modal>
-            <ReservedModalContents
-              reservedInfo={reservedInfo}
-              closeModal={closeModal}
-            />
-          </Modal>
+          {reservedInfo && (
+            <Modal>
+              <ReservedModalContents
+                reservedInfo={reservedInfo}
+                closeModal={closeModal}
+              />
+            </Modal>
+          )}
           <div className="reserved-loan-table__pagination">
             <Pagination page={page} setPage={setPage} lastPage={lastPage} />
           </div>

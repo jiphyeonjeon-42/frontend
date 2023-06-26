@@ -13,11 +13,14 @@ type Props = {
 };
 
 const ReservedFilter = ({ filter, setFilter }: Props) => {
-  const toggleFilter = type => {
-    const newFilter = {};
+  const toggleFilter = (type: "isPending" | "isWaiting" | "isExpired") => {
+    const newFilter = {
+      isPending: false,
+      isWaiting: false,
+      isExpired: false,
+    };
     Object.keys(filter).forEach(key => {
       if (key === type) newFilter[key] = !filter[key];
-      else newFilter[key] = false;
     });
     setFilter(newFilter);
   };
