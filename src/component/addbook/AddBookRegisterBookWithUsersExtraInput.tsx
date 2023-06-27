@@ -1,40 +1,40 @@
-import { useRef, useState, useEffect } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  ChangeEventHandler,
+  FormEventHandler,
+} from "react";
 import { category, koreanDemicalClassification } from "../../constant/category";
 import usePostBooksCreate from "../../api/books/usePostBooksCreate";
+import { BookInfo } from "../../type";
 
 type Props = {
-  bookInfo: {
-    title: string;
-    isbn: string;
-    author: string;
-    publisher: string;
-    image: string;
-    pubdate: string;
-    koreanDemicalClassification: string;
-  };
+  bookInfo: BookInfo;
 };
 
 const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
-  const [isDevBook, setIsDevBook] = useState("");
+  const [isDevBook, setIsDevBook] = useState(false);
   const [categoryId, setCategoryId] = useState("");
-  const donator = useRef(null);
+  const donator = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setIsDevBook("");
+    setIsDevBook(false);
     setCategoryId("");
   }, [bookInfo]);
+
   const { message, registerBook } = usePostBooksCreate();
 
-  const onChangeCategory = e => {
-    setCategoryId(parseInt(e.currentTarget.value, 10));
+  const onChangeCategory: ChangeEventHandler<HTMLSelectElement> = e => {
+    setCategoryId(e.currentTarget.value);
   };
 
-  const onSubmit = e => {
+  const onSubmit: FormEventHandler = e => {
     e.preventDefault();
     registerBook({
       ...bookInfo,
-      categoryId: `${categoryId}`,
-      donator: donator.current.value,
+      categoryId: +categoryId,
+      donator: donator.current?.value || "",
     });
   };
 
@@ -42,15 +42,15 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
     return categoryId && bookInfo.title && bookInfo.author;
   };
 
-  const setDev = e => {
+  const setDev: ChangeEventHandler<HTMLSelectElement> = e => {
     const value = e.currentTarget.value === "true";
-    if (!value && bookInfo?.koreanDemicalClassification)
-      setCategoryId(
-        koreanDemicalClassification.find(
-          i => i.id === bookInfo.koreanDemicalClassification,
-        ).categoryId,
-      );
-    setIsDevBook(value);
+    if (!value && bookInfo?.koreanDemicalClassification) {
+      const id = koreanDemicalClassification.find(
+        i => i.id === bookInfo.koreanDemicalClassification,
+      )?.categoryId;
+      id && setCategoryId(id);
+      setIsDevBook(value);
+    }
   };
 
   return (
@@ -62,12 +62,12 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
           className="add-book__isDev-select"
           name="isDevCategory"
           id="isDevCategory"
-          value={isDevBook}
+          value={`${isDevBook}`}
           onChange={setDev}
         >
           <option value="">대분류를 선택해주세요</option>
-          <option value>개발</option>
-          <option value={false}>비개발</option>
+          <option value="true">개발</option>
+          <option value="false">비개발</option>
         </select>
         <select
           required

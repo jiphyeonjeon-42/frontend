@@ -32,7 +32,7 @@ const AddBook = () => {
     setUsingBarcodeReader(!isUsingBarcodeReader);
   };
 
-  const toDoAfterRead = text => {
+  const toDoAfterRead = (text: string) => {
     fetchData(text);
     setUsingBarcodeReader(false);
   };

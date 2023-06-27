@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
-// import useDebounce from "../../hook/useDebounce";
 import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";
+import { Book } from "../../type";
 
-const useGetBooksCreate = defalutBook => {
+const useGetBooksCreate = (defalutBook: Book) => {
   const [isbnQuery, setIsbnQuery] = useState("");
   const [bookInfo, setBookInfo] = useState(defalutBook);
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,7 +22,7 @@ const useGetBooksCreate = defalutBook => {
     { key: "image", type: "string", isNullable: true },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: any) => {
     const books = compareExpect(
       "books/create",
       [response.data.bookInfo],
@@ -36,7 +36,7 @@ const useGetBooksCreate = defalutBook => {
     setErrorMessage("");
   };
 
-  const displayError = error => {
+  const displayError = (error: any) => {
     const errorCode = parseInt(error?.response?.data?.errorCode, 10);
     setErrorMessage(
       errorCode === 401
@@ -45,10 +45,6 @@ const useGetBooksCreate = defalutBook => {
     );
     setBookInfo(defalutBook);
   };
-  // const debounce = useDebounce();
-  const fetchData = isbn => {
-    setIsbnQuery(isbn);
-  };
 
   useEffect(() => {
     if (isbnQuery && isbnQuery.length) {
@@ -56,7 +52,7 @@ const useGetBooksCreate = defalutBook => {
     }
   }, [isbnQuery]);
 
-  return { bookInfo, errorMessage, fetchData, setBookInfo };
+  return { bookInfo, errorMessage, fetchData: setIsbnQuery, setBookInfo };
 };
 
 export default useGetBooksCreate;

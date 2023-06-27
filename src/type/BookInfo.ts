@@ -8,4 +8,6 @@ export type BookInfo = {
   publisher: string;
   publishedAt?: string;
   image?: string;
+  koreanDemicalClassification?: string;
+  donator?: string;
 };
