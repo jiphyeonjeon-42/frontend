@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
+import { AxiosError } from "axios";
+import { BookInfo } from "../../type";
 
 export const usePostBooksCreate = () => {
-  const [newBookInfo, setNewBookInfo] = useState(null);
+  const [newBookInfo, setNewBookInfo] = useState<BookInfo | null>(null);
   const [message, setMessage] = useState("");
 
   const { request } = useApi("post", "books/create", newBookInfo);
@@ -25,15 +27,15 @@ export const usePostBooksCreate = () => {
     window.location.reload();
   };
 
-  const displayError = error => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+  const displayError = (error: AxiosError<{ errorCode: number }>) => {
+    const errorCode = error?.response?.data?.errorCode;
     const errorMessage = errorCode ? getErrorMessage(errorCode) : error.message;
     setMessage(`실패했습니다. ${errorMessage} `);
   };
 
-  const registerBook = newBook => {
-    const book = compareExpect("books/create", [newBook], expectedItem);
-    setNewBookInfo(...book);
+  const registerBook = (newBook: BookInfo) => {
+    const [book] = compareExpect("books/create", [newBook], expectedItem);
+    setNewBookInfo(book);
   };
 
   useEffect(() => {

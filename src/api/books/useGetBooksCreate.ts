@@ -3,8 +3,10 @@ import { useApi } from "../../hook/useApi";
 // import { useDebounce } from "../../hook/useDebounce";
 import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";
+import { Book } from "../../type";
+import { AxiosError, AxiosResponse } from "axios";
 
-export const useGetBooksCreate = defalutBook => {
+export const useGetBooksCreate = (defalutBook: Book) => {
   const [isbnQuery, setIsbnQuery] = useState("");
   const [bookInfo, setBookInfo] = useState(defalutBook);
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,7 +24,7 @@ export const useGetBooksCreate = defalutBook => {
     { key: "image", type: "string", isNullable: true },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const books = compareExpect(
       "books/create",
       [response.data.bookInfo],
@@ -36,18 +38,14 @@ export const useGetBooksCreate = defalutBook => {
     setErrorMessage("");
   };
 
-  const displayError = error => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
+  const displayError = (error: AxiosError<{ errorCode: number }>) => {
+    const errorCode = error?.response?.data?.errorCode;
     setErrorMessage(
       errorCode === 401
         ? "로그인 유효시간이 지났습니다. 로그아웃 후 재로그인 해주세요! "
         : getErrorMessage(errorCode) || error.message,
     );
     setBookInfo(defalutBook);
-  };
-  // const debounce = useDebounce();
-  const fetchData = isbn => {
-    setIsbnQuery(isbn);
   };
 
   useEffect(() => {
@@ -56,5 +54,5 @@ export const useGetBooksCreate = defalutBook => {
     }
   }, [isbnQuery]);
 
-  return { bookInfo, errorMessage, fetchData, setBookInfo };
+  return { bookInfo, errorMessage, fetchData: setIsbnQuery, setBookInfo };
 };
