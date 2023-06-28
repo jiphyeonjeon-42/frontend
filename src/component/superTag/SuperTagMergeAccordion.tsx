@@ -8,7 +8,7 @@ import Accordion from "../utils/Accordion";
 import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 import Droppable from "../utils/Droppable";
 import Image from "../utils/Image";
-import TrashIcon from "../../img/trash.svg";
+import TrashIcon from "../../asset/img/trash.svg";
 
 type Props = {
   bookInfoId: number;

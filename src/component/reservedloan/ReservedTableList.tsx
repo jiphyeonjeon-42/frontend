@@ -1,6 +1,6 @@
 import Image from "../utils/Image";
-import Arr from "../../img/arrow_right_black.svg";
-import "../../css/ReservedTableList.css";
+import Arr from "../../asset/img/arrow_right_black.svg";
+import "../../asset/css/ReservedTableList.css";
 import { Book, Lending, Reservation } from "../../types";
 
 type Props = {

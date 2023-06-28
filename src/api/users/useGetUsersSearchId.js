@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { setErrorDialog } from "../../data/error";
+import { setErrorDialog } from "../../constant/error";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 

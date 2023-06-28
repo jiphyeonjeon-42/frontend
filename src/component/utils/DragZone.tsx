@@ -5,7 +5,7 @@ import {
   ReactNode,
   useState,
 } from "react";
-import "../../css/DragZone.css";
+import "../../asset/css/DragZone.css";
 type Props = Partial<HtmlHTMLAttributes<HTMLDivElement>> & {
   children: ReactNode;
 };

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { setErrorDialog } from "../../data/error";
+import { setErrorDialog } from "../../constant/error";
 import useApi from "../../hook/useApi";
 
 const usePatchUsersMyupdate = ({ modeString, setOpenTitleAndMessage }) => {

@@ -1,8 +1,8 @@
 import useModal from "../../hook/useModal";
 import RentModalBook from "./RentModalBook";
 import Image from "../utils/Image";
-import DeleteButton from "../../img/x_button.svg";
-import "../../css/RentInquireBoxBook.css";
+import DeleteButton from "../../asset/img/x_button.svg";
+import "../../asset/css/RentInquireBoxBook.css";
 
 type Props = {
   setSelectedBooks(...args: unknown[]): unknown;

@@ -1,8 +1,8 @@
 import { useCallback, useState, useRef, useEffect } from "react";
 import HandleReview from "./HandleReview";
 import axiosPromise from "../../../util/axios";
-import "../../../css/Tabs.css";
-import "../../../css/Review.css";
+import "../../../asset/css/Tabs.css";
+import "../../../asset/css/Review.css";
 
 type Props = {
   bookInfoId: number;

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../hook/useApi";
-import getErrorMessage from "../../data/error";
+import getErrorMessage from "../../constant/error";
 
 const usePostUsersCreate = () => {
   const emailRef = useRef(null);

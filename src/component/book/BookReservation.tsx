@@ -1,9 +1,9 @@
 import Image from "../utils/Image";
 import useGetReservationsCount from "../../api/reservations/useGetReservationsCount";
 import usePostReservations from "../../api/reservations/usePostReservations";
-import Available from "../../img/arrow_right_res.svg";
-import Unavailable from "../../img/arrow_right_res_default.svg";
-import "../../css/Reservation.css";
+import Available from "../../asset/img/arrow_right_res.svg";
+import Unavailable from "../../asset/img/arrow_right_res_default.svg";
+import "../../asset/css/Reservation.css";
 
 type Props = {
   bookInfoId: number;

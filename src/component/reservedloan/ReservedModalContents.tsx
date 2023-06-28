@@ -8,13 +8,13 @@ import TextareaWithLabel from "../utils/TextareaWithLabel";
 import BookInformationWithCover from "../utils/BookInformationWithCover";
 import { isValidString } from "../../util/typeCheck";
 import { dateFormat } from "../../util/date";
-import "../../css/ReservedModalContents.css";
+import "../../asset/css/ReservedModalContents.css";
 import { Reservation } from "../../types";
 
 type Props = {
-  reservedInfo: Reservation
-  closeModal: () => void
-}
+  reservedInfo: Reservation;
+  closeModal: () => void;
+};
 
 const ReservedModalContents = ({ reservedInfo, closeModal }: Props) => {
   const [remark, setRemark] = useState("");

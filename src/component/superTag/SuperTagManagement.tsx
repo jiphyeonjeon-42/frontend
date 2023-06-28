@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { otherManagementTabList } from "../../data/tablist";
+import { otherManagementTabList } from "../../constant/tablist";
 import Tabs from "../utils/Tabs";
 import Banner from "../utils/Banner";
 import SuperTagSelectedBook from "./SuperTagSelectedBook";

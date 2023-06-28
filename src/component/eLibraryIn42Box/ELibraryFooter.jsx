@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ELibraryTitleWithMore from "./ELibraryTitleWithMore";
-import GithubLogo from "../../img/github.svg";
+import GithubLogo from "../../asset/img/github.svg";
 
 const ELibraryFooter = () => {
   return (

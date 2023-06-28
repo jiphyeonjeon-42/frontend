@@ -1,4 +1,4 @@
-import "../../css/Sort.css";
+import "../../asset/css/Sort.css";
 
 type Props = {
   sort: string;

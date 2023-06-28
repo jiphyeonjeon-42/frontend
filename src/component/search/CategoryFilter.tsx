@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Image from "../utils/Image";
-import ArrLeftGray from "../../img/arrow_left_gray.svg";
-import ArrLeftBlack from "../../img/arrow_left_black.svg";
-import ArrRightGray from "../../img/arrow_right_gray.svg";
-import ArrRightBlack from "../../img/arrow_right_black.svg";
-import "../../css/CategoryFilter.css";
+import ArrLeftGray from "../../asset/img/arrow_left_gray.svg";
+import ArrLeftBlack from "../../asset/img/arrow_left_black.svg";
+import ArrRightGray from "../../asset/img/arrow_right_gray.svg";
+import ArrRightBlack from "../../asset/img/arrow_right_black.svg";
+import "../../asset/css/CategoryFilter.css";
 
 const MARGIN_OF_CATEGORY_BUTTON = 36;
 const EPSILON = 1;

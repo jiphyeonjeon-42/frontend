@@ -2,7 +2,7 @@ import useDialog from "../../hook/useDialog";
 import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
 import RentedOrReservedBooks from "./MyRentInfo/RentedOrReservedBooks";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import Reserve from "../../img/list-check-solid.svg";
+import Reserve from "../../asset/img/list-check-solid.svg";
 
 const MyReservation = () => {
   const {

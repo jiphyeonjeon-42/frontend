@@ -4,9 +4,9 @@ import useGetLike from "../../../api/like/useGetLike";
 import usePostLike from "../../../api/like/usePostLike";
 import useDeleteLike from "../../../api/like/useDeleteLike";
 import Image from "../../utils/Image";
-import FilledLike from "../../../img/like_filled.svg";
-import EmptyLike from "../../../img/like_empty.svg";
-import "../../../css/RentHistory.css";
+import FilledLike from "../../../asset/img/like_filled.svg";
+import EmptyLike from "../../../asset/img/like_empty.svg";
+import "../../../asset/css/RentHistory.css";
 
 const RentHistoryTable = ({ factor }) => {
   const [currentLike, setCurrentLike] = useState();

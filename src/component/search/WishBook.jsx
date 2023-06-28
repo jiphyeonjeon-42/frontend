@@ -1,6 +1,6 @@
 import Image from "../utils/Image";
-import AlretIcon from "../../img/alret_icon.svg";
-import "../../css/WishBook.css";
+import AlretIcon from "../../asset/img/alret_icon.svg";
+import "../../asset/css/WishBook.css";
 
 const WishBook = () => {
   return (

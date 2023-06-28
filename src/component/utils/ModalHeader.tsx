@@ -1,5 +1,5 @@
 import EmphasisInString from "./EmphasisInString";
-import "../../css/ModalHeader.css";
+import "../../asset/css/ModalHeader.css";
 
 type Props = {
   title?: string;

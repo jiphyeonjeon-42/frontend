@@ -1,4 +1,4 @@
-import "../../css/RentConfirm.css";
+import "../../asset/css/RentConfirm.css";
 
 type Props = {
   // eslint-disable-next-line react/require-default-props
@@ -7,11 +7,7 @@ type Props = {
   openModal(...args: unknown[]): unknown;
 };
 
-const RentConfirm = ({
-  selectedUser,
-  selectedBooks,
-  openModal,
-}: Props) => {
+const RentConfirm = ({ selectedUser, selectedBooks, openModal }: Props) => {
   return (
     <section className="rent__confirm-button">
       <div className="rent__confirm-button__text font-16 color-a4">

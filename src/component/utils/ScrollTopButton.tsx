@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Image from "./Image";
-import Button from "../../img/arrow_right_circle.svg";
-import "../../css/ScrollTopButton.css";
+import Button from "../../asset/img/arrow_right_circle.svg";
+import "../../asset/css/ScrollTopButton.css";
 
 type Props = {
   rightRem: number;

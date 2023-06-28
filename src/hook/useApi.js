@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import axiosPromise from "../util/axios";
-import getErrorMessage from "../data/error";
+import getErrorMessage from "../constant/error";
 import useDialog from "./useDialog";
 
 const useApi = (method, url, data) => {

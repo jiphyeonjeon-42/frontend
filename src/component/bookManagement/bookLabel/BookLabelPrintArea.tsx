@@ -1,5 +1,5 @@
 import BookLabelPrintItem from "./BookLabelPrintItem";
-import "../../../css/PrintLabel.css";
+import "../../../asset/css/PrintLabel.css";
 import { RefObject } from "react";
 import { Book } from "../../../types";
 

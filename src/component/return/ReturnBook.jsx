@@ -12,9 +12,9 @@ import useModal from "../../hook/useModal";
 import useGetLendingsSearch from "../../api/lendings/useGetLendingsSearch";
 import useGetLendingsSearchId from "../../api/lendings/useGetLendingsSearchId";
 
-import { rentTabList } from "../../data/tablist";
-import Book from "../../img/book-arrow-up-free-icon-font.svg";
-import "../../css/ReturnBook.css";
+import { rentTabList } from "../../constant/tablist";
+import Book from "../../asset/img/book-arrow-up-free-icon-font.svg";
+import "../../asset/css/ReturnBook.css";
 
 const ReturnBook = () => {
   const [lendingId, setLendingId] = useState(undefined);

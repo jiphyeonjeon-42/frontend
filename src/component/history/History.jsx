@@ -9,9 +9,9 @@ import useModal from "../../hook/useModal";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import useDialog from "../../hook/useDialog";
 import useGetHistories from "../../api/histories/useGetHistories";
-import { rentTabList } from "../../data/tablist";
-import Book from "../../img/book-arrow-up-free-icon-font.svg";
-import "../../css/Histories.css";
+import { rentTabList } from "../../constant/tablist";
+import Book from "../../asset/img/book-arrow-up-free-icon-font.svg";
+import "../../asset/css/Histories.css";
 
 const History = () => {
   const [historyInfo, setHistoryInfo] = useState(null);

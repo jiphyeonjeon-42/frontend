@@ -1,6 +1,6 @@
 import type { StoryDefault, Story, ArgTypes } from "@ladle/react";
 import { Button, Props } from "./Button";
-import colorPalette from "../../data/color";
+import colorPalette from "../../constant/color";
 import { HTMLAttributes } from "react";
 
 type ButtonStory = Story<Props>;

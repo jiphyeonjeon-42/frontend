@@ -1,4 +1,4 @@
-import "../../css/Title.css";
+import "../../asset/css/Title.css";
 
 export type Props = {
   titleKorean: string;

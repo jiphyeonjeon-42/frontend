@@ -1,6 +1,6 @@
 import { MouseEvent, ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
-import "../../css/Modal.css";
+import "../../asset/css/Modal.css";
 
 /* chidren 컴포넌트를 조립해서 사용하는 모달, 최소 기능만 포함된 기본형
 modal__backdrop 어두워지는 뒷배경, 클릭시 모달 종료

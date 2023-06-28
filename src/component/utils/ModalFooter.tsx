@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import "../../css/ModalFooter.css";
+import "../../asset/css/ModalFooter.css";
 
 type Props = {
   align?: string;

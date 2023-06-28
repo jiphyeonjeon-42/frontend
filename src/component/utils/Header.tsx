@@ -7,13 +7,13 @@ import {
   basicGnbMenu,
   adminLnbMenu,
   loginLnbMenu,
-} from "../../data/headerMenu";
-import Logo from "../../img/jiphyeonjeon_logo.svg";
-import User from "../../img/Uniconlabs.png";
-import ToggleUser from "../../img/UniconlabsFill.png";
-import ToggleDownArrow from "../../img/caret-down_DaveGandy.png";
-import DownArrow from "../../img/drop-down_Freepik.png";
-import "../../css/Header.css";
+} from "../../constant/headerMenu";
+import Logo from "../../asset/img/jiphyeonjeon_logo.svg";
+import User from "../../asset/img/Uniconlabs.png";
+import ToggleUser from "../../asset/img/UniconlabsFill.png";
+import ToggleDownArrow from "../../asset/img/caret-down_DaveGandy.png";
+import DownArrow from "../../asset/img/drop-down_Freepik.png";
+import "../../asset/css/Header.css";
 
 const Header = () => {
   const user = useRecoilValue(userState);
@@ -62,7 +62,7 @@ const Header = () => {
       </header>
     );
   return (
-    (<header className="header">
+    <header className="header">
       <section className="header-wrapper">
         <div className="header__logo">
           <Link to="/">
@@ -112,7 +112,7 @@ const Header = () => {
                 </button>
                 {toggleLNB && (
                   /* 토글 시작 */
-                  (<div className="gnb__user__lnb">
+                  <div className="gnb__user__lnb">
                     <div className="lnb__line" />
                     <ul className="lnb__menu">
                       {user.isAdmin &&
@@ -143,7 +143,7 @@ const Header = () => {
                         );
                       })}
                     </ul>
-                  </div>)
+                  </div>
                   /* 토글 끝 */
                 )}
               </div>
@@ -151,7 +151,7 @@ const Header = () => {
           </ul>
         </nav>
       </section>
-    </header>)
+    </header>
   );
 };
 

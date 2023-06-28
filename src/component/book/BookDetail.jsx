@@ -8,8 +8,8 @@ import Review from "./review/Review";
 import Banner from "../utils/Banner";
 import Image from "../utils/Image";
 import Like from "./like/Like";
-import TagWrapper from "./tag/TagWrapper"
-import "../../css/BookDetail.css";
+import TagWrapper from "./tag/TagWrapper";
+import "../../asset/css/BookDetail.css";
 
 const BookDetail = () => {
   const { id } = useParams();

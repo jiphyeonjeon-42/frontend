@@ -1,4 +1,4 @@
-import "../../css/UserUsageInfo.css";
+import "../../asset/css/UserUsageInfo.css";
 
 type Props = {
   user: {

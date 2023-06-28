@@ -6,10 +6,10 @@ import {
   basicGnbMenu,
   adminLnbMenu,
   loginLnbMenu,
-} from "../../data/headerMenu";
-import CloseButton from "../../img/x_button_grey.svg";
-import User from "../../img/Freepik_user.png";
-import "../../css/HeaderModal.css";
+} from "../../constant/headerMenu";
+import CloseButton from "../../asset/img/x_button_grey.svg";
+import User from "../../asset/img/Freepik_user.png";
+import "../../asset/css/HeaderModal.css";
 
 type Props = {
   setHeaderModal(...args: unknown[]): unknown;

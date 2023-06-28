@@ -1,10 +1,10 @@
 import { useState } from "react";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import BookIcon from "../../img/admin_icon.svg";
+import BookIcon from "../../asset/img/admin_icon.svg";
 import InquireBoxBody from "../utils/InquireBoxBody";
 import BookStockCheckedListLine from "./BookStockCheckedListLine";
 import Pagination from "../utils/Pagination";
-import "../../css/BookStockCheckedList.css";
+import "../../asset/css/BookStockCheckedList.css";
 import { Book } from "../../types";
 
 type Props = {

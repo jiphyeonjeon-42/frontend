@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
-import getErrorMessage from "../../data/error";
+import getErrorMessage from "../../constant/error";
 
 const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
   const [bookDetailInfo, setBookDetailInfo] = useState({ books: [] });

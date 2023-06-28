@@ -1,5 +1,5 @@
 import { DragEventHandler, HTMLAttributes, ReactNode, useState } from "react";
-import "../../css/Droppable.css";
+import "../../asset/css/Droppable.css";
 
 type Props = HTMLAttributes<HTMLDivElement> & {
   format?: string;

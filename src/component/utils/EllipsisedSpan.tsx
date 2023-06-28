@@ -1,5 +1,5 @@
 import { HTMLAttributes, useState } from "react";
-import "../../css/EllipsisedSpan.css";
+import "../../asset/css/EllipsisedSpan.css";
 
 const EllipsisedSpan = (props: Partial<HTMLAttributes<HTMLSpanElement>>) => {
   const [isEllipsised, setIsEllipsised] = useState(true);
@@ -9,7 +9,7 @@ const EllipsisedSpan = (props: Partial<HTMLAttributes<HTMLSpanElement>>) => {
   return (
     <span
       {...props}
-      className={`ellipsised-span__wrapper ${isEllipsised ? "" : "unfolded" } ${
+      className={`ellipsised-span__wrapper ${isEllipsised ? "" : "unfolded"} ${
         props.className
       }`}
       onClick={toggleElipsis}

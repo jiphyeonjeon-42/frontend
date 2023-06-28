@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEvent, HTMLProps } from "react";
-import "../../css/SelectWithLabel.css";
+import "../../asset/css/SelectWithLabel.css";
 
 type Props = {
   wrapperClassName?: string;

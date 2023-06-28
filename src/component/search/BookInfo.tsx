@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import LinkToDetail from "../../img/link_to_detail.svg";
-import "../../css/BookInfo.css";
+import LinkToDetail from "../../asset/img/link_to_detail.svg";
+import "../../asset/css/BookInfo.css";
 import Image from "../utils/Image";
 
 type Props = {

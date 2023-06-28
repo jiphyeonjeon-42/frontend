@@ -3,7 +3,7 @@ import SubTitle from "../utils/SubTitle";
 import MainPopularCenter from "./MainPopularCenter";
 import MainPopularSide from "./MainPopularSide";
 import useGetBooksInfoPopular from "../../api/books/useGetBooksInfoPopular";
-import "../../css/MainPopular.css";
+import "../../asset/css/MainPopular.css";
 
 type Props = {
   setOpenTitleAndMessage(...args: unknown[]): unknown;

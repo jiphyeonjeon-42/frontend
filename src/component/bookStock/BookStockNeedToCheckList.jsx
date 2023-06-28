@@ -3,9 +3,9 @@ import useGetStockSearch from "../../api/stock/useGetStockSearch";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import InquireBoxBody from "../utils/InquireBoxBody";
 import Pagination from "../utils/Pagination";
-import Book from "../../img/admin_icon.svg";
+import Book from "../../asset/img/admin_icon.svg";
 import useDialog from "../../hook/useDialog";
-import "../../css/BookStockNeedToCheckList.css";
+import "../../asset/css/BookStockNeedToCheckList.css";
 
 const BookStockNeedToCheckList = () => {
   const { setOpenTitleAndMessage, Dialog } = useDialog();

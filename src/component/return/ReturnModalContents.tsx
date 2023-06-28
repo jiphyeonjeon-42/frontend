@@ -2,7 +2,7 @@ import BookInformationWithCover from "../utils/BookInformationWithCover";
 import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";
 import Button from "../utils/Button";
-import "../../css/ReturnModalContents.css";
+import "../../asset/css/ReturnModalContents.css";
 import usePatchLendingsReturn from "../../api/lendings/usePatchLendingsReturn";
 import useGetLendingsId from "../../api/lendings/useGetLendingsId";
 

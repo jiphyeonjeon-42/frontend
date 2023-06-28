@@ -2,19 +2,16 @@ import { useState } from "react";
 import useModal from "../../hook/useModal";
 import BookLabelModalToPrint from "./BookManagementModalToPrint";
 import Image from "../utils/Image";
-import Plus from "../../img/plus_icon_off.svg";
-import Minus from "../../img/plus_icon_on.svg";
-import "../../css/BookManagementCart.css";
+import Plus from "../../asset/img/plus_icon_off.svg";
+import Minus from "../../asset/img/plus_icon_on.svg";
+import "../../asset/css/BookManagementCart.css";
 
 type Props = {
   printList: object[];
   removeBookById(...args: unknown[]): unknown;
 };
 
-const BookManagementCartToPrint = ({
-  printList,
-  removeBookById,
-}: Props) => {
+const BookManagementCartToPrint = ({ printList, removeBookById }: Props) => {
   const [isOpen, setIsOpen] = useState(true);
   const { Modal, setOpen } = useModal();
 

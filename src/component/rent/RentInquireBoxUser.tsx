@@ -1,8 +1,8 @@
 import useModal from "../../hook/useModal";
 import RentModalUser from "./RentModalUser";
 import Image from "../utils/Image";
-import DeleteButton from "../../img/x_button.svg";
-import "../../css/RentInquireBoxUser.css";
+import DeleteButton from "../../asset/img/x_button.svg";
+import "../../asset/css/RentInquireBoxUser.css";
 import { dateFormat } from "../../util/date";
 
 type Props = {
@@ -21,10 +21,7 @@ type Props = {
   setSelectedUser(...args: unknown[]): unknown;
 };
 
-const InquireBoxUser = ({
-  selectedUser,
-  setSelectedUser,
-}: Props) => {
+const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
   const { setOpen, setClose, Modal } = useModal();
 
   const deleteUser = () => {

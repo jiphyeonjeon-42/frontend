@@ -1,10 +1,10 @@
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import Reserve from "../../img/list-check-solid.svg";
+import Reserve from "../../asset/img/list-check-solid.svg";
 import HandleReview from "../book/review/HandleReview";
 import axiosPromise from "../../util/axios";
 import Pagination from "../utils/Pagination";
 import useGetMyReviewInfo from "../../api/reviews/useGetMyReviewInfo";
-import "../../css/MyReview.css";
+import "../../asset/css/MyReview.css";
 
 type Props = {
   type: string;

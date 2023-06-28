@@ -1,8 +1,8 @@
 import Image from "../utils/Image";
 import SearchBar from "../utils/SearchBar";
-import ScrollIcon from "../../img/scroll-icon.svg";
-import "../../css/Banner.css";
-import "../../css/MainBanner.css";
+import ScrollIcon from "../../asset/img/scroll-icon.svg";
+import "../../asset/css/Banner.css";
+import "../../asset/css/MainBanner.css";
 
 const MainBanner = () => {
   return (

@@ -1,6 +1,6 @@
 import Image from "./Image";
 import SearchBar from "./SearchBar";
-import "../../css/InquireBoxTitle.css";
+import "../../asset/css/InquireBoxTitle.css";
 
 type Props = {
   Icon: string;

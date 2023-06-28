@@ -9,9 +9,9 @@ import Modal from "../utils/Modal";
 import ModalHeader from "../utils/ModalHeader";
 import UserDetailInfo from "./UserDetailInfo";
 
-import { userManagementTabList } from "../../data/tablist";
+import { userManagementTabList } from "../../constant/tablist";
 import useGetUsersSearch from "../../api/users/useGetUsersSearch";
-import "../../css/UserManagement.css";
+import "../../asset/css/UserManagement.css";
 
 const USAGE = 1;
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import getErrorMessage from "../../data/error";
+import getErrorMessage from "../../constant/error";
 import useApiMultiple from "../../hook/useApiMultiple";
 
 const usePostLendingsMultiple = ({

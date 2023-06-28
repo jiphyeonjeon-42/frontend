@@ -1,5 +1,5 @@
-import colorPalette from "../../data/color";
-import "../../css/TextWithLabel.css";
+import colorPalette from "../../constant/color";
+import "../../asset/css/TextWithLabel.css";
 
 type Props = {
   wrapperClassName?: string;

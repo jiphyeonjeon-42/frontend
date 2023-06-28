@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useGetBooksInfoSearch from "../../api/books/useGetBooksInfoSearch";
 import Modal from "../utils/Modal";
 import SearchModal from "../utils/SearchModal";
-import "../../css/SuperTagSearchBookModal.css";
+import "../../asset/css/SuperTagSearchBookModal.css";
 import { Book } from "../../types";
 
 type Props = {

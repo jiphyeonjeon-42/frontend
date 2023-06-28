@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { myPageTabList } from "../../data/tablist";
+import { myPageTabList } from "../../constant/tablist";
 import MyRent from "./MyRentInfo/MyRent";
 import MyReservation from "./MyReservation";
 import MyReview from "./MyReview";
@@ -8,10 +8,10 @@ import useDialog from "../../hook/useDialog";
 import useGetUsersSearchId from "../../api/users/useGetUsersSearchId";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import getErrorMessage from "../../data/error";
-import Login from "../../img/login_icon_white.svg";
+import getErrorMessage from "../../constant/error";
+import Login from "../../asset/img/login_icon_white.svg";
 import useTabFocus from "../../hook/useTabFocus";
-import "../../css/Mypage.css";
+import "../../asset/css/Mypage.css";
 
 const Mypage = () => {
   const { currentTab, changeTab } = useTabFocus(0, myPageTabList);

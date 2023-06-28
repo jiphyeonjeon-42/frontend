@@ -1,4 +1,4 @@
-import "../../css/RentModalUserList.css";
+import "../../asset/css/RentModalUserList.css";
 import { User } from "../../types";
 
 type Props = {

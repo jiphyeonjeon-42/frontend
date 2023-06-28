@@ -2,17 +2,14 @@ import useDialog from "../../../hook/useDialog";
 import usePatchReservationsCancel from "../../../api/reservations/usePatchReservationsCancel";
 import Image from "../../utils/Image";
 import { isNumber } from "../../../util/typeCheck";
-import "../../../css/RentedOrReservedBooks.css";
+import "../../../asset/css/RentedOrReservedBooks.css";
 
 type Props = {
   componentMode: string;
   bookInfoArr?: object[];
 };
 
-const RentedOrReservedBooks = ({
-  componentMode,
-  bookInfoArr,
-}: Props) => {
+const RentedOrReservedBooks = ({ componentMode, bookInfoArr }: Props) => {
   if (!bookInfoArr) return null;
   const { setOpen, defaultConfig, setConfig, Dialog, setOpenTitleAndMessage } =
     useDialog();

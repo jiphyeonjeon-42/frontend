@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "../component/utils/Modal";
 import ModalFooter from "../component/utils/ModalFooter";
 import ModalHeader from "../component/utils/ModalHeader";
-import "../css/Dialog.css";
+import "../asset/css/Dialog.css";
 
 type DialogButton = {
   text: string;

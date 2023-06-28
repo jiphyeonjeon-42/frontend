@@ -11,11 +11,11 @@ import RentModalConfirm from "./RentModalConfirm";
 import useDialog from "../../hook/useDialog";
 import useModal from "../../hook/useModal";
 
-import Login from "../../img/login_icon_white.svg";
-import Book from "../../img/admin_icon.svg";
+import Login from "../../asset/img/login_icon_white.svg";
+import Book from "../../asset/img/admin_icon.svg";
 
-import { rentTabList } from "../../data/tablist";
-import "../../css/Rent.css";
+import { rentTabList } from "../../constant/tablist";
+import "../../asset/css/Rent.css";
 
 const Rent = () => {
   const [selectedUser, setSelectedUser] = useState(null);

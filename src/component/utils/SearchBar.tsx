@@ -7,7 +7,7 @@ import {
   MouseEventHandler,
 } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import "../../css/SearchBar.css";
+import "../../asset/css/SearchBar.css";
 
 type Props = {
   setQuery?: (query: string) => void;

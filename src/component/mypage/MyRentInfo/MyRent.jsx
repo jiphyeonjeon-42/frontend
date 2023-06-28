@@ -3,7 +3,7 @@ import useDialog from "../../../hook/useDialog";
 import useGetUsersSearchId from "../../../api/users/useGetUsersSearchId";
 import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import InquireBoxTitle from "../../utils/InquireBoxTitle";
-import Book from "../../../img/admin_icon.svg";
+import Book from "../../../asset/img/admin_icon.svg";
 
 const MyRent = () => {
   const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =

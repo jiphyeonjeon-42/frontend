@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Image from "./Image";
 import HeaderModal from "./HeaderModal";
-import Logo from "../../img/jiphyeonjeon_logo.svg";
-import Hamburger from "../../img/Hamburger_OwlDsgnr.png";
-import SearchBook from "../../img/Search_VectorsMarket.png";
-import "../../css/MobileHeader.css";
+import Logo from "../../asset/img/jiphyeonjeon_logo.svg";
+import Hamburger from "../../asset/img/Hamburger_OwlDsgnr.png";
+import SearchBook from "../../asset/img/Search_VectorsMarket.png";
+import "../../asset/css/MobileHeader.css";
 
 const MobileHeader = () => {
   const [headerModal, setHeaderModal] = useState(false);

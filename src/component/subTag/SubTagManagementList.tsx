@@ -3,7 +3,7 @@ import ManagementListItem from "../utils/ManagementListItem";
 import VisibilityToggleButton from "../utils/VisibilityToggleButton";
 import { Link } from "react-router-dom";
 import Date from "../utils/Date";
-import { Tag } from "../../types/Tag";
+import { Tag } from "../../type/Tag";
 import Tooltip from "../utils/Tooltip";
 import EllipsisedSpan from "../utils/EllipsisedSpan";
 import useDialog from "../../hook/useDialog";

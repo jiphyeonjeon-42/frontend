@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
 // import useDebounce from "../../hook/useDebounce";
 import { compareExpect } from "../../util/typeCheck";
-import getErrorMessage from "../../data/error";
+import getErrorMessage from "../../constant/error";
 
 const useGetBooksCreate = defalutBook => {
   const [isbnQuery, setIsbnQuery] = useState("");

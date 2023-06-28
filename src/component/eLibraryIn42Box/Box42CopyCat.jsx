@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import "../../css/Box42CopyCat.css";
+import "../../asset/css/Box42CopyCat.css";
 
 const Box42CopyCat = ({ setView }) => {
   const location = useLocation();
-  
+
   return (
     <div className="box42__wrapper">
       <Link to="/" className="box42__logo">

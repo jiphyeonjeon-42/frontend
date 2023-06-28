@@ -1,5 +1,5 @@
 import { HTMLProps, useState } from "react";
-import fallback from "../../img/image_onerror.svg";
+import fallback from "../../asset/img/image_onerror.svg";
 
 type Size = number;
 type Props = HTMLProps<HTMLImageElement> & { width?: Size; height?: Size };

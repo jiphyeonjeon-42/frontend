@@ -24,7 +24,6 @@ import MyPageRoutes from "./component/mypage/MyPageRoutes";
 import userState from "./atom/userState";
 import Mypage from "./component/mypage/Mypage";
 import EditEmailOrPassword from "./component/mypage/EditEmailOrPassword";
-import "./css/reset.css";
 import LimitedRoute from "./LimitedRoute";
 import { isExpiredDate } from "./util/date";
 import BookManagement from "./component/bookManagement/BookManagement";
@@ -33,6 +32,7 @@ import BookStock from "./component/bookStock/BookStock";
 import ELibraryIn42Box from "./component/eLibraryIn42Box/EventPage";
 import SuperTagManagement from "./component/superTag/SuperTagManagement";
 import SubTagManagement from "./component/subTag/SubTagManagement";
+import "./asset/css/reset.css";
 
 function App() {
   const setUser = useSetRecoilState(userState);

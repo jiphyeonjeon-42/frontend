@@ -1,4 +1,4 @@
-import "../../css/InquireBoxItem.css";
+import "../../asset/css/InquireBoxItem.css";
 
 type Props = {
   keyString: string;

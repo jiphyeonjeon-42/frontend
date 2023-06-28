@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 import { useSearch } from "../../hook/useSearch";
 import useApi from "../../hook/useApi";
-import { Tag } from "../../types/Tag";
+import { Tag } from "../../type/Tag";
 
 export const useGetTags = () => {
   const { searchParams, searchResult, setPage, setQuery, setSearchResult } =

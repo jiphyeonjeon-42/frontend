@@ -4,7 +4,7 @@ import BookManagementCartToPrint from "./BookManagementCartToPrint";
 import BookManagementBooksList from "./BookManagementBooksList";
 import Tabs from "../utils/Tabs";
 import Banner from "../utils/Banner";
-import { bookManagementTabList } from "../../data/tablist";
+import { bookManagementTabList } from "../../constant/tablist";
 
 const BookManagement = () => {
   const [printList, setPrintList] = useState([]);
