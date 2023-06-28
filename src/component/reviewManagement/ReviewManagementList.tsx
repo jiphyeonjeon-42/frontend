@@ -1,9 +1,9 @@
 import useDialog from "../../hook/useDialog";
 import usePatchReviewsId from "../../api/reviews/usePatchReviewsId";
-import Edit from "../../img/edit.svg";
+import Edit from "../../asset/img/edit.svg";
 import Image from "../utils/Image";
-import "../../css/ReviewManagementList.css";
-import { Review } from "../../types";
+import "../../asset/css/ReviewManagementList.css";
+import { Review } from "../../type";
 
 type Props = {
   reviewList: Review[];

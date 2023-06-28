@@ -4,7 +4,7 @@ import useDeleteLike from "../../../api/like/useDeleteLike";
 import useGetLike from "../../../api/like/useGetLike";
 import useDialog from "../../../hook/useDialog";
 import ShowLike from "./ShowLike";
-import "../../../css/BookDetail.css";
+import "../../../asset/css/BookDetail.css";
 
 type Props = {
   initBookInfoId: string;

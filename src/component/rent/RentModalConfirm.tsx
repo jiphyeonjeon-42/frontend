@@ -3,9 +3,9 @@ import Button from "../utils/Button";
 import BookInformationWithCover from "../utils/BookInformationWithCover";
 import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";
-import "../../css/RentModalConfirm.css";
+import "../../asset/css/RentModalConfirm.css";
 import usePostLendingsMultiple from "../../api/lendings/usePostLendingsMultiple";
-import { Book, User } from "../../types";
+import { Book, User } from "../../type";
 
 type Props = {
   selectedUser: User;

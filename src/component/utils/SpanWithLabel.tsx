@@ -1,4 +1,4 @@
-import "../../css/SpanWithLabel.css";
+import "../../asset/css/SpanWithLabel.css";
 
 type Props = {
   wrapperClassName?: string;

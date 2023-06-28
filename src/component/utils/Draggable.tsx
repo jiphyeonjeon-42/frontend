@@ -1,5 +1,5 @@
 import { DragEventHandler, HTMLAttributes, HTMLProps, ReactNode } from "react";
-import "../../css/Draggable.css";
+import "../../asset/css/Draggable.css";
 
 type Props = HTMLAttributes<HTMLSpanElement> & {
   className?: string;

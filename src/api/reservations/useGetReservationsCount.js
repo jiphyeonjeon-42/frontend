@@ -1,4 +1,4 @@
-import { setErrorDialog } from "../../data/error";
+import { setErrorDialog } from "../../constant/error";
 import useApi from "../../hook/useApi";
 
 const useGetReservationsCount = ({

@@ -3,7 +3,7 @@ import useModal from "../../hook/useModal";
 import BookManagementBooksListItem from "./BookManagementBooksListItem";
 import BookManagementModalDetail from "./BookManagementModalDetail";
 import Management from "../utils/Management";
-import { Book } from "../../types";
+import { Book } from "../../type";
 
 type Props = {
   page: number;

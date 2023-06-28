@@ -1,7 +1,7 @@
 import Image from "../../utils/Image";
-import FilledLike from "../../../img/like_filled.svg";
-import EmptyLike from "../../../img/like_empty.svg";
-import "../../../css/BookDetail.css";
+import FilledLike from "../../../asset/img/like_filled.svg";
+import EmptyLike from "../../../asset/img/like_empty.svg";
+import "../../../asset/css/BookDetail.css";
 
 type Props = {
   deleteLike(...args: unknown[]): unknown;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Tag } from "../../types";
+import { Tag } from "../../type";
 import useApi from "../../hook/useApi";
 import { AxiosResponse } from "axios";
 

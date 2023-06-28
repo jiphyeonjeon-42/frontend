@@ -1,5 +1,5 @@
 import Image from "./Image";
-import "../../css/BookInformationWithCover.css";
+import "../../asset/css/BookInformationWithCover.css";
 
 type Props = {
   wrapperClassName?: string;

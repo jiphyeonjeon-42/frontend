@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useApi from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
-import { Book } from "../../types";
+import { Book } from "../../type";
 import { AxiosResponse } from "axios";
 
 const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {

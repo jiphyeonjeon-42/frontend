@@ -1,8 +1,8 @@
-import colorPalette from "../../data/color";
-import "../../css/Button.css";
+import colorPalette from "../../constant/color";
+import "../../asset/css/Button.css";
 import { HTMLProps } from "react";
 
-type Palette = typeof colorPalette[number]["string"];
+type Palette = (typeof colorPalette)[number]["string"];
 
 export type Props = {
   type?: "submit" | "button";

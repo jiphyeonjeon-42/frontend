@@ -1,12 +1,12 @@
-import Information from "../img/information_icon.svg";
-import InformationMobile from "../img/information_icon_black.svg";
-import Book from "../img/admin_icon.svg";
-import User from "../img/Uniconlabs.png";
-import UserMobile from "../img/login_feen.png";
-import Rent from "../img/admin_icon_black.svg";
-import DB from "../img/database.svg";
-import Mypage from "../img/login_icon.svg";
-import Logout from "../img/logout_IconsBox.png";
+import Information from "../asset/img/information_icon.svg";
+import InformationMobile from "../asset/img/information_icon_black.svg";
+import Book from "../asset/img/admin_icon.svg";
+import User from "../asset/img/Uniconlabs.png";
+import UserMobile from "../asset/img/login_feen.png";
+import Rent from "../asset/img/admin_icon_black.svg";
+import DB from "../asset/img/database.svg";
+import Mypage from "../asset/img/login_icon.svg";
+import Logout from "../asset/img/logout_IconsBox.png";
 
 export const basicGnbMenu = [
   {

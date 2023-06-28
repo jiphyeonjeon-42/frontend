@@ -1,8 +1,8 @@
 import Image from "../utils/Image";
-import Edit from "../../img/edit.svg";
-import { bookStatus } from "../../data/status";
-import "../../css/BookManagementBooksListItem.css";
-import { Book } from "../../types";
+import Edit from "../../asset/img/edit.svg";
+import { bookStatus } from "../../constant/status";
+import "../../asset/css/BookManagementBooksListItem.css";
+import { Book } from "../../type";
 
 type Props = {
   book: Book;

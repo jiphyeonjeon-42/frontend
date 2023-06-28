@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { setErrorDialog } from "../../data/error";
+import { setErrorDialog } from "../../constant/error";
 import useApi from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
-import { History } from "../../types";
+import { History } from "../../type";
 
 const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =

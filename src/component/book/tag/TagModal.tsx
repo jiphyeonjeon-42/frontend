@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TagType } from "../../../type/TagType";
 import Tooltip from "../../utils/Tooltip";
-import { string } from "prop-types";
+import { string } from "prop-type";
 import TagList from "./TagList";
 import Tag from "./Tag";
 

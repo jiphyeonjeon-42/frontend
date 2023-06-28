@@ -4,7 +4,7 @@ import { useState } from "react";
 import ELibraryCopyCat from "./ELibraryCopyCat";
 import Box42CopyCat from "./Box42CopyCat";
 import IframeLinkView from "./IframeLinkView";
-import "../../css/ELibraryIn42Box.css";
+import "../../asset/css/ELibraryIn42Box.css";
 
 const linkList = {
   BOX: "https://42box.github.io/front-end/",

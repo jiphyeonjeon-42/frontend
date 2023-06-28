@@ -1,5 +1,5 @@
-import "../../css/RentModalUserList.css";
-import { User } from "../../types";
+import "../../asset/css/RentModalUserList.css";
+import { User } from "../../type";
 
 type Props = {
   setSelectedUser(...args: unknown[]): unknown;

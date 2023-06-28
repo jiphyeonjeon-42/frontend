@@ -1,6 +1,6 @@
-import { Tag } from "../../types";
+import { Tag } from "../../type";
 import Draggable from "../utils/Draggable";
-import "../../css/SuperTagMergeSubTag.css";
+import "../../asset/css/SuperTagMergeSubTag.css";
 
 type Props = {
   superTag: Tag | null;

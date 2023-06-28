@@ -2,12 +2,12 @@ import { useState, useRef } from "react";
 import Button from "../utils/Button";
 import InputWithLabel from "../utils/InputWithLabel";
 import SelectWithLabel from "../utils/SelectWithLabel";
-import { bookStatus } from "../../data/status";
+import { bookStatus } from "../../constant/status";
 import usePatchBooksUpdate from "../../api/books/usePatchBooksUpdate";
-import { category } from "../../data/category";
-import "../../css/BookManagementDetail.css";
+import { category } from "../../constant/category";
+import "../../asset/css/BookManagementDetail.css";
 import Image from "../utils/Image";
-import { Book } from "../../types";
+import { Book } from "../../type";
 
 type Props = {
   book: Book;

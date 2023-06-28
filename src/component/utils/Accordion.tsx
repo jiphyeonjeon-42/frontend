@@ -1,9 +1,9 @@
 import { ReactNode, useEffect, useState } from "react";
 import Image from "./Image";
-import Plus from "../../img/plus_icon_off.svg";
-import Minus from "../../img/plus_icon_on.svg";
-import Arrow from "../../img/arrow_right_black.svg";
-import "../../css/Accordion.css";
+import Plus from "../../asset/img/plus_icon_off.svg";
+import Minus from "../../asset/img/plus_icon_on.svg";
+import Arrow from "../../asset/img/arrow_right_black.svg";
+import "../../asset/css/Accordion.css";
 
 type AccordionProp = {
   initialOpened?: boolean;

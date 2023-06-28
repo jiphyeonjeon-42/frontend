@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import Image from "./Image";
 import HiddenModal from "./HiddenModal";
-import Youtube from "../../img/youtube.svg";
-import Github from "../../img/github.svg";
-import Information from "../../img/information_icon.svg";
-import "../../css/Footer.css";
+import Youtube from "../../asset/img/youtube.svg";
+import Github from "../../asset/img/github.svg";
+import Information from "../../asset/img/information_icon.svg";
+import "../../asset/css/Footer.css";
 
 const Footer = () => {
   return (

@@ -1,11 +1,11 @@
-import { otherManagementTabList } from "../../data/tablist";
+import { otherManagementTabList } from "../../constant/tablist";
 import { useGetTags } from "../../api/tags/useGetTags";
 import Filter from "../utils/Filter";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
 import Management from "../utils/Management";
 import SubTagManagementList from "./SubTagManagementList";
-import "../../css/SubTagManagement.css";
+import "../../asset/css/SubTagManagement.css";
 
 const visibiltyFilterList = [
   { name: "공개만 보기", type: "public" },
@@ -18,11 +18,7 @@ const SubTagManagement = () => {
 
   return (
     <main>
-      <Banner
-        img="admin"
-        titleKo="태그 기록"
-        titleEn="TAG HISTORY"
-      />
+      <Banner img="admin" titleKo="태그 기록" titleEn="TAG HISTORY" />
       <Tabs tabList={otherManagementTabList} />
       <Management
         searchBarPlaceHolder="태그를 확인할 도서명을 입력하세요"

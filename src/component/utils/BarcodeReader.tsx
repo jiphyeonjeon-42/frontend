@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, ChangeEventHandler } from "react";
 import { BrowserMultiFormatReader, Result } from "@zxing/library";
-import "../../css/BarcodeReader.css";
+import "../../asset/css/BarcodeReader.css";
 
 type Props = {
   wrapperClassName?: string;

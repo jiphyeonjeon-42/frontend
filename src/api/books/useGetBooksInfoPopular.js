@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
-import getErrorMessage from "../../data/error";
+import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
 
 const useGetBooksInfoPopular = ({ setOpenTitleAndMessage }) => {

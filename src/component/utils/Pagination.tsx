@@ -1,8 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 import Image from "./Image";
-import ArrRight from "../../img/arrow_right_black.svg";
-import ArrRightDouble from "../../img/arrow_right_black_double.svg";
-import "../../css/Pagination.css";
+import ArrRight from "../../asset/img/arrow_right_black.svg";
+import ArrRightDouble from "../../asset/img/arrow_right_black_double.svg";
+import "../../asset/css/Pagination.css";
 
 type Props = {
   className?: string;

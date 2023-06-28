@@ -1,4 +1,4 @@
-import "../../css/InquireBoxLine.css";
+import "../../asset/css/InquireBoxLine.css";
 
 type Props = {
   children: React.ReactNode;

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "../../css/ManagementListItem.css";
+import "../../asset/css/ManagementListItem.css";
 
 type ManagementListItemProps = {
   children: ReactNode;

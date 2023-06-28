@@ -1,4 +1,4 @@
-import "../../css/Question.css";
+import "../../asset/css/Question.css";
 import Accordion from "../utils/Accordion";
 
 type Props = {

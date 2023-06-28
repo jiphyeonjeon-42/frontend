@@ -1,5 +1,5 @@
 import { useState, useEffect, HTMLProps, HTMLInputTypeAttribute } from "react";
-import "../../css/InputWithLabel.css";
+import "../../asset/css/InputWithLabel.css";
 
 type Props = {
   wrapperClassName?: string;

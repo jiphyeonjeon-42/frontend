@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import Tooltip from "../../utils/Tooltip";
 import userState from "../../../atom/userState";
-import "../../../css/Tags.css";
-import minusicon from "../../../img/tag_minus.svg";
+import "../../../asset/css/Tags.css";
+import minusicon from "../../../asset/img/tag_minus.svg";
 import RemoveTagModal from "./RemoveTagModal";
 
 type TagProps = TagType & {

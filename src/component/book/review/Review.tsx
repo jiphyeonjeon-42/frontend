@@ -1,11 +1,11 @@
-import { reviewTabList } from "../../../data/tablist";
+import { reviewTabList } from "../../../constant/tablist";
 import PostReview from "./PostReview";
 import ShowReviews from "./ShowReviews";
 import useTabFocus from "../../../hook/useTabFocus";
 import usePostReview from "../../../api/reviews/usePostReview";
 import useDialog from "../../../hook/useDialog";
-import "../../../css/Tabs.css";
-import "../../../css/Review.css";
+import "../../../asset/css/Tabs.css";
+import "../../../asset/css/Review.css";
 
 type Props = {
   bookInfoId: string;

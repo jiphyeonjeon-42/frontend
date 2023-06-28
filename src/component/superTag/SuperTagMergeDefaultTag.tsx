@@ -1,7 +1,7 @@
 import { DragEventHandler, useState } from "react";
 import useDialog from "../../hook/useDialog";
 import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
-import { Tag } from "../../types";
+import { Tag } from "../../type";
 import Accordion from "../utils/Accordion";
 import SearchBar from "../utils/SearchBar";
 import Droppable from "../utils/Droppable";

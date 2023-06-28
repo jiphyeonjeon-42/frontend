@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import MainNewBook from "./MainNewBook";
 import MainNewBookPagination from "./MainNewBookPagination";
 import Image from "../utils/Image";
-import ArrLeft from "../../img/arrow_left.svg";
-import ArrRight from "../../img/arrow_right.svg";
+import ArrLeft from "../../asset/img/arrow_left.svg";
+import ArrRight from "../../asset/img/arrow_right.svg";
 
 const mobileWidth = 100;
 const pcWidth = 200;

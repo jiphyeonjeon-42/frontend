@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Tag } from "../../types";
+import { Tag } from "../../type";
 import useApi from "../../hook/useApi";
 import { AxiosError, AxiosResponse } from "axios";
-import { setErrorDialog } from "../../data/error";
+import { setErrorDialog } from "../../constant/error";
 
 type Props = {
   tagId: number;

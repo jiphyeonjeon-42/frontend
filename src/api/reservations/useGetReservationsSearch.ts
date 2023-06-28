@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
-import { Reservation } from "../../types";
+import { Reservation } from "../../type";
 
 const useGetReservationsSearch = () => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =

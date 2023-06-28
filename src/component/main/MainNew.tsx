@@ -1,7 +1,7 @@
 import SubTitle from "../utils/SubTitle";
 import MainNewBookList from "./MainNewBookList";
 import useGetBooksInfoNew from "../../api/books/useGetBooksInfoNew";
-import "../../css/MainNew.css";
+import "../../asset/css/MainNew.css";
 
 type Props = {
   setOpenTitleAndMessage(...args: unknown[]): unknown;

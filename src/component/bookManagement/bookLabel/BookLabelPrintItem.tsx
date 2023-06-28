@@ -1,7 +1,7 @@
 import QRGenerator from "../../utils/QRGenerator";
-import logo from "../../../img/logo_img.png";
-import { category } from "../../../data/category";
-import { Book } from "../../../types";
+import logo from "../../../asset/img/logo_img.png";
+import { category } from "../../../constant/category";
+import { Book } from "../../../type";
 
 type Props = {
   book: Book;

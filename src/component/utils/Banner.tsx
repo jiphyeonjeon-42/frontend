@@ -1,4 +1,4 @@
-import "../../css/Banner.css";
+import "../../asset/css/Banner.css";
 
 type Props = {
   img: string;

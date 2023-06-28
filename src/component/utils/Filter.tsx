@@ -1,8 +1,8 @@
 import { MouseEvent } from "react";
 import Image from "./Image";
-import CheckIcon from "../../img/check_icon.svg";
-import RedCheckIcon from "../../img/check_icon_red.svg";
-import "../../css/Filter.css";
+import CheckIcon from "../../asset/img/check_icon.svg";
+import RedCheckIcon from "../../asset/img/check_icon_red.svg";
+import "../../asset/css/Filter.css";
 
 type Props = {
   filterList: {
@@ -14,7 +14,7 @@ type Props = {
 };
 
 const Filter = ({ filterList, selectedType, setSelectedType }: Props) => {
-  const onClickFilter = (e: MouseEvent<HTMLButtonElement> ) => {
+  const onClickFilter = (e: MouseEvent<HTMLButtonElement>) => {
     setSelectedType(e.currentTarget.value);
   };
 

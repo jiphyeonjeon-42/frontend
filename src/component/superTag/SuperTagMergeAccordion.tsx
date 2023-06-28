@@ -2,13 +2,13 @@ import { DragEventHandler, MouseEventHandler } from "react";
 import { useGetTagsSuperTagIdSub } from "../../api/tags/useGetTagsSuperTagIdSub";
 import { useDeleteTagsSuper } from "../../api/tags/useDeleteTagsSuper";
 import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
-import { Tag } from "../../types";
+import { Tag } from "../../type";
 import useDialog from "../../hook/useDialog";
 import Accordion from "../utils/Accordion";
 import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 import Droppable from "../utils/Droppable";
 import Image from "../utils/Image";
-import TrashIcon from "../../img/trash.svg";
+import TrashIcon from "../../asset/img/trash.svg";
 
 type Props = {
   bookInfoId: number;

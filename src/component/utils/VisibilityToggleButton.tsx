@@ -1,7 +1,7 @@
 import { MouseEvent, ButtonHTMLAttributes } from "react";
-import Edit from "../../img/edit.svg";
+import Edit from "../../asset/img/edit.svg";
 import Image from "./Image";
-import "../../css/VisibilityToggleButton.css";
+import "../../asset/css/VisibilityToggleButton.css";
 
 interface VisibilityToggleButtonProps
   extends Partial<ButtonHTMLAttributes<HTMLButtonElement>> {

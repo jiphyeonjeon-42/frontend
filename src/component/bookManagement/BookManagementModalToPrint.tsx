@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import { category } from "../../data/category";
+import { category } from "../../constant/category";
 import Button from "../utils/Button";
 import BookLabelPrintArea from "./bookLabel/BookLabelPrintArea";
-import "../../css/BookManagementToPrint.css";
+import "../../asset/css/BookManagementToPrint.css";
 
 type Props = {
   printList?: object[];

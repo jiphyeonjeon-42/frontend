@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
-import { setErrorDialog } from "../../data/error";
+import { setErrorDialog } from "../../constant/error";
 
 const usePostLendings = ({
   title,

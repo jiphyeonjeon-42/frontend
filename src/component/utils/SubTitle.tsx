@@ -1,4 +1,4 @@
-import "../../css/SubTitle.css";
+import "../../asset/css/SubTitle.css";
 
 type Props = {
   subTitle: string;

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { otherManagementTabList } from "../../data/tablist";
+import { otherManagementTabList } from "../../constant/tablist";
 import Tabs from "../utils/Tabs";
 import Banner from "../utils/Banner";
 import SuperTagSelectedBook from "./SuperTagSelectedBook";
 import SuperTagMerge from "./SuperTagMerge";
 import SuperTagSearchBookModal from "./SuperTagSearchBookModal";
-import { Book } from "../../types";
+import { Book } from "../../type";
 
 const SuperTagManagement = () => {
   const [book, setBook] = useState<Book | null>(null);

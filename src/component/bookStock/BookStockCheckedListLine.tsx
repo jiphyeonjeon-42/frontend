@@ -1,4 +1,4 @@
-import { Book } from "../../types";
+import { Book } from "../../type";
 import InquireBoxItem from "../utils/InquireBoxItem";
 import InquireBoxLine from "../utils/InquireBoxLine";
 

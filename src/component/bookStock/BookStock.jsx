@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
-import { bookManagementTabList } from "../../data/tablist";
+import { bookManagementTabList } from "../../constant/tablist";
 import BookStockCheckedList from "./BookStockCheckedList";
 import BookStockNeedToCheckList from "./BookStockNeedToCheckList";
 import BookStockCheckByReadingQR from "./BookStockCheckByReadingQR";

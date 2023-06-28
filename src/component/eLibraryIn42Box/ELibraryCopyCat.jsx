@@ -5,7 +5,7 @@ import ELibraryNew from "./ELibraryNew";
 import ELibraryPopular from "./ELibraryPopular";
 import ELibraryFooter from "./ELibraryFooter";
 import HeaderModal from "../utils/HeaderModal";
-import "../../css/ELibraryCopyCat.css";
+import "../../asset/css/ELibraryCopyCat.css";
 
 const ELibraryCopyCat = () => {
   const [isModalOpened, setModalOpened] = useState(false);

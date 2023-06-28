@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
-import "../../css/Management.css";
+import "../../asset/css/Management.css";
 
 type Props = {
   searchBarPlaceHolder: string;

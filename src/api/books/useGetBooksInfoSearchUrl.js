@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
 import useParseUrlQueryString from "../../hook/useParseUrlQueryString";
 import { compareExpect } from "../../util/typeCheck";
-import { searchUrlQueryKeys } from "../../data/key";
+import { searchUrlQueryKeys } from "../../constant/key";
 
 const useGetBooksInfoSearchUrl = () => {
   const [searchResult, setSearchResult] = useState({

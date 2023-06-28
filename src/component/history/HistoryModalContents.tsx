@@ -1,7 +1,7 @@
 import TextWithLabel from "../utils/TextWithLabel";
 import BookInformationWithCover from "../utils/BookInformationWithCover";
-import "../../css/HistoryModalContents.css";
-import { History } from "../../types";
+import "../../asset/css/HistoryModalContents.css";
+import { History } from "../../type";
 
 type Props = {
   historyInfo: History;

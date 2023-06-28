@@ -9,9 +9,9 @@ import Banner from "../utils/Banner";
 import BarcodeReader from "../utils/BarcodeReader";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 
-import { bookManagementTabList } from "../../data/tablist";
-import Book from "../../img/admin_icon.svg";
-import "../../css/AddBook.css";
+import { bookManagementTabList } from "../../constant/tablist";
+import Book from "../../asset/img/admin_icon.svg";
+import "../../asset/css/AddBook.css";
 
 const AddBook = () => {
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);

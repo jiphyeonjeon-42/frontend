@@ -1,6 +1,6 @@
 import Image from "../utils/Image";
-import Arrow from "../../img/arrow_right_black.svg";
-import "../../css/RentModalBookList.css";
+import Arrow from "../../asset/img/arrow_right_black.svg";
+import "../../asset/css/RentModalBookList.css";
 
 type Props = {
   setSelectedBooks(...args: unknown[]): unknown;

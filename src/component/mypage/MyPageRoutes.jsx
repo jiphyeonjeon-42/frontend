@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Banner from "../utils/Banner";
-import "../../css/MypageRoutes.css";
+import "../../asset/css/MypageRoutes.css";
 
 function MyPageRoutes() {
   return (

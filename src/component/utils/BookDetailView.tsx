@@ -1,7 +1,7 @@
 import Image from "./Image";
-import "../../css/BookDetailView.css";
+import "../../asset/css/BookDetailView.css";
 import { ReactNode } from "react";
-import { Book } from "../../types";
+import { Book } from "../../type";
 
 type Props = {
   book: Partial<Book>;

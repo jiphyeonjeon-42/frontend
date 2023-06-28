@@ -1,10 +1,10 @@
 import { useGetTagsBookInfoId } from "../../api/tags/useGetTagsBookInfoId";
-import { Book } from "../../types";
+import { Book } from "../../type";
 import SuperTagMergeDefaultTag from "./SuperTagMergeDefaultTag";
 import SuperTagMergeAccordion from "./SuperTagMergeAccordion";
 import SuperTagMergeCreate from "./SuperTagMergeCreate";
 import DragZone from "../utils/DragZone";
-import "../../css/SuperTagMerge.css";
+import "../../asset/css/SuperTagMerge.css";
 
 type SuperTagMergeProps = {
   book: Book;

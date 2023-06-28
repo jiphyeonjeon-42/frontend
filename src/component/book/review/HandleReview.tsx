@@ -2,10 +2,10 @@ import { useState } from "react";
 import axiosPromise from "../../../util/axios";
 import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
-import UserEdit from "../../../img/edit.svg";
-import DeleteButton from "../../../img/x_button.svg";
+import UserEdit from "../../../asset/img/edit.svg";
+import DeleteButton from "../../../asset/img/x_button.svg";
 import useDialog from "../../../hook/useDialog";
-import "../../../css/Review.css";
+import "../../../asset/css/Review.css";
 
 type Props = {
   data?: {

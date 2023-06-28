@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
-import { Review } from "../../types";
+import { Review } from "../../type";
 
 const useGetReviews = () => {
   const [params, setParams] = useState({

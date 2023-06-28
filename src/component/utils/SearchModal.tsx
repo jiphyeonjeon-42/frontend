@@ -2,7 +2,7 @@ import { MouseEventHandler, ReactNode, useRef } from "react";
 import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
 import TextWithLabel from "./TextWithLabel";
-import "../../css/SearchModal.css";
+import "../../asset/css/SearchModal.css";
 
 type Props = {
   titleText: string;

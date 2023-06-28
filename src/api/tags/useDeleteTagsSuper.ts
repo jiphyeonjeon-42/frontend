@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
 import { AxiosError } from "axios";
-import getErrorMessage from "../../data/error";
+import getErrorMessage from "../../constant/error";
 
 type Props = {
   removeTag: (tagId: number) => void;

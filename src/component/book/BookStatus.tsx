@@ -1,4 +1,4 @@
-import "../../css/BookStatus.css";
+import "../../asset/css/BookStatus.css";
 
 type Props = {
   book: {

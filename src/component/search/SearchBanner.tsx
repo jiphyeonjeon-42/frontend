@@ -1,6 +1,6 @@
 import SearchBar from "../utils/SearchBar";
-import "../../css/Banner.css";
-import "../../css/SearchBanner.css";
+import "../../asset/css/Banner.css";
+import "../../asset/css/SearchBanner.css";
 
 type Props = {
   setQuery(...args: unknown[]): unknown;

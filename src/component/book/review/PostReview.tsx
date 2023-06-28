@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../../../css/Review.css";
+import "../../../asset/css/Review.css";
 import Button from "../../utils/Button";
 
 type Props = {

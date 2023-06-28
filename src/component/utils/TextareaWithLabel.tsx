@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import colorPalette from "../../data/color";
-import "../../css/TextareaWithLabel.css";
+import colorPalette from "../../constant/color";
+import "../../asset/css/TextareaWithLabel.css";
 
 type Props = {
   wrapperClassName?: string;

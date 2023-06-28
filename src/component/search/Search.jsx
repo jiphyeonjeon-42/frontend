@@ -10,9 +10,9 @@ import Pagination from "../utils/Pagination";
 import useParseUrlQueryString from "../../hook/useParseUrlQueryString";
 import useDebounce from "../../hook/useDebounce";
 import useGetBooksInfoSearchUrl from "../../api/books/useGetBooksInfoSearchUrl";
-import { searchUrlQueryKeys } from "../../data/key";
-import "../../css/Books.css";
-import "../../css/Search.css";
+import { searchUrlQueryKeys } from "../../constant/key";
+import "../../asset/css/Books.css";
+import "../../asset/css/Search.css";
 
 const Search = () => {
   const myRef = useRef(null);

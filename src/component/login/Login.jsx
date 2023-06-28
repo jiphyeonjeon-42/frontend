@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import usePostAuthLogin from "../../api/auth/usePostAuthLogin";
-import "../../css/MainBanner.css";
-import "../../css/Banner.css";
-import "../../css/Login.css";
+import "../../asset/css/MainBanner.css";
+import "../../asset/css/Banner.css";
+import "../../asset/css/Login.css";
 
 const Login = () => {
   const emailRef = useRef(null);

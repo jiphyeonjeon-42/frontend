@@ -1,4 +1,4 @@
-import colorPalette from "../../data/color";
+import colorPalette from "../../constant/color";
 
 type Props = {
   wholeString: string;
@@ -6,11 +6,7 @@ type Props = {
   emphasisColor?: string;
 };
 
-const EmphasisInString = ({
-  wholeString,
-  emphasis,
-  emphasisColor,
-}: Props) => {
+const EmphasisInString = ({ wholeString, emphasis, emphasisColor }: Props) => {
   const colorCode = colorPalette.find(i => i.string === emphasisColor)?.code;
   const emphasisPosition = wholeString.indexOf(emphasis);
   const isAvailableEmphasis = emphasis.length && emphasisPosition > 0;

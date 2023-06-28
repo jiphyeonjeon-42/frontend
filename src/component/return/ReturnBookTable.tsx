@@ -1,16 +1,12 @@
 import Image from "../utils/Image";
-import Arr from "../../img/arrow_right_black.svg";
-import "../../css/ReturnbookTable.css";
+import Arr from "../../asset/img/arrow_right_black.svg";
+import "../../asset/css/ReturnbookTable.css";
 
 type Props = {
   setLendingId(...args: unknown[]): unknown;
 };
 
-const ReturnbookTable = ({
-  factor,
-  openModal,
-  setLendingId,
-}: Props) => {
+const ReturnbookTable = ({ factor, openModal, setLendingId }: Props) => {
   const openSetModal = () => {
     setLendingId(factor.id);
     openModal();

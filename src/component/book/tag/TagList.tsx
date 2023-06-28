@@ -3,7 +3,7 @@ import { TagType } from "../../../type/TagType";
 import Tag from "./Tag";
 import TagModal from "./TagModal";
 import CreateTagModal from "./CreateTagModal";
-import plusicon from "../../../img/tag_plus.svg";
+import plusicon from "../../../asset/img/tag_plus.svg";
 
 type TagListProps = {
   tagData: {

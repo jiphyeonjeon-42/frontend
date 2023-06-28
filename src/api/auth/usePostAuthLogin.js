@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import getErrorMessage from "../../data/error";
+import getErrorMessage from "../../constant/error";
 import useApi from "../../hook/useApi";
 
 const usePostAuthLogin = () => {

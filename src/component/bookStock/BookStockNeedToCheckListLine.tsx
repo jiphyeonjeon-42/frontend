@@ -2,7 +2,7 @@ import InquireBoxItem from "../utils/InquireBoxItem";
 import InquireBoxLine from "../utils/InquireBoxLine";
 import usePatchBooksUpdate from "../../api/books/usePatchBooksUpdate";
 import useDialog from "../../hook/useDialog";
-import { Book } from "../../types";
+import { Book } from "../../type";
 
 type Props = {
   book: Book;

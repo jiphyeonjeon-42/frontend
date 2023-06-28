@@ -1,8 +1,8 @@
 import Image from "../utils/Image";
-import UserUsage from "../../img/book-arrow-right.svg";
-import UserEdit from "../../img/edit.svg";
-import "../../css/UserBriefInfo.css";
-import { User } from "../../types";
+import UserUsage from "../../asset/img/book-arrow-right.svg";
+import UserEdit from "../../asset/img/edit.svg";
+import "../../asset/css/UserBriefInfo.css";
+import { User } from "../../type";
 
 const roles = ["미인증", "일반", "사서", "운영진"];
 const USAGE = 1;
@@ -15,12 +15,7 @@ type Props = {
   setSelectedUser(...args: unknown[]): unknown;
 };
 
-const UserBriefInfo = ({
-  user,
-  line,
-  setModal,
-  setSelectedUser,
-}: Props) => {
+const UserBriefInfo = ({ user, line, setModal, setSelectedUser }: Props) => {
   const nowDay = new Date();
   const openUsageModal = () => {
     setSelectedUser(user);

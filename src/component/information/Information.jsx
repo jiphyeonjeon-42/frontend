@@ -3,8 +3,8 @@ import Question from "./Question";
 import Image from "../utils/Image";
 import Banner from "../utils/Banner";
 import ScrollTopButton from "../utils/ScrollTopButton";
-import Toggle from "../../img/caret-right.svg";
-import "../../css/Information.css";
+import Toggle from "../../asset/img/caret-right.svg";
+import "../../asset/css/Information.css";
 
 const Information = () => {
   const [allOpen, setAllOpen] = useState(false);

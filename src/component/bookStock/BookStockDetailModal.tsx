@@ -3,9 +3,9 @@ import BookDetailView from "../utils/BookDetailView";
 import SpanWithLabel from "../utils/SpanWithLabel";
 import Button from "../utils/Button";
 import useDialog from "../../hook/useDialog";
-import { bookStatus } from "../../data/status";
+import { bookStatus } from "../../constant/status";
 import usePatchStockUpdate from "../../api/stock/usePatchStockUpdate";
-import "../../css/BookStockDetailModal.css";
+import "../../asset/css/BookStockDetailModal.css";
 
 type Props = {
   bookId: number;
@@ -13,11 +13,7 @@ type Props = {
   closeModal(...args: unknown[]): unknown;
 };
 
-const BookStockDetailModal = ({
-  bookId,
-  closeModal,
-  addChecked,
-}: Props) => {
+const BookStockDetailModal = ({ bookId, closeModal, addChecked }: Props) => {
   const { setOpenTitleAndMessage, Dialog } = useDialog();
   const { bookDetail: book } = useGetBooksIdForStock({
     id: bookId,

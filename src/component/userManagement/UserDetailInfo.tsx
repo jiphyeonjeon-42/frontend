@@ -4,8 +4,8 @@ import InputWithLabel from "../utils/InputWithLabel";
 import SelectWithLabel from "../utils/SelectWithLabel";
 import Button from "../utils/Button";
 import { dateFormat, dateLessThan, nowDate } from "../../util/date";
-import "../../css/UserDetailInfo.css";
-import { User } from "../../types";
+import "../../asset/css/UserDetailInfo.css";
+import { User } from "../../type";
 
 const roles = ["미인증", "카뎃", "사서", "운영진"];
 

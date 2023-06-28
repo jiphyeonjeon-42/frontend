@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
-import getErrorMessage from "../../data/error";
+import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
-import { Lending } from "../../types";
+import { Lending } from "../../type";
 
 const useGetLendingsId = ({ lendingId, closeModal, setError }) => {
   const defaultData: Lending = {

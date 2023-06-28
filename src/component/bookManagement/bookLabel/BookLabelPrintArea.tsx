@@ -1,7 +1,7 @@
 import BookLabelPrintItem from "./BookLabelPrintItem";
-import "../../../css/PrintLabel.css";
+import "../../../asset/css/PrintLabel.css";
 import { RefObject } from "react";
-import { Book } from "../../../types";
+import { Book } from "../../../type";
 
 type Props = {
   sortedList: Book[];
