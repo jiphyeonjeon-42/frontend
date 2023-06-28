@@ -20,10 +20,9 @@ import ReservedLoan from "./component/reservedloan/ReservedLoan";
 import ReturnBook from "./component/return/ReturnBook";
 import UserManagement from "./component/userManagement/UserManagement";
 import AddBook from "./component/addbook/AddBook";
-import MyPageRoutes from "./component/mypage/MyPageRoutes";
 import userState from "./atom/userState";
 import Mypage from "./component/mypage/Mypage";
-import EditEmailOrPassword from "./component/mypage/EditEmailOrPassword";
+import MypageEditEmailOrPassword from "./component/mypageEdit/MypageEditEmailOrPassword";
 import LimitedRoute from "./LimitedRoute";
 import { isExpiredDate } from "./util/date";
 import BookManagement from "./component/bookManagement/BookManagement";
@@ -79,10 +78,9 @@ function App() {
           <Route path="/tag/sub" element={<SubTagManagement />} />
         </Route>
         <Route element={<LimitedRoute isLoginOnly />}>
-          <Route path="/mypage" element={<MyPageRoutes />}>
-            <Route index element={<Mypage />} />
-            <Route path="edit/:mode" element={<EditEmailOrPassword />} />
-          </Route>
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/mypage/edit/email" element={<MypageEditEmailOrPassword />} />
+          <Route path="/mypage/edit/pw" element={<MypageEditEmailOrPassword />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

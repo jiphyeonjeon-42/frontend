@@ -1,3 +1,15 @@
+.mypage-wrapper {
+  min-width: 360px;
+  padding: 0 15rem 6rem 15rem;
+}
+
+.mypage-section {
+  position: relative;
+  min-width: 90rem;
+  max-width: 95rem;
+  margin: 0 auto;
+}
+
 .mypage-subtitle {
   padding: 11rem 0 3rem 0;
 }
@@ -125,8 +137,19 @@
 }
 
 @media screen and (max-width: 1200px) {
+  .mypage-wrapper {
+    padding: 0;
+  }
   .mypage-inquire-box-long-wrapper {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .mypage-section {
+    max-width: unset;
+    min-width: unset;
+    width: 90%;
   }
 }
 
