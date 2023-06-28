@@ -1,23 +1,12 @@
-import { useDialog } from "../../hook/useDialog";
 import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
 import RentedOrReservedBooks from "./MyRentInfo/RentedOrReservedBooks";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Reserve from "../../asset/img/list-check-solid.svg";
 
 const MyReservation = () => {
-  const {
-    setOpen: openDialog,
-    config: dialogConfig,
-    setConfig: setDialogConfig,
-    setOpenTitleAndMessage: setDialogTitleAndMessage,
-    Dialog,
-  } = useDialog();
-
-  const userId = JSON.parse(window.localStorage.getItem("user")).id;
-  const { userInfo } = useGetUsersSearchId({
-    setDialogTitleAndMessage,
-    userId,
-  });
+  const user = window.localStorage.getItem("user");
+  const userId = user && JSON.parse(user).id;
+  const { userInfo } = useGetUsersSearchId({ userId });
 
   return (
     <>
@@ -33,13 +22,9 @@ const MyReservation = () => {
           <RentedOrReservedBooks
             componentMode="reserve"
             bookInfoArr={userInfo ? userInfo.reservations : null}
-            openDialog={openDialog}
-            dialogConfig={dialogConfig}
-            setDialogConfig={setDialogConfig}
           />
         </div>
       </div>
-      <Dialog />
     </>
   );
 };

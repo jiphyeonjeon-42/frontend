@@ -1,60 +1,46 @@
-import { useState, useMemo } from "react";
+import { ChangeEvent, FormEventHandler, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDialog } from "../../hook/useDialog";
 import { usePatchUsersMyupdate } from "../../api/users/usePatchUsersMyupdate.js";
-import Image from "../utils/Image";
-import { registerRule } from "../../constant/validate";
+import { useNewDialog } from "../../hook/useNewDialog.js";
+import { registerRule } from "../../constant/validate.js";
+import Image from "../utils/Image.js";
 import arrowLeft from "../../asset/img/arrow_left_black.svg";
 import "../../asset/css/EditEmailOrPassword.css";
-import { useNewDialog } from "../../hook/useNewDialog";
-
-const modeStringKorean = mode => (mode === "email" ? "이메일" : "비밀번호");
-const modeString = mode => (mode === "email" ? "email" : "password");
 
 function EditEmailOrPassword() {
-  const { mode } = useParams();
+  const isEmailMode = useParams().mode === "email";
+  const mode = isEmailMode ? "email" : "password";
+  const modeKorean = isEmailMode ? "이메일" : "비밀번호";
+
   const navigate = useNavigate();
   const [revision, setRevision] = useState({
     text: "",
     check: "",
   });
 
-  const userInfo = useMemo(
-    () => JSON.parse(window.localStorage.getItem("user")),
-    [],
-  );
+  const user = window.localStorage.getItem("user");
+  const userInfo = useMemo(() => user && JSON.parse(user), []);
 
-  const onChangeInput = e => {
+  const onChangeInput = (
+    e: ChangeEvent<HTMLInputElement>,
+    input: "text" | "check",
+  ) => {
     const { value } = e.currentTarget;
-    setRevision({ ...revision, text: value });
+    setRevision(prev => {
+      return { ...prev, [input]: value };
+    });
   };
 
-  const onChangeCheck = e => {
-    const { value } = e.currentTarget;
-    setRevision({ ...revision, check: value });
-  };
-
-  const { setPatchData } = usePatchUsersMyupdate({
-    modeString: modeStringKorean(mode),
-  });
+  const { setPatchData } = usePatchUsersMyupdate({ modeKorean });
 
   const { addDialogWithTitleAndMessage } = useNewDialog();
 
-  const onSubmitUpdate = async e => {
+  const onSubmitUpdate: FormEventHandler = async e => {
     e.preventDefault();
-    if (mode === "pw" && revision.text !== revision.check) {
+    if (!registerRule[mode]?.validator(revision.text, revision.check)) {
       addDialogWithTitleAndMessage(
         "editMypageError",
-        "비밀번호 재입력이 다릅니다.",
-        "비밀번호를 다시 확인해주세요.",
-      );
-      return;
-    }
-    if (!registerRule[modeString(mode)]?.validator(revision.text)) {
-      addDialogWithTitleAndMessage(
-        "editMypageError",
-        registerRule[modeString(mode)].invalidMessage,
-
+        registerRule[mode].invalidMessage,
         "",
       );
       return;
@@ -62,12 +48,12 @@ function EditEmailOrPassword() {
     if (!revision.text) {
       addDialogWithTitleAndMessage(
         "editMypageError",
-        `${modeStringKorean(mode)}를 다시 확인해주세요`,
+        `${modeKorean}를 다시 확인해주세요`,
         "",
       );
       return;
     }
-    setPatchData({ [modeString(mode)]: revision.text });
+    setPatchData({ [mode]: revision.text });
   };
 
   return (
@@ -80,13 +66,11 @@ function EditEmailOrPassword() {
         </div>
         <div className="mypage-edit-title color-2d">
           <span>{`${userInfo ? userInfo.email : "-"}님의, `}</span>
-          <span className="inline-block">{`${modeStringKorean(
-            mode,
-          )} 변경 페이지입니다`}</span>
+          <span className="inline-block">{`${modeKorean} 변경 페이지입니다`}</span>
         </div>
-        {mode === "email" ? (
+        {isEmailMode ? (
           <>
-            <div className={`mypage-edit-${mode}-curr_email`}>
+            <div className="mypage-edit-email-curr_email">
               <span className="font-14-bold color-2d">현재 이메일</span>
               <span className="font-14 text-center">
                 {userInfo ? userInfo.email : "-"}
@@ -98,7 +82,7 @@ function EditEmailOrPassword() {
                 <input
                   value={revision.text}
                   type="email"
-                  onChange={onChangeInput}
+                  onChange={e => onChangeInput(e, "text")}
                   placeholder="이메일을 입력해주세요"
                   onFocus={e => {
                     e.target.placeholder = "";
@@ -116,7 +100,7 @@ function EditEmailOrPassword() {
             </form>
           </>
         ) : null}
-        {mode === "pw" ? (
+        {!isEmailMode ? (
           <>
             <div className="mypage-edit-input-box font-14">
               <span className="font-14-bold">새로운 비밀번호</span>
@@ -130,7 +114,7 @@ function EditEmailOrPassword() {
                 onBlur={e => {
                   e.target.placeholder = "비밀번호 입력";
                 }}
-                onChange={onChangeInput}
+                onChange={e => onChangeInput(e, "text")}
               />
             </div>
             <form onSubmit={onSubmitUpdate}>
@@ -146,7 +130,7 @@ function EditEmailOrPassword() {
                   onBlur={e => {
                     e.target.placeholder = "비밀번호 재입력";
                   }}
-                  onChange={onChangeCheck}
+                  onChange={e => onChangeInput(e, "check")}
                 />
               </div>
               <div className={`mypage-edit-${mode}-button`}>

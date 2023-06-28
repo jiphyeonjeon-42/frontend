@@ -4,14 +4,12 @@ import RentHistoryTable from "./RentHistoryTable";
 import "../../../asset/css/RentHistory.css";
 
 const RentHistory = () => {
-  const { historiesList, lastPage, page, setPage } = useGetHistories({
-    initWho: "my",
-  });
+  const { historiesList, lastPage, page, setPage } = useGetHistories();
 
   return (
     <div>
-      {historiesList.map(factor => (
-        <RentHistoryTable key={factor.id} factor={factor} />
+      {historiesList.map(history => (
+        <RentHistoryTable key={history.id} history={history} />
       ))}
       <div className="rent_histories-table__pagination">
         <Pagination page={page} setPage={setPage} lastPage={lastPage} />

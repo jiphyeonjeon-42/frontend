@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import getErrorMessage from "../../constant/error";
+import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
-export const useDeleteLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
+type Props = {
+  initBookInfoId?: number;
+};
+export const useDeleteLike = ({ initBookInfoId }: Props) => {
   const [bookInfoId, setBookInfoId] = useState(initBookInfoId);
   const { request } = useApi("delete", `books/info/${bookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
@@ -14,24 +17,18 @@ export const useDeleteLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
     { key: "likeNum", type: "number", isNullable: false },
   ];
 
-  const refineResponse = response => {
-    const refinelikeData = compareExpect(
+  const refineResponse = (response: AxiosResponse) => {
+    const [refinelikeData] = compareExpect(
       `books/info/${initBookInfoId}/like`,
       [response.data],
       expectedItem,
     );
-    setLikeData(...refinelikeData);
-  };
-
-  const displayError = error => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setOpenTitleAndMessage(title, errorCode ? message : error.message);
+    setLikeData(refinelikeData);
   };
 
   useEffect(() => {
-    if (bookInfoId) request(refineResponse, displayError);
-    setBookInfoId(null);
+    if (bookInfoId) request(refineResponse);
+    setBookInfoId(undefined);
   }, [bookInfoId]);
 
   return { setBookInfoId, likeData };

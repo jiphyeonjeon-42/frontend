@@ -1,19 +1,13 @@
 import RentHistory from "./RentHistory";
-import { useDialog } from "../../../hook/useDialog";
 import { useGetUsersSearchId } from "../../../api/users/useGetUsersSearchId";
 import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import InquireBoxTitle from "../../utils/InquireBoxTitle";
 import Book from "../../../asset/img/admin_icon.svg";
 
 const MyRent = () => {
-  const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =
-    useDialog();
-
-  const userId = JSON.parse(window.localStorage.getItem("user")).id;
-  const { userInfo } = useGetUsersSearchId({
-    setDialogTitleAndMessage,
-    userId,
-  });
+  const user = window.localStorage.getItem("user");
+  const userId = user && JSON.parse(user).id;
+  const { userInfo } = useGetUsersSearchId({ userId });
 
   return (
     <>
@@ -42,7 +36,6 @@ const MyRent = () => {
           <RentHistory />
         </div>
       </div>
-      <Dialog />
     </>
   );
 };
