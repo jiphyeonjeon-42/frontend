@@ -9,7 +9,8 @@ const MyRent = () => {
   const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =
     useDialog();
 
-  const userId = JSON.parse(window.localStorage.getItem("user")).id;
+  const user = window.localStorage.getItem("user");
+  const userId = user && JSON.parse(user).id;
   const { userInfo } = useGetUsersSearchId({
     setDialogTitleAndMessage,
     userId,

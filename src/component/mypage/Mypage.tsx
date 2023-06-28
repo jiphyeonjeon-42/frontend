@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { myPageTabList } from "../../constant/tablist";
 import MyRent from "./MyRentInfo/MyRent";
@@ -19,20 +19,20 @@ const Mypage = () => {
   const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =
     useDialog();
 
-  const selectComponent = {
+  const selectComponent: { [key: string]: ReactNode } = {
     myRent: <MyRent />,
     myReservation: <MyReservation />,
     myReview: <MyReview type="myReviews" />,
   };
-
-  const userId = JSON.parse(window.localStorage.getItem("user")).id;
+  const user = window.localStorage.getItem("user");
+  const userId = user && JSON.parse(user).id;
   const { userInfo } = useGetUsersSearchId({
     setDialogTitleAndMessage,
     userId,
   });
-  const [deviceMode, setDeviceMode] = useState(window.innerWidth);
+  const [deviceMode, setDeviceMode] = useState("desktop");
 
-  const convertRoleToStr = roleInt => {
+  const convertRoleToStr = (roleInt: number) => {
     switch (roleInt) {
       case 1:
         return "카뎃";
@@ -62,33 +62,36 @@ const Mypage = () => {
         setDeviceMode("pad");
       if (window.innerWidth < 767) setDeviceMode("mobile");
     };
+    getWindowWidth();
     window.addEventListener("resize", getWindowWidth);
     return () => {
       window.removeEventListener("resize", getWindowWidth);
     };
   }, []);
 
-  const concatDate = day => {
+  const concatDate = (day: Date) => {
+    if (!userInfo) return "";
     let overDueDate = "";
-
     day.setDate(day.getDate() + userInfo.overDueDay);
     overDueDate += day.getFullYear();
     overDueDate += "-";
     overDueDate +=
       day.getMonth() + 1 >= 10
         ? day.getMonth() + 1
-        : "0".concat(day.getMonth() + 1);
+        : "0".concat(`${day.getMonth() + 1}}`);
     overDueDate += "-";
     overDueDate +=
-      day.getDate() >= 10 ? day.getDate() : "0".concat(day.getDate());
+      day.getDate() >= 10 ? day.getDate() : "0".concat(`${day.getDate()}`);
     return overDueDate;
   };
 
   const getOverDueDate = () => {
     if (
-      !userInfo.penaltyEndDate ||
-      new Date(userInfo.penaltyEndDate).setHours(0, 0, 0, 0) <
-        new Date().setHours(0, 0, 0, 0)
+      !userInfo ||
+      (userInfo &&
+        (!userInfo.penaltyEndDate ||
+          new Date(userInfo.penaltyEndDate).setHours(0, 0, 0, 0) <
+            new Date().setHours(0, 0, 0, 0)))
     ) {
       return concatDate(new Date());
     }
@@ -198,7 +201,6 @@ const Mypage = () => {
               key={tab.type}
               role="button"
               tabIndex={index}
-              onKeyDown=""
               onClick={() => {
                 changeTab(index);
               }}

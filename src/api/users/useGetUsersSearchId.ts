@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
-import { setErrorDialog } from "../../constant/error";
+import { AxiosResponse } from "axios";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
+import { User } from "../../type";
+import { setErrorDialog } from "../../constant/error";
 
-const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }) => {
-  const [userInfo, setUserInfo] = useState(null);
+type Props = {
+  userId: number;
+  setDialogTitleAndMessage: (title: string, message: string) => void;
+};
+
+const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }: Props) => {
+  const [userInfo, setUserInfo] = useState<User>();
 
   const { request } = useApi("get", "users/search", {
     id: userId,
@@ -39,7 +46,7 @@ const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }) => {
     { key: "reservations", type: "*", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: AxiosResponse) => {
     const user = compareExpect(
       "users/search",
       response.data.items,
@@ -48,7 +55,7 @@ const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }) => {
     setUserInfo(user[0]);
   };
 
-  const onError = error => {
+  const onError = (error: any) => {
     setErrorDialog(error, setDialogTitleAndMessage);
   };
 

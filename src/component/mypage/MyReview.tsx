@@ -11,11 +11,11 @@ type Props = {
 };
 
 const MyReview = ({ type }: Props) => {
-  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
+  const checkLogin = window.localStorage.getItem("user");
   const { page, setPage, lastPage, reviewList, setReviewList } =
     useGetMyReviewInfo();
 
-  const deleteReview = reviewId => {
+  const deleteReview = (reviewId: number) => {
     const temp = reviewList.filter(review => review.reviewsId !== reviewId);
     setReviewList(temp);
     axiosPromise("delete", `/reviews/${reviewId}`);

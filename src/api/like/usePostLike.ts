@@ -3,7 +3,12 @@ import getErrorMessage from "../../constant/error";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
-const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
+type Props = {
+  setOpenTitleAndMessage: (title: string, message: string) => void;
+  initBookInfoId?: number;
+};
+
+const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }: Props) => {
   const [bookInfoId, setBookInfoId] = useState(initBookInfoId);
   const { request } = useApi("post", `books/info/${bookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
@@ -13,16 +18,16 @@ const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
     { key: "bookInfoId", type: "number", isNullable: false },
   ];
 
-  const refineResponse = response => {
-    const refinelikeData = compareExpect(
+  const refineResponse = (response: any) => {
+    const [refinelikeData] = compareExpect(
       `books/info/${initBookInfoId}/like`,
       [response.data],
       expectedItem,
     );
-    setLikeData(...refinelikeData);
+    setLikeData(refinelikeData);
   };
 
-  const displayError = error => {
+  const displayError = (error: any) => {
     const errorCode = parseInt(error?.response?.data?.errorCode, 10);
     const [title, message] = getErrorMessage(errorCode).split("\r\n");
     setOpenTitleAndMessage(title, errorCode ? message : error.message);
@@ -30,7 +35,7 @@ const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }) => {
 
   useEffect(() => {
     if (bookInfoId) request(refineResponse, displayError);
-    setBookInfoId(null);
+    setBookInfoId(undefined);
   }, [bookInfoId]);
 
   return { setBookInfoId, likeData };

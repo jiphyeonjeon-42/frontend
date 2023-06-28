@@ -13,4 +13,5 @@ export type User = {
   reservations: Reservation[];
   lendings: Partial<Lending>[];
   isPenalty?: boolean;
+  updatedAt?: string;
 };

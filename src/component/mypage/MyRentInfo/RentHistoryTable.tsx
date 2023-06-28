@@ -6,11 +6,16 @@ import useDeleteLike from "../../../api/like/useDeleteLike";
 import Image from "../../utils/Image";
 import FilledLike from "../../../asset/img/like_filled.svg";
 import EmptyLike from "../../../asset/img/like_empty.svg";
+import { History } from "../../../type";
 import "../../../asset/css/RentHistory.css";
 
-const RentHistoryTable = ({ factor }) => {
-  const [currentLike, setCurrentLike] = useState();
-  const { setOpenTitleAndMessage } = useDialog();
+type Props = {
+  factor: History;
+};
+
+const RentHistoryTable = ({ factor }: Props) => {
+  const [currentLike, setCurrentLike] = useState(false);
+  const { Dialog, setOpenTitleAndMessage } = useDialog();
   useGetLike({
     setOpenTitleAndMessage,
     initBookInfoId: factor.bookInfoId,
@@ -19,17 +24,17 @@ const RentHistoryTable = ({ factor }) => {
   const { setBookInfoId: setBookInfoIdPost } = usePostLike({
     setOpenTitleAndMessage,
   });
-  const postLike = bookInfoId => {
+  const postLike = (bookInfoId: number) => {
     setBookInfoIdPost(bookInfoId);
   };
   const { setBookInfoId: setBookInfoIdDelete } = useDeleteLike({
     setOpenTitleAndMessage,
   });
-  const deleteLike = bookInfoId => {
+  const deleteLike = (bookInfoId: number) => {
     setBookInfoIdDelete(bookInfoId);
   };
 
-  const clickLikeHandler = bookInfoId => {
+  const clickLikeHandler = (bookInfoId: number) => {
     if (currentLike) {
       deleteLike(bookInfoId);
       setCurrentLike(false);
@@ -41,6 +46,7 @@ const RentHistoryTable = ({ factor }) => {
 
   return (
     <div className="rent_histories__table-list">
+      <Dialog />
       <span className="rent_histories__table_info__date">
         {factor?.createdAt}
       </span>

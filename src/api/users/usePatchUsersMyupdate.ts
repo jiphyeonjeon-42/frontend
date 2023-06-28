@@ -3,9 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { setErrorDialog } from "../../constant/error";
 import useApi from "../../hook/useApi";
 
-const usePatchUsersMyupdate = ({ modeString, setOpenTitleAndMessage }) => {
-  const [patchData, setPatchData] = useState(undefined);
-
+type Props = {
+  modeString: string;
+  setOpenTitleAndMessage: (
+    title: string,
+    message: string,
+    afterClose?: () => void,
+  ) => void;
+};
+const usePatchUsersMyupdate = ({
+  modeString,
+  setOpenTitleAndMessage,
+}: Props) => {
+  const [patchData, setPatchData] = useState<{
+    email?: string;
+    password?: string;
+  }>();
   const { request } = useApi("patch", "/users/myupdate", patchData);
   const navigate = useNavigate();
 
@@ -14,7 +27,8 @@ const usePatchUsersMyupdate = ({ modeString, setOpenTitleAndMessage }) => {
       navigate("/auth"),
     );
   };
-  const onError = error => {
+
+  const onError = (error: any) => {
     setErrorDialog(error, setOpenTitleAndMessage, () => navigate("-1"));
   };
 
