@@ -4,15 +4,17 @@ import { useTabFocus } from "../../hook/useTabFocus";
 import { useNewDialog } from "../../hook/useNewDialog";
 import getErrorMessage from "../../constant/error";
 import { myPageTabList } from "../../constant/tablist";
+import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
+import { useRecoilValue } from "recoil";
+import userState from "../../atom/userState";
 import MyRent from "./MyRentInfo/MyRent";
 import MyReservation from "./MyReservation";
 import MyReview from "./MyReview";
-import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Login from "../../asset/img/login_icon_white.svg";
-import "../../asset/css/Mypage.css";
 import Banner from "../utils/Banner";
+import "../../asset/css/Mypage.css";
 
 const Mypage = () => {
   const { currentTab, changeTab } = useTabFocus(0, myPageTabList);
@@ -23,8 +25,7 @@ const Mypage = () => {
     myReservation: <MyReservation />,
     myReview: <MyReview type="myReviews" />,
   };
-  const user = window.localStorage.getItem("user");
-  const userId = user && JSON.parse(user).id;
+  const userId = useRecoilValue(userState).id;
   const { userInfo } = useGetUsersSearchId({ userId });
   const [deviceMode, setDeviceMode] = useState("desktop");
 

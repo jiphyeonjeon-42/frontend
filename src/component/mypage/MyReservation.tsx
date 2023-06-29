@@ -2,10 +2,11 @@ import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
 import RentedOrReservedBooks from "./MyRentInfo/RentedOrReservedBooks";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Reserve from "../../asset/img/list-check-solid.svg";
+import { useRecoilValue } from "recoil";
+import userState from "../../atom/userState";
 
 const MyReservation = () => {
-  const user = window.localStorage.getItem("user");
-  const userId = user && JSON.parse(user).id;
+  const userId = useRecoilValue(userState).id;
   const { userInfo } = useGetUsersSearchId({ userId });
 
   return (

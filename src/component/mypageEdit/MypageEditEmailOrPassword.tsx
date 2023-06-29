@@ -6,6 +6,8 @@ import { registerRule } from "../../constant/validate.js";
 import Image from "../utils/Image.js";
 import arrowLeft from "../../asset/img/arrow_left_black.svg";
 import "../../asset/css/EditEmailOrPassword.css";
+import userState from "../../atom/userState.js";
+import { useRecoilValue } from "recoil";
 
 function EditEmailOrPassword() {
   const isEmailMode = useParams().mode === "email";
@@ -17,9 +19,7 @@ function EditEmailOrPassword() {
     text: "",
     check: "",
   });
-
-  const user = window.localStorage.getItem("user");
-  const userInfo = useMemo(() => user && JSON.parse(user), []);
+  const userInfo = useRecoilValue(userState);
 
   const onChangeInput = (
     e: ChangeEvent<HTMLInputElement>,

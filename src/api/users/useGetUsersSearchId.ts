@@ -52,7 +52,9 @@ export const useGetUsersSearchId = ({ userId }: Props) => {
     setUserInfo(user[0]);
   };
 
-  useEffect(() => request(refineResponse), []);
+  useEffect(() => {
+    if (userId) request(refineResponse);
+  }, [userId]);
 
   return { userInfo };
 };

@@ -5,13 +5,15 @@ import { axiosPromise } from "../../util/axios";
 import Pagination from "../utils/Pagination";
 import { useGetMyReviewInfo } from "../../api/reviews/useGetMyReviewInfo";
 import "../../asset/css/MyReview.css";
+import { useRecoilValue } from "recoil";
+import userState from "../../atom/userState";
 
 type Props = {
   type: string;
 };
 
 const MyReview = ({ type }: Props) => {
-  const checkLogin = window.localStorage.getItem("user");
+  const checkLogin = useRecoilValue(userState)
   const { page, setPage, lastPage, reviewList, setReviewList } =
     useGetMyReviewInfo();
 
