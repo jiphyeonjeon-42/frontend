@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TagType } from "../../../type/TagType";
 import Tooltip from "../../utils/Tooltip";
-import { string } from "prop-type";
 import TagList from "./TagList";
 import Tag from "./Tag";
 
@@ -10,7 +9,7 @@ import useApi from "../../../hook/useApi";
 import { AxiosResponse } from "axios";
 
 const TagModal = ({ id }: TagType) => {
-  const [subTagData, setSubTagData] = useState([]);
+  const [subTagData, setSubTagData] = useState<TagType[]>([]);
   const { request, Dialog } = useApi("get", `/tags/${id}/sub`);
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const TagModal = ({ id }: TagType) => {
   }, []);
 
   return (
-    <div className="button_tag-modal-background">
+    <div className="button_tag_modal_in_background">
       <Dialog />
       {subTagData.map((item: TagType) => (
         <Tag
@@ -30,7 +29,7 @@ const TagModal = ({ id }: TagType) => {
           openModalFunc={() => {}}
           tagData={subTagData}
           setTagData={setSubTagData}
-        ></Tag>
+        />
       ))}
     </div>
   );

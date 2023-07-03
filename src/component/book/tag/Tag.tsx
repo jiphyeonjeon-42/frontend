@@ -73,16 +73,27 @@ const Tag = ({
           />
         </div>
       ) : null}
-      <button className={`button_tag-box-${isType()}`} onClick={tagClick}>
+      <button
+        className={`button_tag-box button_tag-box-${isType()}`}
+        onClick={tagClick}
+      >
         {isMysub ? (
-          <img
-            className="button_tag-remove-button"
-            src={minusicon}
-            alt="minus"
-            onClick={openRemoveModal}
-          />
+          <Tooltip
+            className="button_tag_image_tooltip button_tag-image-button"
+            description="태그 삭제"
+          >
+            <img
+              className="button_tag-image-button"
+              src={minusicon}
+              alt="minus"
+              onClick={openRemoveModal}
+            />
+          </Tooltip>
         ) : null}
-        <Tooltip className="button_tag-tooltip" description={login}>
+        <Tooltip
+          className="button_tag_image_tooltip"
+          description={login ?? "Librarian"}
+        >
           {content}
         </Tooltip>
       </button>

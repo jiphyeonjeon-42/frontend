@@ -1,12 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { TagType } from "../../../type/TagType";
 import { useLocation } from "react-router-dom";
+import { AxiosResponse, AxiosError } from "axios";
+import useApi from "../../../hook/useApi";
 import Tag from "./Tag";
 import TagModal from "./TagModal";
-import CreateTagModal from "./CreateTagModal";
 import plusicon from "../../../asset/img/tag_plus.svg";
-import useApi from "../../../hook/useApi";
-import { AxiosResponse, AxiosError } from "axios";
+import Tooltip from "../../utils/Tooltip";
 
 type TagListProps = {
   tagData: TagType[];
@@ -14,7 +14,7 @@ type TagListProps = {
 };
 
 const TagList = ({ tagData, setTagData }: TagListProps) => {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
   const bookId = location.pathname.split("/")[2];
   const [tagModalData, setTagModalData] = useState<number | null>(null);
@@ -30,6 +30,10 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
 
   const onError = (error: AxiosError) => {
     setErrorCode(parseInt(error?.response?.data?.errorCode, 10));
+    errorActive();
+  };
+
+  const errorActive = () => {
     setActive(true);
     setShowErrorMassege(true);
     setTimeout(() => {
@@ -77,18 +81,17 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
       setLastPress(now);
       if (createTag === "") {
         setErrorCode(1);
-      } else if (createTag === "default") {
-        setErrorCode(2);
       } else if (createTag.length > 42) {
-        setErrorCode(3);
+        setErrorCode(2);
       }
-
-      if (errorCode !== null) {
-        onError({ response: { data: { errorCode: errorCode } } });
+      if (errorCode !== null && typeof errorCode === "number") {
+        errorActive();
       } else {
         postTag();
       }
-      inputRef.current.blur();
+      if (inputRef.current !== null) {
+        inputRef.current.blur();
+      }
     }
   };
 
@@ -102,8 +105,6 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
       case 1:
         return "태그를 입력해주세요.";
       case 2:
-        return "사용할 수 없는 태그입니다.";
-      case 3:
         return "42자 이내로 입력해주세요.";
       case 102:
         return "생성 권한이 없습니다.";
@@ -129,15 +130,15 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
           ></Tag>
         ))}
         {tagModalData !== null ? (
-          <div className="button_tag-modal" onClick={closeModal}>
-            <TagModal id={tagModalData}></TagModal>
+          <div className="button_tag_modal_background_" onClick={closeModal}>
+            <TagModal id={tagModalData} content={""} />
           </div>
         ) : null}
         <button
           className={`${
             active
-              ? "button_tag-create-box button_atcive"
-              : "button_tag-create-box"
+              ? "button_tag-box button_tag-create-box button_atcive"
+              : "button_tag-box button_tag-create-box"
           }`}
         >
           <div
@@ -150,24 +151,34 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             title={errorCode ? getErrorMessage() : ""}
             className={`${
               errorCode
-                ? "button_tag-create-box button_post_error_code button_create"
-                : "button_tag-create-box button_create"
+                ? "button_tag-box button_tag-create-box button_post_error_code button_create-input"
+                : "button_tag-box button_tag-create-box button_create-input"
             }`}
             ref={inputRef}
             type="textarea"
             value={createTag}
-            placeholder="태그를 입력하세요."
+            placeholder={
+              tagData.length === 0
+                ? "첫 번째 태그를 작성해보세요!"
+                : "태그를 입력하세요."
+            }
             onChange={onChange}
             onKeyUp={handleKeyPress}
           />
-          <img
-            className="button_tag-create-button"
-            src={plusicon}
-            alt="plus"
-            onClick={() => {
-              onClickCreateButton();
-            }}
-          />
+
+          <Tooltip
+            className="button_tag_image_tooltip button_tag-image-button"
+            description="태그 등록"
+          >
+            <img
+              className="button_tag-image-button"
+              src={plusicon}
+              alt="plus"
+              onClick={() => {
+                onClickCreateButton();
+              }}
+            />
+          </Tooltip>
         </button>
       </div>
     </>
