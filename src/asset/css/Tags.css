@@ -141,3 +141,106 @@
   position: absolute;
   right: 10px;
 }
+
+.button_mainpage_tag_box {
+  overflow-y: auto;
+  max-width: 100rem;
+  position: relative;
+  margin: auto;
+  margin-top: 7rem;
+  margin-bottom: 10rem;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  25% {
+    transform: translate(2px, 2px) rotate(1deg);
+  }
+  50% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  75% {
+    transform: translate(2px, 2px) rotate(-1deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+
+:root {
+  --base-color: rgba(255, 255, 255, 0.9);
+  --target-color: rgba(119, 32, 16, 0.9);
+}
+
+@keyframes colorChange {
+  0% {
+    color: var(--base-color);
+  }
+  100% {
+    color: var(--target-color);
+  }
+}
+
+.button_atcive {
+  animation: shake 0.1s linear infinite;
+}
+
+.button_post_error_code {
+  animation: colorChange 0.5s linear 1 forwards;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+@keyframes appearChange {
+  0% {
+    color: rgba(255, 255, 255, 0.1);
+  }
+  20% {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  90% {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  100% {
+    color: rgba(255, 255, 255, 0);
+  }
+}
+
+.button_post_error_message {
+  animation: appearChange 2s linear 1 forwards;
+}
+
+@keyframes blink {
+  0% {
+    border-color: 0;
+  }
+  20% {
+    border-color: transparent;
+  }
+  80% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: 0;
+  }
+}
+
+.button_create:focus {
+  outline: none;
+  border: none;
+  border-radius: 0;
+  border-left: 1px solid white;
+  animation: blink 2s linear infinite;
+}
+
+.button_create:focus::placeholder {
+  animation: none;
+}

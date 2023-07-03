@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
+import { AxiosResponse } from "axios";
+import { TagType } from "../../../type/TagType";
+import { useGetTagsBookInfoId } from "../../../api/tags/useGetTagsBookInfoId";
 import TagList from "./TagList";
 import Button from "../../utils/Button";
 import useApi from "../../../hook/useApi";
-import { AxiosResponse } from "axios";
 
-type TagProps = {
-  bookInfoId: string;
-};
-
-type TagData = {
-  id: number;
-  content: string;
-  count: number;
-  login: string;
-};
-
-const TagWrapper = ({ bookInfoId }: TagProps) => {
-  const [tagData, setTagData] = useState<TagData[]>([]);
+const TagWrapper = ({ bookInfoId }: TagType) => {
+  const [tagData, setTagData] = useState<TagType[]>([]);
   const { request, Dialog } = useApi("get", `/tags/${bookInfoId}`);
 
   useEffect(() => {

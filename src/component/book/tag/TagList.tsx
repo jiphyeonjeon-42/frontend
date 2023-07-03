@@ -1,28 +1,52 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { TagType } from "../../../type/TagType";
+import { useLocation } from "react-router-dom";
 import Tag from "./Tag";
 import TagModal from "./TagModal";
 import CreateTagModal from "./CreateTagModal";
 import plusicon from "../../../asset/img/tag_plus.svg";
+import useApi from "../../../hook/useApi";
+import { AxiosResponse, AxiosError } from "axios";
 
 type TagListProps = {
-  tagData: {
-    id: number;
-    content: string;
-    count: number;
-    login: string;
-  }[];
+  tagData: TagType[];
   setTagData: React.Dispatch<React.SetStateAction<TagType[]>>;
 };
 
 const TagList = ({ tagData, setTagData }: TagListProps) => {
+  const inputRef = useRef(null);
+  const location = useLocation();
+  const bookId = location.pathname.split("/")[2];
   const [tagModalData, setTagModalData] = useState<number | null>(null);
   const [createTag, setCreateTag] = useState("");
-  const [createTagModalData, setCreateTagModalData] = useState<boolean | null>(
-    null,
-  );
-  const [tagModalEnter, setTagModalEnter] = useState<boolean>(false);
   const [lastPress, setLastPress] = useState(Date.now());
+  const [active, setActive] = useState<boolean>(false);
+  const [errorCode, setErrorCode] = useState<number | null>(null);
+  const [showErrorMassege, setShowErrorMassege] = useState(false);
+  const { request } = useApi("post", `/tags/default`, {
+    bookInfoId: +bookId,
+    content: createTag.trim().replace(/ /g, "_"),
+  });
+
+  const onError = (error: AxiosError) => {
+    setErrorCode(parseInt(error?.response?.data?.errorCode, 10));
+    setActive(true);
+    setShowErrorMassege(true);
+    setTimeout(() => {
+      setActive(false);
+    }, 500);
+    setTimeout(() => {
+      setShowErrorMassege(false);
+    }, 2500);
+  };
+
+  const postTag = () => {
+    request((res: AxiosResponse) => {
+      const resTagdata: TagType = res.data;
+      setTagData(prev => [...prev, resTagdata]);
+      resetCreateContent();
+    }, onError);
+  };
 
   const openModalFunc = (tagId: number) => {
     setTagModalData(tagId);
@@ -32,16 +56,15 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
     setTagModalData(null);
   };
 
-  const closeCreateModal = () => {
-    setCreateTagModalData(null);
-  };
-
   const resetCreateContent = () => {
     setCreateTag("");
   };
 
-  const openCreateModal = () => {
-    if (createTag !== "") setCreateTagModalData(true);
+  const onClickCreateButton = () => {
+    handleKeyPress({
+      key: "Enter",
+      preventDefault: () => {},
+    } as React.KeyboardEvent<HTMLInputElement>);
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -52,12 +75,44 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
       const now = Date.now();
       if (now - lastPress < 300) return;
       setLastPress(now);
-
-      if (!createTagModalData) {
-        openCreateModal();
-      } else if (createTagModalData) {
-        setTagModalEnter(true);
+      if (createTag === "") {
+        setErrorCode(1);
+      } else if (createTag === "default") {
+        setErrorCode(2);
+      } else if (createTag.length > 42) {
+        setErrorCode(3);
       }
+
+      if (errorCode !== null) {
+        onError({ response: { data: { errorCode: errorCode } } });
+      } else {
+        postTag();
+      }
+      inputRef.current.blur();
+    }
+  };
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setErrorCode(null);
+    setCreateTag(event.target.value);
+  };
+
+  const getErrorMessage = () => {
+    switch (errorCode) {
+      case 1:
+        return "태그를 입력해주세요.";
+      case 2:
+        return "사용할 수 없는 태그입니다.";
+      case 3:
+        return "42자 이내로 입력해주세요.";
+      case 102:
+        return "생성 권한이 없습니다.";
+      case 900:
+        return "사용 불가능한 문자가 있습니다.";
+      case 909:
+        return "중복된 태그가 있습니다.";
+      default:
+        return "알 수 없는 에러가 발생했습니다.";
     }
   };
 
@@ -78,27 +133,31 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             <TagModal id={tagModalData}></TagModal>
           </div>
         ) : null}
-        {createTagModalData !== null ? (
-          <div className="button_tag-modal" onClick={closeCreateModal}>
-            <CreateTagModal
-              content={createTag}
-              contentReset={resetCreateContent}
-              tagModalEnter={tagModalEnter}
-              setTagModalEnter={setTagModalEnter}
-              setCreateTagModalData={setCreateTagModalData}
-              tagData={tagData}
-              setTagData={setTagData}
-            ></CreateTagModal>
+        <button
+          className={`${
+            active
+              ? "button_tag-create-box button_atcive"
+              : "button_tag-create-box"
+          }`}
+        >
+          <div
+            className="tooltip-content button_post_error_message"
+            style={{ display: showErrorMassege ? "block" : "none" }}
+          >
+            {errorCode ? getErrorMessage() : ""}
           </div>
-        ) : null}
-        <button className="button_tag-create-box">
           <input
-            className="button_tag-create-box"
-            required
+            title={errorCode ? getErrorMessage() : ""}
+            className={`${
+              errorCode
+                ? "button_tag-create-box button_post_error_code button_create"
+                : "button_tag-create-box button_create"
+            }`}
+            ref={inputRef}
             type="textarea"
             value={createTag}
-            placeholder="태그를 생성하세요."
-            onChange={event => setCreateTag(event.target.value)}
+            placeholder="태그를 입력하세요."
+            onChange={onChange}
             onKeyUp={handleKeyPress}
           />
           <img
@@ -106,7 +165,7 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             src={plusicon}
             alt="plus"
             onClick={() => {
-              openCreateModal();
+              onClickCreateButton();
             }}
           />
         </button>
