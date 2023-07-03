@@ -134,12 +134,12 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             <TagModal id={tagModalData} content={""} />
           </div>
         ) : null}
+      </div>
+      <div className="button_tag-background-create">
         <button
           className={`${
-            active
-              ? "button_tag-box button_tag-create-box button_atcive"
-              : "button_tag-box button_tag-create-box"
-          }`}
+            active ? "button_atcive" : ""
+          } button_tag-box button_tag-create-box`}
         >
           <div
             className="tooltip-content button_post_error_message"
@@ -150,10 +150,8 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
           <input
             title={errorCode ? getErrorMessage() : ""}
             className={`${
-              errorCode
-                ? "button_tag-box button_tag-create-box button_post_error_code button_create-input"
-                : "button_tag-box button_tag-create-box button_create-input"
-            }`}
+              errorCode ? "button_post_error_code" : ""
+            } button_tag-box button_tag-create-box button_create-input`}
             ref={inputRef}
             type="textarea"
             value={createTag}
@@ -166,10 +164,7 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             onKeyUp={handleKeyPress}
           />
 
-          <Tooltip
-            className="button_tag_image_tooltip button_tag-image-button"
-            description="태그 등록"
-          >
+          <Tooltip description="태그 등록">
             <img
               className="button_tag-image-button"
               src={plusicon}
