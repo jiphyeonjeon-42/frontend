@@ -1,6 +1,7 @@
 import MainBanner from "./MainBanner";
 import MainNew from "./MainNew";
 import MainPopular from "./MainPopular";
+import MainTag from "./MainTag";
 import "../../asset/css/Main.css";
 import useDialog from "../../hook/useDialog";
 
@@ -10,6 +11,7 @@ const Main = () => {
     <main className="main-wrapper">
       <Dialog />
       <MainBanner />
+      <MainTag setOpenTitleAndMessage={setOpenTitleAndMessage} />
       <MainNew setOpenTitleAndMessage={setOpenTitleAndMessage} />
       <MainPopular setOpenTitleAndMessage={setOpenTitleAndMessage} />
     </main>
