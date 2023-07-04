@@ -84,7 +84,8 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
       } else if (createTag.length > 42) {
         setErrorCode(2);
       }
-      if (errorCode !== null && typeof errorCode === "number") {
+
+      if (errorCode !== null && errorCode > 0) {
         errorActive();
       } else {
         postTag();
@@ -96,7 +97,7 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setErrorCode(null);
+    if (errorCode !== null) setErrorCode(null);
     setCreateTag(event.target.value);
   };
 
