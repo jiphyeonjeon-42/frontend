@@ -8,6 +8,12 @@ type Props = {
 };
 
 const RentConfirm = ({ selectedUser, selectedBooks, openModal }: Props) => {
+  const isLendable =
+    selectedUser &&
+    !selectedUser.isPenalty &&
+    selectedBooks.length > 0 &&
+    2 - selectedUser.lendings.length >= selectedBooks.length;
+
   return (
     <section className="rent__confirm-button">
       <div className="rent__confirm-button__text font-16 color-a4">
@@ -21,20 +27,10 @@ const RentConfirm = ({ selectedUser, selectedBooks, openModal }: Props) => {
       </div>
       <button
         className={`rent__confirm-button__button ${
-          selectedUser &&
-          !selectedUser.isPenalty &&
-          selectedBooks.length > 0 &&
-          2 - selectedUser.lendings.length >= selectedBooks.length
-            ? "red"
-            : "black"
+          isLendable ? "red" : "black"
         }-button color-ff`}
         type="button"
-        disabled={
-          selectedUser === null ||
-          selectedUser.isPenalty ||
-          selectedBooks.length == 0 ||
-          2 - selectedUser.lendings.length >= selectedBooks.length
-        }
+        disabled={!isLendable}
         onClick={openModal}
       >
         도서 대출하기
