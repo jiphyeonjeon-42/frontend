@@ -7,8 +7,8 @@ import ReviewManagementList from "./ReviewManagementList";
 import Filter from "../utils/Filter";
 
 const reviewFilterList = [
-  { name: "공개만 보기", type: "0" },
-  { name: "비공개만 보기", type: "1" },
+  { name: "공개만 보기", type: "public" },
+  { name: "비공개만 보기", type: "private" },
 ];
 
 const ReviewManagement = () => {
@@ -22,8 +22,11 @@ const ReviewManagement = () => {
     lastPage,
   } = useGetReviews();
 
+  const currentType =
+    selectedType === 0 ? "public" : selectedType === 1 ? "private" : undefined;
   const setUndefinedReSelected = (newType: string) => {
-    setSelectedType(newType === selectedType ? undefined : newType);
+    if (newType === "public" || newType === "private")
+      setSelectedType(newType === currentType ? undefined : newType);
   };
 
   return (
@@ -46,7 +49,7 @@ const ReviewManagement = () => {
           <>
             <Filter
               filterList={reviewFilterList}
-              selectedType={selectedType}
+              selectedType={currentType}
               setSelectedType={setUndefinedReSelected}
             />
             <ReviewManagementList reviewList={reviewList} />

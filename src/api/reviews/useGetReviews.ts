@@ -4,14 +4,14 @@ import { useApi } from "../../hook/useApi";
 import { Review } from "../../type";
 
 type RequestParams = {
-  titleOrNickname: string;
+  titleOrNickname?: string;
   page: number;
-  disabled?: string;
+  disabled: 0 | 1 | -1;
 };
 export const useGetReviews = () => {
   const [params, setParams] = useState<RequestParams>({
-    titleOrNickname: "",
     page: 1,
+    disabled: -1,
   });
 
   const [result, setResult] = useState({
@@ -25,8 +25,9 @@ export const useGetReviews = () => {
   const setQuery = (query: string) => {
     setParams({ ...params, titleOrNickname: query });
   };
-  const setSelectedType = (type: string | undefined) => {
-    setParams({ ...params, disabled: type });
+  const setSelectedType = (type: "public" | "private" | undefined) => {
+    const disabled = type === "public" ? 0 : type === "private" ? 1 : -1;
+    setParams({ ...params, disabled });
   };
 
   const { request } = useApi("get", "reviews", {
