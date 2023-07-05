@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import axiosPromise from "../../../util/axios";
 import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
@@ -6,26 +6,16 @@ import UserEdit from "../../../asset/img/edit.svg";
 import DeleteButton from "../../../asset/img/x_button.svg";
 import useDialog from "../../../hook/useDialog";
 import "../../../asset/css/Review.css";
+import { User } from "@sentry/react";
+import { Review } from "../../../type";
 
 type Props = {
-  data?: {
-    bookInfoId?: number;
-    content?: string;
-    reviewsId?: number;
-    title?: string;
-  };
-  nickname?: string;
+  data: Review;
+  nickname: string;
   createdAt: string;
-  checkLogin?: {
-    email?: string;
-    expire?: string;
-    id?: number;
-    isAdmin?: boolean;
-    isLogin?: boolean;
-    userName?: string;
-  };
+  checkLogin: User;
   type: string;
-  onClickDel(...args: unknown[]): unknown;
+  onClickDel: (id: number) => void;
 };
 
 const HandleReview = ({
@@ -103,10 +93,10 @@ const HandleReview = ({
   };
 
   const putBtn = () => {
-    patchReview(data.reviewsId, content);
+    patchReview();
   };
 
-  const reviewFixArea = e => {
+  const reviewFixArea: ChangeEventHandler<HTMLTextAreaElement> = e => {
     setContent(e.target.value);
   };
 
@@ -135,7 +125,6 @@ const HandleReview = ({
             <textarea
               className="review-content-fix-area font-12"
               value={content}
-              type="text-area"
               onChange={reviewFixArea}
             />
           </div>

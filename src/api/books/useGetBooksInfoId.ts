@@ -3,9 +3,18 @@ import { useNavigate } from "react-router-dom";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";
+import { BookInfo } from "../../type";
 
-const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
-  const [bookDetailInfo, setBookDetailInfo] = useState({ books: [] });
+type Pros = {
+  id: string;
+  setOpenTitleAndMessage: (
+    title: string,
+    message: string,
+    afterClose: () => void,
+  ) => void;
+};
+const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }: Pros) => {
+  const [bookDetailInfo, setBookDetailInfo] = useState<BookInfo>();
   const navigate = useNavigate();
 
   const { request } = useApi("get", `books/info/${id}`);
@@ -32,12 +41,16 @@ const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
     },
   ];
 
-  const refineResponse = response => {
-    const books = compareExpect("books/info/id", [response.data], expectedItem);
-    setBookDetailInfo(...books);
+  const refineResponse = (response: any) => {
+    const [bookInfo] = compareExpect(
+      "books/info/id",
+      [response.data],
+      expectedItem,
+    );
+    setBookDetailInfo(bookInfo);
   };
 
-  const displayError = error => {
+  const displayError = (error: any) => {
     const errorCode = parseInt(error?.response?.data?.errorCode, 10);
     const [title, message] = getErrorMessage(errorCode).split("\r\n");
 

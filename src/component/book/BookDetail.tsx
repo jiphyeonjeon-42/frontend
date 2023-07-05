@@ -12,10 +12,10 @@ import TagWrapper from "./tag/TagWrapper";
 import "../../asset/css/BookDetail.css";
 
 const BookDetail = () => {
-  const { id } = useParams();
-  const myRef = useRef(null);
+  const id = useParams().id || "";
+  const myRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  useEffect(() => myRef.current.scrollIntoView(), []);
+  useEffect(() => myRef.current?.scrollIntoView(), []);
   const {
     Dialog,
     defaultConfig: dialogDefaultConfig,
@@ -25,12 +25,14 @@ const BookDetail = () => {
   } = useDialog();
   const { bookDetailInfo } = useGetBooksInfoId({ id, setOpenTitleAndMessage });
 
+  if (!bookDetailInfo) return null;
   const isAvailableReservation = () => {
     const { books } = bookDetailInfo;
-    const noProblemBooksCnt = books.filter(book => book.status === 0).length;
+    const noProblemBooksCnt = books?.filter(book => book.status === 0).length;
     return (
+      noProblemBooksCnt &&
       noProblemBooksCnt > 0 &&
-      books.reduce((sum, i) => sum + i.isLendable, 0) === 0
+      books.reduce((sum, i) => sum + (i.isLendable ? 1 : 0), 0) === 0
     );
   };
 
@@ -60,8 +62,8 @@ const BookDetail = () => {
             <div className="book-detail__reservation-button">
               <div className="book-detail__title">{bookDetailInfo.title}</div>
               <BookReservation
-                bookInfoId={id}
-                isAvailableReservation={isAvailableReservation()}
+                bookInfoId={+id}
+                isAvailableReservation={isAvailableReservation() || false}
                 dialogDefaultConfig={dialogDefaultConfig}
                 setDialogConfig={setDialogConfig}
                 setOpenTitleAndMessage={setOpenTitleAndMessage}
@@ -102,7 +104,7 @@ const BookDetail = () => {
               </span>
               <div className="book-state__list">
                 <div>
-                  {bookDetailInfo.books.map((book, index) => (
+                  {bookDetailInfo.books?.map((book, index) => (
                     <BookStatus key={book.id} book={book} index={index} />
                   ))}
                 </div>

@@ -1,18 +1,28 @@
-import { setErrorDialog } from "../../constant/error";
+import { AxiosResponse } from "axios";
 import useApi from "../../hook/useApi";
+import { setErrorDialog } from "../../constant/error";
 
-const usePostReservations = ({
+type Props = {
+  bookInfoId: number;
+
+  dialogDefaultConfig: any;
+  setDialogConfig: (config: any) => void;
+  openDialog: () => void;
+  setOpenTitleAndMessage: (title: string, message: string) => void;
+};
+
+export const usePostReservations = ({
   bookInfoId,
   dialogDefaultConfig,
   setDialogConfig,
   openDialog,
   setOpenTitleAndMessage,
-}) => {
+}: Props) => {
   const { request } = useApi("post", "reservations", {
     bookInfoId,
   });
 
-  const onSuccess = response => {
+  const onSuccess = (response: AxiosResponse) => {
     const rank = response?.data?.count;
     const lendabledate = response?.data?.lenderableDate?.slice(0, 10);
     const title = `예약 ${rank}순위로 등록되셨습니다.`;
@@ -29,7 +39,7 @@ const usePostReservations = ({
     openDialog();
   };
 
-  const onError = error => {
+  const onError = (error: any) => {
     setErrorDialog(error, setOpenTitleAndMessage);
   };
 

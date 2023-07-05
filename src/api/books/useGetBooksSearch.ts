@@ -28,7 +28,7 @@ const useGetBooksSearch = ({ limit }: { limit: number }) => {
     { key: "publishedAt", type: "string", isNullable: true },
     { key: "callSign", type: "string", isNullable: false },
     { key: "image", type: "string", isNullable: true },
-    { key: "isLendable", type: "number", isNullable: false },
+    { key: "isLendable", type: "bool", isNullable: false },
   ];
 
   const refineResponse = (response: AxiosResponse) => {

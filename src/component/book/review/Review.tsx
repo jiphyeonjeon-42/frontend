@@ -23,8 +23,7 @@ const Review = ({ bookInfoId }: Props) => {
   } = useDialog();
   const { setContent } = usePostReview({
     setOpenTitleAndMessage,
-    setClose: closeDialog,
-    bookInfoId,
+    bookInfoId: +bookInfoId,
     changeTab,
   });
 
@@ -39,7 +38,6 @@ const Review = ({ bookInfoId }: Props) => {
             }-focus`}
             role="button"
             tabIndex={index}
-            onKeyDown=""
             onClick={() => changeTab(index)}
           >
             {tab?.name}
@@ -49,12 +47,11 @@ const Review = ({ bookInfoId }: Props) => {
       <div className="tabs-line" />
       <div className="review-list">
         {currentTab === "showReviews" ? (
-          <ShowReviews bookInfoId={bookInfoId} type="bookReviews" />
+          <ShowReviews bookInfoId={+bookInfoId} type="bookReviews" />
         ) : (
           <PostReview
-            changeTab={changeTab}
             onClickPost={setContent}
-            Dialog={Dialog}
+            Dialog={<Dialog />}
             config={config}
             openDialog={openDialog}
             closeDialog={closeDialog}

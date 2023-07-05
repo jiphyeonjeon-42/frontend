@@ -11,12 +11,13 @@ type Props = {
 };
 
 const Like = ({ initBookInfoId }: Props) => {
-  const { setOpenTitleAndMessage } = useDialog();
-  const [currentLike, setCurrentLike] = useState();
+  const [currentLike, setCurrentLike] = useState(false);
   const [currentLikeNum, setCurrentLikeNum] = useState(0);
+
+  const { setOpenTitleAndMessage } = useDialog();
   useGetLike({
     setOpenTitleAndMessage,
-    initBookInfoId,
+    initBookInfoId: +initBookInfoId,
     setCurrentLike,
     setCurrentLikeNum,
   });
@@ -28,21 +29,19 @@ const Like = ({ initBookInfoId }: Props) => {
   });
   const deleteLike = () => {
     setCurrentLike(false);
-    setDeleteLike(initBookInfoId);
+    setDeleteLike(+initBookInfoId);
     setCurrentLikeNum(currentLikeNum - 1);
   };
   const postLike = () => {
     setCurrentLike(true);
-    setPostLike(initBookInfoId);
+    setPostLike(+initBookInfoId);
     setCurrentLikeNum(currentLikeNum + 1);
   };
   return (
     <>
       <ShowLike
-        setOpenTitleAndMessage={setOpenTitleAndMessage}
         deleteLike={deleteLike}
         postLike={postLike}
-        initBookInfoId={initBookInfoId}
         currentLike={currentLike}
         currentLikeNum={currentLikeNum}
       />

@@ -1,3 +1,5 @@
+import { Book } from "./Book";
+
 export type BookInfo = {
   id: number;
   title: string;
@@ -10,4 +12,5 @@ export type BookInfo = {
   image?: string;
   koreanDemicalClassification?: string;
   donator?: string;
+  books?: Book[];
 };

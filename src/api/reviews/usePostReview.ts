@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
 
-const usePostReview = ({ setOpenTitleAndMessage, bookInfoId, changeTab }) => {
-  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
-  const [content, setContent] = useState(null);
+type Props = {
+  bookInfoId: number;
+  changeTab: (tab: number) => void;
+  setOpenTitleAndMessage: (title: string, message: string) => void;
+};
+
+export const usePostReview = ({
+  bookInfoId,
+  changeTab,
+  setOpenTitleAndMessage,
+}: Props) => {
+  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "");
+  const [content, setContent] = useState("");
   const { request } = useApi("post", "/reviews", {
     bookInfoId,
     content,

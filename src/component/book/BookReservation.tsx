@@ -8,8 +8,8 @@ import "../../asset/css/Reservation.css";
 type Props = {
   bookInfoId: number;
   isAvailableReservation: boolean;
-  dialogDefaultConfig: {};
-  setDialogConfig: () => void;
+  dialogDefaultConfig: any;
+  setDialogConfig: (config: any) => void;
   setOpenTitleAndMessage: (
     title: string,
     message: string,
