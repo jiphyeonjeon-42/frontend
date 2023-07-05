@@ -1,27 +1,14 @@
-import { useState } from "react";
-import "../../../asset/css/Review.css";
+import { FormEventHandler, useState } from "react";
 import Button from "../../utils/Button";
+import { useNewDialog } from "../../../hook/useNewDialog";
+import "../../../asset/css/Review.css";
 
 type Props = {
-  onClickPost(...args: unknown[]): unknown;
-  setDialogConfig(...args: unknown[]): unknown;
-  Dialog: React.ReactElement;
-  openDialog(...args: unknown[]): unknown;
-  closeDialog(...args: unknown[]): unknown;
-  config: Record<string, unknown>;
-  setOpenTitleAndMessage(...args: unknown[]): unknown;
+  onClickPost: (content: string) => void;
 };
 
-const PostReview = ({
-  onClickPost,
-  Dialog,
-  config,
-  openDialog,
-  closeDialog,
-  setDialogConfig,
-  setOpenTitleAndMessage,
-}: Props) => {
-  const [content, setContent] = useState(null);
+const PostReview = ({ onClickPost }: Props) => {
+  const [content, setContent] = useState("");
   const checkLogin = JSON.parse(window.localStorage.getItem("user"));
   const checkValidUser = () => {
     const user = JSON.parse(window.localStorage.getItem("user"));
@@ -33,44 +20,29 @@ const PostReview = ({
     return true;
   };
 
-  const onChange = e => {
-    setContent(e.target.value);
-  };
+  const { addDialogWithTitleAndMessage } = useNewDialog();
 
   const submitReview = () => {
     const validUser = checkValidUser();
     if (validUser === false) {
-      setOpenTitleAndMessage(
+      addDialogWithTitleAndMessage(
+        "reviewError",
         "42 인증 후 리뷰 등록이 가능합니다.",
         "",
-        closeDialog,
       );
       return;
     }
     onClickPost(content);
-    closeDialog();
   };
-
-  const onSubmitHandler = e => {
+  const { addConfirmDialog } = useNewDialog();
+  const onSubmitHandler: FormEventHandler = e => {
     e.preventDefault();
-    console.log(content);
-    setDialogConfig({
-      ...config,
-      title: "리뷰를 등록하시겠습니까?",
-      buttonAlign: "basic",
-      numberOfButtons: 2,
-      firstButton: {
-        text: "확인하기",
-        color: "red",
-        onClick: submitReview,
-      },
-      secondButton: {
-        text: "취소하기",
-        color: "grey",
-        onClick: closeDialog,
-      },
-    });
-    openDialog();
+    addConfirmDialog(
+      "reviewConfirm",
+      "리뷰를 등록하시겠습니까?",
+      content,
+      submitReview,
+    );
   };
 
   return (
@@ -79,8 +51,7 @@ const PostReview = ({
         <textarea
           className="review-area font-12"
           value={content}
-          type="text-area"
-          onChange={onChange}
+          onChange={e => setContent(e.target.value)}
           maxLength={420}
           required
           placeholder={
@@ -93,7 +64,6 @@ const PostReview = ({
           <Button type="submit" value="게시하기" color="red" />
         </div>
       </form>
-      <Dialog />
     </div>
   );
 };

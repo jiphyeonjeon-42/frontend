@@ -20,12 +20,8 @@ const Like = ({ initBookInfoId }: Props) => {
     setCurrentLike,
     setCurrentLikeNum,
   });
-  const { setBookInfoId: setDeleteLike } = useDeleteLike({
-    setOpenTitleAndMessage,
-  });
-  const { setBookInfoId: setPostLike } = usePostLike({
-    setOpenTitleAndMessage,
-  });
+  const { setBookInfoId: setDeleteLike } = useDeleteLike({});
+  const { setBookInfoId: setPostLike } = usePostLike({});
   const deleteLike = () => {
     setCurrentLike(false);
     setDeleteLike(initBookInfoId);
@@ -39,7 +35,6 @@ const Like = ({ initBookInfoId }: Props) => {
   return (
     <>
       <ShowLike
-        setOpenTitleAndMessage={setOpenTitleAndMessage}
         deleteLike={deleteLike}
         postLike={postLike}
         initBookInfoId={initBookInfoId}

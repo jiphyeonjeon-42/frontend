@@ -8,24 +8,9 @@ import "../../asset/css/Reservation.css";
 type Props = {
   bookInfoId: number;
   isAvailableReservation: boolean;
-  dialogDefaultConfig: {};
-  setDialogConfig: () => void;
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose?: () => void,
-  ) => void;
-  openDialog: () => void;
 };
 
-const BookReservation = ({
-  bookInfoId,
-  isAvailableReservation,
-  dialogDefaultConfig,
-  setDialogConfig,
-  setOpenTitleAndMessage,
-  openDialog,
-}: Props) => {
+const BookReservation = ({ bookInfoId, isAvailableReservation }: Props) => {
   if (!isAvailableReservation)
     return (
       <div className="reservation__rentable">
@@ -34,20 +19,10 @@ const BookReservation = ({
       </div>
     );
 
-  const { postReservation } = usePostReservations({
-    bookInfoId,
-    dialogDefaultConfig,
-    setDialogConfig,
-    openDialog,
-    setOpenTitleAndMessage,
-  });
+  const { postReservation } = usePostReservations({ bookInfoId });
 
   const { getCountReservation } = useGetReservationsCount({
     bookInfoId,
-    dialogDefaultConfig,
-    setDialogConfig,
-    openDialog,
-    setOpenTitleAndMessage,
     postReservation,
   });
 

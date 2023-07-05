@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AxiosError, AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
-import getErrorMessage from "../../constant/error";
+import { useNewDialog } from "../../hook/useNewDialog";
 
-export const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
+type Pros = {
+  id: string;
+};
+export const useGetBooksInfoId = ({ id }: Pros) => {
   const [bookDetailInfo, setBookDetailInfo] = useState({ books: [] });
   const navigate = useNavigate();
 
@@ -32,30 +36,28 @@ export const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }) => {
     },
   ];
 
-  const refineResponse = response => {
-    const books = compareExpect("books/info/id", [response.data], expectedItem);
-    setBookDetailInfo(...books);
+  const refineResponse = (response: AxiosResponse) => {
+    const [books] = compareExpect(
+      "books/info/id",
+      [response.data],
+      expectedItem,
+    );
+    setBookDetailInfo(books);
   };
 
-  const displayError = error => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-
-    const afterClose = () => {
-      if (errorCode === 304) {
-        navigate("/search");
-        window.scrollTo(0, 0);
-      }
-    };
-    setOpenTitleAndMessage(
-      title,
-      errorCode ? message : `${message}\r\n${error?.message}`,
-      afterClose,
-    );
+  const { displayErrorDialog } = useNewDialog();
+  const redirectIf304OrDisplayError = (
+    error: AxiosError<{ errorCode: number }>,
+  ) => {
+    const errorCode = error.response?.data.errorCode;
+    if (errorCode === 304) {
+      navigate("/search");
+      window.scrollTo(0, 0);
+    } else displayErrorDialog(error);
   };
 
   useEffect(() => {
-    request(refineResponse, displayError);
+    request(refineResponse, redirectIf304OrDisplayError);
   }, []);
 
   return { bookDetailInfo };
