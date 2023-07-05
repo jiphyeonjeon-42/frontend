@@ -3,7 +3,6 @@ import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { User } from "../../type";
-import { AxiosResponse } from "axios";
 
 export const useGetUsersSearch = ({ limit }: { limit: number }) => {
   const {
@@ -49,7 +48,7 @@ export const useGetUsersSearch = ({ limit }: { limit: number }) => {
     { key: "reservations", type: "*", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const user = compareExpect(
       "users/search",
       response.data.items,

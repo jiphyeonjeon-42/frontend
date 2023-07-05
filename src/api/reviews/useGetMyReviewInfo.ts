@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useApi } from "../../hook/useApi";
-import { AxiosResponse } from "axios";
 import { Review } from "../../type";
 
 export const useGetMyReviewInfo = () => {
@@ -13,7 +12,7 @@ export const useGetMyReviewInfo = () => {
     isMyReview: true,
   });
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const info = response.data.items;
     const { totalPages } = response.data.meta;
     setReviewList(info);

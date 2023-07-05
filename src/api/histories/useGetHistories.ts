@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
@@ -34,7 +33,7 @@ export const useGetHistories = () => {
     { key: "image", type: "string", isNullable: true },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const info = compareExpect("histories", response.data.items, expectedItem);
     const { totalPages } = response.data.meta;
     setSearchResult({

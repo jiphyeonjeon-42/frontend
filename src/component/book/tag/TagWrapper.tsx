@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import TagList from "./TagList";
 import Button from "../../utils/Button";
 import { useApi } from "../../../hook/useApi";
-import { AxiosResponse } from "axios";
 
 type TagProps = {
   bookInfoId: string;
@@ -20,7 +19,7 @@ const TagWrapper = ({ bookInfoId }: TagProps) => {
   const { request } = useApi("get", `/tags/${bookInfoId}`);
 
   useEffect(() => {
-    const getTagRequest = (res: AxiosResponse) => {
+    const getTagRequest = (res: any) => {
       setTagData(res.data);
     };
     request(getTagRequest);

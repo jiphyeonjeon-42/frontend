@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useApi } from "../../hook/useApi";
-import { AxiosResponse } from "axios";
 import { useNewDialog } from "../../hook/useNewDialog";
 type Props = {
   lendingId: number;
@@ -22,7 +21,7 @@ export const usePatchLendingsReturn = ({
 
   const { addDialogWithTitleAndMessage } = useNewDialog();
 
-  const onSuccess = (response: AxiosResponse) => {
+  const onSuccess = (response: any) => {
     closeModal();
     addDialogWithTitleAndMessage(
       "returnSuccess",

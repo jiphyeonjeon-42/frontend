@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../../type";
 import { useApi } from "../../hook/useApi";
-import { AxiosError, AxiosResponse } from "axios";
 import { setErrorDialog } from "../../constant/error";
 
 type Props = {
@@ -15,7 +14,7 @@ export const useGetTagsSuperTagIdSub = ({ tagId }: Props) => {
 
   const { request } = useApi("get", `/tags/${tagId}/sub`);
 
-  const saveTagList = (response: AxiosResponse) => {
+  const saveTagList = (response: any) => {
     setSubTagList(response.data);
   };
 

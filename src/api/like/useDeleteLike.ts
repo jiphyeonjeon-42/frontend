@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
@@ -17,7 +16,7 @@ export const useDeleteLike = ({ initBookInfoId }: Props) => {
     { key: "likeNum", type: "number", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const [refinelikeData] = compareExpect(
       `books/info/${initBookInfoId}/like`,
       [response.data],

@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { AxiosError, AxiosResponse } from "axios";
 import { axiosPromise } from "../util/axios";
 import { useNewDialog } from "./useNewDialog";
 
@@ -10,8 +9,8 @@ export const useApi = (method: Method, url: string, data?: unknown) => {
 
   const request = useCallback(
     (
-      resolve: (response: AxiosResponse<any>) => void,
-      reject?: (error: AxiosError<any>) => void,
+      resolve: (response: any) => void,
+      reject?: (error: any) => void,
     ) => {
       axiosPromise(method, url, data)
         ?.then(response => {

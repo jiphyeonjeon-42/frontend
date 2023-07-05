@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { useNewDialog } from "../../hook/useNewDialog";
 
@@ -16,7 +15,7 @@ export const useGetReservationsCount = ({
   });
 
   const { addConfirmDialog } = useNewDialog();
-  const onSuccess = (response: AxiosResponse) => {
+  const onSuccess = (response: any) => {
     const expectedRank = response?.data?.count;
     const title = `현재 예약대기자는 ${expectedRank}명입니다.
 예약하시겠습니까?`;

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { Lending } from "../../type";
@@ -25,7 +24,7 @@ export const useGetLendingsId = ({ lendingId }: Props) => {
     { key: "image", type: "string", isNullable: true },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const [lending] = compareExpect(
       "lendings/id",
       [response.data],

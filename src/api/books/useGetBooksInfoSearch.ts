@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { Book } from "../../type";
-import { AxiosResponse } from "axios";
 
 export const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
@@ -14,7 +13,7 @@ export const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
     limit,
   });
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const book = response.data.items;
     const { totalPages } = response.data.meta;
     setSearchResult({

@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApi } from "../../hook/useApi";
 import { useNewDialog } from "../../hook/useNewDialog";
-import { AxiosError } from "axios";
 
 type RegisterDataItem = {
   value: string;
@@ -40,7 +39,7 @@ export const usePostUsersCreate = () => {
     );
   };
 
-  const displayError = (error: AxiosError<{ errorCode: number }>) => {
+  const displayError = (error: any) => {
     displayErrorDialog(error, (errorCode: number) => {
       if (errorCode === 203) {
         setRegisterData({

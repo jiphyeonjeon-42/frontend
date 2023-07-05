@@ -3,7 +3,6 @@ import getErrorMessage from "../../constant/error";
 import { useApiMultiple } from "../../hook/useApiMultiple";
 import { useNewDialog } from "../../hook/useNewDialog";
 import { Book, User } from "../../type";
-import { AxiosResponse } from "axios";
 
 type Props = {
   selectedBooks: Book[];

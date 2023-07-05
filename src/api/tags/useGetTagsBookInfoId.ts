@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../../type";
 import { useApi } from "../../hook/useApi";
-import { AxiosResponse } from "axios";
 
 export const useGetTagsBookInfoId = (id?: number) => {
   const [tagList, setTagList] = useState<Tag[]>([]);
   const { request } = useApi("get", `/tags/${id}`);
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     setTagList(response.data);
   };
 

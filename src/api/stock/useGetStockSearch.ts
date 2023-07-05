@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
-import { AxiosResponse } from "axios";
 import { Book } from "../../type";
 
 export const useGetStockSearch = () => {
@@ -18,7 +17,7 @@ export const useGetStockSearch = () => {
     { key: "title", type: "string", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const items = compareExpect(
       "stock/search",
       response.data.items,

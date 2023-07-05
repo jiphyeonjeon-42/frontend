@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { AxiosError, AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { useNewDialog } from "../../hook/useNewDialog";
 import { compareExpect } from "../../util/typeCheck";
@@ -27,7 +26,7 @@ export const useGetBooksIdForStock = ({ id, closeModal }: Props) => {
     { key: "callSign", type: "string", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     console.log(response);
     const [book] = compareExpect("books/:id", [response.data], expectedItem);
     setBookDetail(book);
@@ -35,7 +34,7 @@ export const useGetBooksIdForStock = ({ id, closeModal }: Props) => {
 
   const { displayErrorDialog } = useNewDialog();
 
-  const displayError = (error: AxiosError<any>) => {
+  const displayError = (error: any) => {
     displayErrorDialog(error, () => closeModal());
   };
 

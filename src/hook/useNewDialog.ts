@@ -1,5 +1,4 @@
 import { useSetRecoilState } from "recoil";
-import { AxiosError } from "axios";
 import { dialogConfigs } from "../atom/dialogConfigs";
 import { DialogConfig } from "../type/DialogConfig";
 import getErrorMessage from "../constant/error";
@@ -59,7 +58,7 @@ export const useNewDialog = () => {
   };
 
   const displayErrorDialog = (
-    error: AxiosError<{ errorCode: number }>,
+    error: any,
     afterClose?: (errorCode: number) => void,
   ) => {
     const errorCode = error?.response?.data?.errorCode;

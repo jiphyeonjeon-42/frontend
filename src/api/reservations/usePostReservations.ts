@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { useNewDialog } from "../../hook/useNewDialog";
 
@@ -12,7 +11,7 @@ export const usePostReservations = ({ bookInfoId }: Props) => {
   });
 
   const { addDialogWithTitleAndMessage } = useNewDialog();
-  const onSuccess = (response: AxiosResponse) => {
+  const onSuccess = (response: any) => {
     const rank = response?.data?.count;
     const lendabledate = response?.data?.lenderableDate?.slice(0, 10);
     const title = `예약 ${rank}순위로 등록되셨습니다.`;

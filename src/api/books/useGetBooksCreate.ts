@@ -4,7 +4,6 @@ import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";
 import { Book } from "../../type";
-import { AxiosError, AxiosResponse } from "axios";
 
 export const useGetBooksCreate = (defalutBook: Book) => {
   const [isbnQuery, setIsbnQuery] = useState("");
@@ -24,7 +23,7 @@ export const useGetBooksCreate = (defalutBook: Book) => {
     { key: "image", type: "string", isNullable: true },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const books = compareExpect(
       "books/create",
       [response.data.bookInfo],
@@ -38,7 +37,7 @@ export const useGetBooksCreate = (defalutBook: Book) => {
     setErrorMessage("");
   };
 
-  const displayError = (error: AxiosError<{ errorCode: number }>) => {
+  const displayError = (error: any) => {
     const errorCode = error?.response?.data?.errorCode;
     setErrorMessage(
       errorCode === 401

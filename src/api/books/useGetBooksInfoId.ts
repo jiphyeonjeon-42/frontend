@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AxiosError, AxiosResponse } from "axios";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { useNewDialog } from "../../hook/useNewDialog";
@@ -36,7 +35,7 @@ export const useGetBooksInfoId = ({ id }: Pros) => {
     },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const [books] = compareExpect(
       "books/info/id",
       [response.data],
@@ -46,9 +45,7 @@ export const useGetBooksInfoId = ({ id }: Pros) => {
   };
 
   const { displayErrorDialog } = useNewDialog();
-  const redirectIf304OrDisplayError = (
-    error: AxiosError<{ errorCode: number }>,
-  ) => {
+  const redirectIf304OrDisplayError = (error: any) => {
     const errorCode = error.response?.data.errorCode;
     if (errorCode === 304) {
       navigate("/search");

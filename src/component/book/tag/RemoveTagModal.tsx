@@ -1,7 +1,6 @@
 import { TagType } from "../../../type/TagType";
 import Tag from "./Tag";
 import { useApi } from "../../../hook/useApi";
-import { AxiosResponse } from "axios";
 
 type RemoveTagModalProps = {
   id: number;
@@ -16,7 +15,7 @@ const RemoveTagModal = ({
   tagData,
   setTagData,
 }: RemoveTagModalProps) => {
-  const { request, Dialog } = useApi("delete", `/tags/sub/${id}`);
+  const { request } = useApi("delete", `/tags/sub/${id}`);
 
   const removeButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -24,7 +23,7 @@ const RemoveTagModal = ({
   };
 
   const removeTag = () => {
-    request((res: AxiosResponse) => {
+    request((res: any) => {
       const updatedTagData = tagData.filter(tag => tag.id !== id);
       setTagData(updatedTagData);
     });
@@ -32,7 +31,6 @@ const RemoveTagModal = ({
 
   return (
     <div>
-      <Dialog />
       <ul>
         <button className="button_tag-box-sub">{content}</button>
       </ul>

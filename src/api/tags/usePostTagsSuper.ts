@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useApi } from "../../hook/useApi";
 import { useNewDialog } from "../../hook/useNewDialog";
-import { AxiosResponse } from "axios";
 import { Tag } from "../../type";
 
 type Props = {
@@ -19,7 +18,7 @@ export const usePostTagsSuper = ({ bookInfoId, addTag }: Props) => {
 
   const { addDialogWithTitleAndMessage } = useNewDialog();
 
-  const onSuccess = (res: AxiosResponse<Tag>) => {
+  const onSuccess = (res: any) => {
     const newTag = res.data;
     addTag(newTag);
     addDialogWithTitleAndMessage(

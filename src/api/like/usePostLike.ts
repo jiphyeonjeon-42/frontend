@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
-import { AxiosResponse } from "axios";
 
 type Props = {
   initBookInfoId?: number;
@@ -16,7 +15,7 @@ export const usePostLike = ({ initBookInfoId }: Props) => {
     { key: "bookInfoId", type: "number", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const [refinelikeData] = compareExpect(
       `books/info/${initBookInfoId}/like`,
       [response.data],
@@ -26,7 +25,7 @@ export const usePostLike = ({ initBookInfoId }: Props) => {
   };
 
   useEffect(() => {
-    if (bookInfoId) request(refineResponse,);
+    if (bookInfoId) request(refineResponse);
     setBookInfoId(undefined);
   }, [bookInfoId]);
 

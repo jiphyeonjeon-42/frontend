@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
-import { AxiosResponse } from "axios";
 
 export const useGetBooksInfoPopular = () => {
   const [docs, setDocs] = useState<Book[]>([]);
@@ -22,7 +21,7 @@ export const useGetBooksInfoPopular = () => {
     { key: "publishedAt", type: "string", isNullable: true },
   ];
 
-  const refineResponse = (response: AxiosResponse<{ items: Book[] }>) => {
+  const refineResponse = (response: any) => {
     const books = compareExpect(
       "books/info",
       response.data.items,

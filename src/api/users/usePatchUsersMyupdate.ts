@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApi } from "../../hook/useApi";
 import { useNewDialog } from "../../hook/useNewDialog";
-import { AxiosError } from "axios";
 
 type Props = {
   modeKorean: string;
@@ -26,7 +25,7 @@ export const usePatchUsersMyupdate = ({ modeKorean }: Props) => {
     );
   };
 
-  const onError = (error: AxiosError<{ errorCode: number }>) => {
+  const onError = (error: any) => {
     displayErrorDialog(error, () => navigate("-1"));
   };
 

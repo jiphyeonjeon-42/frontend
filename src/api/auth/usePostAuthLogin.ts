@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import getErrorMessage from "../../constant/error";
 import { useApi } from "../../hook/useApi";
-import { AxiosError } from "axios";
 
 export const usePostAuthLogin = () => {
   const [loginData, setLoginData] = useState({
@@ -28,7 +27,7 @@ export const usePostAuthLogin = () => {
     navigate("/auth", { replace: true });
   };
 
-  const onError = (error: AxiosError<{ errorCode: number }>) => {
+  const onError = (error: any) => {
     const errorCode = error?.response?.data?.errorCode;
     if (errorCode === 103) setMessage("입력된 값이 없습니다.");
     else if (errorCode === 104) setMessage("잘못된 패스워드입니다.");

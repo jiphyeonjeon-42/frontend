@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
-import { AxiosResponse } from "axios";
 import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
@@ -16,7 +15,7 @@ export const useGetLendingsSearchId = ({ setLendingId, openModal }: Props) => {
   });
   const { addDialogWithTitleAndMessage } = useNewDialog();
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const result = response.data?.items;
     if (result && result?.length > 0 && result[0]?.id !== undefined) {
       setLendingId(result[0].id);

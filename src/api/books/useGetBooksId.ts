@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
-import { AxiosResponse } from "axios";
 import { Book } from "../../type";
 
 type Props = {
@@ -21,7 +20,7 @@ export const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
     { key: "callSign", type: "string", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const [book] = compareExpect("books/:id", [response.data], expectedItem);
     book.bookId = book.id;
     setSelectedBooks(prev => [...prev, book]);
@@ -34,4 +33,3 @@ export const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
 
   return { setBookId };
 };
-

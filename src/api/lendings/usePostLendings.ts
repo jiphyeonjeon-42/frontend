@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { useNewDialog } from "../../hook/useNewDialog";
-import { AxiosError } from "axios";
 
 type Props = {
   title: string;
@@ -36,7 +35,7 @@ export const usePostLendings = ({
     );
   };
 
-  const onError = (error: AxiosError<{ errorCode: number }>) => {
+  const onError = (error: any) => {
     displayErrorDialog(error, closeModal);
   };
 
