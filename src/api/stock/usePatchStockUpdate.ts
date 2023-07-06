@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import getErrorMessage from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 type Props = {
   setOpenTitleAndMessage: (
@@ -11,7 +11,10 @@ type Props = {
   addList: () => void;
 };
 
-const usePatchStockUpdate = ({ setOpenTitleAndMessage, addList }: Props) => {
+export const usePatchStockUpdate = ({
+  setOpenTitleAndMessage,
+  addList,
+}: Props) => {
   const [bookId, setBookId] = useState<number>();
   const { request } = useApi("patch", `stock/update`, { id: bookId });
 
@@ -35,5 +38,3 @@ const usePatchStockUpdate = ({ setOpenTitleAndMessage, addList }: Props) => {
   }, [bookId]);
   return { setBookId };
 };
-
-export default usePatchStockUpdate;

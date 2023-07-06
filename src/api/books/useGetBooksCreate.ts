@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";
 import { Book } from "../../type";
 
-const useGetBooksCreate = (defalutBook: Book) => {
+export const useGetBooksCreate = (defalutBook: Book) => {
   const [isbnQuery, setIsbnQuery] = useState("");
   const [bookInfo, setBookInfo] = useState(defalutBook);
   const [errorMessage, setErrorMessage] = useState("");
@@ -54,5 +54,3 @@ const useGetBooksCreate = (defalutBook: Book) => {
 
   return { bookInfo, errorMessage, fetchData: setIsbnQuery, setBookInfo };
 };
-
-export default useGetBooksCreate;

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import useGetBooksInfoPopular from "../../api/books/useGetBooksInfoPopular";
+import { useGetBooksInfoPopular } from "../../api/books/useGetBooksInfoPopular";
 import ELibraryBook from "./ELibraryBook";
 import ELibraryTitleWithMore from "./ELibraryTitleWithMore";
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import getErrorMessage from "../../constant/error";
-import useApiMultiple from "../../hook/useApiMultiple";
+import { useApiMultiple } from "../../hook/useApiMultiple";
 import { Book, User } from "../../type";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
   closeModal: () => void;
 };
 
-const usePostLendingsMultiple = ({
+export const usePostLendingsMultiple = ({
   selectedBooks,
   setSelectedBooks,
   selectedUser,
@@ -73,5 +73,3 @@ const usePostLendingsMultiple = ({
 
   return { setConditions, requestLending };
 };
-
-export default usePostLendingsMultiple;

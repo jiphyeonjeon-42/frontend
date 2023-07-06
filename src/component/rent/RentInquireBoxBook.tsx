@@ -1,4 +1,4 @@
-import useModal from "../../hook/useModal";
+import { useModal } from "../../hook/useModal";
 import RentModalBook from "./RentModalBook";
 import Image from "../utils/Image";
 import { Book } from "../../type";

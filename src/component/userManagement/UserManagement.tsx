@@ -10,7 +10,7 @@ import ModalHeader from "../utils/ModalHeader";
 import UserDetailInfo from "./UserDetailInfo";
 
 import { userManagementTabList } from "../../constant/tablist";
-import useGetUsersSearch from "../../api/users/useGetUsersSearch";
+import { useGetUsersSearch } from "../../api/users/useGetUsersSearch";
 import "../../asset/css/UserManagement.css";
 import { User } from "../../type";
 

@@ -1,6 +1,6 @@
 import RentHistory from "./RentHistory";
-import useDialog from "../../../hook/useDialog";
-import useGetUsersSearchId from "../../../api/users/useGetUsersSearchId";
+import { useDialog } from "../../../hook/useDialog";
+import { useGetUsersSearchId } from "../../../api/users/useGetUsersSearchId";
 import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import InquireBoxTitle from "../../utils/InquireBoxTitle";
 import Book from "../../../asset/img/admin_icon.svg";

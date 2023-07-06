@@ -2,7 +2,7 @@ import MainBanner from "./MainBanner";
 import MainNew from "./MainNew";
 import MainPopular from "./MainPopular";
 import "../../asset/css/Main.css";
-import useDialog from "../../hook/useDialog";
+import { useDialog } from "../../hook/useDialog";
 
 const Main = () => {
   const { Dialog, setOpenTitleAndMessage } = useDialog();

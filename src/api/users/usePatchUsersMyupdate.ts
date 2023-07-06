@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { setErrorDialog } from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 type Props = {
   modeString: string;
@@ -11,7 +11,8 @@ type Props = {
     afterClose?: () => void,
   ) => void;
 };
-const usePatchUsersMyupdate = ({
+
+export const usePatchUsersMyupdate = ({
   modeString,
   setOpenTitleAndMessage,
 }: Props) => {
@@ -38,5 +39,3 @@ const usePatchUsersMyupdate = ({
 
   return { setPatchData };
 };
-
-export default usePatchUsersMyupdate;

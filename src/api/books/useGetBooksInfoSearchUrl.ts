@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
-import useParseUrlQueryString from "../../hook/useParseUrlQueryString";
+import { useApi } from "../../hook/useApi";
+import { useParseUrlQueryString } from "../../hook/useParseUrlQueryString";
 import { compareExpect } from "../../util/typeCheck";
 import { searchUrlQueryKeys } from "../../constant/key";
 import { BookInfo } from "../../type";
 
-const useGetBooksInfoSearchUrl = () => {
+export const useGetBooksInfoSearchUrl = () => {
   const [searchResult, setSearchResult] = useState<{
     bookList: BookInfo[];
     categoryList: { name: string; count: number }[];
@@ -76,5 +76,3 @@ const useGetBooksInfoSearchUrl = () => {
     Dialog,
   };
 };
-
-export default useGetBooksInfoSearchUrl;

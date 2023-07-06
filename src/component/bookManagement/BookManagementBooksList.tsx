@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useModal from "../../hook/useModal";
+import { useModal } from "../../hook/useModal";
 import { Book } from "../../type";
 import BookManagementBooksListItem from "./BookManagementBooksListItem";
 import BookManagementModalDetail from "./BookManagementModalDetail";

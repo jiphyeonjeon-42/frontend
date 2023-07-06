@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import getErrorMessage from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 type Props = {
   setOpenTitleAndMessage: (
@@ -10,7 +10,7 @@ type Props = {
   ) => void;
 };
 
-const usePatchReviewsId = ({ setOpenTitleAndMessage }: Props) => {
+export const usePatchReviewsId = ({ setOpenTitleAndMessage }: Props) => {
   const [reviewId, setReviewId] = useState<number>();
   const { request } = useApi("patch", `reviews/${reviewId}`);
 
@@ -36,5 +36,3 @@ const usePatchReviewsId = ({ setOpenTitleAndMessage }: Props) => {
   }, [reviewId]);
   return { setReviewId };
 };
-
-export default usePatchReviewsId;

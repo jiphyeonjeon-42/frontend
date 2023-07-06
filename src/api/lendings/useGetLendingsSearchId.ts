@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
-const useGetLendingsSearchId = ({
+export const useGetLendingsSearchId = ({
   setLendingId,
   openModal,
   setOpenTitleAndMessage,
@@ -38,5 +38,3 @@ const useGetLendingsSearchId = ({
     setQueryId: setQuery,
   };
 };
-
-export default useGetLendingsSearchId;

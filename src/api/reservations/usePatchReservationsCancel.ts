@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 type Props = {
   defaultConfig: any;
@@ -12,7 +12,7 @@ type Props = {
   ) => void;
 };
 
-const usePatchReservationsCancel = ({
+export const usePatchReservationsCancel = ({
   defaultConfig,
   setConfig,
   setOpen,
@@ -50,5 +50,3 @@ const usePatchReservationsCancel = ({
 
   return { setReservationId };
 };
-
-export default usePatchReservationsCancel;

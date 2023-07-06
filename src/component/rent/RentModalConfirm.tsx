@@ -3,7 +3,7 @@ import Button from "../utils/Button";
 import BookInformationWithCover from "../utils/BookInformationWithCover";
 import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";
-import usePostLendingsMultiple from "../../api/lendings/usePostLendingsMultiple";
+import { usePostLendingsMultiple } from "../../api/lendings/usePostLendingsMultiple";
 import { Book, User } from "../../type";
 import "../../asset/css/RentModalConfirm.css";
 

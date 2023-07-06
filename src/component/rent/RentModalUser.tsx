@@ -1,6 +1,6 @@
 import RentUserList from "./RentModalUserList";
 import SearchModal from "../utils/SearchModal";
-import useGetUsersSearch from "../../api/users/useGetUsersSearch";
+import { useGetUsersSearch } from "../../api/users/useGetUsersSearch";
 import { User } from "../../type";
 
 type Props = {

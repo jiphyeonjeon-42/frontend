@@ -1,6 +1,6 @@
 import { useState } from "react";
-import useDialog from "../../hook/useDialog";
-import useModal from "../../hook/useModal";
+import { useDialog } from "../../hook/useDialog";
+import { useModal } from "../../hook/useModal";
 import { rentTabList } from "../../constant/tablist";
 import { Book, User } from "../../type";
 import Banner from "../utils/Banner";

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import usePostLike from "../../../api/like/usePostLike";
-import useDeleteLike from "../../../api/like/useDeleteLike";
-import useGetLike from "../../../api/like/useGetLike";
-import useDialog from "../../../hook/useDialog";
+import { usePostLike } from "../../../api/like/usePostLike";
+import { useDeleteLike } from "../../../api/like/useDeleteLike";
+import { useGetLike } from "../../../api/like/useGetLike";
+import { useDialog } from "../../../hook/useDialog";
 import ShowLike from "./ShowLike";
 import "../../../asset/css/BookDetail.css";
 

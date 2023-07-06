@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
 import { Lending } from "../../type";
@@ -10,7 +10,11 @@ type Props = {
   setError: (title: string, message: string) => void;
 };
 
-const useGetLendingsId = ({ lendingId, closeModal, setError }: Props) => {
+export const useGetLendingsId = ({
+  lendingId,
+  closeModal,
+  setError,
+}: Props) => {
   const [lendingData, setLendingData] = useState<Lending>();
 
   const { request } = useApi("get", `lendings/${lendingId}`, {});
@@ -49,5 +53,3 @@ const useGetLendingsId = ({ lendingId, closeModal, setError }: Props) => {
 
   return { lendingData };
 };
-
-export default useGetLendingsId;

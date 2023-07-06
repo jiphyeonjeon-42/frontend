@@ -1,4 +1,4 @@
-import useGetReviews from "../../api/reviews/useGetReviews";
+import { useGetReviews } from "../../api/reviews/useGetReviews";
 import { otherManagementTabList } from "../../constant/tablist";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";

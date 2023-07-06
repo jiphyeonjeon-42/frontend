@@ -1,4 +1,4 @@
-import usePostUsersCreate from "../../api/users/usePostUsersCreate";
+import { usePostUsersCreate } from "../../api/users/usePostUsersCreate";
 import { registerRule } from "../../constant/validate";
 import "../../asset/css/Register.css";
 import { ChangeEventHandler, FormEventHandler } from "react";

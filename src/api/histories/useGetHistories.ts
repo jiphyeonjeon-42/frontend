@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { setErrorDialog } from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { History } from "../../type";
@@ -10,7 +10,7 @@ type Props = {
   initWho?: string;
 };
 
-const useGetHistories = ({ setOpenTitleAndMessage, initWho }: Props) => {
+export const useGetHistories = ({ setOpenTitleAndMessage, initWho }: Props) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [who, setWho] = useState(initWho ?? "all");
@@ -70,5 +70,3 @@ const useGetHistories = ({ setOpenTitleAndMessage, initWho }: Props) => {
     Dialog,
   };
 };
-
-export default useGetHistories;

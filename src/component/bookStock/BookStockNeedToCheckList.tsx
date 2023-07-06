@@ -1,10 +1,10 @@
 import BookStockNeedToCheckListLine from "./BookStockNeedToCheckListLine";
-import useGetStockSearch from "../../api/stock/useGetStockSearch";
+import { useGetStockSearch } from "../../api/stock/useGetStockSearch";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import InquireBoxBody from "../utils/InquireBoxBody";
 import Pagination from "../utils/Pagination";
 import Book from "../../asset/img/admin_icon.svg";
-import useDialog from "../../hook/useDialog";
+import { useDialog } from "../../hook/useDialog";
 import "../../asset/css/BookStockNeedToCheckList.css";
 
 const BookStockNeedToCheckList = () => {

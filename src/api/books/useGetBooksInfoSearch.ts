@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { Book } from "../../type";
 
-const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
+export const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
 
@@ -35,5 +35,3 @@ const useGetBooksInfoSearch = ({ limit }: { limit: number }) => {
     Dialog,
   };
 };
-
-export default useGetBooksInfoSearch;

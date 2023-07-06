@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
 import { BookInfo } from "../../type";
 
-const usePostBooksCreate = () => {
+export const usePostBooksCreate = () => {
   const [newBookInfo, setNewBookInfo] = useState<BookInfo | null>(null);
   const [message, setMessage] = useState("");
 
@@ -48,5 +48,3 @@ const usePostBooksCreate = () => {
     registerBook,
   };
 };
-
-export default usePostBooksCreate;

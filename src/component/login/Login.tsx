@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FormEventHandler, useRef } from "react";
-import  usePostAuthLogin  from "../../api/auth/usePostAuthLogin";
+import { usePostAuthLogin } from "../../api/auth/usePostAuthLogin";
 import "../../asset/css/MainBanner.css";
 import "../../asset/css/Banner.css";
 import "../../asset/css/Login.css";

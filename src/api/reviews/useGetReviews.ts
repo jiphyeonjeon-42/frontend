@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { Review } from "../../type";
 
-const useGetReviews = () => {
+export const useGetReviews = () => {
   const [params, setParams] = useState({
     titleOrNickname: "",
     page: 1,
@@ -51,5 +51,3 @@ const useGetReviews = () => {
     Dialog,
   };
 };
-
-export default useGetReviews;

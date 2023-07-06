@@ -3,7 +3,7 @@ import Button from "../utils/Button";
 import InputWithLabel from "../utils/InputWithLabel";
 import SelectWithLabel from "../utils/SelectWithLabel";
 import { bookStatus } from "../../constant/status";
-import usePatchBooksUpdate from "../../api/books/usePatchBooksUpdate";
+import { usePatchBooksUpdate } from "../../api/books/usePatchBooksUpdate";
 import { category } from "../../constant/category";
 import "../../asset/css/BookManagementDetail.css";
 import Image from "../utils/Image";

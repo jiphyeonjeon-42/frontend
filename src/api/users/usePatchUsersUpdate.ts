@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { User } from "../../type";
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   exitEditMode: () => void;
 };
 
-const usePatchUsersUpdate = ({ userId, exitEditMode }: Props) => {
+export const usePatchUsersUpdate = ({ userId, exitEditMode }: Props) => {
   const [patchData, setPatchData] = useState<Partial<User>>();
   const { request, Dialog } = useApi(
     "patch",
@@ -42,5 +42,3 @@ const usePatchUsersUpdate = ({ userId, exitEditMode }: Props) => {
 
   return { requestUpdate, Dialog };
 };
-
-export default usePatchUsersUpdate;

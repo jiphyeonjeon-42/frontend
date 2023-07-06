@@ -1,5 +1,5 @@
 import { DragEventHandler, useState } from "react";
-import useDialog from "../../hook/useDialog";
+import { useDialog } from "../../hook/useDialog";
 import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
 import { Tag } from "../../type";
 import Accordion from "../utils/Accordion";

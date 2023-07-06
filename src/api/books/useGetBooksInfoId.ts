@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useApi from "../../hook/useApi";
-import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";
+import { useApi } from "../../hook/useApi";
 import { BookInfo } from "../../type";
+import { compareExpect } from "../../util/typeCheck";
 
 type Pros = {
   id: string;
@@ -13,7 +13,8 @@ type Pros = {
     afterClose: () => void,
   ) => void;
 };
-const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }: Pros) => {
+
+export const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }: Pros) => {
   const [bookDetailInfo, setBookDetailInfo] = useState<BookInfo>();
   const navigate = useNavigate();
 
@@ -73,5 +74,3 @@ const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }: Pros) => {
 
   return { bookDetailInfo };
 };
-
-export default useGetBooksInfoId;

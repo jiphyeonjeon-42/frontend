@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useResetRecoilState } from "recoil";
-import usePostAuthLogout from "../../api/auth/usePostAuthLogout";
+import { usePostAuthLogout } from "../../api/auth/usePostAuthLogout";
 import userState from "../../atom/userState";
 
 const Logout = () => {

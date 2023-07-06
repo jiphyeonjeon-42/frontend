@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import useGetAuthMe from "../../api/auth/useGetAuthMe";
+import { useGetAuthMe } from "../../api/auth/useGetAuthMe";
 
 const Auth = () => {
   const getMe = useGetAuthMe();
