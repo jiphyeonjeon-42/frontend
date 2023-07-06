@@ -4,7 +4,6 @@ import useParseUrlQueryString from "../../hook/useParseUrlQueryString";
 import { compareExpect } from "../../util/typeCheck";
 import { searchUrlQueryKeys } from "../../constant/key";
 import { BookInfo } from "../../type";
-import { AxiosResponse } from "axios";
 
 const useGetBooksInfoSearchUrl = () => {
   const [searchResult, setSearchResult] = useState<{
@@ -47,7 +46,7 @@ const useGetBooksInfoSearchUrl = () => {
     { key: "name", type: "string", isNullable: false },
     { key: "count", type: "number", isNullable: false },
   ];
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const book = compareExpect(
       "books/info/search",
       response.data.items,

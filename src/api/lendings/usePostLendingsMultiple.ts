@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from "react";
 import getErrorMessage from "../../constant/error";
 import useApiMultiple from "../../hook/useApiMultiple";
 import { Book, User } from "../../type";
-import { AxiosResponse } from "axios";
 
 type Props = {
   selectedBooks: Book[];
@@ -39,7 +38,7 @@ const usePostLendingsMultiple = ({
   let resultMessage = "";
   const lendingSuccess = selectedUser.lendings;
 
-  const handleResult = (results: PromiseSettledResult<AxiosResponse>[]) => {
+  const handleResult = (results: PromiseSettledResult<any>[]) => {
     results.forEach((result, index) => {
       const title = selectedBooks[index]?.title;
       if (result.status === "fulfilled") {

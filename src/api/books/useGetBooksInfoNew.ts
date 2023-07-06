@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
-import { AxiosResponse } from "axios";
 import { Book } from "../../type";
 
 type Props = {
@@ -24,7 +23,7 @@ const useGetBooksInfoNew = ({ setOpenTitleAndMessage }: Props) => {
     { key: "author", type: "string", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse<{ items: Book[] }>) => {
+  const refineResponse = (response: any) => {
     const books = compareExpect(
       "books/info",
       response.data.items,

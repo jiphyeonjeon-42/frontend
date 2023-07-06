@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { AxiosResponse } from "axios";
 import useApi from "../../hook/useApi";
 import { Review } from "../../type";
 
@@ -30,7 +29,7 @@ const useGetReviews = () => {
     page: params.page - 1,
   });
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const { items } = response.data;
     const { totalPages } = response.data.meta;
 

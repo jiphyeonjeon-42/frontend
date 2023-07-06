@@ -3,7 +3,6 @@ import { setErrorDialog } from "../../constant/error";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
-import { AxiosResponse } from "axios";
 
 type Props = {
   id: number;
@@ -33,7 +32,7 @@ const useGetBooksIdForStock = ({
     { key: "callSign", type: "string", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     console.log(response);
     const [book] = compareExpect("books/:id", [response.data], expectedItem);
     setBookDetail(book);

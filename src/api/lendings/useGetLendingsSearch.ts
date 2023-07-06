@@ -4,7 +4,6 @@ import useApi from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { Lending } from "../../type";
-import { AxiosResponse } from "axios";
 
 type Props = {
   setOpenTitleAndMessage: (title: string, message: string) => void;
@@ -38,7 +37,7 @@ const useGetLendingsSearch = ({ setOpenTitleAndMessage }: Props) => {
     { key: "title", type: "string", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const info = compareExpect(
       "lendings/search",
       response.data.items,

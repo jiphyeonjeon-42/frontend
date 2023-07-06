@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
-import { AxiosError } from "axios";
 import { BookInfo } from "../../type";
 
 const usePostBooksCreate = () => {
@@ -27,7 +26,7 @@ const usePostBooksCreate = () => {
     window.location.reload();
   };
 
-  const displayError = (error: AxiosError<{ errorCode: number }>) => {
+  const displayError = (error: any) => {
     const errorCode = error?.response?.data?.errorCode;
     const errorMessage = errorCode ? getErrorMessage(errorCode) : error.message;
     setMessage(`실패했습니다. ${errorMessage} `);

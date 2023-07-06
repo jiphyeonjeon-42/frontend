@@ -3,13 +3,12 @@ import useApi from "../../hook/useApi";
 import { addHourDateObject } from "../../util/date";
 import userState from "../../atom/userState";
 import getErrorMessage from "../../constant/error";
-import { AxiosResponse } from "axios";
 
 const useGetAuthMe = () => {
   const { request } = useApi("get", "auth/me");
   const setUser = useSetRecoilState(userState);
 
-  const onSuccess = (response: AxiosResponse) => {
+  const onSuccess = (response: any) => {
     const { data } = response;
     const newUser = {
       isLogin: true,

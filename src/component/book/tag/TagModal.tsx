@@ -7,14 +7,13 @@ import TagList from "./TagList";
 import Tag from "./Tag";
 
 import useApi from "../../../hook/useApi";
-import { AxiosResponse } from "axios";
 
 const TagModal = ({ id }: TagType) => {
   const [subTagData, setSubTagData] = useState([]);
   const { request, Dialog } = useApi("get", `/tags/${id}/sub`);
 
   useEffect(() => {
-    const getSubTagRequest = (res: AxiosResponse) => {
+    const getSubTagRequest = (res: any) => {
       setSubTagData(res.data);
     };
     request(getSubTagRequest);

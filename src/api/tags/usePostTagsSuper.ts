@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useApi from "../../hook/useApi";
-import { AxiosError, AxiosResponse } from "axios";
 import { Tag } from "../../type";
 import { setErrorDialog } from "../../constant/error";
 
@@ -26,13 +25,13 @@ export const usePostTagsSuper = ({
     content: newTagName.replace(/ /g, "_"),
   });
 
-  const onSuccess = (res: AxiosResponse<Tag>) => {
+  const onSuccess = (res: any) => {
     const newTag = res.data;
     addTag(newTag);
     setOpenTitleAndMessage("태그가 추가되었습니다.", newTag.content);
   };
 
-  const displayError = (error: AxiosError) => {
+  const displayError = (error: any) => {
     setErrorDialog(error, setOpenTitleAndMessage);
   };
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AxiosError } from "axios";
 import useApi from "../../hook/useApi";
 import { setErrorDialog } from "../../constant/error";
 
@@ -25,7 +24,7 @@ export const usePatchTagsSub = ({
       window.location.reload(),
     );
   };
-  const displayError = (error: AxiosError) => {
+  const displayError = (error: any) => {
     setErrorDialog(error, setOpenTitleAndMessage);
   };
 

@@ -3,7 +3,6 @@ import useApi from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
-import { AxiosResponse } from "axios";
 
 const useGetBooksSearch = ({ limit }: { limit: number }) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
@@ -31,7 +30,7 @@ const useGetBooksSearch = ({ limit }: { limit: number }) => {
     { key: "isLendable", type: "bool", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const book = compareExpect(
       "books/search",
       response.data.items,

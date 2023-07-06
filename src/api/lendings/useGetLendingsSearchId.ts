@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import useApi from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
-import { AxiosResponse } from "axios";
 
 type Props = {
   setLendingId: (id: number) => void;
@@ -20,7 +19,7 @@ const useGetLendingsSearchId = ({
     type: "bookId",
   });
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const result = response.data?.items;
     if (result && result?.length > 0 && result[0]?.id !== undefined) {
       setLendingId(result[0].id);

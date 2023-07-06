@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AxiosResponse } from "axios";
 import useApi from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { User } from "../../type";
@@ -46,7 +45,7 @@ const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }: Props) => {
     { key: "reservations", type: "*", isNullable: false },
   ];
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const user = compareExpect(
       "users/search",
       response.data.items,

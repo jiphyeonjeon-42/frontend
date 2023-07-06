@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import useApi from "../../hook/useApi";
 import { setErrorDialog } from "../../constant/error";
-import { AxiosError } from "axios";
 
 type Props = {
   title: string;
