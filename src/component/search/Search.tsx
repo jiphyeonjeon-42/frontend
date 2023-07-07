@@ -16,7 +16,7 @@ import "../../asset/css/Search.css";
 
 const Search = () => {
   const myRef = useRef<HTMLDivElement>(null);
-  const { Dialog, bookList, categoryList, lastPage, categoryIndex } =
+  const { bookList, categoryList, lastPage, categoryIndex } =
     useGetBooksInfoSearchUrl();
   const [urlSearchParams, setUrlSearchParams] = useSearchParams();
   const [query, page, sort] = useParseUrlQueryString(searchUrlQueryKeys);
@@ -103,7 +103,6 @@ const Search = () => {
       <section className="wish-book-wraper">
         <WishBook />
       </section>
-      <Dialog />
     </main>
   );
 };

@@ -3,7 +3,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { useGetBooksInfoId } from "../../api/books/useGetBooksInfoId";
 import BookReservation from "./BookReservation";
 import BookStatus from "./BookStatus";
-import { useDialog } from "../../hook/useDialog";
 import Review from "./review/Review";
 import Banner from "../utils/Banner";
 import Image from "../utils/Image";
@@ -16,14 +15,7 @@ const BookDetail = () => {
   const myRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   useEffect(() => myRef.current?.scrollIntoView(), []);
-  const {
-    Dialog,
-    defaultConfig: dialogDefaultConfig,
-    setConfig: setDialogConfig,
-    setOpen: openDialog,
-    setOpenTitleAndMessage,
-  } = useDialog();
-  const { bookDetailInfo } = useGetBooksInfoId({ id, setOpenTitleAndMessage });
+  const { bookDetailInfo } = useGetBooksInfoId({ id });
 
   if (!bookDetailInfo) return null;
   const isAvailableReservation = () => {
@@ -64,10 +56,6 @@ const BookDetail = () => {
               <BookReservation
                 bookInfoId={+id}
                 isAvailableReservation={isAvailableReservation() || false}
-                dialogDefaultConfig={dialogDefaultConfig}
-                setDialogConfig={setDialogConfig}
-                setOpenTitleAndMessage={setOpenTitleAndMessage}
-                openDialog={openDialog}
               />
             </div>
             <div className="book-detail__info">
@@ -119,7 +107,6 @@ const BookDetail = () => {
           <Review bookInfoId={id} />
         </div>
       </section>
-      <Dialog />
     </main>
   );
 };

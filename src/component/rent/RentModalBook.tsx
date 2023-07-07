@@ -19,7 +19,7 @@ const RentModalBook = ({
 }: Props) => {
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
 
-  const { setBookId, Dialog: ErrorDialog } = useGetBooksId({
+  const { setBookId } = useGetBooksId({
     setSelectedBooks,
     closeModal,
   });
@@ -30,7 +30,7 @@ const RentModalBook = ({
     setBookId(bookId);
   };
 
-  const { bookList, lastPage, page, setPage, setQuery, Dialog } =
+  const { bookList, lastPage, page, setPage, setQuery } =
     useGetBooksSearch({ limit: 3 });
 
   return (
@@ -54,8 +54,6 @@ const RentModalBook = ({
           closeModal={closeModal}
         />
       ))}
-      <Dialog />
-      <ErrorDialog />
     </SearchModal>
   );
 };

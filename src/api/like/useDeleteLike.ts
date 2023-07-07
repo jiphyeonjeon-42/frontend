@@ -1,17 +1,8 @@
 import { useEffect, useState } from "react";
 import { compareExpect } from "../../util/typeCheck";
-import getErrorMessage from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 
-type Props = {
-  initBookInfoId?: number;
-  setOpenTitleAndMessage: (title: string, message: string) => void;
-};
-
-export const useDeleteLike = ({
-  initBookInfoId,
-  setOpenTitleAndMessage,
-}: Props) => {
+export const useDeleteLike = (initBookInfoId?: number) => {
   const [bookInfoId, setBookInfoId] = useState(initBookInfoId);
   const { request } = useApi("delete", `books/info/${bookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
@@ -31,14 +22,8 @@ export const useDeleteLike = ({
     setLikeData(refinelikeData);
   };
 
-  const displayError = (error: any) => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setOpenTitleAndMessage(title, errorCode ? message : error.message);
-  };
-
   useEffect(() => {
-    if (bookInfoId) request(refineResponse, displayError);
+    if (bookInfoId) request(refineResponse);
     setBookInfoId(undefined);
   }, [bookInfoId]);
 

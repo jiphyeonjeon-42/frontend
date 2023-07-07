@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useApi } from "../../hook/useApi";
-import getErrorMessage from "../../constant/error";
 import { Book } from "../../type";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   bookTitle: string;
@@ -11,24 +11,25 @@ type Props = {
 export const usePatchBooksUpdate = ({ bookTitle, closeModal }: Props) => {
   const [change, setChange] = useState<Partial<Book>>();
 
-  const { request, setError, Dialog } = useApi("patch", "books/update", change);
+  const { request } = useApi("patch", "books/update", change);
+
+  const { addDialogWithTitleAndMessage } = useNewDialog();
 
   const onSuccess = () => {
-    setError("수정되었습니다", bookTitle, () => {
-      closeModal();
-      window.location.reload();
-    });
-  };
-
-  const onError = (error: any) => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setError(title, errorCode ? message : `${message}\r\n${error?.message}`);
+    addDialogWithTitleAndMessage(
+      `${bookTitle}수정`,
+      "수정되었습니다",
+      bookTitle,
+      () => {
+        closeModal();
+        window.location.reload();
+      },
+    );
   };
 
   useEffect(() => {
-    if (change) request(onSuccess, onError);
+    if (change) request(onSuccess);
   }, [change]);
 
-  return { setChange, Dialog };
+  return { setChange };
 };

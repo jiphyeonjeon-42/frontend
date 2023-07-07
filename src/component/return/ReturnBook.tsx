@@ -7,7 +7,6 @@ import Banner from "../utils/Banner";
 import Pagination from "../utils/Pagination";
 import BarcodeReader from "../utils/BarcodeReader";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import { useDialog } from "../../hook/useDialog";
 import { useModal } from "../../hook/useModal";
 import { useGetLendingsSearch } from "../../api/lendings/useGetLendingsSearch";
 import { useGetLendingsSearchId } from "../../api/lendings/useGetLendingsSearchId";
@@ -23,7 +22,6 @@ const ReturnBook = () => {
   const toggleBarcode = () => setUsingBarcodeReader(!isUsingBarcodeReader);
 
   const { setOpen: openModal, setClose: closeModal, Modal } = useModal();
-  const { setOpenTitleAndMessage, Dialog } = useDialog();
 
   const {
     returnBookList,
@@ -33,11 +31,10 @@ const ReturnBook = () => {
     setQuery,
     isSortNew,
     setIsSortNew,
-  } = useGetLendingsSearch({ setOpenTitleAndMessage });
+  } = useGetLendingsSearch();
   // 위의 search api로는 특정 ID검색이 안됨
   const { setQueryId } = useGetLendingsSearchId({
     openModal,
-    setOpenTitleAndMessage,
     setLendingId,
   });
 
@@ -85,13 +82,11 @@ const ReturnBook = () => {
           </div>
         </div>
       </section>
-      <Dialog />
       {lendingId && (
         <Modal>
           <ReturnModalContents
             lendingId={lendingId}
             closeModal={closeModal}
-            setOpenTitleAndMessage={setOpenTitleAndMessage}
           />
         </Modal>
       )}

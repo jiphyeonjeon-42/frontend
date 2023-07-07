@@ -2,7 +2,6 @@ import { useState } from "react";
 import { usePostLike } from "../../../api/like/usePostLike";
 import { useDeleteLike } from "../../../api/like/useDeleteLike";
 import { useGetLike } from "../../../api/like/useGetLike";
-import { useDialog } from "../../../hook/useDialog";
 import ShowLike from "./ShowLike";
 import "../../../asset/css/BookDetail.css";
 
@@ -14,19 +13,13 @@ const Like = ({ initBookInfoId }: Props) => {
   const [currentLike, setCurrentLike] = useState(false);
   const [currentLikeNum, setCurrentLikeNum] = useState(0);
 
-  const { setOpenTitleAndMessage } = useDialog();
   useGetLike({
-    setOpenTitleAndMessage,
     initBookInfoId: +initBookInfoId,
     setCurrentLike,
     setCurrentLikeNum,
   });
-  const { setBookInfoId: setDeleteLike } = useDeleteLike({
-    setOpenTitleAndMessage,
-  });
-  const { setBookInfoId: setPostLike } = usePostLike({
-    setOpenTitleAndMessage,
-  });
+  const { setBookInfoId: setDeleteLike } = useDeleteLike();
+  const { setBookInfoId: setPostLike } = usePostLike();
   const deleteLike = () => {
     setCurrentLike(false);
     setDeleteLike(+initBookInfoId);

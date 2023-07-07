@@ -12,7 +12,6 @@ type Props = {
   selectedBooks: Book[];
   setSelectedUser: (user: User) => void;
   setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
-  setError: (title: string, message: string) => void;
   closeModal: () => void;
 };
 
@@ -21,7 +20,6 @@ const RentModalConfirm = ({
   selectedBooks,
   setSelectedUser,
   setSelectedBooks,
-  setError,
   closeModal,
 }: Props) => {
   const [first, setFirst] = useState("");
@@ -32,7 +30,6 @@ const RentModalConfirm = ({
     selectedUser,
     setSelectedBooks,
     setSelectedUser,
-    setError,
     closeModal,
   });
 

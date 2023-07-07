@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
-import { setErrorDialog } from "../../constant/error";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   title: string;
   userId: number;
   bookId: number;
   closeModal: () => void;
-  setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
 export const usePostLendings = ({
   title,
   userId,
   bookId,
-  setOpenTitleAndMessage,
   closeModal,
 }: Props) => {
   const [condition, setCondition] = useState("");
@@ -24,12 +22,15 @@ export const usePostLendings = ({
     condition,
   });
 
+  const { addDialogWithTitleAndMessage, addErrorDialog } = useNewDialog();
+
   const onSuccess = () => {
-    setOpenTitleAndMessage("대출결과", `${title} - 대출완료`, closeModal);
+    const message = `${title} - 대출완료`;
+    addDialogWithTitleAndMessage(message, "대출결과", message, closeModal);
   };
 
   const onError = (error: any) => {
-    setErrorDialog(error, setOpenTitleAndMessage, closeModal);
+    addErrorDialog(error, closeModal);
   };
 
   useEffect(() => {

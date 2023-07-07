@@ -9,8 +9,9 @@ import Banner from "../utils/Banner";
 
 const BookManagement = () => {
   const [printList, setPrintList] = useState<Book[]>([]);
-  const { bookList, lastPage, page, setPage, setQuery, Dialog } =
-    useGetBooksSearch({ limit: 10 });
+  const { bookList, lastPage, page, setPage, setQuery } = useGetBooksSearch({
+    limit: 10,
+  });
 
   const addBookById = (bookId: number) => {
     const book = bookList.find(item => item.bookId === bookId);
@@ -32,7 +33,6 @@ const BookManagement = () => {
 
   return (
     <main>
-      <Dialog />
       <Banner img="admin" titleKo="도서 관리" titleEn="BOOK MANAGEMENT" />
       <Tabs tabList={bookManagementTabList} />
       <BookManagementBooksList

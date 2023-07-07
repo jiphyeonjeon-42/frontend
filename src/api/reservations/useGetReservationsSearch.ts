@@ -29,7 +29,7 @@ export const useGetReservationsSearch = () => {
     return "all";
   };
 
-  const { request, Dialog } = useApi("get", "reservations/search", {
+  const { request } = useApi("get", "reservations/search", {
     query: searchParams.query,
     page: searchParams.page - 1,
     limit: 5,
@@ -66,6 +66,7 @@ export const useGetReservationsSearch = () => {
   useEffect(() => {
     request(refineResponse);
   }, [searchParams, filter]);
+
   return {
     reservedLoanList: searchResult.list as Reservation[],
     lastPage: searchResult.lastPage,
@@ -74,6 +75,5 @@ export const useGetReservationsSearch = () => {
     setQuery,
     filter,
     setFilter,
-    Dialog,
   };
 };

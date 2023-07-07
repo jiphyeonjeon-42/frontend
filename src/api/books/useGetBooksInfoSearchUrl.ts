@@ -20,7 +20,7 @@ export const useGetBooksInfoSearchUrl = () => {
   const [query, page, sort, category] =
     useParseUrlQueryString(searchUrlQueryKeys);
 
-  const { request, Dialog } = useApi("get", "books/info/search", {
+  const { request } = useApi("get", "books/info/search", {
     query,
     page: page ? page - 1 : 0,
     limit: 20,
@@ -73,6 +73,5 @@ export const useGetBooksInfoSearchUrl = () => {
 
   return {
     ...searchResult,
-    Dialog,
   };
 };

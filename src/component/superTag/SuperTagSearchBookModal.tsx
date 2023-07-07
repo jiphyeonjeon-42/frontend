@@ -9,12 +9,12 @@ type Props = {
 };
 
 const SuperTagSearchBookModal = ({ setBook }: Props) => {
-  const { bookList, lastPage, page, setPage, setQuery, Dialog } =
-    useGetBooksInfoSearch({ limit: 3 });
+  const { bookList, lastPage, page, setPage, setQuery } = useGetBooksInfoSearch(
+    { limit: 3 },
+  );
 
   return (
     <>
-      <Dialog />
       <Modal isOpen={true} onCloseModal={() => {}}>
         <SearchModal
           className="super-tag-book__search__wrapper"

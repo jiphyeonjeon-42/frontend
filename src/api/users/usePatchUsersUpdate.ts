@@ -9,11 +9,7 @@ type Props = {
 
 export const usePatchUsersUpdate = ({ userId, exitEditMode }: Props) => {
   const [patchData, setPatchData] = useState<Partial<User>>();
-  const { request, Dialog } = useApi(
-    "patch",
-    `users/update/${userId}`,
-    patchData,
-  );
+  const { request } = useApi("patch", `users/update/${userId}`, patchData);
   const expectedItem: { [key: string]: string } = {
     nickname: "string",
     intraId: "number",
@@ -40,5 +36,5 @@ export const usePatchUsersUpdate = ({ userId, exitEditMode }: Props) => {
     if (patchData !== null) request(onSuccess);
   }, [patchData]);
 
-  return { requestUpdate, Dialog };
+  return { requestUpdate };
 };

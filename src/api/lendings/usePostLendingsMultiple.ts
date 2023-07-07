@@ -2,13 +2,13 @@ import { useState, useEffect, useMemo } from "react";
 import getErrorMessage from "../../constant/error";
 import { useApiMultiple } from "../../hook/useApiMultiple";
 import { Book, User } from "../../type";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   selectedBooks: Book[];
   setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
   selectedUser: User;
   setSelectedUser: (user: User) => void;
-  setError: (title: string, message: string) => void;
   closeModal: () => void;
 };
 
@@ -17,7 +17,6 @@ export const usePostLendingsMultiple = ({
   setSelectedBooks,
   selectedUser,
   setSelectedUser,
-  setError,
   closeModal,
 }: Props) => {
   const [conditions, setConditions] = useState<string[]>([]);
@@ -38,6 +37,8 @@ export const usePostLendingsMultiple = ({
   let resultMessage = "";
   const lendingSuccess = selectedUser.lendings;
 
+  const { addDialogWithTitleAndMessage } = useNewDialog();
+
   const handleResult = (results: PromiseSettledResult<any>[]) => {
     results.forEach((result, index) => {
       const title = selectedBooks[index]?.title;
@@ -57,7 +58,7 @@ export const usePostLendingsMultiple = ({
     });
     setSelectedBooks([]);
     setSelectedUser({ ...selectedUser, lendings: lendingSuccess });
-    setError("대출결과", resultMessage);
+    addDialogWithTitleAndMessage(resultMessage, "대출결과", resultMessage);
     closeModal();
   };
 

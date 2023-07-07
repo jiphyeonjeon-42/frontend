@@ -6,30 +6,13 @@ import {
 } from "react";
 import "../../../asset/css/Review.css";
 import Button from "../../utils/Button";
+import { useNewDialog } from "../../../hook/useNewDialog";
 
 type Props = {
   onClickPost: (post: string) => void;
-  setDialogConfig: (config: any) => void;
-  Dialog: ReactNode;
-  openDialog: () => void;
-  closeDialog: () => void;
-  config: any;
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose?: () => void,
-  ) => void;
 };
 
-const PostReview = ({
-  onClickPost,
-  Dialog,
-  config,
-  openDialog,
-  closeDialog,
-  setDialogConfig,
-  setOpenTitleAndMessage,
-}: Props) => {
+const PostReview = ({ onClickPost }: Props) => {
   const [content, setContent] = useState("");
   const checkLogin = JSON.parse(window.localStorage.getItem("user") || "");
   const checkValidUser = () => {
@@ -46,40 +29,25 @@ const PostReview = ({
     setContent(e.target.value);
   };
 
+  const { addDialogWithTitleAndMessage, addConfirmDialog } = useNewDialog();
   const submitReview = () => {
     const validUser = checkValidUser();
     if (validUser === false) {
-      setOpenTitleAndMessage(
-        "42 인증 후 리뷰 등록이 가능합니다.",
-        "",
-        closeDialog,
-      );
+      const title = "42 인증 후 리뷰 등록이 가능합니다.";
+      addDialogWithTitleAndMessage(title, title, "");
       return;
     }
     onClickPost(content);
-    closeDialog();
   };
 
   const onSubmitHandler: FormEventHandler = e => {
     e.preventDefault();
-    console.log(content);
-    setDialogConfig({
-      ...config,
-      title: "리뷰를 등록하시겠습니까?",
-      buttonAlign: "basic",
-      numberOfButtons: 2,
-      firstButton: {
-        text: "확인하기",
-        color: "red",
-        onClick: submitReview,
-      },
-      secondButton: {
-        text: "취소하기",
-        color: "grey",
-        onClick: closeDialog,
-      },
-    });
-    openDialog();
+    addConfirmDialog(
+      `${content} 리뷰등록 확인`,
+      "리뷰를 등록하시겠습니까?",
+      "",
+      submitReview,
+    );
   };
 
   return (
@@ -101,7 +69,6 @@ const PostReview = ({
           <Button type="submit" value="게시하기" color="red" />
         </div>
       </form>
-      {Dialog}
     </div>
   );
 };

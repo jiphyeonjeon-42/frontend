@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApi } from "../../hook/useApi";
-import getErrorMessage from "../../constant/error";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type RegisterDataItem = {
   value: string;
@@ -22,14 +22,16 @@ export const usePostUsersCreate = () => {
     confirmPassword: { value: "", error: "", ref: confirmPasswordRef },
   });
 
-  const { request, setError, Dialog } = useApi("post", "users/create", {
+  const { request } = useApi("post", "users/create", {
     email: registerData.email.value,
     password: registerData.password.value,
   });
   const navigate = useNavigate();
+  const { addDialogWithTitleAndMessage, addErrorDialog } = useNewDialog();
 
   const displaySuccess = () => {
-    setError(
+    addDialogWithTitleAndMessage(
+      "회원가입 완료",
       "회원가입 완료",
       "환영합니다. 로그인 후 집현전 서비스를 이용하세요.",
       () => navigate("/login"),
@@ -60,13 +62,12 @@ export const usePostUsersCreate = () => {
       registerData.password.ref.current?.focus();
       return;
     }
-    const errorMessage = errorCode ? getErrorMessage(errorCode) : error.message;
-    setError(errorMessage, "");
+    addErrorDialog(error);
   };
 
   const requestRegister = () => {
     request(displaySuccess, displayError);
   };
 
-  return { registerData, requestRegister, Dialog, setRegisterData };
+  return { registerData, requestRegister, setRegisterData };
 };

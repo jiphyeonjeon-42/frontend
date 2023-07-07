@@ -14,7 +14,7 @@ export const useGetUsersSearch = ({ limit }: { limit: number }) => {
     setQueryNoDelay,
   } = useSearch();
 
-  const { request, Dialog } = useApi("get", "users/search", {
+  const { request } = useApi("get", "users/search", {
     nicknameOrEmail: searchParams.query,
     page: searchParams.page - 1,
     limit,
@@ -72,6 +72,5 @@ export const useGetUsersSearch = ({ limit }: { limit: number }) => {
     setPage,
     setQuery,
     setQueryNoDelay,
-    Dialog,
   };
 };

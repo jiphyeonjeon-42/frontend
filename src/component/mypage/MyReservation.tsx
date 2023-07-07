@@ -1,19 +1,12 @@
-import { useDialog } from "../../hook/useDialog";
 import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
 import RentedOrReservedBooks from "./MyRentInfo/RentedOrReservedBooks";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Reserve from "../../asset/img/list-check-solid.svg";
 
 const MyReservation = () => {
-  const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =
-    useDialog();
-
   const user = window.localStorage.getItem("user");
   const userId = user && JSON.parse(user).id;
-  const { userInfo } = useGetUsersSearchId({
-    setDialogTitleAndMessage,
-    userId,
-  });
+  const { userInfo } = useGetUsersSearchId({ userId });
 
   return (
     <>
@@ -32,7 +25,6 @@ const MyReservation = () => {
           />
         </div>
       </div>
-      <Dialog />
     </>
   );
 };

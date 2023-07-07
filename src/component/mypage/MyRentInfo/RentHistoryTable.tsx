@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useDialog } from "../../../hook/useDialog";
 import { useGetLike } from "../../../api/like/useGetLike";
 import { usePostLike } from "../../../api/like/usePostLike";
 import { useDeleteLike } from "../../../api/like/useDeleteLike";
@@ -15,21 +14,15 @@ type Props = {
 
 const RentHistoryTable = ({ factor }: Props) => {
   const [currentLike, setCurrentLike] = useState(false);
-  const { Dialog, setOpenTitleAndMessage } = useDialog();
   useGetLike({
-    setOpenTitleAndMessage,
     initBookInfoId: factor.bookInfoId,
     setCurrentLike,
   });
-  const { setBookInfoId: setBookInfoIdPost } = usePostLike({
-    setOpenTitleAndMessage,
-  });
+  const { setBookInfoId: setBookInfoIdPost } = usePostLike();
   const postLike = (bookInfoId: number) => {
     setBookInfoIdPost(bookInfoId);
   };
-  const { setBookInfoId: setBookInfoIdDelete } = useDeleteLike({
-    setOpenTitleAndMessage,
-  });
+  const { setBookInfoId: setBookInfoIdDelete } = useDeleteLike();
   const deleteLike = (bookInfoId: number) => {
     setBookInfoIdDelete(bookInfoId);
   };
@@ -46,7 +39,6 @@ const RentHistoryTable = ({ factor }: Props) => {
 
   return (
     <div className="rent_histories__table-list">
-      <Dialog />
       <span className="rent_histories__table_info__date">
         {factor?.createdAt}
       </span>

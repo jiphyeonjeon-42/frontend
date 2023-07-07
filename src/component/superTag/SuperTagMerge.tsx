@@ -11,15 +11,13 @@ type SuperTagMergeProps = {
 };
 const SuperTagMerge = ({ book }: SuperTagMergeProps) => {
   const bookInfoId = book.id || book.bookInfoId;
-  const { tagList, addTag, removeTag, Dialog } =
-    useGetTagsBookInfoId(bookInfoId);
+  const { tagList, addTag, removeTag } = useGetTagsBookInfoId(bookInfoId);
 
   const defaultTagList = tagList.filter(i => i.type === "default");
   const superTagList = tagList.filter(i => i.type === "super");
 
   return (
     <div className="super-tag__merge__wrapper">
-      <Dialog />
       <SuperTagMergeCreate bookInfoId={bookInfoId} addTag={addTag} />
       <DragZone>
         <SuperTagMergeDefaultTag

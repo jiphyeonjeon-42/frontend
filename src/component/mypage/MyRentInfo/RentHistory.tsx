@@ -2,13 +2,10 @@ import Pagination from "../../utils/Pagination";
 import { useGetHistories } from "../../../api/histories/useGetHistories";
 import RentHistoryTable from "./RentHistoryTable";
 import "../../../asset/css/RentHistory.css";
-import { useDialog } from "../../../hook/useDialog";
 
 const RentHistory = () => {
-  const { Dialog, setOpenTitleAndMessage } = useDialog();
   const { historiesList, lastPage, page, setPage } = useGetHistories({
     initWho: "my",
-    setOpenTitleAndMessage,
   });
 
   return (

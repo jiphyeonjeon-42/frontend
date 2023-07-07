@@ -7,7 +7,6 @@ import Banner from "../utils/Banner";
 import Pagination from "../utils/Pagination";
 import { useModal } from "../../hook/useModal";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import { useDialog } from "../../hook/useDialog";
 import { useGetHistories } from "../../api/histories/useGetHistories";
 import { rentTabList } from "../../constant/tablist";
 import Book from "../../asset/img/book-arrow-up-free-icon-font.svg";
@@ -17,13 +16,11 @@ import "../../asset/css/Histories.css";
 const History = () => {
   const [historyInfo, setHistoryInfo] = useState<History>();
   const { setOpen: openModal, Modal } = useModal();
-  const { setOpenTitleAndMessage, Dialog } = useDialog();
   const { historiesList, lastPage, page, type, setPage, setQuery, setType } =
-    useGetHistories({ setOpenTitleAndMessage });
+    useGetHistories({});
 
   return (
     <main>
-      <Dialog />
       <Banner
         img="admin"
         titleKo="전체 대출/반납 기록"

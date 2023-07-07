@@ -25,12 +25,10 @@ const ReservedLoan = () => {
     setQuery,
     filter,
     setFilter,
-    Dialog,
   } = useGetReservationsSearch();
 
   return (
     <main>
-      <Dialog />
       <Banner img="admin" titleKo="예약 대출" titleEn="BOOK RESERVATION" />
       <Tabs tabList={rentTabList} />
       <section className="reserved-loan-body">

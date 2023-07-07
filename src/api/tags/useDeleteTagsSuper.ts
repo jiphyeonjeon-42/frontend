@@ -1,42 +1,31 @@
 import { useEffect, useState } from "react";
 import { useApi } from "../../hook/useApi";
-import getErrorMessage from "../../constant/error";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   removeTag: (tagId: number) => void;
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose?: () => void,
-  ) => void;
 };
 
-export const useDeleteTagsSuper = ({
-  removeTag,
-  setOpenTitleAndMessage,
-}: Props) => {
+export const useDeleteTagsSuper = ({ removeTag }: Props) => {
   const [tagId, setTagId] = useState<number | undefined>(undefined);
 
   const { request } = useApi("delete", `/tags/super/${tagId}`);
 
+  const { addDialogWithTitleAndMessage } = useNewDialog();
   const onSuccess = () => {
-    setOpenTitleAndMessage("처리되었습니다", "", () => {
-      if (tagId) removeTag(tagId);
-    });
-  };
-
-  const onError = (error: any) => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setOpenTitleAndMessage(
-      title,
-      errorCode ? message : `${message}\r\n${error?.message}`,
+    addDialogWithTitleAndMessage(
+      `${tagId}patched`,
+      "처리되었습니다",
+      "",
+      () => {
+        tagId && removeTag(tagId);
+      },
     );
   };
 
   useEffect(() => {
     if (tagId !== undefined) {
-      request(onSuccess, onError);
+      request(onSuccess);
     }
   }, [tagId]);
 

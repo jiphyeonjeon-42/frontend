@@ -7,14 +7,12 @@ type Props = {
   initBookInfoId: number;
   setCurrentLike: (isLiked: boolean) => void;
   setCurrentLikeNum?: (likeNum: number) => void;
-  setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
 export const useGetLike = ({
   initBookInfoId,
   setCurrentLike,
   setCurrentLikeNum,
-  setOpenTitleAndMessage,
 }: Props) => {
   const { request } = useApi("get", `books/info/${initBookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
@@ -36,14 +34,8 @@ export const useGetLike = ({
     setCurrentLikeNum && setCurrentLikeNum(refinelikeData[0].likeNum);
   };
 
-  const displayError = (error: any) => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setOpenTitleAndMessage(title, errorCode ? message : error.message);
-  };
-
   useEffect(() => {
-    if (initBookInfoId) request(refineResponse, displayError);
+    if (initBookInfoId) request(refineResponse);
   }, []);
 
   return { likeData };

@@ -4,10 +4,10 @@ import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
 import UserEdit from "../../../asset/img/edit.svg";
 import DeleteButton from "../../../asset/img/x_button.svg";
-import { useDialog } from "../../../hook/useDialog";
 import "../../../asset/css/Review.css";
 import { User } from "@sentry/react";
 import { Review } from "../../../type";
+import { useNewDialog } from "../../../hook/useNewDialog";
 
 type Props = {
   data: Review;
@@ -26,14 +26,6 @@ const HandleReview = ({
   type,
   onClickDel,
 }: Props) => {
-  const {
-    Dialog,
-    config,
-    setOpenTitleAndMessage,
-    setConfig: setDialogConfig,
-    setOpen: openDialog,
-    setClose: closeDialog,
-  } = useDialog();
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
   const uploadDate = splitDate(createdAt)[0];
@@ -59,24 +51,14 @@ const HandleReview = ({
     onClickDel(data.reviewsId);
   };
 
+  const { addConfirmDialog, addDialogWithTitleAndMessage } = useNewDialog();
   const deleteBtn = () => {
-    setDialogConfig({
-      ...config,
-      title: "리뷰를 삭제하시겠습니까?",
-      buttonAlign: "basic",
-      numberOfButtons: 2,
-      firstButton: {
-        text: "확인하기",
-        color: "red",
-        onClick: deleteReview,
-      },
-      secondButton: {
-        text: "취소하기",
-        color: "grey",
-        onClick: closeDialog,
-      },
-    });
-    openDialog();
+    addConfirmDialog(
+      "삭제확인",
+      "리뷰를 삭제하시겠습니까?",
+      data.content,
+      deleteReview,
+    );
   };
 
   const patchReview = () => {
@@ -88,7 +70,11 @@ const HandleReview = ({
         setFixReview(!fixReview);
       })
       .catch(() => {
-        setOpenTitleAndMessage("10자 이상 420자 이하로 입력해주세요.", "");
+        addDialogWithTitleAndMessage(
+          "error",
+          "10자 이상 420자 이하로 입력해주세요.",
+          "",
+        );
       });
   };
 
@@ -175,7 +161,6 @@ const HandleReview = ({
           )}
         </div>
       ) : null}
-      <Dialog />
     </div>
   );
 };

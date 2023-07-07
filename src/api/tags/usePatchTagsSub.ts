@@ -1,36 +1,26 @@
 import { useEffect, useState } from "react";
 import { useApi } from "../../hook/useApi";
-import { setErrorDialog } from "../../constant/error";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type PatchTagsSubParamType = {
   id: number;
   visibility: "public" | "private";
 };
 
-export const usePatchTagsSub = ({
-  setOpenTitleAndMessage,
-}: {
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose?: () => void,
-  ) => void;
-}) => {
+export const usePatchTagsSub = () => {
   const [params, setParams] = useState<PatchTagsSubParamType | null>(null);
   const { request } = useApi("patch", "tags/sub", params);
 
+  const { addDialogWithTitleAndMessage } = useNewDialog();
   const displaySuccess = () => {
-    setOpenTitleAndMessage("처리되었습니다", "", () =>
+    addDialogWithTitleAndMessage("patched", "처리되었습니다", "", () =>
       window.location.reload(),
     );
-  };
-  const displayError = (error: any) => {
-    setErrorDialog(error, setOpenTitleAndMessage);
   };
 
   useEffect(() => {
     if (params) {
-      request(displaySuccess, displayError);
+      request(displaySuccess);
     }
   }, [params]);
   return { setParams };

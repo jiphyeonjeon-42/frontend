@@ -1,4 +1,3 @@
-import { useDialog } from "../../../hook/useDialog";
 import { usePatchReservationsCancel } from "../../../api/reservations/usePatchReservationsCancel";
 import Image from "../../utils/Image";
 import { isNumber } from "../../../util/typeCheck";
@@ -13,17 +12,9 @@ type Props = {
 const RentedOrReservedBooks = ({ componentMode, bookInfoArr }: Props) => {
   if (!bookInfoArr) return null;
 
-  const { setOpen, defaultConfig, setConfig, Dialog, setOpenTitleAndMessage } =
-    useDialog();
-  const { setReservationId } = usePatchReservationsCancel({
-    setOpen,
-    setConfig,
-    defaultConfig,
-    setOpenTitleAndMessage,
-  });
+  const { setReservationId } = usePatchReservationsCancel();
   return (
     <div className="mypage-books_box">
-      <Dialog />
       {bookInfoArr &&
         bookInfoArr.map(bookInfo => (
           <div key={bookInfo.title} className="mypage-books_box-wrapper">

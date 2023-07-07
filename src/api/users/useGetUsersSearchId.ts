@@ -2,17 +2,12 @@ import { useEffect, useState } from "react";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { User } from "../../type";
-import { setErrorDialog } from "../../constant/error";
 
 type Props = {
   userId: number;
-  setDialogTitleAndMessage: (title: string, message: string) => void;
 };
 
-export const useGetUsersSearchId = ({
-  userId,
-  setDialogTitleAndMessage,
-}: Props) => {
+export const useGetUsersSearchId = ({ userId }: Props) => {
   const [userInfo, setUserInfo] = useState<User>();
 
   const { request } = useApi("get", "users/search", {
@@ -57,11 +52,7 @@ export const useGetUsersSearchId = ({
     setUserInfo(user[0]);
   };
 
-  const onError = (error: any) => {
-    setErrorDialog(error, setDialogTitleAndMessage);
-  };
-
-  useEffect(() => request(refineResponse, onError), []);
+  useEffect(() => request(refineResponse), []);
 
   return { userInfo };
 };

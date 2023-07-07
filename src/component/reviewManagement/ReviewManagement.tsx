@@ -20,7 +20,6 @@ const ReviewManagement = () => {
     setSelectedType,
     reviewList,
     lastPage,
-    Dialog,
   } = useGetReviews();
 
   const setUndefinedReSelected = (newType: string) => {
@@ -29,7 +28,6 @@ const ReviewManagement = () => {
 
   return (
     <main>
-      <Dialog />
       <Banner img="admin" titleKo="리뷰 관리" titleEn="REVIEW MANAGEMENT" />
       <Tabs tabList={otherManagementTabList} />
       <Management

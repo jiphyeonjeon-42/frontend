@@ -9,21 +9,15 @@ import { useGetLendingsId } from "../../api/lendings/useGetLendingsId";
 type Props = {
   lendingId: number;
   closeModal: () => void;
-  setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
-const ReturnModalContents = ({
-  lendingId,
-  closeModal,
-  setOpenTitleAndMessage: setError,
-}: Props) => {
-  const { lendingData } = useGetLendingsId({ lendingId, closeModal, setError });
+const ReturnModalContents = ({ lendingId, closeModal }: Props) => {
+  const { lendingData } = useGetLendingsId({ lendingId, closeModal });
 
   const { condition, setCondition, requestReturn } = usePatchLendingsReturn({
     lendingId,
     title: lendingData?.title || "",
     closeModal,
-    setError,
   });
   if (!lendingData) return null;
 

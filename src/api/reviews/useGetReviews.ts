@@ -24,7 +24,7 @@ export const useGetReviews = () => {
     if (type) setParams({ ...params, disabled: type });
   };
 
-  const { request, Dialog } = useApi("get", "reviews", {
+  const { request } = useApi("get", "reviews", {
     ...params,
     page: params.page - 1,
   });
@@ -48,6 +48,5 @@ export const useGetReviews = () => {
     setSelectedType,
     reviewList: result.reviewList as Review[],
     lastPage: result.lastPage,
-    Dialog,
   };
 };
