@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@jiphyeonjeon-42/contracts": "https://github.com/jiphyeonjeon-42/backend/releases/download/v0.0.11-alpha/contracts.tgz",
     "@ladle/react": "^2.13.0",
     "@sentry/react": "^7.53.0",
     "@sentry/tracing": "^7.53.0",
