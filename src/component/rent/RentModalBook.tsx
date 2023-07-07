@@ -5,6 +5,7 @@ import BarcodeReader from "../utils/BarcodeReader";
 import { useGetBooksSearch } from "../../api/books/useGetBooksSearch";
 import { useGetBooksId } from "../../api/books/useGetBooksId";
 import { Book } from "../../type";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
@@ -24,14 +25,23 @@ const RentModalBook = ({
     closeModal,
   });
 
+  const { addDialogWithTitleAndMessage } = useNewDialog();
   const toDoAfterRead = (text: string) => {
     const bookId = text?.split(" ")[0];
     setUsingBarcodeReader(false);
-    setBookId(bookId);
+    const isAlreadySelected = selectedBooks.some(book => book.id === +bookId);
+    if (isAlreadySelected)
+      addDialogWithTitleAndMessage(
+        "alreadySelected",
+        "이미 선택된 도서입니다.",
+        "다시 한번 확인해주세요",
+      );
+    else setBookId(bookId);
   };
 
-  const { bookList, lastPage, page, setPage, setQuery } =
-    useGetBooksSearch({ limit: 3 });
+  const { bookList, lastPage, page, setPage, setQuery } = useGetBooksSearch({
+    limit: 3,
+  });
 
   return (
     <SearchModal
