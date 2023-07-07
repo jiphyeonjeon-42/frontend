@@ -6,7 +6,7 @@ export const useGetMyReviewInfo = () => {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(10);
   const [reviewList, setReviewList] = useState<Review[]>([]);
-  const { request, Dialog } = useApi("get", `reviews/my-reviews`, {
+  const { request } = useApi("get", `reviews/my-reviews`, {
     limit: 5,
     page: page - 1,
     isMyReview: true,
@@ -29,6 +29,5 @@ export const useGetMyReviewInfo = () => {
     lastPage,
     reviewList,
     setReviewList,
-    Dialog,
   };
 };

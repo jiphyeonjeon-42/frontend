@@ -1,18 +1,11 @@
 import { useCallback } from "react";
+import { useNewDialog } from "./useNewDialog";
 import axiosPromise from "../util/axios";
-import getErrorMessage from "../constant/error";
-import { useDialog } from "./useDialog";
 
 type Method = "get" | "post" | "put" | "patch" | "delete";
 
 export const useApi = (method: Method, url: string, data?: unknown) => {
-  const { setOpenTitleAndMessage: setError, Dialog } = useDialog();
-
-  const errorDialog = (error: any) => {
-    const errorCode = error?.response?.data?.errorCode;
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setError(title, errorCode ? message : `${message}\r\n${error?.message}`);
-  };
+  const { addErrorDialog } = useNewDialog();
 
   const request = useCallback(
     (resolve: (response: any) => void, reject?: (error: any) => void) => {
@@ -21,12 +14,13 @@ export const useApi = (method: Method, url: string, data?: unknown) => {
           resolve(response);
         })
         ?.catch(error => {
+          // 직접 정의한 reject함수가 없으면 기본적인 에러 알림 다이얼로그 호출
           if (reject) reject(error);
-          else errorDialog(error);
+          else addErrorDialog(error);
         });
     },
     [method, url, data],
   );
 
-  return { request, setError, Dialog };
+  return { request };
 };

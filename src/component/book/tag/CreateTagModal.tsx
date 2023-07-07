@@ -25,7 +25,7 @@ const CreateTagModal = ({
 
   const location = useLocation();
   const bookId = location.pathname.split("/")[2];
-  const { request, Dialog } = useApi("post", `/tags/default`, {
+  const { request } = useApi("post", `/tags/default`, {
     bookInfoId: +bookId,
     createContent,
   });
@@ -52,7 +52,6 @@ const CreateTagModal = ({
 
   return (
     <div>
-      <Dialog />
       <ul>
         <button className="button_tag-box-sub">{createContent}</button>
       </ul>

@@ -16,7 +16,7 @@ type TagData = {
 
 const TagWrapper = ({ bookInfoId }: TagProps) => {
   const [tagData, setTagData] = useState<TagData[]>([]);
-  const { request, Dialog } = useApi("get", `/tags/${bookInfoId}`);
+  const { request } = useApi("get", `/tags/${bookInfoId}`);
 
   useEffect(() => {
     const getTagRequest = (res: any) => {
@@ -27,7 +27,6 @@ const TagWrapper = ({ bookInfoId }: TagProps) => {
 
   return (
     <div className="none-drag">
-      <Dialog />
       <TagList tagData={tagData} setTagData={setTagData} />
     </div>
   );

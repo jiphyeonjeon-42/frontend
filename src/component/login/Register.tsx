@@ -1,10 +1,10 @@
 import { usePostUsersCreate } from "../../api/users/usePostUsersCreate";
 import { registerRule } from "../../constant/validate";
-import "../../asset/css/Register.css";
 import { ChangeEventHandler, FormEventHandler } from "react";
+import "../../asset/css/Register.css";
 
 const Register = () => {
-  const { registerData, setRegisterData, requestRegister, Dialog } =
+  const { registerData, setRegisterData, requestRegister } =
     usePostUsersCreate();
 
   const validateInput = (value: string, name: string) => {
@@ -51,7 +51,6 @@ const Register = () => {
 
   return (
     <main>
-      <Dialog />
       <section className="banner main-img">
         <div className="main-banner register-banner">
           <div className="register-main">

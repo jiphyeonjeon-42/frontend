@@ -1,39 +1,23 @@
 import { useEffect, useState } from "react";
-import getErrorMessage from "../../constant/error";
 import { useApi } from "../../hook/useApi";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose?: () => void,
-  ) => void;
   addList: () => void;
 };
 
-export const usePatchStockUpdate = ({
-  setOpenTitleAndMessage,
-  addList,
-}: Props) => {
+export const usePatchStockUpdate = ({ addList }: Props) => {
   const [bookId, setBookId] = useState<number>();
   const { request } = useApi("patch", `stock/update`, { id: bookId });
 
+  const { addDialogWithTitleAndMessage } = useNewDialog();
   const onSuccess = () => {
-    setOpenTitleAndMessage("처리되었습니다", "", addList);
-  };
-
-  const onError = (error: any) => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setOpenTitleAndMessage(
-      title,
-      errorCode ? message : `${message}\r\n${error?.message}`,
-    );
+    addDialogWithTitleAndMessage("end", "처리되었습니다", "", addList);
   };
 
   useEffect(() => {
     if (bookId !== undefined) {
-      request(onSuccess, onError);
+      request(onSuccess);
     }
   }, [bookId]);
   return { setBookId };

@@ -10,7 +10,7 @@ import { useApi } from "../../../hook/useApi";
 
 const TagModal = ({ id }: TagType) => {
   const [subTagData, setSubTagData] = useState([]);
-  const { request, Dialog } = useApi("get", `/tags/${id}/sub`);
+  const { request } = useApi("get", `/tags/${id}/sub`);
 
   useEffect(() => {
     const getSubTagRequest = (res: any) => {
@@ -21,7 +21,6 @@ const TagModal = ({ id }: TagType) => {
 
   return (
     <div className="button_tag-modal-background">
-      <Dialog />
       {subTagData.map((item: TagType) => (
         <Tag
           key={item.id}

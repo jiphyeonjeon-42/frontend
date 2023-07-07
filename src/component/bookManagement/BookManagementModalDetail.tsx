@@ -30,7 +30,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
   const statusRef = useRef(null);
   const categoryRef = useRef(null);
 
-  const { setChange, Dialog } = usePatchBooksUpdate({
+  const { setChange } = usePatchBooksUpdate({
     bookTitle: book.title,
     closeModal,
   });
@@ -105,7 +105,6 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
 
   return (
     <div className="book-management__detail__wrarpper">
-      <Dialog />
       <p className="book-management__detail__title">도서정보</p>
       <div className="book-management__detail__book-info">
         <Image

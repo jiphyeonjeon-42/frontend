@@ -1,23 +1,21 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { myPageTabList } from "../../constant/tablist";
+import { useTabFocus } from "../../hook/useTabFocus";
+import { useNewDialog } from "../../hook/useNewDialog";
+import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
 import MyRent from "./MyRentInfo/MyRent";
 import MyReservation from "./MyReservation";
 import MyReview from "./MyReview";
-import { useDialog } from "../../hook/useDialog";
-import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
 import ScrollTopButton from "../utils/ScrollTopButton";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import getErrorMessage from "../../constant/error";
 import Login from "../../asset/img/login_icon_white.svg";
-import { useTabFocus } from "../../hook/useTabFocus";
 import "../../asset/css/Mypage.css";
 
 const Mypage = () => {
   const { currentTab, changeTab } = useTabFocus(0, myPageTabList);
   const [urlQuery, setUrlQuery] = useSearchParams();
-  const { setOpenTitleAndMessage: setDialogTitleAndMessage, Dialog } =
-    useDialog();
 
   const selectComponent: { [key: string]: ReactNode } = {
     myRent: <MyRent />,
@@ -26,10 +24,7 @@ const Mypage = () => {
   };
   const user = window.localStorage.getItem("user");
   const userId = user && JSON.parse(user).id;
-  const { userInfo } = useGetUsersSearchId({
-    setDialogTitleAndMessage,
-    userId,
-  });
+  const { userInfo } = useGetUsersSearchId({ userId });
   const [deviceMode, setDeviceMode] = useState("desktop");
 
   const convertRoleToStr = (roleInt: number) => {
@@ -45,12 +40,13 @@ const Mypage = () => {
     }
   };
 
+  const { addDialogWithTitleAndMessage } = useNewDialog();
   useEffect(() => {
     const error = urlQuery.get("errorCode");
     if (error) {
       const errorCode = parseInt(error, 10);
       const [title, message] = getErrorMessage(errorCode).split("\r\n");
-      setDialogTitleAndMessage(title, message, () => {
+      addDialogWithTitleAndMessage(title, title, message, () => {
         urlQuery.delete("errorCode");
         setUrlQuery(urlQuery);
       });
@@ -211,7 +207,6 @@ const Mypage = () => {
         </div>
       </section>
       <div>{selectComponent[currentTab]}</div>
-      <Dialog />
     </>
   );
 };

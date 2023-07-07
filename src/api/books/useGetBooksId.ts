@@ -10,7 +10,7 @@ type Props = {
 
 export const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
   const [bookId, setBookId] = useState<string>();
-  const { request, Dialog } = useApi("get", `books/${bookId}`);
+  const { request } = useApi("get", `books/${bookId}`);
 
   const expectedItem = [
     { key: "id", type: "number", isNullable: false },
@@ -31,5 +31,5 @@ export const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
     if (bookId) request(refineResponse);
   }, [bookId]);
 
-  return { setBookId, Dialog };
+  return { setBookId };
 };

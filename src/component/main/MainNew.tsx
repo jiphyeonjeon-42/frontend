@@ -3,12 +3,8 @@ import MainNewBookList from "./MainNewBookList";
 import { useGetBooksInfoNew } from "../../api/books/useGetBooksInfoNew";
 import "../../asset/css/MainNew.css";
 
-type Props = {
-  setOpenTitleAndMessage: (title: string, message: string) => void;
-};
-
-const MainNew = ({ setOpenTitleAndMessage }: Props) => {
-  const { bookList } = useGetBooksInfoNew({ setOpenTitleAndMessage });
+const MainNew = () => {
+  const { bookList } = useGetBooksInfoNew();
 
   return (
     <section className="main-new">

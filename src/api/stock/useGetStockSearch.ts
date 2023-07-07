@@ -1,15 +1,10 @@
 import { useEffect } from "react";
-import { setErrorDialog } from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
 
-type Props = {
-  setOpenTitleAndMessage: (title: string, message: string) => void;
-};
-
-export const useGetStockSearch = ({ setOpenTitleAndMessage }: Props) => {
+export const useGetStockSearch = () => {
   const { searchParams, setSearchResult, searchResult, setPage } = useSearch();
   const { request } = useApi("get", "stock/search", {
     page: searchParams.page - 1,
@@ -36,12 +31,8 @@ export const useGetStockSearch = ({ setOpenTitleAndMessage }: Props) => {
     });
   };
 
-  const displayError = (error: any) => {
-    setErrorDialog(error, setOpenTitleAndMessage);
-  };
-
   useEffect(() => {
-    request(refineResponse, displayError);
+    request(refineResponse);
   }, [searchParams]);
 
   return {

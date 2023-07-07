@@ -9,8 +9,9 @@ type Props = {
 };
 
 const RentModalUser = ({ setSelectedUser, closeModal }: Props) => {
-  const { userList, lastPage, page, setPage, setQuery, Dialog } =
-    useGetUsersSearch({ limit: 5 });
+  const { userList, lastPage, page, setPage, setQuery } = useGetUsersSearch({
+    limit: 5,
+  });
 
   return (
     <SearchModal
@@ -21,7 +22,6 @@ const RentModalUser = ({ setSelectedUser, closeModal }: Props) => {
       setQuery={setQuery}
       lastPage={lastPage}
     >
-      <Dialog />
       {userList.map(user => (
         <RentUserList
           key={user.id}

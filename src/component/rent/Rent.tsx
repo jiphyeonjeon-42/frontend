@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useDialog } from "../../hook/useDialog";
 import { useModal } from "../../hook/useModal";
 import { rentTabList } from "../../constant/tablist";
 import { Book, User } from "../../type";
@@ -18,7 +17,6 @@ const Rent = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
 
-  const { Dialog, setOpenTitleAndMessage } = useDialog();
   const { Modal, setOpen: openModal, setClose: closeModal } = useModal();
 
   return (
@@ -77,11 +75,9 @@ const Rent = () => {
             setSelectedBooks={setSelectedBooks}
             setSelectedUser={setSelectedUser}
             closeModal={closeModal}
-            setError={setOpenTitleAndMessage}
           />
         </Modal>
       ) : null}
-      <Dialog />
     </main>
   );
 };

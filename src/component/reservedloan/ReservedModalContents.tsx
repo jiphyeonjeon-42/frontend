@@ -1,5 +1,4 @@
 import { FormEventHandler, useState } from "react";
-import { useDialog } from "../../hook/useDialog";
 import { usePostLendings } from "../../api/lendings/usePostLendings";
 import { usePatchReservationsCancel } from "../../api/reservations/usePatchReservationsCancel";
 import Button from "../utils/Button";
@@ -18,21 +17,13 @@ type Props = {
 
 const ReservedModalContents = ({ reservedInfo, closeModal }: Props) => {
   const [remark, setRemark] = useState("");
-  const { Dialog, setOpen, defaultConfig, setConfig, setOpenTitleAndMessage } =
-    useDialog();
 
-  const { setReservationId: cancelReservation } = usePatchReservationsCancel({
-    setOpen,
-    setConfig,
-    defaultConfig,
-    setOpenTitleAndMessage,
-  });
+  const { setReservationId: cancelReservation } = usePatchReservationsCancel();
 
   const { requestLending } = usePostLendings({
     title: reservedInfo?.title,
     userId: reservedInfo?.userId,
     bookId: reservedInfo?.bookId,
-    setOpenTitleAndMessage,
     closeModal,
   });
 
@@ -51,7 +42,6 @@ const ReservedModalContents = ({ reservedInfo, closeModal }: Props) => {
       bookCoverAlt={reservedInfo.title}
       bookCoverImg={reservedInfo.image}
     >
-      <Dialog />
       <TextWithLabel
         wrapperClassName="reserved-modal__book"
         topLabelText="도서정보"

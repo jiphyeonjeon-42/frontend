@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
-import { setErrorDialog } from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   id: number;
   closeModal: () => void;
-  setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
-export const useGetBooksIdForStock = ({
-  id,
-  closeModal,
-  setOpenTitleAndMessage,
-}: Props) => {
+export const useGetBooksIdForStock = ({ id, closeModal }: Props) => {
   const [bookDetail, setBookDetail] = useState<Book>();
   const { request } = useApi("get", `books/${id}`);
 
@@ -33,14 +28,14 @@ export const useGetBooksIdForStock = ({
   ];
 
   const refineResponse = (response: any) => {
-    console.log(response);
     const [book] = compareExpect("books/:id", [response.data], expectedItem);
     setBookDetail(book);
   };
 
+  const { addErrorDialog } = useNewDialog();
+
   const displayError = (error: any) => {
-    closeModal();
-    setErrorDialog(error, setOpenTitleAndMessage);
+    addErrorDialog(error, closeModal);
   };
 
   useEffect(() => {

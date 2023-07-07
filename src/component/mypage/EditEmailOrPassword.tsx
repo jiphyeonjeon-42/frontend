@@ -1,7 +1,7 @@
 import { useState, useMemo, ChangeEventHandler, FormEventHandler } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDialog } from "../../hook/useDialog";
 import { usePatchUsersMyupdate } from "../../api/users/usePatchUsersMyupdate";
+import { useNewDialog } from "../../hook/useNewDialog";
 import Image from "../utils/Image";
 import { registerRule } from "../../constant/validate";
 import arrowLeft from "../../asset/img/arrow_left_black.svg";
@@ -32,33 +32,27 @@ function EditEmailOrPassword() {
     setRevision({ ...revision, check: value });
   };
 
-  const { Dialog, setOpenTitleAndMessage } = useDialog();
-
   const { setPatchData } = usePatchUsersMyupdate({
     modeString: modeStringKorean,
-    setOpenTitleAndMessage,
   });
+
+  const { addDialogWithTitleAndMessage } = useNewDialog();
 
   const onSubmitUpdate: FormEventHandler = e => {
     e.preventDefault();
-    if (mode === "pw" && revision.text !== revision.check) {
-      setOpenTitleAndMessage("비밀번호 재입력이 다릅니다.", "");
-      return;
-    }
-    if (!registerRule[modeString]?.validator(revision.text, "")) {
-      setOpenTitleAndMessage(registerRule[modeString].invalidMessage, "");
-      return;
-    }
-    if (!revision.text) {
-      setOpenTitleAndMessage(`${modeStringKorean}를 다시 확인해주세요`, "");
-      return;
-    }
+    let title = "";
+    if (mode === "pw" && revision.text !== revision.check)
+      title = "비밀번호 재입력이 다릅니다.";
+    else if (!registerRule[modeString]?.validator(revision.text, ""))
+      title = registerRule[modeString].invalidMessage;
+    else if (!revision.text) title = `${modeStringKorean}를 다시 확인해주세요`;
+
+    addDialogWithTitleAndMessage(title, title, "");
     setPatchData({ [modeString]: revision.text });
   };
 
   return (
     <div className="mypage-edit">
-      <Dialog />
       <div className="mypage-edit-box">
         <div className="mypage-edit-leftArrow">
           <button type="button" onClick={() => navigate(-1)}>

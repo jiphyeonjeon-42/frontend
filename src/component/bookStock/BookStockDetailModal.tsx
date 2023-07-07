@@ -2,7 +2,6 @@ import { useGetBooksIdForStock } from "../../api/books/useGetBooksIdForStock";
 import BookDetailView from "../utils/BookDetailView";
 import SpanWithLabel from "../utils/SpanWithLabel";
 import Button from "../utils/Button";
-import { useDialog } from "../../hook/useDialog";
 import { bookStatus } from "../../constant/status";
 import { usePatchStockUpdate } from "../../api/stock/usePatchStockUpdate";
 import { Book } from "../../type";
@@ -15,15 +14,12 @@ type Props = {
 };
 
 const BookStockDetailModal = ({ bookId, closeModal, addChecked }: Props) => {
-  const { setOpenTitleAndMessage, Dialog } = useDialog();
   const { bookDetail: book } = useGetBooksIdForStock({
     id: bookId,
-    setOpenTitleAndMessage,
     closeModal,
   });
 
   const { setBookId } = usePatchStockUpdate({
-    setOpenTitleAndMessage,
     addList: () => {
       if (book) addChecked(book);
       closeModal();
@@ -63,7 +59,6 @@ const BookStockDetailModal = ({ bookId, closeModal, addChecked }: Props) => {
           }
         />
       ) : null}
-      <Dialog />
     </>
   );
 };

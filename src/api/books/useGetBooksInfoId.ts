@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import getErrorMessage from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 import { BookInfo } from "../../type";
 import { compareExpect } from "../../util/typeCheck";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Pros = {
   id: string;
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose: () => void,
-  ) => void;
 };
 
-export const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }: Pros) => {
+export const useGetBooksInfoId = ({ id }: Pros) => {
   const [bookDetailInfo, setBookDetailInfo] = useState<BookInfo>();
   const navigate = useNavigate();
 
@@ -51,21 +46,18 @@ export const useGetBooksInfoId = ({ id, setOpenTitleAndMessage }: Pros) => {
     setBookDetailInfo(bookInfo);
   };
 
-  const displayError = (error: any) => {
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
+  const { addErrorDialog } = useNewDialog();
 
-    const afterClose = () => {
+  const displayError = (error: any) => {
+    const errorCode = error?.response?.data?.errorCode;
+    const redirectIfCode304 = () => {
       if (errorCode === 304) {
         navigate("/search");
         window.scrollTo(0, 0);
       }
     };
-    setOpenTitleAndMessage(
-      title,
-      errorCode ? message : `${message}\r\n${error?.message}`,
-      afterClose,
-    );
+
+    addErrorDialog(error, redirectIfCode304);
   };
 
   useEffect(() => {

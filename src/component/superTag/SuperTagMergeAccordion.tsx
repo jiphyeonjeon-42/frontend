@@ -3,12 +3,12 @@ import { useGetTagsSuperTagIdSub } from "../../api/tags/useGetTagsSuperTagIdSub"
 import { useDeleteTagsSuper } from "../../api/tags/useDeleteTagsSuper";
 import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
 import { Tag } from "../../type";
-import { useDialog } from "../../hook/useDialog";
 import Accordion from "../utils/Accordion";
 import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 import Droppable from "../utils/Droppable";
 import Image from "../utils/Image";
 import TrashIcon from "../../asset/img/trash.svg";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   bookInfoId: number;
@@ -17,22 +17,10 @@ type Props = {
 };
 
 const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
-  const { Dialog, setOpenTitleAndMessage, setConfig, setOpen, defaultConfig } =
-    useDialog();
   const { subTagList, toggleOpened, addSubTag, removeSubTag } =
-    useGetTagsSuperTagIdSub({
-      tagId: tag.id,
-      setOpenTitleAndMessage,
-    });
-  const { deleteTag } = useDeleteTagsSuper({
-    removeTag,
-    setOpenTitleAndMessage,
-  });
-
-  const { setParams } = usePatchTagsBookInfoIdMerge({
-    bookInfoId,
-    setOpenTitleAndMessage,
-  });
+    useGetTagsSuperTagIdSub({ tagId: tag.id });
+  const { deleteTag } = useDeleteTagsSuper({ removeTag });
+  const { setParams } = usePatchTagsBookInfoIdMerge({ bookInfoId });
 
   const addNewListAndMergeIfMoved: DragEventHandler = e => {
     const stringifiedTag = e.dataTransfer.getData("text/plain");
@@ -43,26 +31,16 @@ const SuperTagMergeAccordion = ({ bookInfoId, tag, removeTag }: Props) => {
     }
   };
 
+  const { addConfirmDialog } = useNewDialog();
   const getConfirmThenRemove: MouseEventHandler = e => {
     e.preventDefault();
     e.stopPropagation();
-    setConfig({
-      ...defaultConfig,
-      title: `태그를 삭제하겠습니까?`,
-      message: `태그 내용 : ${tag.content}`,
-      numberOfButtons: 2,
-      firstButton: {
-        ...defaultConfig.firstButton,
-        onClick: () => {
-          deleteTag(tag.id);
-        },
-      },
-    });
-    setOpen();
+    addConfirmDialog("삭제확인", "태그를 삭제하겠습니까?", "", () =>
+      deleteTag(tag.id),
+    );
   };
   return (
     <div className="super-tag__accordion__wrapper">
-      <Dialog />
       <Accordion
         summaryButtonClassName="super-tag__accordion__summary"
         summaryUI={

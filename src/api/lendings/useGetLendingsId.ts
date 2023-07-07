@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import { useApi } from "../../hook/useApi";
-import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
 import { Lending } from "../../type";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   lendingId: number;
   closeModal: () => void;
-  setError: (title: string, message: string) => void;
 };
 
-export const useGetLendingsId = ({
-  lendingId,
-  closeModal,
-  setError,
-}: Props) => {
+export const useGetLendingsId = ({ lendingId, closeModal }: Props) => {
   const [lendingData, setLendingData] = useState<Lending>();
 
   const { request } = useApi("get", `lendings/${lendingId}`, {});
@@ -40,11 +35,9 @@ export const useGetLendingsId = ({
     setLendingData(lending);
   };
 
+  const { addErrorDialog } = useNewDialog();
   const displayError = (error: any) => {
-    closeModal();
-    const errorCode = parseInt(error?.response?.data?.errorCode, 10);
-    const [title, message] = getErrorMessage(errorCode).split("\r\n");
-    setError(title, errorCode ? message : error.message);
+    addErrorDialog(error, closeModal);
   };
 
   useEffect(() => {

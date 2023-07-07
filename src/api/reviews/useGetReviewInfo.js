@@ -6,7 +6,7 @@ export const useGetReviewInfo = () => {
   const [lastPage, setLastPage] = useState(null);
   const [reviewList, setReviewList] = useState([]);
   const userId = JSON.parse(window.localStorage.getItem("user")).id;
-  const { request, Dialog } = useApi("get", `reviews`, {
+  const { request } = useApi("get", `reviews`, {
     userId,
     page: page - 1,
   });
@@ -28,6 +28,5 @@ export const useGetReviewInfo = () => {
     lastPage,
     reviewList,
     setReviewList,
-    Dialog,
   };
 };

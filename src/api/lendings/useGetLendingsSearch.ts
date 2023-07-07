@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
-import { setErrorDialog } from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { Lending } from "../../type";
 
-type Props = {
-  setOpenTitleAndMessage: (title: string, message: string) => void;
-};
-
-export const useGetLendingsSearch = ({ setOpenTitleAndMessage }: Props) => {
+export const useGetLendingsSearch = () => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [isSortNew, setIsSearchSort] = useState(false);
@@ -19,7 +14,7 @@ export const useGetLendingsSearch = ({ setOpenTitleAndMessage }: Props) => {
     setPage(1);
   };
 
-  const { request, Dialog } = useApi("get", "lendings/search", {
+  const { request } = useApi("get", "lendings/search", {
     query: searchParams.query,
     page: searchParams.page - 1,
     limit: 5,
@@ -50,12 +45,8 @@ export const useGetLendingsSearch = ({ setOpenTitleAndMessage }: Props) => {
     });
   };
 
-  const displayError = (error: any) => {
-    setErrorDialog(error, setOpenTitleAndMessage);
-  };
-
   useEffect(() => {
-    request(refineResponse, displayError);
+    request(refineResponse);
   }, [searchParams, isSortNew]);
 
   return {
@@ -66,6 +57,5 @@ export const useGetLendingsSearch = ({ setOpenTitleAndMessage }: Props) => {
     setQuery,
     isSortNew,
     setIsSortNew,
-    Dialog,
   };
 };

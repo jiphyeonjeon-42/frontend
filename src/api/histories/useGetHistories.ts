@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
-import { setErrorDialog } from "../../constant/error";
 import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { History } from "../../type";
 
 type Props = {
-  setOpenTitleAndMessage: (title: string, message: string) => void;
   initWho?: string;
 };
 
-export const useGetHistories = ({ setOpenTitleAndMessage, initWho }: Props) => {
+export const useGetHistories = ({ initWho }: Props) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [who, setWho] = useState(initWho ?? "all");
   const [type, setType] = useState("");
 
-  const { request, Dialog } = useApi("get", "histories", {
+  const { request } = useApi("get", "histories", {
     query: searchParams.query,
     page: searchParams.page - 1,
     limit: 5,
@@ -50,12 +48,8 @@ export const useGetHistories = ({ setOpenTitleAndMessage, initWho }: Props) => {
     });
   };
 
-  const displayError = (error: any) => {
-    setErrorDialog(error, setOpenTitleAndMessage);
-  };
-
   useEffect(() => {
-    request(refineResponse, displayError);
+    request(refineResponse);
   }, [searchParams, who, type]);
 
   return {
@@ -67,6 +61,5 @@ export const useGetHistories = ({ setOpenTitleAndMessage, initWho }: Props) => {
     setQuery,
     setWho,
     setType,
-    Dialog,
   };
 };

@@ -32,6 +32,7 @@ import BookStock from "./component/bookStock/BookStock";
 import ELibraryIn42Box from "./component/eLibraryIn42Box/EventPage";
 import SuperTagManagement from "./component/superTag/SuperTagManagement";
 import SubTagManagement from "./component/subTag/SubTagManagement";
+import Portals from "./component/utils/Portals";
 import "./asset/css/reset.css";
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
   return (
     <BrowserRouter>
       <div id="portal" />
+      <Portals />
       <Header />
       <MobileHeader />
       <Routes>
