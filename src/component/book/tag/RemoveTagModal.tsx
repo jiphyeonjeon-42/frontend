@@ -1,7 +1,6 @@
 import { TagType } from "../../../type/TagType";
 import Tag from "./Tag";
 import useApi from "../../../hook/useApi";
-import { AxiosResponse } from "axios";
 
 type RemoveTagModalProps = {
   id: number;
@@ -24,7 +23,7 @@ const RemoveTagModal = ({
   };
 
   const removeTag = () => {
-    request((res: AxiosResponse) => {
+    request((res: any) => {
       const updatedTagData = tagData.filter(tag => tag.id !== id);
       setTagData(updatedTagData);
     });

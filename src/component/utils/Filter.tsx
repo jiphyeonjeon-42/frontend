@@ -9,8 +9,8 @@ type Props = {
     name: string;
     type: string;
   }[];
-  selectedType: string | null;
-  setSelectedType(...args: unknown[]): unknown;
+  selectedType?: string | null;
+  setSelectedType: (type: string) => void;
 };
 
 const Filter = ({ filterList, selectedType, setSelectedType }: Props) => {

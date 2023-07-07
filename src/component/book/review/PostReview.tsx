@@ -1,15 +1,24 @@
-import { useState } from "react";
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  ReactNode,
+  useState,
+} from "react";
 import "../../../asset/css/Review.css";
 import Button from "../../utils/Button";
 
 type Props = {
-  onClickPost(...args: unknown[]): unknown;
-  setDialogConfig(...args: unknown[]): unknown;
-  Dialog: React.ReactElement;
-  openDialog(...args: unknown[]): unknown;
-  closeDialog(...args: unknown[]): unknown;
-  config: Record<string, unknown>;
-  setOpenTitleAndMessage(...args: unknown[]): unknown;
+  onClickPost: (post: string) => void;
+  setDialogConfig: (config: any) => void;
+  Dialog: ReactNode;
+  openDialog: () => void;
+  closeDialog: () => void;
+  config: any;
+  setOpenTitleAndMessage: (
+    title: string,
+    message: string,
+    afterClose?: () => void,
+  ) => void;
 };
 
 const PostReview = ({
@@ -21,10 +30,10 @@ const PostReview = ({
   setDialogConfig,
   setOpenTitleAndMessage,
 }: Props) => {
-  const [content, setContent] = useState(null);
-  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
+  const [content, setContent] = useState("");
+  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "");
   const checkValidUser = () => {
-    const user = JSON.parse(window.localStorage.getItem("user"));
+    const user = JSON.parse(window.localStorage.getItem("user") || "");
     if (user) {
       if (user.userName === user.email) {
         return false;
@@ -33,7 +42,7 @@ const PostReview = ({
     return true;
   };
 
-  const onChange = e => {
+  const onChange: ChangeEventHandler<HTMLTextAreaElement> = e => {
     setContent(e.target.value);
   };
 
@@ -51,7 +60,7 @@ const PostReview = ({
     closeDialog();
   };
 
-  const onSubmitHandler = e => {
+  const onSubmitHandler: FormEventHandler = e => {
     e.preventDefault();
     console.log(content);
     setDialogConfig({
@@ -79,7 +88,6 @@ const PostReview = ({
         <textarea
           className="review-area font-12"
           value={content}
-          type="text-area"
           onChange={onChange}
           maxLength={420}
           required
@@ -93,7 +101,7 @@ const PostReview = ({
           <Button type="submit" value="게시하기" color="red" />
         </div>
       </form>
-      <Dialog />
+      {Dialog}
     </div>
   );
 };

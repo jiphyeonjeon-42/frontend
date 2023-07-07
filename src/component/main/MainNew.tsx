@@ -4,7 +4,7 @@ import useGetBooksInfoNew from "../../api/books/useGetBooksInfoNew";
 import "../../asset/css/MainNew.css";
 
 type Props = {
-  setOpenTitleAndMessage(...args: unknown[]): unknown;
+  setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
 const MainNew = ({ setOpenTitleAndMessage }: Props) => {

@@ -7,4 +7,5 @@ export type Review = {
   title: string;
   nickname: string;
   intraId: string;
+  disabled?: boolean;
 };

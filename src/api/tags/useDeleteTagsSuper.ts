@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
-import { AxiosError } from "axios";
 import getErrorMessage from "../../constant/error";
 
 type Props = {
@@ -26,7 +25,7 @@ export const useDeleteTagsSuper = ({
     });
   };
 
-  const onError = (error: AxiosError) => {
+  const onError = (error: any) => {
     const errorCode = parseInt(error?.response?.data?.errorCode, 10);
     const [title, message] = getErrorMessage(errorCode).split("\r\n");
     setOpenTitleAndMessage(

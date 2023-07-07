@@ -17,25 +17,27 @@ type PreCategoryProps = {
 const PreCategory = ({ startOfScroll }: PreCategoryProps) => {
   const scrollToPre = () => {
     const categories = document.querySelector(".categories");
-    const categoriesScrollX = categories.scrollLeft;
+    if (categories) {
+      const categoriesScrollX = categories.scrollLeft;
 
-    const categoryButton = document.getElementsByClassName("category-button");
-    const categoryButtonWidth = Array.from(categoryButton).map(
-      items => items.clientWidth + MARGIN_OF_CATEGORY_BUTTON,
-    );
+      const categoryButton = document.getElementsByClassName("category-button");
+      const categoryButtonWidth = Array.from(categoryButton).map(
+        items => items.clientWidth + MARGIN_OF_CATEGORY_BUTTON,
+      );
 
-    let sumOfCategory = 0;
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < categoryButtonWidth.length; index++) {
-      if (
-        sumOfCategory + categoryButtonWidth[index] + EPSILON >=
-        categoriesScrollX
-      ) {
-        break;
+      let sumOfCategory = 0;
+      // eslint-disable-next-line no-plusplus
+      for (let index = 0; index < categoryButtonWidth.length; index++) {
+        if (
+          sumOfCategory + categoryButtonWidth[index] + EPSILON >=
+          categoriesScrollX
+        ) {
+          break;
+        }
+        sumOfCategory += categoryButtonWidth[index];
       }
-      sumOfCategory += categoryButtonWidth[index];
+      categories.scrollTo({ left: sumOfCategory, top: 0, behavior: "smooth" });
     }
-    categories.scrollTo({ left: sumOfCategory, top: 0, behavior: "smooth" });
   };
 
   return (
@@ -63,32 +65,33 @@ type NextCategoryProps = {
 
 const NextCategory = ({ endOfScroll }: NextCategoryProps) => {
   const scrollToNext = () => {
-    const categories = document.querySelector(".categories");
-    const categoriesScrollX = categories.scrollLeft;
-    const categoriesOffsetWidth =
-      document.querySelector(".categories").offsetWidth;
-    const categoriesScrollWidth =
-      document.querySelector(".categories").scrollWidth;
-    const endOfScrollWidth = categoriesScrollWidth - categoriesOffsetWidth;
+    const categories = document.querySelector<HTMLDivElement>(".categories");
+    if (categories) {
+      const categoriesScrollX = categories.scrollLeft;
+      const categoriesOffsetWidth = categories.offsetWidth;
+      const categoriesScrollWidth = categories.scrollWidth;
+      const endOfScrollWidth = categoriesScrollWidth - categoriesOffsetWidth;
 
-    const categoryButton = document.getElementsByClassName("category-button");
-    const categoryButtonWidth = Array.from(categoryButton).map(
-      items => items.clientWidth + MARGIN_OF_CATEGORY_BUTTON,
-    );
+      const categoryButton = document.getElementsByClassName("category-button");
+      const categoryButtonWidth = Array.from(categoryButton).map(
+        items => items.clientWidth + MARGIN_OF_CATEGORY_BUTTON,
+      );
 
-    let sumOfCategory = 0;
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < categoryButtonWidth.length; index++) {
-      sumOfCategory += categoryButtonWidth[index];
-      if (sumOfCategory - EPSILON > categoriesScrollX) {
-        break;
+      let sumOfCategory = 0;
+      // eslint-disable-next-line no-plusplus
+      for (let index = 0; index < categoryButtonWidth.length; index++) {
+        sumOfCategory += categoryButtonWidth[index];
+        if (sumOfCategory - EPSILON > categoriesScrollX) {
+          break;
+        }
       }
+      categories.scrollTo({
+        left:
+          sumOfCategory > endOfScrollWidth ? endOfScrollWidth : sumOfCategory,
+        top: 0,
+        behavior: "smooth",
+      });
     }
-    categories.scrollTo({
-      left: sumOfCategory > endOfScrollWidth ? endOfScrollWidth : sumOfCategory,
-      top: 0,
-      behavior: "smooth",
-    });
   };
 
   return (
@@ -137,15 +140,13 @@ const Category = ({
 
   return (
     <button
-      className={`category-button button-onclick-${
-        parseInt(userCate, 10) === categoryIndex
-      }`}
+      className={`category-button button-onclick-${userCate === categoryIndex}`}
       type="button"
       onClick={changeFilter}
     >
       <div
         className={`${
-          parseInt(userCate, 10) === categoryIndex
+          userCate === categoryIndex
             ? "font-16-bold color-54"
             : "font-16 color-a4"
         } category-button-text cateNum-${categoryIndex}`}
@@ -160,7 +161,7 @@ type CategoryFilterProps = {
   userWord: string;
   userSort: string;
   userCate: number;
-  entireCate: object[];
+  entireCate: { name: string; count: number }[];
 };
 
 const CategoryFilter = ({
@@ -173,23 +174,24 @@ const CategoryFilter = ({
   const [endOfScroll, setEndOfScroll] = useState(true);
 
   const setScrollState = () => {
-    const categoriesScrollX = document.querySelector(".categories").scrollLeft;
-    const categoriesOffsetWidth =
-      document.querySelector(".categories").offsetWidth;
-    const categoriesScrollWidth =
-      document.querySelector(".categories").scrollWidth;
-    const endOfScrollWidth = categoriesScrollWidth - categoriesOffsetWidth;
+    const categories = document.querySelector<HTMLDivElement>(".categories");
+    if (categories) {
+      const categoriesScrollX = categories.scrollLeft;
+      const categoriesOffsetWidth = categories.offsetWidth;
+      const categoriesScrollWidth = categories.scrollWidth;
+      const endOfScrollWidth = categoriesScrollWidth - categoriesOffsetWidth;
 
-    if (categoriesScrollX === 0) {
-      setStartOfScroll(true);
-    } else {
-      setStartOfScroll(false);
-    }
+      if (categoriesScrollX === 0) {
+        setStartOfScroll(true);
+      } else {
+        setStartOfScroll(false);
+      }
 
-    if (categoriesScrollX === endOfScrollWidth) {
-      setEndOfScroll(true);
-    } else {
-      setEndOfScroll(false);
+      if (categoriesScrollX === endOfScrollWidth) {
+        setEndOfScroll(true);
+      } else {
+        setEndOfScroll(false);
+      }
     }
   };
 

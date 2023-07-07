@@ -1,28 +1,26 @@
 import "../../asset/css/BookStatus.css";
+import { Book } from "../../type";
 
 type Props = {
-  book: {
-    id?: number;
-    callSign?: string;
-    donator?: string;
-    dueDate?: string;
-    isLendable?: boolean;
-    isReserved?: boolean;
-    status?: number;
-  };
+  book: Book;
   index: number;
 };
 
 const BookStatus = ({ book, index }: Props) => {
-  const doubleDigit = number => {
+  const doubleDigit = (number: number) => {
     return number < 10 ? `0${number}` : `${number}`;
   };
 
-  const getBookStatus = (isLendable, isReserved, dueDate, status) => {
+  const getBookStatus = (
+    isLendable: boolean,
+    isReserved: boolean,
+    dueDate: string,
+    status: number,
+  ) => {
     if (status === 3) return "지정 도서(대출불가)";
     if (status === 2) return "파손 도서";
     if (status === 1) return "분실 도서";
-    if (isReserved === 1) return "예약 중";
+    if (isReserved) return "예약 중";
     if (dueDate !== "-") return "대출 중";
     if (isLendable) return "비치 중";
     return "대출 불가";

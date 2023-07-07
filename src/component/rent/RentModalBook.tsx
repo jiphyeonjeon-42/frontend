@@ -4,11 +4,12 @@ import SearchModal from "../utils/SearchModal";
 import BarcodeReader from "../utils/BarcodeReader";
 import useGetBooksSearch from "../../api/books/useGetBooksSearch";
 import useGetBooksId from "../../api/books/useGetBooksId";
+import { Book } from "../../type";
 
 type Props = {
-  setSelectedBooks(...args: unknown[]): unknown;
-  closeModal(...args: unknown[]): unknown;
-  selectedBooks: object[];
+  setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
+  closeModal: () => void;
+  selectedBooks: Book[];
 };
 
 const RentModalBook = ({
@@ -23,8 +24,8 @@ const RentModalBook = ({
     closeModal,
   });
 
-  const toDoAfterRead = text => {
-    const bookId = text.split(" ")[0];
+  const toDoAfterRead = (text: string) => {
+    const bookId = text?.split(" ")[0];
     setUsingBarcodeReader(false);
     setBookId(bookId);
   };

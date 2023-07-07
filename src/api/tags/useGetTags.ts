@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { AxiosResponse } from "axios";
 import { useSearch } from "../../hook/useSearch";
 import useApi from "../../hook/useApi";
 import { Tag } from "../../type/Tag";
@@ -19,7 +18,7 @@ export const useGetTags = () => {
     visibility: filter,
   });
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     const tags = response.data.items as Tag[];
     const lastPage: number = response.data.meta.totalPages || 10;
     setSearchResult({ list: tags, lastPage });

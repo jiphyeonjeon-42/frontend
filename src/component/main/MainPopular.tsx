@@ -6,7 +6,7 @@ import useGetBooksInfoPopular from "../../api/books/useGetBooksInfoPopular";
 import "../../asset/css/MainPopular.css";
 
 type Props = {
-  setOpenTitleAndMessage(...args: unknown[]): unknown;
+  setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
 const MainPopular = ({ setOpenTitleAndMessage }: Props) => {

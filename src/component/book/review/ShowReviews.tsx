@@ -3,6 +3,7 @@ import HandleReview from "./HandleReview";
 import axiosPromise from "../../../util/axios";
 import "../../../asset/css/Tabs.css";
 import "../../../asset/css/Review.css";
+import { Review } from "../../../type";
 
 type Props = {
   bookInfoId: number;
@@ -10,13 +11,13 @@ type Props = {
 };
 
 const ShowReviews = ({ bookInfoId, type }: Props) => {
-  const [postReviews, setPostReviews] = useState([]);
-  const observeReviewList = useRef(null);
-  const totalLeftPages = useRef();
-  const lastReviewId = useRef();
-  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
+  const [postReviews, setPostReviews] = useState<Review[]>([]);
+  const observeReviewList = useRef<HTMLDivElement>(null);
+  const totalLeftPages = useRef(0);
+  const lastReviewId = useRef(0);
+  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "");
 
-  const deleteReview = reviewsId => {
+  const deleteReview = (reviewsId: number) => {
     const temp = postReviews.filter(review => review.reviewsId !== reviewsId);
     setPostReviews(temp);
     axiosPromise("delete", `/reviews/${reviewsId}`);
@@ -40,13 +41,13 @@ const ShowReviews = ({ bookInfoId, type }: Props) => {
   }, []);
 
   useEffect(() => {
-    if (totalLeftPages === 0) return;
+    if (totalLeftPages.current === 0) return;
     const io = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
         fetch();
       }
     });
-    io.observe(observeReviewList.current);
+    observeReviewList.current && io.observe(observeReviewList.current);
   }, []);
 
   return (

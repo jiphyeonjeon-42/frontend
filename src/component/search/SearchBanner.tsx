@@ -3,7 +3,7 @@ import "../../asset/css/Banner.css";
 import "../../asset/css/SearchBanner.css";
 
 type Props = {
-  setQuery(...args: unknown[]): unknown;
+  setQuery: (query: string) => void;
 };
 
 const SearchBanner = ({ setQuery }: Props) => {

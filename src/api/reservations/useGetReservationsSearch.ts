@@ -13,7 +13,11 @@ const useGetReservationsSearch = () => {
     isExpired: false,
   });
 
-  const setFilter = newFilter => {
+  const setFilter = (newFilter: {
+    isPending: boolean;
+    isWaiting: boolean;
+    isExpired: boolean;
+  }) => {
     setSearchFilter(newFilter);
     setPage(1);
   };
@@ -46,7 +50,7 @@ const useGetReservationsSearch = () => {
     { key: "userId", type: "number", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: any) => {
     const info = compareExpect(
       "reservations/search",
       response.data.items,

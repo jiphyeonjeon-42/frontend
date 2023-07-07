@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useApi from "../../hook/useApi";
 import { setErrorDialog } from "../../constant/error";
-import { AxiosError } from "axios";
 import { Tag } from "../../type";
 
 type Props = {
@@ -27,7 +26,7 @@ export const usePatchTagsBookInfoIdMerge = ({
     superTagId: params?.superTag?.id || null,
   });
 
-  const displayError = (error: AxiosError) => {
+  const displayError = (error: any) => {
     setErrorDialog(error, setOpenTitleAndMessage);
   };
 

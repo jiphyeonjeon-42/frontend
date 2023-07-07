@@ -1,12 +1,13 @@
+import { Book } from "../../type";
 import Image from "../utils/Image";
 import Arrow from "../../asset/img/arrow_right_black.svg";
 import "../../asset/css/RentModalBookList.css";
 
 type Props = {
-  setSelectedBooks(...args: unknown[]): unknown;
-  closeModal(...args: unknown[]): unknown;
-  selectedBooks: object[];
-  book: object;
+  setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
+  closeModal: () => void;
+  selectedBooks: Book[];
+  book: Book;
 };
 
 const RentModalBookList = ({
@@ -20,7 +21,7 @@ const RentModalBookList = ({
     closeModal();
   };
 
-  const isAlreadySelected = (userBook, alreadySelect) => {
+  const isAlreadySelected = (userBook: Book, alreadySelect: Book[]) => {
     for (let i = 0; i < alreadySelect.length; i += 1) {
       if (userBook.bookId === alreadySelect[i].bookId) {
         return true;
@@ -40,7 +41,7 @@ const RentModalBookList = ({
       className={`rent__modal-book-list ${isDisabled()}`}
       type="button"
       onClick={seletOneOfBook}
-      disabled={isDisabled() !== "available" ? "disabled" : ""}
+      disabled={isDisabled() !== "available"}
     >
       <div className="rent__modal-book-list__name">
         <span className="rent__modal-book-list__title color-54">

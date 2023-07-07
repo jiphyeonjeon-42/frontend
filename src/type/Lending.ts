@@ -8,4 +8,5 @@ export type Lending = {
   login?: string;
   penaltyDays: number;
   image?: string;
+  userId: number;
 };

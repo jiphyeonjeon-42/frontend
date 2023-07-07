@@ -1,10 +1,10 @@
+import { Book, User } from "../../type";
 import "../../asset/css/RentConfirm.css";
 
 type Props = {
-  // eslint-disable-next-line react/require-default-props
-  selectedUser?: object;
-  selectedBooks: object[];
-  openModal(...args: unknown[]): unknown;
+  selectedUser: User | null;
+  selectedBooks: Book[];
+  openModal: () => void;
 };
 
 const RentConfirm = ({ selectedUser, selectedBooks, openModal }: Props) => {
@@ -30,12 +30,10 @@ const RentConfirm = ({ selectedUser, selectedBooks, openModal }: Props) => {
         }-button color-ff`}
         type="button"
         disabled={
-          selectedUser &&
-          !selectedUser.isPenalty &&
-          selectedBooks.length > 0 &&
+          selectedUser === null ||
+          selectedUser.isPenalty ||
+          selectedBooks.length == 0 ||
           2 - selectedUser.lendings.length >= selectedBooks.length
-            ? ""
-            : "disabled"
         }
         onClick={openModal}
       >

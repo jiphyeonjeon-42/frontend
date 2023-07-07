@@ -1,9 +1,12 @@
 import Image from "../utils/Image";
 import Arr from "../../asset/img/arrow_right_black.svg";
 import "../../asset/css/ReturnbookTable.css";
+import { Lending } from "../../type";
 
 type Props = {
-  setLendingId(...args: unknown[]): unknown;
+  factor: Lending;
+  openModal: () => void;
+  setLendingId: (id: number) => void;
 };
 
 const ReturnbookTable = ({ factor, openModal, setLendingId }: Props) => {
@@ -42,10 +45,10 @@ const ReturnbookTable = ({ factor, openModal, setLendingId }: Props) => {
           </span>
           <span
             className={`re-penaltyDays font-16-bold ${
-              today - dueDate > 0 ? "color-red" : "color-54"
+              today > dueDate ? "color-red" : "color-54"
             }`}
           >
-            {`${today - dueDate > 0 ? "연체 중" : ""}`}
+            {`${today > dueDate ? "연체 중" : ""}`}
           </span>
         </div>
       </button>

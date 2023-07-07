@@ -12,5 +12,8 @@ export type Book = {
   publishedAt?: string;
   callSign: string;
   image?: string;
-  isLendable: number;
+  isLendable: boolean;
+  isReserved?: boolean;
+  dueDate?: string;
+  donator?: string;
 };
