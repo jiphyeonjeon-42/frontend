@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
@@ -8,7 +8,7 @@ type Props = {
   setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
-const useGetBooksInfoPopular = ({ setOpenTitleAndMessage }: Props) => {
+export const useGetBooksInfoPopular = ({ setOpenTitleAndMessage }: Props) => {
   const [docs, setDocs] = useState<Book[]>([]);
 
   const { request } = useApi("get", "books/info", {
@@ -45,5 +45,3 @@ const useGetBooksInfoPopular = ({ setOpenTitleAndMessage }: Props) => {
 
   return { docs };
 };
-
-export default useGetBooksInfoPopular;

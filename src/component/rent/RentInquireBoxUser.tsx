@@ -1,4 +1,4 @@
-import useModal from "../../hook/useModal";
+import { useModal } from "../../hook/useModal";
 import { dateFormat } from "../../util/date";
 import { User } from "../../type";
 import RentModalUser from "./RentModalUser";

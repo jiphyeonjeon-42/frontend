@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { setErrorDialog } from "../../constant/error";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
-const usePostLendings = ({
+export const usePostLendings = ({
   title,
   userId,
   bookId,
@@ -40,5 +40,3 @@ const usePostLendings = ({
 
   return { requestLending: setCondition };
 };
-
-export default usePostLendings;

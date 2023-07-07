@@ -6,7 +6,7 @@ import Date from "../utils/Date";
 import { Tag } from "../../type/Tag";
 import Tooltip from "../utils/Tooltip";
 import EllipsisedSpan from "../utils/EllipsisedSpan";
-import useDialog from "../../hook/useDialog";
+import { useDialog } from "../../hook/useDialog";
 import { usePatchTagsSub } from "../../api/tags/usePatchTagsSub";
 
 type SubTagManagementListProps = {

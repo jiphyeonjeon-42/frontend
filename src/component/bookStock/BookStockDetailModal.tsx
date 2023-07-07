@@ -1,10 +1,10 @@
-import useGetBooksIdForStock from "../../api/books/useGetBooksIdForStock";
+import { useGetBooksIdForStock } from "../../api/books/useGetBooksIdForStock";
 import BookDetailView from "../utils/BookDetailView";
 import SpanWithLabel from "../utils/SpanWithLabel";
 import Button from "../utils/Button";
-import useDialog from "../../hook/useDialog";
+import { useDialog } from "../../hook/useDialog";
 import { bookStatus } from "../../constant/status";
-import usePatchStockUpdate from "../../api/stock/usePatchStockUpdate";
+import { usePatchStockUpdate } from "../../api/stock/usePatchStockUpdate";
 import { Book } from "../../type";
 import "../../asset/css/BookStockDetailModal.css";
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { setErrorDialog } from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
 
@@ -10,7 +10,7 @@ type Props = {
   setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
-const useGetBooksIdForStock = ({
+export const useGetBooksIdForStock = ({
   id,
   closeModal,
   setOpenTitleAndMessage,
@@ -49,5 +49,3 @@ const useGetBooksIdForStock = ({
 
   return { bookDetail };
 };
-
-export default useGetBooksIdForStock;

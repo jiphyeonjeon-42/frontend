@@ -4,7 +4,7 @@ import { splitDate } from "../../../util/date";
 import Image from "../../utils/Image";
 import UserEdit from "../../../asset/img/edit.svg";
 import DeleteButton from "../../../asset/img/x_button.svg";
-import useDialog from "../../../hook/useDialog";
+import { useDialog } from "../../../hook/useDialog";
 import "../../../asset/css/Review.css";
 import { User } from "@sentry/react";
 import { Review } from "../../../type";

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { Review } from "../../type";
 
-const useGetMyReviewInfo = () => {
+export const useGetMyReviewInfo = () => {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(10);
   const [reviewList, setReviewList] = useState<Review[]>([]);
@@ -32,5 +32,3 @@ const useGetMyReviewInfo = () => {
     Dialog,
   };
 };
-
-export default useGetMyReviewInfo;

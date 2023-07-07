@@ -3,7 +3,7 @@ import axiosPromise from "../util/axios";
 
 type Method = "get" | "post" | "put" | "patch" | "delete";
 
-const useApiMultiple = (
+export const useApiMultiple = (
   apiArray: { method: Method; url: string; data?: unknown }[],
 ) => {
   const axiosArray = () =>
@@ -33,4 +33,3 @@ const useApiMultiple = (
   return { requestTransaction, requestIndividual };
 };
 
-export default useApiMultiple;

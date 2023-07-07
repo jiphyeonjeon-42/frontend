@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 
 type RegisterDataItem = {
@@ -9,7 +9,7 @@ type RegisterDataItem = {
   ref: React.RefObject<HTMLInputElement>;
 };
 
-const usePostUsersCreate = () => {
+export const usePostUsersCreate = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
@@ -70,5 +70,3 @@ const usePostUsersCreate = () => {
 
   return { registerData, requestRegister, Dialog, setRegisterData };
 };
-
-export default usePostUsersCreate;

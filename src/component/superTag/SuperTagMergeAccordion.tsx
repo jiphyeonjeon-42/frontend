@@ -3,7 +3,7 @@ import { useGetTagsSuperTagIdSub } from "../../api/tags/useGetTagsSuperTagIdSub"
 import { useDeleteTagsSuper } from "../../api/tags/useDeleteTagsSuper";
 import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
 import { Tag } from "../../type";
-import useDialog from "../../hook/useDialog";
+import { useDialog } from "../../hook/useDialog";
 import Accordion from "../utils/Accordion";
 import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 import Droppable from "../utils/Droppable";

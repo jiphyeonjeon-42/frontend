@@ -1,4 +1,4 @@
-import useGetBooksInfoNew from "../../api/books/useGetBooksInfoNew";
+import { useGetBooksInfoNew } from "../../api/books/useGetBooksInfoNew";
 import ELibraryBook from "./ELibraryBook";
 import ELibraryTitleWithMore from "./ELibraryTitleWithMore";
 const ELibraryNew = () => {

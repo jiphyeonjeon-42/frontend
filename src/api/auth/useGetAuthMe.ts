@@ -1,10 +1,10 @@
 import { useSetRecoilState } from "recoil";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { addHourDateObject } from "../../util/date";
 import userState from "../../atom/userState";
 import getErrorMessage from "../../constant/error";
 
-const useGetAuthMe = () => {
+export const useGetAuthMe = () => {
   const { request } = useApi("get", "auth/me");
   const setUser = useSetRecoilState(userState);
 
@@ -32,5 +32,3 @@ const useGetAuthMe = () => {
   };
   return () => request(onSuccess, onError);
 };
-
-export default useGetAuthMe;

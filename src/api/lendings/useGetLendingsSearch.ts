@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { setErrorDialog } from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { Lending } from "../../type";
@@ -9,7 +9,7 @@ type Props = {
   setOpenTitleAndMessage: (title: string, message: string) => void;
 };
 
-const useGetLendingsSearch = ({ setOpenTitleAndMessage }: Props) => {
+export const useGetLendingsSearch = ({ setOpenTitleAndMessage }: Props) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [isSortNew, setIsSearchSort] = useState(false);
@@ -69,5 +69,3 @@ const useGetLendingsSearch = ({ setOpenTitleAndMessage }: Props) => {
     Dialog,
   };
 };
-
-export default useGetLendingsSearch;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "../component/utils/Modal";
 import ModalHeader from "../component/utils/ModalHeader";
 
-const useModal = () => {
+export const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const setOpen = () => setIsOpen(true);
@@ -35,5 +35,3 @@ const useModal = () => {
   };
   return { isOpen, setOpen, setClose, config, setConfig, Modal: modalElement };
 };
-
-export default useModal;

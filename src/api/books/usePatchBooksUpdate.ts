@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
 import { Book } from "../../type";
 
@@ -8,7 +8,7 @@ type Props = {
   closeModal: () => void;
 };
 
-const usePatchBooksUpdate = ({ bookTitle, closeModal }: Props) => {
+export const usePatchBooksUpdate = ({ bookTitle, closeModal }: Props) => {
   const [change, setChange] = useState<Partial<Book>>();
 
   const { request, setError, Dialog } = useApi("patch", "books/update", change);
@@ -32,5 +32,3 @@ const usePatchBooksUpdate = ({ bookTitle, closeModal }: Props) => {
 
   return { setChange, Dialog };
 };
-
-export default usePatchBooksUpdate;

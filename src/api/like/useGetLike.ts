@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import getErrorMessage from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
 type Props = {
@@ -33,7 +33,7 @@ export const useGetLike = ({
     );
     setLikeData(refinelikeData);
     setCurrentLike(refinelikeData[0].isLiked);
-    setCurrentLikeNum &&setCurrentLikeNum(refinelikeData[0].likeNum);
+    setCurrentLikeNum && setCurrentLikeNum(refinelikeData[0].likeNum);
   };
 
   const displayError = (error: any) => {
@@ -48,5 +48,3 @@ export const useGetLike = ({
 
   return { likeData };
 };
-
-export default useGetLike;

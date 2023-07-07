@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import useGetBooksInfoId from "../../api/books/useGetBooksInfoId";
+import { useGetBooksInfoId } from "../../api/books/useGetBooksInfoId";
 import BookReservation from "./BookReservation";
 import BookStatus from "./BookStatus";
-import useDialog from "../../hook/useDialog";
+import { useDialog } from "../../hook/useDialog";
 import Review from "./review/Review";
 import Banner from "../utils/Banner";
 import Image from "../utils/Image";

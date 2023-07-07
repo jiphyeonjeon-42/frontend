@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import useGetBooksInfoSearch from "../../api/books/useGetBooksInfoSearch";
+import { useGetBooksInfoSearch } from "../../api/books/useGetBooksInfoSearch";
 import Modal from "../utils/Modal";
 import SearchModal from "../utils/SearchModal";
 import "../../asset/css/SuperTagSearchBookModal.css";

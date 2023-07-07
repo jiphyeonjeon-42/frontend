@@ -3,8 +3,8 @@ import TextWithLabel from "../utils/TextWithLabel";
 import TextareaWithLabel from "../utils/TextareaWithLabel";
 import Button from "../utils/Button";
 import "../../asset/css/ReturnModalContents.css";
-import usePatchLendingsReturn from "../../api/lendings/usePatchLendingsReturn";
-import useGetLendingsId from "../../api/lendings/useGetLendingsId";
+import { usePatchLendingsReturn } from "../../api/lendings/usePatchLendingsReturn";
+import { useGetLendingsId } from "../../api/lendings/useGetLendingsId";
 
 type Props = {
   lendingId: number;

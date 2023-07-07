@@ -1,5 +1,5 @@
-import useDialog from "../../../hook/useDialog";
-import usePatchReservationsCancel from "../../../api/reservations/usePatchReservationsCancel";
+import { useDialog } from "../../../hook/useDialog";
+import { usePatchReservationsCancel } from "../../../api/reservations/usePatchReservationsCancel";
 import Image from "../../utils/Image";
 import { isNumber } from "../../../util/typeCheck";
 import { Lending, Reservation } from "../../../type";

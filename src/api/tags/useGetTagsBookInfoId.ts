@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../../type";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 export const useGetTagsBookInfoId = (id?: number) => {
   const [tagList, setTagList] = useState<Tag[]>([]);

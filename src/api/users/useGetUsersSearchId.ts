@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { User } from "../../type";
 import { setErrorDialog } from "../../constant/error";
@@ -9,7 +9,10 @@ type Props = {
   setDialogTitleAndMessage: (title: string, message: string) => void;
 };
 
-const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }: Props) => {
+export const useGetUsersSearchId = ({
+  userId,
+  setDialogTitleAndMessage,
+}: Props) => {
   const [userInfo, setUserInfo] = useState<User>();
 
   const { request } = useApi("get", "users/search", {
@@ -62,5 +65,3 @@ const useGetUsersSearchId = ({ userId, setDialogTitleAndMessage }: Props) => {
 
   return { userInfo };
 };
-
-export default useGetUsersSearchId;

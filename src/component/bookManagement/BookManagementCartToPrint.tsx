@@ -1,6 +1,6 @@
 import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 import { Book } from "../../type";
-import useModal from "../../hook/useModal";
+import { useModal } from "../../hook/useModal";
 import BookLabelModalToPrint from "./BookManagementModalToPrint";
 import Image from "../utils/Image";
 import Plus from "../../asset/img/plus_icon_off.svg";

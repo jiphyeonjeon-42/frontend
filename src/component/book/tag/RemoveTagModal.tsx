@@ -1,6 +1,6 @@
 import { TagType } from "../../../type/TagType";
 import Tag from "./Tag";
-import useApi from "../../../hook/useApi";
+import { useApi } from "../../../hook/useApi";
 
 type RemoveTagModalProps = {
   id: number;

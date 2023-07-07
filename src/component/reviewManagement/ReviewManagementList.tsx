@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
-import useDialog from "../../hook/useDialog";
-import usePatchReviewsId from "../../api/reviews/usePatchReviewsId";
+import { useDialog } from "../../hook/useDialog";
+import { usePatchReviewsId } from "../../api/reviews/usePatchReviewsId";
 import { Review } from "../../type";
 import Edit from "../../asset/img/edit.svg";
 import Image from "../utils/Image";

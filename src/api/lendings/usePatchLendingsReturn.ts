@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 type Props = {
   lendingId: number;
@@ -8,7 +8,7 @@ type Props = {
   setError: (title: string, message: string, afterClose?: () => void) => void;
 };
 
-const usePatchLendingsReturn = ({
+export const usePatchLendingsReturn = ({
   lendingId,
   title,
   closeModal,
@@ -39,5 +39,3 @@ const usePatchLendingsReturn = ({
   };
   return { condition, setCondition, requestReturn };
 };
-
-export default usePatchLendingsReturn;

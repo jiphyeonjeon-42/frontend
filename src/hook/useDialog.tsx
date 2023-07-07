@@ -21,7 +21,7 @@ type DialogConfig = {
   secondButton: DialogButton;
 };
 
-const useDialog = () => {
+export const useDialog = () => {
   // 모달의 기본 로직 + 미리 조립해둔 대화창 형태의 모달 제공
   const [isOpen, setIsOpen] = useState(false);
   const setOpen = () => setIsOpen(true);
@@ -137,4 +137,3 @@ const useDialog = () => {
   };
 };
 
-export default useDialog;

@@ -6,11 +6,11 @@ import Tabs from "../utils/Tabs";
 import Banner from "../utils/Banner";
 import Pagination from "../utils/Pagination";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
-import useModal from "../../hook/useModal";
+import { useModal } from "../../hook/useModal";
 import { rentTabList } from "../../constant/tablist";
 import Reserve from "../../asset/img/list-check-solid.svg";
 import "../../asset/css/ReservedLoan.css";
-import useGetReservationsSearch from "../../api/reservations/useGetReservationsSearch";
+import { useGetReservationsSearch } from "../../api/reservations/useGetReservationsSearch";
 import { Reservation } from "../../type";
 
 const ReservedLoan = () => {

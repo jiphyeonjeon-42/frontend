@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 import { Book } from "../../type";
 
@@ -7,7 +7,8 @@ type Props = {
   setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
   closeModal: () => void;
 };
-const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
+
+export const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
   const [bookId, setBookId] = useState<string>();
   const { request, Dialog } = useApi("get", `books/${bookId}`);
 
@@ -32,5 +33,3 @@ const useGetBooksId = ({ setSelectedBooks, closeModal }: Props) => {
 
   return { setBookId, Dialog };
 };
-
-export default useGetBooksId;

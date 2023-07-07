@@ -1,5 +1,5 @@
 import { setErrorDialog } from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
 type Props = {
   bookInfoId: number;
@@ -11,7 +11,7 @@ type Props = {
   postReservation: () => void;
 };
 
-const useGetReservationsCount = ({
+export const useGetReservationsCount = ({
   bookInfoId,
   dialogDefaultConfig,
   setDialogConfig,
@@ -51,5 +51,3 @@ const useGetReservationsCount = ({
   };
   return { getCountReservation };
 };
-
-export default useGetReservationsCount;

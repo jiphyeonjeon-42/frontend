@@ -3,7 +3,7 @@ import { usePostTagsSuper } from "../../api/tags/usePostTagsSuper";
 import { Tag } from "../../type";
 import Image from "../utils/Image";
 import Arrow from "../../asset/img/arrow_right_black.svg";
-import useDialog from "../../hook/useDialog";
+import { useDialog } from "../../hook/useDialog";
 
 type Props = {
   bookInfoId: number;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import getErrorMessage from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
 
 type Props = {
@@ -8,7 +8,10 @@ type Props = {
   initBookInfoId?: number;
 };
 
-const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }: Props) => {
+export const usePostLike = ({
+  setOpenTitleAndMessage,
+  initBookInfoId,
+}: Props) => {
   const [bookInfoId, setBookInfoId] = useState(initBookInfoId);
   const { request } = useApi("post", `books/info/${bookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
@@ -40,5 +43,3 @@ const usePostLike = ({ setOpenTitleAndMessage, initBookInfoId }: Props) => {
 
   return { setBookInfoId, likeData };
 };
-
-export default usePostLike;

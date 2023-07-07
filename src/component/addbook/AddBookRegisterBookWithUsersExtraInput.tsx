@@ -6,7 +6,7 @@ import {
   FormEventHandler,
 } from "react";
 import { category, koreanDemicalClassification } from "../../constant/category";
-import usePostBooksCreate from "../../api/books/usePostBooksCreate";
+import { usePostBooksCreate } from "../../api/books/usePostBooksCreate";
 import { BookInfo } from "../../type";
 
 type Props = {

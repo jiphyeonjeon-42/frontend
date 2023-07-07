@@ -1,4 +1,4 @@
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { setErrorDialog } from "../../constant/error";
 
 type Props = {
@@ -46,5 +46,3 @@ export const usePostReservations = ({
   };
   return { postReservation };
 };
-
-export default usePostReservations;

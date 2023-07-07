@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { User } from "../../type";
 
-const useGetUsersSearch = ({ limit }: { limit: number }) => {
+export const useGetUsersSearch = ({ limit }: { limit: number }) => {
   const {
     searchResult,
     setSearchResult,
@@ -75,5 +75,3 @@ const useGetUsersSearch = ({ limit }: { limit: number }) => {
     Dialog,
   };
 };
-
-export default useGetUsersSearch;

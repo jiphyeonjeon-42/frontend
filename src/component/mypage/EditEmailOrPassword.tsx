@@ -1,7 +1,7 @@
 import { useState, useMemo, ChangeEventHandler, FormEventHandler } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useDialog from "../../hook/useDialog";
-import usePatchUsersMyupdate from "../../api/users/usePatchUsersMyupdate";
+import { useDialog } from "../../hook/useDialog";
+import { usePatchUsersMyupdate } from "../../api/users/usePatchUsersMyupdate";
 import Image from "../utils/Image";
 import { registerRule } from "../../constant/validate";
 import arrowLeft from "../../asset/img/arrow_left_black.svg";

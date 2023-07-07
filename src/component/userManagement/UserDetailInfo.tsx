@@ -1,5 +1,5 @@
 import { useState, useRef, FormEventHandler } from "react";
-import usePatchUsersUpdate from "../../api/users/usePatchUsersUpdate";
+import { usePatchUsersUpdate } from "../../api/users/usePatchUsersUpdate";
 import InputWithLabel from "../utils/InputWithLabel";
 import SelectWithLabel from "../utils/SelectWithLabel";
 import Button from "../utils/Button";
