@@ -1,6 +1,7 @@
 // .eslintrc.js
 
 module.exports = {
+  root: true,
   env: {
     browser: true,
     es6: true,
@@ -13,6 +14,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:prettier/recommended",
+    "plugin:import/typescript",
   ],
   rules: {
     "import/extensions": "off",
@@ -38,10 +40,12 @@ module.exports = {
     "no-console": 0,
   },
   settings: {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
     "import/resolver": {
-      node: {
-        paths: ["src"],
-      },
+      typescript: true,
+      node: true,
     },
   },
   parser: "@typescript-eslint/parser",
