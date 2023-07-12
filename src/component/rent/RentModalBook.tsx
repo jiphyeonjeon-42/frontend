@@ -37,6 +37,7 @@ const RentModalBook = ({
         "다시 한번 확인해주세요",
       );
     else setBookId(bookId);
+    closeModal();
   };
 
   const { bookList, lastPage, page, setPage, setQuery } = useGetBooksSearch({
