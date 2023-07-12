@@ -10,13 +10,23 @@ module.exports = {
     "airbnb",
     "prettier",
     "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
     "plugin:prettier/recommended",
   ],
   rules: {
+    "import/extensions": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        namedComponents: "arrow-function",
+        unnamedComponents: "arrow-function",
+      },
+    ],
     "react/jsx-filename-extension": [
       "error",
       {
-        extensions: [".js", ".jsx"],
+        extensions: [".jsx", ".tsx"],
       },
     ],
     "prettier/prettier": [
