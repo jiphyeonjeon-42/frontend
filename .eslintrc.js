@@ -34,7 +34,7 @@ module.exports = {
       },
     },
   },
-  parser: "babel-eslint",
+  parser: "@typescript-eslint/parser",
 };
 
 //   "extends": ["plugin:prettier/recommended"]는 세 가지를 한다고 설명한다.
