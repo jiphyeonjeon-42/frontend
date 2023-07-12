@@ -29,7 +29,9 @@ const RentModalBook = ({
   const toDoAfterRead = (text: string) => {
     const bookId = text?.split(" ")[0];
     setUsingBarcodeReader(false);
-    const isAlreadySelected = selectedBooks.some(book => book.id === +bookId);
+    const isAlreadySelected = selectedBooks.some(
+      book => book.bookId === +bookId,
+    );
     if (isAlreadySelected)
       addDialogWithTitleAndMessage(
         "alreadySelected",
