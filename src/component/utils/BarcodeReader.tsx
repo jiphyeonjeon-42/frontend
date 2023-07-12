@@ -10,7 +10,7 @@ type Props = {
 const BarcodeReader = ({ toDoAfterRead, wrapperClassName = "" }: Props) => {
   const [deviceList, setDeviceList] = useState<MediaDeviceInfo[]>([]);
   const [selectedDevice, setSelectedDevice] = useState(deviceList[0]?.deviceId);
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const codeReader = new BrowserMultiFormatReader();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const BarcodeReader = ({ toDoAfterRead, wrapperClassName = "" }: Props) => {
       selectedDevice,
       videoRef.current,
       (result: Result) => {
-        toDoAfterRead(result.getText());
+        result && toDoAfterRead(result.getText());
       },
     );
   }, [selectedDevice]);
