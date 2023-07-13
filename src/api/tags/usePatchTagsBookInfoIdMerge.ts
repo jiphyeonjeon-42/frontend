@@ -1,22 +1,12 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
-import { setErrorDialog } from "../../constant/error";
-import { AxiosError } from "axios";
+import { useApi } from "../../hook/useApi";
 import { Tag } from "../../type";
 
 type Props = {
   bookInfoId: number;
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose?: () => void,
-  ) => void;
 };
 
-export const usePatchTagsBookInfoIdMerge = ({
-  bookInfoId,
-  setOpenTitleAndMessage,
-}: Props) => {
+export const usePatchTagsBookInfoIdMerge = ({ bookInfoId }: Props) => {
   const [params, setParams] = useState<{
     subTag: Tag;
     superTag: Tag | null;
@@ -27,12 +17,8 @@ export const usePatchTagsBookInfoIdMerge = ({
     superTagId: params?.superTag?.id || null,
   });
 
-  const displayError = (error: AxiosError) => {
-    setErrorDialog(error, setOpenTitleAndMessage);
-  };
-
   useEffect(() => {
-    if (params) request(() => {}, displayError);
+    if (params) request(() => {});
   }, [params]);
 
   return { setParams };

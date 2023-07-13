@@ -1,41 +1,36 @@
-import useGetBooksIdForStock from "../../api/books/useGetBooksIdForStock";
+import { useGetBooksIdForStock } from "../../api/books/useGetBooksIdForStock";
 import BookDetailView from "../utils/BookDetailView";
 import SpanWithLabel from "../utils/SpanWithLabel";
 import Button from "../utils/Button";
-import useDialog from "../../hook/useDialog";
 import { bookStatus } from "../../constant/status";
-import usePatchStockUpdate from "../../api/stock/usePatchStockUpdate";
+import { usePatchStockUpdate } from "../../api/stock/usePatchStockUpdate";
+import { Book } from "../../type";
 import "../../asset/css/BookStockDetailModal.css";
 
 type Props = {
   bookId: number;
-  addChecked(...args: unknown[]): unknown;
-  closeModal(...args: unknown[]): unknown;
+  addChecked: (checked: Book) => void;
+  closeModal: () => void;
 };
 
 const BookStockDetailModal = ({ bookId, closeModal, addChecked }: Props) => {
-  const { setOpenTitleAndMessage, Dialog } = useDialog();
   const { bookDetail: book } = useGetBooksIdForStock({
     id: bookId,
-    setOpenTitleAndMessage,
     closeModal,
   });
 
   const { setBookId } = usePatchStockUpdate({
-    setOpenTitleAndMessage,
     addList: () => {
-      addChecked(book);
+      if (book) addChecked(book);
       closeModal();
     },
   });
 
-  const callUpdate = () => {
-    setBookId(bookId);
-  };
+  const callUpdate = () => setBookId(bookId);
 
   return (
     <>
-      {book.bookId ? (
+      {book && book.bookId ? (
         <BookDetailView
           book={book}
           bookInfoDetailUI={
@@ -52,7 +47,7 @@ const BookStockDetailModal = ({ bookId, closeModal, addChecked }: Props) => {
               <SpanWithLabel labelText="청구기호" value={book.callSign} />
               <SpanWithLabel
                 labelText="도서 상태"
-                value={bookStatus.find(i => i.code === book.status).string}
+                value={bookStatus.find(i => i.code === book.status)?.string}
               />
             </>
           }
@@ -64,8 +59,6 @@ const BookStockDetailModal = ({ bookId, closeModal, addChecked }: Props) => {
           }
         />
       ) : null}
-
-      <Dialog />
     </>
   );
 };

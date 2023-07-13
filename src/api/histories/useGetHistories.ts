@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
-import { setErrorDialog } from "../../constant/error";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { History } from "../../type";
 
-const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
+type Props = {
+  initWho?: string;
+};
+
+export const useGetHistories = ({ initWho }: Props) => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [who, setWho] = useState(initWho ?? "all");
   const [type, setType] = useState("");
 
-  const { request, Dialog } = useApi("get", "histories", {
+  const { request } = useApi("get", "histories", {
     query: searchParams.query,
     page: searchParams.page - 1,
     limit: 5,
@@ -36,7 +39,7 @@ const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
     { key: "image", type: "string", isNullable: true },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: any) => {
     const info = compareExpect("histories", response.data.items, expectedItem);
     const { totalPages } = response.data.meta;
     setSearchResult({
@@ -45,12 +48,8 @@ const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
     });
   };
 
-  const displayError = error => {
-    setErrorDialog(error, setOpenTitleAndMessage);
-  };
-
   useEffect(() => {
-    request(refineResponse, displayError);
+    request(refineResponse);
   }, [searchParams, who, type]);
 
   return {
@@ -62,8 +61,5 @@ const useGetHistories = ({ setOpenTitleAndMessage, initWho }) => {
     setQuery,
     setWho,
     setType,
-    Dialog,
   };
 };
-
-export default useGetHistories;

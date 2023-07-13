@@ -3,7 +3,7 @@ import Reserve from "../../asset/img/list-check-solid.svg";
 import HandleReview from "../book/review/HandleReview";
 import axiosPromise from "../../util/axios";
 import Pagination from "../utils/Pagination";
-import useGetMyReviewInfo from "../../api/reviews/useGetMyReviewInfo";
+import { useGetMyReviewInfo } from "../../api/reviews/useGetMyReviewInfo";
 import "../../asset/css/MyReview.css";
 
 type Props = {
@@ -11,11 +11,11 @@ type Props = {
 };
 
 const MyReview = ({ type }: Props) => {
-  const checkLogin = JSON.parse(window.localStorage.getItem("user"));
+  const checkLogin = window.localStorage.getItem("user");
   const { page, setPage, lastPage, reviewList, setReviewList } =
     useGetMyReviewInfo();
 
-  const deleteReview = reviewId => {
+  const deleteReview = (reviewId: number) => {
     const temp = reviewList.filter(review => review.reviewsId !== reviewId);
     setReviewList(temp);
     axiosPromise("delete", `/reviews/${reviewId}`);

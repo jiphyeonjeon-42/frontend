@@ -1,24 +1,14 @@
-import useModal from "../../hook/useModal";
+import { useModal } from "../../hook/useModal";
+import { dateFormat } from "../../util/date";
+import { User } from "../../type";
 import RentModalUser from "./RentModalUser";
 import Image from "../utils/Image";
 import DeleteButton from "../../asset/img/x_button.svg";
 import "../../asset/css/RentInquireBoxUser.css";
-import { dateFormat } from "../../util/date";
 
 type Props = {
-  selectedUser: {
-    id?: number;
-    email?: string;
-    nickname?: string;
-    intraId?: number;
-    slack?: string;
-    penaltyEndDate?: string;
-    overDueDay?: string;
-    role?: number;
-    lendings?: object[];
-    reservations?: object[];
-  };
-  setSelectedUser(...args: unknown[]): unknown;
+  selectedUser: User | null;
+  setSelectedUser: (user: User | null) => void;
 };
 
 const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
@@ -31,6 +21,7 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
   };
 
   const displayPenalty = () => {
+    if (!selectedUser) return "";
     let penalty = "";
     if (
       new Date(selectedUser.penaltyEndDate).setHours(0, 0, 0, 0) >=
@@ -76,7 +67,7 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
                     {`${index + 1}. ${item.title}`}
                   </div>
                   <div className="user__book-info__description color-54">
-                    {`반납 예정일 : ${dateFormat(item.duedate)}`}
+                    {`반납 예정일 : ${dateFormat(item.dueDate)}`}
                   </div>
                 </div>
               ))}

@@ -1,30 +1,25 @@
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
+import { BookInfo } from "../../type";
 
-const labelText = {
+const labelText: {
+  [key: string]: string;
+} = {
   author: "저 자",
   publisher: "출판사",
   pubdate: "출판일",
 };
 
 type Props = {
-  bookInfo: {
-    isbn: string;
-    title: string;
-    author: string;
-    publisher: string;
-    image: string;
-    pubdate: string;
-  };
-  setBookInfo(...args: unknown[]): unknown;
+  bookInfo: BookInfo & { [key: string]: string };
+  setBookInfo: (bookinfo: BookInfo) => void;
 };
 
-const DisplayBasicBookInfo = ({
-  bookInfo,
-  setBookInfo,
-}: Props) => {
+const DisplayBasicBookInfo = ({ bookInfo, setBookInfo }: Props) => {
   const [message, setMessage] = useState("");
 
-  const onChangeInput = e => {
+  const onChangeInput: ChangeEventHandler<
+    HTMLTextAreaElement | HTMLInputElement
+  > = e => {
     const { id, value } = e.currentTarget;
     if (id === "pubdate") {
       const isValidDate = RegExp(

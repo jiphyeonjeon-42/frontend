@@ -1,15 +1,15 @@
-import useModal from "../../hook/useModal";
+import { useModal } from "../../hook/useModal";
 import RentModalBook from "./RentModalBook";
 import Image from "../utils/Image";
+import { Book } from "../../type";
 import DeleteButton from "../../asset/img/x_button.svg";
 import "../../asset/css/RentInquireBoxBook.css";
 
 type Props = {
-  setSelectedBooks(...args: unknown[]): unknown;
-  selectedBooks: object[];
+  setSelectedBooks: React.Dispatch<React.SetStateAction<Book[]>>;
+  selectedBooks: Book[];
   shape: string;
-  // eslint-disable-next-line react/require-default-props
-  book?: Record<string, unknown>;
+  book?: Book | null;
 };
 
 const InquireBoxBook = ({

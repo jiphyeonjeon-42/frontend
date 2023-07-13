@@ -1,18 +1,11 @@
 import { Link } from "react-router-dom";
+import { BookInfo } from "../../type";
+import { splitDate } from "../../util/date";
+import Image from "../utils/Image";
 import LinkToDetail from "../../asset/img/link_to_detail.svg";
 import "../../asset/css/BookInfo.css";
-import Image from "../utils/Image";
 
-type Props = {
-  id: number;
-  isbn: string;
-  title: string;
-  author: string;
-  publisher: string;
-  image: string;
-  // eslint-disable-next-line react/require-default-props
-  publishedAt?: object;
-  category: string;
+type Props = BookInfo & {
   bread: string;
 };
 
@@ -27,13 +20,7 @@ const BookInfo = ({
   category,
   bread,
 }: Props) => {
-  const parseDate = publishedDate => {
-    if (!publishedDate) return { year: null, month: null, day: null };
-    const [year, month, day] = publishedDate.split("-");
-    return { year, month, day };
-  };
-
-  const { year, month } = parseDate(publishedAt) ?? { year: 0, month: 0 };
+  const [year, month] = splitDate(publishedAt || "");
 
   return (
     <div className="book-info-wraper">
@@ -70,9 +57,7 @@ const BookInfo = ({
           <div className="book-info__published-at font-16 color-54">
             <span>발행연월</span>
             <span className="book-info__separator-half" />
-            <span>
-              {year && month ? `${year}년 ${parseInt(month, 10)}월` : "-"}
-            </span>
+            <span>{year && month ? `${year}년 ${month}월` : "-"}</span>
           </div>
           <div className="book-info__isbn font-16 color-54">
             <span>표준부호</span>

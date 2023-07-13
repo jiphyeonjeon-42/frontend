@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 
-const useGetReviewInfo = () => {
+export const useGetReviewInfo = () => {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(null);
   const [reviewList, setReviewList] = useState([]);
   const userId = JSON.parse(window.localStorage.getItem("user")).id;
-  const { request, Dialog } = useApi("get", `reviews`, {
+  const { request } = useApi("get", `reviews`, {
     userId,
     page: page - 1,
   });
@@ -28,8 +28,5 @@ const useGetReviewInfo = () => {
     lastPage,
     reviewList,
     setReviewList,
-    Dialog,
   };
 };
-
-export default useGetReviewInfo;

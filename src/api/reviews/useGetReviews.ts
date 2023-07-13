@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { Review } from "../../type";
 
-const useGetReviews = () => {
+export const useGetReviews = () => {
   const [params, setParams] = useState({
     titleOrNickname: "",
     page: 1,
@@ -14,22 +14,22 @@ const useGetReviews = () => {
     lastPage: 5,
   });
 
-  const setPage = page => {
+  const setPage = (page: number) => {
     setParams({ ...params, page });
   };
-  const setQuery = query => {
+  const setQuery = (query: string) => {
     setParams({ ...params, titleOrNickname: query });
   };
-  const setSelectedType = type => {
-    setParams({ ...params, disabled: type });
+  const setSelectedType = (type: string | undefined) => {
+    if (type) setParams({ ...params, disabled: type });
   };
 
-  const { request, Dialog } = useApi("get", "reviews", {
+  const { request } = useApi("get", "reviews", {
     ...params,
     page: params.page - 1,
   });
 
-  const refineResponse = response => {
+  const refineResponse = (response: any) => {
     const { items } = response.data;
     const { totalPages } = response.data.meta;
 
@@ -48,8 +48,5 @@ const useGetReviews = () => {
     setSelectedType,
     reviewList: result.reviewList as Review[],
     lastPage: result.lastPage,
-    Dialog,
   };
 };
-
-export default useGetReviews;

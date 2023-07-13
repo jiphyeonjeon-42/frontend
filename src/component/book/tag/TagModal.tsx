@@ -5,23 +5,21 @@ import Tooltip from "../../utils/Tooltip";
 import TagList from "./TagList";
 import Tag from "./Tag";
 
-import useApi from "../../../hook/useApi";
-import { AxiosResponse } from "axios";
+import { useApi } from "../../../hook/useApi";
 
 const TagModal = ({ id }: TagType) => {
-  const [subTagData, setSubTagData] = useState<TagType[]>([]);
-  const { request, Dialog } = useApi("get", `/tags/${id}/sub`);
+  const [subTagData, setSubTagData] = useState([]);
+  const { request } = useApi("get", `/tags/${id}/sub`);
 
   useEffect(() => {
-    const getSubTagRequest = (res: AxiosResponse) => {
+    const getSubTagRequest = (res: any) => {
       setSubTagData(res.data);
     };
     request(getSubTagRequest);
   }, []);
 
   return (
-    <div className="button_tag_modal_in_background">
-      <Dialog />
+    <div className="button_tag-modal-background">
       {subTagData.map((item: TagType) => (
         <Tag
           key={item.id}

@@ -1,3 +1,4 @@
+import { MouseEventHandler, RefObject } from "react";
 import { useSearchParams } from "react-router-dom";
 import Image from "./Image";
 import ArrRight from "../../asset/img/arrow_right_black.svg";
@@ -7,25 +8,21 @@ import "../../asset/css/Pagination.css";
 type Props = {
   className?: string;
   page: number;
-  setPage(...args: unknown[]): unknown;
+  setPage: (page: number) => void;
   lastPage: number;
   isReplaceUrl?: boolean;
-  scrollRef?: (...args: unknown[]) =>
-    | unknown
-    | {
-        current?: Element;
-      };
+  scrollRef?: RefObject<HTMLDivElement>;
   count?: number;
 };
 
 const Pagination = ({
-  className,
+  className = "",
   page,
   setPage,
   lastPage,
-  isReplaceUrl,
+  isReplaceUrl = false,
   scrollRef,
-  count,
+  count = 5,
 }: Props) => {
   const startNum = Math.floor((page - 1) / count) * count + 1;
   const pageRange = [];
@@ -36,20 +33,20 @@ const Pagination = ({
   const isNextAvailable = page < lastPage;
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const changePage = newPage => {
+  const changePage = (newPage: number) => {
     setPage(newPage);
     if (isReplaceUrl) {
-      searchParams.set("page", newPage);
+      searchParams.set("page", `${newPage}`);
       setSearchParams(searchParams);
-      scrollRef?.current.scrollIntoView(); // 페이지 전환시 돔이 참조하고 있는 곳으로 현재 스크롤 이동
+      if (scrollRef?.current) scrollRef.current.scrollIntoView(); // 페이지 전환시 돔이 참조하고 있는 곳으로 현재 스크롤 이동
     }
   };
-  const onClickPage = e => {
+  const onClickPage: MouseEventHandler<HTMLButtonElement> = e => {
     const { value } = e.currentTarget;
     changePage(parseInt(value, 10));
   };
 
-  const onClickPageRange = e => {
+  const onClickPageRange: MouseEventHandler<HTMLButtonElement> = e => {
     const type = e.currentTarget.value;
     if (type === "previous" && page > 1) changePage(page - 1);
     else if (type.includes("prev")) changePage(1);
@@ -139,10 +136,3 @@ const Pagination = ({
 };
 
 export default Pagination;
-
-Pagination.defaultProps = {
-  className: "",
-  isReplaceUrl: false,
-  scrollRef: undefined,
-  count: 5,
-};

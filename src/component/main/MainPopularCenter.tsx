@@ -1,58 +1,56 @@
-import { useState } from "react";
+import { MouseEventHandler, TouchEventHandler, useState } from "react";
 import Image from "../utils/Image";
+import { Book } from "../../type";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
-  docs: object[];
+  docs: Book[];
   centerTop: number;
-  onLeft(...args: unknown[]): unknown;
-  onRight(...args: unknown[]): unknown;
+  onLeft: () => void;
+  onRight: () => void;
 };
 
-const MainPopularCenter = ({
-  docs,
-  centerTop,
-  onLeft,
-  onRight,
-}: Props) => {
+const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }: Props) => {
   const [selected, setSelected] = useState(0);
   const [posX, setPosX] = useState(0);
   const [moveX, setMoveX] = useState(0);
+  const navigate = useNavigate();
 
-  function linkToDetail(e) {
+  const linkToDetail: MouseEventHandler = e => {
     if (posX) return;
-    window.location = `/info/${e.currentTarget.id}`;
-  }
+    navigate(`/info/${e.currentTarget.id}`);
+  };
 
-  function changeSelected(e) {
+  const changeSelected: MouseEventHandler<HTMLButtonElement> = e => {
     if (posX) return;
     setSelected(parseInt(e.currentTarget.value, 10));
-  }
+  };
 
-  function touchStart(e) {
+  const touchStart: TouchEventHandler = e => {
     setPosX(e.touches[0].pageX);
-  }
-  function touchMove(e) {
+  };
+  const touchMove: TouchEventHandler = e => {
     const move = posX - e.touches[0].pageX;
     if (centerTop || move > 0) setMoveX(move);
-  }
+  };
 
-  function touchEnd() {
+  const touchEnd: TouchEventHandler = e => {
     if (moveX > 30) onRight();
     else if (moveX < -30) onLeft();
     setMoveX(0);
-  }
+  };
 
-  function mouseMove(e) {
+  const mouseMove: MouseEventHandler = e => {
     if (!posX) return;
     const move = posX - e.clientX;
     if (centerTop || move > 0) setMoveX(move);
-  }
+  };
 
-  function mouseStart(e) {
+  const mouseStart: MouseEventHandler = e => {
     setPosX(e.clientX);
-  }
+  };
 
-  function mouseEnd(e) {
+  const mouseEnd: MouseEventHandler = e => {
     if (!posX) return;
     const move = posX - e.clientX;
     if (centerTop || move < 0) setMoveX(move);
@@ -60,7 +58,7 @@ const MainPopularCenter = ({
     else if (move < -30) onLeft();
     setMoveX(0);
     setPosX(0);
-  }
+  };
 
   const totalBooks = [docs.slice(0, 3), docs.slice(3, 6), docs.slice(6, 9)];
 
@@ -89,7 +87,6 @@ const MainPopularCenter = ({
                 type="button"
                 onClick={selected === index ? linkToDetail : changeSelected}
                 key={book.id}
-                id={book.id}
               >
                 <Image
                   draggable={false}
@@ -102,7 +99,7 @@ const MainPopularCenter = ({
                 />
                 <div className="main__popular__summary">
                   <span className="main__popular__rank font-48-bold">
-                    {book.rank}
+                    {index + 1}
                   </span>
                   <p className="font-16-light color-2d"> #{book.category}</p>
                   <p className="font-32-bold color-2d">{book.title}</p>

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../../type";
-import useApi from "../../hook/useApi";
-import { AxiosResponse } from "axios";
+import { useApi } from "../../hook/useApi";
 
 export const useGetTagsBookInfoId = (id?: number) => {
   const [tagList, setTagList] = useState<Tag[]>([]);
-  const { request, Dialog } = useApi("get", `/tags/${id}`);
+  const { request } = useApi("get", `/tags/${id}`);
 
-  const refineResponse = (response: AxiosResponse) => {
+  const refineResponse = (response: any) => {
     setTagList(response.data);
   };
 
@@ -25,5 +24,5 @@ export const useGetTagsBookInfoId = (id?: number) => {
     setTagList(prev => prev.filter(tag => tag.id !== tagId));
   };
 
-  return { tagList, addTag, removeTag, Dialog };
+  return { tagList, addTag, removeTag };
 };

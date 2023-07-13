@@ -1,8 +1,8 @@
-import useGetBooksInfoNew from "../../api/books/useGetBooksInfoNew";
+import { useGetBooksInfoNew } from "../../api/books/useGetBooksInfoNew";
 import ELibraryBook from "./ELibraryBook";
 import ELibraryTitleWithMore from "./ELibraryTitleWithMore";
 const ELibraryNew = () => {
-  const { bookList } = useGetBooksInfoNew({ setOpenTitleAndMessage: () => {} });
+  const { bookList } = useGetBooksInfoNew();
   return (
     <>
       <ELibraryTitleWithMore title="신착자료" />

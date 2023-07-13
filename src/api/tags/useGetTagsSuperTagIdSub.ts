@@ -1,38 +1,24 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../../type";
-import useApi from "../../hook/useApi";
-import { AxiosError, AxiosResponse } from "axios";
-import { setErrorDialog } from "../../constant/error";
+import { useApi } from "../../hook/useApi";
 
 type Props = {
   tagId: number;
-  setOpenTitleAndMessage: (
-    title: string,
-    message: string,
-    afterClose?: () => void,
-  ) => void;
 };
 
-export const useGetTagsSuperTagIdSub = ({
-  tagId,
-  setOpenTitleAndMessage,
-}: Props) => {
+export const useGetTagsSuperTagIdSub = ({ tagId }: Props) => {
   const [subTagList, setSubTagList] = useState<Tag[]>([]);
   const [isOpened, setOpened] = useState(false);
   const toggleOpened = () => setOpened(!isOpened);
 
   const { request } = useApi("get", `/tags/${tagId}/sub`);
 
-  const saveTagList = (response: AxiosResponse) => {
+  const saveTagList = (response: any) => {
     setSubTagList(response.data);
   };
 
-  const displayError = (error: AxiosError) => {
-    setErrorDialog(error, setOpenTitleAndMessage);
-  };
-
   useEffect(() => {
-    if (isOpened) request(saveTagList, displayError);
+    if (isOpened) request(saveTagList);
   }, [isOpened]);
 
   const addSubTag = (subTag: Tag) => {

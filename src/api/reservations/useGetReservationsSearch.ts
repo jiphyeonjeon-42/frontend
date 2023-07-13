@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import useApi from "../../hook/useApi";
+import { useApi } from "../../hook/useApi";
 import { useSearch } from "../../hook/useSearch";
 import { compareExpect } from "../../util/typeCheck";
 import { Reservation } from "../../type";
 
-const useGetReservationsSearch = () => {
+export const useGetReservationsSearch = () => {
   const { searchParams, searchResult, setSearchResult, setPage, setQuery } =
     useSearch();
   const [filter, setSearchFilter] = useState({
@@ -13,7 +13,11 @@ const useGetReservationsSearch = () => {
     isExpired: false,
   });
 
-  const setFilter = newFilter => {
+  const setFilter = (newFilter: {
+    isPending: boolean;
+    isWaiting: boolean;
+    isExpired: boolean;
+  }) => {
     setSearchFilter(newFilter);
     setPage(1);
   };
@@ -25,7 +29,7 @@ const useGetReservationsSearch = () => {
     return "all";
   };
 
-  const { request, Dialog } = useApi("get", "reservations/search", {
+  const { request } = useApi("get", "reservations/search", {
     query: searchParams.query,
     page: searchParams.page - 1,
     limit: 5,
@@ -46,7 +50,7 @@ const useGetReservationsSearch = () => {
     { key: "userId", type: "number", isNullable: false },
   ];
 
-  const refineResponse = response => {
+  const refineResponse = (response: any) => {
     const info = compareExpect(
       "reservations/search",
       response.data.items,
@@ -62,6 +66,7 @@ const useGetReservationsSearch = () => {
   useEffect(() => {
     request(refineResponse);
   }, [searchParams, filter]);
+
   return {
     reservedLoanList: searchResult.list as Reservation[],
     lastPage: searchResult.lastPage,
@@ -70,8 +75,5 @@ const useGetReservationsSearch = () => {
     setQuery,
     filter,
     setFilter,
-    Dialog,
   };
 };
-
-export default useGetReservationsSearch;

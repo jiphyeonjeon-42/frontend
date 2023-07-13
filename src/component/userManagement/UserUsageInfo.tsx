@@ -1,32 +1,14 @@
+import { User } from "../../type";
 import "../../asset/css/UserUsageInfo.css";
 
 type Props = {
-  user: {
-    id?: number;
-    email?: string;
-    nickname?: string;
-    intraId?: number;
-    slack?: string;
-    penaltyEndDate?: string;
-    overDueDay?: string;
-    role?: number;
-    reservations?: {
-      ranking?: number;
-      endAt?: unknown;
-      lenderableDate?: unknown;
-      title?: string;
-    }[];
-    lendings?: {
-      duedate?: string;
-      title?: string;
-    }[];
-  };
+  user: User;
 };
 
 const UserUsageInfo = ({ user }: Props) => {
   const today = new Date();
 
-  const convertDatetoString = date => {
+  const convertDatetoString = (date:Date) => {
     let stringDate = "";
 
     stringDate += date.getFullYear();

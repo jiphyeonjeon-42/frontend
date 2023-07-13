@@ -1,8 +1,10 @@
+import { MouseEventHandler } from "react";
+import { Book } from "../../type";
 import Image from "../utils/Image";
 
 type Props = {
-  books: object[];
-  onClick(...args: unknown[]): unknown;
+  books: Book[];
+  onClick: MouseEventHandler;
   side: string;
 };
 

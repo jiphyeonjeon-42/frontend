@@ -6,41 +6,33 @@ import Date from "../utils/Date";
 import { Tag } from "../../type/Tag";
 import Tooltip from "../utils/Tooltip";
 import EllipsisedSpan from "../utils/EllipsisedSpan";
-import useDialog from "../../hook/useDialog";
 import { usePatchTagsSub } from "../../api/tags/usePatchTagsSub";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type SubTagManagementListProps = {
   tagList: Tag[];
 };
 
 const SubTagManagementList = ({ tagList }: SubTagManagementListProps) => {
-  const { Dialog, setOpenTitleAndMessage, setConfig, defaultConfig, setOpen } =
-    useDialog();
-  const { setParams } = usePatchTagsSub({ setOpenTitleAndMessage });
+  const { setParams } = usePatchTagsSub();
+  const { addConfirmDialog } = useNewDialog();
 
   const confirmChangeVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     const { id, name: content, value } = e.currentTarget;
 
     const isHidden = value === "false";
     const job = isHidden ? "공개" : "비공개";
-    setConfig({
-      ...defaultConfig,
-      title: `태그를 ${job}하시겠습니까?`,
-      message: `태그내용 : ${content}`,
-      numberOfButtons: 2,
-      firstButton: {
-        ...defaultConfig.firstButton,
-        text: `${job}하기`,
-        onClick: () => {
-          setParams({ id: +id, visibility: isHidden ? "public" : "private" });
-        },
+    addConfirmDialog(
+      "태그 수정확인",
+      `태그를 ${job}하시겠습니까?`,
+      `태그내용 : ${content}`,
+      () => {
+        setParams({ id: +id, visibility: isHidden ? "public" : "private" });
       },
-    });
-    setOpen();
+    );
   };
   return (
     <>
-      <Dialog />
       {tagList.map(tag => {
         const isMerged = tag.superContent !== "default";
 

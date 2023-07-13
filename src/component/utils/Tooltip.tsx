@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { createPortal } from "react-dom";
-import useBound from "../../hook/useBound";
+import { useBound } from "../../hook/useBound";
 
 type TooltipProps = {
   className?: string;

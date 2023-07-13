@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const useBound = <T extends HTMLElement>() => {
+export const useBound = <T extends HTMLElement>() => {
   const [boundInfo, setBoundInfo] = useState({
     top: 0,
     bottom: 0,
@@ -29,4 +29,3 @@ const useBound = <T extends HTMLElement>() => {
   return { targetRef, boundInfo };
 };
 
-export default useBound;

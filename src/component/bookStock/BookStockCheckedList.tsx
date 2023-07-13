@@ -13,10 +13,11 @@ type Props = {
 const BookStockCheckedList = ({ checkedList }: Props) => {
   const [page, setPage] = useState(1);
 
-  const start = (page - 1) * 5;
-  const VisibleList = checkedList.slice(start, start + 5);
+  const size = 5;
+  const start = (page - 1) * size;
+  const VisibleList = checkedList.slice(start, start + size);
   const lastPage =
-    checkedList.length > 5 ? Math.floor(checkedList.length / 5) + 1 : 0;
+    checkedList.length > size ? Math.floor(checkedList.length / size) + 1 : 0;
 
   return (
     <section className="book-stock__checked-list">
