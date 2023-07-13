@@ -14,9 +14,9 @@ type Props = {
 
 const PostReview = ({ onClickPost }: Props) => {
   const [content, setContent] = useState("");
-  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "");
+  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "{}");
   const checkValidUser = () => {
-    const user = JSON.parse(window.localStorage.getItem("user") || "");
+    const user = JSON.parse(window.localStorage.getItem("user") || "{}");
     if (user) {
       if (user.userName === user.email) {
         return false;

@@ -30,8 +30,8 @@ export const useGetLike = ({
       expectedItem,
     );
     setLikeData(refinelikeData);
-    setCurrentLike(refinelikeData[0].isLiked);
-    setCurrentLikeNum && setCurrentLikeNum(refinelikeData[0].likeNum);
+    setCurrentLike(refinelikeData.isLiked);
+    setCurrentLikeNum && setCurrentLikeNum(refinelikeData.likeNum);
   };
 
   useEffect(() => {

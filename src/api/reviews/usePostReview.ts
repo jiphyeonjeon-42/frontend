@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const usePostReview = ({ bookInfoId, changeTab }: Props) => {
-  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "");
+  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "{}");
   const [content, setContent] = useState("");
   const { request } = useApi("post", "/reviews", {
     bookInfoId,
@@ -30,7 +30,7 @@ export const usePostReview = ({ bookInfoId, changeTab }: Props) => {
 
   useEffect(() => {
     const req = () => {
-      if (content !== null) {
+      if (content !== "") {
         request(refineResponse, displayError);
       }
     };

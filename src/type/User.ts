@@ -15,3 +15,12 @@ export type User = {
   isPenalty?: boolean;
   updatedAt?: string;
 };
+
+export type UserState = {
+  isLogin: boolean;
+  id: number;
+  userName: string;
+  email: string;
+  isAdmin: boolean;
+  expire: string; // ISO String
+};
