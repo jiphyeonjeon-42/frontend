@@ -43,7 +43,7 @@ const Rent = () => {
         {selectedBooks.length > 0
           ? selectedBooks.map((book, index) => (
               <RentInquireBoxBook
-                key={book.id}
+                key={book.bookId}
                 book={book}
                 shape={
                   selectedBooks.length === 2 && index === 0 ? "none" : "two"
