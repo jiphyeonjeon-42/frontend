@@ -87,6 +87,7 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }: Props) => {
                 type="button"
                 onClick={selected === index ? linkToDetail : changeSelected}
                 key={book.id}
+                id={`${book.id}` ?? ""}
               >
                 <Image
                   draggable={false}
