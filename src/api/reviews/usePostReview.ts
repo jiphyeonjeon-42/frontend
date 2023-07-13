@@ -30,7 +30,7 @@ export const usePostReview = ({ bookInfoId, changeTab }: Props) => {
 
   useEffect(() => {
     const req = () => {
-      if (content !== null) {
+      if (content !== "") {
         request(refineResponse, displayError);
       }
     };
