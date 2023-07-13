@@ -6,8 +6,11 @@ import { useRecoilValue } from "recoil";
 import Tooltip from "../../utils/Tooltip";
 import userState from "../../../atom/userState";
 import "../../../asset/css/Tags.css";
-import minusicon from "../../../asset/img/tag_minus.svg";
-import RemoveTagModal from "./RemoveTagModal";
+import { useApi } from "../../../hook/useApi";
+import { AxiosResponse } from "axios";
+
+import minusicon from "../../../asset/img/tag_minus_white.svg";
+import trashicon from "../../../asset/img/trash_white.svg";
 
 type TagProps = TagType & {
   tagData: TagType[];
@@ -27,9 +30,16 @@ const Tag = ({
 }: TagProps) => {
   const navigate = useNavigate();
   const currentLogin = useRecoilValue(userState);
-  const [removeTagModalData, setRemoveTagModalData] = useState<boolean | null>(
-    null,
-  );
+  const [clickDeleteTag, setClickDeleteTag] = useState(false);
+  const [icon, setIcon] = useState(minusicon);
+  const { request } = useApi("delete", `/tags/sub/${id}`);
+
+  const removeTag = () => {
+    request((res: AxiosResponse) => {
+      const updatedTagData = tagData.filter(tag => tag.id !== id);
+      setTagData(updatedTagData);
+    });
+  };
 
   const tagClick: MouseEventHandler<HTMLButtonElement> = e => {
     e.stopPropagation();
@@ -52,39 +62,37 @@ const Tag = ({
 
   const isMysub = login === currentLogin.userName;
 
-  const closeRemoveModal = () => {
-    setRemoveTagModalData(null);
-  };
-
-  const openRemoveModal: MouseEventHandler<HTMLImageElement> = e => {
+  const onClickImage: MouseEventHandler<HTMLImageElement> = e => {
     e.stopPropagation();
-    setRemoveTagModalData(true);
+    if (icon === trashicon) {
+      removeTag();
+    } else {
+      setTimeout(() => {
+        setIcon(trashicon);
+      }, 1000);
+      setClickDeleteTag(true);
+    }
   };
 
   return (
     <>
-      {removeTagModalData !== null ? (
-        <div className="button_tag-modal" onClick={closeRemoveModal}>
-          <RemoveTagModal
-            id={id}
-            content={content}
-            tagData={tagData}
-            setTagData={setTagData}
-          />
-        </div>
-      ) : null}
-      <button className={`button_tag-box-${isType()}`} onClick={tagClick}>
+      <button
+        className={`button_tag-box button_tag-box-${isType()}`}
+        onClick={tagClick}
+      >
+        <Tooltip description={login ?? "Librarian"}>{content}</Tooltip>
         {isMysub ? (
-          <img
-            className="button_tag-remove-button"
-            src={minusicon}
-            alt="minus"
-            onClick={openRemoveModal}
-          />
+          <Tooltip description="태그 삭제">
+            <img
+              className={`${
+                clickDeleteTag ? "rotate" : ""
+              } button_tag-image-button`}
+              src={icon}
+              alt="icon"
+              onClick={onClickImage}
+            />
+          </Tooltip>
         ) : null}
-        <Tooltip className="button_tag-tooltip" description={login}>
-          {content}
-        </Tooltip>
       </button>
     </>
   );
