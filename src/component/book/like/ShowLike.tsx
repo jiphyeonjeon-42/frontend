@@ -16,7 +16,7 @@ const ShowLike = ({
   currentLike,
   currentLikeNum,
 }: Props) => {
-  const permission = JSON.parse(window.localStorage.getItem("user") || "");
+  const permission = JSON.parse(window.localStorage.getItem("user") || "{}");
   const clickLikeHandler = () => {
     if (currentLike) {
       deleteLike();

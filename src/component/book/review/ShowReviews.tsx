@@ -15,7 +15,7 @@ const ShowReviews = ({ bookInfoId, type }: Props) => {
   const observeReviewList = useRef<HTMLDivElement>(null);
   const totalLeftPages = useRef(0);
   const lastReviewId = useRef(0);
-  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "");
+  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "{}");
 
   const deleteReview = (reviewsId: number) => {
     const temp = postReviews.filter(review => review.reviewsId !== reviewsId);

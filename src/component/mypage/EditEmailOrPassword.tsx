@@ -18,7 +18,7 @@ function EditEmailOrPassword() {
   });
 
   const userInfo = useMemo(
-    () => JSON.parse(window.localStorage.getItem("user") || ""),
+    () => JSON.parse(window.localStorage.getItem("user") || "{}"),
     [],
   );
 
