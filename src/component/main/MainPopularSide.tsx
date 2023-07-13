@@ -5,15 +5,13 @@ import Image from "../utils/Image";
 type Props = {
   books: Book[];
   onClick: MouseEventHandler;
-  side: string;
+  side: "left" | "right";
 };
 
 const MainPopularSide = ({ books, onClick, side }: Props) => {
   return (
     <button
-      className={`main__popular__${
-        side === "left" ? "left" : "right"
-      } main__popular__content main__popular__side`}
+      className={`main__popular__${side} main__popular__content main__popular__side`}
       type="button"
       onClick={onClick}
     >
