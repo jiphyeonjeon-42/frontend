@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 import Tooltip from "../../utils/Tooltip";
 import userState from "../../../atom/userState";
 import "../../../asset/css/Tags.css";
-import useApi from "../../../hook/useApi";
+import { useApi } from "../../../hook/useApi";
 import { AxiosResponse } from "axios";
 
 import minusicon from "../../../asset/img/tag_minus_white.svg";

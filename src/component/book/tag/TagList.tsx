@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { TagType } from "../../../type/TagType";
 import { useLocation } from "react-router-dom";
 import { AxiosResponse, AxiosError } from "axios";
-import useApi from "../../../hook/useApi";
+import { useApi } from "../../../hook/useApi";
 import Tag from "./Tag";
 import TagModal from "./TagModal";
 import plusicon from "../../../asset/img/tag_plus.svg";
