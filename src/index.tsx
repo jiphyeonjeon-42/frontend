@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
@@ -16,11 +16,10 @@ Sentry.init({
       : "production",
 });
 
-ReactDOM.render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RecoilRoot>
       <App />
     </RecoilRoot>
   </StrictMode>,
-  document.getElementById("root"),
 );
