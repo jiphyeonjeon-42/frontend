@@ -41,6 +41,7 @@ const ReturnBook = () => {
   const toDoAfterRead = (text: string) => {
     const bookId = text.split(" ")[0];
     setQueryId(bookId);
+    setUsingBarcodeReader(false);
   };
 
   return (
@@ -84,10 +85,7 @@ const ReturnBook = () => {
       </section>
       {lendingId && (
         <Modal>
-          <ReturnModalContents
-            lendingId={lendingId}
-            closeModal={closeModal}
-          />
+          <ReturnModalContents lendingId={lendingId} closeModal={closeModal} />
         </Modal>
       )}
     </main>
