@@ -13,7 +13,8 @@ type Props = {
 const ReviewManagementListItem = ({ review }: Props) => {
   const { setReviewId } = usePatchReviewsId();
   const { addConfirmDialog } = useNewDialog();
-  const onClick: MouseEventHandler<HTMLButtonElement> = e => {
+
+  const requestConfirmToUpdate: MouseEventHandler = e => {
     const job = review.disabled ? "공개" : "비공개";
 
     addConfirmDialog(
@@ -52,7 +53,7 @@ const ReviewManagementListItem = ({ review }: Props) => {
       <button
         className="review-management__list__scope"
         type="button"
-        onClick={onClick}
+        onClick={requestConfirmToUpdate}
       >
         <p
           className={`review-management__list__scope-text ${
