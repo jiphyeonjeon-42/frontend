@@ -14,17 +14,14 @@ const ReviewManagementListItem = ({ review }: Props) => {
   const { setReviewId } = usePatchReviewsId();
   const { addConfirmDialog } = useNewDialog();
   const onClick: MouseEventHandler<HTMLButtonElement> = e => {
-    const id = parseInt(e.currentTarget.id, 10);
-    const { name: content, value } = e.currentTarget;
-    const isHidden = value === "hidden";
-    const job = isHidden ? "공개" : "비공개";
+    const job = review.disabled ? "공개" : "비공개";
 
     addConfirmDialog(
       "리뷰확인",
       `리뷰를 ${job}하시겠습니까?`,
-      `리뷰내용 : ${content}`,
+      `리뷰내용 : ${review.content}`,
       () => {
-        setReviewId(id);
+        setReviewId(review.reviewsId);
       },
     );
   };
@@ -54,9 +51,6 @@ const ReviewManagementListItem = ({ review }: Props) => {
       </div>
       <button
         className="review-management__list__scope"
-        id={`${review.reviewsId}`}
-        name={review.content}
-        value={review.disabled ? "hidden" : "visible"}
         type="button"
         onClick={onClick}
       >
