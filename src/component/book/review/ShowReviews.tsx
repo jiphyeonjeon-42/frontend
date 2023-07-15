@@ -52,23 +52,22 @@ const ShowReviews = ({ bookInfoId, type }: Props) => {
 
   return (
     <>
-      {postReviews.length ? (
-        postReviews.map(review => (
-          <HandleReview
-            key={review.reviewsId}
-            data={review}
-            nickname={review.nickname}
-            createdAt={review.createdAt}
-            checkLogin={checkLogin}
-            type={type}
-            onClickDel={deleteReview}
-          />
-        ))
-      ) : (
+      {postReviews.map(review => (
+        <HandleReview
+          key={review.reviewsId}
+          data={review}
+          nickname={review.nickname}
+          createdAt={review.createdAt}
+          checkLogin={checkLogin}
+          type={type}
+          onClickDel={deleteReview}
+        />
+      ))}
+      {postReviews.length === 0 ? (
         <div className="no-review color-54">
           <span className="font-18">첫 번째 리뷰를 남겨주세요!</span>
         </div>
-      )}
+      ) : null}
       <div ref={observeReviewList} />
     </>
   );
