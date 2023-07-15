@@ -20,7 +20,7 @@ const ReviewManagementListItem = ({ review }: Props) => {
     addConfirmDialog(
       "리뷰확인",
       `리뷰를 ${job}하시겠습니까?`,
-      `리뷰내용 : ${review.content}`,
+      `[${review.title}]\n\n리뷰내용 : ${review.content}`,
       () => {
         setReviewId(review.reviewsId);
       },
