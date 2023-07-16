@@ -32,6 +32,11 @@ const ShowReviews = ({ bookInfoId, type }: Props) => {
 
     if (triggerElementForInfiniteScroll.current)
       io.observe(triggerElementForInfiniteScroll.current); // 트리거 엘리먼트 관찰 시작
+
+    return () => {
+      // 트리거 엘리먼트 관찰 종료
+      io.disconnect();
+    };
   }, []);
 
   return (
