@@ -33,7 +33,7 @@ export const usePatchUsersUpdate = ({ userId, exitEditMode }: Props) => {
   };
 
   useEffect(() => {
-    if (patchData !== null) request(onSuccess);
+    if (patchData) request(onSuccess);
   }, [patchData]);
 
   return { requestUpdate };
