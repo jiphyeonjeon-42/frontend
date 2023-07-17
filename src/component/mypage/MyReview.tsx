@@ -11,7 +11,6 @@ type Props = {
 };
 
 const MyReview = ({ type }: Props) => {
-  const checkLogin = window.localStorage.getItem("user");
   const { page, setPage, lastPage, reviewList, setReviewList } =
     useGetMyReviewInfo();
 
@@ -37,9 +36,6 @@ const MyReview = ({ type }: Props) => {
               <HandleReview
                 key={review.reviewsId}
                 data={review}
-                nickname={review.nickname}
-                createdAt={review.createdAt}
-                checkLogin={checkLogin}
                 type={type}
                 onClickDel={deleteReview}
               />

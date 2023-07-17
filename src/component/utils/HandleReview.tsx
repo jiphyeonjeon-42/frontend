@@ -11,30 +11,21 @@ import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   data: Review;
-  nickname: string;
-  createdAt: string;
-  checkLogin: User;
   type: string;
   onClickDel: (id: number) => void;
 };
 
-const HandleReview = ({
-  data,
-  nickname,
-  createdAt,
-  checkLogin,
-  type,
-  onClickDel,
-}: Props) => {
+const HandleReview = ({ data, type, onClickDel }: Props) => {
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(data.content);
-  const uploadDate = splitDate(createdAt)[0];
+  const uploadDate = splitDate(data.createdAt)[0];
+  const checkLogin = JSON.parse(localStorage.getItem("login") ?? "{}");
   const getPermission = () => {
     if (checkLogin === null) {
       return false;
     }
     const user = checkLogin.userName;
-    const checkReviewerNickname = user === nickname;
+    const checkReviewerNickname = user === data.nickname;
     return checkReviewerNickname;
   };
   const permission = getPermission();
@@ -95,7 +86,7 @@ const HandleReview = ({
       <div className="review-info">
         {type === "bookReviews" ? (
           <span className="reviewer-name font-12-bold">
-            {nickname ?? "미인증 유저"}
+            {data.nickname ?? "미인증 유저"}
           </span>
         ) : null}
         <span className="review-day font-12">{uploadDate}</span>
@@ -166,14 +157,3 @@ const HandleReview = ({
 };
 
 export default HandleReview;
-
-HandleReview.defaultProps = {
-  data: {
-    bookInfoId: null,
-    content: null,
-    reviewsId: null,
-    title: null,
-  },
-  nickname: null,
-  checkLogin: null,
-};

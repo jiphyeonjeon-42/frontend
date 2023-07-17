@@ -13,8 +13,6 @@ type Props = {
 const ShowReviews = ({ bookInfoId, type }: Props) => {
   const triggerElementForInfiniteScroll = useRef<HTMLDivElement>(null);
 
-  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "{}");
-
   const { reviewList, fetch, isAllFetched, deleteReviewById } =
     useGetBookInfoReviews(bookInfoId);
 
@@ -45,9 +43,6 @@ const ShowReviews = ({ bookInfoId, type }: Props) => {
         <HandleReview
           key={review.reviewsId}
           data={review}
-          nickname={review.nickname}
-          createdAt={review.createdAt}
-          checkLogin={checkLogin}
           type={type}
           onClickDel={deleteReview}
         />
