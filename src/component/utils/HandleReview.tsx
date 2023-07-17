@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import axiosPromise from "../../util/axios";
 import { splitDate } from "../../util/date";
 import Image from "./Image";
@@ -17,30 +17,23 @@ type Props = {
 };
 
 const HandleReview = ({ type, review, deleteReview }: Props) => {
-  const [fixReview, setFixReview] = useState(false);
+  const [isEditMode, setEditMode] = useState(false);
   const [content, setContent] = useState(review.content);
   const uploadDate = splitDate(review.createdAt)[0];
-  const checkLogin = useRecoilValue(userState);
-  const getPermission = () => {
-    if (checkLogin === null) {
-      return false;
-    }
-    const user = checkLogin.userName;
-    const checkReviewerNickname = user === review.nickname;
-    return checkReviewerNickname;
-  };
-  const permission = getPermission();
-  const doFixBtn = () => {
-    return setFixReview(!fixReview);
-  };
 
-  const cancelFixBtn = () => {
+  const user = useRecoilValue(userState);
+  const hasPermissionToEdit = user && user.userName === review.nickname;
+
+  const startEditMode = () => setEditMode(true);
+
+  const resetEdited = () => {
     setContent(review.content);
-    return setFixReview(!fixReview);
+    setEditMode(false);
   };
 
   const { addConfirmDialog, addDialogWithTitleAndMessage } = useNewDialog();
-  const deleteBtn = () => {
+  
+  const requestConfirmToDelete = () => {
     addConfirmDialog(
       "삭제확인",
       "리뷰를 삭제하시겠습니까?",
@@ -49,13 +42,13 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
     );
   };
 
-  const patchReview = () => {
+  const updateChange = () => {
     const text = {
       content,
     };
     axiosPromise("put", `/reviews/${review.reviewsId}`, text)
       .then(() => {
-        setFixReview(!fixReview);
+        setEditMode(false);
       })
       .catch(() => {
         addDialogWithTitleAndMessage(
@@ -64,14 +57,6 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
           "",
         );
       });
-  };
-
-  const putBtn = () => {
-    patchReview();
-  };
-
-  const reviewFixArea: ChangeEventHandler<HTMLTextAreaElement> = e => {
-    setContent(e.target.value);
   };
 
   return (
@@ -90,12 +75,12 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
             {review.title}
           </div>
         )}
-        {fixReview ? (
+        {isEditMode ? (
           <div>
             <textarea
               className="review-content-fix-area font-12"
               value={content}
-              onChange={reviewFixArea}
+              onChange={e => setContent(e.target.value)}
             />
           </div>
         ) : (
@@ -108,24 +93,24 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
           </div>
         )}
       </div>
-      {permission ? (
+      {hasPermissionToEdit ? (
         <div className="review-manage">
-          {fixReview ? (
+          {isEditMode ? (
             <div className="review-manage__fix-buttons font-12">
-              <button type="button" onClick={putBtn}>
+              <button type="button" onClick={updateChange}>
                 <span className="fix-text">수정하기</span>
               </button>
               <button
                 className="review-manage__fix-cancle"
                 type="button"
-                onClick={cancelFixBtn}
+                onClick={resetEdited}
               >
                 취소하기
               </button>
             </div>
           ) : (
             <div className="review-manage__start-fix-buttons font-12">
-              <button type="button" onClick={doFixBtn}>
+              <button type="button" onClick={startEditMode}>
                 수정
                 <Image
                   className="review-manage__button-img"
@@ -133,7 +118,7 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
                   alt=""
                 />
               </button>
-              <button type="button" onClick={deleteBtn}>
+              <button type="button" onClick={requestConfirmToDelete}>
                 삭제
                 <Image
                   className="review-manage__button-img"
