@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import HandleReview from "./HandleReview";
+import HandleReview from "../../utils/HandleReview";
 import axiosPromise from "../../../util/axios";
 import { useGetBookInfoReviews } from "../../../api/bookInfo/useGetBookInfoReviews";
 import "../../../asset/css/Tabs.css";

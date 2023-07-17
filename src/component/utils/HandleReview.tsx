@@ -1,13 +1,13 @@
 import { ChangeEventHandler, useState } from "react";
-import axiosPromise from "../../../util/axios";
-import { splitDate } from "../../../util/date";
-import Image from "../../utils/Image";
-import UserEdit from "../../../asset/img/edit.svg";
-import DeleteButton from "../../../asset/img/x_button.svg";
-import "../../../asset/css/Review.css";
+import axiosPromise from "../../util/axios";
+import { splitDate } from "../../util/date";
+import Image from "./Image";
+import UserEdit from "../../asset/img/edit.svg";
+import DeleteButton from "../../asset/img/x_button.svg";
+import "../../asset/css/Review.css";
 import { User } from "@sentry/react";
-import { Review } from "../../../type";
-import { useNewDialog } from "../../../hook/useNewDialog";
+import { Review } from "../../type";
+import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
   data: Review;
