@@ -7,6 +7,8 @@ import {
 import "../../../asset/css/Review.css";
 import Button from "../../utils/Button";
 import { useNewDialog } from "../../../hook/useNewDialog";
+import { useRecoilValue } from "recoil";
+import userState from "../../../atom/userState";
 
 type Props = {
   onClickPost: (post: string) => void;
@@ -14,9 +16,9 @@ type Props = {
 
 const PostReview = ({ onClickPost }: Props) => {
   const [content, setContent] = useState("");
-  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "{}");
+  const checkLogin = useRecoilValue(userState);
   const checkValidUser = () => {
-    const user = JSON.parse(window.localStorage.getItem("user") || "{}");
+    const user = checkLogin;
     if (user) {
       if (user.userName === user.email) {
         return false;

@@ -5,9 +5,10 @@ import Image from "./Image";
 import UserEdit from "../../asset/img/edit.svg";
 import DeleteButton from "../../asset/img/x_button.svg";
 import "../../asset/css/Review.css";
-import { User } from "@sentry/react";
 import { Review } from "../../type";
 import { useNewDialog } from "../../hook/useNewDialog";
+import userState from "../../atom/userState";
+import { useRecoilValue } from "recoil";
 
 type Props = {
   type: "my" | "book";
@@ -19,7 +20,7 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
   const [fixReview, setFixReview] = useState(false);
   const [content, setContent] = useState(review.content);
   const uploadDate = splitDate(review.createdAt)[0];
-  const checkLogin = JSON.parse(localStorage.getItem("login") ?? "{}");
+  const checkLogin = useRecoilValue(userState);
   const getPermission = () => {
     if (checkLogin === null) {
       return false;
