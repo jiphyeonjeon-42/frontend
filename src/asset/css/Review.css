@@ -6,6 +6,7 @@
   background-color: #e8e8e8;
   padding: 4rem 6rem;
   margin: 3rem 0 0 0;
+  font-size: 1.2rem;
 }
 
 .showReview__my-review-box {
@@ -15,6 +16,7 @@
   border-radius: 2rem;
   background-color: #e8e8e8;
   padding: 2rem 4rem;
+  font-size: 1.2rem;
 }
 
 .do-review__review-box {
@@ -68,28 +70,33 @@
   height: 3rem;
 }
 
-.review-info > span {
+.review-day {
   display: block;
 }
 
+.reviewer-name {
+  display: none;
+}
+
+.reviewer-name.book {
+  display: block;
+  font-weight: bold;
+}
 .review-content {
   width: 70%;
   white-space: break-spaces;
   padding: 0rem 3.5rem 0rem 3.5rem;
 }
 
-.review-content-book-title {
-  margin-bottom: 1rem;
+.review-content-book-title.book {
+  display: none;
 }
 
-.review-content-fix-area {
-  width: 95%;
-  min-height: 7rem;
-  padding: 1rem;
-  border: none;
-  resize: none;
-  border-radius: 0.5rem;
-  background-color: white;
+.review-content-book-title {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
 .review-content-area {
@@ -98,6 +105,12 @@
   border: none;
   border-radius: 0.5rem;
   resize: none;
+}
+
+.review-content-area.edit {
+  width: 95%;
+  padding: 1rem;
+  background-color: white;
 }
 
 .review-manage:before {
@@ -113,6 +126,10 @@
   width: 15%;
   padding-left: 5rem;
   position: relative;
+}
+
+.review-manage.hidden {
+  display: none;
 }
 
 .review-manage__fix-buttons > button {
@@ -144,8 +161,8 @@
 }
 
 .review-manage__button-img {
-    margin: 0 0 -0.15rem -3rem;
-    width: 1.1rem;
+  margin: 0 0 -0.15rem -3rem;
+  width: 1.1rem;
 }
 
 .no-review {
@@ -191,6 +208,12 @@
     width: 100%;
   }
 
+  .review-manage.hidden {
+    display: none;
+  }
+  .review-manage.visible {
+    display: block;
+  }
   .review-content-area {
     width: 100%;
     min-height: 0rem;

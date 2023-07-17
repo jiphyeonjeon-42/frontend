@@ -63,74 +63,57 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
   return (
     <div className={`showReview__${type}-review-box`}>
       <div className="review-info">
-        {type === "book" ? (
-          <span className="reviewer-name font-12-bold">
-            {review.nickname ?? "미인증 유저"}
-          </span>
-        ) : null}
-        <span className="review-day font-12">{dateFormat(review.createdAt)}</span>
+        <span className={`reviewer-name ${type}`}>
+          {review.nickname ?? "미인증 유저"}
+        </span>
+        <span className="review-day">{dateFormat(review.createdAt)}</span>
       </div>
       <div className="review-content">
-        {type === "book" ? null : (
-          <div className="review-content-book-title font-14-bold">
-            {review.title}
-          </div>
-        )}
+        <div className={`review-content-book-title ${type}`}>
+          {review.title}
+        </div>
+        <textarea
+          className={`review-content-area ${isEditMode ? "edit" : ""}`}
+          value={content}
+          onChange={e => setContent(e.target.value)}
+          disabled={!isEditMode}
+        />
+      </div>
+      <div className={`review-manage ${hasPermissionToEdit ? "" : "hidden"}`}>
         {isEditMode ? (
-          <div>
-            <textarea
-              className="review-content-fix-area font-12"
-              value={content}
-              onChange={e => setContent(e.target.value)}
-            />
+          <div className="review-manage__fix-buttons">
+            <button type="button" onClick={updateChange}>
+              <span className="fix-text">수정하기</span>
+            </button>
+            <button
+              className="review-manage__fix-cancle"
+              type="button"
+              onClick={resetEdited}
+            >
+              취소하기
+            </button>
           </div>
         ) : (
-          <div>
-            <textarea
-              className="review-content-area font-12"
-              value={content}
-              disabled
-            />
+          <div className="review-manage__start-fix-buttons">
+            <button type="button" onClick={startEditMode}>
+              수정
+              <Image
+                className="review-manage__button-img"
+                src={UserEdit}
+                alt=""
+              />
+            </button>
+            <button type="button" onClick={requestConfirmToDelete}>
+              삭제
+              <Image
+                className="review-manage__button-img"
+                src={DeleteButton}
+                alt=""
+              />
+            </button>
           </div>
         )}
       </div>
-      {hasPermissionToEdit ? (
-        <div className="review-manage">
-          {isEditMode ? (
-            <div className="review-manage__fix-buttons font-12">
-              <button type="button" onClick={updateChange}>
-                <span className="fix-text">수정하기</span>
-              </button>
-              <button
-                className="review-manage__fix-cancle"
-                type="button"
-                onClick={resetEdited}
-              >
-                취소하기
-              </button>
-            </div>
-          ) : (
-            <div className="review-manage__start-fix-buttons font-12">
-              <button type="button" onClick={startEditMode}>
-                수정
-                <Image
-                  className="review-manage__button-img"
-                  src={UserEdit}
-                  alt=""
-                />
-              </button>
-              <button type="button" onClick={requestConfirmToDelete}>
-                삭제
-                <Image
-                  className="review-manage__button-img"
-                  src={DeleteButton}
-                  alt=""
-                />
-              </button>
-            </div>
-          )}
-        </div>
-      ) : null}
     </div>
   );
 };
