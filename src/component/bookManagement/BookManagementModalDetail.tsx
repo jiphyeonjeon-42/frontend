@@ -67,25 +67,24 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
     const callSignRegex = /^[A-Za-z][0-9]{1,3}\.[0-9]{2}\.v[1-9]\.c[1-9]$/;
     const isbnRegex = /^\d{13}$/;
 
-    const validateDate =
+    const categoryToChange = change.callSign[0];
+    const isValidDate =
       change.publishedAt && dateRegex.test(change.publishedAt);
-    const validateCallSign = callSignRegex.test(change.callSign);
-    const validateCategory =
-      change.callSign[0] ===
-      category.find(item => parseInt(item.id, 10) === change.categoryId)?.code;
-    const validateISBN = change.isbn && isbnRegex.test(change.isbn);
+    const isValidCallSign = callSignRegex.test(change.callSign);
+    const isValidCategory = category.find(x => x.code === categoryToChange) !== undefined;
+    const isValidISBN = change.isbn && isbnRegex.test(change.isbn);
 
     let errorMessage = "";
-    if (validateDate && validateCallSign && validateCategory && validateISBN)
+    if (isValidDate && isValidCallSign && isValidCategory && isValidISBN)
       return errorMessage;
 
-    if (!validateDate)
+    if (!isValidDate)
       errorMessage += "출판일자 날짜형식 yyyddmm에 맞지 않습니다.\n";
-    if (!validateCallSign) errorMessage += "청구기호 형식이 맞지 않습니다.\n";
-    if (!validateCategory) {
+    if (!isValidCallSign) errorMessage += "청구기호 형식이 맞지 않습니다.\n";
+    if (!isValidCategory) {
       errorMessage += "카테고리와 청구기호가 맞지 않습니다.\n";
     }
-    if (!validateISBN) errorMessage += "13자리 ISBN를 입력해주세요";
+    if (!isValidISBN) errorMessage += "13자리 ISBN를 입력해주세요";
     return errorMessage;
   };
 
