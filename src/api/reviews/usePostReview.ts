@@ -1,41 +1,24 @@
-import { useEffect, useState } from "react";
-import { useApi } from "../../hook/useApi";
+import { useState } from "react";
+
 import { useNewDialog } from "../../hook/useNewDialog";
+import axiosPromise from "../../util/axios";
 
 type Props = {
   bookInfoId: number;
-  changeTab: (tab: number) => void;
+  resetTab: () => void;
 };
 
-export const usePostReview = ({ bookInfoId, changeTab }: Props) => {
-  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "{}");
+export const usePostReview = ({ bookInfoId, resetTab }: Props) => {
   const [content, setContent] = useState("");
-  const { request } = useApi("post", "/reviews", {
-    bookInfoId,
-    content,
-  });
 
-  const refineResponse = () => {
-    changeTab(0);
-  };
-  const { addDialogWithTitleAndMessage } = useNewDialog();
+  const { addErrorDialog } = useNewDialog();
 
-  const displayError = () => {
-    const title =
-      checkLogin === null
-        ? "로그인 후 입력해주세요."
-        : "10자 이상 420자 이하로 입력해주세요.";
-    addDialogWithTitleAndMessage(title, title, "");
-  };
-
-  useEffect(() => {
-    const req = () => {
-      if (content !== "") {
-        request(refineResponse, displayError);
-      }
-    };
-    req();
-  }, [content]);
-
-  return { setContent };
+  const request = () =>
+    axiosPromise("post", "/reviews", {
+      bookInfoId,
+      content,
+    })
+      .then(resetTab)
+      .catch(addErrorDialog);
+  return { content, setContent, request };
 };
