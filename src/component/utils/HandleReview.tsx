@@ -10,22 +10,22 @@ import { Review } from "../../type";
 import { useNewDialog } from "../../hook/useNewDialog";
 
 type Props = {
-  data: Review;
-  type: string;
-  onClickDel: (id: number) => void;
+  type: "my" | "book";
+  review: Review;
+  deleteReview: (id: number) => void;
 };
 
-const HandleReview = ({ data, type, onClickDel }: Props) => {
+const HandleReview = ({ type, review, deleteReview }: Props) => {
   const [fixReview, setFixReview] = useState(false);
-  const [content, setContent] = useState(data.content);
-  const uploadDate = splitDate(data.createdAt)[0];
+  const [content, setContent] = useState(review.content);
+  const uploadDate = splitDate(review.createdAt)[0];
   const checkLogin = JSON.parse(localStorage.getItem("login") ?? "{}");
   const getPermission = () => {
     if (checkLogin === null) {
       return false;
     }
     const user = checkLogin.userName;
-    const checkReviewerNickname = user === data.nickname;
+    const checkReviewerNickname = user === review.nickname;
     return checkReviewerNickname;
   };
   const permission = getPermission();
@@ -34,12 +34,8 @@ const HandleReview = ({ data, type, onClickDel }: Props) => {
   };
 
   const cancelFixBtn = () => {
-    setContent(data.content);
+    setContent(review.content);
     return setFixReview(!fixReview);
-  };
-
-  const deleteReview = () => {
-    onClickDel(data.reviewsId);
   };
 
   const { addConfirmDialog, addDialogWithTitleAndMessage } = useNewDialog();
@@ -47,8 +43,8 @@ const HandleReview = ({ data, type, onClickDel }: Props) => {
     addConfirmDialog(
       "삭제확인",
       "리뷰를 삭제하시겠습니까?",
-      data.content,
-      deleteReview,
+      review.content,
+      () => deleteReview(review.reviewsId),
     );
   };
 
@@ -56,7 +52,7 @@ const HandleReview = ({ data, type, onClickDel }: Props) => {
     const text = {
       content,
     };
-    axiosPromise("put", `/reviews/${data.reviewsId}`, text)
+    axiosPromise("put", `/reviews/${review.reviewsId}`, text)
       .then(() => {
         setFixReview(!fixReview);
       })
@@ -78,23 +74,19 @@ const HandleReview = ({ data, type, onClickDel }: Props) => {
   };
 
   return (
-    <div
-      className={`showReview__${
-        type === "bookReviews" ? "book" : "my"
-      }-review-box`}
-    >
+    <div className={`showReview__${type}-review-box`}>
       <div className="review-info">
-        {type === "bookReviews" ? (
+        {type === "book" ? (
           <span className="reviewer-name font-12-bold">
-            {data.nickname ?? "미인증 유저"}
+            {review.nickname ?? "미인증 유저"}
           </span>
         ) : null}
         <span className="review-day font-12">{uploadDate}</span>
       </div>
       <div className="review-content">
-        {type === "bookReviews" ? null : (
+        {type === "book" ? null : (
           <div className="review-content-book-title font-14-bold">
-            {data.title}
+            {review.title}
           </div>
         )}
         {fixReview ? (

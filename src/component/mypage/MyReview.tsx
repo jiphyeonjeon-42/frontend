@@ -6,11 +6,7 @@ import Pagination from "../utils/Pagination";
 import { useGetMyReviewInfo } from "../../api/reviews/useGetMyReviewInfo";
 import "../../asset/css/MyReview.css";
 
-type Props = {
-  type: string;
-};
-
-const MyReview = ({ type }: Props) => {
+const MyReview = () => {
   const { page, setPage, lastPage, reviewList, setReviewList } =
     useGetMyReviewInfo();
 
@@ -35,9 +31,9 @@ const MyReview = ({ type }: Props) => {
             {reviewList.map(review => (
               <HandleReview
                 key={review.reviewsId}
-                data={review}
-                type={type}
-                onClickDel={deleteReview}
+                review={review}
+                type="my"
+                deleteReview={deleteReview}
               />
             ))}
           </div>

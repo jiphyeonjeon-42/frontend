@@ -37,7 +37,7 @@ const Review = ({ bookInfoId }: Props) => {
       <div className="tabs-line" />
       <div className="review-list">
         {currentTab === "showReviews" ? (
-          <ShowReviews bookInfoId={+bookInfoId} type="bookReviews" />
+          <ShowReviews bookInfoId={+bookInfoId} />
         ) : (
           <PostReview onClickPost={setContent} />
         )}

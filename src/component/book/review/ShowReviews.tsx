@@ -7,10 +7,9 @@ import "../../../asset/css/Review.css";
 
 type Props = {
   bookInfoId: number;
-  type: string;
 };
 
-const ShowReviews = ({ bookInfoId, type }: Props) => {
+const ShowReviews = ({ bookInfoId }: Props) => {
   const triggerElementForInfiniteScroll = useRef<HTMLDivElement>(null);
 
   const { reviewList, fetch, isAllFetched, deleteReviewById } =
@@ -42,9 +41,9 @@ const ShowReviews = ({ bookInfoId, type }: Props) => {
       {reviewList.map(review => (
         <HandleReview
           key={review.reviewsId}
-          data={review}
-          type={type}
-          onClickDel={deleteReview}
+          review={review}
+          type="book"
+          deleteReview={deleteReview}
         />
       ))}
       {reviewList.length === 0 ? (

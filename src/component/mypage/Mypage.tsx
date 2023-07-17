@@ -20,7 +20,7 @@ const Mypage = () => {
   const selectComponent: { [key: string]: ReactNode } = {
     myRent: <MyRent />,
     myReservation: <MyReservation />,
-    myReview: <MyReview type="myReviews" />,
+    myReview: <MyReview />,
   };
   const user = window.localStorage.getItem("user");
   const userId = user && JSON.parse(user).id;
