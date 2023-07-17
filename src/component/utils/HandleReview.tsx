@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axiosPromise from "../../util/axios";
 import { splitDate } from "../../util/date";
 import Image from "./Image";
 import UserEdit from "../../asset/img/edit.svg";
@@ -9,6 +8,7 @@ import { Review } from "../../type";
 import { useNewDialog } from "../../hook/useNewDialog";
 import userState from "../../atom/userState";
 import { useRecoilValue } from "recoil";
+import { usePutReviewsReviewsId } from "../../api/reviews/usePutReviewsReviewsId";
 
 type Props = {
   type: "my" | "book";
@@ -18,13 +18,20 @@ type Props = {
 
 const HandleReview = ({ type, review, deleteReview }: Props) => {
   const [isEditMode, setEditMode] = useState(false);
-  const [content, setContent] = useState(review.content);
   const uploadDate = splitDate(review.createdAt)[0];
 
   const user = useRecoilValue(userState);
   const hasPermissionToEdit = user && user.userName === review.nickname;
 
   const startEditMode = () => setEditMode(true);
+  const finishEditMode = () => setEditMode(false);
+  const initialContent = review.content;
+  
+  const { content, setContent, request } = usePutReviewsReviewsId({
+    reviewsId: review.reviewsId,
+    initialContent,
+    finishEditMode,
+  });
 
   const resetEdited = () => {
     setContent(review.content);
@@ -32,7 +39,7 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
   };
 
   const { addConfirmDialog, addDialogWithTitleAndMessage } = useNewDialog();
-  
+
   const requestConfirmToDelete = () => {
     addConfirmDialog(
       "삭제확인",
@@ -43,20 +50,16 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
   };
 
   const updateChange = () => {
-    const text = {
-      content,
-    };
-    axiosPromise("put", `/reviews/${review.reviewsId}`, text)
-      .then(() => {
-        setEditMode(false);
-      })
-      .catch(() => {
-        addDialogWithTitleAndMessage(
-          "error",
-          "10자 이상 420자 이하로 입력해주세요.",
-          "",
-        );
-      });
+    if (content === initialContent) return;
+    if (content.length >= 10 && content.length < 420) {
+      request();
+    } else {
+      addDialogWithTitleAndMessage(
+        "error",
+        "10자 이상 420자 이하로 입력해주세요.",
+        "",
+      );
+    }
   };
 
   return (
