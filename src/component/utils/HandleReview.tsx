@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { splitDate } from "../../util/date";
+import { dateFormat } from "../../util/date";
 import Image from "./Image";
 import UserEdit from "../../asset/img/edit.svg";
 import DeleteButton from "../../asset/img/x_button.svg";
@@ -18,15 +18,13 @@ type Props = {
 
 const HandleReview = ({ type, review, deleteReview }: Props) => {
   const [isEditMode, setEditMode] = useState(false);
-  const uploadDate = splitDate(review.createdAt)[0];
-
   const user = useRecoilValue(userState);
   const hasPermissionToEdit = user && user.userName === review.nickname;
 
   const startEditMode = () => setEditMode(true);
   const finishEditMode = () => setEditMode(false);
   const initialContent = review.content;
-  
+
   const { content, setContent, request } = usePutReviewsReviewsId({
     reviewsId: review.reviewsId,
     initialContent,
@@ -70,7 +68,7 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
             {review.nickname ?? "미인증 유저"}
           </span>
         ) : null}
-        <span className="review-day font-12">{uploadDate}</span>
+        <span className="review-day font-12">{dateFormat(review.createdAt)}</span>
       </div>
       <div className="review-content">
         {type === "book" ? null : (
