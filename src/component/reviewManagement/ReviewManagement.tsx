@@ -23,7 +23,7 @@ const ReviewManagement = () => {
   } = useGetReviews();
 
   const setUndefinedReSelected = (newType: string) => {
-    setSelectedType(newType === selectedType ? undefined : newType);
+    setSelectedType(newType === selectedType ? "-1" : newType);
   };
 
   return (
