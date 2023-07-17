@@ -70,9 +70,8 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
     const validateDate =
       change.publishedAt && dateRegex.test(change.publishedAt);
     const validateCallSign = callSignRegex.test(change.callSign);
-    const validateCategory =
-      change.callSign[0] ===
-      category.find(item => parseInt(item.id, 10) === change.categoryId)?.code;
+    const categoryToChange = change.callSign[0];
+    const validateCategory = category.find(x => x.code === categoryToChange) !== undefined;
     const validateISBN = change.isbn && isbnRegex.test(change.isbn);
 
     let errorMessage = "";
