@@ -4,6 +4,7 @@ import axiosPromise from "../../../util/axios";
 import { useGetBookInfoReviews } from "../../../api/bookInfo/useGetBookInfoReviews";
 import "../../../asset/css/Tabs.css";
 import "../../../asset/css/Review.css";
+import { useDeleteReviewsReviewsId } from "../../../api/reviews/useDeleteReviewsReviewsId";
 
 type Props = {
   bookInfoId: number;
@@ -14,10 +15,11 @@ const ShowReviews = ({ bookInfoId }: Props) => {
 
   const { reviewList, fetch, isAllFetched, deleteReviewById } =
     useGetBookInfoReviews(bookInfoId);
-
+  const { requestToDelete } = useDeleteReviewsReviewsId();
+  
   const deleteReview = (reviewsId: number) => {
     deleteReviewById(reviewsId);
-    axiosPromise("delete", `/reviews/${reviewsId}`);
+    requestToDelete;
   };
 
   useEffect(() => {
