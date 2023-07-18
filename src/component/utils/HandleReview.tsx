@@ -9,6 +9,7 @@ import { useNewDialog } from "../../hook/useNewDialog";
 import userState from "../../atom/userState";
 import { useRecoilValue } from "recoil";
 import { usePutReviewsReviewsId } from "../../api/reviews/usePutReviewsReviewsId";
+import { Link } from "react-router-dom";
 
 type Props = {
   type: "my" | "book";
@@ -69,9 +70,12 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
         <span className="review-day">{dateFormat(review.createdAt)}</span>
       </div>
       <div className="review-content">
-        <div className={`review-content-book-title ${type}`}>
+        <Link
+          to={`/info/${review.bookInfoId}`}
+          className={`review-content-book-title ${type}`}
+        >
           {review.title}
-        </div>
+        </Link>
         <textarea
           className={`review-content-area ${isEditMode ? "edit" : ""}`}
           value={content}
