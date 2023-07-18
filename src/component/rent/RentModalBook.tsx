@@ -32,14 +32,14 @@ const RentModalBook = ({
     const isAlreadySelected = selectedBooks.some(
       book => book.bookId === +bookId,
     );
-    if (isAlreadySelected)
+    if (isAlreadySelected) {
       addDialogWithTitleAndMessage(
         "alreadySelected",
         "이미 선택된 도서입니다.",
         "다시 한번 확인해주세요",
       );
-    else setBookId(bookId);
-    closeModal();
+      closeModal();
+    } else setBookId(bookId);
   };
 
   const { bookList, lastPage, page, setPage, setQuery } = useGetBooksSearch({
