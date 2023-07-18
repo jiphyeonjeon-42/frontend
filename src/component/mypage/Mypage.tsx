@@ -205,6 +205,7 @@ const Mypage = () => {
             </div>
           ))}
         </div>
+        <div className="tabs-line" />
       </section>
       <div>{selectComponent[currentTab]}</div>
     </>
