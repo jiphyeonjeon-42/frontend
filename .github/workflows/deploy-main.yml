@@ -1,13 +1,12 @@
-# sub-branch-deploy-work.yml
-name: sub-branch
+name: main 배포
 
 on:
   push:
     branches:
-      - main   # sub-branch[branch name] 브랜치에서 push 이벤트가 일어났을 때 실행
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
