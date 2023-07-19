@@ -3,7 +3,7 @@ import { otherManagementTabList } from "../../constant/tablist";
 import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
 import Management from "../utils/Management";
-import ReviewManagementList from "./ReviewManagementList";
+import ReviewManagementListItem from "./ReviewManagementListItem";
 import Filter from "../utils/Filter";
 
 const reviewFilterList = [
@@ -49,7 +49,9 @@ const ReviewManagement = () => {
               selectedType={selectedType}
               setSelectedType={setUndefinedReSelected}
             />
-            <ReviewManagementList reviewList={reviewList} />
+            {reviewList.map(review => (
+              <ReviewManagementListItem review={review} />
+            ))}
           </>
         }
         page={page}
