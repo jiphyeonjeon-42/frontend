@@ -4,6 +4,7 @@
   margin: auto;
   margin-top: 7rem;
   margin-bottom: 10rem;
+  min-height: 20rem;
 }
 
 .book-detail__reservation-button {
@@ -156,11 +157,11 @@
   }
 
   .book-detail__info-status {
-	font-size: 1.6rem;
+    font-size: 1.6rem;
   }
 
   .book-content {
-	justify-content: space-evenly;
+    justify-content: space-evenly;
   }
 }
 
