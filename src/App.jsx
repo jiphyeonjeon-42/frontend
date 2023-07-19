@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { install } from "ga-gtag";
@@ -24,13 +24,16 @@ import MyPageRoutes from "./component/mypage/MyPageRoutes";
 import userState from "./atom/userState";
 import Mypage from "./component/mypage/Mypage";
 import EditEmailOrPassword from "./component/mypage/EditEmailOrPassword";
-import "./css/reset.css";
 import LimitedRoute from "./LimitedRoute";
 import { isExpiredDate } from "./util/date";
 import BookManagement from "./component/bookManagement/BookManagement";
 import ReviewManagement from "./component/reviewManagement/ReviewManagement";
 import BookStock from "./component/bookStock/BookStock";
 import ELibraryIn42Box from "./component/eLibraryIn42Box/EventPage";
+import SuperTagManagement from "./component/superTag/SuperTagManagement";
+import SubTagManagement from "./component/subTag/SubTagManagement";
+import Portals from "./component/utils/Portals";
+import "./asset/css/reset.css";
 
 function App() {
   const setUser = useSetRecoilState(userState);
@@ -46,7 +49,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div id="modal" />
+      <div id="portal" />
+      <Portals />
       <Header />
       <MobileHeader />
       <Routes>
@@ -71,6 +75,8 @@ function App() {
           <Route path="/book" element={<BookManagement />} />
           <Route path="/review" element={<ReviewManagement />} />
           <Route path="/stock" element={<BookStock />} />
+          <Route path="/tag/super" element={<SuperTagManagement />} />
+          <Route path="/tag/sub" element={<SubTagManagement />} />
         </Route>
         <Route element={<LimitedRoute isLoginOnly />}>
           <Route path="/mypage" element={<MyPageRoutes />}>

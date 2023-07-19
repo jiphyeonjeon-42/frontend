@@ -1,0 +1,40 @@
+.super-tag-book__search__wrapper {
+  padding-top: 5rem;
+}
+
+.super-tag-book__wrapper {
+  display: flex;
+  flex-direction: column;
+  color: #545454;
+}
+
+.super-tag-book-item__wrapper {
+  display: block;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 0.1rem solid #a4a4a4;
+  color: inherit;
+  font-size: 1.2rem;
+  text-align: left;
+  padding: 1.6rem 0;
+  transition: 0.3s;
+}
+
+.super-tag-book-item__wrapper:hover {
+  transform: scale(1.01);
+}
+
+.super-tag-book-item__title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.super-tag-book-item__details > span:not(:last-child):after {
+  content: "|";
+  color: black;
+  margin: 0 1rem;
+}

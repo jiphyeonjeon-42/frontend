@@ -1,10 +1,10 @@
 // 2023년 4월 1일 만우절용 이벤트 페이지입니다.
 
-import React, { useState } from "react";
+import { useState } from "react";
 import ELibraryCopyCat from "./ELibraryCopyCat";
 import Box42CopyCat from "./Box42CopyCat";
 import IframeLinkView from "./IframeLinkView";
-import "../../css/ELibraryIn42Box.css";
+import "../../asset/css/ELibraryIn42Box.css";
 
 const linkList = {
   BOX: "https://42box.github.io/front-end/",

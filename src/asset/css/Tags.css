@@ -1,0 +1,235 @@
+/* default */
+
+.none-drag {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.button_tag-box {
+  font-family: "Noto Sans KR", sans-serif;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem 2rem 1rem 2rem;
+  text-align: center;
+  margin: 1rem;
+  border-radius: 10px;
+  opacity: 1;
+  box-shadow: none;
+  left: 0px;
+  border: none;
+}
+
+.button_tag-box:hover {
+  box-shadow: 0 0.6rem 0.6rem rgba(248, 189, 151, 0.4);
+}
+
+.button_tag-box-super {
+  background-color: rgba(38, 70, 83, 1);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.button_tag-box-sub {
+  background-color: rgb(115, 103, 87, 1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.button_tag-box-my-sub {
+  background-color: rgba(61, 83, 38, 1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.button_tag-create-box {
+  position: flex;
+  line-height: 4rem;
+  font-size: large;
+  margin: 1rem;
+  background-color: rgba(95, 63, 54, 1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.button_tag-create-box::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.button_tag-background {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: space-between;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 12rem;
+  overflow: hidden;
+  padding: 1.5rem 1rem;
+  margin: 6rem 0rem 0rem 0rem;
+  background-color: rgb(232, 232, 232, 0.9);
+  border-radius: 1rem;
+}
+
+.button_tag-background-create {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: space-between;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 12rem;
+  overflow: hidden;
+  padding: 1.5rem 1rem;
+  margin: -1.3rem 0rem 10rem 0rem;
+  background-color: rgb(232, 232, 232, 0.9);
+  border-radius: 1rem;
+}
+
+.button_tag_modal_in_background {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  left: 0px;
+  margin: 10px;
+}
+
+.button_tag_modal_background_ {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 4;
+}
+
+.button_tag-image-button {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  background-color: rgba(00, 00, 00, 0);
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+}
+
+@keyframes rotateImage {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    width: 65%;
+    height: 65%;
+  }
+}
+
+.rotate {
+  animation: rotateImage 1s linear 1 forwards;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  25% {
+    transform: translate(2px, 2px) rotate(1deg);
+  }
+  50% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  75% {
+    transform: translate(2px, 2px) rotate(-1deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+
+:root {
+  --base-color: rgba(255, 255, 255, 0.9);
+  --target-color: rgba(240, 111, 89, 0.683);
+}
+
+@keyframes colorChange {
+  0% {
+    color: var(--base-color);
+  }
+  100% {
+    color: var(--target-color);
+  }
+}
+
+.button_atcive {
+  animation: shake 0.1s linear infinite;
+}
+
+.button_post_error_code {
+  animation: colorChange 0.5s linear 1 forwards;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+@keyframes appearChange {
+  0% {
+    color: rgba(255, 255, 255, 0.1);
+  }
+  20% {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  90% {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  100% {
+    color: rgba(255, 255, 255, 0);
+  }
+}
+
+.button_post_error_message {
+  animation: appearChange 2s linear 1 forwards;
+}
+
+.button_create-input:hover {
+  outline: none;
+  box-shadow: none;
+}
+
+.button_create-input:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.button_create-input:focus::placeholder {
+  animation: none;
+  box-shadow: none;
+}
+
+/* main */
+.button_mainpage_tag_box {
+  overflow-y: auto;
+  max-width: 100rem;
+  position: relative;
+  margin: auto;
+  margin-top: 7rem;
+  margin-bottom: 10rem;
+}

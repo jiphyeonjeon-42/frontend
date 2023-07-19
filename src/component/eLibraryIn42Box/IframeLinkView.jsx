@@ -1,5 +1,3 @@
-import React from "react";
-
 const IframeLinkView = ({ link, type }) => {
   return (
     <div className={`elibrary-in-box__iframe__wrapper ${type}`}>

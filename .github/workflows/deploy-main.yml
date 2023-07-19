@@ -1,0 +1,61 @@
+name: main 배포
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Cache node modules  # node modules 캐싱
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-master-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "REACT_APP_API=$REACT_APP_API" >> .env
+          echo "REACT_APP_WISH=$REACT_APP_WISH" >> .env
+          echo "REACT_APP_E_BOOK_LIBRARY=$REACT_APP_E_BOOK_LIBRARY" >> .env
+          echo "REACT_APP_SUGGESTION=$REACT_APP_SUGGESTION" >> .env
+          echo "REACT_APP_GA_ID=$REACT_APP_GA_ID" >> .env
+          echo "PORT=$PORT" >> .env
+        env:
+          REACT_APP_API: ${{ secrets.REACT_APP_API }}
+          REACT_APP_WISH: ${{ secrets.REACT_APP_WISH }}
+          REACT_APP_E_BOOK_LIBRARY: ${{ secrets.REACT_APP_E_BOOK_LIBRARY }}
+          REACT_APP_SUGGESTION: ${{ secrets.REACT_APP_SUGGESTION }}
+          REACT_APP_GA_ID: ${{ secrets.REACT_APP_GA_ID }}
+          PORT: ${{ secrets.PORT }}
+
+      - name: Install Pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 sync ./build s3://42library.kr --region ap-northeast-2
+
+      - name: invalidate CDN cache
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_CDN_DISTRIBUTION_ID: ${{ secrets.AWS_CDN_DISTRIBUTION_ID }}
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CDN_DISTRIBUTION_ID }} --paths "/*" --region ap-northeast-2

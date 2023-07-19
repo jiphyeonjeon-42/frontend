@@ -1,0 +1,9 @@
+.ellipsised-span__wrapper {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ellipsised-span__wrapper.unfolded {
+  white-space: normal;
+  word-break: break-all;
+}

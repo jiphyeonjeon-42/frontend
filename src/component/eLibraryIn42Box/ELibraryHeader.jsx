@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { Link } from "react-router-dom";
 import userState from "../../atom/userState";
-import Logo from "../../img/jiphyeonjeon_logo_without_text.svg";
+import Logo from "../../asset/img/jiphyeonjeon_logo_without_text.svg";
 
 const ELibraryHeader = ({ setModalOpened }) => {
   const { isLogin } = useRecoilValue(userState);

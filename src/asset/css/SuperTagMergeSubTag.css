@@ -1,0 +1,15 @@
+.super-tag__sub-tag::before {
+  content: "# ";
+  opacity: 0.8;
+}
+
+.super-tag__sub-tag {
+  padding: 1.2rem 1.6rem;
+  background-color: transparent;
+  color: #545454;
+  border: 0.1rem solid #545454;
+  margin: 0.4rem;
+  border-radius: 1.6rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
