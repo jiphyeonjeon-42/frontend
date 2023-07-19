@@ -2,7 +2,6 @@ import { reviewTabList } from "../../../constant/tablist";
 import PostReview from "./PostReview";
 import ShowReviews from "./ShowReviews";
 import { useTabFocus } from "../../../hook/useTabFocus";
-import { usePostReview } from "../../../api/reviews/usePostReview";
 import "../../../asset/css/Tabs.css";
 import "../../../asset/css/Review.css";
 
@@ -12,10 +11,7 @@ type Props = {
 
 const Review = ({ bookInfoId }: Props) => {
   const { currentTab, changeTab } = useTabFocus(0, reviewTabList);
-  const { setContent } = usePostReview({
-    bookInfoId: +bookInfoId,
-    changeTab,
-  });
+  const resetTab = () => changeTab(0);
 
   return (
     <>
@@ -37,9 +33,9 @@ const Review = ({ bookInfoId }: Props) => {
       <div className="tabs-line" />
       <div className="review-list">
         {currentTab === "showReviews" ? (
-          <ShowReviews bookInfoId={+bookInfoId} type="bookReviews" />
+          <ShowReviews bookInfoId={+bookInfoId} />
         ) : (
-          <PostReview onClickPost={setContent} />
+          <PostReview bookInfoId={+bookInfoId} resetTab={resetTab} />
         )}
       </div>
     </>

@@ -1,17 +1,12 @@
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 import Reserve from "../../asset/img/list-check-solid.svg";
-import HandleReview from "../book/review/HandleReview";
+import HandleReview from "../utils/HandleReview";
 import axiosPromise from "../../util/axios";
 import Pagination from "../utils/Pagination";
 import { useGetMyReviewInfo } from "../../api/reviews/useGetMyReviewInfo";
 import "../../asset/css/MyReview.css";
 
-type Props = {
-  type: string;
-};
-
-const MyReview = ({ type }: Props) => {
-  const checkLogin = window.localStorage.getItem("user");
+const MyReview = () => {
   const { page, setPage, lastPage, reviewList, setReviewList } =
     useGetMyReviewInfo();
 
@@ -36,12 +31,9 @@ const MyReview = ({ type }: Props) => {
             {reviewList.map(review => (
               <HandleReview
                 key={review.reviewsId}
-                data={review}
-                nickname={review.nickname}
-                createdAt={review.createdAt}
-                checkLogin={checkLogin}
-                type={type}
-                onClickDel={deleteReview}
+                review={review}
+                type="my"
+                deleteReview={deleteReview}
               />
             ))}
           </div>

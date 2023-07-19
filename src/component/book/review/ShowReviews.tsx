@@ -1,75 +1,59 @@
-import { useCallback, useState, useRef, useEffect } from "react";
-import HandleReview from "./HandleReview";
+import { useRef, useEffect } from "react";
+import HandleReview from "../../utils/HandleReview";
 import axiosPromise from "../../../util/axios";
+import { useGetBookInfoReviews } from "../../../api/bookInfo/useGetBookInfoReviews";
 import "../../../asset/css/Tabs.css";
 import "../../../asset/css/Review.css";
-import { Review } from "../../../type";
+import { useDeleteReviewsReviewsId } from "../../../api/reviews/useDeleteReviewsReviewsId";
 
 type Props = {
   bookInfoId: number;
-  type: string;
 };
 
-const ShowReviews = ({ bookInfoId, type }: Props) => {
-  const [postReviews, setPostReviews] = useState<Review[]>([]);
-  const observeReviewList = useRef<HTMLDivElement>(null);
-  const totalLeftPages = useRef(0);
-  const lastReviewId = useRef(0);
-  const checkLogin = JSON.parse(window.localStorage.getItem("user") || "{}");
+const ShowReviews = ({ bookInfoId }: Props) => {
+  const triggerElementForInfiniteScroll = useRef<HTMLDivElement>(null);
 
+  const { reviewList, fetch, isAllFetched, deleteReviewById } =
+    useGetBookInfoReviews(bookInfoId);
+  const { requestToDelete } = useDeleteReviewsReviewsId();
+  
   const deleteReview = (reviewsId: number) => {
-    const temp = postReviews.filter(review => review.reviewsId !== reviewsId);
-    setPostReviews(temp);
-    axiosPromise("delete", `/reviews/${reviewsId}`);
+    deleteReviewById(reviewsId);
+    requestToDelete;
   };
 
-  const fetch = useCallback(async () => {
-    try {
-      axiosPromise(
-        "get",
-        `/book-info/${bookInfoId}/reviews?reviewsId=${lastReviewId.current}&limit=5`,
-      ).then(res => {
-        if (res.data.items.length !== 0) {
-          setPostReviews(prevPosts => [...prevPosts, ...res.data.items]);
-          lastReviewId.current = res.data.meta.finalReviewsId;
-          totalLeftPages.current = res.data.meta.totalLeftPages;
-        }
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
   useEffect(() => {
-    if (totalLeftPages.current === 0) return;
+    // 무한 스크롤을 위한 옵저버 설정
     const io = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
-        fetch();
-      }
+      // 아직 불러올 정보가 있고 트리거가 보이면 fetch 함수 호출
+      if (!isAllFetched.current && entries[0].isIntersecting) fetch();
     });
-    observeReviewList.current && io.observe(observeReviewList.current);
+
+    if (triggerElementForInfiniteScroll.current)
+      io.observe(triggerElementForInfiniteScroll.current); // 트리거 엘리먼트 관찰 시작
+
+    return () => {
+      // 트리거 엘리먼트 관찰 종료
+      io.disconnect();
+    };
   }, []);
 
   return (
     <>
-      {postReviews.length ? (
-        postReviews.map(review => (
-          <HandleReview
-            key={review.reviewsId}
-            data={review}
-            nickname={review.nickname}
-            createdAt={review.createdAt}
-            checkLogin={checkLogin}
-            type={type}
-            onClickDel={deleteReview}
-          />
-        ))
-      ) : (
+      {reviewList.map(review => (
+        <HandleReview
+          key={review.reviewsId}
+          review={review}
+          type="book"
+          deleteReview={deleteReview}
+        />
+      ))}
+      {reviewList.length === 0 ? (
         <div className="no-review color-54">
           <span className="font-18">첫 번째 리뷰를 남겨주세요!</span>
         </div>
-      )}
-      <div ref={observeReviewList} />
+      ) : null}
+      <div ref={triggerElementForInfiniteScroll} />
     </>
   );
 };
