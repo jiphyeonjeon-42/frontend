@@ -39,7 +39,9 @@ const RentModalBook = ({
         "다시 한번 확인해주세요",
       );
       closeModal();
-    } else setBookId(bookId);
+    } else { 
+      setBookId(bookId);
+    }
   };
 
   const { bookList, lastPage, page, setPage, setQuery } = useGetBooksSearch({
