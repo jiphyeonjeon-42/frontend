@@ -17,7 +17,19 @@ const BookDetail = () => {
   useEffect(() => myRef.current?.scrollIntoView(), []);
   const { bookDetailInfo } = useGetBooksInfoId({ id });
 
-  if (!bookDetailInfo) return null;
+  if (!bookDetailInfo) {
+    return (
+      <main>
+        <Banner
+          img="bookdetail"
+          titleKo="도서 상세 및 예약"
+          titleEn="DETAIL & RESERVATION"
+        />
+        <section className="book-detail-body" />
+      </main>
+    );
+  }
+
   const isAvailableReservation = () => {
     const { books } = bookDetailInfo;
     const noProblemBooksCnt = books?.filter(book => book.status === 0).length;
