@@ -120,22 +120,24 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
 
   return (
     <>
-      <div className="button_tag-background">
-        {tagData.map(item => (
-          <Tag
-            key={item.id}
-            {...item}
-            openModalFunc={openModalFunc}
-            tagData={tagData}
-            setTagData={setTagData}
-          ></Tag>
-        ))}
-        {tagModalData !== null ? (
-          <div className="button_tag_modal_background_" onClick={closeModal}>
-            <TagModal id={tagModalData} content={""} />
-          </div>
-        ) : null}
-      </div>
+      {tagData.length !== 0 ? (
+        <div className="button_tag-background">
+          {tagData.map(item => (
+            <Tag
+              key={item.id}
+              {...item}
+              openModalFunc={openModalFunc}
+              tagData={tagData}
+              setTagData={setTagData}
+            ></Tag>
+          ))}
+          {tagModalData !== null ? (
+            <div className="button_tag_modal_background_" onClick={closeModal}>
+              <TagModal id={tagModalData} content={""} />
+            </div>
+          ) : null}
+        </div>
+      ) : null}
       <div className="button_tag-background-create">
         <button
           className={`${
