@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
-import { Book } from "../../type";
+import { BookInfo } from "../../type";
 
 export const useGetBooksInfoPopular = () => {
-  const [docs, setDocs] = useState<Book[]>([]);
+  const [docs, setDocs] = useState<BookInfo[]>([]);
 
   const { request } = useApi("get", "books/info", {
     sort: "popular",

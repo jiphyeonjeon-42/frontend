@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 import Image from "../utils/Image";
+import { BookInfo } from "../../type";
 
 type Props = {
-  book: {
-    id?: number;
-    image?: string;
-    title?: string;
-  };
+  book: BookInfo;
   bookWidth: number;
 };
 
