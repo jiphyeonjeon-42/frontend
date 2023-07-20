@@ -4,7 +4,7 @@ import { BookInfo } from "../../type";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  docs: BookInfo[];
+  docs: (BookInfo & { rank: number })[];
   centerTop: number;
   onLeft: () => void;
   onRight: () => void;

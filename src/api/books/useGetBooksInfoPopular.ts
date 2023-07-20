@@ -4,7 +4,7 @@ import { compareExpect } from "../../util/typeCheck";
 import { BookInfo } from "../../type";
 
 export const useGetBooksInfoPopular = () => {
-  const [docs, setDocs] = useState<BookInfo[]>([]);
+  const [docs, setDocs] = useState<(BookInfo & { rank: number })[]>([]);
 
   const { request } = useApi("get", "books/info", {
     sort: "popular",
@@ -27,7 +27,11 @@ export const useGetBooksInfoPopular = () => {
       response.data.items,
       expectedItem,
     );
-    setDocs(books);
+    const booksWithRank = books.map((book, index) => ({
+      ...book,
+      rank: index + 1,
+    }));
+    setDocs(booksWithRank);
   };
 
   useEffect(() => request(refineResponse), []);
