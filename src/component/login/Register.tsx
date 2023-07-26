@@ -1,50 +1,46 @@
-import { usePostUsersCreate } from "../../api/users/usePostUsersCreate";
-import { registerRule } from "../../constant/validate";
 import { ChangeEventHandler, FormEventHandler } from "react";
+import { usePostUsersCreate } from "../../api/users/usePostUsersCreate";
 import "../../asset/css/Register.css";
+import { registerRule } from "../../constant/validate";
 
 const Register = () => {
   const { registerData, setRegisterData, requestRegister } =
     usePostUsersCreate();
 
   const validateInput = (value: string, name: string) => {
-    return (
-      value.length > 0 &&
-      registerRule[name].validator(value, registerData.password.value)
-    );
+    const rule = registerRule[name];
+    const result = rule.validator(value, registerData.password.value);
+
+    if (value.length === 0) {
+      return rule.emptyMessage;
+    }
+    return result;
   };
 
-  const checkValidation = (value: string, name: string) => {
-    const rule = registerRule[name];
+  const checkIsValid = (value: string, name: string) => {
+    const errorResult = validateInput(value, name);
+    const isValid = errorResult === null;
+    const error = isValid ? "" : errorResult;
 
-    if (validateInput(value, name)) {
-      setRegisterData({
-        ...registerData,
-        [name]: { ...registerData[name], value, error: "" },
-      });
-      return true;
-    }
     setRegisterData({
       ...registerData,
-      [name]: {
-        ...registerData[name],
-        value,
-        error: value.length ? rule.invalidMessage : rule.emptyMessage,
-      },
+      [name]: { ...registerData[name], value, error },
     });
-    registerData[name].ref.current?.focus();
-    return false;
+    if (!isValid) {
+      registerData[name].ref.current?.focus();
+    }
+    return isValid;
   };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = e => {
     const { value, name } = e.currentTarget;
-    checkValidation(value, name);
+    checkIsValid(value, name);
   };
 
   const submitRegister: FormEventHandler<HTMLButtonElement> = e => {
     e.preventDefault();
     const isAllValid = Object.keys(registerData).every(name =>
-      checkValidation(registerData[name].value, name),
+      checkIsValid(registerData[name].value, name),
     );
     if (isAllValid) requestRegister();
   };
