@@ -57,7 +57,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
     modifyFromRef("callSign", callSignRef);
     modifyFromRef("categoryId", categoryRef);
     modifyFromRef("status", statusRef);
-    change.categoryId += 1; // select option의 index는 0부터 시작하므로 +1
+    change.categoryId = Number(change.categoryId) + 1; // select option의 index는 0부터 시작하므로 +1
     return change;
   };
 
@@ -166,7 +166,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
             ref={categoryRef}
             resetDependency={reset}
             optionList={category.map(i => i.name)}
-            initialSelectedIndex={book.categoryId - 1}
+            initialSelectedIndex={Number(book.categoryId) - 1}
           />
         </div>
       </div>
