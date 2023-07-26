@@ -4,12 +4,13 @@ import MainNewBookPagination from "./MainNewBookPagination";
 import Image from "../utils/Image";
 import ArrLeft from "../../asset/img/arrow_left.svg";
 import ArrRight from "../../asset/img/arrow_right.svg";
+import { BookInfo } from "../../type";
 
 const mobileWidth = 100;
 const pcWidth = 200;
 
 type Props = {
-  docs: object[];
+  docs: BookInfo[];
 };
 
 const MainNewBookList = ({ docs }: Props) => {
