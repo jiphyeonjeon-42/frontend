@@ -3,28 +3,22 @@ import { useApi } from "../../hook/useApi";
 
 type Props = {
   bookInfoId: number;
-  setCurrentLike: (isLiked: boolean) => void;
-  setCurrentLikeNum?: (likeNum: number) => void;
 };
 
-export const useGetLike = ({
-  bookInfoId,
-  setCurrentLike,
-  setCurrentLikeNum,
-}: Props) => {
+export const useGetLike = ({ bookInfoId }: Props) => {
   const { request } = useApi("get", `books/info/${bookInfoId}/like`);
-  const [likeData, setLikeData] = useState({});
+  const [like, setLike] = useState({
+    isLiked: false,
+    likeNum: 0,
+  });
 
   const refineResponse = (response: any) => {
-    const refinelikeData = response.data;
-    setLikeData(refinelikeData);
-    setCurrentLike(refinelikeData.isLiked);
-    setCurrentLikeNum && setCurrentLikeNum(refinelikeData.likeNum);
+    setLike(response.data);
   };
 
   useEffect(() => {
     if (bookInfoId) request(refineResponse);
   }, []);
 
-  return { likeData };
+  return { like, setLike };
 };

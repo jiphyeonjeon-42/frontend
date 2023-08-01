@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { usePostLike } from "../../../api/like/usePostLike";
 import { useDeleteLike } from "../../../api/like/useDeleteLike";
 import { useGetLike } from "../../../api/like/useGetLike";
@@ -13,27 +12,25 @@ type Props = {
 };
 
 const Like = ({ bookInfoId }: Props) => {
-  const [currentLike, setCurrentLike] = useState(false);
-  const [currentLikeNum, setCurrentLikeNum] = useState(0);
-
   const { is42Authenticated } = usePermission();
 
-  useGetLike({
-    bookInfoId: +bookInfoId,
-    setCurrentLike,
-    setCurrentLikeNum,
-  });
+  const { like, setLike } = useGetLike({ bookInfoId: +bookInfoId });
   const { setBookInfoId: setDeleteLike } = useDeleteLike();
   const { setBookInfoId: setPostLike } = usePostLike();
+
   const deleteLike = () => {
-    setCurrentLike(false);
+    setLike({
+      isLiked: false,
+      likeNum: like.likeNum - 1,
+    });
     setDeleteLike(+bookInfoId);
-    setCurrentLikeNum(currentLikeNum - 1);
   };
   const postLike = () => {
-    setCurrentLike(true);
+    setLike({
+      isLiked: true,
+      likeNum: like.likeNum + 1,
+    });
     setPostLike(+bookInfoId);
-    setCurrentLikeNum(currentLikeNum + 1);
   };
 
   return (
@@ -42,16 +39,16 @@ const Like = ({ bookInfoId }: Props) => {
         <button
           className="like_button"
           type="button"
-          onClick={currentLike ? deleteLike : postLike}
+          onClick={like.isLiked ? deleteLike : postLike}
         >
           <Image
             className="like__icon"
-            src={currentLike ? FilledLike : EmptyLike}
-            alt={currentLike ? "liked" : "unliked"}
+            src={like.isLiked ? FilledLike : EmptyLike}
+            alt={like.isLiked ? "liked" : "unliked"}
           />
         </button>
       ) : null}
-      {`좋아요 ${currentLikeNum}`}
+      {`좋아요 ${like.likeNum}`}
     </div>
   );
 };

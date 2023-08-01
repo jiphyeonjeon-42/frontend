@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useGetLike, usePostLike, useDeleteLike } from "~/api/like";
 import Image from "~/component/utils/Image";
 import FilledLike from "~/asset/img/like_filled.svg";
@@ -11,10 +10,8 @@ type Props = {
 };
 
 const RentHistoryTable = ({ factor }: Props) => {
-  const [currentLike, setCurrentLike] = useState(false);
-  useGetLike({
+  const { like, setLike } = useGetLike({
     bookInfoId: factor.bookInfoId,
-    setCurrentLike,
   });
   const { setBookInfoId: setBookInfoIdPost } = usePostLike();
   const postLike = (bookInfoId: number) => {
@@ -26,12 +23,12 @@ const RentHistoryTable = ({ factor }: Props) => {
   };
 
   const clickLikeHandler = (bookInfoId: number) => {
-    if (currentLike) {
+    if (like.isLiked) {
       deleteLike(bookInfoId);
-      setCurrentLike(false);
+      setLike({ ...like, isLiked: false });
     } else {
       postLike(bookInfoId);
-      setCurrentLike(true);
+      setLike({ ...like, isLiked: true });
     }
   };
 
@@ -51,7 +48,7 @@ const RentHistoryTable = ({ factor }: Props) => {
           clickLikeHandler(factor.bookInfoId);
         }}
       >
-        {currentLike ? (
+        {like.isLiked ? (
           <Image className="mypage__like_icon" src={FilledLike} alt="like" />
         ) : (
           <Image className="mypage__like_icon" src={EmptyLike} alt="unlike" />
