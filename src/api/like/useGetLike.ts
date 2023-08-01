@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import getErrorMessage from "../../constant/error";
 import { useApi } from "../../hook/useApi";
-import { compareExpect } from "../../util/typeCheck";
 
 type Props = {
   initBookInfoId: number;
@@ -17,18 +15,8 @@ export const useGetLike = ({
   const { request } = useApi("get", `books/info/${initBookInfoId}/like`);
   const [likeData, setLikeData] = useState({});
 
-  const expectedItem = [
-    { key: "bookInfoId", type: "number", isNullable: false },
-    { key: "isLiked", type: "bool", isNullable: false },
-    { key: "likeNum", type: "number", isNullable: false },
-  ];
-
   const refineResponse = (response: any) => {
-    const [refinelikeData] = compareExpect(
-      `books/info/${initBookInfoId}/like`,
-      [response.data],
-      expectedItem,
-    );
+    const refinelikeData = response.data;
     setLikeData(refinelikeData);
     setCurrentLike(refinelikeData.isLiked);
     setCurrentLikeNum && setCurrentLikeNum(refinelikeData.likeNum);
