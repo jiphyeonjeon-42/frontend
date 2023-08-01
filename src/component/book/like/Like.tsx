@@ -35,13 +35,6 @@ const Like = ({ initBookInfoId }: Props) => {
     setPostLike(+initBookInfoId);
     setCurrentLikeNum(currentLikeNum + 1);
   };
-  const clickLikeHandler = () => {
-    if (currentLike) {
-      deleteLike();
-    } else {
-      postLike();
-    }
-  };
 
   return (
     <div className="like_button_box">
@@ -49,13 +42,13 @@ const Like = ({ initBookInfoId }: Props) => {
         <button
           className="like_button"
           type="button"
-          onClick={clickLikeHandler}
+          onClick={currentLike ? deleteLike : postLike}
         >
-          {currentLike ? (
-            <Image className="like__icon" src={FilledLike} alt="like" />
-          ) : (
-            <Image className="like__icon" src={EmptyLike} alt="unlike" />
-          )}
+          <Image
+            className="like__icon"
+            src={currentLike ? FilledLike : EmptyLike}
+            alt={currentLike ? "liked" : "unliked"}
+          />
         </button>
       ) : null}
       {`좋아요 ${currentLikeNum}`}
