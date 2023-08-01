@@ -2,6 +2,7 @@ import { useState } from "react";
 import { usePostLike } from "../../../api/like/usePostLike";
 import { useDeleteLike } from "../../../api/like/useDeleteLike";
 import { useGetLike } from "../../../api/like/useGetLike";
+import { usePermission } from "../../../hook/usePermission";
 
 import Image from "../../utils/Image";
 import FilledLike from "../../../asset/img/like_filled.svg";
@@ -14,6 +15,8 @@ type Props = {
 const Like = ({ initBookInfoId }: Props) => {
   const [currentLike, setCurrentLike] = useState(false);
   const [currentLikeNum, setCurrentLikeNum] = useState(0);
+
+  const { is42Authenticated } = usePermission();
 
   useGetLike({
     initBookInfoId: +initBookInfoId,
@@ -32,8 +35,6 @@ const Like = ({ initBookInfoId }: Props) => {
     setPostLike(+initBookInfoId);
     setCurrentLikeNum(currentLikeNum + 1);
   };
-  
-  const permission = JSON.parse(window.localStorage.getItem("user") || "{}");
   const clickLikeHandler = () => {
     if (currentLike) {
       deleteLike();
@@ -44,7 +45,7 @@ const Like = ({ initBookInfoId }: Props) => {
 
   return (
     <div className="like_button_box">
-      {permission !== null ? (
+      {is42Authenticated ? (
         <button
           className="like_button"
           type="button"
