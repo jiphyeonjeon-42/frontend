@@ -2,8 +2,10 @@ import { useState } from "react";
 import { usePostLike } from "../../../api/like/usePostLike";
 import { useDeleteLike } from "../../../api/like/useDeleteLike";
 import { useGetLike } from "../../../api/like/useGetLike";
-import ShowLike from "./ShowLike";
-import "../../../asset/css/BookDetail.css";
+
+import Image from "../../utils/Image";
+import FilledLike from "../../../asset/img/like_filled.svg";
+import EmptyLike from "../../../asset/img/like_empty.svg";
 
 type Props = {
   initBookInfoId: string;
@@ -30,15 +32,33 @@ const Like = ({ initBookInfoId }: Props) => {
     setPostLike(+initBookInfoId);
     setCurrentLikeNum(currentLikeNum + 1);
   };
+  
+  const permission = JSON.parse(window.localStorage.getItem("user") || "{}");
+  const clickLikeHandler = () => {
+    if (currentLike) {
+      deleteLike();
+    } else {
+      postLike();
+    }
+  };
+
   return (
-    <>
-      <ShowLike
-        deleteLike={deleteLike}
-        postLike={postLike}
-        currentLike={currentLike}
-        currentLikeNum={currentLikeNum}
-      />
-    </>
+    <div className="like_button_box">
+      {permission !== null ? (
+        <button
+          className="like_button"
+          type="button"
+          onClick={clickLikeHandler}
+        >
+          {currentLike ? (
+            <Image className="like__icon" src={FilledLike} alt="like" />
+          ) : (
+            <Image className="like__icon" src={EmptyLike} alt="unlike" />
+          )}
+        </button>
+      ) : null}
+      {`좋아요 ${currentLikeNum}`}
+    </div>
   );
 };
 
