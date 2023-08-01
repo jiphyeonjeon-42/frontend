@@ -9,17 +9,17 @@ import FilledLike from "../../../asset/img/like_filled.svg";
 import EmptyLike from "../../../asset/img/like_empty.svg";
 
 type Props = {
-  initBookInfoId: string;
+  bookInfoId: string;
 };
 
-const Like = ({ initBookInfoId }: Props) => {
+const Like = ({ bookInfoId }: Props) => {
   const [currentLike, setCurrentLike] = useState(false);
   const [currentLikeNum, setCurrentLikeNum] = useState(0);
 
   const { is42Authenticated } = usePermission();
 
   useGetLike({
-    initBookInfoId: +initBookInfoId,
+    bookInfoId: +bookInfoId,
     setCurrentLike,
     setCurrentLikeNum,
   });
@@ -27,12 +27,12 @@ const Like = ({ initBookInfoId }: Props) => {
   const { setBookInfoId: setPostLike } = usePostLike();
   const deleteLike = () => {
     setCurrentLike(false);
-    setDeleteLike(+initBookInfoId);
+    setDeleteLike(+bookInfoId);
     setCurrentLikeNum(currentLikeNum - 1);
   };
   const postLike = () => {
     setCurrentLike(true);
-    setPostLike(+initBookInfoId);
+    setPostLike(+bookInfoId);
     setCurrentLikeNum(currentLikeNum + 1);
   };
 

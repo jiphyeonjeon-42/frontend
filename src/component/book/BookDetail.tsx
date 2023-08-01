@@ -58,7 +58,7 @@ const BookDetail = () => {
               <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
             </div>
             <div className="book-likes">
-              <Like initBookInfoId={id} />
+              <Like bookInfoId={id} />
             </div>
           </div>
           <div className="book-detail">

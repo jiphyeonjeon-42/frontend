@@ -13,7 +13,7 @@ type Props = {
 const RentHistoryTable = ({ factor }: Props) => {
   const [currentLike, setCurrentLike] = useState(false);
   useGetLike({
-    initBookInfoId: factor.bookInfoId,
+    bookInfoId: factor.bookInfoId,
     setCurrentLike,
   });
   const { setBookInfoId: setBookInfoIdPost } = usePostLike();
