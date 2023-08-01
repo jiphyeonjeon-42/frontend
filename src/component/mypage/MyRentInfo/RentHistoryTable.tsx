@@ -13,23 +13,14 @@ const RentHistoryTable = ({ factor }: Props) => {
   const { like, setLike } = useGetLike({
     bookInfoId: factor.bookInfoId,
   });
-  const { setBookInfoId: setBookInfoIdPost } = usePostLike();
-  const postLike = (bookInfoId: number) => {
-    setBookInfoIdPost(bookInfoId);
-  };
-  const { setBookInfoId: setBookInfoIdDelete } = useDeleteLike();
-  const deleteLike = (bookInfoId: number) => {
-    setBookInfoIdDelete(bookInfoId);
-  };
+  const { setBookInfoId: requestPost } = usePostLike({ setLike });
+  const { setBookInfoId: requestDelete } = useDeleteLike({ setLike });
 
-  const clickLikeHandler = (bookInfoId: number) => {
-    if (like.isLiked) {
-      deleteLike(bookInfoId);
-      setLike({ ...like, isLiked: false });
-    } else {
-      postLike(bookInfoId);
-      setLike({ ...like, isLiked: true });
-    }
+  const postLike = () => {
+    requestPost(factor.bookInfoId);
+  };
+  const deleteLike = () => {
+    requestDelete(factor.bookInfoId);
   };
 
   return (
@@ -44,9 +35,7 @@ const RentHistoryTable = ({ factor }: Props) => {
       <button
         className="rent_histories__table-list__button"
         type="button"
-        onClick={() => {
-          clickLikeHandler(factor.bookInfoId);
-        }}
+        onClick={like.isLiked ? deleteLike : postLike}
       >
         {like.isLiked ? (
           <Image className="mypage__like_icon" src={FilledLike} alt="like" />

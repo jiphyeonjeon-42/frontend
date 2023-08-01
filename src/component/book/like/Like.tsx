@@ -15,22 +15,14 @@ const Like = ({ bookInfoId }: Props) => {
   const { is42Authenticated } = usePermission();
 
   const { like, setLike } = useGetLike({ bookInfoId: +bookInfoId });
-  const { setBookInfoId: setDeleteLike } = useDeleteLike();
-  const { setBookInfoId: setPostLike } = usePostLike();
+  const { setBookInfoId: requestdelete } = useDeleteLike({ setLike });
+  const { setBookInfoId: requestPost } = usePostLike({ setLike });
 
   const deleteLike = () => {
-    setLike({
-      isLiked: false,
-      likeNum: like.likeNum - 1,
-    });
-    setDeleteLike(+bookInfoId);
+    requestdelete(+bookInfoId);
   };
   const postLike = () => {
-    setLike({
-      isLiked: true,
-      likeNum: like.likeNum + 1,
-    });
-    setPostLike(+bookInfoId);
+    requestPost(+bookInfoId);
   };
 
   return (

@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
 import { useApi } from "../../hook/useApi";
 
-export const usePostLike = (initBookInfoId?: number) => {
-  const [bookInfoId, setBookInfoId] = useState(initBookInfoId);
+type Props = {
+  setLike: React.Dispatch<
+    React.SetStateAction<{ isLiked: boolean; likeNum: number }>
+  >;
+};
+
+export const usePostLike = ({ setLike }: Props) => {
+  const [bookInfoId, setBookInfoId] = useState<number>();
   const { request } = useApi("post", `books/info/${bookInfoId}/like`);
-  
+
+  const onSuccess = () => {
+    setLike(prev => ({ isLiked: true, likeNum: prev.likeNum + 1 }));
+  };
+
   useEffect(() => {
-    if (bookInfoId) request(() => {});
+    if (bookInfoId) request(onSuccess);
     setBookInfoId(undefined);
   }, [bookInfoId]);
 
