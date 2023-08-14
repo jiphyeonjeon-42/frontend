@@ -1,3 +1,5 @@
+import { User } from "../type";
+
 /*  기본적인 날짜표시 형식 20yy-mm-dd */
 const dateReg = /^(20\d{2})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
 
@@ -51,4 +53,24 @@ export const addDay = (num: number, date = nowDate) => {
   if (!isFormattedDate(date)) return date;
   const dateObj = new Date(date);
   return dateFormat(addDayDateObject(dateObj, num).toISOString());
+};
+
+/* lending 관련 날짜 함수 */
+
+export const lendingRestriction = (user: User) => {
+  // 대출제한날짜는 이미 반납한 대출건의 연체제한 + 대출중인 도서의 연체일로 계산
+  const restrictionDate =
+    !user.penaltyEndDate || dateLessThan(user.penaltyEndDate)
+      ? addDay(user.overDueDay) // 오늘 날짜 + 대출중인 도서를 오늘 반납시 받게 될 연체일
+      : addDay(user.overDueDay, user.penaltyEndDate);
+  // 이미 반납한 대출건의 연체 제한날짜 + 대출중인 도서를 오늘 반납시 받게 될 연체일
+
+  // 대출제한날짜가 현재 날짜보다 크면 대출제한
+  const isRestricted = compareDate(
+    restrictionDate,
+    nowDate,
+    (d1, d2) => d1 > d2,
+  );
+
+  return { isRestricted, restrictionDate };
 };
