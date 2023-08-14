@@ -40,9 +40,7 @@ export const isExpiredDate = (expireDateString: string) => {
 };
 
 export const addDay = (num: number, date = nowDate) => {
-  const splited = splitDate(dateFormat(date));
-  if (!splited) return date;
-  const [year, month, day] = splited;
-  const dateObj = new Date(year, month - 1, day);
+  if (!isFormattedDate(date)) return date;
+  const dateObj = new Date(date);
   return dateFormat(addDayDateObject(dateObj, num).toISOString());
 };
