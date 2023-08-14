@@ -19,8 +19,16 @@ export const splitDate = (string: string) =>
     ?.map(v => parseInt(v)) || [];
 
 /* string 형식의 날짜 비교 */
+export const compareDate = (
+  date1: string,
+  date2 = nowDate,
+  compare: (date1: string, date2: string) => boolean,
+) => {
+  return compare(dateFormat(date1), dateFormat(date2));
+};
+
 export const dateLessThan = (date: string, now = nowDate) => {
-  return dateFormat(date) < now;
+  return compareDate(date, now, (date1, date2) => date1 < date2);
 };
 
 /* 날짜 및 시간 계산 */
