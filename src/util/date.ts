@@ -1,11 +1,8 @@
-import { isNumber, isString } from "./typeCheck";
 /*  기본적인 날짜표시 형식 20yy-mm-dd */
-
 const dateReg = /^(20\d{2})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
 
 export const isFormattedDate = (string: string) => RegExp(dateReg).test(string);
 export const dateFormat = (string: string) => {
-  if (isFormattedDate(string)) return string;
   return string?.slice(0, 10)?.replace(".", "-") || "";
 };
 
@@ -23,7 +20,6 @@ export const splitDate = (string: string) =>
 
 /* string 형식의 날짜 비교 */
 export const dateLessThan = (date: string, now = nowDate) => {
-  if (!isString(date) || !isString(now)) return undefined;
   return dateFormat(date) < now;
 };
 
@@ -44,7 +40,6 @@ export const isExpiredDate = (expireDateString: string) => {
 };
 
 export const addDay = (num: number, date = nowDate) => {
-  if (!isString(date) || !isNumber(num)) return date;
   const splited = splitDate(dateFormat(date));
   if (!splited) return date;
   const [year, month, day] = splited;
