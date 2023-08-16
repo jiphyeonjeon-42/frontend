@@ -1,6 +1,4 @@
-import Image from "../utils/Image";
 import SearchBar from "../utils/SearchBar";
-import ScrollIcon from "../../asset/img/scroll-icon.svg";
 import "../../asset/css/Banner.css";
 import "../../asset/css/MainBanner.css";
 
@@ -24,11 +22,7 @@ const MainBanner = () => {
         </div>
         <div className="main-banner__scroll">
           <p className="font-12 color-d5">스크롤을 내려주세요</p>
-          <Image
-            src={ScrollIcon}
-            className="main-banner__scroll_icon"
-            alt="scroll-icon"
-          />
+          <div className="main-banner__mouse" />
         </div>
       </div>
     </section>
