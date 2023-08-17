@@ -19,7 +19,6 @@
   z-index: 1;
   padding: 0;
   transition: all 0.3s ease-in-out;
-  -webkit-transition: 0.3s;
 }
 
 .main-new__arrow.right {
@@ -41,7 +40,6 @@
 
 .main-new__books {
   transition: all 0.3s ease-in-out;
-  -webkit-transition: 0.3s;
 }
 
 .main-new__book {
@@ -53,13 +51,8 @@
 
 .main-new__book:hover {
   margin-top: 1rem;
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  -o-transform: scale(1.05);
   transform: scale(1.05);
   transition: all 0.3s ease-in-out;
-  -webkit-transition: 0.3s;
 }
 
 .main-new__book:first-child {
@@ -118,6 +111,6 @@
   }
 
   .main-new__book {
-    margin-left:1rem;
+    margin-left: 1rem;
   }
 }
