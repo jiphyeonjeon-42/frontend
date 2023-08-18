@@ -79,11 +79,11 @@ const SearchBar = ({
           onClick={onClickBarcodeButton}
           aria-label="바코드"
         >
-          <img src={BarCodeIcon} />
+          <img src={BarCodeIcon} alt="" />
         </button>
       ) : null}
       <button className="search-bar__button" type="submit" aria-label="검색">
-        <img src={SearchIcon} />
+        <img src={SearchIcon} alt="" />
       </button>
     </form>
   );
