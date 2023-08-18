@@ -2,6 +2,7 @@
 import { defineConfig, loadEnv } from "vite";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import react from "@vitejs/plugin-react-swc";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 /**
  * REACT_APP_ 으로 시작하는 환경변수를
@@ -21,7 +22,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     /** @see https://vitejs.dev/plugins/ */
-    plugins: [react()],
+    plugins: [react(), tsconfigPaths()],
 
     envPrefix,
 
