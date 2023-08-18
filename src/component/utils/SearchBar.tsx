@@ -1,13 +1,15 @@
 import {
-  useRef,
-  useState,
-  useEffect,
   ChangeEventHandler,
   FormEventHandler,
   MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
 } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import "../../asset/css/SearchBar.css";
+import BarCodeIcon from "../../asset/img/barcode.svg";
+import SearchIcon from "../../asset/img/search_icon_black.svg";
 
 type Props = {
   setQuery?: (query: string) => void;
@@ -75,12 +77,13 @@ const SearchBar = ({
           type="button"
           className="search-bar__button barcode"
           onClick={onClickBarcodeButton}
+          aria-label="바코드"
         >
-          바코드
+          <img src={BarCodeIcon} alt="" />
         </button>
       ) : null}
-      <button className="search-bar__button submit" type="submit">
-        검색
+      <button className="search-bar__button" type="submit" aria-label="검색">
+        <img src={SearchIcon} alt="" />
       </button>
     </form>
   );
