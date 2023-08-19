@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useGetLike } from "../../../api/like/useGetLike";
-import { usePostLike } from "../../../api/like/usePostLike";
-import { useDeleteLike } from "../../../api/like/useDeleteLike";
-import Image from "../../utils/Image";
-import FilledLike from "../../../asset/img/like_filled.svg";
-import EmptyLike from "../../../asset/img/like_empty.svg";
-import { History } from "../../../type";
-import "../../../asset/css/RentHistory.css";
+import { useGetLike, usePostLike, useDeleteLike } from "~/api/like";
+import Image from "~/component/utils/Image";
+import FilledLike from "~/asset/img/like_filled.svg";
+import EmptyLike from "~/asset/img/like_empty.svg";
+import type { History } from "~/type";
+import "~/asset/css/RentHistory.css";
 
 type Props = {
   factor: History;
