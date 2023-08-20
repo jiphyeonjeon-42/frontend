@@ -15,6 +15,7 @@ const BookSearchBar = () => {
     e.preventDefault();
     const searchWord = e.currentTarget.input.value;
     navigate(`/search?search=${encodeURIComponent(searchWord)}`);
+    e.currentTarget.input.blur();
   };
 
   useEffect(() => {
