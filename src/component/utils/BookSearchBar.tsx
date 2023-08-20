@@ -1,10 +1,14 @@
-import { FormEventHandler, useEffect, useState } from "react";
+import { FormEventHandler, useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import SearchBar from "~/component/utils/SearchBar";
+import BookSearchPreview from "~/component/utils/BookSearchPreview";
+import BookSearchRecentKeyword from "~/component/utils/BookSearchRecentKeywords";
 
 const BookSearchBar = () => {
+  const [isOpened, setIsOpened] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [params] = useSearchParams();
+  const ref = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   const goToSearchPage: FormEventHandler<HTMLFormElement> = e => {
@@ -23,8 +27,20 @@ const BookSearchBar = () => {
       <SearchBar.Input
         value={keyword}
         onChange={e => setKeyword(e.target.value)}
-        ref={undefined}
+        onFocus={() => setIsOpened(true)}
+        ref={ref}
       />
+      <SearchBar.DropDown
+        isOpened={isOpened}
+        setIsOpened={setIsOpened}
+        searchBarRef={ref}
+      >
+        {keyword.length == 0 ? (
+          <BookSearchRecentKeyword />
+        ) : (
+          <BookSearchPreview />
+        )}
+      </SearchBar.DropDown>
       <SearchBar.Button />
     </SearchBar>
   );

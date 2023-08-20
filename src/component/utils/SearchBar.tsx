@@ -1,6 +1,7 @@
 import { ComponentProps } from "react";
 import SearchBarInput from "~/component/utils/SearchBarInput";
 import SearchBarButton from "~/component/utils/SearchBarButton";
+import SearchBarDropDown from "~/component/utils/SearchBarDropDown";
 import "~/asset/css/SearchBar.css";
 
 export type Props = ComponentProps<"form"> & {
@@ -24,3 +25,4 @@ export default SearchBar;
 
 SearchBar.Input = SearchBarInput;
 SearchBar.Button = SearchBarButton;
+SearchBar.DropDown = SearchBarDropDown;
