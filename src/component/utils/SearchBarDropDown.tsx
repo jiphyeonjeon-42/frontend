@@ -32,9 +32,16 @@ const SearchBarDropDown = ({
       )
         setIsOpened(false);
     };
+
+    const closeWithEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpened(false);
+    };
+
     document.addEventListener("click", closeWhenClickedOutside);
+    document.addEventListener("keydown", closeWithEsc);
     return () => {
       document.removeEventListener("click", closeWhenClickedOutside);
+      document.removeEventListener("keydown", closeWithEsc);
     };
   }, []);
 
