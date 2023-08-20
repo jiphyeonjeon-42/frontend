@@ -1,6 +1,6 @@
 .search-bar__dropdown {
   text-align: left;
-  background-color: white !important;
+  background-color: rgba(255, 255, 255, 0.6) !important;
   position: absolute;
   top: 6.4rem;
   padding: 1rem;
