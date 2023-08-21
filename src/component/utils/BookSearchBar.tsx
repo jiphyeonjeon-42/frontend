@@ -14,6 +14,12 @@ const BookSearchBar = () => {
   const goToSearchPage: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
     const searchWord = e.currentTarget.input.value;
+    const storageSaved = localStorage.getItem("recent") || "[]";
+    const recentKeywords = JSON.parse(storageSaved);
+    if (!recentKeywords.includes(searchWord)) {
+      recentKeywords.unshift(searchWord);
+      localStorage.setItem("recent", JSON.stringify(recentKeywords));
+    }
     navigate(`/search?search=${encodeURIComponent(searchWord)}`);
     e.currentTarget.input.blur();
   };
