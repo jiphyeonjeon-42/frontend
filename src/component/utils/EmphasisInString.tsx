@@ -23,7 +23,12 @@ const EmphasisInString = ({
   return (
     <>
       {wholeString.substring(0, emphasisPosition)}
-      <span style={{ color: colorCode }}>{emphasis}</span>
+      <span style={{ color: colorCode }}>
+        {wholeString.slice(
+          emphasisPosition,
+          emphasisPosition + emphasis.length,
+        )}
+      </span>
       {wholeString.substring(emphasisPosition + emphasis.length)}
     </>
   );
