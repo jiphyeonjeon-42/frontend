@@ -1,0 +1,57 @@
+.search-preview__wrapper {
+  display: flex;
+  background-color: rgba(200, 200, 200, 0.6);
+}
+
+.search-preview__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-preview__left {
+  overflow: hidden;
+  width: 100%;
+}
+
+.search-preview__book {
+  text-align: left;
+  font-size: 1.4rem;
+  height: 6rem;
+  cursor: pointer;
+  margin: 0;
+  padding: 0 2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-bottom: solid 1px gray;
+}
+
+.search-preview__book.selected {
+  background-color: rgba(200, 200, 200, 0.6);
+}
+
+.search-preview__book__title {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.search-preview__book__author:after {
+  content: "|";
+  margin: 0 1rem;
+}
+
+.search-preview__pagination {
+  margin-top: 2rem;
+}
+
+.search-preview__more {
+  padding: 2rem;
+  display: block;
+  text-align: center;
+  font-size: 1.6rem;
+  margin: auto;
+}

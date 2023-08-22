@@ -1,4 +1,10 @@
-import { FormEventHandler, useEffect, useRef, useState } from "react";
+import {
+  FormEventHandler,
+  useDeferredValue,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import SearchBar from "~/component/utils/SearchBar";
 import BookSearchPreview from "~/component/utils/BookSearchPreview";
@@ -7,6 +13,7 @@ import BookSearchRecentKeyword from "~/component/utils/BookSearchRecentKeywords"
 const BookSearchBar = () => {
   const [isOpened, setIsOpened] = useState(false);
   const [keyword, setKeyword] = useState("");
+  const searchWord = useDeferredValue(keyword);
   const [params] = useSearchParams();
   const ref = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -46,7 +53,7 @@ const BookSearchBar = () => {
         {keyword.length == 0 ? (
           <BookSearchRecentKeyword />
         ) : (
-          <BookSearchPreview />
+          <BookSearchPreview keyword={searchWord} key={searchWord} />
         )}
       </SearchBar.DropDown>
       <SearchBar.Button />
