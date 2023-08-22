@@ -1,6 +1,7 @@
 import { useGetBooksInfoAutoComplete } from "~/api/books/useGetBooksInfoAutoComplete";
 import { BookInfo } from "~/type";
 import BookSearchPreviewList from "~/component/utils/BookSearchPreviewList";
+import EmphasisInString from "./EmphasisInString";
 
 export type BookPreviewType = Omit<BookInfo, "category">;
 
@@ -19,12 +20,20 @@ const BookSearchPreview = ({ keyword }: Props) => {
         bookUI={({ book }) => {
           return (
             <>
-              <p className="search-preview__book__title">{book.title}</p>
+              <p className="search-preview__book__title">
+                <EmphasisInString wholeString={book.title} emphasis={keyword} />
+              </p>
               <span className="search-preview__book__author">
-                {book.author}
+                <EmphasisInString
+                  wholeString={book.author}
+                  emphasis={keyword}
+                />
               </span>
               <span className="search-preview__book__publisher">
-                {book.publisher}
+                <EmphasisInString
+                  wholeString={book.publisher}
+                  emphasis={keyword}
+                />
               </span>
             </>
           );
