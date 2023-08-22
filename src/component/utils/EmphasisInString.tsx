@@ -12,9 +12,10 @@ const EmphasisInString = ({
   emphasisColor = "red",
 }: Props) => {
   const colorCode = colorPalette.find(i => i.string === emphasisColor)?.code;
-  const emphasisPosition = wholeString.indexOf(emphasis);
+  const emphasisPosition = wholeString
+    .toUpperCase()
+    .indexOf(emphasis.toUpperCase());
   const isAvailableEmphasis = emphasis.length && emphasisPosition >= 0;
-
 
   if (!isAvailableEmphasis) {
     return <>{wholeString}</>;
