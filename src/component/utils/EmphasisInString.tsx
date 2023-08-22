@@ -6,10 +6,15 @@ type Props = {
   emphasisColor?: string;
 };
 
-const EmphasisInString = ({ wholeString, emphasis, emphasisColor }: Props) => {
+const EmphasisInString = ({
+  wholeString,
+  emphasis = "",
+  emphasisColor = "red",
+}: Props) => {
   const colorCode = colorPalette.find(i => i.string === emphasisColor)?.code;
   const emphasisPosition = wholeString.indexOf(emphasis);
   const isAvailableEmphasis = emphasis.length && emphasisPosition > 0;
+
 
   if (!isAvailableEmphasis) {
     return <>{wholeString}</>;
@@ -21,11 +26,6 @@ const EmphasisInString = ({ wholeString, emphasis, emphasisColor }: Props) => {
       {wholeString.substring(emphasisPosition + emphasis.length)}
     </>
   );
-};
-
-EmphasisInString.defaultProps = {
-  emphasis: "",
-  emphasisColor: "red",
 };
 
 export default EmphasisInString;
