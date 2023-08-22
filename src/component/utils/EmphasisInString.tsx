@@ -13,7 +13,7 @@ const EmphasisInString = ({
 }: Props) => {
   const colorCode = colorPalette.find(i => i.string === emphasisColor)?.code;
   const emphasisPosition = wholeString.indexOf(emphasis);
-  const isAvailableEmphasis = emphasis.length && emphasisPosition > 0;
+  const isAvailableEmphasis = emphasis.length && emphasisPosition >= 0;
 
 
   if (!isAvailableEmphasis) {
