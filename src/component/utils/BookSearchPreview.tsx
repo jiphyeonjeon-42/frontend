@@ -1,4 +1,4 @@
-import { useGetBooksInfoAutoComplete } from "~/api/books/useGetBooksInfoAutoComplete";
+import { useGetSearchKeywordsAutocomplete } from "~/api/searchKeywords/useGetSearchKeywordsAutoComplete";
 import { BookInfo } from "~/type";
 import BookSearchPreviewList from "~/component/utils/BookSearchPreviewList";
 import EmphasisInString from "./EmphasisInString";
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const BookSearchPreview = ({ keyword }: Props) => {
-  const { books } = useGetBooksInfoAutoComplete();
+  const { books } = useGetSearchKeywordsAutocomplete();
 
   return (
     <div className="search-preview__wrapper">
