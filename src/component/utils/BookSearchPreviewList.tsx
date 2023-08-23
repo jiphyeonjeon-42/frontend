@@ -20,38 +20,12 @@ const BookSearchPreviewList = ({ keyword, books, bookUI }: Props) => {
   const pageCount = Math.floor(books.length / PAGE_SIZE);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      e.stopPropagation();
-      if (e.key === "ArrowUp") {
-        setSelectedIndex(prev => (prev - 1 + PAGE_SIZE) % PAGE_SIZE);
-      } else if (e.key === "ArrowDown") {
-        setSelectedIndex(prev => (prev + 1) % PAGE_SIZE);
-      } else if (e.key === "ArrowLeft") {
-        setPage(prev => Math.max(prev - 1, 0));
-      } else if (e.key === "ArrowRight") {
-        setPage(prev => Math.min(prev + 1, pageCount - 1));
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedIndex, pageCount]);
-
   return (
     <>
       <div className="search-preview__left">
         <div className="search-preview__list">
           {slicedBooks.map((book, index) => {
             const isSelected = index === selectedIndex;
-            const setSelectedOrNavigate = (
-              e: MouseEvent<HTMLButtonElement>,
-            ) => {
-              e.stopPropagation();
-              if (isSelected) navigate(`/info/${book.id}`);
-              else setSelectedIndex(index);
-            };
 
             return (
               <button
@@ -61,7 +35,11 @@ const BookSearchPreviewList = ({ keyword, books, bookUI }: Props) => {
                 className={`search-preview__book ${
                   isSelected ? "selected" : ""
                 }`}
-                onClick={setSelectedOrNavigate}
+                onClick={e => {
+                  e.preventDefault();
+                  navigate(`/info/${book.id}`);
+                }}
+                onMouseOver={() => setSelectedIndex(index)}
               >
                 {bookUI({ book })}
               </button>
