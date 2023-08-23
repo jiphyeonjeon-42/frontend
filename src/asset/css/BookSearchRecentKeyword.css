@@ -17,10 +17,15 @@
   width: 100%;
   font-size: 1.4rem;
   gap: 0.8rem;
+  padding-right: 1rem;
 }
 
 .recent-keyword__keyword {
   position: relative;
+  white-space: wrap;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
 }
 
 .recent-keyword__keyword > a {
@@ -36,8 +41,6 @@
   cursor: pointer;
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
   padding: 1rem;
 }
 .recent-keyword__remove > img {

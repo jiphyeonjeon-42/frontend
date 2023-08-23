@@ -36,6 +36,7 @@ const BookSearchBar = () => {
         onChange={e => setKeyword(e.target.value)}
         onFocus={() => setIsOpened(true)}
         ref={ref}
+        maxLength={80}
       />
       <SearchBar.DropDown
         isOpened={isOpened}
