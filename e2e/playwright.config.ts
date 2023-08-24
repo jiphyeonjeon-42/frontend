@@ -13,7 +13,6 @@ const baseURL = `http://127.0.0.1:${process.env.PORT || 4242}`;
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./e2e",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */

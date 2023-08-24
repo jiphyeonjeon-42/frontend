@@ -2,7 +2,7 @@ import { test } from "@playwright/test";
 
 test("전체 도서 목록 열람", async ({ page }) => {
   await page.goto("http://localhost:4242/");
-  await page.getByRole("link").filter({ hasText: "도서목록" }).click();
+  await page.getByRole("link", { name: "도서목록" }).click();
   await page.getByRole("button", { name: "IT 일반" }).click();
   await page.getByRole("button", { name: "nextCategory" }).click();
   await page.getByRole("button", { name: "preCategory" }).click();
