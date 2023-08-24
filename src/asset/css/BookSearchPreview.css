@@ -1,14 +1,19 @@
 .search-preview__wrapper {
-  display: flex;
-  background-color: rgba(200, 200, 200, 0.6);
+  background-color: white;
+  z-index: 2;
+  display: block;
 }
 
 .search-preview__list {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
 }
 
 .search-preview__left {
+  display: flex;
   overflow: hidden;
   width: 100%;
 }
@@ -35,6 +40,7 @@
   overflow: hidden;
   font-size: 1.6rem;
   font-weight: bold;
+  margin-bottom: 0.4rem;
   text-overflow: ellipsis;
   box-sizing: border-box;
 }
@@ -44,14 +50,28 @@
   margin: 0 1rem;
 }
 
+.search-preview__image {
+  flex-shrink: 0;
+}
+
 .search-preview__pagination {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .search-preview__more {
-  padding: 2rem;
+  padding: 1rem;
   display: block;
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .search-preview__book {
+    padding: 0 1rem;
+    font-size: 1.2rem;
+  }
+  .search-preview__book__title {
+    font-size: 1.4rem;
+  }
 }

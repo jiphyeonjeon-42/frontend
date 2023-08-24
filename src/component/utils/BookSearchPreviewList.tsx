@@ -46,27 +46,28 @@ const BookSearchPreviewList = ({ keyword, books, bookUI }: Props) => {
             );
           })}
         </div>
-        <PaginationCircle
-          className="search-preview__pagination"
-          currentPage={page}
-          setCurrentPage={setPage}
-          length={pageCount}
+        <Image
+        className="search-preview__image"
+          width={120}
+          height={180}
+          src={slicedBooks[selectedIndex]?.image}
+          alt={slicedBooks[selectedIndex]?.title}
         />
-        <Link
-          className="search-preview__more"
-          to={`/search?search=${encodeURI(keyword)}`}
-        >
-          {`
+      </div>
+      <PaginationCircle
+        className="search-preview__pagination"
+        currentPage={page}
+        setCurrentPage={setPage}
+        length={pageCount}
+      />
+      <Link
+        className="search-preview__more"
+        to={`/search?search=${encodeURI(keyword)}`}
+      >
+        {`
            
           검색 결과 더보기`}
-        </Link>
-      </div>
-      <Image
-        width={180}
-        height={270}
-        src={slicedBooks[selectedIndex]?.image}
-        alt={slicedBooks[selectedIndex]?.title}
-      />
+      </Link>
     </>
   );
 };
