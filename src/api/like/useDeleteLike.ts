@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-import { useApi } from "../../hook/useApi";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useApi } from "~/hook/useApi";
 
 type Props = {
-  setLike: React.Dispatch<
-    React.SetStateAction<{ isLiked: boolean; likeNum: number }>
-  >;
+  setLike: Dispatch<SetStateAction<{ isLiked: boolean; likeNum: number }>>;
 };
 
 export const useDeleteLike = ({ setLike }: Props) => {
