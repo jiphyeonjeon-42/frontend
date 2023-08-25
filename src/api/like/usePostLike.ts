@@ -1,29 +1,22 @@
-import { useEffect, useState } from "react";
-import { useApi } from "../../hook/useApi";
-import { compareExpect } from "../../util/typeCheck";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useApi } from "~/hook/useApi";
 
-export const usePostLike = (initBookInfoId?: number) => {
-  const [bookInfoId, setBookInfoId] = useState(initBookInfoId);
+type Props = {
+  setLike: Dispatch<SetStateAction<{ isLiked: boolean; likeNum: number }>>;
+};
+
+export const usePostLike = ({ setLike }: Props) => {
+  const [bookInfoId, setBookInfoId] = useState<number>();
   const { request } = useApi("post", `books/info/${bookInfoId}/like`);
-  const [likeData, setLikeData] = useState({});
 
-  const expectedItem = [
-    { key: "userId", type: "number", isNullable: false },
-    { key: "bookInfoId", type: "number", isNullable: false },
-  ];
-
-  const refineResponse = (response: any) => {
-    const [refinelikeData] = compareExpect(
-      `books/info/${initBookInfoId}/like`,
-      [response.data],
-      expectedItem,
-    );
-    setLikeData(refinelikeData);
+  const onSuccess = () => {
+    setLike(prev => ({ isLiked: true, likeNum: prev.likeNum + 1 }));
   };
+
   useEffect(() => {
-    if (bookInfoId) request(refineResponse);
+    if (bookInfoId) request(onSuccess);
     setBookInfoId(undefined);
   }, [bookInfoId]);
 
-  return { setBookInfoId, likeData };
+  return { setBookInfoId };
 };

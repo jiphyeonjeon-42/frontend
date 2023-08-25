@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useGetLike, usePostLike, useDeleteLike } from "~/api/like";
 import Image from "~/component/utils/Image";
 import FilledLike from "~/asset/img/like_filled.svg";
@@ -11,28 +10,17 @@ type Props = {
 };
 
 const RentHistoryTable = ({ factor }: Props) => {
-  const [currentLike, setCurrentLike] = useState(false);
-  useGetLike({
-    initBookInfoId: factor.bookInfoId,
-    setCurrentLike,
+  const { like, setLike } = useGetLike({
+    bookInfoId: factor.bookInfoId,
   });
-  const { setBookInfoId: setBookInfoIdPost } = usePostLike();
-  const postLike = (bookInfoId: number) => {
-    setBookInfoIdPost(bookInfoId);
-  };
-  const { setBookInfoId: setBookInfoIdDelete } = useDeleteLike();
-  const deleteLike = (bookInfoId: number) => {
-    setBookInfoIdDelete(bookInfoId);
-  };
+  const { setBookInfoId: requestPost } = usePostLike({ setLike });
+  const { setBookInfoId: requestDelete } = useDeleteLike({ setLike });
 
-  const clickLikeHandler = (bookInfoId: number) => {
-    if (currentLike) {
-      deleteLike(bookInfoId);
-      setCurrentLike(false);
-    } else {
-      postLike(bookInfoId);
-      setCurrentLike(true);
-    }
+  const postLike = () => {
+    requestPost(factor.bookInfoId);
+  };
+  const deleteLike = () => {
+    requestDelete(factor.bookInfoId);
   };
 
   return (
@@ -47,11 +35,9 @@ const RentHistoryTable = ({ factor }: Props) => {
       <button
         className="rent_histories__table-list__button"
         type="button"
-        onClick={() => {
-          clickLikeHandler(factor.bookInfoId);
-        }}
+        onClick={like.isLiked ? deleteLike : postLike}
       >
-        {currentLike ? (
+        {like.isLiked ? (
           <Image className="mypage__like_icon" src={FilledLike} alt="like" />
         ) : (
           <Image className="mypage__like_icon" src={EmptyLike} alt="unlike" />
