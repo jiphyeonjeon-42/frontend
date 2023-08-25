@@ -18,7 +18,6 @@
   overflow: hidden;
 }
 
-
 .search-preview__book {
   text-align: left;
   font-size: 1.4rem;
@@ -55,8 +54,32 @@
   flex-shrink: 0;
 }
 
-.search-preview__pagination {
-  margin-top: 1rem;
+.search-preview__pagination.pagination {
+  display: flex;
+  align-items: center;
+  margin-top: 0.4rem;
+  padding: 0;
+}
+.search-preview__pagination.pagination > span {
+  font-size: 1.4rem;
+  margin-top: 0.4rem;
+}
+
+.search-preview__pagination.pagination > span:before {
+  content: "0";
+}
+
+.search-preview__page {
+  font-weight: bold;
+}
+.search-preview__last-page {
+  color: #5d5d5d;
+}
+
+.search-preview__page:after {
+  content: "|";
+  margin: 0 1rem;
+  font-weight: normal;
 }
 
 .search-preview__more {
