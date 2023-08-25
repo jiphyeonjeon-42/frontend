@@ -4,6 +4,7 @@ import { useGetSearchKeywordsAutocomplete } from "~/api/searchKeywords/useGetSea
 import { type BookInfo } from "~/type";
 import BookSearchPreviewList from "~/component/utils/BookSearchPreviewList";
 import Paginations from "~/component/utils/Paginations";
+import EmphasisInString from "./EmphasisInString";
 import "~/asset/css/BookSearchPreview.css";
 
 export type BookPreviewType = Omit<BookInfo, "category">;
@@ -15,7 +16,7 @@ type Props = {
 const PAGE_SIZE = 3;
 
 const BookSearchPreview = ({ keyword }: Props) => {
-  const { books } = useGetSearchKeywordsAutocomplete();
+  const { books, totalCount } = useGetSearchKeywordsAutocomplete();
   const [page, setPage] = useState(1);
 
   const slicedBooks = books.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -39,7 +40,10 @@ const BookSearchPreview = ({ keyword }: Props) => {
         className="search-preview__more"
         to={`/search?search=${encodeURI(keyword)}`}
       >
-        {`검색 결과 더보기`}
+        <EmphasisInString
+          wholeString={`전체 ${totalCount} 건 검색 결과 더보기`}
+          emphasis={`${totalCount}`}
+        />
       </Link>
     </div>
   );
