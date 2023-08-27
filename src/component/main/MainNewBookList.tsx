@@ -5,6 +5,7 @@ import Image from "../utils/Image";
 import ArrLeft from "../../asset/img/arrow_left.svg";
 import ArrRight from "../../asset/img/arrow_right.svg";
 import { BookInfo } from "../../type";
+import { useInterval } from "~/hook/useInterval";
 
 const mobileWidth = 100;
 const pcWidth = 200;
@@ -18,7 +19,6 @@ const MainNewBookList = ({ docs }: Props) => {
   const [bookWidth, setBookWidth] = useState(pcWidth);
   const [transition, setTransition] = useState(true);
   const [displayCount, setDisplayCount] = useState(0);
-  const intervalId = useRef<NodeJS.Timer>();
 
   useEffect(() => {
     function handleSize() {
@@ -58,19 +58,7 @@ const MainNewBookList = ({ docs }: Props) => {
     } else setPage(index - 1);
   };
 
-  const pauseInterval = () => {
-    clearInterval(intervalId.current);
-  };
-  const startInterval = () => {
-    clearInterval(intervalId.current);
-    intervalId.current = setInterval(onNext, 2000);
-  };
-
-  useEffect(() => {
-    clearInterval(intervalId.current);
-    intervalId.current = setInterval(onNext, 2000);
-    return () => clearInterval(intervalId.current);
-  }, [page]);
+  const { startInterval, stopInterval } = useInterval(onNext, 2000);
 
   return (
     <div className="main-new__content">
@@ -78,7 +66,7 @@ const MainNewBookList = ({ docs }: Props) => {
         className="main-new__arrow"
         onClick={onPrev}
         type="button"
-        onMouseEnter={pauseInterval}
+        onMouseEnter={stopInterval}
         onMouseLeave={startInterval}
       >
         <Image
@@ -92,7 +80,7 @@ const MainNewBookList = ({ docs }: Props) => {
         className="main-new__arrow right"
         onClick={onNext}
         type="button"
-        onMouseEnter={pauseInterval}
+        onMouseEnter={stopInterval}
         onMouseLeave={startInterval}
       >
         <Image
@@ -110,7 +98,7 @@ const MainNewBookList = ({ docs }: Props) => {
               +((bookWidth / 2) * 0.1) - bookWidth * 1.1 * page * 0.1
             }rem)`,
           }}
-          onMouseEnter={pauseInterval}
+          onMouseEnter={stopInterval}
           onMouseLeave={startInterval}
         >
           {books.map(book => (
