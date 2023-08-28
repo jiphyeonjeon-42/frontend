@@ -1,6 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
-export const useBound = <T extends HTMLElement>() => {
+type Props = {
+  hasResizeEvent?: boolean;
+  hasScrollEvent?: boolean;
+};
+
+export const useBound = <T extends HTMLElement>({
+  hasResizeEvent = true,
+  hasScrollEvent = false,
+}: Props) => {
   const [boundInfo, setBoundInfo] = useState({
     top: 0,
     bottom: 0,
@@ -18,14 +26,13 @@ export const useBound = <T extends HTMLElement>() => {
 
   useEffect(() => {
     getBound();
-    window.addEventListener("resize", getBound);
-    window.addEventListener("scroll", getBound);
+    if (hasResizeEvent) window.addEventListener("resize", getBound);
+    if (hasScrollEvent) window.addEventListener("scroll", getBound);
     return () => {
-      window.removeEventListener("scroll", getBound);
-      window.removeEventListener("resize", getBound);
+      if (hasScrollEvent) window.removeEventListener("scroll", getBound);
+      if (hasResizeEvent) window.removeEventListener("resize", getBound);
     };
   }, []);
 
   return { targetRef, boundInfo };
 };
-
