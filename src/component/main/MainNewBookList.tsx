@@ -6,31 +6,34 @@ import ArrLeft from "../../asset/img/arrow_left.svg";
 import ArrRight from "../../asset/img/arrow_right.svg";
 import { BookInfo } from "../../type";
 import { useInterval } from "~/hook/useInterval";
-
-const mobileWidth = 100;
-const pcWidth = 200;
+import { useResponsiveWidth } from "~/hook/useResponsiveWidth";
 
 type Props = {
   docs: BookInfo[];
 };
 
 const MainNewBookList = ({ docs }: Props) => {
+  const { width: bookWidth } = useResponsiveWidth({
+    pcWidth: 200,
+    mobileWidth: 100,
+  });
+
   const [page, setPage] = useState(1);
-  const [bookWidth, setBookWidth] = useState(pcWidth);
   const [transition, setTransition] = useState(true);
   const [displayCount, setDisplayCount] = useState(0);
 
   useEffect(() => {
     function handleSize() {
+      const mobileWidth = 100;
+      const pcWidth = 200;
       const width = window.innerWidth < 767 ? mobileWidth : pcWidth;
-      if (width !== bookWidth) setBookWidth(width);
       const count = Math.ceil(window.innerWidth / (width * 1.1));
       if (count !== displayCount) setDisplayCount(count);
     }
     window.addEventListener("resize", handleSize);
     handleSize();
     return () => window.removeEventListener("resize", handleSize);
-  }, [bookWidth, displayCount]);
+  }, [displayCount]);
 
   const books = [...docs.slice(-1), ...docs, ...docs.slice(0, displayCount)];
   const onNext = () => {
