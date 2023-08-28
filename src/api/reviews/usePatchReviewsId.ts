@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useApi } from "../../hook/useApi";
+import { queryClient } from "~/index";
 import { useNewDialog } from "../../hook/useNewDialog";
 import { client } from "../../util/tsRestClient";
 
@@ -7,12 +6,7 @@ export const usePatchReviewsId = () => {
   const { addErrorDialog, addDialogWithTitleAndMessage } = useNewDialog();
 
   const mutation = client.reviews.patch.useMutation({
-    onSuccess: () => {
-      console.log("local success");
-      addDialogWithTitleAndMessage("patched", "처리되었습니다", "", () =>
-        window.location.reload(),
-      );
-    },
+    onSuccess: () => queryClient.invalidateQueries(["reviews"]),
     onError: err => {
       switch (err.status) {
         case 401:

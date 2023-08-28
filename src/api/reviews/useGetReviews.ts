@@ -1,52 +1,40 @@
-import { useState, useEffect } from "react";
-import { useApi } from "../../hook/useApi";
-import { Review } from "../../type";
+import type { contract } from "@jiphyeonjeon-42/contracts";
+import type { ClientInferRequest } from "@ts-rest/core";
+import { useState } from "react";
+import { client } from "~/util/tsRestClient";
+
+type QueryArgs = ClientInferRequest<typeof contract.reviews.get>["query"];
 
 export const useGetReviews = () => {
-  const [params, setParams] = useState({
-    titleOrNickname: "",
-    page: 1,
-    disabled: "-1",
-  });
+  const [search, setSearch] = useState<string | undefined>();
+  const [page, setPage] = useState(1);
+  const [visibility, setVisibility] = useState<"public" | "hidden" | "all">(
+    "all",
+  );
 
-  const [result, setResult] = useState({
-    reviewList: [],
-    lastPage: 5,
-  });
-
-  const setPage = (page: number) => {
-    setParams({ ...params, page });
-  };
-  const setQuery = (query: string) => {
-    setParams({ ...params, titleOrNickname: query });
-  };
-  const setSelectedType = (type: string | undefined) => {
-    if (type) setParams({ ...params, disabled: type });
+  const queryArgs: QueryArgs = {
+    search,
+    page,
+    visibility,
+    perPage: 10,
+    sort: "desc",
   };
 
-  const { request } = useApi("get", "reviews", {
-    ...params,
-    page: params.page - 1,
-  });
-
-  const refineResponse = (response: any) => {
-    const { items } = response.data;
-    const { totalPages } = response.data.meta;
-
-    setResult({ reviewList: items, lastPage: totalPages });
-  };
-
-  useEffect(() => {
-    request(refineResponse);
-  }, [params]);
+  const query = client.reviews.get.useQuery(
+    ["reviews", queryArgs],
+    { query: queryArgs },
+    {
+      keepPreviousData: true,
+      staleTime: 1000 * 60 * 60,
+    },
+  );
 
   return {
-    page: params.page,
+    page,
     setPage,
-    setQuery,
-    selectedType: params.disabled,
-    setSelectedType,
-    reviewList: result.reviewList as Review[],
-    lastPage: result.lastPage,
+    setSearch,
+    visibility,
+    setVisibility,
+    data: query.data?.body,
   };
 };
