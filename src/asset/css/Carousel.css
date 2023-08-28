@@ -1,0 +1,13 @@
+.carousel__container {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel__list {
+  display: flex;
+}
+
+.carousel__list > * {
+  display: block;
+  box-sizing: border-box;
+}
