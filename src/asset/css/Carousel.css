@@ -10,4 +10,5 @@
 .carousel__list > * {
   display: block;
   box-sizing: border-box;
+  flex: 0 0;
 }
