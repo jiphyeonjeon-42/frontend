@@ -28,20 +28,27 @@ const CarouselContext = createContext({
  * Carousel 무한 슬라이드를 위한 컴포넌트
  * @param length -  슬라이드 될 item의 개수
  * @param itemSize - 슬라이드 될 item의 크기, margin 포함 실제 크기(px)로 실제 이동하는 거리와 같음
+ * @param itemCount - 슬라이드 될 container에 들어갈 item의 개수, 크기는 자동 조정
+ * itemSize나 itemCount 둘 중 하나만 지정가능, 둘 중 하나는 반드시 지정되어야 함
  * @param direction - 슬라이드 방향 (row | column)
  * @param delay - 슬라이드 간의 시간 간격
  */
 
 type Props = ComponentProps<"div"> & {
   length: number;
-  itemSize: number;
+  itemSize?: number;
+  itemCount?: number;
   direction?: "row" | "column";
   delay?: number;
-};
+} & (
+    | { itemSize: number; itemCount?: never }
+    | { itemCount: number; itemSize?: never }
+  );
 
 const Root = ({
   length,
   itemSize,
+  itemCount,
   direction = "row",
   delay = 2000,
   children,
@@ -55,7 +62,10 @@ const Root = ({
     hasScrollEvent: false,
   }); // 슬라이드 컨테이너의 전체 크기 확인
   const containerSize = direction === "row" ? bound.width : bound.height;
-  const displayCount = Math.floor(containerSize / itemSize); // 슬라이드에 들어가야 할 item의 총 개수 (화면에 보여지는 개수)
+  const displayCount = itemSize
+    ? Math.floor(containerSize / itemSize)
+    : itemCount!;
+  // 슬라이드에 들어가야 할 item의 총 개수 (화면에 보여지는 개수)
 
   // 무한 슬라이드를 위한 index 이동 설정
   const onNext = () => {
@@ -92,7 +102,7 @@ const Root = ({
         startInterval,
         stopInterval,
         displayCount,
-        itemSize,
+        itemSize: itemSize ?? containerSize / itemCount!,
         length,
         direction,
       }}
@@ -122,7 +132,7 @@ const Root = ({
 
 type ListProps<T extends { id: number }> = ComponentProps<"ul"> & {
   items: T[];
-  renderItem: (props: ComponentProps<"a"> & { item: T }) => React.ReactNode;
+  renderItem: (props: ComponentProps<any> & { item: T }) => React.ReactNode;
   showPreviousItem?: "half" | "none";
 };
 
@@ -176,7 +186,9 @@ const List = <T extends { id: number }>({
       onMouseOver={stopInterval}
       onMouseLeave={startInterval}
     >
-      {displayItems.map(item => renderItem({ item, key: item.key }))}
+      {displayItems.map(item =>
+        renderItem({ item, key: item.key, style: { flexBasis: itemSize } }),
+      )}
     </ul>
   );
 };
