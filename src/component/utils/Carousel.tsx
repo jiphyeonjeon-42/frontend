@@ -164,8 +164,7 @@ const List = <T extends { id: number }>({
   const displayItems = useMemo(() => {
     if (items.length === 0) return [];
     const lastItem = items.slice(-1)[0];
-    const copySize =
-      displayCount >= items.length ? displayCount / items.length + 1 : 0;
+    const copySize = displayCount / items.length + 1;
     return [
       { ...lastItem, key: "last" + lastItem.id },
       ...items.map(i => ({ ...i, key: `${i.id}` })),
