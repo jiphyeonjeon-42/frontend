@@ -164,20 +164,22 @@ const List = <T extends { id: number }>({
   const displayItems = useMemo(() => {
     if (items.length === 0) return [];
     const lastItem = items.slice(-1)[0];
+    const copySize =
+      displayCount >= items.length ? displayCount / items.length + 1 : 0;
     return [
       { ...lastItem, key: "last" + lastItem.id },
       ...items.map(i => ({ ...i, key: `${i.id}` })),
-      ...Array.from({ length: displayCount / items.length + 1 }).flatMap(
-        (_, i) =>
-          items.map((_, index) => ({
-            ...items[index % items.length],
-            key: "copy" + i + index, //  key 중복을 피하기 위해 임의로 가공
-          })),
+      ...Array.from({ length: copySize }).flatMap((_, i) =>
+        items.map((_, index) => ({
+          ...items[index % items.length],
+          key: "copy" + i + index, //  key 중복을 피하기 위해 임의로 가공
+        })),
       ),
     ];
   }, [items, displayCount]);
 
   const prevItemSize = showPreviousItem === "half" ? itemSize / 2 : 0;
+  const translate = direction === "row" ? "translateX" : "translateY";
 
   return (
     <ul
@@ -185,7 +187,7 @@ const List = <T extends { id: number }>({
       className={`carousel__list ${className}`}
       style={{
         // 슬라이더의 이동을 위해 transform을 사용한다.
-        transform: `translate(-${itemSize * index + prevItemSize / 2}px)`,
+        transform: `${translate}(-${itemSize * index + prevItemSize / 2}px)`,
         flexDirection: direction === "row" ? "row" : "column",
         transition: isSmoothAnimated ? "transform 0.2s ease-in-out" : "",
       }}
