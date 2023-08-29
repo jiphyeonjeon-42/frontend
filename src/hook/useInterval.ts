@@ -25,7 +25,6 @@ export const useInterval = (callback: () => void, delay: number) => {
   };
 
   useEffect(() => {
-    startInterval();
     return stopInterval;
   }, [callback, delay]);
 

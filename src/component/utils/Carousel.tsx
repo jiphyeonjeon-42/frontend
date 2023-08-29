@@ -2,6 +2,7 @@ import {
   ComponentProps,
   createContext,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -12,12 +13,12 @@ import "~/asset/css/Carousel.css";
 // 내부 컴포넌트에서 사용하는 context
 const CarouselContext = createContext({
   index: 0,
-  isAnimated: true,
+  isSmoothAnimated: true,
   onPrev: () => {},
   onNext: () => {},
   setIndex: (index: number) => {},
-  startInterval: () => {},
-  stopInterval: () => {},
+  startAutoAnimation: () => {},
+  pauseAutoAnimation: () => {},
   displayCount: 0,
   itemSize: 0,
   length: 0,
@@ -29,6 +30,7 @@ const CarouselContext = createContext({
  * @param length -  슬라이드 될 item의 개수
  * @param itemSize - 슬라이드 될 item의 크기, margin 포함 실제 크기(px)로 실제 이동하는 거리와 같음
  * @param itemCount - 슬라이드 될 container에 들어갈 item의 개수, 크기는 자동 조정
+ * @param isAnimated - 슬라이드 애니메이션 여부
  * itemSize나 itemCount 둘 중 하나만 지정가능, 둘 중 하나는 반드시 지정되어야 함
  * @param direction - 슬라이드 방향 (row | column)
  * @param delay - 슬라이드 간의 시간 간격
@@ -40,6 +42,7 @@ type Props = ComponentProps<"div"> & {
   itemCount?: number;
   direction?: "row" | "column";
   delay?: number;
+  isAutoAnimated?: boolean;
 } & (
     | { itemSize: number; itemCount?: never }
     | { itemCount: number; itemSize?: never }
@@ -51,11 +54,12 @@ const Root = ({
   itemCount,
   direction = "row",
   delay = 2000,
+  isAutoAnimated = true,
   children,
   className = "",
   ...rest
 }: Props) => {
-  const [slide, setSlide] = useState({ index: 1, isAnimated: true }); // 슬라이드 움직임 제어
+  const [slide, setSlide] = useState({ index: 1, isSmoothAnimated: true }); // 슬라이드 움직임 제어
 
   const { targetRef, boundInfo: bound } = useBound<HTMLDivElement>({
     hasResizeEvent: true,
@@ -72,35 +76,41 @@ const Root = ({
     // 슬라이드가 처음이나 끝에서 이동할 때는 애니메이션 효과를 없애고, 이동 후에 애니메이션 효과를 적용한다.
     // 마지막 요소가 첫번째 앞에 추가되었기 때문에 length - 1 대신 length로 이동
     if (slide.index === length) {
-      setSlide({ index: 0, isAnimated: false });
-      setTimeout(() => setSlide({ index: 1, isAnimated: true }), delay / 100);
-    } else setSlide({ index: slide.index + 1, isAnimated: true });
+      setSlide({ index: 0, isSmoothAnimated: false });
+      setTimeout(() => setSlide({ index: 1, isSmoothAnimated: true }), 10);
+    } else setSlide({ index: slide.index + 1, isSmoothAnimated: true });
   };
 
   const onPrev = () => {
     if (slide.index === 0) {
       // 마찬가지로 length - 1 대신 length로 이동
-      setSlide({ index: length, isAnimated: false });
+      setSlide({ index: length, isSmoothAnimated: false });
       setTimeout(
-        () => setSlide({ index: length - 1, isAnimated: true }),
-        delay / 100,
+        () => setSlide({ index: length - 1, isSmoothAnimated: true }),
+        10,
       );
-    } else setSlide({ index: slide.index - 1, isAnimated: true });
+    } else setSlide({ index: slide.index - 1, isSmoothAnimated: true });
   };
 
-  // 슬라이드 자동 이동 및 Hover시 멈추기 위한 함수
   const { startInterval, stopInterval } = useInterval(onNext, delay);
+
+  const startAutoAnimation = () => isAutoAnimated && startInterval();
+  const pauseAutoAnimation = stopInterval;
+
+  useEffect(() => {
+    startAutoAnimation();
+  }, [startAutoAnimation]);
 
   return (
     <CarouselContext.Provider
       value={{
         index: slide.index,
-        isAnimated: slide.isAnimated,
+        isSmoothAnimated: slide.isSmoothAnimated,
         onNext,
         onPrev,
         setIndex: (index: number) => setSlide(prev => ({ ...prev, index })),
-        startInterval,
-        stopInterval,
+        startAutoAnimation,
+        pauseAutoAnimation,
         displayCount,
         itemSize: itemSize ?? containerSize / itemCount!,
         length,
@@ -111,8 +121,8 @@ const Root = ({
         {...rest}
         className={`carousel__container ${className}`}
         ref={targetRef}
-        onMouseEnter={stopInterval}
-        onMouseLeave={startInterval}
+        onMouseEnter={pauseAutoAnimation}
+        onMouseLeave={startAutoAnimation}
       >
         {children}
       </div>
@@ -145,12 +155,12 @@ const List = <T extends { id: number }>({
 }: ListProps<T>) => {
   const {
     index,
-    startInterval,
-    stopInterval,
+    startAutoAnimation,
+    pauseAutoAnimation,
     displayCount,
     itemSize,
     direction,
-    isAnimated,
+    isSmoothAnimated,
   } = useContext(CarouselContext);
 
   // 슬라이드 될 item들을 복사해서 앞뒤로 붙여준다.
@@ -181,10 +191,10 @@ const List = <T extends { id: number }>({
         // 슬라이더의 이동을 위해 transform을 사용한다.
         transform: `translate(-${itemSize * index + prevItemSize / 2}px)`,
         flexDirection: direction === "row" ? "row" : "column",
-        transition: isAnimated ? "transform 0.2s ease-in-out" : "",
+        transition: isSmoothAnimated ? "transform 0.2s ease-in-out" : "",
       }}
-      onMouseOver={stopInterval}
-      onMouseLeave={startInterval}
+      onMouseOver={pauseAutoAnimation}
+      onMouseLeave={startAutoAnimation}
     >
       {displayItems.map(item =>
         renderItem({ item, key: item.key, style: { flexBasis: itemSize } }),
@@ -194,29 +204,31 @@ const List = <T extends { id: number }>({
 };
 
 const Prev = ({ className, ...rest }: ComponentProps<"button">) => {
-  const { onPrev, startInterval, stopInterval } = useContext(CarouselContext);
+  const { onPrev, startAutoAnimation, pauseAutoAnimation } =
+    useContext(CarouselContext);
 
   return (
     <button
       {...rest}
       onClick={onPrev}
       className={`carousel__prev ${className}`}
-      onMouseOver={stopInterval}
-      onMouseLeave={startInterval}
+      onMouseOver={pauseAutoAnimation}
+      onMouseLeave={startAutoAnimation}
     />
   );
 };
 
 const Next = ({ className, ...rest }: ComponentProps<"button">) => {
-  const { onNext, startInterval, stopInterval } = useContext(CarouselContext);
+  const { onNext, startAutoAnimation, pauseAutoAnimation } =
+    useContext(CarouselContext);
 
   return (
     <button
       {...rest}
       onClick={onNext}
       className={`carousel__next ${className}`}
-      onMouseOver={stopInterval}
-      onMouseLeave={startInterval}
+      onMouseOver={pauseAutoAnimation}
+      onMouseLeave={startAutoAnimation}
     />
   );
 };
