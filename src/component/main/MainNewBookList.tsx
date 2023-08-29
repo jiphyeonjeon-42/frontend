@@ -51,7 +51,7 @@ const MainNewBookList = ({ docs }: Props) => {
         showPreviousItem="half"
         items={docs}
         renderItem={({ item }) => (
-          <MainNewBook book={item} bookWidth={bookWidth} />
+          <MainNewBook book={item} key={item.key} bookWidth={bookWidth} />
         )}
       />
       <Carousel.Pagination

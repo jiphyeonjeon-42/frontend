@@ -138,7 +138,7 @@ const Root = ({
 
 type ListProps<T extends { id: number }> = ComponentProps<"ul"> & {
   items: T[];
-  renderItem: (props: ComponentProps<any> & { item: T }) => React.ReactNode;
+  renderItem: (props: { item: T & { key: string } }) => JSX.Element;
   showPreviousItem?: "half" | "none";
 };
 
@@ -193,9 +193,7 @@ const List = <T extends { id: number }>({
       onMouseOver={pauseAutoAnimation}
       onMouseLeave={startAutoAnimation}
     >
-      {displayItems.map(item =>
-        renderItem({ item, key: item.key, style: { flexBasis: itemSize } }),
-      )}
+      {displayItems.map(item => renderItem({ item }))}
     </ul>
   );
 };
@@ -237,6 +235,7 @@ type PaginationProps = {
     lastPage?: number;
   }) => JSX.Element;
 } & ComponentProps<"div">;
+
 const Pagination = ({ render }: PaginationProps) => {
   const { index, setIndex, length } = useContext(CarouselContext);
   return render({
