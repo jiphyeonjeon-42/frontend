@@ -73,8 +73,8 @@ const Root = ({
 
   // 무한 슬라이드를 위한 index 이동 설정
   const onNext = () => {
-    // 슬라이드가 처음이나 끝에서 이동할 때는 애니메이션 효과를 없애고, 이동 후에 애니메이션 효과를 적용한다.
     // 마지막 요소가 첫번째 앞에 추가되었기 때문에 length - 1 대신 length로 이동
+    // 바로 이동하면 동작이 어색함, 애니메이션 효과 false 설정 후 0.01초 뒤에 이동
     if (slide.index === length) {
       setSlide({ index: 0, isSmoothAnimated: false });
       setTimeout(() => setSlide({ index: 1, isSmoothAnimated: true }), 10);
@@ -82,13 +82,9 @@ const Root = ({
   };
 
   const onPrev = () => {
-    if (slide.index === 0) {
-      // 마찬가지로 length - 1 대신 length로 이동
-      setSlide({ index: length, isSmoothAnimated: false });
-      setTimeout(
-        () => setSlide({ index: length - 1, isSmoothAnimated: true }),
-        10,
-      );
+    if (slide.index === 1) {
+      setSlide({ index: length + 1, isSmoothAnimated: false });
+      setTimeout(() => setSlide({ index: length, isSmoothAnimated: true }), 10);
     } else setSlide({ index: slide.index - 1, isSmoothAnimated: true });
   };
 
