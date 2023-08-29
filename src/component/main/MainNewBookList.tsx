@@ -17,7 +17,7 @@ const MainNewBookList = ({ docs }: Props) => {
     mobileWidth: 100,
   });
 
-  const margin = 10;
+  const margin = bookWidth * 0.1;
   const moveButton = {
     width: bookWidth / 4,
     height: bookWidth * 1.5 + 20,
@@ -27,7 +27,7 @@ const MainNewBookList = ({ docs }: Props) => {
     <Carousel.Root
       className="main-new__container"
       length={docs.length}
-      itemSize={bookWidth + margin * 2}
+      itemSize={bookWidth + margin}
       delay={2000}
     >
       <Carousel.Prev className="main-new__arrow">
