@@ -12,7 +12,7 @@
 .main-new__arrow {
   margin: 0;
   position: absolute;
-  top: 10rem;
+  bottom: 10rem;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   border: none;

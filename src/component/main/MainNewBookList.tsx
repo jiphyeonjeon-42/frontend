@@ -25,11 +25,20 @@ const MainNewBookList = ({ docs }: Props) => {
 
   return (
     <Carousel.Root
-      className="main-new__container"
       length={docs.length}
       itemSize={bookWidth + margin}
       delay={2000}
     >
+      <Carousel.Container className="main-new__container">
+        <Carousel.List
+          className="main-new__booklist"
+          showPreviousItem="half"
+          items={docs}
+          renderItem={({ item }) => (
+            <MainNewBook book={item} key={item.key} bookWidth={bookWidth} />
+          )}
+        />
+      </Carousel.Container>
       <Carousel.Prev className="main-new__arrow">
         <Image
           src={ArrLeft}
@@ -46,14 +55,6 @@ const MainNewBookList = ({ docs }: Props) => {
           height={moveButton.height}
         />
       </Carousel.Next>
-      <Carousel.List
-        className="main-new__booklist"
-        showPreviousItem="half"
-        items={docs}
-        renderItem={({ item }) => (
-          <MainNewBook book={item} key={item.key} bookWidth={bookWidth} />
-        )}
-      />
       <Carousel.Pagination
         className="main-new__pagination"
         render={({ page, setPage }) => (
