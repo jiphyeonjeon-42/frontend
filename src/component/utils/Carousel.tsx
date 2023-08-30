@@ -1,4 +1,5 @@
 import {
+  CSSProperties,
   ComponentProps,
   createContext,
   useContext,
@@ -138,7 +139,11 @@ const Root = ({
 
 type ListProps<T extends { id: number }> = ComponentProps<"ul"> & {
   items: T[];
-  renderItem: (props: { item: T & { key: string } }) => JSX.Element;
+  renderItem: (props: {
+    item: T;
+    key: string;
+    style: CSSProperties;
+  }) => JSX.Element;
   showPreviousItem?: "half" | "none";
 };
 
@@ -193,7 +198,9 @@ const List = <T extends { id: number }>({
       onMouseOver={pauseAutoAnimation}
       onMouseLeave={startAutoAnimation}
     >
-      {displayItems.map(item => renderItem({ item }))}
+      {displayItems.map(item =>
+        renderItem({ item, key: item.key, style: { flexBasis: itemSize } }),
+      )}
     </ul>
   );
 };
