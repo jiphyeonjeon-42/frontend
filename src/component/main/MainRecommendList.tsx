@@ -1,4 +1,5 @@
-import { BookInfoRecommend } from "~/type";
+import { Link } from "react-router-dom";
+import type { BookInfoRecommend } from "~/type";
 import { dateFormat } from "~/util/date";
 import Carousel from "~/component/utils/Carousel";
 import Image from "~/component/utils/Image";
@@ -14,8 +15,11 @@ const MainRecommendList = ({ books }: Props) => {
         <Carousel.List
           items={books}
           renderItem={({ item, ...rest }) => (
-            // TODO div 대신 Link
-            <div {...rest} className="main__recommend-list__book">
+            <Link
+              {...rest}
+              to={`/info/${item.id}`}
+              className="main__recommend-list__book"
+            >
               <Image
                 className="main__recommend-list__cover"
                 src={item.image}
@@ -28,9 +32,8 @@ const MainRecommendList = ({ books }: Props) => {
                 <p>발행연월일 | {dateFormat(item.publishedAt ?? "")}</p>
                 <p>관련과제 | {item.subject.join(", ")}</p>
               </div>
-            </div>
+            </Link>
           )}
-          showPreviousItem="none"
         />
       </Carousel.Container>
       <Carousel.Pagination
