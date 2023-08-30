@@ -1,0 +1,84 @@
+.main__recommend__wrapper {
+  font: inherit;
+  margin: 24rem auto 0;
+  width: 100rem;
+  height: 60rem;
+}
+
+.main__recommend__title__wrapper {
+  margin-bottom: 4rem;
+}
+
+.main__recommend__title__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__recommend__title__select {
+  font: inherit;
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin: 0 0 0 2.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 1rem;
+}
+
+.main__recommend-list__wrapper {
+  background-color: #f2f2f2;
+  padding: 0;
+  margin: 0;
+  border-radius: 3rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  outline: #f2f2f2 solid 2rem;
+}
+
+.main__recommend-list__book {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.main__recommend-list__cover {
+  width: 24rem;
+}
+
+.main__recommend-list__detail {
+  font-size: 1.8rem;
+  line-height: 2;
+  margin-left: 10rem;
+  text-align: left;
+}
+
+.main__recommend-list__title {
+  width: 30rem;
+  max-height: 10rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre-wrap;
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 1.6rem;
+  line-height: 1.4;
+}
+.main__recommend-list__pagination {
+  position: absolute;
+}
+
+@media screen and (max-width: 1200px) {
+  .main__recommend__wrapper {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .main__recommend-list__book {
+    flex-direction: column;
+  }
+  .main__recommend-list__detail {
+    margin-left: 0;
+    margin-top: 2rem;
+    text-align: center;
+  }
+}
