@@ -1,7 +1,8 @@
 .main__recommend__wrapper {
+  position: relative;
   font: inherit;
   margin: 24rem auto 0;
-  width: 100rem;
+  width: 80rem;
   height: 60rem;
 }
 
@@ -24,13 +25,12 @@
   border-radius: 1rem;
 }
 
-.main__recommend-list__wrapper {
+.main__recommend-list__container {
   background-color: #f2f2f2;
   padding: 0;
   margin: 0;
   border-radius: 3rem;
   box-sizing: border-box;
-  overflow: hidden;
   outline: #f2f2f2 solid 2rem;
 }
 
@@ -41,8 +41,9 @@
   justify-content: center;
   align-items: center;
 }
+
 .main__recommend-list__cover {
-  width: 24rem;
+  width: 20rem;
 }
 
 .main__recommend-list__detail {
@@ -50,6 +51,7 @@
   line-height: 2;
   margin-left: 10rem;
   text-align: left;
+  padding: 4rem 0;
 }
 
 .main__recommend-list__title {
@@ -63,8 +65,31 @@
   margin-bottom: 1.6rem;
   line-height: 1.4;
 }
+
 .main__recommend-list__pagination {
   position: absolute;
+}
+
+.main__recommend-list__arrow-button {
+  position: absolute;
+  bottom: 16rem;
+  transform: translateY(-50%);
+  width: 4rem;
+  height: 4rem;
+  background-color: transparent;
+  border: none;
+  right: -10rem;
+  cursor: pointer;
+}
+
+.main__recommend-list__arrow-button.left {
+  left: -10rem;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.main__recommend-list__arrow-button > img {
+  width: 100%;
+  height: 100%;
 }
 
 @media screen and (max-width: 1200px) {

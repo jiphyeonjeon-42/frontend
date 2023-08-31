@@ -3,6 +3,7 @@ import type { BookInfoRecommend } from "~/type";
 import { dateFormat } from "~/util/date";
 import Carousel from "~/component/utils/Carousel";
 import Image from "~/component/utils/Image";
+import Arr from "~/asset/img/arrow_right_gray.svg";
 
 type Props = {
   books: BookInfoRecommend[];
@@ -11,7 +12,7 @@ type Props = {
 const MainRecommendList = ({ books }: Props) => {
   return (
     <Carousel.Root length={books.length} itemCount={1}>
-      <Carousel.Container className="main__recommend-list__wrapper">
+      <Carousel.Container className="main__recommend-list__container">
         <Carousel.List
           items={books}
           renderItem={({ item, ...rest }) => (
@@ -42,6 +43,12 @@ const MainRecommendList = ({ books }: Props) => {
           <div className="main__recommend-list__pagination">페이지</div>
         )}
       />
+      <Carousel.Prev className="main__recommend-list__arrow-button left">
+        <Image src={Arr} />
+      </Carousel.Prev>
+      <Carousel.Next className="main__recommend-list__arrow-button">
+        <Image src={Arr} />
+      </Carousel.Next>
     </Carousel.Root>
     // TODO: <> 버튼 추가해야
   );
