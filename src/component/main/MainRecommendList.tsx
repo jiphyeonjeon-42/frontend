@@ -30,7 +30,7 @@ const MainRecommendList = ({ books }: Props) => {
                 <p className="main__recommend-list__title">{item.title}</p>
                 <p>저자 | {item.author}</p>
                 <p>출판사 | {item.publisher}</p>
-                <p>발행연월일 | {dateFormat(item.publishedAt ?? "")}</p>
+                <p>발행일 | {dateFormat(item.publishedAt ?? "")}</p>
                 <p>관련과제 | {item.subject.join(", ")}</p>
               </div>
             </Link>
