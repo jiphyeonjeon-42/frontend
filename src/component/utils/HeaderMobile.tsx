@@ -5,9 +5,9 @@ import HeaderModal from "./HeaderModal";
 import Logo from "../../asset/img/jiphyeonjeon_logo.svg";
 import Hamburger from "../../asset/img/Hamburger_OwlDsgnr.png";
 import SearchBook from "../../asset/img/Search_VectorsMarket.png";
-import "../../asset/css/MobileHeader.css";
+import "../../asset/css/HeaderMobile.css";
 
-const MobileHeader = () => {
+const HeaderMobile = () => {
   const [headerModal, setHeaderModal] = useState(false);
   const [isFixed, setFixed] = useState(false);
   const location = useLocation();
@@ -78,4 +78,4 @@ const MobileHeader = () => {
   );
 };
 
-export default MobileHeader;
+export default HeaderMobile;

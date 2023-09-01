@@ -5,5 +5,5 @@
 export const breakPoint= {
   mobile: 360,
   tablet: 768,
-  desktop: 1200,
+  laptop: 1200,
 };
