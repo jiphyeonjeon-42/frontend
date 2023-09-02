@@ -3,13 +3,15 @@ import { ChangeEventHandler, Dispatch, SetStateAction } from "react";
 type Props = {
   description: string;
   options: string[];
-  setOptions: Dispatch<SetStateAction<string[]>>;
+  setSelectedOption: (option: string) => void;
 };
-const MainRecommendTitle = ({ options, setOptions, description }: Props) => {
+const MainRecommendTitle = ({
+  description,
+  options,
+  setSelectedOption,
+}: Props) => {
   const changeOption: ChangeEventHandler<HTMLSelectElement> = e => {
-    console.log(e.currentTarget.value);
-    // TODO: 옵션 변경때마다 API 호출
-    // "0서클 | ft_printf" => | 기준으로 split해서 request 보내야 함
+    setSelectedOption(e.target.selectedOptions[0].value);
   };
 
   return (

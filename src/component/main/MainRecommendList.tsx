@@ -31,7 +31,7 @@ const MainRecommendList = ({ books }: Props) => {
                 <p>저자 | {item.author}</p>
                 <p>출판사 | {item.publisher}</p>
                 <p>발행일 | {dateFormat(item.publishedAt ?? "")}</p>
-                <p>관련과제 | {item.subject.join(", ")}</p>
+                <p>관련과제 | {item.project.join(", ")}</p>
               </div>
             </Link>
           )}

@@ -16,5 +16,5 @@ export type BookInfo = {
 };
 
 export type BookInfoRecommend = BookInfo & {
-  subject: string[];
+  project: string[];
 };
