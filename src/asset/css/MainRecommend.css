@@ -40,26 +40,35 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 4rem;
 }
 
 .main__recommend-list__cover {
   width: 20rem;
   height: 24rem;
-  margin: 4rem 0;
+  margin: 4rem 0 4rem 2rem;
+  flex: 0 0 20rem;
 }
 
 .main__recommend-list__detail {
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: flex-start;
   font-size: 1.8rem;
   line-height: 2;
-  margin-left: 10rem;
   text-align: left;
+  overflow: hidden;
+  padding: 4rem 2rem;
+  padding-left: 0;
+  box-sizing: border-box;
 }
 
+.main__recommend-list__detail > p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 .main__recommend-list__title {
-  width: 30rem;
   max-height: 10rem;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -100,21 +109,42 @@
     width: 80%;
   }
 }
+
 @media screen and (max-width: 767px) {
-  .main__recommend-list__book {
+  .main__recommend__title__wrapper {
+    height: auto;
+    margin-bottom: 6rem;
+  }
+  .main__recommend__title__title {
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: start;
+  }
+  .main__recommend__title__select {
+    margin: 1rem 0;
+  }
+  .main__recommend-list__book {
+    display: block;
     line-height: 1.2;
   }
 
   .main__recommend-list__cover {
-    margin: 2rem 0 0 0;
+    margin: 4rem auto 0;
+    display: block;
   }
 
   .main__recommend-list__detail {
     margin-left: 0;
     margin-top: 2rem;
     text-align: center;
+    align-items: center;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    padding: 2rem 8rem 4rem;
+  }
+
+  .main__recommend-list__title {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
   }
 
   .main__recommend-list__arrow-button {

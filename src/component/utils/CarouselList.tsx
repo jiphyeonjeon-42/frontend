@@ -75,7 +75,11 @@ const CarouselList = <T extends { id: number }>({
       onMouseLeave={startAutoAnimation}
     >
       {displayItems.map(item =>
-        renderItem({ item, key: item.key, style: { flexBasis: itemSize } }),
+        renderItem({
+          item,
+          key: item.key,
+          style: { flexBasis: itemSize, width: itemSize, overflow: "hidden" },
+        }),
       )}
     </ul>
   );
