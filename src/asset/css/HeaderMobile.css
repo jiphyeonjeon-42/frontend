@@ -1,0 +1,47 @@
+.header-mobile__wrapper {
+  width: 100%;
+  margin: auto;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 3.5rem 3rem 0 3rem;
+  box-sizing: border-box;
+}
+
+.header-mobile__wrapper.fixed {
+  z-index: 5;
+  background-color: rgba(45, 45, 45, 0.97);
+  padding: 1.8rem 2rem;
+}
+
+.header-mobile__logo > img {
+  width: 9.3rem;
+  height: 3.15rem;
+  object-fit: contain;
+}
+
+.header-mobile__gnb__wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.header-mobile__search > img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+.header-mobile__hamburger {
+  background-color: transparent;
+  border: none;
+  margin: 0 0 0 3.5rem;
+  padding: 0;
+}
+
+.header-mobile__hamburger > img {
+  width: 3.15rem;
+  height: 3.15rem;
+  object-fit: contain;
+}
