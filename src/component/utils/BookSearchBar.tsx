@@ -7,7 +7,7 @@ import BookSearchRecentKeyword from "~/component/utils/BookSearchRecentKeywords"
 
 const BookSearchBar = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const { books, totalCount, keyword, setKeyword } =
+  const { books, totalCount, keyword, setKeyword, isLoading } =
     useGetSearchKeywordsAutocomplete();
   const [params] = useSearchParams();
   const ref = useRef<HTMLInputElement>(null);
@@ -52,6 +52,7 @@ const BookSearchBar = () => {
             keyword={keyword}
             books={books}
             totalCount={totalCount}
+            isLoading={isLoading}
           />
         )}
       </SearchBar.DropDown>

@@ -1,7 +1,18 @@
 .search-preview__wrapper {
+  position: relative;
   background-color: white;
   z-index: 2;
   display: block;
+}
+
+.search-preview__wrapper.loading {
+  background-color: rgba(200, 200, 200, 0.8);
+}
+
+.search-preview__loader {
+  position: absolute !important;
+  top: 40%;
+  left: 50%;
 }
 
 .search-preview__list {
