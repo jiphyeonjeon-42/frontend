@@ -3,7 +3,7 @@
   font: inherit;
   margin: 24rem auto 0;
   width: 80rem;
-  height: 60rem;
+  min-height: 60rem;
   min-width: 36rem;
 }
 
@@ -92,7 +92,7 @@
   height: 100%;
 }
 .main__recommend-list__pagination {
-  position: absolute;
+  margin: 8rem auto 0;
 }
 
 @media screen and (max-width: 1200px) {

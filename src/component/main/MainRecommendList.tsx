@@ -4,6 +4,7 @@ import { dateFormat } from "~/util/date";
 import Carousel from "~/component/utils/Carousel";
 import Image from "~/component/utils/Image";
 import Arr from "~/asset/img/arrow_right_gray.svg";
+import PaginationCircle from "../utils/PaginationCircle";
 
 type Props = {
   books: BookInfoRecommend[];
@@ -38,10 +39,17 @@ const MainRecommendList = ({ books }: Props) => {
         />
       </Carousel.Container>
       <Carousel.Pagination
-        render={({ page, setPage }) => (
-          // TODO: 페이지네이션 UI 인기도서에서 추출후 가져와야
-          <div className="main__recommend-list__pagination">페이지</div>
-        )}
+        render={({ page, setPage, lastPage }) => {
+          if (!lastPage) return <></>;
+          return (
+            <PaginationCircle
+              page={page}
+              setPage={setPage}
+              lastPage={lastPage}
+              className="main__recommend-list__pagination"
+            />
+          );
+        }}
       />
       <Carousel.Prev className="main__recommend-list__arrow-button left">
         <Image src={Arr} />
@@ -50,7 +58,6 @@ const MainRecommendList = ({ books }: Props) => {
         <Image src={Arr} />
       </Carousel.Next>
     </Carousel.Root>
-    // TODO: <> 버튼 추가해야
   );
 };
 
