@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { createPortal } from "react-dom";
-import { useBound } from "../../hook/useBound";
+import { useBound } from "~/hook/useBound";
 
 type TooltipProps = {
   className?: string;
@@ -10,7 +10,10 @@ type TooltipProps = {
 
 const Tooltip = ({ children, description, className }: TooltipProps) => {
   const [isDisplayed, setDisplayed] = useState(false);
-  const { boundInfo, targetRef } = useBound<HTMLDivElement>();
+  const { boundInfo, targetRef } = useBound<HTMLDivElement>({
+    hasResizeEvent: true,
+    hasScrollEvent: true,
+  });
 
   const displayTooltip = () => setDisplayed(true);
   const hiddenTooltip = () => setDisplayed(false);

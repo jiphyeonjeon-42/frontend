@@ -12,7 +12,7 @@
 .main-new__arrow {
   margin: 0;
   position: absolute;
-  top: 27.5rem;
+  bottom: 10rem;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   border: none;
@@ -34,12 +34,7 @@
   position: relative;
   z-index: 0;
   width: 100%;
-  overflow: hidden;
   margin-top: 10rem;
-}
-
-.main-new__books {
-  transition: all 0.3s ease-in-out;
 }
 
 .main-new__book {
@@ -78,10 +73,9 @@
 }
 
 .main-new__books_pagination {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
 }
 
 .main-new__books_pag_circle {
@@ -105,7 +99,7 @@
   background-color: #2d2d2d;
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .main-new {
     height: 52rem;
   }
