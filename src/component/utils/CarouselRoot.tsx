@@ -75,6 +75,10 @@ const CarouselRoot = ({
     startAutoAnimation();
   }, [startAutoAnimation]);
 
+  useEffect(() => {
+    setSlide({ index: 1, isSmoothAnimated: true });
+  }, [length]);
+  
   return (
     <CarouselContext.Provider
       value={{
