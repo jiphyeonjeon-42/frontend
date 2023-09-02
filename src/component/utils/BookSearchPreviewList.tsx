@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookPreviewType } from "~/component/utils/BookSearchPreview";
+import { BookPreviewType } from "~/type";
 import EmphasisInString from "~/component/utils/EmphasisInString";
 import Image from "~/component/utils/Image";
 

@@ -1,22 +1,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useGetSearchKeywordsAutocomplete } from "~/api/searchKeywords/useGetSearchKeywordsAutocomplete";
-import { type BookInfo } from "~/type";
+import { type BookPreviewType } from "~/type";
 import BookSearchPreviewList from "~/component/utils/BookSearchPreviewList";
 import Paginations from "~/component/utils/Paginations";
 import EmphasisInString from "./EmphasisInString";
 import "~/asset/css/BookSearchPreview.css";
 
-export type BookPreviewType = Omit<BookInfo, "category">;
-
 type Props = {
   keyword: string;
+  books: BookPreviewType[];
+  totalCount: number;
 };
 
 const PAGE_SIZE = 3;
 
-const BookSearchPreview = ({ keyword }: Props) => {
-  const { books, totalCount } = useGetSearchKeywordsAutocomplete();
+const BookSearchPreview = ({ keyword, books, totalCount }: Props) => {
   const [page, setPage] = useState(1);
 
   const slicedBooks = books.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
