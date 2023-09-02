@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BookPreviewType } from "~/type";
 import EmphasisInString from "~/component/utils/EmphasisInString";
 import Image from "~/component/utils/Image";
@@ -11,23 +11,17 @@ type Props = {
 
 const BookSearchPreviewList = ({ keyword, books }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const navigate = useNavigate();
 
   return (
     <div className="search-preview__list">
       <div className="search-preview__books">
         {books.map((book, index) => (
-          <button
-            type="button"
+          <Link
             key={book.id}
-            value={book.id}
+            to={`/info/${book.bookInfoId}`}
             className={`search-preview__book ${
               index === selectedIndex ? "selected" : ""
             }`}
-            onClick={e => {
-              e.preventDefault();
-              navigate(`/info/${book.id}`);
-            }}
             onMouseOver={() => setSelectedIndex(index)}
           >
             <p className="search-preview__book__title">
@@ -42,7 +36,7 @@ const BookSearchPreviewList = ({ keyword, books }: Props) => {
                 emphasis={keyword}
               />
             </span>
-          </button>
+          </Link>
         ))}
       </div>
       <Image

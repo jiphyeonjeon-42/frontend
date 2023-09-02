@@ -15,4 +15,6 @@ export type BookInfo = {
   books?: Book[];
 };
 
-export type BookPreviewType = Omit<BookInfo, "category">;
+export type BookPreviewType = Omit<BookInfo, "category"> & {
+  bookInfoId: number;
+};
