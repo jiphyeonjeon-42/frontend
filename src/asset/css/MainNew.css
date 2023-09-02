@@ -78,26 +78,6 @@
   margin-top: 10rem;
 }
 
-.main-new__books_pag_circle {
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  background-color: #a4a4a4;
-  display: inline-block;
-  margin-left: 1.2rem;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: transparent;
-}
-
-.main-new__books_pag_circle:first-child {
-  margin: 0;
-}
-
-.main-new__books_pag_circle.selected {
-  background-color: #2d2d2d;
-}
 
 @media screen and (max-width: 767px) {
   .main-new {

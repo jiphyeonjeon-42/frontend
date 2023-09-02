@@ -19,7 +19,7 @@ const CarouselPagination = ({ render }: Props) => {
   return render({
     page: index,
     setPage: setIndex,
-    lastPage: length - 1,
+    lastPage: length,
   });
 };
 
