@@ -1,80 +1,55 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Image from "./Image";
+import Logo from "~/asset/img/jiphyeonjeon_logo.svg";
+import Hamburger from "~/asset/img/Hamburger_OwlDsgnr.png";
+import SearchBook from "~/asset/img/Search_VectorsMarket.png";
 import HeaderModal from "./HeaderModal";
-import Logo from "../../asset/img/jiphyeonjeon_logo.svg";
-import Hamburger from "../../asset/img/Hamburger_OwlDsgnr.png";
-import SearchBook from "../../asset/img/Search_VectorsMarket.png";
-import "../../asset/css/HeaderMobile.css";
+import "~/asset/css/HeaderMobile.css";
 
 const HeaderMobile = () => {
-  const [headerModal, setHeaderModal] = useState(false);
+  const [isDrawerOpened, setIsDrawerOpened] = useState(false);
   const [isFixed, setFixed] = useState(false);
   const location = useLocation();
 
-  const openHeaderModal = () => {
-    setHeaderModal(true);
-  };
+  useEffect(() => {
+    const handleScroll = () => setFixed(window.scrollY > 0);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const stickyHeader = () => {
-    if (window.pageYOffset > 0) {
-      setFixed(true);
-    } else {
-      setFixed(false);
-    }
-  };
+  useEffect(() => {
+    setIsDrawerOpened(false);
+  }, [location.pathname]);
 
-  window.onscroll = stickyHeader;
-
-  const closeHeader = () => {
-    setHeaderModal(false);
-  };
-
-  useEffect(closeHeader, [location.pathname]);
+  useEffect(() => {
+    if (isDrawerOpened) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "unset";
+  }, [isDrawerOpened]);
 
   return (
-    <header className={isFixed ? "fixed-header" : "mobile-header"}>
-      <section
-        className={
-          isFixed
-            ? `${headerModal ? "f-header-none" : "f-header"} `
-            : "m-header"
-        }
-      >
-        <div className="m-header__logo">
-          <Link to={{ pathname: `/` }}>
-            <Image src={Logo} className="m-header__logo-icon" alt="logo" />
+    <>
+      <header className={`header-mobile__wrapper ${isFixed ? "fixed" : ""}`}>
+        <Link className="header-mobile__logo" to={{ pathname: `/` }}>
+          <Image src={Logo} alt="logo" />
+        </Link>
+        <nav className="header-mobile__gnb__wrapper">
+          <Link className="header-mobile__search" to={{ pathname: `/search` }}>
+            <Image src={SearchBook} alt="search" />
           </Link>
-        </div>
-        <nav className="m-header__gnb">
-          <ul className="m-header__ul">
-            <li>
-              <Link className="m-header__button" to={{ pathname: `/search` }}>
-                <Image
-                  src={SearchBook}
-                  className="m-header__gnb__search-icon"
-                  alt="search"
-                />
-              </Link>
-            </li>
-            <li>
-              <button
-                className="m-header__hamburger-button"
-                type="button"
-                onClick={openHeaderModal}
-              >
-                <Image
-                  src={Hamburger}
-                  className="gnb__hamburger__icon"
-                  alt="dropdown"
-                />
-              </button>
-            </li>
-          </ul>
+          <button
+            type="button"
+            className="header-mobile__hamburger"
+            onClick={() => setIsDrawerOpened(true)}
+          >
+            <Image src={Hamburger} alt="dropdown" />
+          </button>
         </nav>
-      </section>
-      {headerModal ? <HeaderModal setHeaderModal={setHeaderModal} /> : ``}
-    </header>
+      </header>
+      {isDrawerOpened && (
+        <HeaderModal setHeaderModal={() => setIsDrawerOpened(false)} />
+      )}
+    </>
   );
 };
 

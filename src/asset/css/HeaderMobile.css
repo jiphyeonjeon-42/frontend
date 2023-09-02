@@ -1,118 +1,47 @@
-.mobile-header {
+.header-mobile__wrapper {
   width: 100%;
   margin: auto;
   position: fixed;
   z-index: 3;
   top: 0;
-  left: 50%;
-  transform: translate(-50%);
-  display: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 3.5rem 3rem 0 3rem;
+  box-sizing: border-box;
 }
 
-.fixed-header {
-  width: 100%;
-  margin: auto;
-  position: fixed;
+.header-mobile__wrapper.fixed {
   z-index: 5;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%);
-  display: none;
   background-color: rgba(45, 45, 45, 0.97);
+  padding: 1.8rem 2rem;
 }
 
-@media screen and (max-width: 767px) {
-  .mobile-header {
-    display: block;
-  }
-  .fixed-header {
-    display: block;
-  }
-  .fixed-header-none {
-    display: block;
-  }
-}
-
-.f-header {
-  padding: 1.8rem 2rem 1.8rem 2rem;
-  display: flex;
-  max-width: 71.7rem;
-  min-width: 31rem;
-  margin: auto;
-  flex-grow: 1;
-  align-items: center;
-}
-
-.f-header-none {
-  padding: 1.8rem 2rem 1.8rem 2rem;
-  display: none;
-  max-width: 71.7rem;
-  min-width: 31rem;
-  margin: auto;
-  flex-grow: 1;
-  align-items: center;
-  /* visibility: hidden; */
-}
-
-.m-header {
-  padding: 3.5rem 3rem 0rem 3rem;
-  display: flex;
-  max-width: 70.7rem;
-  min-width: 30rem;
-  margin: auto;
-  flex-grow: 1;
-  align-items: center;
-}
-
-.m-header__logo {
-  flex: none;
-  margin: 0 0 0 0;
-}
-
-.m-header__logo-icon {
+.header-mobile__logo > img {
   width: 9.3rem;
   height: 3.15rem;
   object-fit: contain;
 }
 
-.m-header__gnb {
-  margin-left: auto;
-}
-
-.m-header__ul {
-  list-style: none;
+.header-mobile__gnb__wrapper {
   display: flex;
-  padding: 0 0 0 0;
-  margin: 0 0 0 0;
   align-items: center;
 }
 
-.m-header__gnb__search-icon {
+.header-mobile__search > img {
   width: 2rem;
   height: 2rem;
-  margin: 0 0 0 0;
   object-fit: contain;
 }
 
-.gnb__hamburger__icon {
+.header-mobile__hamburger {
+  background-color: transparent;
+  border: none;
+  margin: 0 0 0 3.5rem;
+  padding: 0;
+}
+
+.header-mobile__hamburger > img {
   width: 3.15rem;
   height: 3.15rem;
-  margin: 0 0 0 0;
   object-fit: contain;
-}
-
-.m-header__button {
-  margin: 0 0 0 0rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.m-header__hamburger-button {
-  all: unset;
-  margin: 0 0 0 3.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 }
