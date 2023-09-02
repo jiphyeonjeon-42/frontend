@@ -15,33 +15,27 @@ const HeaderDefault = () => {
     : basicGnbMenu;
 
   return (
-    <header className="header">
-      <section className="header-wrapper">
-        <div className="header__logo">
-          <Link to="/">
-            <Image src={Logo} className="logo_img" alt="logo" />
+    <header className="header__wrapper">
+      <Link to="/" className="header__logo">
+        <Image src={Logo} alt="집현전 로고" />
+      </Link>
+      <nav className="header__gnb__wrapper">
+        {gnbMenu.map(menu => (
+          <Link
+            className="header__gnb__menu"
+            key={menu.linkTo}
+            to={menu.linkTo}
+          >
+            <Image
+              className="header__gnb__icon"
+              src={menu.img}
+              alt={menu.imgAlt}
+            />
+            <span>{menu.text}</span>
           </Link>
-        </div>
-        <nav className="header__gnb">
-          <ul className="gnb__menu">
-            {gnbMenu.map(menu => {
-              return (
-                <li key={menu.linkTo}>
-                  <Link className="gnb__button" to={menu.linkTo}>
-                    <Image
-                      src={menu.img}
-                      className="gnb__icon gnb__info__icon"
-                      alt={menu.imgAlt}
-                    />
-                    <span className="gnb__text font-18">{menu.text}</span>
-                  </Link>
-                </li>
-              );
-            })}
-            {user.isLogin && <HeaderDefaultLNB />}
-          </ul>
-        </nav>
-      </section>
+        ))}
+        {user.isLogin && <HeaderDefaultLNB />}
+      </nav>
     </header>
   );
 };
