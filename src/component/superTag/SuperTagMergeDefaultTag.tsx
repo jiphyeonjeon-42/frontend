@@ -2,7 +2,7 @@ import { DragEventHandler, useState } from "react";
 import { usePatchTagsBookInfoIdMerge } from "../../api/tags/usePatchTagsBookInfoIdMerge";
 import { Tag } from "../../type";
 import Accordion from "../utils/Accordion";
-import SearchBar from "../utils/SearchBar";
+import ManagementSearchBar from "../utils/ManagementSearchBar";
 import Droppable from "../utils/Droppable";
 import SuperTagMergeSubTag from "./SuperTagMergeSubTag";
 
@@ -49,7 +49,7 @@ const SuperTagMergeDefaultTag = ({
             format="text/plain"
             onDrop={addNewListAndMergeIfMoved}
           >
-            <SearchBar
+            <ManagementSearchBar
               wrapperClassName="super-tag__default__search-bar"
               width="short"
               placeHolder="분류없음 내 검색"

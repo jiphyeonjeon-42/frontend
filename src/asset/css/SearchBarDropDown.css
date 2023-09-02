@@ -1,0 +1,21 @@
+.search-bar__dropdown {
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  position: absolute;
+  top: 6.4rem;
+  white-space: wrap;
+  width: calc(100% - 5.4rem);
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1200px) {
+  .search-bar__dropdown {
+    top: 5.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .search-bar__dropdown {
+    top: 5rem;
+  }
+}
