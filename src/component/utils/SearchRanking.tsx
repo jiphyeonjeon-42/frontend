@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useGetSearchKeyword } from "~/api/searchKeyword/useGetSearchKeyword";
 import { adminLnbMenu } from "~/constant/headerMenu";
 import SearchRankingList from "~/component/utils/SearchRankingList";
-import "~/asset/css/searchRanking.css";
+import "~/asset/css/SearchRanking.css";
 
 const SearchRanking = () => {
   const isAdminPath = adminLnbMenu.some(
