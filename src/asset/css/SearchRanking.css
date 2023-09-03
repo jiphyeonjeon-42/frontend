@@ -1,0 +1,74 @@
+.search-ranking__wrapper {
+  position: absolute;
+  top: 6rem;
+  left: 4.4rem;
+  width: 20rem;
+  z-index: 2;
+  appearance: none;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.search-ranking__container {
+  background-color: white;
+  outline: solid 3px white;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  font-family: inherit;
+}
+
+.search-ranking__container.carousel__container {
+  height: 100%;
+}
+
+.search-ranking__keyword__wrapper {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-ranking__keyword__rank {
+  font-weight: bold;
+  flex: 0 0 1rem;
+  margin: 0 1rem;
+}
+
+.search-ranking__keyword__keyword {
+  flex: 1 0;
+  text-align: left;
+}
+.search-ranking__keyword__change {
+  flex: 0 0 2rem;
+  margin-right: 1rem;
+}
+
+.search-ranking__keyword__change.new {
+  color: green;
+  font-size: 1rem;
+}
+.search-ranking__keyword__change.▲ {
+  color: red;
+}
+.search-ranking__keyword__change.▼ {
+  color: blue;
+}
+@media screen and (min-width: 1200px) {
+  .search-ranking__wrapper {
+    top: 6rem;
+    left: 5rem;
+    width: 24rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .search-ranking__wrapper {
+    top: 4.8rem;
+    left: -12rem;
+    font-size: 1.2rem;
+  }
+  .search-ranking__keyword__wrapper {
+    font-size: 1.2rem;
+  }
+}

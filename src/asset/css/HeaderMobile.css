@@ -25,6 +25,7 @@
 .header-mobile__gnb__wrapper {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .header-mobile__search > img {

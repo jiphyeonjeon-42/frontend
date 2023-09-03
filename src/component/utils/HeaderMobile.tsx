@@ -6,6 +6,7 @@ import Hamburger from "~/asset/img/Hamburger_OwlDsgnr.png";
 import SearchBook from "~/asset/img/Search_VectorsMarket.png";
 import HeaderModal from "./HeaderModal";
 import "~/asset/css/HeaderMobile.css";
+import SearchRanking from "./SearchRanking";
 
 const HeaderMobile = () => {
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
@@ -44,6 +45,7 @@ const HeaderMobile = () => {
           >
             <Image src={Hamburger} alt="dropdown" />
           </button>
+          <SearchRanking />
         </nav>
       </header>
       {isDrawerOpened && (

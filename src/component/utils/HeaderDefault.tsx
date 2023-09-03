@@ -6,6 +6,7 @@ import Image from "./Image";
 import HeaderDefaultLNB from "./HeaderDefaultLNB";
 import Logo from "~/asset/img/jiphyeonjeon_logo.svg";
 import "~/asset/css/HeaderDefault.css";
+import SearchRanking from "./SearchRanking";
 
 const HeaderDefault = () => {
   const user = useRecoilValue(userState);
@@ -35,6 +36,7 @@ const HeaderDefault = () => {
           </Link>
         ))}
         {user.isLogin && <HeaderDefaultLNB />}
+        <SearchRanking />
       </nav>
     </header>
   );
