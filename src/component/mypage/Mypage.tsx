@@ -13,6 +13,8 @@ import InquireBoxTitle from "../utils/InquireBoxTitle";
 import getErrorMessage from "../../constant/error";
 import Login from "../../asset/img/login_icon_white.svg";
 import "../../asset/css/Mypage.css";
+import { useRecoilValue } from "recoil";
+import { userIdAtom } from "~/atom/userAtom"
 
 const Mypage = () => {
   const { currentTab, changeTab } = useTabFocus(0, myPageTabList);
@@ -23,8 +25,7 @@ const Mypage = () => {
     myReservation: <MyReservation />,
     myReview: <MyReview />,
   };
-  const user = window.localStorage.getItem("user");
-  const userId = user && JSON.parse(user).id;
+  const userId = useRecoilValue(userIdAtom);
   const { userInfo } = useGetUsersSearchId({ userId });
   const [deviceMode, setDeviceMode] = useState("desktop");
 
