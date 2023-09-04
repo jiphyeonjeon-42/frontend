@@ -3,19 +3,26 @@ import { useApi } from "~/hook/useApi";
 import type { BookInfoRecommend } from "~/type";
 
 export const useGetCursusRecommendBooks = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>();
   const [recommend, setRecommend] = useState<Recommend>({
     books: [],
-    options: [],
+    options: ["사용자 지정"],
   });
   const { requestWithUrl } = useApi();
   useEffect(() => {
+    setIsLoading(true);
     const saveRecommend = (response: any) => {
       const { items, meta } = response.data;
+      meta.sort();
       setRecommend({
         books: items,
-        options: meta,
+        options: [
+          "사용자 지정",
+          ...meta.filter((item: string) => item !== "사용자 지정"),
+        ],
       });
+      setIsLoading(false);
     };
     requestWithUrl("get", "/cursus/recommend/books", {
       data: {
@@ -27,7 +34,7 @@ export const useGetCursusRecommendBooks = () => {
     });
   }, [selectedOption]);
 
-  return { ...recommend, setSelectedOption };
+  return { ...recommend, setSelectedOption, isLoading };
 };
 
 type Recommend = {

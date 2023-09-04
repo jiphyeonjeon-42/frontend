@@ -30,6 +30,19 @@
   align-items: center;
 }
 
+.search-ranking__keyword__wrapper.title {
+  padding: 0 1rem;
+  font-weight: bold;
+}
+
+.search-ranking__keyword__wrapper.title > img {
+  width: 1rem;
+  margin-right: 0.4rem;
+  color: black;
+  filter: opacity(0.5) drop-shadow(0 0 0 black);
+  transform: rotate(180deg);
+}
+
 .search-ranking__keyword__rank {
   font-weight: bold;
   flex: 0 0 1rem;
@@ -39,7 +52,10 @@
 .search-ranking__keyword__keyword {
   flex: 1 0;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .search-ranking__keyword__change {
   flex: 0 0 2rem;
   margin-right: 1rem;
@@ -64,11 +80,19 @@
 }
 @media screen and (max-width: 768px) {
   .search-ranking__wrapper {
-    top: 4.8rem;
-    left: -12rem;
+    position: absolute;
+    top: 9rem;
+    left: unset;
+    right: 3rem;
     font-size: 1.2rem;
   }
   .search-ranking__keyword__wrapper {
     font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .search-ranking__wrapper {
+    left: 13rem;
   }
 }

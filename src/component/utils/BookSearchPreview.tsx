@@ -25,7 +25,8 @@ const BookSearchPreview = ({
   const [page, setPage] = useState(1);
 
   const slicedBooks = books.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
-  const pageCount = Math.floor(books.length / PAGE_SIZE);
+  const pageCount = Math.ceil(books.length / PAGE_SIZE);
+  const disabled = !books.length;
 
   return (
     <div className="search-preview__wrapper">
@@ -37,10 +38,12 @@ const BookSearchPreview = ({
         setPage={setPage}
         lastPage={pageCount}
       >
-        <Paginations.Prev />
-        <span className="search-preview__page">{isLoading ? 0 : page}</span>
-        <span className="search-preview__last-page">{pageCount}</span>
-        <Paginations.Next />
+        <Paginations.Prev disabled={disabled} />
+        <span className="search-preview__page">{disabled ? 0 : page}</span>
+        <span className="search-preview__last-page">
+          {disabled ? 0 : pageCount}
+        </span>
+        <Paginations.Next disabled={disabled} />
       </Paginations.Root>
       <Link
         className="search-preview__more"

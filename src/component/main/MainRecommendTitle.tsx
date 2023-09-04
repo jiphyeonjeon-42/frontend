@@ -1,11 +1,13 @@
 import { ChangeEventHandler, Dispatch, SetStateAction } from "react";
 
 type Props = {
+  isLoading: boolean;
   description: string;
   options: string[];
   setSelectedOption: (option: string) => void;
 };
 const MainRecommendTitle = ({
+  isLoading,
   description,
   options,
   setSelectedOption,
@@ -22,6 +24,7 @@ const MainRecommendTitle = ({
         <select
           className="main__recommend__title__select"
           onChange={changeOption}
+          disabled={isLoading}
         >
           {options.map(option => (
             <option key={option} value={option}>

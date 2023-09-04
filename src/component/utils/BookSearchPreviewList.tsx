@@ -38,12 +38,15 @@ const BookSearchPreviewList = ({ keyword, books }: Props) => {
             </span>
           </Link>
         ))}
+        {books.length === 0 && (
+          <p className="search-preview__no-result">검색 결과가 없습니다.</p>
+        )}
       </div>
       <Image
         className="search-preview__image"
         width={120}
         height={180}
-        src={books[selectedIndex]?.image}
+        src={books[selectedIndex]?.image ?? ""}
         alt={books[selectedIndex]?.title}
       />
     </div>

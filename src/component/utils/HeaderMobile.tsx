@@ -45,12 +45,12 @@ const HeaderMobile = () => {
           >
             <Image src={Hamburger} alt="dropdown" />
           </button>
-          <SearchRanking />
         </nav>
       </header>
       {isDrawerOpened && (
         <HeaderModal setHeaderModal={() => setIsDrawerOpened(false)} />
       )}
+      <SearchRanking />
     </>
   );
 };

@@ -7,12 +7,17 @@ import Arr from "~/asset/img/arrow_right_gray.svg";
 import PaginationCircle from "../utils/PaginationCircle";
 
 type Props = {
+  isLoading: boolean;
   books: BookInfoRecommend[];
 };
 
-const MainRecommendList = ({ books }: Props) => {
+const MainRecommendList = ({ books, isLoading }: Props) => {
   return (
-    <Carousel.Root length={books.length} itemCount={1}>
+    <Carousel.Root
+      length={books.length}
+      itemCount={1}
+      isAutoAnimated={books.length > 1}
+    >
       <Carousel.Container className="main__recommend-list__container">
         <Carousel.List
           items={books}
@@ -51,12 +56,16 @@ const MainRecommendList = ({ books }: Props) => {
           );
         }}
       />
-      <Carousel.Prev className="main__recommend-list__arrow-button left">
-        <Image src={Arr} />
-      </Carousel.Prev>
-      <Carousel.Next className="main__recommend-list__arrow-button">
-        <Image src={Arr} />
-      </Carousel.Next>
+      {!isLoading && (
+        <>
+          <Carousel.Prev className="main__recommend-list__arrow-button left">
+            <Image src={Arr} />
+          </Carousel.Prev>
+          <Carousel.Next className="main__recommend-list__arrow-button">
+            <Image src={Arr} />
+          </Carousel.Next>
+        </>
+      )}
     </Carousel.Root>
   );
 };

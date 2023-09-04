@@ -1,4 +1,5 @@
 import { type SearchKeyword } from "~/type/SearchKeyword";
+import Tooltip from "./Tooltip";
 
 type Props = { item: SearchKeyword & { id: number }; height: number };
 

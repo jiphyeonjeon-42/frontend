@@ -2,6 +2,9 @@ import { ComponentProps, useState } from "react";
 import { type SearchKeyword } from "~/type/SearchKeyword";
 import Carousel from "./Carousel";
 import SearchRankingItem from "./SearchRankingItem";
+import ToggleDownArrow from "~/asset/img/caret-down_DaveGandy.png";
+import Image from "./Image";
+import { Link } from "react-router-dom";
 
 type Props = ComponentProps<"div"> & {
   list: (SearchKeyword & { id: number })[];
@@ -22,8 +25,17 @@ const SearchRankingList = ({ list }: Props) => {
     >
       {isOpened ? (
         <div className="search-ranking__container">
+          <p
+            className="search-ranking__keyword__wrapper title"
+            style={{ height: HEIGHT }}
+          >
+            인기검색어
+            <Image src={ToggleDownArrow} alt="인기검색어 닫기" />
+          </p>
           {list.map(item => (
-            <SearchRankingItem key={item.id} item={item} height={HEIGHT} />
+            <Link to={`search?search=${item.searchKeyword}`}>
+              <SearchRankingItem key={item.id} item={item} height={HEIGHT} />
+            </Link>
           ))}
         </div>
       ) : (

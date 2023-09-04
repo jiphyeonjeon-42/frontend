@@ -64,6 +64,10 @@
   margin: 0 1rem;
 }
 
+.search-preview__no-result {
+  margin: auto;
+}
+
 .search-preview__image {
   flex-shrink: 0;
 }
@@ -73,6 +77,7 @@
   align-items: center;
   margin-top: 0.4rem;
   padding: 0;
+  min-width: auto;
 }
 .search-preview__pagination.pagination > span {
   font-size: 1.4rem;

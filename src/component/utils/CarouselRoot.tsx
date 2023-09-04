@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useBound } from "~/hook/useBound";
 import { useInterval } from "~/hook/useInterval";
 import { CarouselContext } from "~/component/utils/Carousel";
@@ -11,7 +11,7 @@ type Props = {
   direction?: "row" | "column";
   delay?: number;
   isAutoAnimated?: boolean;
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
 } & (
   | { itemSize: number; itemCount?: never }
   | { itemCount: number; itemSize?: never }
