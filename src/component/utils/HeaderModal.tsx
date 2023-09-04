@@ -1,22 +1,22 @@
 import { useRecoilValue } from "recoil";
 import { Link } from "react-router-dom";
-import userState from "../../atom/userState";
+import { userAtom } from "~/atom/userAtom";
 import Image from "./Image";
 import {
   basicGnbMenu,
   adminLnbMenu,
   loginLnbMenu,
-} from "../../constant/headerMenu";
-import CloseButton from "../../asset/img/x_button_grey.svg";
-import User from "../../asset/img/Freepik_user.png";
-import "../../asset/css/HeaderModal.css";
+} from "~/constant/headerMenu";
+import CloseButton from "~/asset/img/x_button_grey.svg";
+import User from "~/asset/img/Freepik_user.png";
+import "~/asset/css/HeaderModal.css";
 
 type Props = {
   setHeaderModal(...args: unknown[]): unknown;
 };
 
 const HeaderModal = ({ setHeaderModal }: Props) => {
-  const user = useRecoilValue(userState);
+  const user = useRecoilValue(userAtom);
   const closeHeaderModal = () => {
     setHeaderModal(false);
   };
