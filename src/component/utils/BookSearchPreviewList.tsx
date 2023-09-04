@@ -5,11 +5,12 @@ import EmphasisInString from "~/component/utils/EmphasisInString";
 import Image from "~/component/utils/Image";
 
 type Props = {
+  isLoading: boolean;
   keyword: string;
   books: BookPreviewType[];
 };
 
-const BookSearchPreviewList = ({ keyword, books }: Props) => {
+const BookSearchPreviewList = ({ keyword, books, isLoading }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
@@ -38,7 +39,7 @@ const BookSearchPreviewList = ({ keyword, books }: Props) => {
             </span>
           </Link>
         ))}
-        {books.length === 0 && (
+        {!isLoading && books.length === 0 && (
           <p className="search-preview__no-result">검색 결과가 없습니다.</p>
         )}
       </div>
