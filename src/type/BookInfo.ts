@@ -14,3 +14,7 @@ export type BookInfo = {
   donator?: string;
   books?: Book[];
 };
+
+export type BookPreviewType = Omit<BookInfo, "category"> & {
+  bookInfoId: number;
+};

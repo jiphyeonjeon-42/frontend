@@ -1,12 +1,14 @@
 import { FormEventHandler, useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useGetSearchKeywordsAutocomplete } from "~/api/searchKeywords/useGetSearchKeywordsAutocomplete";
 import SearchBar from "~/component/utils/SearchBar";
 import BookSearchPreview from "~/component/utils/BookSearchPreview";
 import BookSearchRecentKeyword from "~/component/utils/BookSearchRecentKeywords";
 
 const BookSearchBar = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const [keyword, setKeyword] = useState("");
+  const { books, totalCount, keyword, setKeyword, isLoading } =
+    useGetSearchKeywordsAutocomplete();
   const [params] = useSearchParams();
   const ref = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -46,7 +48,12 @@ const BookSearchBar = () => {
         {keyword.length == 0 ? (
           <BookSearchRecentKeyword />
         ) : (
-          <BookSearchPreview />
+          <BookSearchPreview
+            keyword={keyword}
+            books={books}
+            totalCount={totalCount}
+            isLoading={isLoading}
+          />
         )}
       </SearchBar.DropDown>
       <SearchBar.Button />
