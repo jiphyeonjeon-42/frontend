@@ -26,12 +26,22 @@
   border-radius: 1rem;
 }
 
-.main__recommend-list__container {
-  background-color: #f2f2f2;
+.main__recommend-list__container,
+.main__recommend__loader {
+  background-color: #b2b2b2;
+
   margin: 0;
   border-radius: 3rem;
   box-sizing: border-box;
   outline: #f2f2f2 solid 2rem;
+  min-height: 30rem;
+}
+
+.main__recommend__loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a4a4a4;
 }
 
 .main__recommend-list__book {
@@ -81,7 +91,7 @@
 
 .main__recommend-list__arrow-button {
   position: absolute;
-  bottom: 16rem;
+  bottom: 20rem;
   transform: translateY(-50%);
   width: 4rem;
   height: 4rem;
@@ -145,6 +155,9 @@
   .main__recommend-list__title {
     font-size: 1.6rem;
     margin-bottom: 1.2rem;
+  }
+  .main__recommend-list__arrow-button {
+    bottom: 16rem;
   }
 
   .main__recommend-list__arrow-button {
