@@ -15,6 +15,10 @@ export type BookInfo = {
   books?: Book[];
 };
 
+export type BookPreviewType = BookInfo & {
+  bookInfoId: number;
+};
+
 export type BookInfoRecommend = BookInfo & {
   project: string[];
 };
