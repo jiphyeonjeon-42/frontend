@@ -29,6 +29,7 @@ const BookSearchBar = () => {
   useEffect(() => {
     const currentKeyword = params.get("search");
     setKeyword(currentKeyword || "");
+    setIsOpened(false);
   }, [params]);
 
   return (
