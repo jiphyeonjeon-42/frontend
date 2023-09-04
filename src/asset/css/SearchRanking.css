@@ -80,11 +80,19 @@
 }
 @media screen and (max-width: 768px) {
   .search-ranking__wrapper {
-    top: 4.8rem;
-    left: -12rem;
+    position: absolute;
+    top: 9rem;
+    left: unset;
+    right: 3rem;
     font-size: 1.2rem;
   }
   .search-ranking__keyword__wrapper {
     font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .search-ranking__wrapper {
+    left: 13rem;
   }
 }
