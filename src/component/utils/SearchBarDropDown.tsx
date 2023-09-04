@@ -23,24 +23,23 @@ const SearchBarDropDown = ({
   const dropDownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const closeWhenClickedOutside = (e: MouseEvent) => {
-      if (
-        searchBarRef.current &&
-        dropDownRef.current &&
-        !searchBarRef.current.contains(e.target as Node) &&
-        !dropDownRef.current.contains(e.target as Node)
-      )
-        setIsOpened(false);
+    const updateDropdownVisibility = (e: MouseEvent) => {
+      const clickedNode = e.target as Node;
+      const isInsideClicked =
+        searchBarRef.current?.contains(clickedNode) ||
+        dropDownRef.current?.contains(clickedNode);
+
+      setIsOpened(isInsideClicked ?? false);
     };
 
     const closeWithEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpened(false);
     };
 
-    document.addEventListener("click", closeWhenClickedOutside);
+    document.addEventListener("click", updateDropdownVisibility);
     document.addEventListener("keydown", closeWithEsc);
     return () => {
-      document.removeEventListener("click", closeWhenClickedOutside);
+      document.removeEventListener("click", updateDropdownVisibility);
       document.removeEventListener("keydown", closeWithEsc);
     };
   }, []);
