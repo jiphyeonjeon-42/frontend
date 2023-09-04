@@ -1,21 +1,18 @@
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { Link } from "react-router-dom";
-import userState from "../../atom/userState";
-import Logo from "../../asset/img/jiphyeonjeon_logo_without_text.svg";
+import { userAtom } from "~/atom/userAtom";
+import Logo from "~/asset/img/jiphyeonjeon_logo_without_text.svg";
 
-const ELibraryHeader = ({ setModalOpened }) => {
-  const { isLogin } = useRecoilValue(userState);
+type Props = {
+  setModalOpened: (value: boolean) => void;
+};
+
+const ELibraryHeader = ({ setModalOpened }: Props) => {
+  const { isLogin } = useRecoilValue(userAtom);
   const [isFixed, setFixed] = useState(false);
-  const stickyHeader = () => {
-    if (window.pageYOffset > 140) {
-      setFixed(true);
-    } else {
-      setFixed(false);
-    }
-  };
 
-  window.onscroll = stickyHeader;
+  window.onscroll = () => setFixed(window.scrollY > 140);
 
   return (
     <>
