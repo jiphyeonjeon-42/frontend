@@ -4,7 +4,7 @@ export type BookInfo = {
   id: number;
   title: string;
   author: string;
-  category: string;
+  category?: string;
   categoryId?: number;
   isbn?: string;
   publisher: string;
@@ -15,6 +15,10 @@ export type BookInfo = {
   books?: Book[];
 };
 
-export type BookPreviewType = Omit<BookInfo, "category"> & {
+export type BookPreviewType = BookInfo & {
   bookInfoId: number;
+};
+
+export type BookInfoRecommend = BookInfo & {
+  project: string[];
 };

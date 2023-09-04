@@ -1,0 +1,25 @@
+.pagination-circle__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-circle__circle {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background-color: #a4a4a4;
+  display: inline-block;
+  margin-left: 1.2rem;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: transparent;
+}
+
+.pagination-circle__circle:first-child {
+  margin: 0;
+}
+
+.pagination-circle__circle.selected {
+  background-color: #2d2d2d;
+}
