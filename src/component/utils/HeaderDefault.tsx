@@ -1,17 +1,17 @@
 import { useRecoilValue } from "recoil";
 import { Link } from "react-router-dom";
 import { basicGnbMenu } from "~/constant/headerMenu";
-import userState from "~/atom/userState";
 import Image from "./Image";
 import HeaderDefaultLNB from "./HeaderDefaultLNB";
 import Logo from "~/asset/img/jiphyeonjeon_logo.svg";
 import "~/asset/css/HeaderDefault.css";
 import SearchRanking from "./SearchRanking";
+import { isUserAuthedAtom } from "~/atom/userAtom";
 
 const HeaderDefault = () => {
-  const user = useRecoilValue(userState);
+  const isAuthed = useRecoilValue(isUserAuthedAtom);
 
-  const gnbMenu = user.isLogin
+  const gnbMenu = isAuthed
     ? basicGnbMenu.slice(0, basicGnbMenu.length - 1) // basicGnbMenu의 마지막 요소는 "로그인", 이미 로그인 상태면 제외
     : basicGnbMenu;
 
@@ -35,7 +35,7 @@ const HeaderDefault = () => {
             <span>{menu.text}</span>
           </Link>
         ))}
-        {user.isLogin && <HeaderDefaultLNB />}
+        {isAuthed && <HeaderDefaultLNB />}
         <SearchRanking />
       </nav>
     </header>
