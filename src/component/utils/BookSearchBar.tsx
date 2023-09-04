@@ -50,6 +50,7 @@ const BookSearchBar = () => {
           <BookSearchRecentKeyword />
         ) : (
           <BookSearchPreview
+            key={keyword}
             keyword={keyword}
             books={books}
             totalCount={totalCount}
