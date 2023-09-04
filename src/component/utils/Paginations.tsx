@@ -98,48 +98,52 @@ const ConditionalMove = (props: {
   </div>
 );
 
-const First = () => {
+const First = (props: ComponentProps<"button">) => {
   const { page, setPage } = useContext(PaginationContext);
   return (
     <Move
+      {...props}
       direction="left"
       onClick={() => setPage(1)}
       isDoubled
-      disabled={page === 1}
+      disabled={props.disabled || page === 1}
     />
   );
 };
 
-const Prev = () => {
+const Prev = (props: ComponentProps<"button">) => {
   const { page, setPage } = useContext(PaginationContext);
   return (
     <Move
+      {...props}
       direction="left"
       onClick={() => setPage(page - 1)}
-      disabled={page === 1}
+      disabled={props.disabled || page === 1}
     />
   );
 };
 
-const Next = () => {
+const Next = (props: ComponentProps<"button">) => {
   const { page, setPage, lastPage } = useContext(PaginationContext);
   return (
     <Move
+      {...props}
       direction="right"
       onClick={() => setPage(page + 1)}
-      disabled={page === lastPage}
+      disabled={props.disabled || page === lastPage}
     />
   );
 };
 
-const Last = () => {
+const Last = (props: ComponentProps<"button">) => {
   const { page, setPage, lastPage } = useContext(PaginationContext);
   return (
     <Move
+      {...props}
       direction="right"
       onClick={() => setPage(lastPage)}
       isDoubled
-      disabled={page === lastPage}
+      disabled={props.disabled || page === lastPage}
     />
   );
 };
