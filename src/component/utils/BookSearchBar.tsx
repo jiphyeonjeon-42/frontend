@@ -15,10 +15,10 @@ const BookSearchBar = () => {
 
   const goToSearchPage: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
-    const searchWord = e.currentTarget.input.value;
+    const searchWord = e.currentTarget.input.value.trim();
     const storageSaved = localStorage.getItem("recent") || "[]";
     const recentKeywords = JSON.parse(storageSaved);
-    if (!recentKeywords.includes(searchWord)) {
+    if (searchWord && !recentKeywords.includes(searchWord)) {
       recentKeywords.unshift(searchWord);
       localStorage.setItem("recent", JSON.stringify(recentKeywords));
     }
