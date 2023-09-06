@@ -24,7 +24,7 @@ export const useGetBooksInfoSearchUrl = () => {
     query,
     page: page ? page - 1 : 0,
     limit: 20,
-    sort,
+    sort: sort ?? "title",
     category,
   });
 

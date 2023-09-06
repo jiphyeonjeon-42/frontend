@@ -15,10 +15,10 @@ const BookSearchBar = () => {
 
   const goToSearchPage: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
-    const searchWord = e.currentTarget.input.value;
+    const searchWord = e.currentTarget.input.value.trim();
     const storageSaved = localStorage.getItem("recent") || "[]";
     const recentKeywords = JSON.parse(storageSaved);
-    if (!recentKeywords.includes(searchWord)) {
+    if (searchWord && !recentKeywords.includes(searchWord)) {
       recentKeywords.unshift(searchWord);
       localStorage.setItem("recent", JSON.stringify(recentKeywords));
     }
@@ -29,6 +29,7 @@ const BookSearchBar = () => {
   useEffect(() => {
     const currentKeyword = params.get("search");
     setKeyword(currentKeyword || "");
+    setIsOpened(false);
   }, [params]);
 
   return (
@@ -49,6 +50,7 @@ const BookSearchBar = () => {
           <BookSearchRecentKeyword />
         ) : (
           <BookSearchPreview
+            key={keyword}
             keyword={keyword}
             books={books}
             totalCount={totalCount}
