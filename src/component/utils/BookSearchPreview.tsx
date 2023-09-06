@@ -53,12 +53,12 @@ const BookSearchPreview = ({
         className="search-preview__more"
         to={`/search?search=${encodeURI(keyword)}`}
       >
-        {!isLoading && totalCount && (
+        {!isLoading && totalCount ? (
           <EmphasisInString
             wholeString={`전체 ${totalCount} 건 검색 결과 더보기`}
             emphasis={`${totalCount}`}
           />
-        )}
+        ) : null}
       </Link>
     </div>
   );

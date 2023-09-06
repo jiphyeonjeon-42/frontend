@@ -39,9 +39,9 @@ const BookSearchPreviewList = ({ keyword, books, isLoading }: Props) => {
             </span>
           </Link>
         ))}
-        {!isLoading && books.length === 0 && (
+        {!isLoading && books.length === 0 ? (
           <p className="search-preview__no-result">검색 결과가 없습니다.</p>
-        )}
+        ) : null}
       </div>
       <Image
         className="search-preview__image"
