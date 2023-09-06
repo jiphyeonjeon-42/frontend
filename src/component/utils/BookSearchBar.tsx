@@ -5,6 +5,7 @@ import SearchBar from "~/component/utils/SearchBar";
 import BookSearchPreview from "~/component/utils/BookSearchPreview";
 import BookSearchRecentKeyword from "~/component/utils/BookSearchRecentKeywords";
 
+const RECENT_LIMIT = 10;
 const BookSearchBar = () => {
   const [isOpened, setIsOpened] = useState(false);
   const { books, totalCount, keyword, setKeyword, isLoading } =
@@ -20,7 +21,10 @@ const BookSearchBar = () => {
     const recentKeywords = JSON.parse(storageSaved);
     if (searchWord && !recentKeywords.includes(searchWord)) {
       recentKeywords.unshift(searchWord);
-      localStorage.setItem("recent", JSON.stringify(recentKeywords));
+      localStorage.setItem(
+        "recent",
+        JSON.stringify(recentKeywords.slice(0, RECENT_LIMIT)),
+      );
     }
     navigate(`/search?search=${encodeURIComponent(searchWord)}`);
     e.currentTarget.input.blur();
