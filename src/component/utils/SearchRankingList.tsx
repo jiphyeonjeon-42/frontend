@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 import { type SearchKeyword } from "~/type/SearchKeyword";
 import Carousel from "./Carousel";
 import SearchRankingItem from "./SearchRankingItem";
@@ -33,7 +33,9 @@ const SearchRankingList = ({ list }: Props) => {
             <Image src={ToggleDownArrow} alt="인기검색어 닫기" />
           </p>
           {list.map(item => (
-            <Link to={`search?search=${item.searchKeyword}`}>
+            <Link
+              to={`search?search=${encodeURIComponent(item.searchKeyword)}`}
+            >
               <SearchRankingItem key={item.id} item={item} height={HEIGHT} />
             </Link>
           ))}

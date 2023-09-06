@@ -51,7 +51,7 @@ const BookSearchPreview = ({
       </Paginations.Root>
       <Link
         className="search-preview__more"
-        to={`/search?search=${encodeURI(keyword)}`}
+        to={`/search?search=${encodeURIComponent(keyword)}`}
       >
         {!isLoading && totalCount ? (
           <EmphasisInString
