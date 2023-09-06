@@ -11,6 +11,7 @@ type Props = {
   direction?: "row" | "column";
   delay?: number;
   isAutoAnimated?: boolean;
+  initailSmoothAnimated?: boolean;
   children: ReactNode;
 } & (
   | { itemSize: number; itemCount?: never }
@@ -37,9 +38,13 @@ const CarouselRoot = ({
   direction = "row",
   delay = 2000,
   isAutoAnimated = true,
+  initailSmoothAnimated = true,
   children,
 }: Props) => {
-  const [slide, setSlide] = useState({ index: 1, isSmoothAnimated: true }); // 슬라이드 움직임 제어
+  const [slide, setSlide] = useState({
+    index: 1,
+    isSmoothAnimated: initailSmoothAnimated,
+  }); // 슬라이드 움직임 제어
 
   const { targetRef, boundInfo: bound } = useBound<HTMLDivElement>({
     hasResizeEvent: true,
@@ -78,7 +83,7 @@ const CarouselRoot = ({
   useEffect(() => {
     setSlide({ index: 1, isSmoothAnimated: true });
   }, [length]);
-  
+
   return (
     <CarouselContext.Provider
       value={{

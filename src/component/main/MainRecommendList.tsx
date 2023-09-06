@@ -17,6 +17,7 @@ const MainRecommendList = ({ books, isLoading }: Props) => {
       length={books.length}
       itemCount={1}
       isAutoAnimated={books.length > 1}
+      initailSmoothAnimated={false}
     >
       <Carousel.Container className="main__recommend-list__container">
         <Carousel.List
