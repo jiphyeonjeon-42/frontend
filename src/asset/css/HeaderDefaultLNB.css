@@ -1,0 +1,78 @@
+.header__lnb-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-size: inherit;
+}
+
+.header__gnb__icon.dropdown {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin: 0.5rem 0 0 0.8rem;
+}
+
+.header__lnb-menu__wrapper {
+  position: absolute;
+  top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: -0.8rem;
+}
+
+.header__lnb-menu__wrapper:after {
+  content: " ";
+  position: absolute;
+  top: -1.2rem;
+  bottom: -2rem;
+  right: 0.6rem;
+  width: 0.1rem;
+  height: 100%;
+  background-color: #fff;
+}
+
+.header__lnb-menu__item {
+  position: relative;
+  color: white;
+  padding-right: 2rem;
+  margin-top: 0.8rem;
+}
+
+.header__lnb-menu__item::after {
+  content: " ";
+  position: absolute;
+  top: 40%;
+  right: 0.3rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 100%;
+  background-color: #fff;
+  opacity: 1;
+}
+
+.header__lnb-menu__text {
+  font-size: 1.4rem;
+  line-height: 1;
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 1200px) {
+  .header__lnb-menu__wrapper {
+    margin-top: -0.3rem;
+  }
+  .header__lnb-menu__item {
+    margin-top: 0.9피rem;
+  }
+  .header__lnb-menu__text {
+    font-size: 1.6rem;
+  }
+}

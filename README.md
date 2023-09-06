@@ -1,4 +1,5 @@
 ## 42서울의 도서관, 집현전
+
 <p align='center'>
 <img width='70%' src='https://user-images.githubusercontent.com/79993356/180756135-0f622d3c-e5aa-4ac8-8d50-fa768aeaf5f9.png'>
 </p>
@@ -19,24 +20,32 @@
 
 ## 🏠 [HOME PAGE](https://42library.kr/)
 
-**1,000명 이상**이 사용하는 42 SEOUL 공식 도서관 웹사이트입니다. 
+**1,000명 이상**이 사용하는 42 SEOUL 공식 도서관 웹사이트입니다.
 
-사용자와 사서님들에게 피드백을 매주 받는 것은 물론, 사이트에 대한 건의 사항을 **42 Seoul 재단**에서 직접 받기도 합니다. 
+사용자와 사서님들에게 피드백을 매주 받는 것은 물론, 사이트에 대한 건의 사항을 **42 Seoul 재단**에서 직접 받기도 합니다.
 
 매주 유지보수 팀이 도서관에 상주하여 해당 건의 사항을 해결합니다.
 
 ## 📌 집현전 서비스 소개
-###  👩‍👩‍👧‍👦 도서검색
+
+### 👩‍👩‍👧‍👦 도서검색
+
 > - 네이버에서 제공하는 모든 도서를 검색 가능합니다.
 > - 도서명, ISBN, 저자명으로 검색합니다.
+
 ### 📈 도서 대출과 반납, 등록 가능
+
 > - 도서의 **QR코드** 및 바코드를 읽어 간단하게 책을 대출해드릴 수 있습니다.
 > - 같은 방법으로, 집현전에 새로운 도서를 등록하여 DB에 저장 가능합니다.
+
 ### 📆 간편한 마이페이지 제공
+
 > - 자신의 연체 날짜를 확인하며, 대출하거나 예약한 책의 내역을 봅니다.
 > - 이메일과 비밀번호를 변경할 수 있습니다.
 > - 연체 날짜가 잘못된 경우, 사서가 이를 수정해줄 수 있습니다.
+
 ### 📩 42 OAuth 2.0 활용
+
 > - 이메일과 비밀번호로 회원가입은 물론, [**42의 OAuth API**](https://api.intra.42.fr/apidoc/guides/specification)를 통한 로그인 인증이 가능합니다.
 
 ## 📌 시연 영상
@@ -56,6 +65,7 @@
 
 **1. MySQL 다운로드 후 워크벤치에 DB 스키마 설계 후 실행**
 **2. 백엔드**
+
 - 백엔드 환경 변수 설정
   - backend폴더 바로 안에 .env 파일 생성
   - .env 예시
@@ -84,17 +94,20 @@
     ```
 
 **3. 프론트엔드**
+
 - 프론트엔드 환경 변수 설정
-   - 폴더에 .env 파일 생성
-   - .env 예시
-      ```
-      REACT_APP_API=...
-      REACT_APP_WISH=...
-      REACT_APP_E_BOOK_LIBRARY=...
-      PORT=...
-      REACT_APP_SUGGESTION=...
-      ```
+
+  - 폴더에 .env 파일 생성
+  - .env 예시
+    ```
+    REACT_APP_API=...
+    REACT_APP_WISH=...
+    REACT_APP_E_BOOK_LIBRARY=...
+    PORT=...
+    REACT_APP_SUGGESTION=...
+    ```
   - 실행
+
     ```jsx
     pnpm install
     pnpm dev
@@ -118,3 +131,4 @@
 - [Jaekim](https://github.com/jae-hwan-kim)
 - [Chanheki](https://github.com/chanhihi)
 - [Youkim](https://github.com/scarf005)
+- [Mingkang](https://github.com/mink97)

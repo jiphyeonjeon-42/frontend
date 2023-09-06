@@ -20,15 +20,15 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
   const [image, setImage] = useState(book.image);
   const [reset, setReset] = useState(false);
 
-  const titleRef = useRef(null);
-  const authorRef = useRef(null);
-  const publisherRef = useRef(null);
-  const publishedAtRef = useRef(null);
-  const isbnRef = useRef(null);
-  const imageRef = useRef(null);
-  const callSignRef = useRef(null);
-  const statusRef = useRef(null);
-  const categoryRef = useRef(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const authorRef = useRef<HTMLInputElement>(null);
+  const publisherRef = useRef<HTMLInputElement>(null);
+  const publishedAtRef = useRef<HTMLInputElement>(null);
+  const isbnRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
+  const callSignRef = useRef<HTMLInputElement>(null);
+  const statusRef = useRef<HTMLSelectElement>(null);
+  const categoryRef = useRef<HTMLSelectElement>(null);
 
   const { setChange } = usePatchBooksUpdate({
     bookTitle: book.title,
@@ -57,7 +57,8 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
     modifyFromRef("callSign", callSignRef);
     modifyFromRef("categoryId", categoryRef);
     modifyFromRef("status", statusRef);
-    change.categoryId += 1; // select option의 index는 0부터 시작하므로 +1
+    change.categoryId = Number(change.categoryId);
+    change.category = category[change.categoryId].name;
     return change;
   };
 
@@ -71,7 +72,8 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
     const isValidDate =
       change.publishedAt && dateRegex.test(change.publishedAt);
     const isValidCallSign = callSignRegex.test(change.callSign);
-    const isValidCategory = category.find(x => x.code === categoryToChange) !== undefined;
+    const isValidCategory =
+      category.find(x => x.code === categoryToChange) !== undefined;
     const isValidISBN = change.isbn && isbnRegex.test(change.isbn);
 
     let errorMessage = "";
@@ -166,7 +168,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
             ref={categoryRef}
             resetDependency={reset}
             optionList={category.map(i => i.name)}
-            initialSelectedIndex={book.categoryId - 1}
+            initialSelectedIndex={Number(book.categoryId) - 1}
           />
         </div>
       </div>

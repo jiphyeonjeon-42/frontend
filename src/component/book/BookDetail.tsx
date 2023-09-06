@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useGetBooksInfoId } from "../../api/books/useGetBooksInfoId";
-import BookReservation from "./BookReservation";
-import BookStatus from "./BookStatus";
-import Review from "./review/Review";
-import Banner from "../utils/Banner";
-import Image from "../utils/Image";
-import Like from "./like/Like";
-import TagWrapper from "./tag/TagWrapper";
-import "../../asset/css/BookDetail.css";
+import { useGetBooksInfoId } from "~/api/books/useGetBooksInfoId";
+import BookReservation from "~/component/book/BookReservation";
+import BookStatus from "~/component/book/BookStatus";
+import Review from "~/component/book/review/Review";
+import Banner from "~/component/utils/Banner";
+import Image from "~/component/utils/Image";
+import Like from "~/component/book/like/Like";
+import TagWrapper from "~/component/book/tag/TagWrapper";
+import "~/asset/css/BookDetail.css";
 
 const BookDetail = () => {
   const id = useParams().id || "";
@@ -58,7 +58,7 @@ const BookDetail = () => {
               <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
             </div>
             <div className="book-likes">
-              <Like initBookInfoId={id} />
+              <Like bookInfoId={id} />
             </div>
           </div>
           <div className="book-detail">

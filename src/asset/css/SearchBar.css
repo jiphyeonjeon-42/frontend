@@ -4,6 +4,7 @@
   display: flex;
   border-radius: 6.1rem;
   background-color: #f2f2f2;
+  position: relative;
 }
 
 .search-bar__wrapper.short {
@@ -56,21 +57,13 @@
 .search-bar__button {
   all: unset;
   margin-left: auto;
-  background-image: url("../img/search_icon_black.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
   width: 2.8rem;
   height: 2.8rem;
   margin: auto;
-  color: transparent;
-}
-
-.search-bar__button.submit {
-  background-image: url("../img/search_icon_black.svg");
+  cursor: pointer;
 }
 
 .search-bar__button.barcode {
-  background-image: url("../img/barcode.svg");
   margin-right: 2rem;
 }
 
@@ -100,9 +93,11 @@
   .search-bar__wrapper.center {
     padding: 0 2rem 0 2rem;
   }
+
   .search-bar__wrapper.long {
     padding: 0 2.5rem 0 2.2rem;
   }
+
   .search-bar__wrapper.short {
     margin-right: 1.8rem;
     padding: 0 2.5rem 0 2.2rem;

@@ -1,7 +1,7 @@
-import Pagination from "../../utils/Pagination";
-import { useGetHistories } from "../../../api/histories/useGetHistories";
+import Pagination from "~/component/utils/Pagination";
+import { useGetHistories } from "~/api/histories/useGetHistories";
 import RentHistoryTable from "./RentHistoryTable";
-import "../../../asset/css/RentHistory.css";
+import "~/asset/css/RentHistory.css";
 
 const RentHistory = () => {
   const { historiesList, lastPage, page, setPage } = useGetHistories({

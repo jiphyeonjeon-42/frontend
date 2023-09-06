@@ -3,7 +3,7 @@ import Banner from "../utils/Banner";
 import Tabs from "../utils/Tabs";
 import UserBriefInfo from "./UserBriefInfo";
 import UserUsageInfo from "./UserUsageInfo";
-import SearchBar from "../utils/SearchBar";
+import ManagementSearchBar from "../utils/ManagementSearchBar";
 import Pagination from "../utils/Pagination";
 import Modal from "../utils/Modal";
 import ModalHeader from "../utils/ModalHeader";
@@ -32,7 +32,7 @@ const UserManagement = () => {
       <Tabs tabList={userManagementTabList} />
       <section className="user-management-body">
         <div className="user-management-search">
-          <SearchBar
+          <ManagementSearchBar
             width="center"
             placeHolder="nickname 또는 email을 입력해주세요."
             setQuery={setQuery}

@@ -31,6 +31,10 @@
   cursor: pointer;
 }
 
+.pagination__page-range-button:disabled {
+  opacity: 0.4;
+}
+
 .pagination__page-range-button > img {
   width: 0.8rem;
   height: 1.6rem;
