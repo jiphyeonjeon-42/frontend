@@ -1,5 +1,5 @@
 import { MouseEventHandler, ReactNode, useRef } from "react";
-import ManagementSearchBar from "./ManagementSearchBar";
+import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
 import TextWithLabel from "./TextWithLabel";
 import "../../asset/css/SearchModal.css";
@@ -37,7 +37,7 @@ const SearchModal = ({
           mainText={titleText}
           wrapperClassName="search-modal__header__title"
         />
-        <ManagementSearchBar
+        <SearchBar
           setQuery={setQuery}
           width="long"
           isWithBarcodeButton={isWithBarcodeButton}

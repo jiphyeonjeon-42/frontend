@@ -11,7 +11,6 @@
   padding: 0 15rem 0 15rem;
   max-width: 120rem;
   margin: auto;
-  overflow: hidden;
 }
 
 .search-title {
@@ -28,10 +27,6 @@
 .search-subtitle {
   width: 100%;
   padding: 10rem 0 0 0;
-}
-
-.search-subtitle > * > .subtitle__title {
-  word-break: break-all;
 }
 
 .search-sort {

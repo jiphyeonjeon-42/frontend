@@ -1,4 +1,4 @@
-import BookSearchBar from "../utils/BookSearchBar";
+import SearchBar from "../utils/SearchBar";
 import "../../asset/css/Banner.css";
 import "../../asset/css/SearchBanner.css";
 
@@ -18,7 +18,11 @@ const SearchBanner = ({ setQuery }: Props) => {
             SEARCH
           </span>
         </div>
-        <BookSearchBar />
+        <SearchBar
+          setQuery={setQuery}
+          width="banner"
+          isFocusedOnMount={false}
+        />
       </section>
     </section>
   );

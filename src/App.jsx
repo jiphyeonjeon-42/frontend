@@ -6,6 +6,7 @@ import BookDetail from "./component/book/BookDetail";
 import Footer from "./component/utils/Footer";
 import NotFound from "./component/utils/NotFound";
 import Header from "./component/utils/Header";
+import MobileHeader from "./component/utils/MobileHeader";
 import Information from "./component/information/Information";
 import Main from "./component/main/Main";
 import Search from "./component/search/Search";
@@ -51,6 +52,7 @@ function App() {
       <div id="portal" />
       <Portals />
       <Header />
+      <MobileHeader />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/41" element={<ELibraryIn42Box />} />

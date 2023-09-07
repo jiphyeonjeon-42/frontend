@@ -4,7 +4,6 @@ import { myPageTabList } from "../../constant/tablist";
 import { useTabFocus } from "../../hook/useTabFocus";
 import { useNewDialog } from "../../hook/useNewDialog";
 import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
-import { lendingRestriction } from "../../util/date";
 import MyRent from "./MyRentInfo/MyRent";
 import MyReservation from "./MyReservation";
 import MyReview from "./MyReview";
@@ -65,6 +64,35 @@ const Mypage = () => {
       window.removeEventListener("resize", getWindowWidth);
     };
   }, []);
+
+  const concatDate = (day: Date) => {
+    if (!userInfo) return "";
+    let overDueDate = "";
+    day.setDate(day.getDate() + userInfo.overDueDay);
+    overDueDate += day.getFullYear();
+    overDueDate += "-";
+    overDueDate +=
+      day.getMonth() + 1 >= 10
+        ? day.getMonth() + 1
+        : "0".concat(`${day.getMonth() + 1}}`);
+    overDueDate += "-";
+    overDueDate +=
+      day.getDate() >= 10 ? day.getDate() : "0".concat(`${day.getDate()}`);
+    return overDueDate;
+  };
+
+  const getOverDueDate = () => {
+    if (
+      !userInfo ||
+      (userInfo &&
+        (!userInfo.penaltyEndDate ||
+          new Date(userInfo.penaltyEndDate).setHours(0, 0, 0, 0) <
+            new Date().setHours(0, 0, 0, 0)))
+    ) {
+      return concatDate(new Date());
+    }
+    return concatDate(new Date(userInfo.penaltyEndDate));
+  };
 
   return (
     <>
@@ -142,8 +170,11 @@ const Mypage = () => {
                   </span>
                   <span className="font-14-bold color-54">대출제한</span>
                   <span className="font-14">
-                    {lendingRestriction(userInfo).isRestricted
-                      ? `${lendingRestriction(userInfo).restrictionDate} 까지`
+                    {userInfo.overDueDay ||
+                    (userInfo.penaltyEndDate &&
+                      new Date(userInfo.penaltyEndDate).setHours(0, 0, 0, 0) >=
+                        new Date().setHours(0, 0, 0, 0))
+                      ? `${getOverDueDate()} 까지`
                       : "-"}
                   </span>
                   <span className="font-14-bold color-54">정보수정</span>

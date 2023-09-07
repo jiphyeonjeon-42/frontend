@@ -1,10 +1,10 @@
 import { MouseEventHandler, TouchEventHandler, useState } from "react";
 import Image from "../utils/Image";
-import { BookInfo } from "../../type";
+import { Book } from "../../type";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  docs: (BookInfo & { rank: number })[];
+  docs: Book[];
   centerTop: number;
   onLeft: () => void;
   onRight: () => void;
@@ -100,7 +100,7 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }: Props) => {
                 />
                 <div className="main__popular__summary">
                   <span className="main__popular__rank font-48-bold">
-                    {book.rank}
+                    {index + 1}
                   </span>
                   <p className="font-16-light color-2d"> #{book.category}</p>
                   <p className="font-32-bold color-2d">{book.title}</p>

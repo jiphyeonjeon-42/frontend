@@ -1,26 +1,40 @@
-import { useGetLike, usePostLike, useDeleteLike } from "~/api/like";
-import Image from "~/component/utils/Image";
-import FilledLike from "~/asset/img/like_filled.svg";
-import EmptyLike from "~/asset/img/like_empty.svg";
-import type { History } from "~/type";
-import "~/asset/css/RentHistory.css";
+import { useState } from "react";
+import { useGetLike } from "../../../api/like/useGetLike";
+import { usePostLike } from "../../../api/like/usePostLike";
+import { useDeleteLike } from "../../../api/like/useDeleteLike";
+import Image from "../../utils/Image";
+import FilledLike from "../../../asset/img/like_filled.svg";
+import EmptyLike from "../../../asset/img/like_empty.svg";
+import { History } from "../../../type";
+import "../../../asset/css/RentHistory.css";
 
 type Props = {
   factor: History;
 };
 
 const RentHistoryTable = ({ factor }: Props) => {
-  const { like, setLike } = useGetLike({
-    bookInfoId: factor.bookInfoId,
+  const [currentLike, setCurrentLike] = useState(false);
+  useGetLike({
+    initBookInfoId: factor.bookInfoId,
+    setCurrentLike,
   });
-  const { setBookInfoId: requestPost } = usePostLike({ setLike });
-  const { setBookInfoId: requestDelete } = useDeleteLike({ setLike });
-
-  const postLike = () => {
-    requestPost(factor.bookInfoId);
+  const { setBookInfoId: setBookInfoIdPost } = usePostLike();
+  const postLike = (bookInfoId: number) => {
+    setBookInfoIdPost(bookInfoId);
   };
-  const deleteLike = () => {
-    requestDelete(factor.bookInfoId);
+  const { setBookInfoId: setBookInfoIdDelete } = useDeleteLike();
+  const deleteLike = (bookInfoId: number) => {
+    setBookInfoIdDelete(bookInfoId);
+  };
+
+  const clickLikeHandler = (bookInfoId: number) => {
+    if (currentLike) {
+      deleteLike(bookInfoId);
+      setCurrentLike(false);
+    } else {
+      postLike(bookInfoId);
+      setCurrentLike(true);
+    }
   };
 
   return (
@@ -35,9 +49,11 @@ const RentHistoryTable = ({ factor }: Props) => {
       <button
         className="rent_histories__table-list__button"
         type="button"
-        onClick={like.isLiked ? deleteLike : postLike}
+        onClick={() => {
+          clickLikeHandler(factor.bookInfoId);
+        }}
       >
-        {like.isLiked ? (
+        {currentLike ? (
           <Image className="mypage__like_icon" src={FilledLike} alt="like" />
         ) : (
           <Image className="mypage__like_icon" src={EmptyLike} alt="unlike" />

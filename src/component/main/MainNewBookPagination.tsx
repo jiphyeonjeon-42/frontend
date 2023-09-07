@@ -1,28 +1,36 @@
-import PaginationCircle from "~/component/utils/PaginationCircle";
+import { MouseEventHandler } from "react";
 
 type Props = {
   page: number;
   setPage: (page: number) => void;
 };
-/*
- * 신작도서를 5권씩 4챕터로 나누어서 표시
- * page: 1 ~ 20
- * chapter: 1 ~ 4
- */
-const pageSize = 5;
-const chapterSize = 4;
 
 const MainNewBookPagination = ({ page, setPage }: Props) => {
-  const currentChapter = Math.ceil(page / pageSize);
-  const setCurrentChapter = (chapter: number) => setPage(chapter * pageSize);
-
+  const onChapter: MouseEventHandler<HTMLButtonElement> = e => {
+    setPage(+e.currentTarget.value * 5);
+  };
+  const chapter = [0, 1, 2, 3];
+  function isSelected(n: number) {
+    if (Math.floor(page / 5) === n) return true;
+    if (Math.floor(page / 5) === 4 && !n) return true;
+    return false;
+  }
   return (
-    <PaginationCircle
-      className="main-new__books_pagination"
-      page={currentChapter}
-      setPage={setCurrentChapter}
-      lastPage={chapterSize - 1}
-    />
+    <div className="main-new__books_pagination">
+      {chapter.map(i => (
+        <button
+          key={i}
+          type="button"
+          value={i}
+          className={`${
+            isSelected(i) && "selected"
+          } main-new__books_pag_circle`}
+          onClick={onChapter}
+        >
+          {i}
+        </button>
+      ))}
+    </div>
   );
 };
 

@@ -1,27 +1,30 @@
 import { Link } from "react-router-dom";
-import type { BookInfo } from "~/type";
-import Image from "~/component/utils/Image";
+import Image from "../utils/Image";
 
 type Props = {
-  book: BookInfo;
+  book: {
+    id?: number;
+    image?: string;
+    title?: string;
+  };
   bookWidth: number;
 };
 
 const MainNewBook = ({ book, bookWidth }: Props) => {
   return (
-    <Link
+    <div
       className="main-new__book"
-      to={`/info/${book.id}`}
-      state={{ bread: "신간 도서" }}
       style={{ width: bookWidth, height: bookWidth * 1.5 }}
     >
-      <Image
-        width={bookWidth}
-        height={bookWidth * 1.5}
-        src={book.image}
-        alt="new"
-      />
-    </Link>
+      <Link to={`/info/${book.id}`} state={{ bread: "신간 도서" }}>
+        <Image
+          width={bookWidth}
+          height={bookWidth * 1.5}
+          src={book.image}
+          alt="new"
+        />
+      </Link>
+    </div>
   );
 };
 

@@ -1,10 +1,11 @@
-import { User } from "../type";
-
+import { isNumber, isString } from "./typeCheck";
 /*  기본적인 날짜표시 형식 20yy-mm-dd */
+
 const dateReg = /^(20\d{2})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
 
 export const isFormattedDate = (string: string) => RegExp(dateReg).test(string);
 export const dateFormat = (string: string) => {
+  if (isFormattedDate(string)) return string;
   return string?.slice(0, 10)?.replace(".", "-") || "";
 };
 
@@ -21,16 +22,9 @@ export const splitDate = (string: string) =>
     ?.map(v => parseInt(v)) || [];
 
 /* string 형식의 날짜 비교 */
-export const compareDate = (
-  date1: string,
-  date2 = nowDate,
-  compare: (date1: string, date2: string) => boolean,
-) => {
-  return compare(dateFormat(date1), dateFormat(date2));
-};
-
 export const dateLessThan = (date: string, now = nowDate) => {
-  return compareDate(date, now, (date1, date2) => date1 < date2);
+  if (!isString(date) || !isString(now)) return undefined;
+  return dateFormat(date) < now;
 };
 
 /* 날짜 및 시간 계산 */
@@ -50,27 +44,10 @@ export const isExpiredDate = (expireDateString: string) => {
 };
 
 export const addDay = (num: number, date = nowDate) => {
-  if (!isFormattedDate(date)) return date;
-  const dateObj = new Date(date);
+  if (!isString(date) || !isNumber(num)) return date;
+  const splited = splitDate(dateFormat(date));
+  if (!splited) return date;
+  const [year, month, day] = splited;
+  const dateObj = new Date(year, month - 1, day);
   return dateFormat(addDayDateObject(dateObj, num).toISOString());
-};
-
-/* lending 관련 날짜 함수 */
-
-export const lendingRestriction = (user: User) => {
-  // 대출제한날짜는 이미 반납한 대출건의 연체제한 + 대출중인 도서의 연체일로 계산
-  const restrictionDate =
-    !user.penaltyEndDate || dateLessThan(user.penaltyEndDate)
-      ? addDay(user.overDueDay) // 오늘 날짜 + 대출중인 도서를 오늘 반납시 받게 될 연체일
-      : addDay(user.overDueDay, user.penaltyEndDate);
-  // 이미 반납한 대출건의 연체 제한날짜 + 대출중인 도서를 오늘 반납시 받게 될 연체일
-
-  // 대출제한날짜가 현재 날짜보다 크면 대출제한
-  const isRestricted = compareDate(
-    restrictionDate,
-    nowDate,
-    (d1, d2) => d1 > d2,
-  );
-
-  return { isRestricted, restrictionDate };
 };

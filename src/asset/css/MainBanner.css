@@ -63,32 +63,8 @@
   font-size: 1.2rem;
 }
 
-.main-banner__mouse {
+.main-banner__scroll_icon {
   margin-top: 1.6rem;
-  width: 2rem;
-  height: 3.4rem;
-  border: 0.2rem solid rgba(255, 255, 255, 0.5);
-  border-radius: 6rem;
-  position: relative;
-  &::before {
-    content: "";
-    width: 0.6rem;
-    height: 0.6rem;
-    position: absolute;
-    top: 0.3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    border-radius: 50%;
-    animation: wheel 3s infinite;
-  }
-}
-
-@keyframes wheel {
-  to {
-    opacity: 0;
-    top: 2.4rem;
-  }
 }
 
 @media screen and (max-width: 1199px) {

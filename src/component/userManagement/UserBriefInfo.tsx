@@ -1,9 +1,8 @@
-import { User } from "../../type";
-import { lendingRestriction } from "../../util/date";
 import Image from "../utils/Image";
 import UserUsage from "../../asset/img/book-arrow-right.svg";
 import UserEdit from "../../asset/img/edit.svg";
 import "../../asset/css/UserBriefInfo.css";
+import { User } from "../../type";
 
 const roles = ["미인증", "일반", "사서", "운영진"];
 const USAGE = 1;
@@ -27,7 +26,30 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }: Props) => {
     setModal(EDIT);
   };
 
-  const { isRestricted, restrictionDate } = lendingRestriction(user);
+  const concatDate = (day: Date) => {
+    let overDueDate = "";
+
+    day.setDate(day.getDate() + user.overDueDay);
+    overDueDate += day.getFullYear();
+    overDueDate += "-";
+    overDueDate += day.getMonth() + 1 < 10 ? "0" : "";
+    overDueDate += day.getMonth() + 1;
+    overDueDate += "-";
+    overDueDate += day.getDate() < 10 ? "0" : "";
+    overDueDate += day.getDate();
+    return overDueDate;
+  };
+
+  const getOverDueDate = () => {
+    if (
+      !user.penaltyEndDate ||
+      new Date(user.penaltyEndDate).setHours(0, 0, 0, 0) <
+        new Date().setHours(0, 0, 0, 0)
+    ) {
+      return concatDate(nowDay);
+    }
+    return concatDate(new Date(user.penaltyEndDate));
+  };
 
   return (
     <div className={`user-info ${line ? "user-info-line" : ""}`}>
@@ -46,7 +68,12 @@ const UserBriefInfo = ({ user, line, setModal, setSelectedUser }: Props) => {
       )}
       <div className="user-info__email font-18-bold color-54">{user.email}</div>
       <div className="user-info__overdue font-18 color-54">
-        {isRestricted ? restrictionDate : "-"}
+        {user.overDueDay ||
+        (user.penaltyEndDate &&
+          new Date(user.penaltyEndDate).setHours(0, 0, 0, 0) >=
+            new Date().setHours(0, 0, 0, 0))
+          ? getOverDueDate()
+          : "-"}
       </div>
       {user.nickname ? (
         <button

@@ -1,8 +1,8 @@
-import { usePatchReservationsCancel } from "~/api/reservations/usePatchReservationsCancel";
-import Image from "~/component/utils/Image";
-import { isNumber } from "~/util/typeCheck";
-import { Lending, Reservation } from "~/type";
-import "~/asset/css/RentedOrReservedBooks.css";
+import { usePatchReservationsCancel } from "../../../api/reservations/usePatchReservationsCancel";
+import Image from "../../utils/Image";
+import { isNumber } from "../../../util/typeCheck";
+import { Lending, Reservation } from "../../../type";
+import "../../../asset/css/RentedOrReservedBooks.css";
 
 type Props = {
   componentMode: string;

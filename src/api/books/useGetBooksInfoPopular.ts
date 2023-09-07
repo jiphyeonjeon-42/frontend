@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
 import { compareExpect } from "../../util/typeCheck";
-import { BookInfo } from "../../type";
+import { Book } from "../../type";
 
 export const useGetBooksInfoPopular = () => {
-  const [docs, setDocs] = useState<(BookInfo & { rank: number })[]>([]);
+  const [docs, setDocs] = useState<Book[]>([]);
 
   const { request } = useApi("get", "books/info", {
     sort: "popular",
@@ -27,11 +27,7 @@ export const useGetBooksInfoPopular = () => {
       response.data.items,
       expectedItem,
     );
-    const booksWithRank = books.map((book, index) => ({
-      ...book,
-      rank: index + 1,
-    }));
-    setDocs(booksWithRank);
+    setDocs(books);
   };
 
   useEffect(() => request(refineResponse), []);

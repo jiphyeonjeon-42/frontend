@@ -1,5 +1,5 @@
 import Image from "./Image";
-import ManagementSearchBar from "./ManagementSearchBar";
+import SearchBar from "./SearchBar";
 import "../../asset/css/InquireBoxTitle.css";
 
 type Props = {
@@ -51,7 +51,7 @@ const InquireBoxTitle = ({
         </span>
       </span>
       {placeHolder ? (
-        <ManagementSearchBar
+        <SearchBar
           placeHolder={placeHolder}
           width="short"
           setQuery={setQuery}

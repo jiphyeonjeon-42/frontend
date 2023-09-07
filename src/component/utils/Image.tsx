@@ -5,13 +5,14 @@ type Size = number;
 type Props = HTMLProps<HTMLImageElement> & { width?: Size; height?: Size };
 
 const Image = ({ src, alt, width, height, ...props }: Props) => {
+  const [error, setError] = useState(false);
   return (
     <img
       {...props}
-      src={src}
+      src={error ? fallback : src}
       alt={alt}
       style={{ width, height }}
-      onError={e => (e.currentTarget.src = fallback)}
+      onError={() => setError(true)}
       loading="lazy"
     />
   );

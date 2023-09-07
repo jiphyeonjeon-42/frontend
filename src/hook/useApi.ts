@@ -4,12 +4,12 @@ import axiosPromise from "../util/axios";
 
 type Method = "get" | "post" | "put" | "patch" | "delete";
 
-export const useApi = (method?: Method, url?: string, data?: unknown) => {
+export const useApi = (method: Method, url: string, data?: unknown) => {
   const { addErrorDialog } = useNewDialog();
 
   const request = useCallback(
     (resolve: (response: any) => void, reject?: (error: any) => void) => {
-      axiosPromise(method ?? "GET", url ?? "/", data)
+      axiosPromise(method, url, data)
         ?.then(response => {
           resolve(response);
         })
@@ -22,24 +22,5 @@ export const useApi = (method?: Method, url?: string, data?: unknown) => {
     [method, url, data],
   );
 
-  const requestWithUrl = (
-    method: Method,
-    url: string,
-    options?: {
-      data?: unknown;
-      onSuccess?: (response: any) => void;
-      onError?: (error: any) => void;
-    },
-  ) => {
-    axiosPromise(method, url, options?.data)
-      ?.then(response => {
-        if (options?.onSuccess) options.onSuccess(response);
-      })
-      ?.catch(error => {
-        if (options?.onError) options.onError(error);
-        else addErrorDialog(error);
-      });
-  };
-
-  return { request, requestWithUrl };
+  return { request };
 };

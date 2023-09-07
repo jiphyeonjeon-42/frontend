@@ -1,45 +1,44 @@
-import { useGetLike, usePostLike, useDeleteLike } from "~/api/like";
-import { usePermission } from "~/hook/usePermission";
-
-import Image from "~/component/utils/Image";
-import FilledLike from "~/asset/img/like_filled.svg";
-import EmptyLike from "~/asset/img/like_empty.svg";
+import { useState } from "react";
+import { usePostLike } from "../../../api/like/usePostLike";
+import { useDeleteLike } from "../../../api/like/useDeleteLike";
+import { useGetLike } from "../../../api/like/useGetLike";
+import ShowLike from "./ShowLike";
+import "../../../asset/css/BookDetail.css";
 
 type Props = {
-  bookInfoId: string;
+  initBookInfoId: string;
 };
 
-const Like = ({ bookInfoId }: Props) => {
-  const { is42Authenticated } = usePermission();
+const Like = ({ initBookInfoId }: Props) => {
+  const [currentLike, setCurrentLike] = useState(false);
+  const [currentLikeNum, setCurrentLikeNum] = useState(0);
 
-  const { like, setLike } = useGetLike({ bookInfoId: +bookInfoId });
-  const { setBookInfoId: requestdelete } = useDeleteLike({ setLike });
-  const { setBookInfoId: requestPost } = usePostLike({ setLike });
-
+  useGetLike({
+    initBookInfoId: +initBookInfoId,
+    setCurrentLike,
+    setCurrentLikeNum,
+  });
+  const { setBookInfoId: setDeleteLike } = useDeleteLike();
+  const { setBookInfoId: setPostLike } = usePostLike();
   const deleteLike = () => {
-    requestdelete(+bookInfoId);
+    setCurrentLike(false);
+    setDeleteLike(+initBookInfoId);
+    setCurrentLikeNum(currentLikeNum - 1);
   };
   const postLike = () => {
-    requestPost(+bookInfoId);
+    setCurrentLike(true);
+    setPostLike(+initBookInfoId);
+    setCurrentLikeNum(currentLikeNum + 1);
   };
-
   return (
-    <div className="like_button_box">
-      {is42Authenticated ? (
-        <button
-          className="like_button"
-          type="button"
-          onClick={like.isLiked ? deleteLike : postLike}
-        >
-          <Image
-            className="like__icon"
-            src={like.isLiked ? FilledLike : EmptyLike}
-            alt={like.isLiked ? "liked" : "unliked"}
-          />
-        </button>
-      ) : null}
-      {`좋아요 ${like.likeNum}`}
-    </div>
+    <>
+      <ShowLike
+        deleteLike={deleteLike}
+        postLike={postLike}
+        currentLike={currentLike}
+        currentLikeNum={currentLikeNum}
+      />
+    </>
   );
 };
 

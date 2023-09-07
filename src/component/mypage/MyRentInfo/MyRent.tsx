@@ -1,8 +1,8 @@
-import { useGetUsersSearchId } from "~/api/users/useGetUsersSearchId";
+import { useGetUsersSearchId } from "../../../api/users/useGetUsersSearchId";
 import RentHistory from "./RentHistory";
 import RentedOrReservedBooks from "./RentedOrReservedBooks";
-import InquireBoxTitle from "~/component/utils/InquireBoxTitle";
-import Book from "~/asset/img/admin_icon.svg";
+import InquireBoxTitle from "../../utils/InquireBoxTitle";
+import Book from "../../../asset/img/admin_icon.svg";
 
 const MyRent = () => {
   const user = window.localStorage.getItem("user");

@@ -1,4 +1,4 @@
-import ManagementSearchBar from "./ManagementSearchBar";
+import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
 import "../../asset/css/Management.css";
 
@@ -23,7 +23,7 @@ const Management = ({
 }: Props) => {
   return (
     <section className="management__wrapper">
-      <ManagementSearchBar
+      <SearchBar
         placeHolder={searchBarPlaceHolder}
         width="center"
         wrapperClassName="management__search-bar"
