@@ -9,6 +9,20 @@ import Image from "~/component/utils/Image";
 import Like from "~/component/book/like/Like";
 import TagWrapper from "~/component/book/tag/TagWrapper";
 import "~/asset/css/BookDetail.css";
+import { Book } from "~/type";
+
+const callsignToNumbers = (callSign: string) =>
+  callSign
+    .replace(/[^0-9\.]/g, "")
+    .split(".")
+    .map(Number);
+
+const compareCallsign = (a: Book, b: Book) => {
+  const xs = callsignToNumbers(a.callSign);
+  const ys = callsignToNumbers(b.callSign);
+
+  return xs.reduce((sum, x, i) => sum + (x - ys[i]), 0);
+};
 
 const BookDetail = () => {
   const id = useParams().id || "";
@@ -104,9 +118,15 @@ const BookDetail = () => {
               </span>
               <div className="book-state__list">
                 <div>
-                  {bookDetailInfo.books?.map((book, index) => (
-                    <BookStatus key={book.id} book={book} index={index} />
-                  ))}
+                  {bookDetailInfo.books
+                    ?.toSorted((a, b) => compareCallsign(a, b))
+                    .map((book, index) => (
+                      <BookStatus
+                        key={book.callSign}
+                        book={book}
+                        index={index}
+                      />
+                    ))}
                 </div>
               </div>
             </div>
