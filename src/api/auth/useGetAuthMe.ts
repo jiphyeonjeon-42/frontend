@@ -1,16 +1,17 @@
 import { useSetRecoilState } from "recoil";
-import { useApi } from "../../hook/useApi";
-import { addHourDateObject } from "../../util/date";
-import userState from "../../atom/userState";
-import getErrorMessage from "../../constant/error";
+import { useApi } from "~/hook/useApi";
+import { addHourDateObject } from "~/util/date";
+import { userAtom } from "~/atom/userAtom";
+import getErrorMessage from "~/constant/error";
+import { UserState } from "~/type";
 
 export const useGetAuthMe = () => {
   const { request } = useApi("get", "auth/me");
-  const setUser = useSetRecoilState(userState);
+  const setUser = useSetRecoilState(userAtom);
 
   const onSuccess = (response: any) => {
     const { data } = response;
-    const newUser = {
+    const newUser: UserState = {
       isLogin: true,
       id: data.id,
       userName: data.intra,
@@ -19,7 +20,6 @@ export const useGetAuthMe = () => {
       expire: addHourDateObject(new Date(), 8).toISOString(),
     };
     setUser(newUser);
-    window.localStorage.setItem("user", JSON.stringify(newUser));
   };
 
   const onError = (error: any) => {

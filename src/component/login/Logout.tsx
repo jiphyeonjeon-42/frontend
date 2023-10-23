@@ -1,25 +1,16 @@
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useResetRecoilState } from "recoil";
-import { usePostAuthLogout } from "../../api/auth/usePostAuthLogout";
-import userState from "../../atom/userState";
+import { usePostAuthLogout } from "~/api/auth/usePostAuthLogout";
+import { userAtom } from "~/atom/userAtom";
 
 const Logout = () => {
-  const resetState = useResetRecoilState(userState);
+  const resetUser = useResetRecoilState(userAtom);
   const requestLogout = usePostAuthLogout();
 
-  useEffect(() => {
-    requestLogout(() => {
-      resetState();
-      window.localStorage.removeItem("user");
-    });
-  }, []);
+  useEffect(() => requestLogout(resetUser), []);
 
-  return (
-    <>
-      <Navigate to="/" replace={true} />
-    </>
-  );
+  return <Navigate to="/" replace={true} />;
 };
 
 export default Logout;

@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { dateFormat } from "../../util/date";
+import { dateFormat } from "~/util/date";
 import Image from "./Image";
-import UserEdit from "../../asset/img/edit.svg";
-import DeleteButton from "../../asset/img/x_button.svg";
-import "../../asset/css/Review.css";
-import { Review } from "../../type";
-import { useNewDialog } from "../../hook/useNewDialog";
-import userState from "../../atom/userState";
+import UserEdit from "~/asset/img/edit.svg";
+import DeleteButton from "~/asset/img/x_button.svg";
+import "~/asset/css/Review.css";
+import { Review } from "~/type";
+import { useNewDialog } from "~/hook/useNewDialog";
+import { userAtom } from "~/atom/userAtom";
 import { useRecoilValue } from "recoil";
-import { usePutReviewsReviewsId } from "../../api/reviews/usePutReviewsReviewsId";
+import { usePutReviewsReviewsId } from "~/api/reviews/usePutReviewsReviewsId";
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -19,8 +19,8 @@ type Props = {
 
 const HandleReview = ({ type, review, deleteReview }: Props) => {
   const [isEditMode, setEditMode] = useState(false);
-  const user = useRecoilValue(userState);
-  const hasPermissionToEdit = user && user.userName === review.nickname;
+  const { userName } = useRecoilValue(userAtom);
+  const hasPermissionToEdit = userName === review.nickname;
 
   const startEditMode = () => setEditMode(true);
   const finishEditMode = () => setEditMode(false);

@@ -1,11 +1,13 @@
-import { useState, useMemo, ChangeEventHandler, FormEventHandler } from "react";
+import { useState, ChangeEventHandler, FormEventHandler } from "react";
+import { useRecoilValue } from "recoil";
 import { useNavigate, useParams } from "react-router-dom";
-import { usePatchUsersMyupdate } from "../../api/users/usePatchUsersMyupdate";
-import { useNewDialog } from "../../hook/useNewDialog";
-import Image from "../utils/Image";
-import { registerRule } from "../../constant/validate";
-import arrowLeft from "../../asset/img/arrow_left_black.svg";
-import "../../asset/css/EditEmailOrPassword.css";
+import { usePatchUsersMyupdate } from "~/api/users/usePatchUsersMyupdate";
+import { useNewDialog } from "~/hook/useNewDialog";
+import Image from "~/component/utils/Image";
+import { registerRule } from "~/constant/validate";
+import arrowLeft from "~/asset/img/arrow_left_black.svg";
+import { userAtom } from "~/atom/userAtom"
+import "~/asset/css/EditEmailOrPassword.css";
 
 function EditEmailOrPassword() {
   const { mode } = useParams();
@@ -17,10 +19,7 @@ function EditEmailOrPassword() {
     check: "",
   });
 
-  const userInfo = useMemo(
-    () => JSON.parse(window.localStorage.getItem("user") || "{}"),
-    [],
-  );
+  const { email } = useRecoilValue(userAtom);
 
   const onChangeInput: ChangeEventHandler<HTMLInputElement> = e => {
     const { value } = e.currentTarget;
@@ -60,7 +59,7 @@ function EditEmailOrPassword() {
           </button>
         </div>
         <div className="mypage-edit-title color-2d">
-          <span>{`${userInfo ? userInfo.email : "-"}님의, `}</span>
+          <span>{`${email ?? "-"}님의, `}</span>
           <span className="inline-block">{`${modeStringKorean} 변경 페이지입니다`}</span>
         </div>
         {mode === "email" ? (
@@ -68,7 +67,7 @@ function EditEmailOrPassword() {
             <div className={`mypage-edit-${mode}-curr_email`}>
               <span className="font-14-bold color-2d">현재 이메일</span>
               <span className="font-14 text-center">
-                {userInfo ? userInfo.email : "-"}
+                {email ?? "-"}
               </span>
             </div>
             <form onSubmit={onSubmitUpdate}>

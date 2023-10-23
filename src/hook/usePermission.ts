@@ -1,9 +1,9 @@
 import { useRecoilValue } from "recoil";
+import { userAtom } from "~/atom/userAtom"
 import { useNewDialog } from "~/hook/useNewDialog";
-import userState from "~/atom/userState";
 
 export const usePermission = () => {
-  const user = useRecoilValue(userState);
+  const user = useRecoilValue(userAtom);
 
   const isLoggined = user !== null;
   const isAdmin = user?.isAdmin;
