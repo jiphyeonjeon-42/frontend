@@ -119,6 +119,29 @@
     pnpm ladle serve
     ```
 
+## 프로젝트 테스트 방법
+
+```sh
+
+  pnpm exec playwright test
+    Runs the end-to-end tests.
+
+  pnpm exec playwright test --ui
+    Starts the interactive UI mode.
+
+  pnpm exec playwright test --project=chromium
+    Runs the tests only on Desktop Chrome.
+
+  pnpm exec playwright test example
+    Runs the tests in a specific file.
+
+  pnpm exec playwright test --debug
+    Runs the tests in debug mode.
+
+  pnpm exec playwright codegen
+    Auto generate tests with Codegen.
+```
+
 ## 📌 팀원소개
 
 서울42 인트라 아이디로 소개합니다!

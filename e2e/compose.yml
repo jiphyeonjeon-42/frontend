@@ -1,0 +1,19 @@
+services:
+  playwright:
+    build:
+      context: ..
+      dockerfile: e2e/dockerfile
+    command: pnpm e2e # ls -al e2e # pnpm e2e
+    environment:
+      DISPLAY: ${DISPLAY}
+    env_file: ../.env
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ../src:/app/src:ro
+      - ../vite.config.ts:/app/vite.config.ts:ro
+      - ../package.json:/app/package.json:ro
+      - ../e2e:/app/e2e:ro
+      - ../test-results.docker:/app/test-results
+      - ../playwright-report.docker:/app/playwright-report.docker
+    ports:
+      - 9323:9323
