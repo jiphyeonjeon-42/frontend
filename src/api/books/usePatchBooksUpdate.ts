@@ -11,7 +11,7 @@ type Props = {
 export const usePatchBooksUpdate = ({ bookTitle, closeModal }: Props) => {
   const [change, setChange] = useState<Partial<Book>>();
 
-  const { request } = useApi("patch", "books/update", {
+  const { request } = useApi("patch", "books/donator", {
     ...change,
     categoryId: change?.categoryId ? change.categoryId + 1 : undefined, // DB에는 1부터 저장되어 있으므로 +1
   });

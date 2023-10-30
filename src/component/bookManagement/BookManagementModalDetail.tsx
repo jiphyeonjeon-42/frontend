@@ -29,6 +29,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
   const callSignRef = useRef<HTMLInputElement>(null);
   const statusRef = useRef<HTMLSelectElement>(null);
   const categoryRef = useRef<HTMLSelectElement>(null);
+  const donatorRef = useRef<HTMLInputElement>(null);
 
   const { setChange } = usePatchBooksUpdate({
     bookTitle: book.title,
@@ -57,6 +58,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
     modifyFromRef("callSign", callSignRef);
     modifyFromRef("categoryId", categoryRef);
     modifyFromRef("status", statusRef);
+    modifyFromRef("donator", donatorRef);
     change.categoryId = Number(change.categoryId);
     change.category = category[change.categoryId].name;
     return change;
@@ -68,6 +70,7 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
     const callSignRegex = /^[A-Za-z][0-9]{1,3}\.[0-9]{2}\.v[1-9]\.c[1-9]$/;
     const isbnRegex = /^\d{13}$/;
 
+    console.dir(change);
     const categoryToChange = change.callSign[0];
     const isValidDate =
       change.publishedAt && dateRegex.test(change.publishedAt);
@@ -194,6 +197,13 @@ const BookManagementModalDetail = ({ book, closeModal }: Props) => {
             resetDependency={reset}
             optionList={bookStatus.map(status => status.string)}
             initialSelectedIndex={book.status}
+          />
+          <InputWithLabel
+            labelText="도서 기증자"
+            disabled={!editMode}
+            ref={donatorRef}
+            resetDependency={reset}
+            inputInitialValue={book.donator}
           />
         </div>
       </div>
