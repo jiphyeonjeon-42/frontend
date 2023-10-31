@@ -1,37 +1,28 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hook/useApi";
-import { compareExpect } from "../../util/typeCheck";
 import getErrorMessage from "../../constant/error";
-import { Book } from "../../type";
+import { NewBook } from "../../type";
 
-export const useGetBooksCreate = (defalutBook: Book) => {
-  const [isbnQuery, setIsbnQuery] = useState("");
-  const [bookInfo, setBookInfo] = useState(defalutBook);
+const emptyBook: NewBook = {
+  title: "",
+  author: "",
+  isbn: "",
+  publisher: "",
+  publishedAt: "",
+  image: "",
+  category: "",
+};
+
+export const useGetBooksCreate = () => {
   const [errorMessage, setErrorMessage] = useState("");
-
-  const { request } = useApi("get", "books/create", {
-    isbnQuery,
-  });
-
-  const expectedItem = [
-    { key: "title", type: "string", isNullable: false },
-    { key: "author", type: "string", isNullable: false },
-    { key: "publisher", type: "string", isNullable: false },
-    { key: "pubdate", type: "string", isNullable: false },
-    { key: "category", type: "string", isNullable: false },
-    { key: "image", type: "string", isNullable: true },
-  ];
+  const [bookInfo, setBookInfo] = useState(emptyBook);
+  const { requestWithUrl } = useApi();
 
   const refineResponse = (response: any) => {
-    const books = compareExpect(
-      "books/create",
-      [response.data.bookInfo],
-      expectedItem,
-    );
+    const { bookInfo: info } = response.data as GetBooksCreateDto;
     setBookInfo({
-      ...books[0],
-      isbn: isbnQuery,
-      koreanDemicalClassification: books[0].category,
+      ...info,
+      publishedAt: info.pubdate,
     });
     setErrorMessage("");
   };
@@ -43,14 +34,30 @@ export const useGetBooksCreate = (defalutBook: Book) => {
         ? "로그인 유효시간이 지났습니다. 로그아웃 후 재로그인 해주세요! "
         : getErrorMessage(errorCode) || error.message,
     );
-    setBookInfo(defalutBook);
+    setBookInfo(emptyBook);
   };
 
-  useEffect(() => {
-    if (isbnQuery && isbnQuery.length) {
-      request(refineResponse, displayError);
-    }
-  }, [isbnQuery]);
+  const fetchData = (isbn: string) => {
+    if (isbn.length < 0) return;
+    requestWithUrl("get", `books/create`, {
+      data: { isbnQuery: isbn },
+      onSuccess: refineResponse,
+      onError: displayError,
+    });
+  };
 
-  return { bookInfo, errorMessage, fetchData: setIsbnQuery, setBookInfo };
+  return { bookInfo, errorMessage, fetchData, setBookInfo };
+};
+
+type GetBooksCreateDto = {
+  // 2023.10.30 기준 GET v1/books/create 응답값 타입
+  bookInfo: {
+    title: string;
+    author: string;
+    isbn: string;
+    publisher: string;
+    pubdate: string; // "yyyymmdd"
+    image: string;
+    category: string; // "number"
+  };
 };

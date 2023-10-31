@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useState } from "react";
-import { BookInfo } from "../../type";
+import { NewBook } from "../../type";
 
 const labelText: {
   [key: string]: string;
@@ -10,8 +10,8 @@ const labelText: {
 };
 
 type Props = {
-  bookInfo: BookInfo & { [key: string]: string };
-  setBookInfo: (bookinfo: BookInfo) => void;
+  bookInfo: NewBook & { [key: string]: string | null };
+  setBookInfo: (bookinfo: NewBook) => void;
 };
 
 const DisplayBasicBookInfo = ({ bookInfo, setBookInfo }: Props) => {
@@ -57,7 +57,7 @@ const DisplayBasicBookInfo = ({ bookInfo, setBookInfo }: Props) => {
               className="add-book__basic-info__input "
               type="text"
               id={key}
-              value={bookInfo[key]}
+              value={bookInfo[key] ?? ""}
               onChange={onChangeInput}
               required
             />

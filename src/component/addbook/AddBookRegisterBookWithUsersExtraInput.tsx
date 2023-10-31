@@ -7,10 +7,10 @@ import {
 } from "react";
 import { category, koreanDemicalClassification } from "../../constant/category";
 import { usePostBooksCreate } from "../../api/books/usePostBooksCreate";
-import { BookInfo } from "../../type";
+import { NewBook } from "../../type";
 
 type Props = {
-  bookInfo: BookInfo;
+  bookInfo: NewBook;
 };
 
 const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
@@ -31,11 +31,7 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
 
   const onSubmit: FormEventHandler = e => {
     e.preventDefault();
-    registerBook({
-      ...bookInfo,
-      categoryId: +categoryId,
-      donator: donator.current?.value || "",
-    });
+    registerBook(bookInfo, categoryId, donator.current?.value || null);
   };
 
   const isReadyToPost = () => {
@@ -44,9 +40,9 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
 
   const setDev: ChangeEventHandler<HTMLSelectElement> = e => {
     const value = e.currentTarget.value === "true";
-    if (!value && bookInfo?.koreanDemicalClassification) {
+    if (!value && bookInfo.category) {
       const id = koreanDemicalClassification.find(
-        i => i.id === bookInfo.koreanDemicalClassification,
+        i => i.id === bookInfo.category,
       )?.categoryId;
       id && setCategoryId(id);
       setIsDevBook(value);

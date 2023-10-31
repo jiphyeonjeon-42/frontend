@@ -15,18 +15,9 @@ import "../../asset/css/AddBook.css";
 
 const AddBook = () => {
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
-  const defaultBook = {
-    isbn: "",
-    title: "제목",
-    image: "",
-    author: "",
-    publisher: "",
-    pubdate: "",
-    koreanDemicalClassification: "",
-  };
 
   const { bookInfo, errorMessage, fetchData, setBookInfo } =
-    useGetBooksCreate(defaultBook);
+    useGetBooksCreate();
 
   const toggleBarcodeReader = () => {
     setUsingBarcodeReader(!isUsingBarcodeReader);
@@ -58,7 +49,7 @@ const AddBook = () => {
           <p>{errorMessage}</p>
           <div className="add-book__basic-info">
             <div className="add-book__basic-info__cover">
-              <Image src={bookInfo.image} alt={bookInfo.title} />
+              <Image src={bookInfo.image ?? ""} alt={bookInfo.title} />
             </div>
             <div className="add-book__basic-info__detail">
               <DisplayBasicBookInfo

@@ -1,25 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useApi } from "../../hook/useApi";
 import getErrorMessage from "../../constant/error";
-import { compareExpect } from "../../util/typeCheck";
 import { BookInfo } from "../../type";
 
 export const usePostBooksCreate = () => {
-  const [newBookInfo, setNewBookInfo] = useState<BookInfo | null>(null);
   const [message, setMessage] = useState("");
-
-  const { request } = useApi("post", "books/create", newBookInfo);
-
-  const expectedItem = [
-    { key: "title", type: "string", isNullable: false },
-    { key: "isbn", type: "string", isNullable: true },
-    { key: "author", type: "string", isNullable: false },
-    { key: "publisher", type: "string", isNullable: false },
-    { key: "pubdate", type: "string", isNullable: false },
-    { key: "categoryId", type: "string", isNullable: false },
-    { key: "image", type: "string", isNullable: true },
-    { key: "donator", type: "string", isNullable: true },
-  ];
+  const { requestWithUrl } = useApi();
 
   const displaySuccess = () => {
     setMessage("등록되었습니다!");
@@ -32,19 +18,39 @@ export const usePostBooksCreate = () => {
     setMessage(`실패했습니다. ${errorMessage} `);
   };
 
-  const registerBook = (newBook: BookInfo) => {
-    const [book] = compareExpect("books/create", [newBook], expectedItem);
-    setNewBookInfo(book);
-  };
+  const registerBook = (
+    newBook: Omit<BookInfo, "id">,
+    categoryId: string,
+    donator: string | null,
+  ) => {
+    const book: PostBooksCreateDto = {
+      ...newBook,
+      pubdate: newBook.publishedAt,
+      categoryId,
+      donator,
+    };
 
-  useEffect(() => {
-    if (newBookInfo) {
-      request(displaySuccess, displayError);
-    }
-  }, [newBookInfo]);
+    requestWithUrl("post", "books/create", {
+      data: book,
+      onSuccess: displaySuccess,
+      onError: displayError,
+    });
+  };
 
   return {
     message,
     registerBook,
   };
+};
+
+type PostBooksCreateDto = {
+  // 2023.10.31 기준 POST v1/books/create 요청값 타입
+  title: string;
+  isbn: string | null;
+  author: string;
+  publisher: string;
+  image: string | null;
+  categoryId: string;
+  pubdate: string;
+  donator: string | null;
 };
