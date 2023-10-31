@@ -11,11 +11,19 @@ export type Props = ComponentProps<"form"> & {
 const SearchBar = ({
   width = "banner",
   className = "",
+  onSubmit,
   children,
   ...rest
 }: Props) => {
   return (
-    <form {...rest} className={`search-bar__wrapper ${width} ${className}`}>
+    <form
+      {...rest}
+      className={`search-bar__wrapper ${width} ${className}`}
+      onSubmit={e => {
+        e.preventDefault();
+        onSubmit && onSubmit(e);
+      }}
+    >
       {children}
     </form>
   );
