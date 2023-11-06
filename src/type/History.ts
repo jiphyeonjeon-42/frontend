@@ -1,7 +1,7 @@
 export type History = {
   id: number;
   lendingCondition: string;
-  login: string;
+  username: string;
   returningCondition: string;
   penaltyDays: number;
   title: string;

@@ -6,3 +6,4 @@ export * from "./Tag";
 export * from "./History";
 export * from "./Review";
 export * from "./BookInfo";
+export * from "./LoginUser";

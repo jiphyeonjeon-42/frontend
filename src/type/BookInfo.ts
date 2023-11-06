@@ -4,15 +4,11 @@ export type BookInfo = {
   id: number;
   title: string;
   author: string;
-  category?: string;
-  categoryId?: number;
-  isbn?: string;
   publisher: string;
-  publishedAt?: string;
+  isbn?: string;
   image?: string;
-  koreanDemicalClassification?: string;
-  donator?: string;
-  books?: Book[];
+  publishedAt?: string;
+  categoryId: number;
 };
 
 export type BookPreviewType = BookInfo & {

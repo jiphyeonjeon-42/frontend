@@ -6,15 +6,13 @@ export type DialogConfig = {
   titleEmphasis?: string;
   buttonAlign?: string;
   numberOfButtons?: number;
-  firstButton?: {
-    text?: string;
-    color?: string;
-    onClick?: () => void;
-  };
-  secondButton?: {
-    text?: string;
-    color?: string;
-    onClick?: () => void;
-  };
+  firstButton?: ButtonConfig;
+  secondButton?: ButtonConfig;
   afterClose?: () => void;
 };
+
+type ButtonConfig = {
+  text?: string;
+  color?: string;
+  onClick?: () => void;
+}

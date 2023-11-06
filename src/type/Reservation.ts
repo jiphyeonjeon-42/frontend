@@ -5,7 +5,7 @@ export type Reservation = {
   createdAt: string;
   endAt: string;
   image?: string;
-  login?: string;
+  username?: string;
   penaltyDays: number;
   reservationsId: number;
   status: number;

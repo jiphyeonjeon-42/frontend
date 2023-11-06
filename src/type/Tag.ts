@@ -1,7 +1,7 @@
 export type Tag = {
   id: number;
   content: string;
-  login?: string;
+  username?: string;
   count?: number;
   bookInfoId?: number;
   title?: string;

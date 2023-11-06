@@ -5,8 +5,8 @@ export type Lending = {
   dueDate: string;
   createdAt: string;
   lendingCondition: string;
-  login?: string;
+  username?: string; 
   penaltyDays: number;
-  image?: string;
   userId: number;
+  image?: string;
 };
