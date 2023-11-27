@@ -1,4 +1,4 @@
-import { useGetUsersSearchId } from "~/api/users/useGetUsersSearchId";
+import { useGetUsersMe } from "~/api/users/useGetUsersMe";
 import RentedOrReservedBooks from "./MyRentInfo/RentedOrReservedBooks";
 import InquireBoxTitle from "~/component/utils/InquireBoxTitle";
 import Reserve from "~/asset/img/list-check-solid.svg";
@@ -7,7 +7,7 @@ import { userIdAtom } from "~/atom/userAtom"
 
 const MyReservation = () => {
   const userId = useRecoilValue(userIdAtom);
-  const { userInfo } = useGetUsersSearchId({ userId });
+  const { userInfo } = useGetUsersMe();
 
   return (
     <>
