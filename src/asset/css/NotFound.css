@@ -8,11 +8,21 @@
 }
 
 #error_cat {
-  width: 100vh;
+  width: 100vw;
   height: 100vh;
   position: absolute;
   z-index: 1;
   object-fit: cover;
   object-position: center;
-  background: red;
+}
+
+#error_cat__paw {
+  width: 12vw;
+  height: 12vw;
+  position: absolute;
+  z-index: 2;
+  object-fit: cover;
+  object-position: center;
+  background: url("paw.png") no-repeat;
+  background-size: 100% 100%;
 }
