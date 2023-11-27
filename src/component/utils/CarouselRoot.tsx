@@ -4,7 +4,7 @@ import { useInterval } from "~/hook/useInterval";
 import { CarouselContext } from "~/component/utils/Carousel";
 import "~/asset/css/Carousel.css";
 
-type Props = {
+export type Props = {
   length: number;
   itemSize?: number;
   itemCount?: number;
