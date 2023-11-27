@@ -37,13 +37,9 @@ const NotFound = () => {
   return (
     <>
       <div onClick={handleClick} id="error_cat">
-        <animated.div
-          styles={{
-            position: 'absolute',
-            width: 80,
-            height: 80,
-            background: 'url(paw.png) no-repeat center/contain',
-            ...springs
+        <animated.div id="error_cat__paw"
+          style={{
+            ...springs,
           }
           }
         />
