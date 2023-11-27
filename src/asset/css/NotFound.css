@@ -23,6 +23,6 @@
   z-index: 2;
   object-fit: cover;
   object-position: center;
-  background: url("paw.png") no-repeat;
+  background: url("src/asset/img/paw.svg") no-repeat;
   background-size: 100% 100%;
 }
