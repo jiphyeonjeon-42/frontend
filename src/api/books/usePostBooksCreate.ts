@@ -1,29 +1,17 @@
-import { useState, useEffect } from "react";
-import { useApi } from "../../hook/useApi";
-import getErrorMessage from "../../constant/error";
-import { compareExpect } from "../../util/typeCheck";
-import { BookInfo } from "../../type";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useApi } from "~/hook/useApi";
+import getErrorMessage from "~/constant/error";
+import { type BookInfo } from "~/type";
 
 export const usePostBooksCreate = () => {
-  const [newBookInfo, setNewBookInfo] = useState<BookInfo | null>(null);
   const [message, setMessage] = useState("");
-
-  const { request } = useApi("post", "books/create", newBookInfo);
-
-  const expectedItem = [
-    { key: "title", type: "string", isNullable: false },
-    { key: "isbn", type: "string", isNullable: true },
-    { key: "author", type: "string", isNullable: false },
-    { key: "publisher", type: "string", isNullable: false },
-    { key: "pubdate", type: "string", isNullable: false },
-    { key: "categoryId", type: "string", isNullable: false },
-    { key: "image", type: "string", isNullable: true },
-    { key: "donator", type: "string", isNullable: true },
-  ];
+  const navigate = useNavigate();
+  const { requestWithUrl } = useApi();
 
   const displaySuccess = () => {
     setMessage("등록되었습니다!");
-    window.location.reload();
+    navigate(0);
   };
 
   const displayError = (error: any) => {
@@ -32,19 +20,13 @@ export const usePostBooksCreate = () => {
     setMessage(`실패했습니다. ${errorMessage} `);
   };
 
-  const registerBook = (newBook: BookInfo) => {
-    const [book] = compareExpect("books/create", [newBook], expectedItem);
-    setNewBookInfo(book);
+  const registerBook = (newBook: Omit<BookInfo, "id">) => {
+    requestWithUrl("post", "books/create", {
+      data: newBook,
+      onSuccess: displaySuccess,
+      onError: displayError,
+    });
   };
 
-  useEffect(() => {
-    if (newBookInfo) {
-      request(displaySuccess, displayError);
-    }
-  }, [newBookInfo]);
-
-  return {
-    message,
-    registerBook,
-  };
+  return { message, registerBook };
 };

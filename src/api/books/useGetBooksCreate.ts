@@ -1,38 +1,16 @@
-import { useState, useEffect } from "react";
-import { useApi } from "../../hook/useApi";
-import { compareExpect } from "../../util/typeCheck";
-import getErrorMessage from "../../constant/error";
-import { Book } from "../../type";
+import { useState } from "react";
+import { useApi } from "~/hook/useApi";
+import getErrorMessage from "~/constant/error";
+import { type BookInfo } from "~/type";
 
-export const useGetBooksCreate = (defalutBook: Book) => {
-  const [isbnQuery, setIsbnQuery] = useState("");
+export const useGetBooksCreate = (defalutBook: Omit<BookInfo, "id">) => {
   const [bookInfo, setBookInfo] = useState(defalutBook);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { request } = useApi("get", "books/create", {
-    isbnQuery,
-  });
-
-  const expectedItem = [
-    { key: "title", type: "string", isNullable: false },
-    { key: "author", type: "string", isNullable: false },
-    { key: "publisher", type: "string", isNullable: false },
-    { key: "pubdate", type: "string", isNullable: false },
-    { key: "category", type: "string", isNullable: false },
-    { key: "image", type: "string", isNullable: true },
-  ];
+  const { requestWithUrl } = useApi();
 
   const refineResponse = (response: any) => {
-    const books = compareExpect(
-      "books/create",
-      [response.data.bookInfo],
-      expectedItem,
-    );
-    setBookInfo({
-      ...books[0],
-      isbn: isbnQuery,
-      koreanDemicalClassification: books[0].category,
-    });
+    setBookInfo(response.data.bookInfo);
     setErrorMessage("");
   };
 
@@ -46,11 +24,14 @@ export const useGetBooksCreate = (defalutBook: Book) => {
     setBookInfo(defalutBook);
   };
 
-  useEffect(() => {
-    if (isbnQuery && isbnQuery.length) {
-      request(refineResponse, displayError);
-    }
-  }, [isbnQuery]);
+  const fetchData = (isbnQuery: string) => {
+    if (!isbnQuery) return;
+    requestWithUrl("get", "books/create", {
+      data: { isbnQuery },
+      onSuccess: refineResponse,
+      onError: displayError,
+    });
+  };
 
-  return { bookInfo, errorMessage, fetchData: setIsbnQuery, setBookInfo };
+  return { bookInfo, errorMessage, fetchData, setBookInfo };
 };

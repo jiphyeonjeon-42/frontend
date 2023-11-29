@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useGetBooksCreate } from "../../api/books/useGetBooksCreate";
+import { useGetBooksCreate } from "~/api/books/useGetBooksCreate";
 
 import RegisterBookWithUsersExtraInput from "./AddBookRegisterBookWithUsersExtraInput";
 import DisplayBasicBookInfo from "./AddBookDisplayBasicBookInfo";
@@ -9,9 +9,9 @@ import Banner from "../utils/Banner";
 import BarcodeReader from "../utils/BarcodeReader";
 import InquireBoxTitle from "../utils/InquireBoxTitle";
 
-import { bookManagementTabList } from "../../constant/tablist";
-import Book from "../../asset/img/admin_icon.svg";
-import "../../asset/css/AddBook.css";
+import { bookManagementTabList } from "~/constant/tablist";
+import Book from "~/asset/img/admin_icon.svg";
+import "~/asset/css/AddBook.css";
 
 const AddBook = () => {
   const [isUsingBarcodeReader, setUsingBarcodeReader] = useState(true);
@@ -22,7 +22,7 @@ const AddBook = () => {
     author: "",
     publisher: "",
     pubdate: "",
-    koreanDemicalClassification: "",
+    category: "",
   };
 
   const { bookInfo, errorMessage, fetchData, setBookInfo } =

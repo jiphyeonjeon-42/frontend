@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useState } from "react";
-import { BookInfo } from "../../type";
+import { BookInfo } from "~/type";
 
 const labelText: {
   [key: string]: string;
@@ -10,8 +10,8 @@ const labelText: {
 };
 
 type Props = {
-  bookInfo: BookInfo & { [key: string]: string };
-  setBookInfo: (bookinfo: BookInfo) => void;
+  bookInfo: Omit<BookInfo, "id" | "books">;
+  setBookInfo: (bookinfo: Omit<BookInfo, "id" | "books">) => void;
 };
 
 const DisplayBasicBookInfo = ({ bookInfo, setBookInfo }: Props) => {
@@ -48,6 +48,7 @@ const DisplayBasicBookInfo = ({ bookInfo, setBookInfo }: Props) => {
         />
       </label>
       {Object.keys(labelText).map(key => {
+        const bookInfoKey = key as keyof Omit<BookInfo, "id" | "books">;
         return (
           <label htmlFor={key} className="add-book__book-info__text">
             <span className="font-16-bold add-book__book-info__text-key">
@@ -57,7 +58,7 @@ const DisplayBasicBookInfo = ({ bookInfo, setBookInfo }: Props) => {
               className="add-book__basic-info__input "
               type="text"
               id={key}
-              value={bookInfo[key]}
+              value={bookInfo[bookInfoKey]}
               onChange={onChangeInput}
               required
             />
