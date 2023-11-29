@@ -6,6 +6,8 @@ import {
   useState,
 } from "react";
 import SearchBar from "~/component/utils/SearchBar";
+import Image from "./Image";
+import BarcodeIcon from "~/asset/img/barcode.svg";
 
 type Props = {
   width: "banner" | "center" | "short" | "long";
@@ -57,7 +59,7 @@ const ManagementSearchBar = ({
           className="search-bar__button barcode"
           onClick={onClickBarcodeButton}
         >
-          바코드
+          <Image src={BarcodeIcon} alt="바코드" />
         </button>
       ) : null}
       <SearchBar.Button />
