@@ -53,12 +53,4 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 sync ./build s3://42library.kr --region ap-northeast-2
-
-      - name: invalidate CDN cache
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_CDN_DISTRIBUTION_ID: ${{ secrets.AWS_CDN_DISTRIBUTION_ID }}
-        run: |
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CDN_DISTRIBUTION_ID }} --paths "/*" --region ap-northeast-2
+          aws s3 sync --delete ./build s3://42library.kr --region ap-northeast-2
