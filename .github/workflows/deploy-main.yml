@@ -28,6 +28,7 @@ jobs:
           echo "REACT_APP_E_BOOK_LIBRARY=$REACT_APP_E_BOOK_LIBRARY" >> .env
           echo "REACT_APP_SUGGESTION=$REACT_APP_SUGGESTION" >> .env
           echo "REACT_APP_GA_ID=$REACT_APP_GA_ID" >> .env
+          echo "REACT_APP_SENTRY=$REACT_APP_SENTRY" >> .env
           echo "PORT=$PORT" >> .env
         env:
           REACT_APP_API: ${{ secrets.REACT_APP_API }}
