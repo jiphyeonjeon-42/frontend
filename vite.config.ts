@@ -31,5 +31,7 @@ export default defineConfig(({ mode }) => {
 
     /** @see https://vitejs.dev/config/build-options.html#build-outdir */
     build: { outDir: "build" },
+
+    base: "./",
   };
 });
