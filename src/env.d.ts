@@ -13,6 +13,9 @@ interface ImportMetaEnv {
   /** 건의사항 시트 URL */
   readonly REACT_APP_SUGGESTION: string;
 
+  /** 실행 환경 */
+  readonly REACT_APP_ENV: "development" | "production";
+
   /** 로그 및 통계를 위한 센트리, 구글애널리틱스 */
   readonly REACT_APP_SENTRY: string;
   readonly REACT_APP_GA_ID: string;

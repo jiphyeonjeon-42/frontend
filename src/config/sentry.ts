@@ -31,10 +31,7 @@ export const sentryInit = () => {
     tracesSampleRate: 1.0,
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
-    environment:
-      import.meta.env.REACT_APP_API === "http://localhost:3000/api"
-        ? "development"
-        : "production",
+    environment: import.meta.env.REACT_APP_ENV,
   });
 };
 
