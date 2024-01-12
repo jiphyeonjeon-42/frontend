@@ -12,9 +12,14 @@ interface ImportMetaEnv {
 
   /** 건의사항 시트 URL */
   readonly REACT_APP_SUGGESTION: string;
-  readonly REACT_APP_SENTRY:string;
+
+  /** 로그 및 통계를 위한 센트리, 구글애널리틱스 */
+  readonly REACT_APP_SENTRY: string;
+  readonly REACT_APP_GA_ID: string;
 }
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+declare module "ga-gtag";
