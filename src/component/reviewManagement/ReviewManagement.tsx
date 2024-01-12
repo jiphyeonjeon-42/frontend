@@ -1,29 +1,24 @@
 import { useGetReviews } from "../../api/reviews/useGetReviews";
 import { otherManagementTabList } from "../../constant/tablist";
 import Banner from "../utils/Banner";
-import Tabs from "../utils/Tabs";
-import Management from "../utils/Management";
-import ReviewManagementListItem from "./ReviewManagementListItem";
 import Filter from "../utils/Filter";
+import Management from "../utils/Management";
+import Tabs from "../utils/Tabs";
+import ReviewManagementListItem from "./ReviewManagementListItem";
+
+type Visibility = "all" | "public" | "hidden";
 
 const reviewFilterList = [
-  { name: "공개만 보기", type: "0" },
-  { name: "비공개만 보기", type: "1" },
-];
+  { name: "공개만 보기", type: "public" },
+  { name: "비공개만 보기", type: "hidden" },
+] satisfies { name: string; type: Visibility }[];
 
 const ReviewManagement = () => {
-  const {
-    page,
-    setPage,
-    setQuery,
-    selectedType,
-    setSelectedType,
-    reviewList,
-    lastPage,
-  } = useGetReviews();
+  const { page, setPage, data, visibility, setVisibility, setSearch } =
+    useGetReviews();
 
-  const setUndefinedReSelected = (newType: string) => {
-    setSelectedType(newType === selectedType ? "-1" : newType);
+  const setVisiblityWithUnset = (value: "public" | "hidden") => {
+    setVisibility(visibility === value ? "all" : value);
   };
 
   return (
@@ -32,7 +27,7 @@ const ReviewManagement = () => {
       <Tabs tabList={otherManagementTabList} />
       <Management
         searchBarPlaceHolder="도서명이나 닉네임을 검색하세요"
-        setQuery={setQuery}
+        setQuery={setSearch}
         TitleFragement={
           <>
             <span className="review-management__list__id">ID</span>
@@ -46,17 +41,17 @@ const ReviewManagement = () => {
           <>
             <Filter
               filterList={reviewFilterList}
-              selectedType={selectedType}
-              setSelectedType={setUndefinedReSelected}
+              selectedType={visibility}
+              setSelectedType={setVisiblityWithUnset as (_: string) => void}
             />
-            {reviewList.map(review => (
+            {data?.items.map(review => (
               <ReviewManagementListItem review={review} />
             ))}
           </>
         }
         page={page}
         setPage={setPage}
-        lastPage={lastPage}
+        lastPage={data?.meta.totalPages ?? 1}
       />
     </main>
   );
