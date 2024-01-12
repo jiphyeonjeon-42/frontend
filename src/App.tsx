@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { install } from "ga-gtag";
 import { isUserExpiredAtom, userAtom } from "./atom/userAtom";
+import { SentryRoutes } from "./config/sentry";
 
 import BookDetail from "./component/book/BookDetail";
 import Footer from "./component/utils/Footer";
@@ -50,7 +51,7 @@ function App() {
       <div id="portal" />
       <Portals />
       <Header />
-      <Routes>
+      <SentryRoutes>
         <Route path="/" element={<Main />} />
         <Route path="/41" element={<ELibraryIn42Box />} />
         <Route path="/information" element={<Information />} />
@@ -82,7 +83,7 @@ function App() {
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </SentryRoutes>
       <Footer />
     </BrowserRouter>
   );
