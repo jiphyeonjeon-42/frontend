@@ -4,7 +4,6 @@ import { RecoilRoot } from "recoil";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 import App from "./App";
-import "./index.css";
 
 Sentry.init({
   dsn: import.meta.env.REACT_APP_SENTRY,
