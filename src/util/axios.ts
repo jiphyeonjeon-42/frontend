@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as Sentry from "@sentry/react";
 
 const api = axios.create({
   baseURL: `${import.meta.env.REACT_APP_API}`,
@@ -14,3 +15,8 @@ const axiosPromise = (method: string, url: string, data?: unknown) => {
 };
 
 export default axiosPromise;
+
+api.interceptors.response.use(
+  response => response,
+  error => Sentry.captureException(error),
+);

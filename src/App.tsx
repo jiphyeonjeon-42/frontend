@@ -1,7 +1,10 @@
 import { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { BrowserRouter, Route } from "react-router-dom";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { install } from "ga-gtag";
+import { isUserExpiredAtom, userAtom } from "./atom/userAtom";
+import { SentryRoutes } from "./config/sentry";
+
 import BookDetail from "./component/book/BookDetail";
 import Footer from "./component/utils/Footer";
 import NotFound from "./component/utils/NotFound";
@@ -23,15 +26,14 @@ import ELibraryIn42Box from "./component/eLibraryIn42Box/EventPage";
 import SuperTagManagement from "./component/superTag/SuperTagManagement";
 import SubTagManagement from "./component/subTag/SubTagManagement";
 import Portals from "./component/utils/Portals";
+import LimitedRoute from "./LimitedRoute";
+import AddBook from "./component/addbook/AddBook";
+import BookManagement from "./component/bookManagement/BookManagement";
+import EditEmailOrPassword from "./component/mypage/EditEmailOrPassword";
+import MyPageRoutes from "./component/mypage/MyPageRoutes";
+import Mypage from "./component/mypage/Mypage";
+import ReviewManagement from "./component/reviewManagement/ReviewManagement";
 import "./asset/css/reset.css";
-import LimitedRoute from "./LimitedRoute"
-import { isUserExpiredAtom, userAtom } from "./atom/userAtom"
-import AddBook from "./component/addbook/AddBook"
-import BookManagement from "./component/bookManagement/BookManagement"
-import EditEmailOrPassword from "./component/mypage/EditEmailOrPassword"
-import MyPageRoutes from "./component/mypage/MyPageRoutes"
-import Mypage from "./component/mypage/Mypage"
-import ReviewManagement from "./component/reviewManagement/ReviewManagement"
 
 function App() {
   const isUserExpired = useRecoilValue(isUserExpiredAtom);
@@ -49,7 +51,7 @@ function App() {
       <div id="portal" />
       <Portals />
       <Header />
-      <Routes>
+      <SentryRoutes>
         <Route path="/" element={<Main />} />
         <Route path="/41" element={<ELibraryIn42Box />} />
         <Route path="/information" element={<Information />} />
@@ -81,7 +83,7 @@ function App() {
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </SentryRoutes>
       <Footer />
     </BrowserRouter>
   );

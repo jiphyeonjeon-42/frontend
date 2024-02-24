@@ -14,9 +14,6 @@ dependencies:
   '@sentry/react':
     specifier: ^7.53.0
     version: 7.53.0(react@18.2.0)
-  '@sentry/tracing':
-    specifier: ^7.53.0
-    version: 7.53.0
   '@testing-library/jest-dom':
     specifier: ^5.16.5
     version: 5.16.5
@@ -76,6 +73,9 @@ dependencies:
     version: 3.3.1
 
 devDependencies:
+  '@sentry/types':
+    specifier: ^7.93.0
+    version: 7.93.0
   '@types/react':
     specifier: ^18.2.6
     version: 18.2.6
@@ -875,17 +875,15 @@ packages:
       '@sentry/utils': 7.53.0
     dev: false
 
-  /@sentry/tracing@7.53.0:
-    resolution: {integrity: sha512-s0vwXOyn3BEFzuHRGFfZJycmLMnKi74wDoForvbWxhoxgUJNAocuShVSMx4pClCaNtfkOGgD/axG2wxSpLHHxQ==}
-    engines: {node: '>=8'}
-    dependencies:
-      '@sentry-internal/tracing': 7.53.0
-    dev: false
-
   /@sentry/types@7.53.0:
     resolution: {integrity: sha512-hqlbrCL8nfDfjlF6wh4NHNW9plhWJ1m2BSqRyspcxOC44e293BPfwjUzr0aQapJK/aRkHROnfAtzsEu2awNPzg==}
     engines: {node: '>=8'}
     dev: false
+
+  /@sentry/types@7.93.0:
+    resolution: {integrity: sha512-UnzUccNakhFRA/esWBWP+0v7cjNg+RilFBQC03Mv9OEMaZaS29zSbcOGtRzuFOXXLBdbr44BWADqpz3VW0XaNw==}
+    engines: {node: '>=8'}
+    dev: true
 
   /@sentry/utils@7.53.0:
     resolution: {integrity: sha512-T3F2DkXB9fDjUIAcrOMrGCnquyTQxTyTb5Mh+NbFBevQn32fHehQ62VraLhe20HTVy8YBFkXisvLu6HeOZ5Mog==}
