@@ -6,3 +6,23 @@
   background-color: #2d2d2d;
   padding: 25rem 0 10rem 0;
 }
+
+#error_cat {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
+  object-fit: cover;
+  object-position: center;
+}
+
+#error_cat__paw {
+  width: 12vw;
+  height: 12vw;
+  position: absolute;
+  z-index: 2;
+  object-fit: cover;
+  object-position: center;
+  background: url("src/asset/img/paw.svg") no-repeat;
+  background-size: 100% 100%;
+}

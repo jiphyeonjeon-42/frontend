@@ -19,8 +19,8 @@ export type User = {
 export type UserState = {
   isLogin: boolean;
   id: number;
-  userName: string;
-  email: string;
+  userName: string | undefined;
+  email: string | undefined;
   isAdmin: boolean;
-  expire: string; // ISO String
+  expire: string | undefined; // ISO String
 };

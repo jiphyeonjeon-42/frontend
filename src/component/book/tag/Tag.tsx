@@ -1,16 +1,15 @@
-import { MouseEventHandler } from "react";
-import { useState } from "react";
-import { TagType } from "../../../type/TagType";
+import { useState, MouseEventHandler } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import Tooltip from "../../utils/Tooltip";
-import userState from "../../../atom/userState";
-import "../../../asset/css/Tags.css";
-import { useApi } from "../../../hook/useApi";
 import { AxiosResponse } from "axios";
+import { TagType } from "~/type/TagType";
+import { useRecoilValue } from "recoil";
+import Tooltip from "~/component/utils/Tooltip";
+import { userAtom } from "~/atom/userAtom";
+import { useApi } from "~/hook/useApi";
 
-import minusicon from "../../../asset/img/tag_minus_white.svg";
-import trashicon from "../../../asset/img/trash_white.svg";
+import minusicon from "~/asset/img/tag_minus_white.svg";
+import trashicon from "~/asset/img/trash_white.svg";
+import "~/asset/css/Tags.css";
 
 type TagProps = TagType & {
   tagData: TagType[];
@@ -29,7 +28,7 @@ const Tag = ({
   setTagData,
 }: TagProps) => {
   const navigate = useNavigate();
-  const currentLogin = useRecoilValue(userState);
+  const { userName } = useRecoilValue(userAtom);
   const [clickDeleteTag, setClickDeleteTag] = useState(false);
   const [icon, setIcon] = useState(minusicon);
   const { request } = useApi("delete", `/tags/sub/${id}`);
@@ -56,11 +55,11 @@ const Tag = ({
 
   const isType = () => {
     if (type === "super") return "super";
-    else if (login === currentLogin.userName) return "my-sub";
+    else if (login === userName) return "my-sub";
     return "sub";
   };
 
-  const isMysub = login === currentLogin.userName;
+  const isMysub = login === userName;
 
   const onClickImage: MouseEventHandler<HTMLImageElement> = e => {
     e.stopPropagation();

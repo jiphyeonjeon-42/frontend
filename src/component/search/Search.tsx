@@ -68,10 +68,8 @@ const Search = () => {
           />
         </div>
         <CategoryFilter
-          userWord={query || ""}
-          userSort={sort || "title"}
-          userCate={categoryIndex || 0}
-          entireCate={categoryList}
+          selectedCategory={categoryIndex}
+          categoryList={categoryList}
         />
         <div className="search-sort">
           <Sort sort={sort || "title"} setSort={setSort} />

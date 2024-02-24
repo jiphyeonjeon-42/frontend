@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { Link, useLocation } from "react-router-dom";
 import { adminLnbMenu, loginLnbMenu } from "~/constant/headerMenu";
-import userState from "~/atom/userState";
 import Image from "./Image";
 import User from "~/asset/img/Uniconlabs.png";
 import ToggleUser from "~/asset/img/UniconlabsFill.png";
 import ToggleDownArrow from "~/asset/img/caret-down_DaveGandy.png";
 import DownArrow from "~/asset/img/drop-down_Freepik.png";
 import "~/asset/css/HeaderDefaultLNB.css";
+import { userAtom } from "~/atom/userAtom"
 
 const HeaderDefaultLNB = () => {
   const [isLNBOpened, setIsLNBOpened] = useState(false);
-  const user = useRecoilValue(userState);
+  const user = useRecoilValue(userAtom);
   const location = useLocation();
 
   useEffect(() => {

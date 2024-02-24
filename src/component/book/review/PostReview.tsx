@@ -1,10 +1,11 @@
 import { FormEventHandler } from "react";
-import "../../../asset/css/Review.css";
-import Button from "../../utils/Button";
-import { useNewDialog } from "../../../hook/useNewDialog";
 import { useRecoilValue } from "recoil";
-import userState from "../../../atom/userState";
-import { usePostReview } from "../../../api/reviews/usePostReview";
+
+import "~/asset/css/Review.css";
+import { useNewDialog } from "~/hook/useNewDialog";
+import { userAtom } from "~/atom/userAtom";
+import { usePostReview } from "~/api/reviews/usePostReview";
+import Button from "~/component/utils/Button"
 
 type Props = {
   bookInfoId: number;
@@ -17,7 +18,7 @@ const PostReview = ({ bookInfoId, resetTab }: Props) => {
     resetTab,
   });
 
-  const user = useRecoilValue(userState);
+  const user = useRecoilValue(userAtom);
   const hasPermissionToPostReview = user && user.userName !== user.email; // 인증된 유저는 이메일과 다른 닉네임을 가짐
   const isValidLength = content.length >= 10 && content.length <= 420;
   const { addDialogWithTitleAndMessage, addConfirmDialog } = useNewDialog();

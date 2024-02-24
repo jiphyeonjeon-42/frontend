@@ -5,29 +5,29 @@ import {
   ChangeEventHandler,
   FormEventHandler,
 } from "react";
-import { category, koreanDemicalClassification } from "../../constant/category";
-import { usePostBooksCreate } from "../../api/books/usePostBooksCreate";
-import { BookInfo } from "../../type";
+import {
+  category,
+  koreanDemicalClassification as 중앙도서관도서분류,
+} from "~/constant/category";
+import { usePostBooksCreate } from "~/api/books/usePostBooksCreate";
+import { BookInfo } from "~/type";
 
 type Props = {
-  bookInfo: BookInfo;
+  bookInfo: Omit<BookInfo, "id">;
 };
 
 const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
-  const [isDevBook, setIsDevBook] = useState(false);
+  const [isDevBook, setIsDevBook] = useState<"" | "true" | "false">("");
   const [categoryId, setCategoryId] = useState("");
   const donator = useRef<HTMLInputElement>(null);
+  const isReadyToPost = categoryId && bookInfo.title && bookInfo.author;
 
   useEffect(() => {
-    setIsDevBook(false);
+    setIsDevBook("");
     setCategoryId("");
   }, [bookInfo]);
 
   const { message, registerBook } = usePostBooksCreate();
-
-  const onChangeCategory: ChangeEventHandler<HTMLSelectElement> = e => {
-    setCategoryId(e.currentTarget.value);
-  };
 
   const onSubmit: FormEventHandler = e => {
     e.preventDefault();
@@ -38,18 +38,15 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
     });
   };
 
-  const isReadyToPost = () => {
-    return categoryId && bookInfo.title && bookInfo.author;
-  };
-
   const setDev: ChangeEventHandler<HTMLSelectElement> = e => {
-    const value = e.currentTarget.value === "true";
-    if (!value && bookInfo?.koreanDemicalClassification) {
-      const id = koreanDemicalClassification.find(
-        i => i.id === bookInfo.koreanDemicalClassification,
-      )?.categoryId;
-      id && setCategoryId(id);
+    const { value } = e.currentTarget;
+    if (value === "true") {
+      setCategoryId("");
       setIsDevBook(value);
+    } else if (value === "false") {
+      const id = 중앙도서관도서분류.find(i => i.id === bookInfo.category);
+      if (id) setCategoryId(id?.categoryId);
+      setIsDevBook("false");
     }
   };
 
@@ -75,11 +72,11 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
           name="category"
           id="category-select"
           value={categoryId}
-          onChange={onChangeCategory}
+          onChange={e => setCategoryId(e.currentTarget.value)}
         >
           <option value="">카테고리를 선택하세요</option>
           {category
-            ?.filter(items => items.isDev === isDevBook)
+            ?.filter(items => `${items.isDev}` === isDevBook)
             ?.map(element => {
               return (
                 <option value={element.id} key={element.id}>
@@ -92,7 +89,7 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
       <p className="color-red">기부자 정보</p>
       <input type="text" id="donator" ref={donator} />
       <p className="add-book__create-form__errror-Message">{message}</p>
-      <button type="submit" className={isReadyToPost() && "red"}>
+      <button type="submit" className={isReadyToPost && "red"}>
         등록하기
       </button>
     </form>
