@@ -51,8 +51,6 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
 
   const handleChangeDonator = (e: React.ChangeEvent<HTMLInputElement>) => setDonator(e.target.value);
 
-  <CategoryOptions options={categoryOptions[isDevBook] || []} />
-
   const onSubmit: FormEventHandler = e => {
     e.preventDefault();
     if (isReadyToPost) {
