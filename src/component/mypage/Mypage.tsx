@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { myPageTabList } from "../../constant/tablist";
 import { useTabFocus } from "../../hook/useTabFocus";
 import { useNewDialog } from "../../hook/useNewDialog";
-import { useGetUsersSearchId } from "../../api/users/useGetUsersSearchId";
+import { useGetUsersMe } from "../../api/users/useGetUsersMe";
 import { lendingRestriction } from "../../util/date";
 import MyRent from "./MyRentInfo/MyRent";
 import MyReservation from "./MyReservation";
@@ -26,7 +26,7 @@ const Mypage = () => {
     myReview: <MyReview />,
   };
   const userId = useRecoilValue(userIdAtom);
-  const { userInfo } = useGetUsersSearchId({ userId });
+  const { userInfo } = useGetUsersMe();
   const [deviceMode, setDeviceMode] = useState("desktop");
 
   const convertRoleToStr = (roleInt: number) => {
