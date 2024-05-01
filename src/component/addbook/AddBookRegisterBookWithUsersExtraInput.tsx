@@ -16,39 +16,57 @@ type Props = {
   bookInfo: Omit<BookInfo, "id">;
 };
 
-const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
-  const [isDevBook, setIsDevBook] = useState<"" | "true" | "false">("");
-  const [categoryId, setCategoryId] = useState("");
-  const donator = useRef<HTMLInputElement>(null);
-  const isReadyToPost = categoryId && bookInfo.title && bookInfo.author;
+type IsDevBook = "" | "dev" | "non-dev";
 
-  useEffect(() => {
-    setIsDevBook("");
-    setCategoryId("");
-  }, [bookInfo]);
+const categoryOptions = {
+  "": [],
+  "dev": category.filter(item => item.isDev),
+  "non-dev": category.filter(item => !item.isDev),
+};
+
+const CategoryOptions = ({ options }: { options: { id: string; name: string }[] }) => (
+  <>
+    {options.map((element) => (
+      <option value={element.id} key={element.id}>
+        {element.name}
+      </option>
+    ))}
+  </>
+);
+
+const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
+  const [isDevBook, setIsDevBook] = useState<IsDevBook>(() => "");
+  const [categoryId, setCategoryId] = useState(() => "");
+  const [donator, setDonator] = useState(() => "");
+  
+  const isReadyToPost = bookInfo.title && bookInfo.author && categoryId && donator;
 
   const { message, registerBook } = usePostBooksCreate();
+  
+  const handleSelectIsDevBook: ChangeEventHandler<HTMLSelectElement> = e =>
+    setIsDevBook(prev => prev === e.target.value ? prev : e.target.value as IsDevBook);
+
+  const handleSelectCategoryId: ChangeEventHandler<HTMLSelectElement> = e =>
+    setCategoryId(prev => prev === e.target.value ? prev : e.target.value);
+
+  const handleChangeDonator = (e: React.ChangeEvent<HTMLInputElement>) => setDonator(e.target.value);
 
   const onSubmit: FormEventHandler = e => {
     e.preventDefault();
-    registerBook({
-      ...bookInfo,
-      categoryId: +categoryId,
-      donator: donator.current?.value || "",
-    });
-  };
-
-  const setDev: ChangeEventHandler<HTMLSelectElement> = e => {
-    const { value } = e.currentTarget;
-    if (value === "true") {
-      setCategoryId("");
-      setIsDevBook(value);
-    } else if (value === "false") {
-      const id = 중앙도서관도서분류.find(i => i.id === bookInfo.category);
-      if (id) setCategoryId(id?.categoryId);
-      setIsDevBook("false");
+    if (isReadyToPost) {
+      registerBook({
+        ...bookInfo,
+        categoryId: +categoryId,
+        donator
+      });
+    } else {
+      alert("모든 정보를 입력해주세요");
     }
   };
+
+  useEffect(() => {
+    setCategoryId(() => ""); // categoryId 초기화
+  }, [isDevBook]);
 
   return (
     <form className="add-book__create-form" onSubmit={onSubmit}>
@@ -59,12 +77,12 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
           className="add-book__isDev-select"
           name="isDevCategory"
           id="isDevCategory"
-          value={`${isDevBook}`}
-          onChange={setDev}
+          value={isDevBook}
+          onChange={handleSelectIsDevBook}
         >
           <option value="">대분류를 선택해주세요</option>
-          <option value="true">개발</option>
-          <option value="false">비개발</option>
+          <option value="dev">개발</option>
+          <option value="non-dev">비개발</option>
         </select>
         <select
           required
@@ -72,24 +90,24 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
           name="category"
           id="category-select"
           value={categoryId}
-          onChange={e => setCategoryId(e.currentTarget.value)}
+          onChange={handleSelectCategoryId}
         >
           <option value="">카테고리를 선택하세요</option>
-          {category
-            ?.filter(items => `${items.isDev}` === isDevBook)
-            ?.map(element => {
-              return (
-                <option value={element.id} key={element.id}>
-                  {element.name}
-                </option>
-              );
-            })}
+          <CategoryOptions options={categoryOptions[isDevBook] ?? []} />
         </select>
       </div>
       <p className="color-red">기부자 정보</p>
-      <input type="text" id="donator" ref={donator} />
+      <input
+        required
+        type="text"
+        id="donator"
+        name="donator"
+        value={donator}
+        onChange={handleChangeDonator}
+        placeholder="기부자 이름을 입력해주세요"
+      />
       <p className="add-book__create-form__errror-Message">{message}</p>
-      <button type="submit" className={isReadyToPost && "red"}>
+      <button type="submit" className={isReadyToPost ? "red" : ""}>
         등록하기
       </button>
     </form>
