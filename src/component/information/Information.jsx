@@ -53,7 +53,7 @@ const Information = () => {
             <Question
               isOpen={allOpen}
               question="집현전이 어디죠?"
-              answer="개포 클러스터 1층 왼쪽 복도 가장 안쪽에 있습니다."
+              answer="개포 클러스터 5층, 5클러스터 맞은편에 있습니다."
             />
             <Question
               isOpen={allOpen}
