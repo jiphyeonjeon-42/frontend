@@ -5,24 +5,33 @@ type Props = {
   selectedUser: User | null;
   selectedBooks: Book[];
   openModal: () => void;
+  isLendingForSelf: boolean;
 };
 
-const RentConfirm = ({ selectedUser, selectedBooks, openModal }: Props) => {
+const RentConfirm = ({ selectedUser, selectedBooks, openModal, isLendingForSelf }: Props) => {
+
+  const lendingLimit = (isLendingForSelf ? 4 : 2) - (selectedUser?.lendings.length || 0);
+
   const isLendable =
     selectedUser &&
     !selectedUser.isPenalty &&
     selectedBooks.length > 0 &&
-    2 - selectedUser.lendings.length >= selectedBooks.length;
+    lendingLimit >= selectedBooks.length;
   return (
     <section className="rent__confirm-button">
       <div className="rent__confirm-button__text font-16 color-a4">
         {selectedUser && selectedBooks.length > 0
-          ? `${
+          ? (
+          `${
               selectedUser.nickname ? selectedUser.nickname : selectedUser.email
-            }님에게 ${selectedBooks[0].title}${
-              selectedBooks[1] ? `, ${selectedBooks[1].title}` : ``
-            }를 대출합니다.`
-          : "정보를 입력해주세요."}
+            }님에게 ${selectedBooks.map((book, idx) => {
+              if (idx !== 0)
+                return (' ' + book.title)
+              else
+                return (book.title)
+            })}
+            를 대출합니다.`
+          ): "정보를 입력해주세요."}
       </div>
       <button
         className={`rent__confirm-button__button ${
