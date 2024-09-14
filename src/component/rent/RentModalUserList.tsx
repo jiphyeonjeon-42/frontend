@@ -1,5 +1,7 @@
 import { User } from "../../type";
 import "../../asset/css/RentModalUserList.css";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "~/atom/userAtom";
 
 type Props = {
   setSelectedUser: (user: User) => void;
@@ -8,24 +10,37 @@ type Props = {
 };
 
 const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
+
+  const librarian = useRecoilValue(userAtom);
+
+  const isOverDue = (selectedUser: User) => {
+    if (
+      new Date(selectedUser.penaltyEndDate).setHours(0, 0, 0, 0) >=
+        new Date().setHours(0, 0, 0, 0) ||
+      selectedUser.overDueDay > 0
+    )  return true;
+    else return false;
+  }
+
   const seletUser = () => {
+    user.isPenalty = isOverDue(user) ? true : false;
     setSelectedUser(user);
     closeModal();
   };
 
   const displayPenalty = () => {
     let penalty = "";
-    if (
-      new Date(user.penaltyEndDate).setHours(0, 0, 0, 0) >=
-        new Date().setHours(0, 0, 0, 0) ||
-      user.overDueDay > 0
-    )
-      penalty += "대출 불가 (연체";
-    if (user.lendings.length >= 2) {
-      if (penalty !== "") penalty += ", 2권 이상 대출";
-      else penalty += "대출 불가 (2권 이상 대출";
+    user.isPenalty &&( penalty += "대출 불가 (연체");
+
+    const lendingLimit = librarian.id === user.id ? 4 : 2;
+
+    if (user.lendings.length >= lendingLimit) {
+      if (user.isPenalty) penalty += `, ${lendingLimit}권 이상 대출`;
+      else penalty += `대출 불가 (${lendingLimit}권 이상 대출`;
     }
-    if (penalty !== "") penalty += ")";
+
+    if (user.isPenalty) penalty += ")";
+
     return penalty;
   };
 
