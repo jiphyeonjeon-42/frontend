@@ -1,16 +1,18 @@
 import { Book, User } from "../../type";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "~/atom/userAtom";
 import "../../asset/css/RentConfirm.css";
 
 type Props = {
   selectedUser: User | null;
   selectedBooks: Book[];
   openModal: () => void;
-  isLendingForSelf: boolean;
 };
 
-const RentConfirm = ({ selectedUser, selectedBooks, openModal, isLendingForSelf }: Props) => {
+const RentConfirm = ({ selectedUser, selectedBooks, openModal }: Props) => {
+  const librarian = useRecoilValue(userAtom);
 
-  const lendingLimit = (isLendingForSelf ? 4 : 2) - (selectedUser?.lendings.length || 0);
+  const lendingLimit = (librarian && librarian.id === selectedUser?.id ? 4 : 2) - (selectedUser?.lendings.length || 0);
 
   const isLendable =
     selectedUser &&

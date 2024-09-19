@@ -70,7 +70,6 @@ const Rent = () => {
         selectedUser={selectedUser}
         selectedBooks={selectedBooks}
         openModal={openModal}
-        isLendingForSelf={user && user.id === selectedUser?.id}
       />
       {selectedUser && selectedBooks.length > 0 ? (
         <Modal>
