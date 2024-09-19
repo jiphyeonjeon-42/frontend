@@ -12,12 +12,15 @@ import RentModalConfirm from "./RentModalConfirm";
 import LoginIcon from "../../asset/img/login_icon_white.svg";
 import BookIcon from "../../asset/img/admin_icon.svg";
 import "../../asset/css/Rent.css";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "~/atom/userAtom";
 
 const Rent = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
 
   const { Modal, setOpen: openModal, setClose: closeModal } = useModal();
+  const user = useRecoilValue(userAtom);
 
   return (
     <main>
@@ -29,9 +32,11 @@ const Rent = () => {
           titleKO="카뎃 정보"
           titleEN="Cadet info"
         />
+        {/* 사서인 경우 옆에 표시해주면 좋을 것 같다! */}
         <RentInquireBoxUser
           selectedUser={selectedUser}
           setSelectedUser={setSelectedUser}
+          isLendingForSelf={user && user.id === selectedUser?.id}
         />
       </section>
       <section className="inquire-box__wrapper">
@@ -46,14 +51,14 @@ const Rent = () => {
                 key={book.bookId}
                 book={book}
                 shape={
-                  selectedBooks.length === 2 && index === 0 ? "none" : "two"
+                  (selectedBooks.length - index) === 1? "two" : "none"
                 }
                 selectedBooks={selectedBooks}
                 setSelectedBooks={setSelectedBooks}
               />
             ))
           : null}
-        {selectedBooks.length < 2 ? (
+        {selectedBooks.length < 4 ? (
           <RentInquireBoxBook
             book={null}
             shape={selectedBooks.length === 0 ? "two" : "four"}
@@ -66,6 +71,7 @@ const Rent = () => {
         selectedUser={selectedUser}
         selectedBooks={selectedBooks}
         openModal={openModal}
+        isLendingForSelf={user && user.id === selectedUser?.id}
       />
       {selectedUser && selectedBooks.length > 0 ? (
         <Modal>
