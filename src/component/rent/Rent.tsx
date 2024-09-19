@@ -36,7 +36,6 @@ const Rent = () => {
         <RentInquireBoxUser
           selectedUser={selectedUser}
           setSelectedUser={setSelectedUser}
-          isLendingForSelf={user && user.id === selectedUser?.id}
         />
       </section>
       <section className="inquire-box__wrapper">

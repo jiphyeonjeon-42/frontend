@@ -1,6 +1,8 @@
 import { useModal } from "../../hook/useModal";
 import { dateFormat } from "../../util/date";
 import { User } from "../../type";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "~/atom/userAtom";
 import RentModalUser from "./RentModalUser";
 import Image from "../utils/Image";
 import DeleteButton from "../../asset/img/x_button.svg";
@@ -11,8 +13,10 @@ type Props = {
   setSelectedUser: (user: User | null) => void;
 };
 
-const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
+const InquireBoxUser = ({ selectedUser, setSelectedUser}: Props) => {
   const { setOpen, setClose, Modal } = useModal();
+
+  const librarian = useRecoilValue(userAtom);
 
   const deleteUser = () => {
     if (setSelectedUser) {
@@ -22,18 +26,18 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
 
   const displayPenalty = () => {
     if (!selectedUser) return "";
+
     let penalty = "";
-    if (
-      new Date(selectedUser.penaltyEndDate).setHours(0, 0, 0, 0) >=
-        new Date().setHours(0, 0, 0, 0) ||
-      selectedUser.overDueDay > 0
-    )
-      penalty += "대출제한 (연체";
-    if (selectedUser.lendings.length >= 2) {
-      if (penalty !== "") penalty += ", 2권 이상 대출";
-      else penalty += "대출제한 (2권 이상 대출";
+    selectedUser.isPenalty && (penalty += "대출제한 (연체");
+
+    // 제한 권수 판단
+    const lendingLimit = librarian && librarian.id === selectedUser.id ? 4 : 2;
+
+    if (selectedUser.lendings.length >= lendingLimit) {
+      if (selectedUser.isPenalty) penalty += `, ${lendingLimit}권 이상 대출`;
+      else penalty += `대출제한 (${lendingLimit}권 이상 대출`;
     }
-    if (penalty !== "") penalty += ")";
+    if (selectedUser.isPenalty) penalty += ")";
     return penalty;
   };
 
