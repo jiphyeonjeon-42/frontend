@@ -53,7 +53,7 @@ const RentModalConfirm = ({
                 ? selectedUser.nickname
                 : selectedUser.email}
             </p>
-            <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</p>
+            <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / ${selectedUser.role === 2 ? '4' : '2'} )`}</p>
           </div>
         )}
       </div>
