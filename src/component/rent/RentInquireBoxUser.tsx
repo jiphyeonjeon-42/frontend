@@ -34,10 +34,11 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
     const lendingLimit = librarian && librarian.id === selectedUser.id ? 4 : 2;
 
     if (selectedUser.lendings.length >= lendingLimit) {
-      if (selectedUser.isPenalty) penalty += `, ${lendingLimit}권 이상 대출`;
+      if (selectedUser.isPenalty)penalty += `, ${lendingLimit}권 이상 대출`;
       else penalty += `대출제한 (${lendingLimit}권 이상 대출`;
     }
-    if (selectedUser.isPenalty) penalty += ")";
+    if (selectedUser.isPenalty || selectedUser.lendings.length >= lendingLimit)
+      penalty += ")";
     return penalty;
   };
 

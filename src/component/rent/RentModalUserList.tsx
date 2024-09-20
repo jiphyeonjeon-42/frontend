@@ -30,7 +30,7 @@ const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
 
   const displayPenalty = () => {
     let penalty = "";
-    user.isPenalty &&( penalty += "대출 불가 (연체");
+    user.isPenalty && (penalty += "대출 불가 (연체");
 
     const lendingLimit = librarian.id === user.id ? 4 : 2;
 
@@ -39,7 +39,8 @@ const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
       else penalty += `대출 불가 (${lendingLimit}권 이상 대출`;
     }
 
-    if (user.isPenalty) penalty += ")";
+    if (user.isPenalty || user.lendings.length >= lendingLimit)
+      penalty += ")";
 
     return penalty;
   };
