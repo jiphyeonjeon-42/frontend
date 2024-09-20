@@ -21,6 +21,8 @@ const Rent = () => {
 
   const { Modal, setOpen: openModal, setClose: closeModal } = useModal();
   const user = useRecoilValue(userAtom);
+  // 사서의 대출권수 4권으로 설정. 사서 본인의 대출건만 4권으로 적용
+  const lendingLimit = (user.isAdmin && user.id === selectedUser?.id) ? 4 : 2;
 
   return (
     <main>
@@ -32,7 +34,6 @@ const Rent = () => {
           titleKO="카뎃 정보"
           titleEN="Cadet info"
         />
-        {/* 사서인 경우 옆에 표시해주면 좋을 것 같다! */}
         <RentInquireBoxUser
           selectedUser={selectedUser}
           setSelectedUser={setSelectedUser}
@@ -46,18 +47,18 @@ const Rent = () => {
         />
         {selectedBooks.length > 0
           ? selectedBooks.map((book, index) => (
-              <RentInquireBoxBook
-                key={book.bookId}
-                book={book}
-                shape={
-                  (selectedBooks.length - index) === 1? "two" : "none"
-                }
-                selectedBooks={selectedBooks}
-                setSelectedBooks={setSelectedBooks}
-              />
-            ))
+            <RentInquireBoxBook
+              key={book.bookId}
+              book={book}
+              shape={
+                (selectedBooks.length - index) === 1 ? "two" : "none"
+              }
+              selectedBooks={selectedBooks}
+              setSelectedBooks={setSelectedBooks}
+            />
+          ))
           : null}
-        {selectedBooks.length < 4 ? (
+        {selectedBooks.length < lendingLimit ? (
           <RentInquireBoxBook
             book={null}
             shape={selectedBooks.length === 0 ? "two" : "four"}
