@@ -8,9 +8,9 @@ type Props = {
   topLabelColor?: string;
   textareaPlaceHolder?: string;
   textareaName?: string;
-  textareaValue?: string;
+  textareaValue: string;
   textareaDisabled?: boolean;
-  setTextareaValue?(...args: unknown[]): unknown;
+  setTextareaValue(...args: unknown[]): unknown;
   isVisibleBottomMessage?: boolean;
   bottomMessageText?: string;
   bottomMessageColor?: string;
@@ -31,16 +31,9 @@ const TextareaWithLabel = ({
   bottomMessageColor,
   isTextareaFocusedOnMount,
 }: Props) => {
-  const [text, setText] = useState("");
   const textareaRef = useRef(null);
 
-  /* props로 넘겨받은 value와 세터가 유효하지 않으면 내부 상태 이용 */
-  const [textarea, setTextarea] =
-    typeof textareaValue === "string" && typeof setTextareaValue === "function"
-      ? [textareaValue, setTextareaValue]
-      : [text, setText];
-
-  const color = string => {
+  const color = (string : string) => {
     const colorClassName = colorPalette.find(i => i.string === string)?.class;
     return `color-${colorClassName}` || "color-54";
   };
@@ -48,12 +41,12 @@ const TextareaWithLabel = ({
   useEffect(() => {
     const { current } = textareaRef;
     if (isTextareaFocusedOnMount) {
-      current?.focus();
+      current && current.focus();
     }
   }, []);
 
-  const onChangeTextarea = e => {
-    setTextarea(e.currentTarget.value);
+  const onChangeTextarea = (e : React.ChangeEvent<HTMLTextAreaElement> )=> {
+    setTextareaValue(e.currentTarget.value);
   };
 
   return (
@@ -65,12 +58,12 @@ const TextareaWithLabel = ({
         className="textarea__textarea"
         placeholder={textareaPlaceHolder}
         name={textareaName}
-        value={textarea}
+        value={textareaValue}
         onChange={onChangeTextarea}
         ref={textareaRef}
         disabled={textareaDisabled}
       />
-      {bottomMessageText?.length > 0 && isVisibleBottomMessage && (
+      { bottomMessageText?.length && bottomMessageText?.length > 0 && isVisibleBottomMessage && (
         <p className={`textarea__label ${color(bottomMessageColor)}`}>
           {bottomMessageText}
         </p>

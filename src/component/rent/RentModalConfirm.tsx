@@ -40,7 +40,7 @@ const RentModalConfirm = ({
   const isRentable =
     selectedBooks.length > 1
       ? remarks.slice(0, selectedBooks.length).every(remark => remark.length > 0)
-      : remarks[0].length > 0;
+      : remarks[0]?.length > 0;
 
   const handleRemarkChange = (index: number, value: string) => {
     const updatedRemarks = [...remarks];
