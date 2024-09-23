@@ -12,6 +12,13 @@ export const userRoleStatus = [
   { code: 3, string: "기타 운영진" },
 ];
 
+export const userRoleStatusEnum = {
+  미인증: 0,
+  카뎃: 1,
+  사서: 2,
+  기타_운영진: 3
+};
+
 export const reservationStatus = [
   { code: 0, string: "예약 중" },
   { code: 1, string: "대출 완료" },

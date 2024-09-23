@@ -6,6 +6,7 @@ import TextareaWithLabel from "../utils/TextareaWithLabel";
 import { usePostLendingsMultiple } from "../../api/lendings/usePostLendingsMultiple";
 import { Book, User } from "../../type";
 import "../../asset/css/RentModalConfirm.css";
+import { userRoleStatusEnum } from "~/constant/status";
 
 type Props = {
   selectedUser: User;
@@ -59,7 +60,7 @@ const RentModalConfirm = ({
                 ? selectedUser.nickname
                 : selectedUser.email}
             </p>
-            <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / ${selectedUser.role === 2 ? '4' : '2'} )`}</p>
+            <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / ${selectedUser.role >= userRoleStatusEnum["사서"] ? '4' : '2'} )`}</p>
           </div>
         )}
       </div>
@@ -87,8 +88,8 @@ const RentModalConfirm = ({
                   topLabelText="비고"
                   textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
                   textareaValue={remarks[index]}
-                  setTextareaValue={(value:string)=>handleRemarkChange(index, value)}
-                  isTextareaFocusedOnMount={index===0}
+                  setTextareaValue={(value: string) => handleRemarkChange(index, value)}
+                  isTextareaFocusedOnMount={index === 0}
                   isVisibleBottomMessage={!remarks[index]?.length}
                   bottomMessageText="비고를 입력해주세요"
                   bottomMessageColor="red"

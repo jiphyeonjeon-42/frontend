@@ -7,6 +7,7 @@ import RentModalUser from "./RentModalUser";
 import Image from "../utils/Image";
 import DeleteButton from "../../asset/img/x_button.svg";
 import "../../asset/css/RentInquireBoxUser.css";
+import { userRoleStatusEnum } from "~/constant/status";
 
 type Props = {
   selectedUser: User | null;
@@ -34,7 +35,7 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
     const lendingLimit = librarian && librarian.id === selectedUser.id ? 4 : 2;
 
     if (selectedUser.lendings.length >= lendingLimit) {
-      if (selectedUser.isPenalty)penalty += `, ${lendingLimit}권 이상 대출`;
+      if (selectedUser.isPenalty) penalty += `, ${lendingLimit}권 이상 대출`;
       else penalty += `대출제한 (${lendingLimit}권 이상 대출`;
     }
     if (selectedUser.isPenalty || selectedUser.lendings.length >= lendingLimit)
@@ -52,7 +53,7 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
                 ? selectedUser.nickname
                 : selectedUser.email}
             </div>
-            {selectedUser.role === 2 ? <div className="rent__inquire-box-user__role color-ff font-16-bold">사서</div> : null}
+            {selectedUser.role >= userRoleStatusEnum["사서"] ? <div className="rent__inquire-box-user__role color-ff font-16-bold">사서</div> : null}
             <div className="font-16 color-red">{displayPenalty()}</div>
             <button
               className="rent__inquire-box-user__undo-button color-a4"
