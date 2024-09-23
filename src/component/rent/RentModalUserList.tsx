@@ -2,6 +2,7 @@ import { User } from "../../type";
 import "../../asset/css/RentModalUserList.css";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "~/atom/userAtom";
+import { lendingLimit } from "../../constant/status";
 
 type Props = {
   setSelectedUser: (user: User) => void;
@@ -11,7 +12,7 @@ type Props = {
 
 const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
 
-  const librarian = useRecoilValue(userAtom);
+  const currentUser = useRecoilValue(userAtom);
 
   const isOverDue = (selectedUser: User) => {
     if (
@@ -32,14 +33,14 @@ const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
     let penalty = "";
     user.isPenalty && (penalty += "대출 불가 (연체");
 
-    const lendingLimit = librarian.id === user.id ? 4 : 2;
+    const lendingLimitNumber = lendingLimit(currentUser, user);
 
-    if (user.lendings.length >= lendingLimit) {
-      if (user.isPenalty) penalty += `, ${lendingLimit}권 이상 대출`;
-      else penalty += `대출 불가 (${lendingLimit}권 이상 대출`;
+    if (user.lendings.length >= lendingLimitNumber) {
+      if (user.isPenalty) penalty += `, ${lendingLimitNumber}권 이상 대출`;
+      else penalty += `대출 불가 (${lendingLimitNumber}권 이상 대출`;
     }
 
-    if (user.isPenalty || user.lendings.length >= lendingLimit)
+    if (user.isPenalty || user.lendings.length >= lendingLimitNumber)
       penalty += ")";
 
     return penalty;
