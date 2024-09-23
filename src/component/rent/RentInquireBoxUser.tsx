@@ -8,6 +8,7 @@ import Image from "../utils/Image";
 import DeleteButton from "../../asset/img/x_button.svg";
 import "../../asset/css/RentInquireBoxUser.css";
 import { userRoleStatusEnum } from "~/constant/status";
+import { lendingLimit } from "~/constant/status";
 
 type Props = {
   selectedUser: User | null;
@@ -17,7 +18,7 @@ type Props = {
 const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
   const { setOpen, setClose, Modal } = useModal();
 
-  const librarian = useRecoilValue(userAtom);
+  const currentUser = useRecoilValue(userAtom);
 
   const deleteUser = () => {
     if (setSelectedUser) {
@@ -32,13 +33,13 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
     selectedUser.isPenalty && (penalty += "대출제한 (연체");
 
     // 제한 권수 판단
-    const lendingLimit = librarian && librarian.id === selectedUser.id ? 4 : 2;
+    const lendingLimitNumber = lendingLimit(currentUser, selectedUser);
 
-    if (selectedUser.lendings.length >= lendingLimit) {
-      if (selectedUser.isPenalty) penalty += `, ${lendingLimit}권 이상 대출`;
-      else penalty += `대출제한 (${lendingLimit}권 이상 대출`;
+    if (selectedUser.lendings.length >= lendingLimitNumber) {
+      if (selectedUser.isPenalty) penalty += `, ${lendingLimitNumber}권 이상 대출`;
+      else penalty += `대출제한 (${lendingLimitNumber}권 이상 대출`;
     }
-    if (selectedUser.isPenalty || selectedUser.lendings.length >= lendingLimit)
+    if (selectedUser.isPenalty || selectedUser.lendings.length >= lendingLimitNumber)
       penalty += ")";
     return penalty;
   };

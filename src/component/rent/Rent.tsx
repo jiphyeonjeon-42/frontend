@@ -40,8 +40,8 @@ const Rent = () => {
   const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
 
   const { Modal, setOpen: openModal, setClose: closeModal } = useModal();
-  const user = useRecoilValue(userAtom);
-  const lendingLimitNumber = lendingLimit(user, selectedUser);
+  const currentUser = useRecoilValue(userAtom);
+  const lendingLimitNumber = lendingLimit(currentUser, selectedUser);
 
   return (
     <main>
