@@ -14,6 +14,7 @@ import BookIcon from "../../asset/img/admin_icon.svg";
 import "../../asset/css/Rent.css";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "~/atom/userAtom";
+import { lendingLimit } from "../../constant/status"
 
 /**
  * `Rent` 컴포넌트는 도서 대출 기능을 제공하는 페이지입니다.
@@ -31,7 +32,7 @@ import { userAtom } from "~/atom/userAtom";
  * - `useModal`: 모달 창 열기 및 닫기 기능 제공
  * - 'useRecoilValue`: Recoil 상태 관리 라이브러리에서 현재 사용자 정보 가져오기 
  * 
- * @returns {JSX.Element} 도서 대출 페이지를 렌더링하는 JSX 요소
+ * @returns 도서 대출 페이지를 렌더링하는 JSX 요소
  */
 
 const Rent = () => {
@@ -40,8 +41,7 @@ const Rent = () => {
 
   const { Modal, setOpen: openModal, setClose: closeModal } = useModal();
   const user = useRecoilValue(userAtom);
-  // 사서의 대출권수 4권으로 설정. 사서 본인의 대출건만 4권으로 적용
-  const lendingLimit = (user.isAdmin && user.id === selectedUser?.id) ? 4 : 2;
+  const lendingLimitNumber = lendingLimit(user, selectedUser);
 
   return (
     <main>
@@ -77,7 +77,7 @@ const Rent = () => {
             />
           ))
           : null}
-        {selectedBooks.length < lendingLimit ? (
+        {selectedBooks.length < lendingLimitNumber ? (
           <RentInquireBoxBook
             book={null}
             shape={selectedBooks.length === 0 ? "two" : "four"}
