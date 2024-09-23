@@ -15,6 +15,25 @@ import "../../asset/css/Rent.css";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "~/atom/userAtom";
 
+/**
+ * `Rent` 컴포넌트는 도서 대출 기능을 제공하는 페이지입니다.
+ *
+ * @description
+ * 
+ * 유의점: 
+ * - 사서의 대출권수 4권으로 설정. 사서 본인의 대출건만 4권으로 적용
+ * 
+ * 상태:
+ * - `selectedUser`: 대출해줄 사용자 정보
+ * - `selectedBooks`: 대출해줄 도서 목록
+ * 
+ * 훅:
+ * - `useModal`: 모달 창 열기 및 닫기 기능 제공
+ * - 'useRecoilValue`: Recoil 상태 관리 라이브러리에서 현재 사용자 정보 가져오기 
+ * 
+ * @returns {JSX.Element} 도서 대출 페이지를 렌더링하는 JSX 요소
+ */
+
 const Rent = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
