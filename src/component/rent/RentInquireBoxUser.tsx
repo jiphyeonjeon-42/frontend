@@ -1,10 +1,14 @@
 import { useModal } from "../../hook/useModal";
 import { dateFormat } from "../../util/date";
 import { User } from "../../type";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "~/atom/userAtom";
 import RentModalUser from "./RentModalUser";
 import Image from "../utils/Image";
 import DeleteButton from "../../asset/img/x_button.svg";
 import "../../asset/css/RentInquireBoxUser.css";
+import { userRoleStatusEnum } from "~/constant/status";
+import { lendingLimit } from "~/constant/status";
 
 type Props = {
   selectedUser: User | null;
@@ -14,6 +18,8 @@ type Props = {
 const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
   const { setOpen, setClose, Modal } = useModal();
 
+  const currentUser = useRecoilValue(userAtom);
+
   const deleteUser = () => {
     if (setSelectedUser) {
       setSelectedUser(null);
@@ -22,18 +28,19 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
 
   const displayPenalty = () => {
     if (!selectedUser) return "";
+
     let penalty = "";
-    if (
-      new Date(selectedUser.penaltyEndDate).setHours(0, 0, 0, 0) >=
-        new Date().setHours(0, 0, 0, 0) ||
-      selectedUser.overDueDay > 0
-    )
-      penalty += "대출제한 (연체";
-    if (selectedUser.lendings.length >= 2) {
-      if (penalty !== "") penalty += ", 2권 이상 대출";
-      else penalty += "대출제한 (2권 이상 대출";
+    selectedUser.isPenalty && (penalty += "대출제한 (연체");
+
+    // 제한 권수 판단
+    const lendingLimitNumber = lendingLimit(currentUser, selectedUser);
+
+    if (selectedUser.lendings.length >= lendingLimitNumber) {
+      if (selectedUser.isPenalty) penalty += `, ${lendingLimitNumber}권 이상 대출`;
+      else penalty += `대출제한 (${lendingLimitNumber}권 이상 대출`;
     }
-    if (penalty !== "") penalty += ")";
+    if (selectedUser.isPenalty || selectedUser.lendings.length >= lendingLimitNumber)
+      penalty += ")";
     return penalty;
   };
 
@@ -47,7 +54,8 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
                 ? selectedUser.nickname
                 : selectedUser.email}
             </div>
-            <div className="font-16 color-red"> {displayPenalty()} </div>
+            {selectedUser.role >= userRoleStatusEnum["사서"] ? <div className="rent__inquire-box-user__role color-ff font-16-bold">사서</div> : null}
+            <div className="font-16 color-red">{displayPenalty()}</div>
             <button
               className="rent__inquire-box-user__undo-button color-a4"
               type="button"
@@ -84,9 +92,8 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
                     {`${index + 1}. ${item.title}`}
                   </div>
                   <div className="user__book-info__description color-54">
-                    <span>{`예약순위 : ${
-                      item.ranking ? `${item.ranking}순위` : "-"
-                    }`}</span>
+                    <span>{`예약순위 : ${item.ranking ? `${item.ranking}순위` : "-"
+                      }`}</span>
                     {item.endAt ? (
                       <span className="user__reservations-info">
                         예약 혜택 종료일 : {item.endAt}
