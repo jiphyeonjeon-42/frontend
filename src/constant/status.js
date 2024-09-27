@@ -26,7 +26,7 @@ export const userRoleStatusEnum = {
  * @returns 유저가 사서 or 기타 운영진이고 본인의 대출일 때 4, 그 외는 2
  */
 export const lendingLimit = (currentUser, selectedUser) => {
-  return (currentUser.isAdmin && currentUser.id === selectedUser?.id ? 4 : 2);
+  return (currentUser?.isAdmin && currentUser.id === selectedUser?.id ? 4 : 2);
 }
 
 export const reservationStatus = [
