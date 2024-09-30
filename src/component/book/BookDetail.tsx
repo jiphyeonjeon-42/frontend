@@ -59,7 +59,7 @@ const BookDetail = () => {
 
   return (
     <main>
-      <HelmetComponent title={bookDetailInfo.title} description={ `집현전의 소중한 자산 ${bookDetailInfo.title} 입니다.`}  img={bookDetailInfo.image} />
+      <HelmetComponent title={bookDetailInfo.title} description={ `집현전의 소중한 자산 "${bookDetailInfo.title}" 입니다.`}  img={bookDetailInfo.image} />
       <Banner
         img="bookdetail"
         titleKo="도서 상세 및 예약"
