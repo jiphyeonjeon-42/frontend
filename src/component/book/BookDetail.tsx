@@ -10,6 +10,8 @@ import Like from "~/component/book/like/Like";
 import TagWrapper from "~/component/book/tag/TagWrapper";
 import "~/asset/css/BookDetail.css";
 import { Book } from "~/type";
+import { Helmet } from "react-helmet-async";
+import HelmetComponent from "../utils/HelmetComponent";
 
 const callsignToNumbers = (callSign: string) =>
   callSign
@@ -30,6 +32,7 @@ const BookDetail = () => {
   const location = useLocation();
   useEffect(() => myRef.current?.scrollIntoView(), []);
   const { bookDetailInfo } = useGetBooksInfoId({ id });
+
 
   if (!bookDetailInfo) {
     return (
@@ -56,6 +59,7 @@ const BookDetail = () => {
 
   return (
     <main>
+      <HelmetComponent title={bookDetailInfo.title} description={ `집현전의 소중한 자산 "${bookDetailInfo.title}" 입니다.`}  img={bookDetailInfo.image} />
       <Banner
         img="bookdetail"
         titleKo="도서 상세 및 예약"

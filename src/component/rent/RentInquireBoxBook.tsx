@@ -23,7 +23,7 @@ const InquireBoxBook = ({
   const deleteBook = () => {
     if (setSelectedBooks && book) {
       setSelectedBooks(
-        selectedBooks.splice(1 - selectedBooks.indexOf(book), 1),
+        selectedBooks.filter(selectedBook => selectedBook !== book),
       );
     }
   };

@@ -6,6 +6,7 @@ import TextareaWithLabel from "../utils/TextareaWithLabel";
 import { usePostLendingsMultiple } from "../../api/lendings/usePostLendingsMultiple";
 import { Book, User } from "../../type";
 import "../../asset/css/RentModalConfirm.css";
+import { userRoleStatusEnum } from "~/constant/status";
 
 type Props = {
   selectedUser: User;
@@ -22,8 +23,7 @@ const RentModalConfirm = ({
   setSelectedBooks,
   closeModal,
 }: Props) => {
-  const [first, setFirst] = useState("");
-  const [second, setSecond] = useState("");
+  const [remarks, setRemarks] = useState<string[]>([]);
 
   const { requestLending } = usePostLendingsMultiple({
     selectedBooks,
@@ -35,12 +35,19 @@ const RentModalConfirm = ({
 
   const postData: FormEventHandler = e => {
     e.preventDefault();
-    requestLending([first, second]);
+    requestLending(remarks);
   };
+
   const isRentable =
     selectedBooks.length > 1
-      ? first.length > 0 && second.length > 0
-      : first.length > 0;
+      ? remarks.slice(0, selectedBooks.length).every(remark => remark.length > 0)
+      : remarks[0]?.length > 0;
+
+  const handleRemarkChange = (index: number, value: string) => {
+    const updatedRemarks = [...remarks];
+    updatedRemarks[index] = value;
+    setRemarks(updatedRemarks);
+  };
 
   return (
     <form className="rent-modal">
@@ -53,7 +60,7 @@ const RentModalConfirm = ({
                 ? selectedUser.nickname
                 : selectedUser.email}
             </p>
-            <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / 2 )`}</p>
+            <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / ${selectedUser.role >= userRoleStatusEnum["사서"] ? '4' : '2'} )`}</p>
           </div>
         )}
       </div>
@@ -64,7 +71,7 @@ const RentModalConfirm = ({
           return (
             <div
               key={selectBook.bookId}
-              className={`rent-modal__book-info ${isFirst && "second-book"}`}
+              className={`rent-modal__book-info ${index}`}
             >
               <BookInformationWithCover
                 bookCoverAlt={selectBook.title}
@@ -80,12 +87,10 @@ const RentModalConfirm = ({
                   wrapperClassName="rent-modal__remark"
                   topLabelText="비고"
                   textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
-                  textareaValue={isFirst ? first : second}
-                  setTextareaValue={isFirst ? setFirst : setSecond}
-                  isTextareaFocusedOnMount={isFirst}
-                  isVisibleBottomMessage={
-                    isFirst ? !first.length : !second.length
-                  }
+                  textareaValue={remarks[index]}
+                  setTextareaValue={(value: string) => handleRemarkChange(index, value)}
+                  isTextareaFocusedOnMount={index === 0}
+                  isVisibleBottomMessage={!remarks[index]?.length}
                   bottomMessageText="비고를 입력해주세요"
                   bottomMessageColor="red"
                 />

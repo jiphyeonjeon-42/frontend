@@ -80,6 +80,16 @@
   text-overflow: ellipsis;
 }
 
+.rent__inquire-box-user__role {
+  align-items: center;
+  justify-content: center;
+  border: 0.3rem solid #545454;
+  border-radius: 1rem;
+  padding: 0.2rem 0.5rem;
+  background-color: #545454;
+  margin-right: 0.6rem;
+}
+
 .book__info__factor {
   margin-right: 4rem;
   overflow: hidden;
