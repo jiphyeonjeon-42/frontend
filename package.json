@@ -20,6 +20,7 @@
     "ga-gtag": "^1.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.11.2",
     "recoil": "^0.7.7",
     "vite": "^4.3.8",
@@ -51,12 +52,15 @@
     ]
   },
   "devDependencies": {
+    "@prerenderer/renderer-puppeteer": "^1.2.4",
+    "@prerenderer/rollup-plugin": "^0.3.12",
     "@sentry/types": "^7.93.0",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "@types/react-router-dom": "^5.3.3",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "2.8.8"
+    "prettier": "2.8.8",
+    "puppeteer": "^23.4.1"
   }
 }
