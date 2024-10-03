@@ -6,6 +6,12 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  AWS_REGION: ap-northeast-2
+  S3_BUCKET_NAME: 42library.kr
+  CODE_DEPLOY_APPLICATION_NAME: newjiphyeonjeon
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: deploy
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
