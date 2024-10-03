@@ -45,8 +45,6 @@ jobs:
           echo "REACT_APP_GA_ID=$REACT_APP_GA_ID" >> .env
           echo "REACT_APP_SENTRY=$REACT_APP_SENTRY" >> .env
           echo "PORT=$PORT" >> .env
-        env:
-
 
       - name: Install Pnpm
         uses: pnpm/action-setup@v2
