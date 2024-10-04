@@ -3,8 +3,7 @@ name: main 배포
 on:
   push:
     branches:
-      # - main
-      - develop
+      - main
   workflow_dispatch:
 
 env:
@@ -76,7 +75,7 @@ jobs:
             --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
             --source .
 
-      - name: Deploy to AWS EC2 from S3
+      - name: Deploy to AWS LightSail from S3
         run: |
           aws deploy create-deployment \
             --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
