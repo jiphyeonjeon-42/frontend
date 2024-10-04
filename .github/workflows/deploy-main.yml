@@ -9,8 +9,16 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: 42library.kr
-  CODE_DEPLOY_APPLICATION_NAME: newjiphyeonjeon
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: deploy
+  CODE_DEPLOY_APPLICATION_NAME: newjiphyeonjeonfrontend
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: deployfrontend
+  REACT_APP_API: ${{ secrets.REACT_APP_API }}
+  REACT_APP_WISH: ${{ secrets.REACT_APP_WISH }}
+  REACT_APP_E_BOOK_LIBRARY: ${{ secrets.REACT_APP_E_BOOK_LIBRARY }}
+  REACT_APP_SUGGESTION: ${{ secrets.REACT_APP_SUGGESTION }}
+  REACT_APP_GA_ID: ${{ secrets.REACT_APP_GA_ID }}
+  PORT: ${{ secrets.PORT }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   deploy:
@@ -36,13 +44,6 @@ jobs:
           echo "REACT_APP_GA_ID=$REACT_APP_GA_ID" >> .env
           echo "REACT_APP_SENTRY=$REACT_APP_SENTRY" >> .env
           echo "PORT=$PORT" >> .env
-        env:
-          REACT_APP_API: ${{ secrets.REACT_APP_API }}
-          REACT_APP_WISH: ${{ secrets.REACT_APP_WISH }}
-          REACT_APP_E_BOOK_LIBRARY: ${{ secrets.REACT_APP_E_BOOK_LIBRARY }}
-          REACT_APP_SUGGESTION: ${{ secrets.REACT_APP_SUGGESTION }}
-          REACT_APP_GA_ID: ${{ secrets.REACT_APP_GA_ID }}
-          PORT: ${{ secrets.PORT }}
 
       - name: Install Pnpm
         uses: pnpm/action-setup@v2
@@ -52,18 +53,20 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name : install chrome for prerender
+      - name : Install chrome for prerender
         run: |
           npx puppeteer browsers install chrome
+
       - name: Build
         run: pnpm build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'ap-northeast-2'
+
 
       - name: Upload to AWS S3
         run: |
@@ -72,10 +75,10 @@ jobs:
             --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
             --source .
 
-      - name: Deploy to AWS EC2 from S3
+      - name: Deploy to AWS LightSail from S3
         run: |
           aws deploy create-deployment \
             --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
-            --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip i 
+            --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip

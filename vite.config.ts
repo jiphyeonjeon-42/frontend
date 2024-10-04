@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const port = parseInt(env.PORT, 10);
   // TODO: 추후 모든 책들의 id 추가. /info/*
-  const pagesForPrerender = ["/", "/info/1", "/info/42", "/info/1058"];
+  const pagesForPrerender = ["/"];
 
   return {
     /** @see https://vitejs.dev/plugins/ */

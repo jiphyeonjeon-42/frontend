@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# TODO: add front file 
-
+sudo cp -r ~/frontend/build ~/backend/build
 
 docker-compose -f ~/backend/docker-compose.yaml up -d --build
