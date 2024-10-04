@@ -21,35 +21,35 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const port = parseInt(env.PORT, 10);
   // TODO: 추후 모든 책들의 id 추가. /info/*
-  const pagesForPrerender = ["/"];
+  // const pagesForPrerender = ["/"];
 
   return {
     /** @see https://vitejs.dev/plugins/ */
     plugins: [
       react(),
       tsconfigPaths(),
-      prerender({
-        routes: pagesForPrerender,
-        renderer: "@prerenderer/renderer-puppeteer",
-        server: {
-          "host": 'localhost',
-          "port": port,
-          "listenHost": 'localhost',
-        },
-        rendererOptions: {
-          maxConcurrentRoutes: 1,
-          renderAfterTime: 5000,
+      // prerender({
+      //   routes: pagesForPrerender,
+      //   renderer: "@prerenderer/renderer-puppeteer",
+      //   server: {
+      //     "host": 'localhost',
+      //     "port": port,
+      //     "listenHost": 'localhost',
+      //   },
+      //   rendererOptions: {
+      //     maxConcurrentRoutes: 1,
+      //     renderAfterTime: 5000,
 
-        },
-        postProcess(renderedRoute) {
-          renderedRoute.html = renderedRoute.html
-            .replace(/http:/i, "https:")
-            .replace(
-              /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
-              "https://42library.kr",
-            );
-        },
-      }),
+      //   },
+      //   postProcess(renderedRoute) {
+      //     renderedRoute.html = renderedRoute.html
+      //       .replace(/http:/i, "https:")
+      //       .replace(
+      //         /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
+      //         "https://42library.kr",
+      //       );
+      //   },
+      // }),
     ],
 
     envPrefix,
