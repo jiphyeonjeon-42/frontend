@@ -10,8 +10,8 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: 42library.kr
-  CODE_DEPLOY_APPLICATION_NAME: newjiphyeonjeon
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: deploy
+  CODE_DEPLOY_APPLICATION_NAME: newjiphyeonjeonfrontend
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: deployfrontend
   REACT_APP_API: ${{ secrets.REACT_APP_API }}
   REACT_APP_WISH: ${{ secrets.REACT_APP_WISH }}
   REACT_APP_E_BOOK_LIBRARY: ${{ secrets.REACT_APP_E_BOOK_LIBRARY }}
