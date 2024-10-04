@@ -10,7 +10,6 @@ file_exists_behavior: OVERWRITE
 permissions:
   - object: /
     pattern: "**"
-    except: [/home/ubuntu/backend]
     owner: ubuntu
     group: ubuntu
 
