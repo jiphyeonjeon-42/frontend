@@ -13,7 +13,7 @@
   line-height: 3rem;
   font-size: 1.5rem;
   font-weight: bold;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 1rem 2rem 1rem 1rem;
   text-align: center;
   margin: 1rem;
   border-radius: 10px;
@@ -43,12 +43,18 @@
 }
 
 .button_tag-create-box {
-  position: flex;
   line-height: 4rem;
   font-size: large;
   margin: 1rem;
   background-color: rgba(95, 63, 54, 1);
   color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+}
+
+@media screen and (min-width: 767px) {
+  .button_tag-create-box {
+    width: 50%;
+  }
 }
 
 .button_tag-create-box::placeholder {
@@ -66,7 +72,6 @@
   height: 100%;
   min-height: 12rem;
   overflow: hidden;
-  padding: 1.5rem 1rem;
   margin: 6rem 0rem 0rem 0rem;
   background-color: rgb(232, 232, 232, 0.9);
   border-radius: 1rem;
@@ -83,7 +88,6 @@
   height: 100%;
   min-height: 12rem;
   overflow: hidden;
-  padding: 1.5rem 1rem;
   margin: -1.3rem 0rem 10rem 0rem;
   background-color: rgb(232, 232, 232, 0.9);
   border-radius: 1rem;
@@ -117,6 +121,13 @@
   z-index: 1;
   top: 50%;
   left: 50%;
+}
+
+.button_tag-image-button-disabled {
+  display: flex;
+  cursor: not-allowed;
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 @keyframes rotateImage {
