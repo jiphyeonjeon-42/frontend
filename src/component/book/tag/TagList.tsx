@@ -7,6 +7,8 @@ import Tag from "./Tag";
 import TagModal from "./TagModal";
 import plusicon from "../../../asset/img/tag_plus.svg";
 import Tooltip from "../../utils/Tooltip";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "../../../atom/userAtom";
 
 type TagListProps = {
   tagData: TagType[];
@@ -14,6 +16,7 @@ type TagListProps = {
 };
 
 const TagList = ({ tagData, setTagData }: TagListProps) => {
+  const isLogin = useRecoilValue(userAtom);
   const inputRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
   const bookId = location.pathname.split("/")[2];
@@ -167,7 +170,10 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             onKeyUp={handleKeyPress}
           />
 
-          <Tooltip description="태그 등록">
+          <Tooltip
+            className={`${isLogin} ? "" : button_tag-image-button-disabled`}
+            description="태그 등록"
+          >
             <img
               className="button_tag-image-button"
               src={plusicon}

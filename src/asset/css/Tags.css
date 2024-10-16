@@ -130,6 +130,10 @@
   pointer-events: none;
 }
 
+.tooltip_cursor-message {
+  cursor: "help";
+}
+
 @keyframes rotateImage {
   0% {
     transform: rotate(0deg);
