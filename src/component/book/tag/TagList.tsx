@@ -16,7 +16,7 @@ type TagListProps = {
 };
 
 const TagList = ({ tagData, setTagData }: TagListProps) => {
-  const isLogin = useRecoilValue(userAtom);
+  const { isLogin } = useRecoilValue(userAtom);
   const inputRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
   const bookId = location.pathname.split("/")[2];
@@ -82,6 +82,9 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
       const now = Date.now();
       if (now - lastPress < 300) return;
       setLastPress(now);
+      if (!isLogin) {
+        setErrorCode(102); //이거 하고 아래 errorCode가 바로 안바뀌니 useEffect, useRef 사용 고려...졸리다..
+      }
       if (createTag === "") {
         setErrorCode(1);
       } else if (createTag.length > 42) {
@@ -171,7 +174,7 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
           />
 
           <Tooltip
-            className={`${isLogin} ? "" : button_tag-image-button-disabled`}
+            className={`${isLogin ? "" : "button_tag-image-button-disabled"}`}
             description="태그 등록"
           >
             <img
