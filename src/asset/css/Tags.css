@@ -120,7 +120,7 @@
   background-color: rgba(00, 00, 00, 0);
   z-index: 1;
   top: 50%;
-  left: 50%;
+  left: 0;
 }
 
 .button_tag-image-button-disabled {
