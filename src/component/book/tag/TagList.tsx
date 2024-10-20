@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { TagType } from "../../../type/TagType";
 import { useLocation } from "react-router-dom";
-import { AxiosResponse, AxiosError } from "axios";
 import { useApi } from "../../../hook/useApi";
 import Tag from "./Tag";
 import TagModal from "./TagModal";
 import plusicon from "../../../asset/img/tag_plus.svg";
 import Tooltip from "../../utils/Tooltip";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "../../../atom/userAtom";
+import { AxiosError, AxiosResponse } from "axios";
 
 type TagListProps = {
   tagData: TagType[];
@@ -14,6 +16,7 @@ type TagListProps = {
 };
 
 const TagList = ({ tagData, setTagData }: TagListProps) => {
+  const { isLogin } = useRecoilValue(userAtom);
   const inputRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
   const bookId = location.pathname.split("/")[2];
@@ -22,11 +25,24 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
   const [lastPress, setLastPress] = useState(Date.now());
   const [active, setActive] = useState<boolean>(false);
   const [errorCode, setErrorCode] = useState<number | null>(null);
+  const errorCodeRef = useRef<number | null>(null);
   const [showErrorMassege, setShowErrorMassege] = useState(false);
-  const { request } = useApi("post", `/tags/default`, {
+  const { request } = useApi("post", "tags/default", {
     bookInfoId: +bookId,
     content: createTag.trim().replace(/ /g, "_"),
   });
+
+  useEffect(() => {
+    if (errorCode !== null && errorCode > 0) {
+      errorActive();
+    }
+  }, [errorCode]);
+
+  const onSuccess = (response: AxiosResponse) => {
+    const resTagdata: TagType = response.data;
+    setTagData(prev => [...prev, resTagdata]);
+    resetCreateContent();
+  };
 
   const onError = (error: AxiosError) => {
     setErrorCode(parseInt(error?.response?.data?.errorCode, 10));
@@ -42,14 +58,11 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
     setTimeout(() => {
       setShowErrorMassege(false);
     }, 2500);
+    errorCodeRef.current = null;
   };
 
   const postTag = () => {
-    request((res: AxiosResponse) => {
-      const resTagdata: TagType = res.data;
-      setTagData(prev => [...prev, resTagdata]);
-      resetCreateContent();
-    }, onError);
+    request(onSuccess, onError);
   };
 
   const openModalFunc = (tagId: number) => {
@@ -79,15 +92,19 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
       const now = Date.now();
       if (now - lastPress < 300) return;
       setLastPress(now);
+      if (!isLogin) {
+        setErrorCode(102);
+        errorCodeRef.current = 102;
+      }
       if (createTag === "") {
         setErrorCode(1);
+        errorCodeRef.current = 1;
       } else if (createTag.length > 42) {
         setErrorCode(2);
+        errorCodeRef.current = 2;
       }
 
-      if (errorCode !== null && errorCode > 0) {
-        errorActive();
-      } else {
+      if (errorCodeRef.current === null) {
         postTag();
       }
       if (inputRef.current !== null) {
@@ -97,7 +114,10 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (errorCode !== null) setErrorCode(null);
+    if (errorCode !== null) {
+      setErrorCode(null);
+      errorCodeRef.current = null;
+    }
     setCreateTag(event.target.value);
   };
 
@@ -167,14 +187,15 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
             onKeyUp={handleKeyPress}
           />
 
-          <Tooltip description="태그 등록">
+          <Tooltip
+            className={`${isLogin ? "" : "button_tag-image-button-disabled"}`}
+            description="태그 등록"
+          >
             <img
               className="button_tag-image-button"
               src={plusicon}
               alt="plus"
-              onClick={() => {
-                onClickCreateButton();
-              }}
+              onClick={onClickCreateButton}
             />
           </Tooltip>
         </button>

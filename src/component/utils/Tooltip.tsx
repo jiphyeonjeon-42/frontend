@@ -24,8 +24,7 @@ const Tooltip = ({ children, description, className }: TooltipProps) => {
       ref={targetRef}
       onMouseOver={displayTooltip}
       onMouseOut={hiddenTooltip}
-      style={{ cursor: "help" }}
-      className={className}
+      className={`tooltip_cursor-message ${className}`}
     >
       {children}
       {isDisplayed && portal
