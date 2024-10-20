@@ -45,8 +45,6 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
   };
 
   const onError = (error: AxiosError) => {
-    // 400에러 처리 로직이 있지만 콘솔에 찍히는 것을 막기 위해 추가
-    console.clear();
     setErrorCode(parseInt(error?.response?.data?.errorCode, 10));
     errorActive();
   };
