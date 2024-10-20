@@ -8,6 +8,7 @@ import plusicon from "../../../asset/img/tag_plus.svg";
 import Tooltip from "../../utils/Tooltip";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../../atom/userAtom";
+import { AxiosError, AxiosResponse } from "axios";
 
 type TagListProps = {
   tagData: TagType[];
@@ -37,18 +38,15 @@ const TagList = ({ tagData, setTagData }: TagListProps) => {
     }
   }, [errorCode]);
 
-  const onSuccess = (response: any) => {
-    if (response.data === undefined) {
-      setErrorCode(42);
-      errorCodeRef.current = 42;
-      return;
-    }
+  const onSuccess = (response: AxiosResponse) => {
     const resTagdata: TagType = response.data;
     setTagData(prev => [...prev, resTagdata]);
     resetCreateContent();
   };
 
-  const onError = (error: any) => {
+  const onError = (error: AxiosError) => {
+    // 400에러 처리 로직이 있지만 콘솔에 찍히는 것을 막기 위해 추가
+    console.clear();
     setErrorCode(parseInt(error?.response?.data?.errorCode, 10));
     errorActive();
   };
