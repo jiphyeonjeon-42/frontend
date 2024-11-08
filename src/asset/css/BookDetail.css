@@ -107,25 +107,42 @@
   font-weight: bold;
 }
 
-.book-likes {
-  display: flex;
-  justify-content: center;
-}
-
 .like_button_box {
-  font-size: 16px;
+  /* font-size: 16px; */
 }
 
 .like_button {
   background: none;
-  padding: 0;
+  padding: 1rem;
   border: 0;
   cursor: pointer;
+  font-size: 1.6rem;
+  border: solid 0.1rem #c0bebe;
+  border-radius: 1.5rem;
 }
 
 .like__icon {
   width: 1.5rem;
   margin-right: 0.5rem;
+}
+
+.book-detail_buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.location_button_box {
+}
+
+.location_button {
+  background: none;
+  padding: 1rem;
+  border: 0;
+  cursor: pointer;
+  font-size: 1.6rem;
+  border: solid 0.1rem #c0bebe;
+  border-radius: 1.5rem;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1200px) {

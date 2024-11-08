@@ -25,20 +25,21 @@ const Like = ({ bookInfoId }: Props) => {
 
   return (
     <div className="like_button_box">
-      {is42Authenticated ? (
-        <button
-          className="like_button"
-          type="button"
-          onClick={like.isLiked ? deleteLike : postLike}
-        >
+      <button
+        className="like_button"
+        type="button"
+        onClick={like.isLiked ? deleteLike : postLike}
+        disabled={!is42Authenticated}
+      >
+        {is42Authenticated ? (
           <Image
             className="like__icon"
             src={like.isLiked ? FilledLike : EmptyLike}
             alt={like.isLiked ? "liked" : "unliked"}
           />
-        </button>
-      ) : null}
-      {`좋아요 ${like.likeNum}`}
+        ) : null}
+        {`좋아요 ${like.likeNum}`}
+      </button>
     </div>
   );
 };

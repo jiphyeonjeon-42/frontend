@@ -1,12 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useGetBooksInfoId } from "~/api/books/useGetBooksInfoId";
 import BookReservation from "~/component/book/BookReservation";
 import BookStatus from "~/component/book/BookStatus";
+import BookLocation from "./location/BookLocation";
 import Review from "~/component/book/review/Review";
 import Banner from "~/component/utils/Banner";
 import Image from "~/component/utils/Image";
 import Like from "~/component/book/like/Like";
+import LocationButton from "~/component/book/location/LocationButton";
 import TagWrapper from "~/component/book/tag/TagWrapper";
 import "~/asset/css/BookDetail.css";
 import { Book } from "~/type";
@@ -32,7 +34,7 @@ const BookDetail = () => {
   const location = useLocation();
   useEffect(() => myRef.current?.scrollIntoView(), []);
   const { bookDetailInfo } = useGetBooksInfoId({ id });
-
+  const [bookLocation, setBookLocation] = useState(false);
 
   if (!bookDetailInfo) {
     return (
@@ -59,7 +61,11 @@ const BookDetail = () => {
 
   return (
     <main>
-      <HelmetComponent title={bookDetailInfo.title} description={ `집현전의 소중한 자산 "${bookDetailInfo.title}" 입니다.`}  img={bookDetailInfo.image} />
+      <HelmetComponent
+        title={bookDetailInfo.title}
+        description={`집현전의 소중한 자산 "${bookDetailInfo.title}" 입니다.`}
+        img={bookDetailInfo.image}
+      />
       <Banner
         img="bookdetail"
         titleKo="도서 상세 및 예약"
@@ -73,10 +79,15 @@ const BookDetail = () => {
         <div className="book-content">
           <div className="book-detail__photo-likes">
             <div className="book-detail__photo">
-              <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
+              {bookLocation ? (
+                <BookLocation bookDetailInfo={bookDetailInfo} />
+              ) : (
+                <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
+              )}
             </div>
-            <div className="book-likes">
+            <div className="book-detail_buttons">
               <Like bookInfoId={id} />
+              <LocationButton />
             </div>
           </div>
           <div className="book-detail">
