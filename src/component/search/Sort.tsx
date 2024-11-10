@@ -16,6 +16,7 @@ const Sort = ({ sort, setSort }: Props) => {
       {sortInfo.map(item => {
         return (
           <button
+            key={item.key}
             type="button"
             onClick={() => setSort(item.key)}
             className={`sort-by__button ${
