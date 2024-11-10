@@ -20,17 +20,17 @@ const BarcodeReader = ({ toDoAfterRead, wrapperClassName = "" }: Props) => {
     addDialogWithTitleAndMessage("barcodeReader", "바코드 리더 에러", message);
   };
 
-  useEffect(() => {
-    const loadVideoInputDeviceList = async () => {
-      try {
-        const videoDeviceList = await codeReader.listVideoInputDevices();
-        setVideoDeviceList(videoDeviceList);
-      } catch (error) {
-        alertError("기기 목록을 불러오는데 실패했습니다.");
-        setVideoDeviceList([]);
-      }
-    };
+  const loadVideoInputDeviceList = useCallback(async () => {
+    try {
+      const videoDeviceList = await codeReader.listVideoInputDevices();
+      setVideoDeviceList(videoDeviceList);
+    } catch (error) {
+      alertError("기기 목록을 불러오는데 실패했습니다.");
+      setVideoDeviceList([]);
+    }
+  }, []);
 
+  useEffect(() => {
     /** 바코드리더 초기 로드시, 사용가능한 카메라 목록을 가져옵니다. */
     loadVideoInputDeviceList();
     return () => codeReader.reset();
@@ -50,10 +50,12 @@ const BarcodeReader = ({ toDoAfterRead, wrapperClassName = "" }: Props) => {
       codeReader.reset();
 
       try {
-        /** 디바이스 목록엔 떴지만 사용불가시 throw */
+        /** 해당 기기 확인 및 카메라 권한 요청 */
         const newVideoStream = await navigator.mediaDevices.getUserMedia({
           video: { deviceId: { exact: selectedDeviceId } },
         });
+        /** 권한 변경 대비 목록 업데이트 */
+        loadVideoInputDeviceList(); 
         htmlVideoElement.srcObject = newVideoStream;
         htmlVideoElement.autoplay = true;
         /** 연결된 디바이스에 콜백함수를 전달해줍니다. */
