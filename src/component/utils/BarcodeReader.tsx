@@ -31,9 +31,10 @@ const BarcodeReader = ({ toDoAfterRead, wrapperClassName = "" }: Props) => {
 
   useEffect(() => {
     if (!videoDeviceList.length) return;
-    /** 바코드리더 초기 로드시 & 목록 변화시, 사용가능한 카메라 목록중 하나를 디폴트로 선택합니다. */
-    const firstVideoDeviceId = videoDeviceList[0].deviceId;
-    setSelectedDeviceId(firstVideoDeviceId);
+    /** 사용가능한 기기중 마지막, 주로 후면카메라를 기본으로 설정 */
+    const initialDevice = videoDeviceList[videoDeviceList.length - 1];
+
+    setSelectedDeviceId(initialDevice.deviceId);
   }, [videoDeviceList]);
 
   useEffect(() => {
