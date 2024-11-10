@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect, memo } from "react";
 import { useSearchParams } from "react-router-dom";
 import Sort from "./Sort";
 import BookInfo from "./BookInfo";
@@ -123,4 +123,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default memo(Search);

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { BookInfo } from "../../type";
+import { memo } from "react";
+import type { BookInfo } from "../../type";
 import { splitDate } from "../../util/date";
 import Image from "../utils/Image";
 import LinkToDetail from "../../asset/img/link_to_detail.svg";
@@ -76,4 +77,4 @@ const BookInfo = ({
   );
 };
 
-export default BookInfo;
+export default memo(BookInfo);
