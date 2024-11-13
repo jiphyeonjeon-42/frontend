@@ -26,7 +26,7 @@ const Like = ({ bookInfoId }: Props) => {
   return (
     <div className="like_button_box">
       <button
-        className="like_button"
+        className={`like_button ${!is42Authenticated ? "disabled" : ""}`}
         type="button"
         onClick={like.isLiked ? deleteLike : postLike}
         disabled={!is42Authenticated}
