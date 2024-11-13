@@ -1,0 +1,45 @@
+.book-location__container {
+  position: relative;
+  width: 30rem;
+  height: 51.1rem;
+  border: 1px solid #c0bebe;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.book-location__shelves {
+  display: flex;
+  gap: 2rem;
+  /* align-items: center;
+  justify-content: center; */
+  align-items: flex-end;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 90%;
+  padding: 3rem;
+}
+
+.shelf_active {
+  background-color: aquamarine;
+}
+
+.book-location__shelves > div {
+  min-width: 20rem;
+  /* height: 100%; */
+  border: 1px solid #c0c0c0;
+  margin-left: 1rem;
+  display: flex;
+  font-weight: bold;
+  /* background-color: #f4f4f4; */
+}
+
+.book-shelf__big {
+  height: 100%;
+}
+
+.book-shelf__small {
+  height: 50%;
+}
+
+.book-location__map {
+}
