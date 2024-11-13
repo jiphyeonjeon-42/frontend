@@ -108,7 +108,6 @@
 }
 
 .like_button_box {
-  /* font-size: 16px; */
 }
 
 .like_button {
@@ -119,6 +118,8 @@
   font-size: 1.6rem;
   border: solid 0.1rem #c0bebe;
   border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .like_button:disabled {
