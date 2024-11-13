@@ -10,8 +10,6 @@
 .book-location__shelves {
   display: flex;
   gap: 2rem;
-  /* align-items: center;
-  justify-content: center; */
   align-items: flex-end;
   overflow-x: auto;
   overflow-y: hidden;
@@ -20,7 +18,7 @@
 }
 
 .shelf_active {
-  background-color: aquamarine;
+  background-color: #5f3f36;
 }
 
 .book-location__shelves > div {
@@ -34,11 +32,11 @@
 }
 
 .book-shelf__big {
-  height: 100%;
+  height: 90%;
 }
 
 .book-shelf__small {
-  height: 50%;
+  height: 40%;
 }
 
 .book-location__map {

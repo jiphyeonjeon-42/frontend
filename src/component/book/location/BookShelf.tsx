@@ -1,4 +1,5 @@
 import "~/asset/css/BookLocation.css";
+import { useRef, useEffect } from "react";
 
 type BookShelfProps = {
   index: number;
@@ -6,15 +7,24 @@ type BookShelfProps = {
 };
 
 const BookShelf = ({ index, highlight }: BookShelfProps) => {
+  const shelfRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (highlight && shelfRef.current) {
+      shelfRef.current.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+      });
+    }
+  }, [highlight]);
+
   return (
     <div
+      ref={highlight ? shelfRef : undefined}
       className={`${highlight ? "shelf_active" : ""} ${
         index <= 2 ? "book-shelf__big" : "book-shelf__small"
       } 
       }`}
-    >
-      {highlight}
-    </div>
+    ></div>
   );
 };
 
