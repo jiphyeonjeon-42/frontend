@@ -1,4 +1,4 @@
-import { ComponentProps, useContext } from "react";
+import { ComponentProps, memo, useContext } from "react";
 import { CarouselContext } from "~/component/utils/Carousel";
 
 /**
@@ -27,4 +27,4 @@ const CarouselContainer = ({
   );
 };
 
-export default CarouselContainer;
+export default memo(CarouselContainer);
