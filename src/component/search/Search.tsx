@@ -12,7 +12,7 @@ import SearchSection from "./SearchSection";
 
 const Search = () => {
   const myRef = useRef<HTMLDivElement>(null);
-  const { bookList, categoryList, lastPage, categoryIndex } =
+  const { bookList, categoryList, lastPage, categoryIndex, isFetched } =
     useGetBooksInfoSearchUrl();
   const [urlSearchParams, setUrlSearchParams] = useSearchParams();
   const [query, page, sort] = useParseUrlQueryString(searchUrlQueryKeys);
@@ -63,6 +63,7 @@ const Search = () => {
         setPage={setPage}
         myRef={myRef}
       />
+      {!isFetched ? <div className="loader" /> : null}
       <section className="wish-book-wraper">
         <WishBook />
       </section>
