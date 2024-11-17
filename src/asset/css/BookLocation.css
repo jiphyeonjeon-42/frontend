@@ -38,6 +38,68 @@
 }
 
 .book-location__map {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 7.26rem;
+  height: 12.1rem;
+  border: 1px solid #545454;
+  border-radius: 0.3rem;
+  background-color: #f4f4f4;
+  padding: 0.3rem;
+  display: grid;
+  grid-template-columns: repeat(5, 0.5fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-gap: 0.2rem;
+  grid-template-areas:
+    ". . . shelf-1 shelf-1"
+    "saseo saseo saseo shelf-1 shelf-1"
+    ". . . shelf-2 shelf-2"
+    ". . . shelf-2 shelf-2"
+    "shelf-5 . . shelf-3 shelf-3"
+    "shelf-5 . . shelf-3 shelf-3"
+    "shelf-4 shelf-4 shelf-4 shelf-4 shelf-4";
+  opacity: 0.8;
+  z-index: 4;
+}
+
+.book-location__map > div {
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  background-color: #c9c6c6;
+  color: #5f3f36;
+}
+
+.book-location__map > .highlight {
+  background-color: #5f3f36;
+  color: white;
+}
+
+.book-location__map > .saseo {
+  grid-area: saseo;
+}
+
+.book-location__map > .shelf-1 {
+  grid-area: shelf-1;
+}
+
+.book-location__map > .shelf-2 {
+  grid-area: shelf-2;
+}
+
+.book-location__map > .shelf-3 {
+  grid-area: shelf-3;
+}
+
+.book-location__map > .shelf-4 {
+  grid-area: shelf-4;
+}
+
+.book-location__map > .shelf-5 {
+  grid-area: shelf-5;
 }
 
 @media screen and (max-width: 767px) {

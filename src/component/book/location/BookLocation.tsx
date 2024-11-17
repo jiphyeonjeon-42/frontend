@@ -1,6 +1,7 @@
 import { BookInfo } from "../../../type";
 import "~/asset/css/BookLocation.css";
 import BookShelf from "~/component/book/location/BookShelf";
+import BookLocationMap from "~/component/book/location/BookLocationMap";
 import { memo } from "react";
 
 type BookLocationProps = {
@@ -38,14 +39,7 @@ const BookLocation = memo(({ bookDetailInfo }: BookLocationProps) => {
           <BookShelf key={i} index={i} highlight={i === bookLocationInfo} />
         ))}
       </div>
-      {/* <div className="book-location__map">
-        <div className="saseo">사서</div>
-        <div className="ADFI">A</div>
-        <div className="BEGNJ">B</div>
-        <div className="L">L</div>
-        <div className="HKO">H</div>
-        <div className="etc">etc</div>
-      </div> */}
+      <BookLocationMap highlightIndex={bookLocationInfo} />
     </div>
   );
 });
