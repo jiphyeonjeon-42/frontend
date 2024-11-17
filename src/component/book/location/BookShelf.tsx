@@ -12,6 +12,7 @@ const BookShelf = ({ index, highlight }: BookShelfProps) => {
     if (highlight && shelfRef.current) {
       shelfRef.current.scrollIntoView({
         behavior: "smooth",
+        block: "center",
         inline: "center",
       });
     }
