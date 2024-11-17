@@ -1,4 +1,4 @@
-import { ComponentProps, useEffect, useState } from "react";
+import { ComponentProps, memo, useEffect, useState } from "react";
 import { type SearchKeyword } from "~/type/SearchKeyword";
 import Carousel from "./Carousel";
 import SearchRankingItem from "./SearchRankingItem";
@@ -61,4 +61,4 @@ const SearchRankingList = ({ list }: Props) => {
   );
 };
 
-export default SearchRankingList;
+export default memo(SearchRankingList);

@@ -1,12 +1,10 @@
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useCallback, useState, useRef } from "react";
 import Button from "../utils/Button";
-import BookInformationWithCover from "../utils/BookInformationWithCover";
-import TextWithLabel from "../utils/TextWithLabel";
-import TextareaWithLabel from "../utils/TextareaWithLabel";
 import { usePostLendingsMultiple } from "../../api/lendings/usePostLendingsMultiple";
 import { Book, User } from "../../type";
 import "../../asset/css/RentModalConfirm.css";
 import { userRoleStatusEnum } from "~/constant/status";
+import RentModalBooks from "./RentModalBooks";
 
 type Props = {
   selectedUser: User;
@@ -23,7 +21,8 @@ const RentModalConfirm = ({
   setSelectedBooks,
   closeModal,
 }: Props) => {
-  const [remarks, setRemarks] = useState<string[]>([]);
+  const remarksRef = useRef<string[]>([]);
+  const [isRentable, setIsRentable] = useState(false);
 
   const { requestLending } = usePostLendingsMultiple({
     selectedBooks,
@@ -35,20 +34,19 @@ const RentModalConfirm = ({
 
   const postData: FormEventHandler = e => {
     e.preventDefault();
-    requestLending(remarks);
+    requestLending(remarksRef.current);
   };
 
-  const isRentable =
-    selectedBooks.length > 1
-      ? remarks.slice(0, selectedBooks.length).every(remark => remark.length > 0)
-      : remarks[0]?.length > 0;
-
-  const handleRemarkChange = (index: number, value: string) => {
-    const updatedRemarks = [...remarks];
-    updatedRemarks[index] = value;
-    setRemarks(updatedRemarks);
-  };
-
+  const handleRemarkChange = useCallback((index: number, value: string) => {
+    remarksRef.current = [...remarksRef.current];
+    remarksRef.current[index] = value;
+    
+    const newIsRentable = selectedBooks.length > 1
+      ? remarksRef.current.slice(0, selectedBooks.length).every(remark => remark?.length > 0)
+      : remarksRef.current[0]?.length > 0;
+    setIsRentable(newIsRentable);
+  }, [selectedBooks.length]);
+  
   return (
     <form className="rent-modal">
       <div className="rent-modal__user">
@@ -64,41 +62,11 @@ const RentModalConfirm = ({
           </div>
         )}
       </div>
-      <div className="rent-modal__books">
-        {selectedBooks.map((selectBook, index) => {
-          const isFirst = index === 0;
-
-          return (
-            <div
-              key={selectBook.bookId}
-              className={`rent-modal__book-info ${index}`}
-            >
-              <BookInformationWithCover
-                bookCoverAlt={selectBook.title}
-                bookCoverImg={selectBook.image}
-              >
-                <TextWithLabel
-                  wrapperClassName="rent-modal__book"
-                  topLabelText="도서정보"
-                  mainText={selectBook.title}
-                  bottomLabelText={`청구기호 : ${selectBook.callSign}`}
-                />
-                <TextareaWithLabel
-                  wrapperClassName="rent-modal__remark"
-                  topLabelText="비고"
-                  textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
-                  textareaValue={remarks[index]}
-                  setTextareaValue={(value: string) => handleRemarkChange(index, value)}
-                  isTextareaFocusedOnMount={index === 0}
-                  isVisibleBottomMessage={!remarks[index]?.length}
-                  bottomMessageText="비고를 입력해주세요"
-                  bottomMessageColor="red"
-                />
-              </BookInformationWithCover>
-            </div>
-          );
-        })}
-      </div>
+      <RentModalBooks 
+        selectedBooks={selectedBooks}
+        handleRemarkChange={handleRemarkChange}
+        remarksRef={remarksRef}
+      />
       <div className="rent-modal__buttons">
         <Button
           type="submit"

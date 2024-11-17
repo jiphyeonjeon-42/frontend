@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useRef, useState } from "react";
 import { usePostLendings } from "../../api/lendings/usePostLendings";
 import { usePatchReservationsCancel } from "../../api/reservations/usePatchReservationsCancel";
 import Button from "../utils/Button";
@@ -16,7 +16,8 @@ type Props = {
 };
 
 const ReservedModalContents = ({ reservedInfo, closeModal }: Props) => {
-  const [remark, setRemark] = useState("");
+  const remarkRef = useRef<string>('');
+  const [isRentable, setIsRentable] = useState(false);
 
   const { setReservationId: cancelReservation } = usePatchReservationsCancel();
 
@@ -27,13 +28,17 @@ const ReservedModalContents = ({ reservedInfo, closeModal }: Props) => {
     closeModal,
   });
 
+  const setTextareaValue = (value: string) => {
+    remarkRef.current = value;
+    setIsRentable(Boolean(isRent && isValidString(value)));
+  };
+
   const postRent: FormEventHandler = e => {
     e.preventDefault();
-    requestLending(remark);
+    requestLending(remarkRef.current || "");
   };
 
   const isRent = !reservedInfo.status && reservedInfo?.endAt;
-  const isRentable = isRent && isValidString(remark);
   const isAvaliableReservation = !reservedInfo.status && !reservedInfo?.endAt;
 
   return (
@@ -67,9 +72,8 @@ const ReservedModalContents = ({ reservedInfo, closeModal }: Props) => {
             wrapperClassName="reserved-modal__remark"
             topLabelText="비고"
             textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
-            textareaValue={remark}
-            setTextareaValue={setRemark}
-            isVisibleBottomMessage={!remark.length}
+            setTextareaValue={setTextareaValue}
+            isVisibleBottomMessage={!remarkRef.current}
             bottomMessageText="비고를 입력해주세요"
             bottomMessageColor="red"
           />

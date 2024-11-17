@@ -18,5 +18,8 @@ export default axiosPromise;
 
 api.interceptors.response.use(
   response => response,
-  error => Sentry.captureException(error),
+  error => {
+    Sentry.captureException(error);
+    throw error;
+  },
 );

@@ -1,5 +1,6 @@
 import colorPalette from "../../constant/color";
 import "../../asset/css/TextWithLabel.css";
+import { memo } from "react";
 
 type Props = {
   wrapperClassName?: string;
@@ -53,7 +54,7 @@ const TextWithLabel = ({
   );
 };
 
-export default TextWithLabel;
+export default memo(TextWithLabel);
 
 TextWithLabel.defaultProps = {
   wrapperClassName: null,

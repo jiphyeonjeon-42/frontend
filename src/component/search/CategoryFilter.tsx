@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import Image from "../utils/Image";
 import Category from "./Category";
 import ArrLeftGray from "../../asset/img/arrow_left_gray.svg";
@@ -111,4 +111,4 @@ const CategoryFilter = ({ selectedCategory, categoryList }: Props) => {
   );
 };
 
-export default CategoryFilter;
+export default memo(CategoryFilter);

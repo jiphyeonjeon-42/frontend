@@ -1,5 +1,6 @@
 import { type SearchKeyword } from "~/type/SearchKeyword";
 import Tooltip from "./Tooltip";
+import { memo } from "react";
 
 type Props = { item: SearchKeyword & { id: number }; height: number };
 
@@ -25,4 +26,4 @@ const SearchRankingItem = ({ item, height }: Props) => {
   );
 };
 
-export default SearchRankingItem;
+export default memo(SearchRankingItem);
