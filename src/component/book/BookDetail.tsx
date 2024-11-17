@@ -34,7 +34,7 @@ const BookDetail = () => {
   const location = useLocation();
   useEffect(() => myRef.current?.scrollIntoView(), []);
   const { bookDetailInfo } = useGetBooksInfoId({ id });
-  const [bookLocation, setBookLocation] = useState(true);
+  const [bookLocation, setBookLocation] = useState(false);
 
   if (!bookDetailInfo) {
     return (
@@ -87,7 +87,9 @@ const BookDetail = () => {
             </div>
             <div className="book-detail_buttons">
               <Like bookInfoId={id} />
-              <LocationButton />
+              <LocationButton
+                viewLocation={() => setBookLocation(!bookLocation)}
+              />
             </div>
           </div>
           <div className="book-detail">

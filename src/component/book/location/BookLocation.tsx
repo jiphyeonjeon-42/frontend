@@ -1,6 +1,7 @@
 import { BookInfo } from "../../../type";
 import "~/asset/css/BookLocation.css";
 import BookShelf from "~/component/book/location/BookShelf";
+import { memo } from "react";
 
 type BookLocationProps = {
   bookDetailInfo: BookInfo;
@@ -22,9 +23,7 @@ const findBookLocation = (callSign: string) => {
   return shelf;
 };
 
-const BookLocation = ({ bookDetailInfo }: BookLocationProps) => {
-  // TODO: scroll bar (x축 아래)
-  // TODO: 책 위치에 맞게 main view 보여주기
+const BookLocation = memo(({ bookDetailInfo }: BookLocationProps) => {
   const { books } = bookDetailInfo;
 
   if (books === undefined) {
@@ -49,6 +48,6 @@ const BookLocation = ({ bookDetailInfo }: BookLocationProps) => {
       </div> */}
     </div>
   );
-};
+});
 
 export default BookLocation;

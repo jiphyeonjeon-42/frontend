@@ -11,7 +11,7 @@ const BookShelf = ({ index, highlight }: BookShelfProps) => {
   useEffect(() => {
     if (highlight && shelfRef.current) {
       shelfRef.current.scrollIntoView({
-        behavior: "smooth",
+        behavior: "instant",
         block: "center",
         inline: "center",
       });
