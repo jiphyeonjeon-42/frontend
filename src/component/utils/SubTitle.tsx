@@ -1,3 +1,4 @@
+import { memo } from "react";
 import "../../asset/css/SubTitle.css";
 
 type Props = {
@@ -16,4 +17,4 @@ const SubTitle = ({ subTitle, description, alignItems }: Props) => {
   );
 };
 
-export default SubTitle;
+export default memo(SubTitle);

@@ -1,6 +1,6 @@
 import colorPalette from "../../constant/color";
 import "../../asset/css/Button.css";
-import { HTMLProps } from "react";
+import { HTMLProps, memo } from "react";
 
 type Palette = (typeof colorPalette)[number]["string"];
 
@@ -28,4 +28,4 @@ export const Button = ({
   );
 };
 
-export default Button;
+export default memo(Button);

@@ -1,5 +1,6 @@
 import Image from "../utils/Image";
 import AlretIcon from "../../asset/img/alret_icon.svg";
+import { memo } from "react";
 import "../../asset/css/WishBook.css";
 
 const WishBook = () => {
@@ -28,4 +29,4 @@ const WishBook = () => {
   );
 };
 
-export default WishBook;
+export default memo(WishBook);

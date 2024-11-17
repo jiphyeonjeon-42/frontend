@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import { RefObject, memo } from "react";
 import { useSearchParams } from "react-router-dom";
 import Paginations from "~/component/utils/Paginations";
 
@@ -54,4 +54,4 @@ const Pagination = ({
   );
 };
 
-export default Pagination;
+export default memo(Pagination);
