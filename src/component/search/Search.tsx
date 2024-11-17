@@ -13,22 +13,6 @@ import { useGetBooksInfoSearchUrl } from "../../api/books/useGetBooksInfoSearchU
 import { searchUrlQueryKeys } from "../../constant/key";
 import "../../asset/css/Books.css";
 import "../../asset/css/Search.css";
-import { Profiler } from 'react';
-
-const onRender = (
-  id: string,
-  phase: string,
-  actualDuration: number,
-  baseDuration: number,
-  startTime: number,
-  commitTime: number
-) => {
-  console.table([
-    { 항목: '컴포넌트', 값: id },
-    { 항목: '실제 렌더링 시간', 값: `${actualDuration}ms` },
-    { 항목: '기본 렌더링 시간', 값: `${baseDuration}ms` }
-  ]);
-};
 
 const Search = () => {
   const myRef = useRef<HTMLDivElement>(null);
@@ -69,7 +53,6 @@ const Search = () => {
   );
 
   return (
-    <Profiler id="Search" onRender={onRender}>
       <main>
         <SearchBanner setQuery={setQuery} />
         <section className="search-section">
@@ -118,8 +101,7 @@ const Search = () => {
         <section className="wish-book-wraper">
           <WishBook />
         </section>
-      </main>
-    </Profiler>
+    </main>
   );
 };
 
