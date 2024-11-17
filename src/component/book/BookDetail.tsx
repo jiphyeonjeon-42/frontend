@@ -29,7 +29,7 @@ const BookDetail = () => {
   const id = useParams().id || "";
   const myRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  useEffect(() => myRef.current?.scrollIntoView(), []);
+  useEffect(() => myRef.current?.scrollIntoView(), [myRef.current]);
   const { bookDetailInfo } = useGetBooksInfoId({ id });
 
   if (!bookDetailInfo) {
