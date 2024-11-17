@@ -5,6 +5,7 @@ import Button from "../utils/Button";
 import "../../asset/css/ReturnModalContents.css";
 import { usePatchLendingsReturn } from "../../api/lendings/usePatchLendingsReturn";
 import { useGetLendingsId } from "../../api/lendings/useGetLendingsId";
+import { useRef, useCallback, useState } from "react";
 
 type Props = {
   lendingId: number;
@@ -13,12 +14,22 @@ type Props = {
 
 const ReturnModalContents = ({ lendingId, closeModal }: Props) => {
   const { lendingData } = useGetLendingsId({ lendingId, closeModal });
+  const [isReturnable, setIsReturnable] = useState(false);
+  const conditionRef = useRef<string>('');
 
-  const { condition, setCondition, requestReturn } = usePatchLendingsReturn({
+  const { requestReturn } = usePatchLendingsReturn({
     lendingId,
     title: lendingData?.title || "",
     closeModal,
   });
+
+  const setCondition = useCallback((value: string) => {
+      conditionRef.current = value;
+      setIsReturnable(conditionRef.current.length > 0);
+    },
+    [],
+  );
+
   if (!lendingData) return null;
 
   return (
@@ -50,18 +61,17 @@ const ReturnModalContents = ({ lendingId, closeModal }: Props) => {
       <TextareaWithLabel
         wrapperClassName="return-modal__remark"
         topLabelText="비고"
-        textareaValue={condition}
         setTextareaValue={setCondition}
         textareaPlaceHolder={`대출당시 : ${lendingData.lendingCondition}`}
-        isVisibleBottomMessage={!condition.length}
+        isVisibleBottomMessage={!conditionRef.current.length}
         bottomMessageText="비고를 입력해주세요"
         bottomMessageColor="red"
       />
       <div className="return-modal__buttons">
         <Button
           value="반납 완료하기"
-          color={condition.length ? "red" : undefined}
-          disabled={!condition.length}
+          color={conditionRef.current.length ? "red" : undefined}
+          disabled={!conditionRef.current.length}
           onClick={requestReturn}
         />
         <Button
