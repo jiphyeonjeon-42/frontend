@@ -1,11 +1,11 @@
 import BookShelf from "~/component/book/location/BookShelf";
 import BookLocationMap from "~/component/book/location/BookLocationMap";
 import { useBookContext } from "~/component/book/location/BookContext";
-import { findBookShelfLocation } from "~/util/bookShelfLocation";
+import { findBookShelfIndex } from "~/util/bookShelfLocation";
 
 const BookLocationContent = () => {
   const { callSignFirstChar } = useBookContext();
-  const bookLocationInfo = findBookShelfLocation(callSignFirstChar ?? "");
+  const bookShelfIndex = findBookShelfIndex(callSignFirstChar);
 
   return (
     <>
@@ -15,12 +15,9 @@ const BookLocationContent = () => {
         ))}
       </div> */}
       <div className="book-location__shelves">
-        <BookShelf
-          shelfIndex={bookLocationInfo}
-          callSignChar={callSignFirstChar ?? ""}
-        />
+        <BookShelf shelfIndex={bookShelfIndex} />
       </div>
-      <BookLocationMap highlightIndex={bookLocationInfo} />
+      <BookLocationMap highlightIndex={bookShelfIndex} />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 type BookContextType = {
-  callSignFirstChar: string | undefined;
+  callSignFirstChar: string;
 };
 
 const BookContext = createContext<BookContextType | undefined>(undefined);

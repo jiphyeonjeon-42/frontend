@@ -33,6 +33,11 @@
   height: 40%;
 }
 
+.highlight_svg {
+  stroke: #ffcc00; /* Example highlight color */
+  stroke-width: 3;
+}
+
 .book-location__map {
   position: absolute;
   top: 1rem;

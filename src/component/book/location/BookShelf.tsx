@@ -4,10 +4,9 @@ import BookShelfSVG from "~/component/book/location/BookShelfSVG";
 
 type BookShelfProps = {
   shelfIndex: number;
-  callSignChar: string;
 };
 
-const BookShelf = ({ shelfIndex, callSignChar }: BookShelfProps) => {
+const BookShelf = ({ shelfIndex }: BookShelfProps) => {
   // const shelfRef = useRef<HTMLDivElement | null>(null);
   // useEffect(() => {
   //   if (shelfRef.current) {
@@ -32,7 +31,7 @@ const BookShelf = ({ shelfIndex, callSignChar }: BookShelfProps) => {
     <div
       className={`${shelfIndex <= 2 ? "book-shelf__big" : "book-shelf__small"}`}
     >
-      <BookShelfSVG shelfIndex={shelfIndex} callSignChar={callSignChar} />
+      <BookShelfSVG shelfIndex={shelfIndex} />
     </div>
   );
 };
