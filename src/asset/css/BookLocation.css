@@ -17,10 +17,6 @@
   padding: 3rem;
 }
 
-.shelf_active {
-  background-color: #5f3f36;
-}
-
 .book-location__shelves > div {
   min-width: 20rem;
   border: 1px solid #c0c0c0;

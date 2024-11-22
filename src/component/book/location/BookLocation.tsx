@@ -1,27 +1,11 @@
 import { BookInfo } from "../../../type";
 import "~/asset/css/BookLocation.css";
-import BookShelf from "~/component/book/location/BookShelf";
-import BookLocationMap from "~/component/book/location/BookLocationMap";
+import { BookProvider } from "~/component/book/location/BookContext";
+import BookLocationContent from "~/component/book/location/BookLocationContent";
 import { memo } from "react";
 
 type BookLocationProps = {
   bookDetailInfo: BookInfo;
-};
-
-const findBookLocation = (callSign: string) => {
-  const lowerCaseRange = Array.from(
-    { length: "z".charCodeAt(0) - "b".charCodeAt(0) + 1 },
-    (_, i) => String.fromCharCode("b".charCodeAt(0) + i),
-  );
-  const callSignAtShelf = [
-    ["A", "D", "F", "I"],
-    ["B", "E", "G", "N", "J"],
-    ["K", "H", "O"],
-    lowerCaseRange,
-    ["C", "L", "M", "a"],
-  ];
-  const shelf = callSignAtShelf.findIndex(shelf => shelf.includes(callSign));
-  return shelf;
 };
 
 const BookLocation = memo(({ bookDetailInfo }: BookLocationProps) => {
@@ -31,16 +15,13 @@ const BookLocation = memo(({ bookDetailInfo }: BookLocationProps) => {
     return null;
   }
 
-  const bookLocationInfo = findBookLocation(books[0].callSign.at(0) ?? "");
+  const callSignFirstChar = books[0].callSign[0].at(0) ?? "";
   return (
-    <div className="book-location__container">
-      <div className="book-location__shelves">
-        {Array.from({ length: 5 }, (_, i) => (
-          <BookShelf key={i} index={i} highlight={i === bookLocationInfo} />
-        ))}
+    <BookProvider callSignFirstChar={callSignFirstChar}>
+      <div className="book-location__container">
+        <BookLocationContent />
       </div>
-      <BookLocationMap highlightIndex={bookLocationInfo} />
-    </div>
+    </BookProvider>
   );
 });
 

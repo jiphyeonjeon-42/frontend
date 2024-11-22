@@ -1,31 +1,39 @@
 import "~/asset/css/BookLocation.css";
-import { useRef, useEffect } from "react";
+import BookShelfSVG from "~/component/book/location/BookShelfSVG";
+// import { useRef, useEffect } from "react";
 
 type BookShelfProps = {
-  index: number;
-  highlight: boolean;
+  shelfIndex: number;
+  callSignChar: string;
 };
 
-const BookShelf = ({ index, highlight }: BookShelfProps) => {
-  const shelfRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    if (highlight && shelfRef.current) {
-      shelfRef.current.scrollIntoView({
-        behavior: "instant",
-        block: "center",
-        inline: "center",
-      });
-    }
-  }, [highlight]);
+const BookShelf = ({ shelfIndex, callSignChar }: BookShelfProps) => {
+  // const shelfRef = useRef<HTMLDivElement | null>(null);
+  // useEffect(() => {
+  //   if (shelfRef.current) {
+  //     shelfRef.current.scrollIntoView({
+  //       behavior: "instant",
+  //       block: "center",
+  //       inline: "center",
+  //     });
+  //   }
+  // });
 
   return (
+    // <div
+    //   ref={highlight ? shelfRef : undefined}
+    //   className={`${highlight ? "shelf_active" : ""} ${
+    //     index <= 2 ? "book-shelf__big" : "book-shelf__small"
+    //   }
+    //   }`}
+    // >
+    //   <BookShelfSVG index={index} />
+    // </div>
     <div
-      ref={highlight ? shelfRef : undefined}
-      className={`${highlight ? "shelf_active" : ""} ${
-        index <= 2 ? "book-shelf__big" : "book-shelf__small"
-      } 
-      }`}
-    ></div>
+      className={`${shelfIndex <= 2 ? "book-shelf__big" : "book-shelf__small"}`}
+    >
+      <BookShelfSVG shelfIndex={shelfIndex} callSignChar={callSignChar} />
+    </div>
   );
 };
 

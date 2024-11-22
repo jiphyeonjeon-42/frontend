@@ -34,7 +34,7 @@ const BookDetail = () => {
   const location = useLocation();
   useEffect(() => myRef.current?.scrollIntoView(), []);
   const { bookDetailInfo } = useGetBooksInfoId({ id });
-  const [bookLocation, setBookLocation] = useState(false);
+  const [isBookLocationVisible, setIsBookLocationVisible] = useState(false); // isBookLocationVisible 좋아..!
 
   if (!bookDetailInfo) {
     return (
@@ -79,7 +79,7 @@ const BookDetail = () => {
         <div className="book-content">
           <div className="book-detail__photo-likes">
             <div className="book-detail__photo">
-              {bookLocation ? (
+              {isBookLocationVisible ? (
                 <BookLocation bookDetailInfo={bookDetailInfo} />
               ) : (
                 <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
@@ -88,7 +88,9 @@ const BookDetail = () => {
             <div className="book-detail_buttons">
               <Like bookInfoId={id} />
               <LocationButton
-                viewLocation={() => setBookLocation(!bookLocation)}
+                viewLocation={() =>
+                  setIsBookLocationVisible(!isBookLocationVisible)
+                }
               />
             </div>
           </div>
