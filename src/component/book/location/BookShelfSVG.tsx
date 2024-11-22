@@ -6,45 +6,46 @@ type BookShelfSVGProps = {
 
 const ShelfOne = ({ highlight }: { highlight: string }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none">
-      <path
-        key="F"
-        className={`shelf-1__callSign-F ${
-          highlight === "F" ? "highlight_svg" : ""
-        }`}
-        d="M30 54.5L103.864 197.827L0.561546 197.827L0.561545 0.5L30 54.5Z"
-        fill="#CA66E8"
-        transform="translate(0, 0)"
-      />
-
-      <path
-        key="D"
-        className={`shelf-1__callSign-D ${
-          highlight === "D" ? "highlight_svg" : ""
-        }`}
-        d="M103.5 0L0.198035 195L0.198035 0L103.5 0Z"
-        fill="#66B4E8"
-        transform="translate(0, 197.827)"
-      />
-
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="284"
+      height="396"
+      viewBox="0 0 284 380"
+      fill="none"
+    >
       <path
         key="A"
-        className={`shelf-1__callSign-A ${
+        className={`shelf-1__callSign-A callSignPath ${
           highlight === "A" ? "highlight_svg" : ""
         }`}
-        d="M203 0.300628L203 198.498L203 391L177.5 343.498L24 343.498L102 196.5L0 0.309986L203 0.300628Z"
+        d="M283.116 0.625279L283.116 198.823L283.116 396L251 350.5L31.5 350.5L141.5 197L0.499996 0.625279L283.116 0.625279Z"
         fill="#9CDF72"
-        transform="translate(0, 0)"
       />
-
+      <path
+        key="F"
+        className={`shelf-1__callSign-F callSignPath ${
+          highlight === "F" ? "highlight_svg" : ""
+        }`}
+        d="M39.9943 54.7146L141.99 197.603L0.569934 197.608L0.576164 3.09847e-07L39.9943 54.7146Z"
+        fill="#CA66E8"
+      />
+      <path
+        key="D"
+        className={`shelf-1__callSign-D callSignPath ${
+          highlight === "D" ? "highlight_svg" : ""
+        }`}
+        d="M141.5 0.499756L0.950809 199L0.950807 0.5L141.5 0.499756Z"
+        fill="#66B4E8"
+        transform="translate(0, 197)"
+      />
       <path
         key="I"
-        className={`shelf-1__callSign-I ${
+        className={`shelf-1__callSign-I callSignPath ${
           highlight === "I" ? "highlight_svg" : ""
         }`}
-        d="M102.5 0.5H180.5L207.057 47.75H0.942978L25.5 0.5H102.5Z"
+        d="M139.933 0H250.382L284 47H0L31.1095 0H139.933Z"
         fill="#F29A9A"
-        transform="translate(0, 340)" // 391
+        transform="translate(0, 350)"
       />
     </svg>
   );
@@ -52,45 +53,46 @@ const ShelfOne = ({ highlight }: { highlight: string }) => {
 
 const ShelfTwo = ({ highlight }: { highlight: string }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="284"
+      height="396"
+      viewBox="0 0 284 380"
+      fill="none"
+    >
       <path
         key="G"
-        className={`shelf-2__callSign-G ${
+        className={`shelf-2__callSign-G callSignPath ${
           highlight === "G" ? "highlight_svg" : ""
         }`}
-        d="M206 0V90L47.8838 88.5246L0 0H206Z"
+        d="M281 0V125L88.5 125L0 0H281Z"
         fill="#EBCD06"
-        transform="translate(0, 0)"
       />
-
       <path
         key="B"
-        className={`shelf-2__callSign-B ${
+        className={`shelf-2__callSign-B callSignPath ${
           highlight === "B" ? "highlight_svg" : ""
         }`}
-        d="M106 196.991L183.5 348.5L75 348.5L26 348.5L0.72099 392.984L0.721001 0.984595L106 196.991Z"
-        fill="#D9D9D9"
-        transform="translate(0, 0)"
+        d="M130 183L240.5 339L77 339L40 339L0.580937 395L0.580944 0.270506L130 183Z"
+        fill="#B2C3BE"
       />
-
       <path
         key="E"
-        className={`shelf-2__callSign-E ${
+        className={`shelf-2__callSign-E callSignPath ${
           highlight === "E" ? "highlight_svg" : ""
         }`}
-        d="M7.12603e-05 0.010019L158.501 0.00987865L158.501 219.5L115.137 219.5L7.12603e-05 0.010019Z"
+        d="M7.51909e-07 0.988548L192.511 0.988498L192.52 124.218L88 124.218L7.51909e-07 0.988548Z"
         fill="#884CF6"
-        transform="translate(47, 88)"
+        transform="translate(89, 124)"
       />
-
       <path
         key="N"
-        className={`shelf-2__callSign-N ${
+        className={`shelf-2__callSign-N callSignPath ${
           highlight === "N" ? "highlight_svg" : ""
         }`}
-        d="M101.557 42H182.5L161 0H206.114V89.25H0L24.557 42H101.557Z"
+        d="M137.948 90.9166H239.5L175.5 0H281V147H0L39.5 90.9166H137.948Z"
         fill="#F29A9A"
-        transform="translate(0, 305)"
+        transform="translate(0, 248)"
       />
     </svg>
   );
@@ -98,35 +100,37 @@ const ShelfTwo = ({ highlight }: { highlight: string }) => {
 
 const ShelfThree = ({ highlight }: { highlight: string }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="284"
+      height="396"
+      viewBox="0 0 284 380"
+      fill="none"
+    >
       <path
         key="K"
-        className={`shelf-3_callSign-K ${
+        className={`shelf-3_callSign-K callSignPath ${
           highlight === "K" ? "highlight_svg" : ""
         }`}
-        d="M206 0V127.5H165.5V195.5H101.5L0 0H206Z"
+        d="M281 0V97.5H223V132V198L141 196L0 0H281Z"
         fill="#2FC949"
-        transform="translate(0, 0)"
       />
-
-      <path
-        key="H"
-        className={`shelf-3__callSign-H ${
-          highlight === "H" ? "highlight_svg" : ""
-        }`}
-        d="M29.3196 125.691L1.5 71.1911L64.633 71.1911L64.6319 0.190785L106 0.191435L104.752 163.884L104.754 269.693L0.0611791 268.498L0.0603305 220.003L77.8974 220.004L29.3196 125.691Z"
-        fill="#A06565"
-        transform="translate(100, 124)"
-      />
-
       <path
         key="O"
-        className={`shelf-3__callSign-O ${
+        className={`shelf-3__callSign-O callSignPath ${
           highlight === "O" ? "highlight_svg" : ""
         }`}
-        d="M103.629 199.103L180 346.5L101.198 346.507L101.194 394.638L0.732013 394.647L0.795687 0.612423L103.629 199.103Z"
+        d="M143.5 197.5L231 323L176.5 323L176.5 394.492L0.499925 394.492L0.499923 -0.000356686L143.5 197.5Z"
         fill="#32BBD6"
-        transform="translate(0, 0)"
+      />
+      <path
+        key="H"
+        className={`shelf-3__callSign-H callSignPath ${
+          highlight === "H" ? "highlight_svg" : ""
+        }`}
+        d="M47.9995 166.999L0.500011 99.0001L81.4997 101.189L81.4997 0.49883L140 0.498843L140 194.5L141.5 297.999L34.4995 297.999L34.4996 225.999L88.5 225.999L47.9995 166.999Z"
+        fill="#A06565"
+        transform="translate(142, 97)"
       />
     </svg>
   );
@@ -134,53 +138,62 @@ const ShelfThree = ({ highlight }: { highlight: string }) => {
 
 const ShelfFour = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none">
-      <rect x="0" y="0" width="206" height="196" fill="#2FC949" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="201"
+      height="183"
+      viewBox="0 0 201 183"
+      fill="none"
+    >
+      <path d="M0 0H200V183H0V0Z" fill="#D9D9D9" />
     </svg>
   );
 };
 
 const ShelfFive = ({ highlight }: { highlight: string }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 233 198" fill="none">
-      <rect width="233" height="198" fill="white" fill-opacity="0.298" />
-      <rect
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="201"
+      height="183"
+      viewBox="0 0 201 183"
+      fill="none"
+    >
+      <path d="M0 0H200V183H0V0Z" fill="#D9D9D9" />
+      <path
         key="L"
-        className={`shelf-5__callSign-L ${
+        className={`shelf-5__callSign-L callSignPath ${
           highlight === "L" ? "highlight_svg" : ""
         }`}
-        width="233"
-        height="50"
+        d="M1 0H201V45H1V0Z"
         fill="#9AC59E"
-      />
-      <rect
-        key="M"
-        className={`shelf-5__callSign-M ${
-          highlight === "M" ? "highlight_svg" : ""
-        }`}
-        x="82"
-        y="100"
-        width="151"
-        height="50"
-        fill="#B3B3B3"
-      />
-      <rect
-        key="a"
-        className={`shelf-5__callSign-a ${
-          highlight === "a" ? "highlight_svg" : ""
-        }`}
-        y="148"
-        width="233"
-        height="50"
-        fill="#70A4C7"
       />
       <path
         key="C"
-        className={`shelf-5__callSign-C ${
+        className={`shelf-5__callSign-C callSignPath ${
           highlight === "C" ? "highlight_svg" : ""
         }`}
-        d="M0 50H233V101.042H85.5V148H42.5H0V50Z"
+        d="M1 45H201V93.4375H74.3906V138H37.4807H1V45Z"
         fill="#D877C4"
+      />
+      <rect
+        key="a"
+        className={`shelf-5__callSign-a callSignPath ${
+          highlight === "a" ? "highlight_svg" : ""
+        }`}
+        x="1"
+        y="138"
+        width="200"
+        height="45"
+        fill="#70A4C7"
+      />
+      <path
+        key="M"
+        className={`shelf-5__callSign-M callSignPath ${
+          highlight === "M" ? "highlight_svg" : ""
+        }`}
+        d="M74 93H201V138H74V93Z"
+        fill="#B3B3B3"
       />
     </svg>
   );

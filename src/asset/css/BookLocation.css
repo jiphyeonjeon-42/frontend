@@ -9,18 +9,18 @@
 
 .book-location__shelves {
   display: flex;
-  gap: 2rem;
+  /* gap: 2rem; */
   align-items: flex-end;
-  overflow-x: auto;
-  overflow-y: hidden;
+  justify-content: center;
+  /* overflow-x: auto;
+  overflow-y: hidden; */
   height: 90%;
   padding: 3rem;
 }
 
 .book-location__shelves > div {
   min-width: 20rem;
-  border: 1px solid #c0c0c0;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   display: flex;
   font-weight: bold;
 }
@@ -33,9 +33,14 @@
   height: 40%;
 }
 
+.callSignPath {
+  opacity: 0.3;
+}
+
 .highlight_svg {
-  stroke: #ffcc00; /* Example highlight color */
-  stroke-width: 3;
+  /* stroke: #5f3f36;
+  stroke-linecap: round; */
+  opacity: 1;
 }
 
 .book-location__map {
