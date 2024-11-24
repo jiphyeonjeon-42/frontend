@@ -87,8 +87,8 @@ const ShelfTwo = ({ highlight }: { highlight: string }) => {
       />
       <path
         key="N"
-        className={`shelf-2__callSign-N callSignPath ${
-          highlight === "N" ? "highlight_svg" : ""
+        className={`shelf-2__callSign-N shelf-2__callSign-J callSignPath ${
+          highlight === "N" || highlight === "J" ? "highlight_svg" : ""
         }`}
         d="M137.948 90.9166H239.5L175.5 0H281V147H0L39.5 90.9166H137.948Z"
         fill="#F29A9A"
@@ -138,15 +138,18 @@ const ShelfThree = ({ highlight }: { highlight: string }) => {
 
 const ShelfFour = () => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="201"
-      height="183"
-      viewBox="0 0 201 183"
-      fill="none"
-    >
-      <path d="M0 0H200V183H0V0Z" fill="#D9D9D9" />
-    </svg>
+    <div className="shelffour">
+      <div></div>
+      {/* <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="201"
+        height="183"
+        viewBox="0 0 201 183"
+        fill="none"
+      >
+        <path d="M0 0H200V183H0V0Z" fill="#D9D9D9" />
+      </svg> */}
+    </div>
   );
 };
 
@@ -159,7 +162,7 @@ const ShelfFive = ({ highlight }: { highlight: string }) => {
       viewBox="0 0 201 183"
       fill="none"
     >
-      <path d="M0 0H200V183H0V0Z" fill="#D9D9D9" />
+      {/* <path d="M0 0H200V183H0V0Z" fill="#D9D9D9" /> */}
       <path
         key="L"
         className={`shelf-5__callSign-L callSignPath ${

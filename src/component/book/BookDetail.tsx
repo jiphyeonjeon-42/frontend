@@ -82,7 +82,11 @@ const BookDetail = () => {
               {isBookLocationVisible ? (
                 <BookLocation bookDetailInfo={bookDetailInfo} />
               ) : (
-                <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
+                <Image
+                  className="book-photo__container"
+                  src={bookDetailInfo.image}
+                  alt={bookDetailInfo.title}
+                />
               )}
             </div>
             <div className="book-detail_buttons">
