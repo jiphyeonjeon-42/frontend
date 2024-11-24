@@ -35,7 +35,11 @@ const HeaderMobile = () => {
           <Image src={Logo} alt="logo" />
         </Link>
         <nav className="header-mobile__gnb__wrapper">
-          <Link className="header-mobile__search" to={{ pathname: `/search` }}>
+          <Link
+            className="header-mobile__search"
+            to={{ pathname: `/search` }}
+            onClick={() => window.scrollTo(0, 0)}
+          >
             <Image src={SearchBook} alt="search" />
           </Link>
           <button
