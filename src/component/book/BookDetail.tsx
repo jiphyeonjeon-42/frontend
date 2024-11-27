@@ -12,7 +12,6 @@ import LocationButton from "~/component/book/location/LocationButton";
 import TagWrapper from "~/component/book/tag/TagWrapper";
 import "~/asset/css/BookDetail.css";
 import { Book } from "~/type";
-import { Helmet } from "react-helmet-async";
 import HelmetComponent from "../utils/HelmetComponent";
 
 const callsignToNumbers = (callSign: string) =>
