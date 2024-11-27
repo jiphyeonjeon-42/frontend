@@ -33,7 +33,7 @@ const BookDetail = () => {
   const location = useLocation();
   useEffect(() => myRef.current?.scrollIntoView(), []);
   const { bookDetailInfo } = useGetBooksInfoId({ id });
-  const [isBookLocationVisible, setIsBookLocationVisible] = useState(false); // isBookLocationVisible 좋아..!
+  const [isBookLocationVisible, setIsBookLocationVisible] = useState(false);
 
   if (!bookDetailInfo) {
     return (
@@ -47,6 +47,10 @@ const BookDetail = () => {
       </main>
     );
   }
+
+  const handleBookLocationVisible = () => {
+    setIsBookLocationVisible(!isBookLocationVisible);
+  };
 
   const isAvailableReservation = () => {
     const { books } = bookDetailInfo;
@@ -91,9 +95,8 @@ const BookDetail = () => {
             <div className="book-detail_buttons">
               <Like bookInfoId={id} />
               <LocationButton
-                viewLocation={() =>
-                  setIsBookLocationVisible(!isBookLocationVisible)
-                }
+                isBookLocationVisible={isBookLocationVisible}
+                onToggleVisibility={handleBookLocationVisible}
               />
             </div>
           </div>

@@ -22,7 +22,7 @@ const Like = ({ bookInfoId }: Props) => {
   };
 
   return (
-    <div className="like_button__container">
+    <div>
       <button
         className="like_button"
         type="button"

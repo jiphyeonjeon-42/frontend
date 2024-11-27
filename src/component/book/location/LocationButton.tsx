@@ -1,11 +1,19 @@
 type Props = {
-  viewLocation: () => void;
+  isBookLocationVisible: boolean;
+  onToggleVisibility: () => void;
 };
-const LocationButton = ({ viewLocation }: Props) => {
+const LocationButton = ({
+  isBookLocationVisible,
+  onToggleVisibility,
+}: Props) => {
   return (
-    <div className="location_button_box">
-      <button className="location_button" type="button" onClick={viewLocation}>
-        도서 위치
+    <div>
+      <button
+        className="location_button"
+        type="button"
+        onClick={onToggleVisibility}
+      >
+        {isBookLocationVisible ? "표지 보기" : "도서 위치"}
       </button>
     </div>
   );
