@@ -1,6 +1,5 @@
 import { useGetLike, usePostLike, useDeleteLike } from "~/api/like";
 import { usePermission } from "~/hook/usePermission";
-
 import Image from "~/component/utils/Image";
 import FilledLike from "~/asset/img/like_filled.svg";
 import EmptyLike from "~/asset/img/like_empty.svg";
@@ -11,7 +10,6 @@ type Props = {
 
 const Like = ({ bookInfoId }: Props) => {
   const { is42Authenticated } = usePermission();
-
   const { like, setLike } = useGetLike({ bookInfoId: +bookInfoId });
   const { setBookInfoId: requestdelete } = useDeleteLike({ setLike });
   const { setBookInfoId: requestPost } = usePostLike({ setLike });
@@ -24,9 +22,9 @@ const Like = ({ bookInfoId }: Props) => {
   };
 
   return (
-    <div className="like_button_box">
+    <div className="like_button__container">
       <button
-        className={`like_button ${!is42Authenticated ? "disabled" : ""}`}
+        className="like_button"
         type="button"
         onClick={like.isLiked ? deleteLike : postLike}
         disabled={!is42Authenticated}
