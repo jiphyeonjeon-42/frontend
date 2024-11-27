@@ -41,7 +41,7 @@
   height: 51.1rem;
 }
 
-.book-detail__photo > .book-detail__photo-location {
+.book-detail__photo-location {
   width: 34.8rem;
   height: 51.1rem;
 }
@@ -152,7 +152,7 @@
     width: 55%;
   }
 
-  .book-detail__photo > .book-detail__photo-location {
+  .book-detail__photo-location {
     width: 32rem;
     height: 47rem;
   }
@@ -213,11 +213,9 @@
 
   .book-detail__photo {
     margin: 0 auto 1rem auto !important;
-    width: 80%;
-    height: 25%;
   }
 
-  .book-detail__photo > .book-detail__photo-location {
+  .book-detail__photo-location {
     width: 100%;
     height: 100%;
   }
