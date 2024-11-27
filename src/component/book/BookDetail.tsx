@@ -86,7 +86,7 @@ const BookDetail = () => {
                 <BookLocation bookDetailInfo={bookDetailInfo} />
               ) : (
                 <Image
-                  className="book-photo__container"
+                  className="book-detail__photo-location"
                   src={bookDetailInfo.image}
                   alt={bookDetailInfo.title}
                 />

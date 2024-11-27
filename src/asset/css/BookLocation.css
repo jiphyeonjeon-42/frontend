@@ -1,8 +1,3 @@
-.book-location__container {
-  width: 34.8rem;
-  height: 51.1rem;
-}
-
 .book-location__map {
   height: 100%;
   background-color: #f4f4f4;
@@ -58,10 +53,4 @@
 
 .book-location__map > .shelf-5 {
   grid-area: shelf-5;
-}
-
-@media screen and (max-width: 767px) {
-  .book-location__container {
-    width: 100%;
-  }
 }
