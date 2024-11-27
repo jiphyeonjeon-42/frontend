@@ -112,9 +112,6 @@
   font-weight: bold;
 }
 
-.like_button_box {
-}
-
 .like_button {
   background: none;
   padding: 1rem;
@@ -143,9 +140,6 @@
   gap: 1rem;
 }
 
-.location_button_box {
-}
-
 .location_button {
   background: none;
   padding: 1rem;
@@ -160,11 +154,6 @@
   .book-detail {
     width: 55%;
   }
-
-  /* .book-detail__photo img {
-    width: 32rem;
-    height: 47rem;
-  } */
 
   .book-detail__photo > .book-photo__container {
     width: 32rem;
@@ -228,11 +217,6 @@
     width: 80%;
     height: 25%;
   }
-
-  /* .book-detail__photo img {
-    width: 100%;
-    height: 100%;
-  } */
 
   .book-detail__photo > .book-photo__container {
     width: 100%;

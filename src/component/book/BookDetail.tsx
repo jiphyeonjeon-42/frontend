@@ -33,7 +33,7 @@ const BookDetail = () => {
   const location = useLocation();
   useEffect(() => myRef.current?.scrollIntoView(), []);
   const { bookDetailInfo } = useGetBooksInfoId({ id });
-  const [isBookLocationVisible, setIsBookLocationVisible] = useState(false); // isBookLocationVisible 좋아..!
+  const [isBookLocationVisible, setIsBookLocationVisible] = useState(false);
 
   if (!bookDetailInfo) {
     return (
