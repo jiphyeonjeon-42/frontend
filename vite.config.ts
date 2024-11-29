@@ -59,7 +59,5 @@ export default defineConfig(({ mode }) => {
 
     /** @see https://vitejs.dev/config/build-options.html#build-outdir */
     build: { outDir: "build", chunkSizeWarningLimit: 4242 },
-
-    base: "./",
   };
 });
