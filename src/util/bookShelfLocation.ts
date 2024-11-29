@@ -15,7 +15,7 @@ const lowerCaseRange = Array.from(
   (_, i) => String.fromCharCode("b".charCodeAt(0) + i),
 );
 
-const callSignAtShelf = [
+export const callSignAtShelf = [
   ["A", "D", "F", "I"],
   ["B", "E", "G", "N", "J"],
   ["K", "H", "O"],
