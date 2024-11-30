@@ -17,14 +17,15 @@ const ReturnModalContents = ({ lendingId, closeModal }: Props) => {
   const [isReturnable, setIsReturnable] = useState(false);
   const conditionRef = useRef<string>('');
 
-  const { requestReturn } = usePatchLendingsReturn({
+  const { condition, setCondition, requestReturn } = usePatchLendingsReturn({
     lendingId,
     title: lendingData?.title || "",
     closeModal,
   });
 
-  const setCondition = useCallback((value: string) => {
+  const setConditionRef = useCallback((value: string) => {
       conditionRef.current = value;
+      setCondition(value);
       setIsReturnable(conditionRef.current.length > 0);
     },
     [],
@@ -61,7 +62,7 @@ const ReturnModalContents = ({ lendingId, closeModal }: Props) => {
       <TextareaWithLabel
         wrapperClassName="return-modal__remark"
         topLabelText="비고"
-        setTextareaValue={setCondition}
+        setTextareaValue={setConditionRef}
         textareaPlaceHolder={`대출당시 : ${lendingData.lendingCondition}`}
         isVisibleBottomMessage={!conditionRef.current.length}
         bottomMessageText="비고를 입력해주세요"
