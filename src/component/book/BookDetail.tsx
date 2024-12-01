@@ -1,12 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useGetBooksInfoId } from "~/api/books/useGetBooksInfoId";
 import BookReservation from "~/component/book/BookReservation";
 import BookStatus from "~/component/book/BookStatus";
+import BookLocation from "./location/BookLocation";
 import Review from "~/component/book/review/Review";
 import Banner from "~/component/utils/Banner";
 import Image from "~/component/utils/Image";
 import Like from "~/component/book/like/Like";
+import LocationButton from "~/component/book/location/LocationButton";
 import TagWrapper from "~/component/book/tag/TagWrapper";
 import "~/asset/css/BookDetail.css";
 import { Book } from "~/type";
@@ -30,7 +32,7 @@ const BookDetail = () => {
   const myRef = useRef<HTMLDivElement>(null);
   const recentScrollPosition = useRef(0);
   const location = useLocation();
-
+  const [isBookLocationVisible, setIsBookLocationVisible] = useState(false);
   useEffect(() => {
     recentScrollPosition.current = window.scrollY;
     myRef.current?.scrollIntoView();
@@ -52,6 +54,10 @@ const BookDetail = () => {
       </main>
     );
   }
+
+  const handleBookLocationVisible = () => {
+    setIsBookLocationVisible(!isBookLocationVisible);
+  };
 
   const isAvailableReservation = () => {
     const { books } = bookDetailInfo;
@@ -83,10 +89,22 @@ const BookDetail = () => {
         <div className="book-content">
           <div className="book-detail__photo-likes">
             <div className="book-detail__photo">
-              <Image src={bookDetailInfo.image} alt={bookDetailInfo.title} />
+              {isBookLocationVisible ? (
+                <BookLocation bookDetailInfo={bookDetailInfo} />
+              ) : (
+                <Image
+                  className="book-detail__photo-location"
+                  src={bookDetailInfo.image}
+                  alt={bookDetailInfo.title}
+                />
+              )}
             </div>
-            <div className="book-likes">
+            <div className="book-detail_buttons">
               <Like bookInfoId={id} />
+              <LocationButton
+                isBookLocationVisible={isBookLocationVisible}
+                onToggleVisibility={handleBookLocationVisible}
+              />
             </div>
           </div>
           <div className="book-detail">

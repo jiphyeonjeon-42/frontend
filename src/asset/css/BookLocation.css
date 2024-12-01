@@ -1,0 +1,91 @@
+.book-location__map {
+  height: 100%;
+  background-color: #f4f4f4;
+  padding: 0 1rem 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-gap: 0.5rem;
+  grid-template-areas:
+    "cluster . . shelf-1"
+    "cluster selfservice . shelf-1"
+    "cluster entrance . return"
+    "cluster sofa-1 . shelf-2"
+    "cluster sofa-1 . shelf-2"
+    "cluster shelf-5 . sofa-3"
+    "cluster shelf-5 . sofa-3"
+    "cluster sofa-2 . shelf-3"
+    "cluster sofa-2 . shelf-3"
+    "cluster shelf-4 shelf-4 shelf-4";
+}
+
+.book-location__map > div {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  background-color: #e9e9e9;
+  color: #5f3f36;
+}
+
+.book-location__map > .map-highlight {
+  background-color: #736757;
+  color: white;
+}
+
+.book-location__map > .map-shelf {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.book-location__map > .map-selfservice {
+  grid-area: selfservice;
+}
+
+.book-location__map > .map-entrance {
+  grid-area: entrance;
+  background-color: #f4f4f4;
+}
+
+.book-location__map > .map-cluster {
+  grid-area: cluster;
+  background-color: #f4f4f4;
+}
+
+.book-location__map > .map-return {
+  grid-area: return;
+}
+
+.book-location__map > .map-sofa-1 {
+  grid-area: sofa-1;
+}
+
+.book-location__map > .map-sofa-2 {
+  grid-area: sofa-2;
+}
+
+.book-location__map > .map-sofa-3 {
+  grid-area: sofa-3;
+}
+
+.book-location__map > .map-shelf-1 {
+  grid-area: shelf-1;
+}
+
+.book-location__map > .map-shelf-2 {
+  grid-area: shelf-2;
+}
+
+.book-location__map > .map-shelf-3 {
+  grid-area: shelf-3;
+}
+
+.book-location__map > .map-shelf-4 {
+  grid-area: shelf-4;
+}
+
+.book-location__map > .map-shelf-5 {
+  grid-area: shelf-5;
+}
