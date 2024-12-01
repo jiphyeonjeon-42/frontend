@@ -1,5 +1,6 @@
 import Image from "./Image";
 import "../../asset/css/BookInformationWithCover.css";
+import { memo } from "react";
 
 type Props = {
   wrapperClassName?: string;
@@ -28,7 +29,7 @@ const BookInformationWithCover = ({
   );
 };
 
-export default BookInformationWithCover;
+export default memo(BookInformationWithCover);
 
 BookInformationWithCover.defaultProps = {
   wrapperClassName: "",

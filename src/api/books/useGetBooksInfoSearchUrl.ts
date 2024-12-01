@@ -19,6 +19,7 @@ export const useGetBooksInfoSearchUrl = () => {
   });
   const [query, page, sort, category] =
     useParseUrlQueryString(searchUrlQueryKeys);
+  const [isFetched, setIsFetched] = useState(false);
 
   const { request } = useApi("get", "books/info/search", {
     query,
@@ -59,6 +60,7 @@ export const useGetBooksInfoSearchUrl = () => {
     );
     const { totalPages } = response.data.meta;
     const categoryIndex = categories.findIndex(i => i.name === category);
+    setIsFetched(true);
     setSearchResult({
       bookList: book,
       categoryList: categories,
@@ -73,5 +75,6 @@ export const useGetBooksInfoSearchUrl = () => {
 
   return {
     ...searchResult,
+    isFetched,
   };
 };

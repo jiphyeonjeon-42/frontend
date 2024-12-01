@@ -30,10 +30,17 @@ const compareCallsign = (a: Book, b: Book) => {
 const BookDetail = () => {
   const id = useParams().id || "";
   const myRef = useRef<HTMLDivElement>(null);
+  const recentScrollPosition = useRef(0);
   const location = useLocation();
-  useEffect(() => myRef.current?.scrollIntoView(), []);
-  const { bookDetailInfo } = useGetBooksInfoId({ id });
   const [isBookLocationVisible, setIsBookLocationVisible] = useState(false);
+  useEffect(() => {
+    recentScrollPosition.current = window.scrollY;
+    myRef.current?.scrollIntoView();
+    return () => {
+      window.scrollTo(0, recentScrollPosition.current);
+    };
+  }, [myRef.current]);
+  const { bookDetailInfo } = useGetBooksInfoId({ id });
 
   if (!bookDetailInfo) {
     return (

@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentProps, useContext, useMemo } from "react";
+import { CSSProperties, ComponentProps, memo, useContext, useMemo } from "react";
 import { CarouselContext } from "~/component/utils/Carousel";
 
 /**
@@ -85,4 +85,4 @@ const CarouselList = <T extends { id: number }>({
   );
 };
 
-export default CarouselList;
+export default memo(CarouselList);

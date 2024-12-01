@@ -1,3 +1,4 @@
+import { memo } from "react";
 import BookSearchBar from "../utils/BookSearchBar";
 import "../../asset/css/Banner.css";
 import "../../asset/css/SearchBanner.css";
@@ -24,4 +25,4 @@ const SearchBanner = ({ setQuery }: Props) => {
   );
 };
 
-export default SearchBanner;
+export default memo(SearchBanner);

@@ -1,22 +1,18 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect, memo } from "react";
 import { useSearchParams } from "react-router-dom";
-import Sort from "./Sort";
-import BookInfo from "./BookInfo";
 import WishBook from "./WishBook";
 import SearchBanner from "./SearchBanner";
-import CategoryFilter from "./CategoryFilter";
-import SubTitle from "../utils/SubTitle";
-import Pagination from "../utils/Pagination";
 import { useParseUrlQueryString } from "../../hook/useParseUrlQueryString";
 import { useDebounce } from "../../hook/useDebounce";
 import { useGetBooksInfoSearchUrl } from "../../api/books/useGetBooksInfoSearchUrl";
 import { searchUrlQueryKeys } from "../../constant/key";
 import "../../asset/css/Books.css";
 import "../../asset/css/Search.css";
+import SearchSection from "./SearchSection";
 
 const Search = () => {
   const myRef = useRef<HTMLDivElement>(null);
-  const { bookList, categoryList, lastPage, categoryIndex } =
+  const { bookList, categoryList, lastPage, categoryIndex, isFetched } =
     useGetBooksInfoSearchUrl();
   const [urlSearchParams, setUrlSearchParams] = useSearchParams();
   const [query, page, sort] = useParseUrlQueryString(searchUrlQueryKeys);
@@ -55,49 +51,19 @@ const Search = () => {
   return (
     <main>
       <SearchBanner setQuery={setQuery} />
-      <section className="search-section">
-        <div className="search-subtitle" ref={myRef}>
-          <SubTitle
-            subTitle={
-              query === null || query === ""
-                ? "전체 도서 목록"
-                : `'${query}' 도서 검색 결과`
-            }
-            alignItems="start"
-            description=""
-          />
-        </div>
-        <CategoryFilter
-          selectedCategory={categoryIndex}
-          categoryList={categoryList}
-        />
-        <div className="search-sort">
-          <Sort sort={sort || "title"} setSort={setSort} />
-        </div>
-        <section className="books">
-          {bookList.map(items => (
-            <BookInfo
-              key={items.id}
-              id={items.id}
-              isbn={items.isbn}
-              title={items.title}
-              author={items.author}
-              publisher={items.publisher}
-              image={items.image}
-              publishedAt={items.publishedAt}
-              category={items.category}
-              bread="검색"
-            />
-          ))}
-        </section>
-        <Pagination
-          lastPage={lastPage}
-          page={parseInt(page, 10) || 1}
-          setPage={setPage}
-          isReplaceUrl
-          scrollRef={myRef}
-        />
-      </section>
+      <SearchSection
+        query={query}
+        categoryIndex={categoryIndex}
+        categoryList={categoryList}
+        sort={sort || "title"}
+        setSort={setSort}
+        bookList={bookList}
+        lastPage={lastPage}
+        page={page}
+        setPage={setPage}
+        myRef={myRef}
+      />
+      {!isFetched ? <div className="loader" /> : null}
       <section className="wish-book-wraper">
         <WishBook />
       </section>
@@ -105,4 +71,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default memo(Search);

@@ -62,7 +62,7 @@ const Pages = (props: { length: number }) => {
   return (
     <div className="pagination__pages">
       {range.map(i => (
-        <Page number={i} />
+        <Page key={i} number={i} />
       ))}
     </div>
   );

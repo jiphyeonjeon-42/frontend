@@ -8,7 +8,7 @@ type Props = {
   topLabelColor?: string;
   textareaPlaceHolder?: string;
   textareaName?: string;
-  textareaValue: string;
+  textareaValue?: string;
   textareaDisabled?: boolean;
   setTextareaValue(...args: unknown[]): unknown;
   isVisibleBottomMessage?: boolean;
@@ -58,7 +58,6 @@ const TextareaWithLabel = ({
         className="textarea__textarea"
         placeholder={textareaPlaceHolder}
         name={textareaName}
-        value={textareaValue}
         onChange={onChangeTextarea}
         ref={textareaRef}
         disabled={textareaDisabled}
