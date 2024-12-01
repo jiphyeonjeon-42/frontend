@@ -37,9 +37,11 @@
 
 .book-detail__photo {
   margin: 0 0rem 1rem 0;
+  width: 34.8rem;
+  height: 51.1rem;
 }
 
-.book-detail__photo img {
+.book-detail__photo-location {
   width: 34.8rem;
   height: 51.1rem;
 }
@@ -107,20 +109,21 @@
   font-weight: bold;
 }
 
-.book-likes {
-  display: flex;
-  justify-content: center;
-}
-
-.like_button_box {
-  font-size: 16px;
-}
-
 .like_button {
   background: none;
-  padding: 0;
+  padding: 1rem;
   border: 0;
   cursor: pointer;
+  font-size: 1.6rem;
+  border: solid 0.1rem #c0bebe;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.like_button:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .like__icon {
@@ -128,18 +131,36 @@
   margin-right: 0.5rem;
 }
 
+.book-detail_buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.location_button {
+  background: none;
+  padding: 1rem;
+  border: 0;
+  cursor: pointer;
+  font-size: 1.6rem;
+  border: solid 0.1rem #c0bebe;
+  border-radius: 1.5rem;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1200px) {
   .book-detail {
     width: 55%;
   }
 
-  .book-detail__photo img {
+  .book-detail__photo-location {
     width: 32rem;
     height: 47rem;
   }
 
   .book-detail__photo {
     margin: 0 0 1rem 0;
+    width: 32rem;
+    height: 47rem;
   }
 
   .book-detail__info-value {
@@ -192,11 +213,9 @@
 
   .book-detail__photo {
     margin: 0 auto 1rem auto !important;
-    width: 80%;
-    height: 25%;
   }
 
-  .book-detail__photo img {
+  .book-detail__photo-location {
     width: 100%;
     height: 100%;
   }
