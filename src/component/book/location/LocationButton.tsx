@@ -3,7 +3,6 @@ type Props = {
   onToggleVisibility: () => void;
 };
 
-
 const LocationButton = ({
   isBookLocationVisible,
   onToggleVisibility,
