@@ -68,7 +68,7 @@ const Information = () => {
             <Question
               isOpen={allOpen}
               question="만약 연체를 하게 된다면 어떤 페널티를 받게 되나요?"
-              answer="연체한 도서를 반납한 당일부터 연체한 기간만큼 대출이 제한됩니다."
+              answer="연체한 기간만큼 대출불가 기간이 가산됩니다."
             />
             <Question
               isOpen={allOpen}
@@ -95,9 +95,9 @@ const Information = () => {
             <Question
               isOpen={allOpen}
               question="무인 대출 / 무인 반납 가능한가요?"
-              answer="무인 시스템 도입은 여러 가지 고려할 사항들이 많아 당장 시도하기 어려운 상황입니다. 분실 및 파손 대책 등 무인 시스템을 위한 좋은 의견이 있다면 언제든 공유해주세요! 집현전 공식채널 #42seoul_club_42jiphyeonjeon 은 항상 열려있습니다!"
+              answer="가능합니다. 집현전 내 안내문을 참고해주세요."
               linkText="#42seoul_club_42jiphyeonjeon"
-              link="https://42born2code.slack.com/archives/C0174FTH8N6"
+              link="https://42born2code.slack.com/archives/C0174FTH8N6/p1729753195553619"
             />
             <Question
               isOpen={allOpen}
