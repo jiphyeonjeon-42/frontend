@@ -19,7 +19,11 @@ const ReturnModalContents = ({ lendingId, closeModal }: Props) => {
 
   const { condition, setCondition, requestReturn } = usePatchLendingsReturn({
     lendingId,
-    title: lendingData?.title || "",
+    messageData: {
+      title: lendingData?.title || "",
+      dueDate: lendingData?.dueDate || "",
+      penaltyDays: lendingData?.penaltyDays || 0,
+    },
     closeModal,
   });
 
