@@ -20,7 +20,7 @@ export const usePermission = () => {
       return;
     }
     addDialogWithTitleAndMessage(
-      "not authenticated",
+      "key-error-not-authenticated",
       forbiddenMessage || "42 인증 유저만 접근할 수 있는 기능입니다.",
       "42 인증은 마이페이지에서 진행하실 수 있습니다.",
     );

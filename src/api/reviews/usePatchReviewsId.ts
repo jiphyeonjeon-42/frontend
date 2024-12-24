@@ -8,7 +8,7 @@ export const usePatchReviewsId = () => {
 
   const { addDialogWithTitleAndMessage } = useNewDialog();
   const onSuccess = () => {
-    addDialogWithTitleAndMessage("patched", "처리되었습니다", "", () =>
+    addDialogWithTitleAndMessage("key-review-update", "처리되었습니다", "", () =>
       window.location.reload(),
     );
   };

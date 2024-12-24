@@ -24,7 +24,7 @@ export const useGetLendingsSearchId = ({ setLendingId, openModal }: Props) => {
     } else {
       const title = "책을 다시 한번 확인해주세요.";
       addDialogWithTitleAndMessage(
-        title,
+        `key-error-lending-${title}`,
         title,
         "해당책의 대출기록이 없습니다.",
       );

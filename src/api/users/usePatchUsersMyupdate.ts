@@ -17,7 +17,7 @@ export const usePatchUsersMyupdate = ({ modeString }: Props) => {
   const { addDialogWithTitleAndMessage, addErrorDialog } = useNewDialog();
   const onSuccess = () => {
     const title = `${modeString} 변경 성공`;
-    addDialogWithTitleAndMessage(title, title, "", () => navigate("/auth"));
+    addDialogWithTitleAndMessage(`key-user-${title}`, title, "", () => navigate("/auth"));
   };
 
   const onError = (error: any) => {

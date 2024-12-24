@@ -19,7 +19,7 @@ export const usePostReservations = ({ bookInfoId }: Props) => {
       rank === 1 && lendabledate
         ? `대출 가능 예상일자는 ${lendabledate}.입니다.`
         : "대출이 가능해지면 Slack 알림을 보내드리겠습니다.";
-    addDialogWithTitleAndMessage(title, title, message);
+    addDialogWithTitleAndMessage("key-reservation-success", title, message);
   };
 
   const postReservation = () => {

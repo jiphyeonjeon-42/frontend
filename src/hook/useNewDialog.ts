@@ -37,7 +37,7 @@ export const useNewDialog = () => {
   };
 
   /** 간단하게 다이얼로그 호출
-   * @param key 다이얼로그를 구분할 키, 같은 키로 이미 열린 다이얼로그가 있으면 추가되지 않음
+   * @param key 다이얼로그를 구분할 키, 'key-{domain}-{title}' 형식으로 작성 (예: 'key-error-book-update, key-return-반납되었습니다.')
    * @param title  제목
    * @param message 내용
    * @param afterClose 다이얼로그가 닫힌 후 실행할 함수
@@ -87,7 +87,7 @@ export const useNewDialog = () => {
     const errorCode = error?.response?.data?.errorCode;
     const [title, message] = getErrorMessage(errorCode).split("\r\n");
     addDialogWithTitleAndMessage(
-      title, // 같은 오류메세지를 여러번 띄우는 것을 방지하기 위해 title을 key로 사용
+      `key-error-${errorCode}`,
       title,
       errorCode ? message : message + "\n" + error.message,
       () => {

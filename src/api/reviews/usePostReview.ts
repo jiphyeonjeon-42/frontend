@@ -15,7 +15,7 @@ export const usePostReview = ({ bookInfoId, resetTab }: Props) => {
 
   const displaySuccessAndResetTab = () => {
     const title = "성공적으로 등록되었습니다";
-    addDialogWithTitleAndMessage(title, title, "", resetTab);
+    addDialogWithTitleAndMessage("key-review-success", title, "", resetTab);
   };
 
   const request = () =>

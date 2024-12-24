@@ -17,7 +17,7 @@ const BarcodeReader = ({ toDoAfterRead, wrapperClassName = "" }: Props) => {
 
   const { addDialogWithTitleAndMessage } = useNewDialog();
   const alertError = (message: string) => {
-    addDialogWithTitleAndMessage("barcodeReader", "바코드 리더 에러", message);
+    addDialogWithTitleAndMessage("key-error-barcodeReader", "바코드 리더 에러", message);
   };
 
   const loadVideoInputDeviceList = useCallback(async () => {

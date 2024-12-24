@@ -54,7 +54,7 @@ const HandleReview = ({ type, review, deleteReview }: Props) => {
       request();
     } else {
       addDialogWithTitleAndMessage(
-        "error",
+        "key-error-review-length",
         "10자 이상 420자 이하로 입력해주세요.",
         "",
       );

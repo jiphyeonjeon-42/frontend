@@ -22,7 +22,7 @@ export const usePostTagsSuper = ({ bookInfoId, addTag }: Props) => {
     addTag(newTag);
 
     addDialogWithTitleAndMessage(
-      `${newTag.content} 추가`,
+      `key-tag-add-${newTag.content}`,
       "태그가 추가되었습니다.",
       newTag.content,
     );
