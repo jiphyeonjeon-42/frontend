@@ -26,7 +26,7 @@ export const usePatchLendingsReturn = ({
 
   const { title, dueDate } = messageData
   const penaltyDays = Math.max(0, messageData.penaltyDays);
-  let message = `${title} 도서는 반납되었습니다.\r\n`
+  let message = `${title} 도서가 반납되었습니다.\r\n`
   const today = new Date().toISOString().split("T")[0];
   const diffDays = Math.ceil((new Date(today).getTime() - new Date(dueDate).getTime()) / (1000 * 60 * 60 * 24));
 
