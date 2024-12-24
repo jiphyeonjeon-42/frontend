@@ -30,14 +30,16 @@ export const usePatchLendingsReturn = ({
   const today = new Date().toISOString().split("T")[0];
   const diffDays = Math.ceil((new Date(today).getTime() - new Date(dueDate).getTime()) / (1000 * 60 * 60 * 24));
 
+  // 연체 반납, 기존 패널티 존재 X
   if (diffDays > 0 && penaltyDays == 0) {
     message += `${diffDays}일 연체되어 ${diffDays}일 동안 대출이 불가합니다.`
-  }else if (diffDays > 0 && penaltyDays > 0) {
+  // 연체 반납, 기존 패널티 존재 O
+  } else if (diffDays > 0 && penaltyDays > 0) {
     message += `${diffDays}일 연체되어, 기존 ${penaltyDays}일 연체 기간과 합쳐 ${penaltyDays + diffDays}일 동안 대출이 불가합니다.`
-  } else {
-    message += `정상적으로 반납되었습니다.`
+  // 정상 반납, 기존 패널티 존재 O
+  } else if (diffDays <= 0 && penaltyDays > 0) {
+    message += `기존 ${penaltyDays}일 연체 기간이 존재해 ${penaltyDays}일 동안 대출이 불가합니다.`
   }
-
   const { addDialogWithTitleAndMessage } = useNewDialog();
 
   const onSuccess = (response: any) => {
