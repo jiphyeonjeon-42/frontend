@@ -26,7 +26,7 @@ export const usePostLendings = ({
 
   const onSuccess = () => {
     const message = `${title} - 대출완료`;
-    addDialogWithTitleAndMessage(message, "대출결과", message, closeModal);
+    addDialogWithTitleAndMessage(`key-lending-${message}`, "대출결과", message, closeModal);
   };
 
   const onError = (error: any) => {

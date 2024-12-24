@@ -46,7 +46,7 @@ function EditEmailOrPassword() {
       title = registerRule[modeString].invalidMessage;
     else if (!revision.text) title = `${modeStringKorean}를 다시 확인해주세요`;
 
-    addDialogWithTitleAndMessage(title, title, "");
+    addDialogWithTitleAndMessage(`key-error-${title}`, title, "");
     setPatchData({ [modeString]: revision.text });
   };
 
