@@ -58,7 +58,7 @@ export const usePostLendingsMultiple = ({
     });
     setSelectedBooks([]);
     setSelectedUser({ ...selectedUser, lendings: lendingSuccess });
-    addDialogWithTitleAndMessage(resultMessage, "대출결과", resultMessage);
+    addDialogWithTitleAndMessage(`key-lending-${resultMessage}`, "대출결과", resultMessage);
     closeModal();
   };
 

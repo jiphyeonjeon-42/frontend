@@ -14,7 +14,7 @@ export const useDeleteTagsSuper = ({ removeTag }: Props) => {
   const { addDialogWithTitleAndMessage } = useNewDialog();
   const onSuccess = () => {
     addDialogWithTitleAndMessage(
-      `${tagId}patched`,
+      `key-tag-delete-${tagId}`,
       "처리되었습니다",
       "",
       () => {

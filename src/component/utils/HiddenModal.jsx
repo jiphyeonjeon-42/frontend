@@ -8,7 +8,7 @@ const HiddenModal = () => {
     const error = JSON.parse(window.localStorage.getItem("error"));
     if (error) {
       addDialogWithTitleAndMessage(
-        error?.title,
+        `key-error-${error?.title}`,
         error?.title,
         error?.message,
         () => window.localStorage.removeItem("error"),

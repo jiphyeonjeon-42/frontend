@@ -48,7 +48,7 @@ const Mypage = () => {
     if (error) {
       const errorCode = parseInt(error, 10);
       const [title, message] = getErrorMessage(errorCode).split("\r\n");
-      addDialogWithTitleAndMessage(title, title, message, () => {
+      addDialogWithTitleAndMessage(`key-error-${title}`, title, message, () => {
         urlQuery.delete("errorCode");
         setUrlQuery(urlQuery);
       });

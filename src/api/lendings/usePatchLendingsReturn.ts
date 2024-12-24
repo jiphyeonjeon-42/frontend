@@ -47,7 +47,7 @@ export const usePatchLendingsReturn = ({
     const title = response.data?.reservedBook
       ? "예약된 책입니다. 예약자를 위해 따로 보관해주세요."
       : "반납되었습니다.";
-    addDialogWithTitleAndMessage(title, title, message, () =>
+    addDialogWithTitleAndMessage(`key-return-${title}`, title, message, () =>
       window.location.reload(),
     );
   };

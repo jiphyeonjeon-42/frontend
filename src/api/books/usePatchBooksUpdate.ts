@@ -20,7 +20,7 @@ export const usePatchBooksUpdate = ({ bookTitle, closeModal }: Props) => {
 
   const onSuccess = () => {
     addDialogWithTitleAndMessage(
-      `${bookTitle}수정`,
+      `key-book-update-${bookTitle}`,
       "수정되었습니다",
       bookTitle,
       () => {

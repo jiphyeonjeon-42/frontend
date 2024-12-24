@@ -9,7 +9,7 @@ export const usePatchReservationsCancel = () => {
   const { addConfirmDialog, addDialogWithTitleAndMessage } = useNewDialog();
   const onSuccess = () => {
     addDialogWithTitleAndMessage(
-      "예약취소",
+      "key-reservation-cancel",
       "예약 취소가 완료되었습니다.",
       "",
       () => window.location.reload(),

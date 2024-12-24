@@ -13,7 +13,7 @@ export const usePatchTagsSub = () => {
 
   const { addDialogWithTitleAndMessage } = useNewDialog();
   const displaySuccess = () => {
-    addDialogWithTitleAndMessage("patched", "처리되었습니다", "", () =>
+    addDialogWithTitleAndMessage("key-tag-patched", "처리되었습니다", "", () =>
       window.location.reload(),
     );
   };

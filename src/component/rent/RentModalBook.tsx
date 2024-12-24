@@ -34,7 +34,7 @@ const RentModalBook = ({
     );
     if (isAlreadySelected) {
       addDialogWithTitleAndMessage(
-        "alreadySelected",
+        "key-error-alreadySelected",
         "이미 선택된 도서입니다.",
         "다시 한번 확인해주세요",
       );
