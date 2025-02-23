@@ -3,8 +3,8 @@ import RentHistory from "./RentHistory";
 import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import InquireBoxTitle from "~/component/utils/InquireBoxTitle";
 import Book from "~/asset/img/admin_icon.svg";
-import { useRecoilValue } from "recoil"
-import { userIdAtom } from "~/atom/userAtom"
+import { useRecoilValue } from "recoil";
+import { userIdAtom } from "~/atom/userAtom";
 
 const MyRent = () => {
   const userId = useRecoilValue(userIdAtom);
@@ -34,7 +34,7 @@ const MyRent = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          <RentHistory />
+          <RentHistory userRole={userInfo ? userInfo.role : 0} />
         </div>
       </div>
     </>
