@@ -10,7 +10,7 @@ type Props = {
 };
 
 const RentedOrReservedBooks = ({ componentMode, bookInfoArr }: Props) => {
-  if (!bookInfoArr) return null;
+  if (!bookInfoArr || bookInfoArr.length < 1) return null;
 
   const { setReservationId } = usePatchReservationsCancel();
   return (
