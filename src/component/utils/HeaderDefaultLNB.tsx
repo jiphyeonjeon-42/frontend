@@ -8,7 +8,7 @@ import ToggleUser from "~/asset/img/UniconlabsFill.png";
 import ToggleDownArrow from "~/asset/img/caret-down_DaveGandy.png";
 import DownArrow from "~/asset/img/drop-down_Freepik.png";
 import "~/asset/css/HeaderDefaultLNB.css";
-import { userAtom } from "~/atom/userAtom"
+import { userAtom } from "~/atom/userAtom";
 
 const HeaderDefaultLNB = () => {
   const [isLNBOpened, setIsLNBOpened] = useState(false);

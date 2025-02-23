@@ -15,7 +15,7 @@ type Props = {
 const ReturnModalContents = ({ lendingId, closeModal }: Props) => {
   const { lendingData } = useGetLendingsId({ lendingId, closeModal });
   const [isReturnable, setIsReturnable] = useState(false);
-  const conditionRef = useRef<string>('');
+  const conditionRef = useRef<string>("");
 
   const { condition, setCondition, requestReturn } = usePatchLendingsReturn({
     lendingId,
@@ -28,12 +28,10 @@ const ReturnModalContents = ({ lendingId, closeModal }: Props) => {
   });
 
   const setConditionRef = useCallback((value: string) => {
-      conditionRef.current = value;
-      setCondition(value);
-      setIsReturnable(conditionRef.current.length > 0);
-    },
-    [],
-  );
+    conditionRef.current = value;
+    setCondition(value);
+    setIsReturnable(conditionRef.current.length > 0);
+  }, []);
 
   if (!lendingData) return null;
 

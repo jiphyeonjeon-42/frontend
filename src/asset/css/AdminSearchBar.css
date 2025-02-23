@@ -97,10 +97,10 @@ button:focus {
 
   .modal-search-form.short {
     margin-right: 1.8rem;
-	padding: 0 2.5rem 0 2.2rem;
+    padding: 0 2.5rem 0 2.2rem;
   }
 
   .modal-search__input {
-	padding: 0 1rem 0 0.5rem;
+    padding: 0 1rem 0 0.5rem;
   }
 }

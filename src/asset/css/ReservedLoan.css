@@ -49,16 +49,16 @@
   .reserved-loan-table__inquire-box {
     width: 100%;
     top: -9rem;
-	padding: 7rem 0 0 0;
+    padding: 7rem 0 0 0;
   }
 
-  .reserved-loan-body > .inquire-box-wrapper { 
+  .reserved-loan-body > .inquire-box-wrapper {
     margin-bottom: 4rem;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .reserved-loan-body > .inquire-box-wrapper > .inquire-box-title { 
+  .reserved-loan-body > .inquire-box-wrapper > .inquire-box-title {
     min-width: unset;
     max-width: unset;
   }

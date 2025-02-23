@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { userAtom } from "~/atom/userAtom"
+import { userAtom } from "~/atom/userAtom";
 import { useNewDialog } from "~/hook/useNewDialog";
 
 export const usePermission = () => {

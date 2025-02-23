@@ -11,7 +11,6 @@ type Props = {
 };
 
 const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
-
   const currentUser = useRecoilValue(userAtom);
 
   const isOverDue = (selectedUser: User) => {
@@ -19,9 +18,10 @@ const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
       new Date(selectedUser.penaltyEndDate).setHours(0, 0, 0, 0) >=
         new Date().setHours(0, 0, 0, 0) ||
       selectedUser.overDueDay > 0
-    )  return true;
+    )
+      return true;
     else return false;
-  }
+  };
 
   const seletUser = () => {
     user.isPenalty = isOverDue(user) ? true : false;

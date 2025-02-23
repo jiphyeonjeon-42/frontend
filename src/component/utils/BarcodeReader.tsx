@@ -17,7 +17,11 @@ const BarcodeReader = ({ toDoAfterRead, wrapperClassName = "" }: Props) => {
 
   const { addDialogWithTitleAndMessage } = useNewDialog();
   const alertError = (message: string) => {
-    addDialogWithTitleAndMessage("key-error-barcodeReader", "바코드 리더 에러", message);
+    addDialogWithTitleAndMessage(
+      "key-error-barcodeReader",
+      "바코드 리더 에러",
+      message,
+    );
   };
 
   const loadVideoInputDeviceList = useCallback(async () => {
@@ -55,7 +59,7 @@ const BarcodeReader = ({ toDoAfterRead, wrapperClassName = "" }: Props) => {
           video: { deviceId: { exact: selectedDeviceId } },
         });
         /** 권한 변경 대비 목록 업데이트 */
-        loadVideoInputDeviceList(); 
+        loadVideoInputDeviceList();
         htmlVideoElement.srcObject = newVideoStream;
         htmlVideoElement.autoplay = true;
         /** 연결된 디바이스에 콜백함수를 전달해줍니다. */

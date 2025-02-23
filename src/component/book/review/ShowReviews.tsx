@@ -16,7 +16,7 @@ const ShowReviews = ({ bookInfoId }: Props) => {
   const { reviewList, fetch, isAllFetched, deleteReviewById } =
     useGetBookInfoReviews(bookInfoId);
   const { requestToDelete } = useDeleteReviewsReviewsId();
-  
+
   const deleteReview = (reviewsId: number) => {
     deleteReviewById(reviewsId);
     requestToDelete;

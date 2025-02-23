@@ -5,7 +5,7 @@ import "~/asset/css/Review.css";
 import { useNewDialog } from "~/hook/useNewDialog";
 import { userAtom } from "~/atom/userAtom";
 import { usePostReview } from "~/api/reviews/usePostReview";
-import Button from "~/component/utils/Button"
+import Button from "~/component/utils/Button";
 
 type Props = {
   bookInfoId: number;

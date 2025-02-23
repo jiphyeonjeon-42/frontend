@@ -8,12 +8,7 @@ type Props = {
   svgClassName?: string;
 };
 
-const QRGenerator = ({
-  string,
-  qrWidth,
-  qrHeight,
-  svgClassName,
-}: Props) => {
+const QRGenerator = ({ string, qrWidth, qrHeight, svgClassName }: Props) => {
   const imgRef = useRef(null);
   useEffect(() => {
     const writer = new BrowserQRCodeSvgWriter();

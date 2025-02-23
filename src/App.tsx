@@ -49,44 +49,44 @@ function App() {
 
   return (
     <BrowserRouter>
-        <HelmetComponent />
-        <div id="portal" />
-        <Portals />
-        <Header />
-        <SentryRoutes>
-          <Route path="/" element={<Main />} />
-          <Route path="/41" element={<ELibraryIn42Box />} />
-          <Route path="/information" element={<Information />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/info/:id" element={<BookDetail />} />
-          <Route element={<LimitedRoute isLogoutOnly />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+      <HelmetComponent />
+      <div id="portal" />
+      <Portals />
+      <Header />
+      <SentryRoutes>
+        <Route path="/" element={<Main />} />
+        <Route path="/41" element={<ELibraryIn42Box />} />
+        <Route path="/information" element={<Information />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/info/:id" element={<BookDetail />} />
+        <Route element={<LimitedRoute isLogoutOnly />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route element={<LimitedRoute isAdminOnly />}>
+          <Route path="/rent" element={<Rent />} />
+          <Route path="/return" element={<ReturnBook />} />
+          <Route path="/reservation" element={<ReservedLoan />} />
+          <Route path="/addbook" element={<AddBook />} />
+          <Route path="/user" element={<UserManagement />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/book" element={<BookManagement />} />
+          <Route path="/review" element={<ReviewManagement />} />
+          <Route path="/stock" element={<BookStock />} />
+          <Route path="/tag/super" element={<SuperTagManagement />} />
+          <Route path="/tag/sub" element={<SubTagManagement />} />
+        </Route>
+        <Route element={<LimitedRoute isLoginOnly />}>
+          <Route path="/mypage" element={<MyPageRoutes />}>
+            <Route index element={<Mypage />} />
+            <Route path="edit/:mode" element={<EditEmailOrPassword />} />
           </Route>
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route element={<LimitedRoute isAdminOnly />}>
-            <Route path="/rent" element={<Rent />} />
-            <Route path="/return" element={<ReturnBook />} />
-            <Route path="/reservation" element={<ReservedLoan />} />
-            <Route path="/addbook" element={<AddBook />} />
-            <Route path="/user" element={<UserManagement />} />
-            <Route path="/history" element={<History />} />
-            <Route path="/book" element={<BookManagement />} />
-            <Route path="/review" element={<ReviewManagement />} />
-            <Route path="/stock" element={<BookStock />} />
-            <Route path="/tag/super" element={<SuperTagManagement />} />
-            <Route path="/tag/sub" element={<SubTagManagement />} />
-          </Route>
-          <Route element={<LimitedRoute isLoginOnly />}>
-            <Route path="/mypage" element={<MyPageRoutes />}>
-              <Route index element={<Mypage />} />
-              <Route path="edit/:mode" element={<EditEmailOrPassword />} />
-            </Route>
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </SentryRoutes>
-        <Footer />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </SentryRoutes>
+      <Footer />
     </BrowserRouter>
   );
 }

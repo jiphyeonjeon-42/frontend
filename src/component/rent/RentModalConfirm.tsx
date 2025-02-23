@@ -37,16 +37,22 @@ const RentModalConfirm = ({
     requestLending(remarksRef.current);
   };
 
-  const handleRemarkChange = useCallback((index: number, value: string) => {
-    remarksRef.current = [...remarksRef.current];
-    remarksRef.current[index] = value;
-    
-    const newIsRentable = selectedBooks.length > 1
-      ? remarksRef.current.slice(0, selectedBooks.length).every(remark => remark?.length > 0)
-      : remarksRef.current[0]?.length > 0;
-    setIsRentable(newIsRentable);
-  }, [selectedBooks.length]);
-  
+  const handleRemarkChange = useCallback(
+    (index: number, value: string) => {
+      remarksRef.current = [...remarksRef.current];
+      remarksRef.current[index] = value;
+
+      const newIsRentable =
+        selectedBooks.length > 1
+          ? remarksRef.current
+              .slice(0, selectedBooks.length)
+              .every(remark => remark?.length > 0)
+          : remarksRef.current[0]?.length > 0;
+      setIsRentable(newIsRentable);
+    },
+    [selectedBooks.length],
+  );
+
   return (
     <form className="rent-modal">
       <div className="rent-modal__user">
@@ -58,11 +64,15 @@ const RentModalConfirm = ({
                 ? selectedUser.nickname
                 : selectedUser.email}
             </p>
-            <p className="font-16 color-54">{`현재 대출권수 ( ${selectedUser.lendings.length} / ${selectedUser.role >= userRoleStatusEnum["사서"] ? '4' : '2'} )`}</p>
+            <p className="font-16 color-54">{`현재 대출권수 ( ${
+              selectedUser.lendings.length
+            } / ${
+              selectedUser.role >= userRoleStatusEnum["사서"] ? "4" : "2"
+            } )`}</p>
           </div>
         )}
       </div>
-      <RentModalBooks 
+      <RentModalBooks
         selectedBooks={selectedBooks}
         handleRemarkChange={handleRemarkChange}
         remarksRef={remarksRef}

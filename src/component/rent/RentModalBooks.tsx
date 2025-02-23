@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from "react";
 import { Book } from "../../type";
 import BookInformationWithCover from "../utils/BookInformationWithCover";
 import TextWithLabel from "../utils/TextWithLabel";
@@ -10,7 +10,11 @@ interface RentModalBooksProps {
   remarksRef: React.MutableRefObject<string[]>;
 }
 
-const RentModalBooks = ({ selectedBooks, handleRemarkChange, remarksRef }: RentModalBooksProps) => {
+const RentModalBooks = ({
+  selectedBooks,
+  handleRemarkChange,
+  remarksRef,
+}: RentModalBooksProps) => {
   return (
     <div className="rent-modal__books">
       {selectedBooks.map((selectBook, index) => (
@@ -32,7 +36,9 @@ const RentModalBooks = ({ selectedBooks, handleRemarkChange, remarksRef }: RentM
               wrapperClassName="rent-modal__remark"
               topLabelText="비고"
               textareaPlaceHolder="비고를 입력해주세요. (책 상태 등)"
-              setTextareaValue={(value: string) => handleRemarkChange(index, value)}
+              setTextareaValue={(value: string) =>
+                handleRemarkChange(index, value)
+              }
               isTextareaFocusedOnMount={index === 0}
               isVisibleBottomMessage={!remarksRef.current[index]?.length}
               bottomMessageText="비고를 입력해주세요"
@@ -45,4 +51,4 @@ const RentModalBooks = ({ selectedBooks, handleRemarkChange, remarksRef }: RentM
   );
 };
 
-export default memo(RentModalBooks); 
+export default memo(RentModalBooks);

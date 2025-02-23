@@ -2,8 +2,8 @@ import { useGetUsersSearchId } from "~/api/users/useGetUsersSearchId";
 import RentedOrReservedBooks from "./MyRentInfo/RentedOrReservedBooks";
 import InquireBoxTitle from "~/component/utils/InquireBoxTitle";
 import Reserve from "~/asset/img/list-check-solid.svg";
-import { useRecoilValue } from "recoil"
-import { userIdAtom } from "~/atom/userAtom"
+import { useRecoilValue } from "recoil";
+import { userIdAtom } from "~/atom/userAtom";
 
 const MyReservation = () => {
   const userId = useRecoilValue(userIdAtom);
