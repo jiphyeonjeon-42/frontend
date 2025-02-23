@@ -16,7 +16,7 @@ export const usePutReviewsReviewsId = ({
   const [content, setContent] = useState(initialContent);
 
   const { addErrorDialog } = useNewDialog();
-  
+
   const request = () => {
     axiosPromise("put", `/reviews/${reviewsId}`, { content })
       .then(finishEditMode)

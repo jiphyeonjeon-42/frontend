@@ -8,7 +8,7 @@ type Props = {
 const UserUsageInfo = ({ user }: Props) => {
   const today = new Date();
 
-  const convertDatetoString = (date:Date) => {
+  const convertDatetoString = (date: Date) => {
     let stringDate = "";
 
     stringDate += date.getFullYear();

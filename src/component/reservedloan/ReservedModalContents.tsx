@@ -16,7 +16,7 @@ type Props = {
 };
 
 const ReservedModalContents = ({ reservedInfo, closeModal }: Props) => {
-  const remarkRef = useRef<string>('');
+  const remarkRef = useRef<string>("");
   const [isRentable, setIsRentable] = useState(false);
 
   const { setReservationId: cancelReservation } = usePatchReservationsCancel();

@@ -32,4 +32,3 @@ export const useApiMultiple = (
 
   return { requestTransaction, requestIndividual };
 };
-

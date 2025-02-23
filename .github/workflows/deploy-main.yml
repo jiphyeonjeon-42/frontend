@@ -27,7 +27,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
-      - name: Cache node modules  # node modules 캐싱
+      - name: Cache node modules # node modules 캐싱
         uses: actions/cache@v3
         with:
           path: node_modules
@@ -53,7 +53,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name : Install chrome for prerender
+      - name: Install chrome for prerender
         run: |
           npx puppeteer browsers install chrome
 
@@ -65,8 +65,7 @@ jobs:
         with:
           aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'ap-northeast-2'
-
+          aws-region: "ap-northeast-2"
 
       - name: Upload to AWS S3
         run: |

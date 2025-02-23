@@ -31,7 +31,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name : install chrome for prerender
+      - name: install chrome for prerender
         run: |
           npx puppeteer browsers install chrome
 

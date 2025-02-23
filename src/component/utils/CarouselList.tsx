@@ -1,4 +1,10 @@
-import { CSSProperties, ComponentProps, memo, useContext, useMemo } from "react";
+import {
+  CSSProperties,
+  ComponentProps,
+  memo,
+  useContext,
+  useMemo,
+} from "react";
 import { CarouselContext } from "~/component/utils/Carousel";
 
 /**

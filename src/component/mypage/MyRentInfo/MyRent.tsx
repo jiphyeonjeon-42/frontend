@@ -3,8 +3,8 @@ import RentHistory from "./RentHistory";
 import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import InquireBoxTitle from "~/component/utils/InquireBoxTitle";
 import Book from "~/asset/img/admin_icon.svg";
-import { useRecoilValue } from "recoil"
-import { userIdAtom } from "~/atom/userAtom"
+import { useRecoilValue } from "recoil";
+import { userIdAtom } from "~/atom/userAtom";
 
 const MyRent = () => {
   const userId = useRecoilValue(userIdAtom);

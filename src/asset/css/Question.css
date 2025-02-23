@@ -42,12 +42,12 @@
 }
 
 .url_text {
-  text-decoration: underline; 
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 1199px) {
   .qna__question {
-    padding: 3.5rem 0.5rem 3.3rem 0 ;
+    padding: 3.5rem 0.5rem 3.3rem 0;
   }
 
   .question__text {
@@ -72,7 +72,7 @@
 
 @media screen and (max-width: 767px) {
   .qna__question {
-    padding: 2.7rem 0.5rem 2rem 0 ;
+    padding: 2.7rem 0.5rem 2rem 0;
   }
 
   .question__text {

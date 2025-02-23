@@ -39,7 +39,7 @@ const RentModalBook = ({
         "다시 한번 확인해주세요",
       );
       closeModal();
-    } else { 
+    } else {
       setBookId(bookId);
     }
   };

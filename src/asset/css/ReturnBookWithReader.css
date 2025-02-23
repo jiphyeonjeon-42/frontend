@@ -1,48 +1,45 @@
 .return-book__basic-info__qr-search > * {
-	display: block;
-	margin: auto;
-  }
-  
+  display: block;
+  margin: auto;
+}
 
 .return-book__basic-info__qr-search > video {
-	height: 30rem;
-
+  height: 30rem;
 }
 
 .return-book__basic-info__qr-search > button {
-	margin: 0rem;
-	width: 20rem;
-	height: 5rem;
-	border:0;
-	color:#ffffff;
-	border-radius: 2.4rem;
-	background: none;
-	background-color: #a4a4a4;
-	cursor: pointer;
-	font-size:1.8rem;
-	float: right;
+  margin: 0rem;
+  width: 20rem;
+  height: 5rem;
+  border: 0;
+  color: #ffffff;
+  border-radius: 2.4rem;
+  background: none;
+  background-color: #a4a4a4;
+  cursor: pointer;
+  font-size: 1.8rem;
+  float: right;
 }
 
 .return-book__basic-info__qr-search > select {
-	width: 40rem;
-	height: 4rem;
-	font-size: 1.8rem;
-	padding: 0 1rem;
-	margin: 2rem auto;
-
+  width: 40rem;
+  height: 4rem;
+  font-size: 1.8rem;
+  padding: 0 1rem;
+  margin: 2rem auto;
 }
 
 @media screen and (max-width: 767px) {
-	.return-book__basic-info__qr-search > video {
-	  width: 90%;
-	}
+  .return-book__basic-info__qr-search > video {
+    width: 90%;
+  }
 
-.return-book__basic-info__qr-search > button {
-		  margin: auto;
-		  display: block;
-		}
+  .return-book__basic-info__qr-search > button {
+    margin: auto;
+    display: block;
+  }
 
-	.return-book__basic-info__qr-search > select {
-		  width: 80%;
-		}
+  .return-book__basic-info__qr-search > select {
+    width: 80%;
+  }
 }
