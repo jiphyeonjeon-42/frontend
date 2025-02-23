@@ -132,3 +132,5 @@
 - [Chanheki](https://github.com/chanhihi)
 - [Youkim](https://github.com/scarf005)
 - [Mingkang](https://github.com/mink97)
+- [Hyeunkim](https://github.com/hyeunkim42)
+- [Misukim](https://github.com/mixsung)
