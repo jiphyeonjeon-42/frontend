@@ -34,7 +34,7 @@ const MyRent = () => {
           ENsize="font-14"
         />
         <div className="mypage-inquire-box-long">
-          <RentHistory />
+          <RentHistory userRole={userInfo ? userInfo.role : 0} />
         </div>
       </div>
     </>
