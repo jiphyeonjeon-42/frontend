@@ -2,13 +2,13 @@ import { ReactNode, useState } from "react";
 import { createPortal } from "react-dom";
 import { useBound } from "~/hook/useBound";
 
-type TooltipProps = {
+export type Props = {
   className?: string;
   children: ReactNode;
   description: string;
 };
 
-const Tooltip = ({ children, description, className }: TooltipProps) => {
+const Tooltip = ({ children, description, className }: Props) => {
   const [isDisplayed, setDisplayed] = useState(false);
   const { boundInfo, targetRef } = useBound<HTMLDivElement>({
     hasResizeEvent: true,

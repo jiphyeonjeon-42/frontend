@@ -5,7 +5,7 @@ import Minus from "../../asset/img/plus_icon_on.svg";
 import Arrow from "../../asset/img/arrow_right_black.svg";
 import "../../asset/css/Accordion.css";
 
-type AccordionProp = {
+export type Props = {
   initialOpened?: boolean;
   summaryButtonClassName?: string;
   summaryIconClassName?: string;
@@ -17,6 +17,7 @@ type AccordionProp = {
   onChange?: (isOpened: boolean) => void;
   fixed?: boolean;
 };
+
 const Accordion = ({
   initialOpened = false,
   summaryIconType,
@@ -28,7 +29,7 @@ const Accordion = ({
   dependencyOpened,
   onChange,
   fixed = false,
-}: AccordionProp) => {
+}: Props) => {
   const [isOpened, setIsOpened] = useState(initialOpened);
 
   useEffect(() => {
