@@ -13,7 +13,9 @@ const defaultUserState: UserState = {
 };
 
 // TODO: UserState | null 타입 사용
-export const userAtom = atomWithStorage("user", defaultUserState);
+export const userAtom = atomWithStorage("user", defaultUserState, undefined, {
+  getOnInit: true,
+});
 
 export const userIdAtom = atom(get => get(userAtom).id);
 
