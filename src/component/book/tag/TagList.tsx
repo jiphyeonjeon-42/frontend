@@ -6,7 +6,7 @@ import Tag from "./Tag";
 import TagModal from "./TagModal";
 import plusicon from "../../../asset/img/tag_plus.svg";
 import Tooltip from "../../utils/Tooltip";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { userAtom } from "../../../atom/userAtom";
 import { AxiosError, AxiosResponse } from "axios";
 
@@ -16,7 +16,7 @@ type TagListProps = {
 };
 
 const TagList = ({ tagData, setTagData }: TagListProps) => {
-  const { isLogin } = useRecoilValue(userAtom);
+  const { isLogin } = useAtomValue(userAtom);
   const inputRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
   const bookId = location.pathname.split("/")[2];

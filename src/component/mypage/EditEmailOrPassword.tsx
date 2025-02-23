@@ -1,5 +1,5 @@
 import { useState, ChangeEventHandler, FormEventHandler } from "react";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePatchUsersMyupdate } from "~/api/users/usePatchUsersMyupdate";
 import { useNewDialog } from "~/hook/useNewDialog";
@@ -19,7 +19,7 @@ function EditEmailOrPassword() {
     check: "",
   });
 
-  const { email } = useRecoilValue(userAtom);
+  const { email } = useAtomValue(userAtom);
 
   const onChangeInput: ChangeEventHandler<HTMLInputElement> = e => {
     const { value } = e.currentTarget;

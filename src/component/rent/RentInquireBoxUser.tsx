@@ -1,7 +1,7 @@
 import { useModal } from "../../hook/useModal";
 import { dateFormat } from "../../util/date";
 import { User } from "../../type";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { userAtom } from "~/atom/userAtom";
 import RentModalUser from "./RentModalUser";
 import Image from "../utils/Image";
@@ -18,7 +18,7 @@ type Props = {
 const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
   const { setOpen, setClose, Modal } = useModal();
 
-  const currentUser = useRecoilValue(userAtom);
+  const currentUser = useAtomValue(userAtom);
 
   const deleteUser = () => {
     if (setSelectedUser) {

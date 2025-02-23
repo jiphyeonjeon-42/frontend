@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import { useRecoilValue, useResetRecoilState } from "recoil";
+import { useAtomValue } from "jotai";
+import { useResetAtom } from "jotai/utils";
 import { install } from "ga-gtag";
 import { isUserExpiredAtom, userAtom } from "./atom/userAtom";
 import { SentryRoutes } from "./config/sentry";
@@ -37,8 +38,8 @@ import "./asset/css/reset.css";
 import HelmetComponent from "./component/utils/HelmetComponent";
 
 function App() {
-  const isUserExpired = useRecoilValue(isUserExpiredAtom);
-  const resetUser = useResetRecoilState(userAtom);
+  const isUserExpired = useAtomValue(isUserExpiredAtom);
+  const resetUser = useResetAtom(userAtom);
 
   useEffect(() => install(import.meta.env.REACT_APP_GA_ID), []);
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { Link } from "react-router-dom";
 import { userAtom } from "~/atom/userAtom";
 import Image from "./Image";
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const HeaderModal = ({ setHeaderModal }: Props) => {
-  const user = useRecoilValue(userAtom);
+  const user = useAtomValue(userAtom);
   const closeHeaderModal = () => {
     setHeaderModal(false);
   };

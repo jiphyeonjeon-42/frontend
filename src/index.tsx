@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { RecoilRoot } from "recoil";
+import { Provider } from "jotai";
 import { sentryInit } from "./config/sentry";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
@@ -9,10 +9,10 @@ sentryInit();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RecoilRoot>
+    <Provider>
       <HelmetProvider>
         <App />
       </HelmetProvider>
-    </RecoilRoot>
+    </Provider>
   </StrictMode>,
 );

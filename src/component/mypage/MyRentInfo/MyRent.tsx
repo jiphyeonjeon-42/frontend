@@ -3,11 +3,11 @@ import RentHistory from "./RentHistory";
 import RentedOrReservedBooks from "./RentedOrReservedBooks";
 import InquireBoxTitle from "~/component/utils/InquireBoxTitle";
 import Book from "~/asset/img/admin_icon.svg";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { userIdAtom } from "~/atom/userAtom";
 
 const MyRent = () => {
-  const userId = useRecoilValue(userIdAtom);
+  const userId = useAtomValue(userIdAtom);
   const { userInfo } = useGetUsersSearchId({ userId });
 
   return (

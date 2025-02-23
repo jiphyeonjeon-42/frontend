@@ -1,10 +1,10 @@
-import { useSetRecoilState } from "recoil";
+import { useSetAtom } from "jotai";
 import { dialogConfigs } from "../atom/dialogConfigs";
 import { DialogConfig } from "../type/DialogConfig";
 import getErrorMessage from "../constant/error";
 
 export const useNewDialog = () => {
-  const setDialogSettings = useSetRecoilState(dialogConfigs);
+  const setDialogSettings = useSetAtom(dialogConfigs);
   const removeDialog = (id: number) => {
     setDialogSettings(prev => prev.filter(dialog => dialog.id !== id));
   };

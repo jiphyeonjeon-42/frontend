@@ -1,4 +1,4 @@
-import { useSetRecoilState } from "recoil";
+import { useSetAtom } from "jotai";
 import { useApi } from "~/hook/useApi";
 import { addHourDateObject } from "~/util/date";
 import { userAtom } from "~/atom/userAtom";
@@ -7,7 +7,7 @@ import { UserState } from "~/type";
 
 export const useGetAuthMe = () => {
   const { request } = useApi("get", "auth/me");
-  const setUser = useSetRecoilState(userAtom);
+  const setUser = useSetAtom(userAtom);
 
   const onSuccess = (response: any) => {
     const { data } = response;
