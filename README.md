@@ -124,7 +124,7 @@
 서울42 인트라 아이디로 소개합니다!
 
 - [Jwoo](https://github.com/Jiwon-Woo)
-- [Sujikim](https://github.com/notusing11)
+- [Sujikim](https://github.com/not-using)
 - [Chulee](https://github.com/tmam444)
 - [Kyungsle](https://github.com/keinn51)
 - [Seongyle](https://github.com/YeonSeong-Lee)
