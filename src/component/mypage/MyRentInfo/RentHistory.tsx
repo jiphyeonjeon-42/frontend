@@ -2,10 +2,6 @@ import Pagination from "~/component/utils/Pagination";
 import { useGetHistories } from "~/api/histories/useGetHistories";
 import RentHistoryTable from "./RentHistoryTable";
 import "~/asset/css/RentHistory.css";
-import { useRecoilValue } from "recoil";
-import { useGetUsersSearchId } from "~/api/users/useGetUsersSearchId";
-import { userIdAtom } from "~/atom/userAtom";
-import { useEffect } from "react";
 
 type Props = {
   userRole: number;
