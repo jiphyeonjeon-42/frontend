@@ -18,11 +18,11 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "ga-gtag": "^1.1.7",
+    "jotai": "^2.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.11.2",
-    "recoil": "^0.7.7",
     "vite": "^4.3.8",
     "vite-tsconfig-paths": "^4.2.0",
     "web-vitals": "^3.3.1"

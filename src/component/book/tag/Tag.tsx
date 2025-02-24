@@ -2,7 +2,7 @@ import { useState, MouseEventHandler } from "react";
 import { useNavigate } from "react-router-dom";
 import { AxiosResponse } from "axios";
 import { TagType } from "~/type/TagType";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import Tooltip from "~/component/utils/Tooltip";
 import { userAtom } from "~/atom/userAtom";
 import { useApi } from "~/hook/useApi";
@@ -28,7 +28,7 @@ const Tag = ({
   setTagData,
 }: TagProps) => {
   const navigate = useNavigate();
-  const { userName } = useRecoilValue(userAtom);
+  const { userName } = useAtomValue(userAtom);
   const [clickDeleteTag, setClickDeleteTag] = useState(false);
   const [icon, setIcon] = useState(minusicon);
   const { request } = useApi("delete", `/tags/sub/${id}`);

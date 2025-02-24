@@ -1,5 +1,5 @@
 import { Book, User } from "../../type";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { userAtom } from "~/atom/userAtom";
 import "../../asset/css/RentConfirm.css";
 import { lendingLimit } from "~/constant/status";
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const RentConfirm = ({ selectedUser, selectedBooks, openModal }: Props) => {
-  const currentUser = useRecoilValue(userAtom);
+  const currentUser = useAtomValue(userAtom);
   const lendingLeft =
     lendingLimit(currentUser, selectedUser) -
     (selectedUser?.lendings.length || 0);

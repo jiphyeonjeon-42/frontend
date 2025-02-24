@@ -12,7 +12,7 @@ import RentModalConfirm from "./RentModalConfirm";
 import LoginIcon from "../../asset/img/login_icon_white.svg";
 import BookIcon from "../../asset/img/admin_icon.svg";
 import "../../asset/css/Rent.css";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { userAtom } from "~/atom/userAtom";
 import { lendingLimit } from "../../constant/status";
 
@@ -40,7 +40,7 @@ const Rent = () => {
   const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
 
   const { Modal, setOpen: openModal, setClose: closeModal } = useModal();
-  const currentUser = useRecoilValue(userAtom);
+  const currentUser = useAtomValue(userAtom);
   const lendingLimitNumber = lendingLimit(currentUser, selectedUser);
 
   return (

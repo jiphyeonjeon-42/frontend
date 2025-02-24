@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { Link, useLocation } from "react-router-dom";
 import { adminLnbMenu, loginLnbMenu } from "~/constant/headerMenu";
 import Image from "./Image";
@@ -12,7 +12,7 @@ import { userAtom } from "~/atom/userAtom";
 
 const HeaderDefaultLNB = () => {
   const [isLNBOpened, setIsLNBOpened] = useState(false);
-  const user = useRecoilValue(userAtom);
+  const user = useAtomValue(userAtom);
   const location = useLocation();
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { Link } from "react-router-dom";
 import { basicGnbMenu } from "~/constant/headerMenu";
 import Image from "./Image";
@@ -9,7 +9,7 @@ import SearchRanking from "./SearchRanking";
 import { isUserAuthedAtom } from "~/atom/userAtom";
 
 const HeaderDefault = () => {
-  const isAuthed = useRecoilValue(isUserAuthedAtom);
+  const isAuthed = useAtomValue(isUserAuthedAtom);
 
   const gnbMenu = isAuthed
     ? basicGnbMenu.slice(0, basicGnbMenu.length - 1) // basicGnbMenu의 마지막 요소는 "로그인", 이미 로그인 상태면 제외

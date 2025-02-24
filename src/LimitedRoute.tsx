@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import NotFound from "./component/utils/NotFound";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { userAtom } from "./atom/userAtom";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const LimitedRoute = ({ isLoginOnly, isAdminOnly, isLogoutOnly }: Props) => {
-  const user = useRecoilValue(userAtom);
+  const user = useAtomValue(userAtom);
 
   if (isAdminOnly && !user?.isAdmin) {
     return <NotFound />;
