@@ -1,9 +1,9 @@
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { dialogConfigs } from "../../atom/dialogConfigs";
 import Dialog from "./Dialog";
 
 const Portals = () => {
-  const dialogs = useRecoilValue(dialogConfigs);
+  const dialogs = useAtomValue(dialogConfigs);
 
   return (
     <>

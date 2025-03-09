@@ -51,7 +51,7 @@
 
 .histories__table-list__info {
   display: grid;
-  grid-template-columns: 0.2fr 0.2fr 0.67fr 0.3fr;;
+  grid-template-columns: 0.2fr 0.2fr 0.67fr 0.3fr;
   margin-right: 6rem;
   font-size: medium;
   text-align: left;

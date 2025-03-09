@@ -1,5 +1,5 @@
 .returnbook-main {
-  margin:0 auto;
+  margin: 0 auto;
 }
 .returnbook-title {
   position: relative;
@@ -38,5 +38,5 @@
     width: 100%;
     top: -3rem;
     padding-top: 3rem;
-  }  
+  }
 }

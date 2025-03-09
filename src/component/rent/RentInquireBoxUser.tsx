@@ -1,7 +1,7 @@
 import { useModal } from "../../hook/useModal";
 import { dateFormat } from "../../util/date";
 import { User } from "../../type";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { userAtom } from "~/atom/userAtom";
 import RentModalUser from "./RentModalUser";
 import Image from "../utils/Image";
@@ -18,7 +18,7 @@ type Props = {
 const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
   const { setOpen, setClose, Modal } = useModal();
 
-  const currentUser = useRecoilValue(userAtom);
+  const currentUser = useAtomValue(userAtom);
 
   const deleteUser = () => {
     if (setSelectedUser) {
@@ -36,10 +36,14 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
     const lendingLimitNumber = lendingLimit(currentUser, selectedUser);
 
     if (selectedUser.lendings.length >= lendingLimitNumber) {
-      if (selectedUser.isPenalty) penalty += `, ${lendingLimitNumber}권 이상 대출`;
+      if (selectedUser.isPenalty)
+        penalty += `, ${lendingLimitNumber}권 이상 대출`;
       else penalty += `대출제한 (${lendingLimitNumber}권 이상 대출`;
     }
-    if (selectedUser.isPenalty || selectedUser.lendings.length >= lendingLimitNumber)
+    if (
+      selectedUser.isPenalty ||
+      selectedUser.lendings.length >= lendingLimitNumber
+    )
       penalty += ")";
     return penalty;
   };
@@ -54,7 +58,11 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
                 ? selectedUser.nickname
                 : selectedUser.email}
             </div>
-            {selectedUser.role >= userRoleStatusEnum["사서"] ? <div className="rent__inquire-box-user__role color-ff font-16-bold">사서</div> : null}
+            {selectedUser.role >= userRoleStatusEnum["사서"] ? (
+              <div className="rent__inquire-box-user__role color-ff font-16-bold">
+                사서
+              </div>
+            ) : null}
             <div className="font-16 color-red">{displayPenalty()}</div>
             <button
               className="rent__inquire-box-user__undo-button color-a4"
@@ -92,8 +100,9 @@ const InquireBoxUser = ({ selectedUser, setSelectedUser }: Props) => {
                     {`${index + 1}. ${item.title}`}
                   </div>
                   <div className="user__book-info__description color-54">
-                    <span>{`예약순위 : ${item.ranking ? `${item.ranking}순위` : "-"
-                      }`}</span>
+                    <span>{`예약순위 : ${
+                      item.ranking ? `${item.ranking}순위` : "-"
+                    }`}</span>
                     {item.endAt ? (
                       <span className="user__reservations-info">
                         예약 혜택 종료일 : {item.endAt}

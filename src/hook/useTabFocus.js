@@ -7,4 +7,3 @@ export const useTabFocus = (initialTab, tabList) => {
     changeTab: setCurretIndex,
   };
 };
-

@@ -33,7 +33,7 @@ const TextareaWithLabel = ({
 }: Props) => {
   const textareaRef = useRef(null);
 
-  const color = (string : string) => {
+  const color = (string: string) => {
     const colorClassName = colorPalette.find(i => i.string === string)?.class;
     return `color-${colorClassName}` || "color-54";
   };
@@ -45,7 +45,7 @@ const TextareaWithLabel = ({
     }
   }, []);
 
-  const onChangeTextarea = (e : React.ChangeEvent<HTMLTextAreaElement> )=> {
+  const onChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaValue(e.currentTarget.value);
   };
 
@@ -62,11 +62,13 @@ const TextareaWithLabel = ({
         ref={textareaRef}
         disabled={textareaDisabled}
       />
-      { bottomMessageText?.length && bottomMessageText?.length > 0 && isVisibleBottomMessage && (
-        <p className={`textarea__label ${color(bottomMessageColor)}`}>
-          {bottomMessageText}
-        </p>
-      )}
+      {bottomMessageText?.length &&
+        bottomMessageText?.length > 0 &&
+        isVisibleBottomMessage && (
+          <p className={`textarea__label ${color(bottomMessageColor)}`}>
+            {bottomMessageText}
+          </p>
+        )}
     </div>
   );
 };

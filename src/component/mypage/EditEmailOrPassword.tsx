@@ -1,12 +1,12 @@
 import { useState, ChangeEventHandler, FormEventHandler } from "react";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePatchUsersMyupdate } from "~/api/users/usePatchUsersMyupdate";
 import { useNewDialog } from "~/hook/useNewDialog";
 import Image from "~/component/utils/Image";
 import { registerRule } from "~/constant/validate";
 import arrowLeft from "~/asset/img/arrow_left_black.svg";
-import { userAtom } from "~/atom/userAtom"
+import { userAtom } from "~/atom/userAtom";
 import "~/asset/css/EditEmailOrPassword.css";
 
 function EditEmailOrPassword() {
@@ -19,7 +19,7 @@ function EditEmailOrPassword() {
     check: "",
   });
 
-  const { email } = useRecoilValue(userAtom);
+  const { email } = useAtomValue(userAtom);
 
   const onChangeInput: ChangeEventHandler<HTMLInputElement> = e => {
     const { value } = e.currentTarget;
@@ -66,9 +66,7 @@ function EditEmailOrPassword() {
           <>
             <div className={`mypage-edit-${mode}-curr_email`}>
               <span className="font-14-bold color-2d">현재 이메일</span>
-              <span className="font-14 text-center">
-                {email ?? "-"}
-              </span>
+              <span className="font-14 text-center">{email ?? "-"}</span>
             </div>
             <form onSubmit={onSubmitUpdate}>
               <div className="mypage-edit-input-box font-14">

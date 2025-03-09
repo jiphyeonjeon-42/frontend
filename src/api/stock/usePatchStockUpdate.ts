@@ -12,7 +12,12 @@ export const usePatchStockUpdate = ({ addList }: Props) => {
 
   const { addDialogWithTitleAndMessage } = useNewDialog();
   const onSuccess = () => {
-    addDialogWithTitleAndMessage("key-stock-update", "처리되었습니다", "", addList);
+    addDialogWithTitleAndMessage(
+      "key-stock-update",
+      "처리되었습니다",
+      "",
+      addList,
+    );
   };
 
   useEffect(() => {

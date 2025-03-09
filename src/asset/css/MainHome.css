@@ -1,4 +1,3 @@
-
 .main-home {
   padding: 0 15rem 0 15rem;
   position: relative;
@@ -53,7 +52,7 @@
   margin-top: 1.6rem;
 }
 
-@media screen and (max-width:1200px){
+@media screen and (max-width: 1200px) {
   .main-home__scroll {
     display: none;
   }

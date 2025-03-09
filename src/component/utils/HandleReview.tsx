@@ -7,7 +7,7 @@ import "~/asset/css/Review.css";
 import { Review } from "~/type";
 import { useNewDialog } from "~/hook/useNewDialog";
 import { userAtom } from "~/atom/userAtom";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { usePutReviewsReviewsId } from "~/api/reviews/usePutReviewsReviewsId";
 import { Link } from "react-router-dom";
 
@@ -19,7 +19,7 @@ type Props = {
 
 const HandleReview = ({ type, review, deleteReview }: Props) => {
   const [isEditMode, setEditMode] = useState(false);
-  const { userName } = useRecoilValue(userAtom);
+  const { userName } = useAtomValue(userAtom);
   const hasPermissionToEdit = userName === review.nickname;
 
   const startEditMode = () => setEditMode(true);

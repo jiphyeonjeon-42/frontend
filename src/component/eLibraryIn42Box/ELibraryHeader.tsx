@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { Link } from "react-router-dom";
 import { userAtom } from "~/atom/userAtom";
 import Logo from "~/asset/img/jiphyeonjeon_logo_without_text.svg";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const ELibraryHeader = ({ setModalOpened }: Props) => {
-  const { isLogin } = useRecoilValue(userAtom);
+  const { isLogin } = useAtomValue(userAtom);
   const [isFixed, setFixed] = useState(false);
 
   window.onscroll = () => setFixed(window.scrollY > 140);

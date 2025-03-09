@@ -1,6 +1,6 @@
 import { User } from "../../type";
 import "../../asset/css/RentModalUserList.css";
-import { useRecoilValue } from "recoil";
+import { useAtomValue } from "jotai";
 import { userAtom } from "~/atom/userAtom";
 import { lendingLimit } from "../../constant/status";
 
@@ -11,17 +11,17 @@ type Props = {
 };
 
 const UserList = ({ user, setSelectedUser, closeModal }: Props) => {
-
-  const currentUser = useRecoilValue(userAtom);
+  const currentUser = useAtomValue(userAtom);
 
   const isOverDue = (selectedUser: User) => {
     if (
       new Date(selectedUser.penaltyEndDate).setHours(0, 0, 0, 0) >=
         new Date().setHours(0, 0, 0, 0) ||
       selectedUser.overDueDay > 0
-    )  return true;
+    )
+      return true;
     else return false;
-  }
+  };
 
   const seletUser = () => {
     user.isPenalty = isOverDue(user) ? true : false;

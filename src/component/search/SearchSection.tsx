@@ -28,7 +28,7 @@ const SearchSection = ({
   lastPage,
   page,
   setPage,
-  myRef
+  myRef,
 }: SearchSectionProps) => {
   return (
     <section className="search-section">
@@ -77,4 +77,4 @@ const SearchSection = ({
   );
 };
 
-export default memo(SearchSection); 
+export default memo(SearchSection);

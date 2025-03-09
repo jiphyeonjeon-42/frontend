@@ -20,13 +20,17 @@ type IsDevBook = "" | "dev" | "non-dev";
 
 const categoryOptions = {
   "": [],
-  "dev": category.filter(item => item.isDev),
+  dev: category.filter(item => item.isDev),
   "non-dev": category.filter(item => !item.isDev),
 };
 
-const CategoryOptions = ({ options }: { options: { id: string; name: string }[] }) => (
+const CategoryOptions = ({
+  options,
+}: {
+  options: { id: string; name: string }[];
+}) => (
   <>
-    {options.map((element) => (
+    {options.map(element => (
       <option value={element.id} key={element.id}>
         {element.name}
       </option>
@@ -38,18 +42,22 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
   const [isDevBook, setIsDevBook] = useState<IsDevBook>(() => "");
   const [categoryId, setCategoryId] = useState(() => "");
   const [donator, setDonator] = useState(() => "");
-  
-  const isReadyToPost = bookInfo.title && bookInfo.author && categoryId && donator;
+
+  const isReadyToPost =
+    bookInfo.title && bookInfo.author && categoryId && donator;
 
   const { message, registerBook } = usePostBooksCreate();
-  
+
   const handleSelectIsDevBook: ChangeEventHandler<HTMLSelectElement> = e =>
-    setIsDevBook(prev => prev === e.target.value ? prev : e.target.value as IsDevBook);
+    setIsDevBook(prev =>
+      prev === e.target.value ? prev : (e.target.value as IsDevBook),
+    );
 
   const handleSelectCategoryId: ChangeEventHandler<HTMLSelectElement> = e =>
-    setCategoryId(prev => prev === e.target.value ? prev : e.target.value);
+    setCategoryId(prev => (prev === e.target.value ? prev : e.target.value));
 
-  const handleChangeDonator = (e: React.ChangeEvent<HTMLInputElement>) => setDonator(e.target.value);
+  const handleChangeDonator = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setDonator(e.target.value);
 
   const onSubmit: FormEventHandler = e => {
     e.preventDefault();
@@ -57,7 +65,7 @@ const RegisterBookWithUsersExtraInput = ({ bookInfo }: Props) => {
       registerBook({
         ...bookInfo,
         categoryId: +categoryId,
-        donator
+        donator,
       });
     } else {
       alert("모든 정보를 입력해주세요");
