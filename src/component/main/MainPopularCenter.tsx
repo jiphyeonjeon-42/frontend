@@ -60,7 +60,7 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }: Props) => {
     setPosX(0);
   };
 
-  const totalBooks = [docs.slice(0, 3), docs.slice(3, 6), docs.slice(6, 9)];
+  const totalBooks = [docs.slice(0, 3), docs.slice(3, 6), docs.slice(6, 9)].filter(books=> books.length > 0);
 
   return (
     <div className="main__popular__content">
@@ -76,8 +76,8 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }: Props) => {
         onTouchEnd={touchEnd}
         style={{ transform: `translate(${(-750 - moveX) * 0.1}rem)` }}
       >
-        {totalBooks.map(books => (
-          <div className="main__popular__books">
+        {totalBooks.map((books, index) => (
+          <div className="main__popular__books" key={books[0].id + index}>
             {books.map((book, index) => (
               <button
                 className={`${
@@ -87,7 +87,7 @@ const MainPopularCenter = ({ docs, centerTop, onLeft, onRight }: Props) => {
                 type="button"
                 onClick={selected === index ? linkToDetail : changeSelected}
                 key={book.id}
-                id={`${book.id}` ?? ""}
+                id={book.id.toString()}
               >
                 <Image
                   draggable={false}
