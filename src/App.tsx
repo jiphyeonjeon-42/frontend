@@ -36,6 +36,36 @@ import Mypage from "./component/mypage/Mypage";
 import ReviewManagement from "./component/reviewManagement/ReviewManagement";
 import "./asset/css/reset.css";
 import HelmetComponent from "./component/utils/HelmetComponent";
+import { useLocation } from "react-router-dom";
+
+function RouteAnnouncer() {
+  const location = useLocation();
+  const { pathname } = location;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return <p aria-live="assertive"
+    role="alert"
+    style={{
+      border: 0,
+      clip: 'rect(0 0 0 0)',
+      height: '1px',
+      margin: '-1px',
+      overflow: 'hidden',
+      padding: 0,
+      position: 'absolute',
+      top: 0,
+      width: '1px',
+
+      // https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+      whiteSpace: 'nowrap',
+      wordWrap: 'normal',
+    }
+    }
+  > {pathname}</p>;
+}
 
 function App() {
   const isUserExpired = useAtomValue(isUserExpiredAtom);
@@ -53,6 +83,7 @@ function App() {
       <HelmetComponent />
       <div id="portal" />
       <Portals />
+      <RouteAnnouncer />
       <Header />
       <SentryRoutes>
         <Route path="/" element={<Main />} />

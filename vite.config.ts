@@ -55,7 +55,7 @@ export default defineConfig(({ mode }) => {
     envPrefix,
 
     /** @see https://vitejs.dev/config/server-options.html#server-port */
-    server: { port, strictPort: true, host: true },
+    server: { port, strictPort: true, host: '0.0.0.0' },
 
     /** @see https://vitejs.dev/config/build-options.html#build-outdir */
     build: { outDir: "build", chunkSizeWarningLimit: 4242 },
