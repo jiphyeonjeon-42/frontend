@@ -10,8 +10,8 @@
 
 .print-label__print-area {
   margin: auto;
-  width: 148rem;
-  padding: 2rem 7rem 2rem 7rem;
+  width: 150rem;
+  padding: 2rem 4rem 0rem 4.8rem;
   box-sizing: border-box;
   white-space: normal;
 }
@@ -21,10 +21,11 @@
   display: inline-block;
   overflow: hidden;
 }
+
 .print-label__label,
 .print-label__category-label {
-  width: 13.4rem;
-  height: 23.5rem;
+  width: 14.05rem;
+  height: 25rem;
   box-sizing: border-box;
   overflow: hidden;
   background-color: white;
